@@ -1,0 +1,17 @@
+# Universal Agent Rules Pointer
+
+You are operating within the Plus Marketing Website repository.
+To maintain universal compatibility across Cursor, Windsurf, Aider, and other AI coding assistants, we do not store the monolithic rule definitions in this file.
+
+**CRITICAL DIRECTIVE**:
+Before writing any code, answering architectural questions, or planning a feature, you MUST read the following foundational rules:
+
+1. Read `.agent/rules/100-project-context.md` (Project mission and core tech stack).
+2. Read `.agent/rules/101-code-standards.md` (Formatting and React patterns).
+3. Read `.agent/rules/102-agent-capabilities.md` (Available tools and MCPs).
+
+If you are asked to do Frontend or UI work, you MUST also read:
+- `.agent/skills/frontend-design/SKILL.md`
+- The Storybook MDX definitions located in `src/stories/styles/` and `src/stories/layout/`
+
+Do not assume you know the project structure until you have loaded these files into your context window.
