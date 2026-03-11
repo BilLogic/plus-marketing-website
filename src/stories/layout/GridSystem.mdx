@@ -1,0 +1,12 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Layout/Grid System" />
+
+# Grid System
+
+We rely on CSS Grid and Flexbox for all layout. We do not use absolute positioning unless explicitly required (e.g., overlapping elements, floating badges).
+
+## Common Patterns
+- **Responsive Grids**: Use `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3` for listing feature cards or blog posts.
+- **Auto-Fit Grids**: `grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]` for adaptive width column arrays.
+- **Centering**: `flex items-center justify-center` is preferred over manual margin hacks.

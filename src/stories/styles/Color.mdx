@@ -1,0 +1,29 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
+
+<Meta title="Styles/Color" />
+
+# Color System
+
+Our color system is built entirely on OKLCH, powered by a single `--brand-hue` CSS variable.
+
+## Brand Colors
+<ColorPalette>
+  <ColorItem
+    title="Primary"
+    subtitle="--color-primary"
+    colors={{ Default: 'oklch(0.6 0.2 var(--brand-hue))', Hover: 'oklch(0.55 0.2 var(--brand-hue))' }}
+  />
+  <ColorItem
+    title="Background & Foreground"
+    subtitle="Base Layout"
+    colors={{ Background: 'oklch(0.995 0.005 var(--brand-hue))', Foreground: 'oklch(0.15 0.02 var(--brand-hue))' }}
+  />
+  <ColorItem
+    title="Muted & Border"
+    subtitle="Subtle Elements"
+    colors={{ Muted: 'oklch(0.94 0.01 var(--brand-hue))', Border: 'oklch(0.88 0.015 var(--brand-hue))' }}
+  />
+</ColorPalette>
+
+## Usage
+Always use the Tailwind semantic classes (`bg-primary`, `text-muted-foreground`), never hardcoded Hex codes.

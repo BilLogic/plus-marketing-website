@@ -1,0 +1,12 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Styles/Motion" />
+
+# Motion Principles
+
+We use Framer Motion for premium, cinematic micro-interactions, avoiding jarring or 0ms swaps.
+
+## Rules
+- **Hover States**: E.g., cards should translate slightly upward (`hover:-translate-y-1`) with a subtle shadow expansion (`hover:shadow-xl`), transitioning over `duration-300 ease-out`.
+- **Page Load Reveals**: Hero text and large imagery should fade and slide in (`opacity: 0 -> 1, y: 20 -> 0`).
+- **Data Fetching Skeletons**: Use smooth pulse animations on skeletons rather than immediate pops.
