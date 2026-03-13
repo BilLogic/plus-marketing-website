@@ -25,6 +25,31 @@ As an AI Coder working on this repository, you have access to a suite of advance
 ## 5. Design-to-Code
 - **Figma MCP**: If the user asks to implement a Figma design, remind them to spin up the Figma MCP so you can run `get_design_context` and map components accurately.
 
+## 6. Registry & Pattern Discovery
+- **Registry Advisor Skill**: Helps you discover existing marketing blocks/components from shadcn/ui, Tailark, Cult UI, and Bundui before inventing new patterns. Read `.agent/skills/registry-advisor/SKILL.md`.
+- **Shadcn MCP Server**: Primary interface for searching and installing registry components via natural language. Default registries are configured in `components.json`.
+
+## 7. Compound Engineering
+
+The official **Compound Engineering Plugin** ([EveryInc/compound-engineering-plugin](https://github.com/EveryInc/compound-engineering-plugin)) provides global `/ce:*` commands:
+
+- `/ce:brainstorm` – explore requirements and approaches.
+- `/ce:plan` – turn ideas into detailed implementation plans.
+- `/ce:work` – execute plans with worktrees and task tracking.
+- `/ce:review` – multi-agent review before merging.
+- `/ce:compound` – document learnings and patterns so future work is easier.
+
+In this repo:
+
+- Use the **local skill** `.agent/skills/compound-engineering/SKILL.md` as the project-specific overlay.
+- Always ground `/ce:*` usage in existing surfaces:
+  - Storybook `Welcome` and `Effects/Overview`.
+  - Component stories under `components-marketing/*` and `components-misc/*`.
+  - Templates under `Templates/*`.
+  - Registry status in `docs/registry-coverage.md`.
+- Treat “done” as: code + stories + docs updated, and patterns made discoverable for the next engineer.
+
 ## Actions for the Agent
 - If asked to build a new UI, read `.agent/skills/frontend-design/SKILL.md`.
 - Always remind the user: *"I can test this directly if you have the Playwright MCP running"* or *"I can pull the tokens straight from Figma if the Figma MCP is active."*
+- When prototyping pages or sections, first consult the Registry Advisor skill and use the shadcn MCP server (or CLI) to reuse existing blocks.

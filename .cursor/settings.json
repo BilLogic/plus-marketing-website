@@ -1,0 +1,19 @@
+{
+  "plugins": {
+    "figma": {
+      "enabled": true
+    },
+    "supabase": {
+      "enabled": true
+    },
+    "notion-workspace": {
+      "enabled": true
+    },
+    "firecrawl": {
+      "enabled": true
+    },
+    "compound-engineering": {
+      "enabled": true
+    }
+  }
+}

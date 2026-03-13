@@ -1,52 +1,131 @@
-# Marketing Website - Vibe Coding Core
+# PLUS Marketing Website
 
-Welcome to the central hub for the Marketing Website repository. This project is built using **Next.js**, **TypeScript**, **Tailwind CSS**, and **Shadcn UI**.
+Production marketing site for [PLUS (tutors.plus)](https://www.tutors.plus/) — a virtual tutoring platform empowering middle school math learners with AI technology and research-backed methods, founded at Carnegie Mellon University.
 
-This repository is designed from the ground up for high-velocity "Vibe Coding" using AI tooling.
-
----
-
-## 🤖 Vibe Coder Architecture & Rules Index
-
-This section is meant for **AI Agents** (Cursor, Claude Code, Aider, Antigravity) and human developers alike. We use the **2-4-2 Framework Baseline** to manage context. 
-*Note: This rule structure is primarily a starting point for managing context sizes. Feel free to challenge and refactor these rules to better suit the specific needs of the vibe-coding experience as the project evolves.*
-
-### **1. Always-on Context (`.agent/rules` - Load these first)**
-- [100-project-context.md](.agent/rules/100-project-context.md): Core stack info, folder structure, absolute non-negotiable rules.
-- [101-code-standards.md](.agent/rules/101-code-standards.md): TS/React conventions, styling rules, error handling.
-- [102-agent-capabilities.md](.agent/rules/102-agent-capabilities.md): Tools, MCPs, and skills index for proactive agent assistance.
-
-### **2. Domain-Specific Guidelines (Attached conditionally by glob)**
-- [200-frontend-guidelines.md](.agent/rules/200-frontend-guidelines.md) -> `src/app/**`, `src/components/**`
-- [201-backend-api.md](.agent/rules/201-backend-api.md) -> `src/api/**`, `src/lib/**`
-- [202-database-schema.md](.agent/rules/202-database-schema.md) -> `src/db/**`
-- [203-ai-integration.md](.agent/rules/203-ai-integration.md) -> `src/ai/**`
-
-### **3. Agent-Requested Checklists (Read when shipping)**
-- [300-security-checklist.md](.agent/rules/300-security-checklist.md): Auth flows, token handling, access control.
-- [301-feature-checklist.md](.agent/rules/301-feature-checklist.md): End-to-end polish, error boundaries, caching.
-- [302-mcp-status-check.md](.agent/rules/302-mcp-status-check.md): Verify Notion/Figma MCP connections.
+> **Live production site (Framer):** [https://www.tutors.plus/](https://www.tutors.plus/)
+> **This Next.js rebuild:** Hosted on Netlify — same content and section order, rebuilt with a design-system-first component library.
 
 ---
 
-## 🛠️ Vibe Coder Toolkit & Agent Skills
+## Tech Stack
 
-In addition to context rules, the `.agent/skills` folder contains actionable logic for executing tasks optimally. 
-
-**Pro-Tip to Agents:** When requested to perform a design, animation, testing, or deployment task, always refer to the specific `.agent/skills/` documents first.
-Refer to [102-agent-capabilities.md](.agent/rules/102-agent-capabilities.md) for a comprehensive breakdown of all available tools including:
-- **Design/Theming**: Taste Skill, UI/UX Pro Max, Design Tokens.
-- **Testing/Debug**: Playwright MCP, Storybook MCP, Chrome DevTools MCP.
-- **Code Quality**: Web Quality Skills, TypeScript LSP.
+| Layer | Choice |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 (OKLCH token system) |
+| Components | shadcn/ui + Radix UI + Base UI |
+| Motion | Framer Motion |
+| Fonts | DM Sans (primary), Geist Mono |
+| Deploy | Netlify (`@netlify/plugin-nextjs`) |
+| Docs | Storybook (served at `/storybook` on Netlify) |
 
 ---
 
-## 🚀 Getting Started (Human Developers)
+## Getting Started
 
-1. Ensure Node.js (v18+) is installed.
-2. Run standard installation and dev server:
-   ```bash
-   npm install
-   npm run dev
-   ```
-3. Read the `docs/infrastructure-plan.md` (if exported) for full context on why certain libraries were chosen.
+```bash
+# Install dependencies
+npm install
+
+# Start marketing site on localhost:3000
+npm run dev
+
+# Start Storybook component docs on localhost:6006
+npm run storybook
+```
+
+---
+
+## Project Structure
+
+```
+src/
+  app/
+    page.tsx              ← Landing page composition (section order)
+    layout.tsx            ← Root layout with ThemeProvider + fonts
+    globals.css           ← OKLCH design tokens, Tailwind config
+    theme/plus-colors.ts  ← Brand color scale generator
+  components/
+    marketing/            ← PLUS-specific landing sections (source of truth)
+      plus-landing-sections.tsx
+    registry/             ← Registry-first building blocks
+      bundui/             ← Bundui-inspired marketing sections
+      tailark/            ← Tailark-inspired marketing sections
+      cult/               ← Cult UI-inspired components
+    effects/              ← Motion & animation components
+    ui/                   ← shadcn/ui primitives
+.agent/                   ← AI agent rules and skills
+netlify.toml              ← Netlify build config
+```
+
+---
+
+## Landing Page Sections
+
+The landing page mirrors [https://www.tutors.plus/](https://www.tutors.plus/) in structure and content:
+
+1. **Announcement bar** — PLUS app v10 launch banner
+2. **Navbar** — sticky, floating pill with About / Solutions / Impact / Get Involved + Demo / Login + light/dark toggle
+3. **Hero** — headline, platform description, CTAs, mission card + meteor background effect
+4. **Impact stats** — 13+ Schools, 500+ Tutors, 5000+ Students with animated counters
+5. **Motivation** — "Math is for Everyone" / "Learn our stories"
+6. **Outcomes strip** — 1:1 tutoring + 80%+ low-income families
+7. **Testimonials** — 2×2 grid of real quotes from students, teachers, and districts
+8. **Toolkit** — "Giving Tutors Superpowers" + feature cards + 10k+ / 20+ metrics
+9. **Awards** — 2×2 award grid
+10. **Research** — CMU/Stanford roots + 30+ published papers
+11. **Footer** — link columns + newsletter + Carnegie Mellon © 2026
+
+---
+
+## Netlify Deployment
+
+Two surfaces are served from one Netlify site:
+
+| Path | Content |
+|---|---|
+| `/` | PLUS marketing landing page (Next.js) |
+| `/storybook` | Component docs (static Storybook build) |
+
+**Build config (`netlify.toml`):**
+```toml
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build]
+  command = "npm run build && npm run build-storybook"
+  publish = ".next"
+```
+
+Storybook outputs to `public/storybook` so Next.js serves it as a static subfolder automatically.
+
+**To deploy:** Push to `main` on GitHub. Netlify auto-deploys on every push.
+
+---
+
+## Design System
+
+We use a "lazy-genius" OKLCH dynamic color system:
+
+- All semantic colors (`bg-background`, `bg-primary`, `text-muted-foreground`, etc.) resolve from CSS variables in `globals.css`
+- Brand hue: teal (`--primary: #00BFCC`) + magenta accent (`--accent: #DD2AB0`)
+- Light and dark modes supported via `next-themes`
+
+**Never use raw hex codes** — always use Tailwind semantic utilities.
+
+---
+
+## AI Coder Onboarding
+
+Before writing any code, read:
+
+1. `.agent/rules/100-project-context.md` — mission, stack, non-negotiable rules
+2. `.agent/rules/101-code-standards.md` — TS/React conventions
+3. `.agent/rules/102-agent-capabilities.md` — available MCP tools and skills
+
+For frontend/UI work, also read `.agent/skills/frontend-design/SKILL.md`.
+
+---
+
+Carnegie Mellon University © 2026

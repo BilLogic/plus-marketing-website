@@ -4,11 +4,130 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  /* Plus brand palette – Accent teal (primary) */
+  --color-teal-50: #F8FEFE;
+  --color-teal-100: #EFFBFC;
+  --color-teal-200: #D7F9FC;
+  --color-teal-300: #BEF5F9;
+  --color-teal-400: #A5EDF3;
+  --color-teal-500: #87E3EB;
+  --color-teal-600: #58D4DE;
+  --color-teal-700: #00BFCC;
+  --color-teal-800: #00B3C0;
+  --color-teal-900: #007F89;
+  --color-teal-950: #004248;
+
+  /* Plus brand palette – Bento blue */
+  --color-blue-50: #FBFDFF;
+  --color-blue-100: #F2FAFF;
+  --color-blue-200: #E4F5FF;
+  --color-blue-300: #D1EFFF;
+  --color-blue-400: #BBE7FF;
+  --color-blue-500: #A1DBFE;
+  --color-blue-600: #7FCBF8;
+  --color-blue-700: #4DC1FF;
+  --color-blue-800: #40B6F3;
+  --color-blue-900: #007EB8;
+  --color-blue-950: #00395D;
+
+  /* Plus brand palette – Bento green */
+  --color-green-50: #FBFEFB;
+  --color-green-100: #F5FBF6;
+  --color-green-200: #E8F6EA;
+  --color-green-300: #DAF0DD;
+  --color-green-400: #C8E8CD;
+  --color-green-500: #B2DDB9;
+  --color-green-600: #94CE9F;
+  --color-green-700: #68B97A;
+  --color-green-800: #4CAB65;
+  --color-green-900: #297E43;
+  --color-green-950: #213C27;
+
+  /* Plus brand palette – Bento yellow */
+  --color-yellow-50: #FEFDFB;
+  --color-yellow-100: #FFFAEC;
+  --color-yellow-200: #FFF1C7;
+  --color-yellow-300: #FFE8AB;
+  --color-yellow-400: #FFDC8C;
+  --color-yellow-500: #FED084;
+  --color-yellow-600: #EBC077;
+  --color-yellow-700: #D9A852;
+  --color-yellow-800: #FFC94B;
+  --color-yellow-900: #9D6E00;
+  --color-yellow-950: #463923;
+
+  /* Plus brand palette – Bento red */
+  --color-red-50: #FFFCFC;
+  --color-red-100: #FFF7F7;
+  --color-red-200: #FFEAEA;
+  --color-red-300: #FFD9D8;
+  --color-red-400: #FFCAC9;
+  --color-red-500: #FFBAB8;
+  --color-red-600: #FCA5A4;
+  --color-red-700: #F48889;
+  --color-red-800: #FF9292;
+  --color-red-900: #B44F52;
+  --color-red-950: #6A0B19;
+
+  /* Plus brand palette – Bento magenta (mapped to fuchsia) */
+  --color-fuchsia-50: #FFFCFE;
+  --color-fuchsia-100: #FFF7FC;
+  --color-fuchsia-200: #FFE8F6;
+  --color-fuchsia-300: #FEDAF0;
+  --color-fuchsia-400: #FACCE8;
+  --color-fuchsia-500: #F4BCDF;
+  --color-fuchsia-600: #ECA8D3;
+  --color-fuchsia-700: #E48EC6;
+  --color-fuchsia-800: #DD2AB0;
+  --color-fuchsia-900: #C6009C;
+  --color-fuchsia-950: #690051;
+
+  /* Plus brand palette – Neutral grey */
+  --color-gray-50: #FCFCFD;
+  --color-gray-100: #F9F9FB;
+  --color-gray-200: #EFF0F3;
+  --color-gray-300: #E7E8EC;
+  --color-gray-400: #E0E1E6;
+  --color-gray-500: #D8D9E0;
+  --color-gray-600: #CDCED7;
+  --color-gray-700: #B9BBC6;
+  --color-gray-800: #8B8D98;
+  --color-gray-900: #62636C;
+  --color-gray-950: #1E1F24;
+
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
+  /*
+    Font tokens:
+    - In the Next app, next/font sets CSS variables (--font-sans, --font-mono).
+    - In Storybook (no next/font), we fall back to DM Sans via the Google Fonts import.
+  */
+  --font-sans: var(
+    --font-sans,
+    "DM Sans",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif
+  );
+  --font-mono: var(
+    --font-mono,
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    "Courier New",
+    monospace
+  );
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -48,72 +167,125 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
+  /* Surfaces – Neutral grey */
+  --background: #FFFFFF;
+  --foreground: #1E1F24;
+  --card: #FCFCFD;
+  --card-foreground: #1E1F24;
+  --popover: #FFFFFF;
+  --popover-foreground: #1E1F24;
+
+  /* Primary – Accent teal */
+  --primary: #00BFCC;
+  --primary-foreground: #FFFFFF;
+
+  /* Secondary – Neutral grey soft */
+  --secondary: #EFF0F3;
+  --secondary-foreground: #1E1F24;
+
+  /* Muted – Neutral grey */
+  --muted: #F9F9FB;
+  --muted-foreground: #62636C;
+
+  /* Accent – Bento magenta */
+  --accent: #DD2AB0;
+  --accent-foreground: #FFFFFF;
+
+  /* Destructive – Bento red */
+  --destructive: #FF9292;
+  --destructive-foreground: #6A0B19;
+
+  /* Borders – Neutral grey */
+  --border: #E7E8EC;
+  --input: #E0E1E6;
+  --ring: #00BFCC;
+
+  /* Charts – one per hue family */
+  --chart-1: #4DC1FF;
+  --chart-2: #4CAB65;
+  --chart-3: #FFC94B;
+  --chart-4: #FF9292;
+  --chart-5: #DD2AB0;
+
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Sidebar */
+  --sidebar: #F9F9FB;
+  --sidebar-foreground: #1E1F24;
+  --sidebar-primary: #00BFCC;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #EFFBFC;
+  --sidebar-accent-foreground: #004248;
+  --sidebar-border: #E7E8EC;
+  --sidebar-ring: #00BFCC;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* Surfaces – Neutral grey inverted */
+  --background: #1E1F24;
+  --foreground: #F9F9FB;
+  --card: #2A2B31;
+  --card-foreground: #F9F9FB;
+  --popover: #2A2B31;
+  --popover-foreground: #F9F9FB;
+
+  /* Primary – Teal (lighter step for dark backgrounds) */
+  --primary: #58D4DE;
+  --primary-foreground: #004248;
+
+  /* Secondary */
+  --secondary: #3A3B42;
+  --secondary-foreground: #F9F9FB;
+
+  /* Muted */
+  --muted: #3A3B42;
+  --muted-foreground: #B9BBC6;
+
+  /* Accent – Magenta (lighter step) */
+  --accent: #E48EC6;
+  --accent-foreground: #690051;
+
+  /* Destructive – Red (lighter step) */
+  --destructive: #FCA5A4;
+  --destructive-foreground: #6A0B19;
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.15);
+  --ring: #58D4DE;
+
+  /* Charts – same hue families, bumped lightness */
+  --chart-1: #7FCBF8;
+  --chart-2: #68B97A;
+  --chart-3: #FED084;
+  --chart-4: #FCA5A4;
+  --chart-5: #ECA8D3;
+
+  /* Sidebar */
+  --sidebar: #2A2B31;
+  --sidebar-foreground: #F9F9FB;
+  --sidebar-primary: #58D4DE;
+  --sidebar-primary-foreground: #004248;
+  --sidebar-accent: #3A3B42;
+  --sidebar-accent-foreground: #F9F9FB;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #58D4DE;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --space-section-y-400: 2.5rem;
+    --space-section-y-600: 3rem;
+    --space-section-y-800: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --space-section-y-400: 3rem;
+    --space-section-y-600: 4rem;
+    --space-section-y-800: 5rem;
+  }
 }
 
 @layer base {
