@@ -70,7 +70,7 @@ When a task involves **creating, updating, or removing** components, stories, pa
   - **Update**: Keep examples and pointers aligned with Storybook and components.
   - **Delete/Deprecate**: Prefer marking docs as deprecated or superseded at the top; only delete when truly obsolete and unreferenced.
 
-- **Agent rules & skills (`.agent/**`, `.agents/**`, `.claude/**`, `.windsurf/**`, `.kiro/**`)**
+- **Agent rules & skills (`.agent/**`)**
   - **Create**: Only when a pattern is stable and reused; keep skills small and focused.
   - **Update**: Treat behavior changes as versioned contracts; keep them documented.
   - **Delete/Deprecate**: Deprecate in headers and AGENT docs first; physical deletion should be rare and justified in the commit history.

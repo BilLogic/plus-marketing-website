@@ -45,3 +45,9 @@ storybook-static
 
 # Local Netlify folder
 .netlify
+
+# Tool-specific agent dirs (canonical location is .agent/)
+.agents/
+.claude/
+.windsurf/
+.kiro/

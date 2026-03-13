@@ -93,7 +93,7 @@ This playbook defines how to **Create, Read, Update, and Delete/Deprecate** them
   - Only delete when:
     - The content is clearly obsolete and no longer referenced from other docs or AGENT handoff flows.
 
-## 7. Agent Rules & Skills (`.agent/**`, `.agents/**`, `.claude/**`, `.windsurf/**`, `.kiro/**`)
+## 7. Agent Rules & Skills (`.agent/**`)
 
 - **Create**
   - Introduce new rules/skills only when a pattern is stable and reused.
