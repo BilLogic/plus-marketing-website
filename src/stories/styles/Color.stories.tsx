@@ -2,7 +2,8 @@ import { useState } from "react"
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 
 const meta = {
-  title: "Styles/Tokens",
+  // Shown in Storybook sidebar as: STYLES → Color
+  title: "Styles/Color",
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
