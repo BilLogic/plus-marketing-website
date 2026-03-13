@@ -1,0 +1,32 @@
+import {
+  PlusNavbar,
+  PlusFooterSection,
+} from "@/components/marketing/plus-landing-sections"
+import {
+  TutorsHeroSection,
+  TutorsCompensationSection,
+  TutorsExperienceSection,
+  TutorsCertificationSection,
+  TutorsToolkitSection,
+  TutorsImpactCTA,
+} from "@/components/marketing/for-tutors-sections"
+
+/** "For Tutors" landing page — content matches Figma node 1224-1920. */
+const ForTutorsPage = () => {
+  return (
+    <main className="bg-background text-foreground">
+      <PlusNavbar />
+      <div className="mx-auto flex max-w-5xl flex-col gap-16 px-4 pb-16 pt-2 sm:px-6 sm:pb-20 md:gap-24 md:px-8 md:pb-24">
+        <TutorsHeroSection />
+        <TutorsCompensationSection />
+        <TutorsExperienceSection />
+        <TutorsCertificationSection />
+        <TutorsToolkitSection />
+        <TutorsImpactCTA />
+      </div>
+      <PlusFooterSection />
+    </main>
+  )
+}
+
+export default ForTutorsPage
