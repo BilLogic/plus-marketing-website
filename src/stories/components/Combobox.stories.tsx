@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 
 import {
   Combobox,
-  ComboboxCollection,
   ComboboxContent,
   ComboboxEmpty,
   ComboboxInput,
@@ -43,13 +42,11 @@ export const Default: Story = {
         <ComboboxEmpty>No results found.</ComboboxEmpty>
         <ComboboxList>
           <ComboboxLabel>Frameworks</ComboboxLabel>
-          <ComboboxCollection>
-            {frameworks.map((framework) => (
-              <ComboboxItem key={framework.value} value={framework.value}>
-                <ComboboxValue>{framework.label}</ComboboxValue>
-              </ComboboxItem>
-            ))}
-          </ComboboxCollection>
+          {frameworks.map((framework) => (
+            <ComboboxItem key={framework.value} value={framework.value}>
+              <ComboboxValue>{framework.label}</ComboboxValue>
+            </ComboboxItem>
+          ))}
         </ComboboxList>
       </ComboboxContent>
     </Combobox>

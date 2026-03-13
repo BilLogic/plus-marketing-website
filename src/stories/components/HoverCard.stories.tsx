@@ -25,8 +25,8 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   render: () => (
     <HoverCard>
-      <HoverCardTrigger asChild>
-        <Button variant="link">@nextjs</Button>
+      <HoverCardTrigger className="text-sm font-medium text-primary hover:underline">
+        @nextjs
       </HoverCardTrigger>
       <HoverCardContent className="w-80">
         <div className="flex justify-between space-x-4">

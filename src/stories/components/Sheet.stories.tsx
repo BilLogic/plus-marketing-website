@@ -25,6 +25,50 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+const BaseRightSheet = () => (
+  <Sheet>
+    <SheetTrigger className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground hover:bg-muted">
+      Open Sheet
+    </SheetTrigger>
+    <SheetContent>
+      <SheetHeader>
+        <SheetTitle>Sheet Title</SheetTitle>
+        <SheetDescription>
+          This is a description of what this sheet is for.
+        </SheetDescription>
+      </SheetHeader>
+      <div className="p-4">
+        <p className="text-sm text-muted-foreground">Sheet body content goes here.</p>
+      </div>
+      <SheetFooter>
+        <Button>Save changes</Button>
+      </SheetFooter>
+    </SheetContent>
+  </Sheet>
+)
+
+const BaseLeftSheet = () => (
+  <Sheet>
+    <SheetTrigger className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground hover:bg-muted">
+      Open Sheet
+    </SheetTrigger>
+    <SheetContent side="left">
+      <SheetHeader>
+        <SheetTitle>Left Sheet</SheetTitle>
+        <SheetDescription>
+          This sheet slides in from the left side of the screen.
+        </SheetDescription>
+      </SheetHeader>
+      <div className="p-4">
+        <p className="text-sm text-muted-foreground">Sheet body content goes here.</p>
+      </div>
+      <SheetFooter>
+        <Button>Save changes</Button>
+      </SheetFooter>
+    </SheetContent>
+  </Sheet>
+)
+
 /** Overview of sheet patterns across registries. */
 export const Overview: Story = {
   render: () => (
@@ -36,11 +80,11 @@ export const Overview: Story = {
       </TabsList>
 
       <TabsContent value="shadcn">
-        <Default />
+        <BaseRightSheet />
       </TabsContent>
 
       <TabsContent value="tailark">
-        <Left />
+        <BaseLeftSheet />
       </TabsContent>
 
       <TabsContent value="bundui">
@@ -49,7 +93,7 @@ export const Overview: Story = {
             Bundui-style filter sheet
           </p>
           <Sheet>
-            <SheetTrigger render={<Button variant="outline" />}>
+            <SheetTrigger className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground hover:bg-muted">
               Open filters
             </SheetTrigger>
             <SheetContent side="right">
@@ -76,49 +120,13 @@ export const Overview: Story = {
 /** A sheet that slides in from the right (default). */
 export const Default: Story = {
   render: () => (
-    <Sheet>
-      <SheetTrigger render={<Button variant="outline" />}>
-        Open Sheet
-      </SheetTrigger>
-      <SheetContent>
-        <SheetHeader>
-          <SheetTitle>Sheet Title</SheetTitle>
-          <SheetDescription>
-            This is a description of what this sheet is for.
-          </SheetDescription>
-        </SheetHeader>
-        <div className="p-4">
-          <p className="text-sm text-muted-foreground">Sheet body content goes here.</p>
-        </div>
-        <SheetFooter>
-          <Button>Save changes</Button>
-        </SheetFooter>
-      </SheetContent>
-    </Sheet>
+    <BaseRightSheet />
   ),
 }
 
 /** A sheet that slides in from the left side. */
 export const Left: Story = {
   render: () => (
-    <Sheet>
-      <SheetTrigger render={<Button variant="outline" />}>
-        Open Sheet
-      </SheetTrigger>
-      <SheetContent side="left">
-        <SheetHeader>
-          <SheetTitle>Left Sheet</SheetTitle>
-          <SheetDescription>
-            This sheet slides in from the left side of the screen.
-          </SheetDescription>
-        </SheetHeader>
-        <div className="p-4">
-          <p className="text-sm text-muted-foreground">Sheet body content goes here.</p>
-        </div>
-        <SheetFooter>
-          <Button>Save changes</Button>
-        </SheetFooter>
-      </SheetContent>
-    </Sheet>
+    <BaseLeftSheet />
   ),
 }

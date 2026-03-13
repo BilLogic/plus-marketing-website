@@ -5,3 +5,9 @@
   command = "npm run build && npm run build-storybook"
   publish = ".next"
 
+[[redirects]]
+  from = "/storybook"
+  to = "/storybook-static/index.html"
+  status = 200
+
+

@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>
 export const Horizontal: Story = {
   render: () => (
     <div className="w-[500px]">
-      <ResizablePanelGroup direction="horizontal" className="rounded-lg border">
+      <ResizablePanelGroup className="rounded-lg border">
         <ResizablePanel defaultSize={50}>
           <div className="flex h-40 items-center justify-center p-6">
             <span className="font-semibold">Panel One</span>
@@ -43,7 +43,7 @@ export const Horizontal: Story = {
 export const Vertical: Story = {
   render: () => (
     <div className="w-[500px]">
-      <ResizablePanelGroup direction="vertical" className="rounded-lg border">
+      <ResizablePanelGroup className="rounded-lg border">
         <ResizablePanel defaultSize={40}>
           <div className="flex h-24 items-center justify-center p-6">
             <span className="font-semibold">Top</span>
@@ -64,7 +64,7 @@ export const Vertical: Story = {
 export const ThreePanels: Story = {
   render: () => (
     <div className="w-[600px]">
-      <ResizablePanelGroup direction="horizontal" className="rounded-lg border">
+      <ResizablePanelGroup className="rounded-lg border">
         <ResizablePanel defaultSize={25}>
           <div className="flex h-48 items-center justify-center p-6">
             <span className="font-semibold">Sidebar</span>
@@ -72,7 +72,7 @@ export const ThreePanels: Story = {
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={75}>
-          <ResizablePanelGroup direction="vertical">
+          <ResizablePanelGroup>
             <ResizablePanel defaultSize={60}>
               <div className="flex h-full items-center justify-center p-6">
                 <span className="font-semibold">Main</span>

@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>
 /** View toggle between chart and table representations. */
 export const ViewToggle: Story = {
   render: () => (
-    <ToggleGroup type="single" defaultValue="chart" spacing={1}>
+    <ToggleGroup>
       <ToggleGroupItem value="chart" aria-label="Show chart">
         <LineChart className="mr-1 size-4" />
         Chart

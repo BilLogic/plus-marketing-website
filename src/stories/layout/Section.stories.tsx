@@ -29,8 +29,8 @@ const paddingClass = (padding: 400 | 600 | 800) => {
 
 /** Standard marketing section wrapper with consistent padding and max-width. */
 export const StorySection: Story = {
-  render: ({ padding }) => (
-    <section className={`border-border/60 bg-background/60 ${paddingClass(padding)}`}>
+  render: () => (
+    <section className={`border-border/60 bg-background/60 ${paddingClass(800)}`}>
       <div className="mx-auto flex max-w-5xl flex-col gap-8 px-4 sm:px-6 md:px-8">
         <header className="max-w-2xl space-y-3">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">

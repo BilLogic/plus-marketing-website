@@ -30,8 +30,8 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   render: () => (
     <Drawer>
-      <DrawerTrigger render={<Button variant="outline" />}>
-        Open pricing drawer
+      <DrawerTrigger asChild>
+        <Button variant="outline">Open pricing drawer</Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>

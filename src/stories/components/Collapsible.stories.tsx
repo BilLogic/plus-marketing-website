@@ -5,7 +5,6 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
-import { Button } from "@/components/ui/button"
 
 /** Collapsible region for showing and hiding supplemental content. */
 const meta = {
@@ -25,10 +24,8 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   render: () => (
     <Collapsible>
-      <CollapsibleTrigger asChild>
-        <Button variant="outline" size="sm">
-          Toggle details
-        </Button>
+      <CollapsibleTrigger className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground hover:bg-muted">
+        Toggle details
       </CollapsibleTrigger>
       <CollapsibleContent className="mt-3 max-w-sm rounded-xl border border-border bg-card/70 p-4 text-sm text-muted-foreground">
         Use a collapsible when you want to tuck away secondary information without leaving the
