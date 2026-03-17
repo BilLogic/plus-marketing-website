@@ -10,7 +10,7 @@ This file is a combined distillation of several premium frontend design skills, 
 ### 1. Aesthetic Selection & Refinement
 When instructed to build a UI component, NEVER default to standard "tech" defaults (unmodified Inter font, standard blue gradients, generic padding).
 - Determine a highly structured design language first: Is it "Solopunk" (warm, organic, bright), "Brutalist" (high contrast, sharp edges, monochromatic), "Editorial" (serif heavy, large white space, classic typography)? 
-- Consult **`references/tokens.md`** to strictly adhere to the project's OKLCH color palettes and brand rules.
+- Consult **`colors/tokens.md`** to strictly adhere to the project's OKLCH color palettes and brand rules.
 
 ### 2. The Design Token Principle (Tailwind Magic)
 Follow the "lazy-genius" OKLCH dynamic color token approach. 

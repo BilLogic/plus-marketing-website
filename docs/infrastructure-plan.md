@@ -79,9 +79,9 @@ Based strictly on the [Claude Code Frontend Design Toolkit](https://github.com/w
 
 #### [NEW] .agent/skills/frontend-design/SKILL.md
 Main instruction file porting the core concepts of the tools above so any local vibe coder adheres to the premium aesthetics.
-#### [NEW] .agent/skills/frontend-design/references/tokens.md
+#### [NEW] .agent/skills/frontend-design/colors/tokens.md
 Design tokens (OKLCH scale, typography pairings) acting as the source of truth for UI components.
-#### [NEW] .agent/skills/frontend-design/assets/examples.md
+#### [NEW] .agent/skills/frontend-design/colors/examples/examples.md
 Examples of premium marketing components to ensure high visual quality.
 
 ### Documentation Export

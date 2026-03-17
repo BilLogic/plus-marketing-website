@@ -18,7 +18,7 @@ Please execute the following initialization sequence:
    - Understand the tech stack, mission, tokens, and **Compound Engineering** section.
 2. Read `.agent/rules/102-agent-capabilities.md`  
    - Understand available MCP servers, skills, and the **Compound Engineering** capabilities.
-3. Read `.agent/skills/frontend-design/SKILL.md` and `.agent/skills/frontend-design/references/tokens.md`  
+3. Read `.agent/skills/frontend-design/SKILL.md` and `.agent/skills/frontend-design/colors/tokens.md`  
    - Internalize our OKLCH color system, typography, spacing, and interaction rules.
 4. Read `.agent/skills/compound-engineering/SKILL.md`  
    - Learn how to apply the Every **compound-engineering** workflow (Brainstorm → Plan → Work → Review → Compound) to this repo:
