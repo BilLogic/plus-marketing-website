@@ -2,7 +2,7 @@ import { useState } from "react"
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 
 const meta = {
-  title: "Styles/Tokens/Palette",
+  title: "Styles/Color/Tokens",
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
