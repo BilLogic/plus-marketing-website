@@ -14,7 +14,7 @@ import { CultCardSurface } from "@/components/registry/cult/card-surface"
 
 /** Comparison between base shadcn card and Plus-branded variant. */
 const meta = {
-  title: "components-marketing/Card Plus Comparison",
+  title: "Components/Card Plus Comparison",
   tags: ["autodocs"],
 } satisfies Meta<typeof PlusCard>
 

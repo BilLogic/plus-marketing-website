@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button"
 
 /** Confirmation dialog used for high-impact or destructive actions. */
 const meta = {
-  title: "components-marketing/AlertDialog",
+  title: "Components/AlertDialog",
   component: AlertDialog,
   parameters: {
     layout: "centered",

@@ -12,7 +12,7 @@ import {
 
 /** Select displays a list of options for the user to pick from, triggered by a button. */
 const meta = {
-  title: "components-marketing/Select",
+  title: "Components/Select",
   component: Select,
   tags: ["autodocs"],
   parameters: {

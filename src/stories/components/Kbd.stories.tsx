@@ -4,7 +4,7 @@ import { Kbd, KbdGroup } from "@/components/ui/kbd"
 
 /** Renders a keyboard shortcut badge. Useful for documenting hotkeys and shortcuts. */
 const meta = {
-  title: "components-misc/Kbd",
+  title: "Components/Kbd",
   parameters: {
     layout: "centered",
   },

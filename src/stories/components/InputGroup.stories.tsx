@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button"
 
 /** Input group for pairing fields with inline buttons, icons, and helper text. */
 const meta = {
-  title: "components-marketing/InputGroup",
+  title: "Components/InputGroup",
   component: InputGroup,
   parameters: {
     layout: "centered",

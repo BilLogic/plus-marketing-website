@@ -25,7 +25,7 @@ const testimonials = [
 
 /** Embla-powered carousel used for testimonials, logos, and product shots. */
 const meta = {
-  title: "components-marketing/Carousel",
+  title: "Components/Carousel",
   component: Carousel,
   parameters: {
     layout: "centered",

@@ -4,7 +4,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 /** Circular avatar displaying user images with a text fallback. */
 const meta = {
-  title: "components-marketing/Avatar",
+  title: "Components/Avatar",
   component: Avatar,
   tags: ["autodocs"],
   parameters: {

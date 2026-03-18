@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button"
 
 /** A menu of actions or options triggered by a button, revealed on click. */
 const meta = {
-  title: "components-marketing/DropdownMenu",
+  title: "Components/DropdownMenu",
   component: DropdownMenu,
   parameters: {
     layout: "centered",

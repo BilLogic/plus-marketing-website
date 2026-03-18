@@ -11,7 +11,7 @@ import {
 
 /** A navigation aid that shows the user's current location within a hierarchy. */
 const meta = {
-  title: "components-marketing/Breadcrumb",
+  title: "Components/Breadcrumb",
   component: Breadcrumb,
   parameters: {
     layout: "centered",

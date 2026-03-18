@@ -9,7 +9,7 @@ import {
 
 /** A one-time password input with individual character slots. */
 const meta = {
-  title: "components-misc/InputOTP",
+  title: "Components/InputOTP",
   parameters: {
     layout: "centered",
   },

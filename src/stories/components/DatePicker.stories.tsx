@@ -10,7 +10,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 
 /** A date picker composed from Calendar + Popover. Click the button to open a calendar dropdown. */
 const meta = {
-  title: "components-misc/DatePicker",
+  title: "Components/DatePicker",
   parameters: {
     layout: "centered",
   },

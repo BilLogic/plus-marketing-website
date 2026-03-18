@@ -6,11 +6,10 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 /** Accordion displays collapsible content panels for presenting information in a limited space. */
 const meta = {
-  title: "components-marketing/Accordion",
+  title: "Components/Accordion",
   component: Accordion,
   tags: ["autodocs"],
   parameters: {
@@ -28,37 +27,71 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** Overview of Accordion patterns across registries. */
+/** Component overview for designers and coding agents. */
 export const Overview: Story = {
   render: () => (
-    <Tabs defaultValue="shadcn">
-      <TabsList variant="line" className="mb-4 w-full justify-start">
-        <TabsTrigger value="shadcn">Base (shadcn)</TabsTrigger>
-        <TabsTrigger value="tailark">Tailark</TabsTrigger>
-        <TabsTrigger value="bundui">Bundui</TabsTrigger>
-        <TabsTrigger value="plus">Plus</TabsTrigger>
-      </TabsList>
-      {/* Reuse the same content as the Comparison story */}
-      <TabsContent value="shadcn">
-        <Accordion value={[0]}>
-          <AccordionItem>
-            <AccordionTrigger>What are your shipping options?</AccordionTrigger>
-            <AccordionContent>
-              We offer standard (5–7 days), express (2–3 days), and overnight shipping. Free
-              shipping on international orders.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionTrigger>What is your return policy?</AccordionTrigger>
-            <AccordionContent>
-              Returns are accepted within 30 days of purchase. Items must be in original condition
-              with tags attached.
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </TabsContent>
-      {/* Tailark / Bundui / Plus tabs are defined in the Comparison story below */}
-    </Tabs>
+    <div className="max-w-2xl space-y-8 p-6">
+      <div>
+        <h2 className="text-lg font-semibold">Accordion</h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          A vertically stacked set of interactive headings that each reveal a section of content.
+        </p>
+      </div>
+
+      <div className="space-y-1 text-xs text-muted-foreground">
+        <p><strong className="text-foreground">Source:</strong> src/components/ui/accordion.tsx</p>
+        <p><strong className="text-foreground">Import:</strong> <code className="rounded bg-muted px-1 py-0.5 font-mono text-[11px]">{"import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from \"@/components/ui/accordion\""}</code></p>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="rounded-lg border border-border p-4">
+          <p className="text-xs font-semibold text-foreground">When to use</p>
+          <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
+            <li>FAQ sections on marketing pages</li>
+            <li>Settings panels with grouped options</li>
+            <li>Progressive disclosure of complex content</li>
+          </ul>
+        </div>
+        <div className="rounded-lg border border-border p-4">
+          <p className="text-xs font-semibold text-foreground">When NOT to use</p>
+          <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
+            <li>Navigation menus — use NavigationMenu</li>
+            <li>Single collapsible — use Collapsible</li>
+            <li>Tabbed content — use Tabs</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <p className="text-xs font-semibold">Sub-components</p>
+        <div className="mt-2 space-y-1 text-xs text-muted-foreground">
+          <p><code className="rounded bg-muted px-1 py-0.5 font-mono text-[11px]">Accordion</code> — Root container, manages open state</p>
+          <p><code className="rounded bg-muted px-1 py-0.5 font-mono text-[11px]">AccordionItem</code> — Individual collapsible section</p>
+          <p><code className="rounded bg-muted px-1 py-0.5 font-mono text-[11px]">AccordionTrigger</code> — Clickable header</p>
+          <p><code className="rounded bg-muted px-1 py-0.5 font-mono text-[11px]">AccordionContent</code> — Expandable body</p>
+        </div>
+      </div>
+
+      <div>
+        <p className="text-xs font-semibold">Example</p>
+        <div className="mt-3">
+          <Accordion value={[0]}>
+            <AccordionItem>
+              <AccordionTrigger>What are your shipping options?</AccordionTrigger>
+              <AccordionContent>
+                We offer standard (5-7 days), express (2-3 days), and overnight shipping.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem>
+              <AccordionTrigger>What is your return policy?</AccordionTrigger>
+              <AccordionContent>
+                Returns are accepted within 30 days of purchase.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </div>
+    </div>
   ),
 }
 
@@ -69,7 +102,7 @@ export const Default: Story = {
       <AccordionItem>
         <AccordionTrigger>What are your shipping options?</AccordionTrigger>
         <AccordionContent>
-          We offer standard (5–7 days), express (2–3 days), and overnight shipping. Free shipping on
+          We offer standard (5-7 days), express (2-3 days), and overnight shipping. Free shipping on
           international orders.
         </AccordionContent>
       </AccordionItem>
@@ -90,108 +123,52 @@ export const Default: Story = {
   ),
 }
 
-/** Comparison view using tabs to switch between registry-inspired and Plus accordion patterns. */
-export const Comparison: Story = {
+/** All items collapsed by default. */
+export const AllCollapsed: Story = {
   render: () => (
-    <Tabs defaultValue="shadcn">
-      <TabsList variant="line" className="mb-4 w-full justify-start">
-        <TabsTrigger value="shadcn">Base (shadcn)</TabsTrigger>
-        <TabsTrigger value="tailark">Tailark</TabsTrigger>
-        <TabsTrigger value="bundui">Bundui</TabsTrigger>
-        <TabsTrigger value="plus">Plus</TabsTrigger>
-      </TabsList>
+    <Accordion>
+      <AccordionItem>
+        <AccordionTrigger>What are your shipping options?</AccordionTrigger>
+        <AccordionContent>
+          We offer standard (5-7 days), express (2-3 days), and overnight shipping.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem>
+        <AccordionTrigger>What is your return policy?</AccordionTrigger>
+        <AccordionContent>
+          Returns are accepted within 30 days of purchase.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem>
+        <AccordionTrigger>How can I contact customer support?</AccordionTrigger>
+        <AccordionContent>
+          You can reach our support team via email, live chat, or phone 24/7.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  ),
+}
 
-      <TabsContent value="shadcn">
-        <Accordion value={[0]}>
-          <AccordionItem>
-            <AccordionTrigger>What are your shipping options?</AccordionTrigger>
-            <AccordionContent>
-              We offer standard (5–7 days), express (2–3 days), and overnight shipping. Free
-              shipping on international orders.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionTrigger>What is your return policy?</AccordionTrigger>
-            <AccordionContent>
-              Returns are accepted within 30 days of purchase. Items must be in original condition
-              with tags attached.
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </TabsContent>
-
-      <TabsContent value="tailark">
-        <div className="space-y-2 text-sm text-muted-foreground">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">
-            Tailark (registry)
-          </p>
-          <Accordion value={[0]} className="divide-y divide-border/60 rounded-xl border">
-            <AccordionItem>
-              <AccordionTrigger className="px-4 py-3 text-left text-sm font-medium">
-                How does Tailark-style FAQ look?
-              </AccordionTrigger>
-              <AccordionContent className="bg-card/60 px-4 pb-4 pt-0 text-xs text-muted-foreground">
-                This variant leans on clear dividers, compact copy, and subtle radius to echo
-                Tailark&apos;s FAQ and pricing accordions.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem>
-              <AccordionTrigger className="px-4 py-3 text-left text-sm font-medium">
-                Where would we use this?
-              </AccordionTrigger>
-              <AccordionContent className="bg-card/60 px-4 pb-4 pt-0 text-xs text-muted-foreground">
-                Ideal for pricing, onboarding, and product-overview FAQs that sit under Tailark-like
-                hero and pricing blocks.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
-      </TabsContent>
-
-      <TabsContent value="bundui">
-        <div className="space-y-2 text-sm text-muted-foreground">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">
-            Bundui (blocks kit)
-          </p>
-          <Accordion value={[0]} className="rounded-xl border bg-card/70 px-1 py-1">
-            <AccordionItem>
-              <AccordionTrigger className="rounded-lg px-3 py-2 text-left text-sm font-medium hover:bg-background/60">
-                Subscription &amp; billing FAQ
-              </AccordionTrigger>
-              <AccordionContent className="px-3 pb-3 pt-0 text-xs text-muted-foreground">
-                Bundui leans on soft radii, card-like surfaces, and concise copy for subscription
-                questions. This mirrors that pattern while using Plus tokens.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem>
-              <AccordionTrigger className="rounded-lg px-3 py-2 text-left text-sm font-medium hover:bg-background/60">
-                Can I change plans later?
-              </AccordionTrigger>
-              <AccordionContent className="px-3 pb-3 pt-0 text-xs text-muted-foreground">
-                Yes, upgrade or downgrade any time — this accordion lives near Bundui-style pricing
-                templates.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
-      </TabsContent>
-
-      <TabsContent value="plus">
-        <div className="space-y-2 text-sm text-muted-foreground">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">
-            Plus
-          </p>
-          <Accordion value={[0]}>
-            <AccordionItem>
-              <AccordionTrigger>Plus-styled marketing FAQ</AccordionTrigger>
-              <AccordionContent>
-                Currently matches the base styling; we&apos;ll evolve this into a Plus-specific
-                variant once registry coverage is complete.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
-      </TabsContent>
-    </Tabs>
+/** Accordion with visible border styling. */
+export const Bordered: Story = {
+  render: () => (
+    <Accordion value={[0]} className="divide-y divide-border/60 rounded-xl border">
+      <AccordionItem>
+        <AccordionTrigger className="px-4 py-3 text-left text-sm font-medium">
+          What are your shipping options?
+        </AccordionTrigger>
+        <AccordionContent className="px-4 pb-4 pt-0 text-xs text-muted-foreground">
+          We offer standard (5-7 days), express (2-3 days), and overnight shipping.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem>
+        <AccordionTrigger className="px-4 py-3 text-left text-sm font-medium">
+          What is your return policy?
+        </AccordionTrigger>
+        <AccordionContent className="px-4 pb-4 pt-0 text-xs text-muted-foreground">
+          Returns are accepted within 30 days of purchase.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
   ),
 }

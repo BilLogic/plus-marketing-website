@@ -8,7 +8,7 @@ import {
 
 /** A group of panels that can be resized by dragging a handle between them. */
 const meta = {
-  title: "components-misc/Resizable",
+  title: "Components/Resizable",
   parameters: {
     layout: "centered",
   },

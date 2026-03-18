@@ -16,7 +16,7 @@ import {
 
 /** A data table with sorting, filtering, and pagination composed from Table + custom logic. */
 const meta = {
-  title: "components-misc/DataTable",
+  title: "Components/DataTable",
   parameters: {
     layout: "centered",
   },

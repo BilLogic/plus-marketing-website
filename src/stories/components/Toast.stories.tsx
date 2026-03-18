@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 
 /** Application-level toast notifications wired through Sonner. */
 const meta = {
-  title: "components-misc/Toast",
+  title: "Components/Toast",
   parameters: {
     layout: "centered",
   },

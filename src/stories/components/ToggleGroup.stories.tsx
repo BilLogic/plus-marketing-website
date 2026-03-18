@@ -5,7 +5,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 /** Segmented control built from toggle primitives for small option sets. */
 const meta = {
-  title: "components-marketing/ToggleGroup",
+  title: "Components/ToggleGroup",
   component: ToggleGroup,
   parameters: {
     layout: "centered",

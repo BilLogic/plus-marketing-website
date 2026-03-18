@@ -147,7 +147,7 @@ export const Palette: Story = {
 
     return (
       <div className="min-h-dvh bg-background text-foreground">
-        <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 md:px-8">
           <div className="max-w-2xl space-y-2">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
               Styles / Color
@@ -187,7 +187,21 @@ export const Palette: Story = {
                 </p>
               </div>
 
-              <div className="mt-4 space-y-2">
+              {/* Step header row */}
+              <div className="mt-4 flex items-end gap-3">
+                <div className="w-20 shrink-0" />
+                <div className="flex flex-1 gap-0.5">
+                  {steps.map((step) => (
+                    <div key={step} className="flex-1 text-center">
+                      <span className="font-mono text-[9px] font-semibold text-muted-foreground/60">
+                        {step}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-1 space-y-2">
                 {plusBrandHues.map((hue) => (
                   <div key={hue.name} className="flex items-start gap-3">
                     <div className="w-20 shrink-0 pt-2">
@@ -200,16 +214,13 @@ export const Palette: Story = {
                         return (
                           <div key={step} className="group relative flex-1">
                             <div
-                              className="h-10 w-full rounded-md ring-1 ring-black/5 transition-transform hover:scale-110 hover:shadow-lg"
+                              className="h-12 w-full cursor-pointer rounded-md ring-1 ring-black/5 transition-all hover:scale-110 hover:shadow-lg hover:ring-2 hover:ring-primary/40"
                               style={{ backgroundColor: hex }}
                               title={`${hue.name.toLowerCase()}-${step}: ${hex}`}
                             />
                             {showHex && (
                               <div className="mt-1 text-center">
-                                <p className="text-[9px] font-medium text-muted-foreground">
-                                  {step}
-                                </p>
-                                <p className="text-[8px] text-muted-foreground/60">
+                                <p className="font-mono text-[8px] text-muted-foreground/60">
                                   {hex}
                                 </p>
                               </div>
@@ -232,41 +243,23 @@ export const Palette: Story = {
                 </p>
               </div>
 
-              <div className="mt-3 overflow-x-auto rounded-xl border border-border bg-card/60 p-4">
-                <table className="w-full border-collapse text-xs">
-                  <thead>
-                    <tr>
-                      <th className="pb-3 pr-3 text-left text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                        Hue
-                      </th>
-                      {steps.map((s) => (
-                        <th
-                          key={s}
-                          className="pb-3 text-center text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
-                        >
-                          {s}
-                        </th>
+              <div className="mt-3 space-y-1.5">
+                {tailwindHues.map((hue) => (
+                  <div key={hue} className="flex items-center gap-3">
+                    <span className="w-20 shrink-0 text-xs font-medium capitalize text-muted-foreground">
+                      {hue}
+                    </span>
+                    <div className="flex flex-1 gap-0.5">
+                      {steps.map((step) => (
+                        <div
+                          key={step}
+                          className={`h-8 flex-1 rounded-md ring-1 ring-black/5 bg-${hue}-${step}`}
+                          title={`${hue}-${step}`}
+                        />
                       ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {tailwindHues.map((hue) => (
-                      <tr key={hue}>
-                        <td className="py-1 pr-3 text-xs font-medium capitalize text-muted-foreground">
-                          {hue}
-                        </td>
-                        {steps.map((step) => (
-                          <td key={step} className="py-1">
-                            <div
-                              className={`mx-auto size-6 rounded-md ring-1 ring-black/5 bg-${hue}-${step}`}
-                              title={`${hue}-${step}`}
-                            />
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

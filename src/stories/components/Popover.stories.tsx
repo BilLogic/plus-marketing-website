@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button"
 
 /** A floating panel anchored to a trigger element, used for non-modal content. */
 const meta = {
-  title: "components-marketing/Popover",
+  title: "Components/Popover",
   component: Popover,
   parameters: {
     layout: "centered",

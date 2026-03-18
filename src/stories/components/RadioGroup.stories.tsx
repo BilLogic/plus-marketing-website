@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label"
 
 /** RadioGroup lets the user select one option from a set of mutually exclusive choices. */
 const meta = {
-  title: "components-marketing/RadioGroup",
+  title: "Components/RadioGroup",
   component: RadioGroup,
   tags: ["autodocs"],
   parameters: {

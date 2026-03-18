@@ -1,13 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
-import { ChevronRight, Mail } from "lucide-react"
+import { ChevronRight, Loader2, Mail } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { PlusButton } from "@/components/plus/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 /** Displays a button or a component that looks like a button. */
 const meta = {
-  title: "components-marketing/Button",
+  title: "Components/Button",
   component: Button,
   parameters: {
     layout: "centered",
@@ -18,9 +16,69 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** Overview of all registry sources for the Button primitive. */
+/** Component overview for designers and coding agents. */
 export const Overview: Story = {
-  render: () => <ButtonComparisonPreview />,
+  render: () => (
+    <div className="max-w-2xl space-y-8 p-6">
+      <div>
+        <h2 className="text-lg font-semibold">Button</h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          A clickable element that triggers an action or navigation.
+        </p>
+      </div>
+
+      <div className="space-y-1 text-xs text-muted-foreground">
+        <p><strong className="text-foreground">Source:</strong> src/components/ui/button.tsx</p>
+        <p><strong className="text-foreground">Import:</strong> <code className="rounded bg-muted px-1 py-0.5 font-mono text-[11px]">{"import { Button } from \"@/components/ui/button\""}</code></p>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="rounded-lg border border-border p-4">
+          <p className="text-xs font-semibold text-foreground">When to use</p>
+          <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
+            <li>Primary and secondary actions in forms</li>
+            <li>CTA buttons in hero and pricing sections</li>
+            <li>Navigation triggers (as links with button styling)</li>
+            <li>Icon-only actions in toolbars</li>
+          </ul>
+        </div>
+        <div className="rounded-lg border border-border p-4">
+          <p className="text-xs font-semibold text-foreground">When NOT to use</p>
+          <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
+            <li>Inline text links — use an anchor or link variant</li>
+            <li>Toggle state — use Toggle or Switch instead</li>
+            <li>Menu items — use DropdownMenu items</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <p className="text-xs font-semibold">Variants</p>
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <Button variant="default">Default</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="destructive">Destructive</Button>
+          <Button variant="link">Link</Button>
+        </div>
+      </div>
+
+      <div>
+        <p className="text-xs font-semibold">Sizes</p>
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <Button size="xs">Extra Small</Button>
+          <Button size="sm">Small</Button>
+          <Button size="default">Default</Button>
+          <Button size="lg">Large</Button>
+          <Button size="icon" variant="outline"><ChevronRight /></Button>
+          <Button size="icon-xs" variant="outline"><ChevronRight className="size-3" /></Button>
+          <Button size="icon-sm" variant="outline"><ChevronRight className="size-4" /></Button>
+          <Button size="icon-lg" variant="outline"><ChevronRight className="size-5" /></Button>
+        </div>
+      </div>
+    </div>
+  ),
 }
 
 /** The default button style. */
@@ -109,6 +167,16 @@ export const WithIcon: Story = {
   ),
 }
 
+/** A button showing a loading spinner with disabled state. */
+export const Loading: Story = {
+  render: () => (
+    <Button disabled>
+      <Loader2 className="animate-spin" />
+      Please wait
+    </Button>
+  ),
+}
+
 /** All button variants displayed side-by-side. */
 export const AllVariants: Story = {
   render: () => (
@@ -121,136 +189,4 @@ export const AllVariants: Story = {
       <Button variant="link">Link</Button>
     </div>
   ),
-}
-
-/** Plus-branded glass button built on top of the base button. */
-export const PlusGlass: Story = {
-  render: () => <PlusButton>Plus glass button</PlusButton>,
-}
-
-/** Local comparison view that uses an in-story toggle instead of Storybook controls. */
-const TailarkButton = () => (
-  <Button
-    variant="outline"
-    className="rounded-full border-border/80 bg-background px-5 py-2 text-sm font-medium text-foreground shadow-sm hover:bg-background/80"
-  >
-    Primary
-  </Button>
-)
-
-const CultUIButton = () => (
-  <Button
-    variant="outline"
-    className="relative overflow-hidden border border-border/80 bg-card/80 px-5 py-2 text-sm font-medium text-foreground shadow-[0_18px_45px_rgba(15,23,42,0.45)]"
-  >
-    <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),transparent_55%)]" />
-    <span className="relative">Primary</span>
-  </Button>
-)
-
-const BunduiButton = () => (
-  <Button className="rounded-full bg-primary px-5 py-2 text-sm font-medium tracking-tight shadow-lg shadow-primary/40">
-    Primary
-  </Button>
-)
-
-const ButtonComparisonPreview = () => {
-  return (
-    <Tabs defaultValue="shadcn" className="w-full max-w-xl">
-      <TabsList variant="line" className="mb-4 w-full justify-start">
-        <TabsTrigger value="shadcn">Base (shadcn)</TabsTrigger>
-        <TabsTrigger value="tailark">Tailark</TabsTrigger>
-        <TabsTrigger value="cult-ui">Cult UI</TabsTrigger>
-        <TabsTrigger value="bundui">Bundui</TabsTrigger>
-        <TabsTrigger value="plus">Plus</TabsTrigger>
-      </TabsList>
-
-      <TabsContent value="shadcn" className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-          Base (shadcn/ui)
-        </p>
-        <div className="rounded-lg border border-dashed border-border bg-card/60 p-4">
-          <div className="flex items-center gap-3">
-            <Button>Primary</Button>
-            <Button variant="outline">Outline</Button>
-          </div>
-        </div>
-      </TabsContent>
-
-      <TabsContent value="tailark" className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-          Tailark (registry)
-        </p>
-        <div className="rounded-lg border border-dashed border-border bg-card/60 p-4">
-          <p className="mb-2 text-xs text-muted-foreground">
-            Pill-shaped primary actions and neutral outlines inspired by Tailark marketing CTAs.
-          </p>
-          <div className="flex items-center gap-3">
-            <TailarkButton />
-            <Button variant="outline" className="rounded-full px-5 py-2 text-sm font-medium">
-              Outline
-            </Button>
-          </div>
-        </div>
-      </TabsContent>
-
-      <TabsContent value="cult-ui" className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-          Cult UI (registry)
-        </p>
-        <div className="rounded-lg border border-dashed border-border bg-card/60 p-4">
-          <p className="mb-2 text-xs text-muted-foreground">
-            High-contrast buttons with subtle glow and layered light, inspired by Cult UI marketing
-            heroes.
-          </p>
-          <div className="flex items-center gap-3">
-            <CultUIButton />
-            <Button
-              variant="outline"
-              className="border-border/70 bg-background/80 px-5 py-2 text-sm font-medium"
-            >
-              Outline
-            </Button>
-          </div>
-        </div>
-      </TabsContent>
-
-      <TabsContent value="bundui" className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-          Bundui (blocks kit)
-        </p>
-        <div className="rounded-lg border border-dashed border-border bg-card/60 p-4">
-          <p className="mb-2 text-xs text-muted-foreground">
-            Bold, rounded CTAs echoing Bundui marketing hero and pricing sections.
-          </p>
-          <div className="flex items-center gap-3">
-            <BunduiButton />
-            <Button
-              variant="outline"
-              className="rounded-full border-primary/40 bg-background/80 px-5 py-2 text-sm font-medium"
-            >
-              Outline
-            </Button>
-          </div>
-        </div>
-      </TabsContent>
-
-      <TabsContent value="plus" className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-          Plus
-        </p>
-        <div className="rounded-lg border border-dashed border-border bg-card/60 p-4">
-          <div className="flex items-center gap-3">
-            <PlusButton>Primary</PlusButton>
-            <PlusButton variant="outline">Outline</PlusButton>
-          </div>
-        </div>
-      </TabsContent>
-    </Tabs>
-  )
-}
-
-/** Toggle view comparing base shadcn, registry sources, and Plus button implementations. */
-export const Comparison: Story = {
-  render: () => <ButtonComparisonPreview />,
 }

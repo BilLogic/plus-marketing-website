@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator"
 
 /** Scrollable container with custom styled scrollbars. */
 const meta = {
-  title: "components-misc/ScrollArea",
+  title: "Components/ScrollArea",
   component: ScrollArea,
   tags: ["autodocs"],
   parameters: {

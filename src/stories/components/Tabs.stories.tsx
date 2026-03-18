@@ -4,7 +4,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
 /** Tabs organize content into multiple sections and allow users to navigate between them. */
 const meta = {
-  title: "components-marketing/Tabs",
+  title: "Components/Tabs",
   component: Tabs,
   tags: ["autodocs"],
   parameters: {

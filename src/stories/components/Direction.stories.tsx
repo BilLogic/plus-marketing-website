@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 
 /** A context provider for controlling text direction (LTR/RTL). Wrap your app or section to support internationalized layouts. */
 const meta = {
-  title: "components-misc/Direction",
+  title: "Components/Direction",
   parameters: {
     layout: "centered",
   },

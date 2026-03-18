@@ -15,7 +15,7 @@ import {
 
 /** A horizontal menu bar with dropdown menus, modelled after desktop application menubars. */
 const meta = {
-  title: "components-misc/Menubar",
+  title: "Components/Menubar",
   parameters: {
     layout: "centered",
   },

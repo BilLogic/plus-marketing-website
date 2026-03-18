@@ -5,7 +5,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 /** Displays a callout for important messages. */
 const meta = {
-  title: "components-marketing/Alert",
+  title: "Components/Alert",
   component: Alert,
   tags: ["autodocs"],
 } satisfies Meta<typeof Alert>

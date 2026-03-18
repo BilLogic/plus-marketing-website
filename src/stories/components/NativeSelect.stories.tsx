@@ -8,7 +8,7 @@ import {
 
 /** A native HTML select element styled to match the design system. Useful when a lightweight dropdown is preferred over the custom Select. */
 const meta = {
-  title: "components-misc/NativeSelect",
+  title: "Components/NativeSelect",
   parameters: {
     layout: "centered",
   },

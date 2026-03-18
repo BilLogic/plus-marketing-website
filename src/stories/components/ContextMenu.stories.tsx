@@ -18,7 +18,7 @@ import {
 
 /** Displays a menu activated by right-clicking an area (context menu). */
 const meta = {
-  title: "components-misc/ContextMenu",
+  title: "Components/ContextMenu",
   parameters: {
     layout: "centered",
   },

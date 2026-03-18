@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 /** Placeholder loading state for content that hasn't loaded yet. */
 const meta = {
-  title: "components-misc/Skeleton",
+  title: "Components/Skeleton",
   component: Skeleton,
   tags: ["autodocs"],
   parameters: {

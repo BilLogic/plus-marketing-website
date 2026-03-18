@@ -8,7 +8,7 @@ import {
 
 /** Collapsible region for showing and hiding supplemental content. */
 const meta = {
-  title: "components-misc/Collapsible",
+  title: "Components/Collapsible",
   component: Collapsible,
   tags: ["autodocs"],
   parameters: {

@@ -14,7 +14,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 /** A panel that slides in from the edge of the screen, typically used for navigation or forms. */
 const meta = {
-  title: "components-marketing/Sheet",
+  title: "Components/Sheet",
   component: Sheet,
   parameters: {
     layout: "centered",

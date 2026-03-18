@@ -4,7 +4,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio"
 
 /** Utility for maintaining consistent aspect ratios for media and previews. */
 const meta = {
-  title: "components-misc/AspectRatio",
+  title: "Components/AspectRatio",
   component: AspectRatio,
   parameters: {
     layout: "centered",

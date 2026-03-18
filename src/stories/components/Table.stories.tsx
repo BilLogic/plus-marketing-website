@@ -12,7 +12,7 @@ import {
 
 /** Data table built from composable row, header, and cell primitives. */
 const meta = {
-  title: "components-misc/Table",
+  title: "Components/Table",
   component: Table,
   tags: ["autodocs"],
   decorators: [

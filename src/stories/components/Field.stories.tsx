@@ -16,7 +16,7 @@ import {
 
 /** Composable form field primitives that handle labels, descriptions, and validation errors. */
 const meta = {
-  title: "components-misc/Field",
+  title: "Components/Field",
   parameters: {
     layout: "centered",
   },

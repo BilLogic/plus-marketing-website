@@ -4,7 +4,7 @@ import { Calendar } from "@/components/ui/calendar"
 
 /** Calendar primitive used for date pickers and scheduling blocks. */
 const meta = {
-  title: "components-misc/Calendar",
+  title: "Components/Calendar",
   component: Calendar,
   parameters: {
     layout: "centered",

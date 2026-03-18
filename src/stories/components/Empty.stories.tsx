@@ -13,7 +13,7 @@ import {
 
 /** An empty-state placeholder used when a list, table, or view has no content to display. */
 const meta = {
-  title: "components-misc/Empty",
+  title: "Components/Empty",
   parameters: {
     layout: "centered",
   },

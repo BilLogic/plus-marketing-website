@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 
 /** Logical grouping of related buttons for marketing CTAs. */
 const meta = {
-  title: "components-marketing/ButtonGroup",
+  title: "Components/ButtonGroup",
   component: Button,
   parameters: {
     layout: "centered",

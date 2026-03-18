@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator"
 
 /** Separator visually divides content into distinct sections. */
 const meta = {
-  title: "components-marketing/Separator",
+  title: "Components/Separator",
   component: Separator,
   tags: ["autodocs"],
   parameters: {

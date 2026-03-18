@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label"
 
 /** Checkbox allows users to toggle a boolean value on and off. */
 const meta = {
-  title: "components-marketing/Checkbox",
+  title: "Components/Checkbox",
   component: Checkbox,
   tags: ["autodocs"],
   parameters: {

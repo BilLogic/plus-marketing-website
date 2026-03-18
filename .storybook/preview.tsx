@@ -6,7 +6,7 @@ const preview: Preview = {
   parameters: {
     options: {
       storySort: (a, b) => {
-        const order = ["Welcome", "Styles", "Layout", "Effects", "components-marketing", "components-misc", "Templates"]
+        const order = ["Welcome", "Styles", "Layout", "Components", "Effects", "Templates"]
 
         const titleA = a?.title ?? a?.[1]?.title ?? ""
         const titleB = b?.title ?? b?.[1]?.title ?? ""

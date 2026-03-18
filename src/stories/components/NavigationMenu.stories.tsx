@@ -11,7 +11,7 @@ import { CultNavbar } from "@/components/registry/cult/navbar"
 
 /** A top-level navigation component for site-wide or section-wide links. */
 const meta = {
-  title: "components-marketing/NavigationMenu",
+  title: "Components/NavigationMenu",
   component: NavigationMenu,
   parameters: {
     layout: "centered",

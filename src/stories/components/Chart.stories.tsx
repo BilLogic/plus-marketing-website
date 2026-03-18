@@ -10,7 +10,7 @@ import {
 
 /** Themed chart components built on top of Recharts with automatic color tokens. */
 const meta = {
-  title: "components-misc/Chart",
+  title: "Components/Chart",
   parameters: {
     layout: "centered",
   },

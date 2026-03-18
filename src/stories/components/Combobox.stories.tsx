@@ -20,7 +20,7 @@ const frameworks = [
 
 /** Autocomplete input for selecting from marketing taxonomies or filters. */
 const meta = {
-  title: "components-marketing/Combobox",
+  title: "Components/Combobox",
   component: Combobox,
   parameters: {
     layout: "centered",

@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button"
 
 /** Slide-in panel for secondary tasks on mobile and desktop. */
 const meta = {
-  title: "components-marketing/Drawer",
+  title: "Components/Drawer",
   component: Drawer,
   parameters: {
     layout: "centered",

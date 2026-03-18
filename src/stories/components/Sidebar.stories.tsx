@@ -22,7 +22,7 @@ import {
 
 /** An application sidebar with collapsible groups, menus, and mobile support. */
 const meta = {
-  title: "components-misc/Sidebar",
+  title: "Components/Sidebar",
   parameters: {
     layout: "fullscreen",
   },

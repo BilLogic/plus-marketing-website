@@ -4,7 +4,7 @@ import { Progress } from "@/components/ui/progress"
 
 /** Progress bar indicating completion status. */
 const meta = {
-  title: "components-marketing/Progress",
+  title: "Components/Progress",
   component: Progress,
   tags: ["autodocs"],
   parameters: {

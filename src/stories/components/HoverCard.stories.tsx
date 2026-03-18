@@ -11,7 +11,7 @@ import {
 
 /** Displays rich content in a portal when hovering over a trigger. */
 const meta = {
-  title: "components-misc/HoverCard",
+  title: "Components/HoverCard",
   parameters: {
     layout: "centered",
   },

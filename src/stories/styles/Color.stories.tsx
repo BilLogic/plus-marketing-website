@@ -2,7 +2,7 @@ import { useState } from "react"
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 
 const meta = {
-  // Shown in Storybook sidebar as: STYLES → Color
+  // Shown in Storybook sidebar as: STYLES -> Color
   title: "Styles/Color",
   tags: ["autodocs"],
   parameters: {
@@ -297,7 +297,7 @@ const Code = ({ children }: { children: React.ReactNode }) => (
 /*  Story                                                              */
 /* ------------------------------------------------------------------ */
 
-/** Plus semantic token system — every token × every utility. */
+/** Plus semantic token system — every token x every utility. */
 export const Semantics: Story = {
   render: () => {
     const [mode, setMode] = useState<"light" | "dark">("light")
@@ -325,11 +325,18 @@ export const Semantics: Story = {
             <ModeToggle mode={mode} setMode={setMode} />
           </div>
 
-          {/* Utility legend */}
-          <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] text-muted-foreground">
-            <span className="font-semibold uppercase tracking-wider">Columns:</span>
+          {/* Utility legend as pills */}
+          <div className="mt-5 flex flex-wrap items-center gap-1.5">
+            <span className="mr-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+              Columns:
+            </span>
             {compactUtilities.map((u) => (
-              <span key={u.label}>{u.label}-*</span>
+              <span
+                key={u.label}
+                className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-medium text-muted-foreground"
+              >
+                {u.label}-*
+              </span>
             ))}
           </div>
 
@@ -339,7 +346,7 @@ export const Semantics: Story = {
               {tokenGroups.map((group, gi) => (
                 <div
                   key={group.id}
-                  className={`px-6 py-5 ${gi < tokenGroups.length - 1 ? "border-b border-border/50" : ""}`}
+                  className={`px-6 py-5 ${gi % 2 === 1 ? "bg-muted/20" : ""} ${gi < tokenGroups.length - 1 ? "border-b border-border/50" : ""}`}
                 >
                   {/* Group header */}
                   <div className="flex items-baseline gap-3">
@@ -351,10 +358,10 @@ export const Semantics: Story = {
                     </span>
                   </div>
 
-                  {/* Token × utility grid */}
+                  {/* Token x utility grid */}
                   <div className="mt-3 overflow-x-auto">
                     <table className="w-full border-collapse">
-                      <thead>
+                      <thead className="sticky top-0 z-10 bg-background">
                         <tr>
                           <th className="w-44 pb-1.5 pr-3 text-left text-[9px] font-semibold uppercase tracking-wider text-muted-foreground/60">
                             Token
@@ -362,7 +369,7 @@ export const Semantics: Story = {
                           {compactUtilities.map((u) => (
                             <th
                               key={u.label}
-                              className="pb-1.5 text-center text-[9px] font-semibold uppercase tracking-wider text-muted-foreground/60"
+                              className="min-w-[2.75rem] pb-1.5 text-center text-[9px] font-semibold uppercase tracking-wider text-muted-foreground/60"
                             >
                               {u.label}
                             </th>
@@ -371,7 +378,7 @@ export const Semantics: Story = {
                       </thead>
                       <tbody>
                         {group.tokens.map((token) => (
-                          <tr key={token}>
+                          <tr key={token} className="transition-colors hover:bg-muted/30">
                             <td className="py-1.5 pr-3 align-middle">
                               <code className="whitespace-nowrap text-[10px] font-medium text-foreground">
                                 {token}
@@ -383,7 +390,7 @@ export const Semantics: Story = {
                             {compactUtilities.map((u) => (
                               <td
                                 key={u.label}
-                                className="py-1.5 align-middle"
+                                className="min-w-[2.75rem] py-1.5 align-middle"
                                 title={u.cls(token)}
                               >
                                 <div className="flex justify-center">

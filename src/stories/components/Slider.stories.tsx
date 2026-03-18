@@ -4,7 +4,7 @@ import { Slider } from "@/components/ui/slider"
 
 /** Slider input for selecting a value or range within a bounded interval. */
 const meta = {
-  title: "components-marketing/Slider",
+  title: "Components/Slider",
   component: Slider,
   tags: ["autodocs"],
   parameters: {

@@ -4,7 +4,7 @@ import { Textarea } from "@/components/ui/textarea"
 
 /** A multi-line text input for longer-form content. */
 const meta = {
-  title: "components-marketing/Textarea",
+  title: "Components/Textarea",
   component: Textarea,
   parameters: {
     layout: "centered",

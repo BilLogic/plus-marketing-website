@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button"
 
 /** Contextual popup that appears on hover or focus via @base-ui/react tooltip. */
 const meta = {
-  title: "components-marketing/Tooltip",
+  title: "Components/Tooltip",
   component: Tooltip,
   tags: ["autodocs"],
   parameters: {

@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label"
 
 /** Switch toggles the state of a single setting on or off. */
 const meta = {
-  title: "components-marketing/Switch",
+  title: "Components/Switch",
   component: Switch,
   tags: ["autodocs"],
   parameters: {

@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 
 /** Accessible text labels paired with form controls. */
 const meta = {
-  title: "components-misc/Label",
+  title: "Components/Label",
   component: Label,
   parameters: {
     layout: "centered",

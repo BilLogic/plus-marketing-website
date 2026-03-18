@@ -14,7 +14,7 @@ import {
 
 /** Command palette surface for power users and quick navigation. */
 const meta = {
-  title: "components-misc/Command",
+  title: "Components/Command",
   component: Command,
   parameters: {
     layout: "centered",

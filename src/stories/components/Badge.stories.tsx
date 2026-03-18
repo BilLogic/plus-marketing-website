@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge"
 
 /** A small status descriptor for UI elements. */
 const meta = {
-  title: "components-marketing/Badge",
+  title: "Components/Badge",
   component: Badge,
   parameters: {
     layout: "centered",

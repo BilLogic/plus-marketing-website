@@ -16,7 +16,7 @@ import {
 
 /** A versatile list-item component for building settings pages, notification lists, and more. */
 const meta = {
-  title: "components-misc/Item",
+  title: "Components/Item",
   parameters: {
     layout: "centered",
   },

@@ -5,7 +5,7 @@ import { Toggle } from "@/components/ui/toggle"
 
 /** A two-state button that can be toggled on or off. */
 const meta = {
-  title: "components-marketing/Toggle",
+  title: "Components/Toggle",
   component: Toggle,
   parameters: {
     layout: "centered",

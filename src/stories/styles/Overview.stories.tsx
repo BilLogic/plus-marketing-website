@@ -13,8 +13,13 @@ type Story = StoryObj<typeof meta>
 
 const sections = [
   {
-    title: "Tokens",
-    description: "Semantic color tokens, full palette, and usage examples. Every token × every Tailwind utility documented.",
+    title: "Color Palette",
+    description: "Plus brand hues (Figma-derived) and standard Tailwind hues with light/dark preview.",
+    path: "Styles/Color/Tokens",
+  },
+  {
+    title: "Semantic Tokens",
+    description: "Every semantic token paired with every Tailwind color utility — bg, text, border, ring, fill, stroke, and more.",
     path: "Styles/Color",
   },
   {
@@ -23,12 +28,22 @@ const sections = [
     path: "Styles/Typography",
   },
   {
+    title: "Spacing",
+    description: "Tailwind spacing scale, gap utilities, padding conventions, container widths, and responsive patterns.",
+    path: "Styles/Spacing",
+  },
+  {
+    title: "Themes",
+    description: "Light and dark mode token mapping, live side-by-side comparison, and implementation guide.",
+    path: "Styles/Themes",
+  },
+  {
     title: "Elevation",
     description: "Shadow scale, colored shadows, rings, backdrop blur, and glass patterns.",
     path: "Styles/Elevation",
   },
   {
-    title: "Transitions",
+    title: "Motion",
     description: "CSS transition tokens — duration scale, easing curves, transition properties, and keyframe animations.",
     path: "Styles/Transitions",
   },
@@ -51,9 +66,14 @@ export const Guide: Story = {
     <div className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto max-w-5xl px-6 py-10">
         <div className="max-w-3xl space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-            Styles
-          </p>
+          <div className="flex items-center gap-3">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+              Styles
+            </p>
+            <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary">
+              {sections.length} sections
+            </span>
+          </div>
           <h1 className="text-balance text-3xl font-semibold tracking-tight">
             Design foundations
           </h1>
@@ -69,16 +89,19 @@ export const Guide: Story = {
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {sections.map((s) => (
+          {sections.map((s, i) => (
             <div
               key={s.title}
-              className="rounded-xl border border-border p-5 transition-colors hover:border-primary/30 hover:bg-primary/[0.02]"
+              className="group rounded-xl border border-border p-5 transition-colors hover:border-primary/30 hover:bg-primary/[0.02]"
             >
-              <p className="text-sm font-semibold tracking-tight">{s.title}</p>
-              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <div className="h-4 w-1 rounded-full bg-primary/40 transition-colors group-hover:bg-primary" />
+                <p className="text-sm font-semibold tracking-tight">{s.title}</p>
+              </div>
+              <p className="mt-1.5 pl-3 text-xs leading-relaxed text-muted-foreground">
                 {s.description}
               </p>
-              <p className="mt-2 text-[10px] font-medium text-primary">{s.path}</p>
+              <p className="mt-2 pl-3 text-[10px] font-medium text-primary">{s.path}</p>
             </div>
           ))}
         </div>

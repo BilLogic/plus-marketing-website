@@ -4,7 +4,7 @@ import { Spinner } from "@/components/ui/spinner"
 
 /** Animated loading indicator for async operations. */
 const meta = {
-  title: "components-misc/Spinner",
+  title: "Components/Spinner",
   component: Spinner,
   tags: ["autodocs"],
   parameters: {
