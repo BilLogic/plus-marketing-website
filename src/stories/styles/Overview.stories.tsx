@@ -15,7 +15,7 @@ const sections = [
   {
     title: "Tokens",
     description: "Semantic color tokens, full palette, and usage examples. Every token × every Tailwind utility documented.",
-    path: "Styles/Tokens",
+    path: "Styles/Color",
   },
   {
     title: "Typography",

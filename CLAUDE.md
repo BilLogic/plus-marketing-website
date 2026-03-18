@@ -34,4 +34,4 @@ We use a "lazy-genius" dynamic color system.
 - The brand hue is controlled via `--brand-hue: 250;` in `src/app/globals.css`.
 - All semantic colors (background, primary, muted, border) use `oklch()` defined off this hue.
 - Do NOT use arbitrary hex codes. Use standard Tailwind semantic classes (e.g., `text-muted-foreground`).
-- For complete token references, read `.agent/skills/frontend-design/colors/tokens.md` and `src/stories/styles/Color.mdx`.
+- For complete token references, read `.agent/skills/frontend-design/references/tokens.md` and `src/stories/styles/Color.mdx`.
