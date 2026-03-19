@@ -1,43 +1,75 @@
+"use client"
+
+import Link from "next/link"
+import Image from "next/image"
+import { ArrowLeft } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+
+/** Nav links matching PLUS website IA (Figma). */
+const NAV_LINKS = [
+  { label: "About", href: "/#about" },
+  { label: "For schools", href: "/for-schools" },
+  { label: "For tutors", href: "/for-tutors" },
+  { label: "For researchers", href: "/#research" },
+  { label: "Get involved", href: "/#get-involved" },
+] as const
 
 type BunduiNavbarProps = {
-  productName?: string
   className?: string
 }
 
-/** Bundui-inspired marketing navbar with pill-shaped border and floating appearance. */
-const BunduiNavbar = ({ productName = "Plus", className }: BunduiNavbarProps) => {
+/**
+ * Bundui navbar: white background, PLUS logo image, CTA #A6EDF4 / #004247 (no shadow), nav left-aligned.
+ */
+const BunduiNavbar = ({ className }: BunduiNavbarProps) => {
   return (
-    <header className={cn("flex justify-center px-4 pt-4 sm:px-6 sm:pt-6", className)}>
-      <div className="flex w-full max-w-5xl items-center justify-between gap-3 rounded-full border border-border/70 bg-background/80 px-4 py-2 shadow-sm backdrop-blur">
-        <div className="flex items-center gap-2">
-          <span className="size-6 rounded-full bg-primary/10">
-            <span className="relative block size-full">
-              <span className="absolute inset-1 rounded-full bg-primary/80" />
-            </span>
-          </span>
-          <span className="text-sm font-medium tracking-tight">{productName}</span>
-        </div>
-        <nav className="hidden items-center gap-4 text-xs text-muted-foreground sm:flex sm:text-sm">
-          <a href="#" className="hover:text-foreground">
-            Features
-          </a>
-          <a href="#" className="hover:text-foreground">
-            Templates
-          </a>
-          <a href="#" className="hover:text-foreground">
-            Pricing
-          </a>
-          <a href="#" className="hover:text-foreground">
-            Docs
-          </a>
-        </nav>
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm">
-            Log in
-          </Button>
-          <Button size="sm">Get started</Button>
+    <header
+      className={cn("sticky top-0 z-40 bg-background font-sans", className)}
+      role="banner"
+    >
+      <div className="flex justify-center px-4 py-3 sm:px-6">
+        <div className="flex w-full max-w-5xl items-center gap-10">
+          {/* Logo: use a PNG with transparent background (public/plus-logo.png) */}
+          <Link
+            href="/"
+            className="flex shrink-0 bg-transparent transition-opacity hover:opacity-90"
+            aria-label="PLUS home"
+          >
+            <Image
+              src="/plus-logo.png"
+              alt="PLUS Personalized Learning²"
+              width={180}
+              height={40}
+              className="h-10 w-auto bg-transparent"
+              priority
+            />
+          </Link>
+
+          {/* Nav links — left-aligned toward logo, more space between links */}
+          <nav
+            className="hidden items-center gap-8 text-base text-muted-foreground md:flex"
+            aria-label="Main navigation"
+          >
+            {NAV_LINKS.map(({ label, href }) => (
+              <Link
+                key={label}
+                href={href}
+                className="leading-relaxed transition-colors hover:text-foreground"
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* CTA: bg #A6EDF4, text and arrow #004247, not bold */}
+          <Link
+            href="/for-tutors"
+            className="ml-auto flex shrink-0 items-center gap-3 rounded-full px-4 py-2 text-base font-normal transition-opacity hover:opacity-95"
+            style={{ backgroundColor: "#A6EDF4", color: "#004247" }}
+          >
+            <ArrowLeft className="size-4" aria-hidden style={{ color: "#004247" }} />
+            Tutor Login
+          </Link>
         </div>
       </div>
     </header>
@@ -45,4 +77,3 @@ const BunduiNavbar = ({ productName = "Plus", className }: BunduiNavbarProps) =>
 }
 
 export { BunduiNavbar }
-
