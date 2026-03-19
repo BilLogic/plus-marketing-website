@@ -1,7 +1,5 @@
 "use client"
 
-import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
   Accordion,
@@ -9,123 +7,152 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import { BunduiCtaSection } from "@/components/registry/bundui/cta-section"
+import { BunduiHowItWorksSection } from "@/components/registry/bundui/how-it-works-section"
+import { BunduiTestimonialsSection } from "@/components/registry/bundui/testimonials-section"
 import { cn } from "@/lib/utils"
+import { forSchoolsAssets } from "@/components/marketing/for-schools-assets"
 
-/**
- * Hero section for the "For Schools" page.
- * "Research-driven, AI-powered Support for Every Classroom"
- */
 export const SchoolsHeroSection = () => {
   return (
-    <section className="relative flex flex-col items-center gap-10 px-6 py-16 text-center sm:px-10 sm:py-20">
-      <div className="flex max-w-3xl flex-col items-center gap-7">
+    <section className="relative flex flex-col items-center gap-8 px-6 py-16 text-center sm:px-10 sm:py-20">
+      <div className="flex max-w-3xl flex-col items-center gap-5">
         <p className="text-xl font-semibold text-teal-900 sm:text-2xl">
           For schools
         </p>
-        <h1 className="text-balance text-3xl font-bold leading-tight tracking-tight text-teal-950 sm:text-4xl md:text-5xl">
+        <h1 className="text-balance text-3xl font-bold leading-tight tracking-tight text-teal-950 sm:text-4xl md:text-5xl lg:text-[52px]">
           Research-driven, AI-powered Support for Every Classroom
         </h1>
       </div>
-      <Button className="h-11 rounded-full bg-teal-300 px-10 text-base text-teal-950 hover:bg-teal-200">
-        Get Started for Free
-      </Button>
+      <Button>Get Started for Free</Button>
     </section>
   )
 }
 
-/**
- * Partner school community section with placeholder logo circles.
- */
 export const SchoolsCommunitySection = () => {
   return (
-    <section className="space-y-10 px-6 sm:px-10">
+    <section className="relative space-y-10 px-6 sm:px-10">
       <div className="space-y-5">
         <h2 className="text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl md:text-[40px]">
           Join the PLUS School Community
         </h2>
-        <p className="max-w-3xl text-lg text-muted-foreground">
+        <p className="max-w-3xl text-lg text-muted-foreground sm:text-xl">
           We partner with forward-thinking schools to bridge learning gaps. See
           the organizations already making a difference with us.
         </p>
       </div>
-      <div className="flex flex-wrap items-center gap-8 sm:gap-12">
-        {[1, 2, 3, 4].map((i) => (
-          <div
-            key={i}
-            className="flex size-40 items-center justify-center rounded-full bg-muted sm:size-56 md:size-64"
-          >
-            <span className="text-xs text-muted-foreground">Partner {i}</span>
-          </div>
-        ))}
+
+      <div className="relative w-full max-w-5xl">
+        <Carousel opts={{ align: "center", loop: true }}>
+          <CarouselContent className="-ml-4">
+            {forSchoolsAssets.partnerLogos.map((src, index) => (
+              <CarouselItem
+                key={src}
+                className="pl-4 sm:basis-1/2 lg:basis-1/4"
+                aria-label={`Partner logo ${index + 1}`}
+              >
+                <div className="relative flex size-44 items-center justify-center overflow-hidden rounded-full bg-muted sm:size-56 lg:size-64">
+                  <img
+                    alt=""
+                    src={src}
+                    className="h-full w-full object-contain p-10"
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-0 sm:-left-12" />
+          <CarouselNext className="right-0 sm:-right-12" />
+        </Carousel>
       </div>
+
+      <img
+        alt=""
+        src={forSchoolsAssets.decor.community}
+        className="pointer-events-none absolute -right-4 -top-6 hidden h-44 w-44 object-cover lg:block"
+      />
     </section>
   )
 }
 
-/** Data for the training accordion items. */
-const TRAINING_ITEMS = [
+/** Benefits content from Figma node 1104-1220. Rendered with Storybook Accordion (components-marketing/Accordion). */
+const BENEFITS_ITEMS = [
   {
     id: "free-for-all",
     title: "Free for All",
     description:
       "High-quality education shouldn't be gated. Access our full suite of AI-driven training and feedback tools at no cost to your district.",
+    cta: "See if your school qualifies",
   },
   {
     id: "multilingual-support",
     title: "Multilingual Support",
     description:
-      "Our platform supports multiple languages so every tutor and student can communicate effectively regardless of their native language.",
+      "Support your diverse student body with lessons available in both English and Spanish.",
+    cta: "",
   },
   {
-    id: "scenario-based-training",
-    title: "Scenario-Based Training",
+    id: "goal-setting",
+    title: "Goal Setting with Students",
     description:
-      "Tutors practice with realistic classroom scenarios that build confidence and instructional expertise before working with students.",
+      "Tutors set weekly math goals with students and reward them for meeting their goals. By using this goal-setting method, there is a 25% increase in time spent practicing and a 40% increase in skill mastery.",
+    cta: "",
   },
   {
-    id: "ai-powered-feedback",
-    title: "AI-Powered Tutor Feedback",
+    id: "human-ai",
+    title: "Human + AI Tutoring Model",
     description:
-      "Intelligent feedback systems help tutors continuously improve their teaching strategies with actionable, data-driven insights.",
+      "We allow teachers to select the scope and sequence of what is taught. We also determine which students get taught by looking at their past performance on math software.",
+    cta: "",
   },
 ] as const
 
-/**
- * Program Onboarding & Training section with an accordion.
- * [NEW COMPONENT PATTERN]: Custom accordion with side image — uses existing
- * Accordion primitives but the expanded layout (text + image side-by-side)
- * is a new pattern not in the component library.
- */
 export const SchoolsTrainingSection = () => {
   return (
     <section className="space-y-10 px-6 sm:px-10">
       <div className="space-y-5">
         <h2 className="text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl md:text-[40px]">
-          Program Onboarding &amp; Training
+          Benefits of PLUS
         </h2>
-        <p className="max-w-3xl text-lg text-muted-foreground">
-          Here&apos;s how PLUS supports schools and trains tutors to guide
-          students to success
+        <p className="max-w-3xl text-lg text-muted-foreground sm:text-xl">
+          Here&apos;s how PLUS supports schools and trains tutors to guide students
+          to success
         </p>
       </div>
 
-      <Accordion defaultValue={["free-for-all"]}>
-        {TRAINING_ITEMS.map((item) => (
-          <AccordionItem key={item.id} value={item.id} className="border-b-0 py-4">
-            <AccordionTrigger className="text-xl font-semibold text-muted-foreground hover:text-teal-950 hover:no-underline data-[panel-open]:text-teal-950 sm:text-2xl">
-              <div className="flex items-center gap-4">
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-teal-100">
-                  <span className="size-3 rounded-full bg-teal-700" />
-                </span>
-                {item.title}
-              </div>
+      <Accordion
+        defaultValue={[0]}
+        className="w-full rounded-xl border border-border/60 bg-card/70"
+      >
+        {BENEFITS_ITEMS.map((item) => (
+          <AccordionItem key={item.id} className="border-border/60 px-4 last:border-b-0">
+            <AccordionTrigger className="py-4 text-left text-base font-semibold hover:no-underline sm:text-lg">
+              {item.title}
             </AccordionTrigger>
-            <AccordionContent>
-              <div className="flex flex-col gap-6 pt-4 md:flex-row md:items-start md:justify-between">
-                <p className="max-w-md text-base text-muted-foreground">
-                  {item.description}
-                </p>
-                <div className="h-64 w-full max-w-md rounded-3xl bg-muted md:h-80 md:w-96" />
+            <AccordionContent className="pb-4 pt-0">
+              <div className="grid gap-6 md:grid-cols-[1fr_440px] md:items-start">
+                <div className="flex flex-col gap-4">
+                  <p className="text-muted-foreground sm:text-base">
+                    {item.description}
+                  </p>
+                  {item.cta ? (
+                    <Button className="w-fit">{item.cta}</Button>
+                  ) : null}
+                </div>
+                <div className="relative overflow-hidden rounded-3xl bg-muted">
+                  <img
+                    alt=""
+                    src={forSchoolsAssets.images.benefits}
+                    className="h-64 w-full object-cover sm:h-72 md:h-[440px]"
+                  />
+                </div>
               </div>
             </AccordionContent>
           </AccordionItem>
@@ -135,114 +162,58 @@ export const SchoolsTrainingSection = () => {
   )
 }
 
-/** Data for the day-to-day experience bento cards. */
 const EXPERIENCE_STEPS = [
   {
-    number: 1,
     title: "Expert Kickoff",
-    description:
-      "We onboard your faculty and send specialists to your campus for a hands-on kickoff, ensuring a seamless integration into your school's daily schedule.",
+    body: "We onboard your faculty and send specialists to your campus for a hands-on kickoff, ensuring a seamless integration into your school's daily schedule.",
     variant: "filled" as const,
-    bgColor: "bg-fuchsia-200",
-    textColor: "text-fuchsia-800",
-    numberBg: "bg-fuchsia-800",
   },
   {
-    number: 2,
     title: "1:1 Certified Tutoring",
-    description: "",
     variant: "outlined" as const,
-    borderColor: "border-yellow-900",
-    textColor: "text-yellow-900",
-    numberBg: "bg-yellow-900",
   },
   {
-    number: 3,
     title: "Goal-Driven Monitoring",
-    description: "",
     variant: "outlined" as const,
-    borderColor: "border-green-900",
-    textColor: "text-green-900",
-    numberBg: "bg-green-900",
   },
   {
-    number: 4,
     title: "The Teacher Loop",
-    description: "",
     variant: "outlined" as const,
-    borderColor: "border-blue-900",
-    textColor: "text-blue-900",
-    numberBg: "bg-blue-900",
   },
 ] as const
 
-/**
- * "Your Day-to-Day Experience with PLUS" section.
- * [NEW COMPONENT PATTERN]: Numbered process bento cards — a horizontal
- * layout with a featured first card (filled bg) and outlined step cards.
- * Built with existing Card primitives but the numbered-step visual pattern is new.
- */
+const experienceStepsForTemplate = EXPERIENCE_STEPS.map((step) => ({
+  title: step.title,
+  body: "body" in step ? (step as { body?: string }).body : undefined,
+  variant: step.variant,
+}))
+
 export const SchoolsExperienceSection = () => {
   return (
-    <section className="space-y-10 px-6 sm:px-10">
-      <div className="space-y-5">
-        <h2 className="text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl md:text-[40px]">
-          Your Day-to-Day Experience with PLUS
-        </h2>
-        <p className="max-w-3xl text-lg text-muted-foreground">
-          A seamless integration designed to support your faculty and accelerate
-          student growth.
-        </p>
-      </div>
-
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {EXPERIENCE_STEPS.map((step) => (
-          <div
-            key={step.number}
-            className={cn(
-              "flex flex-col gap-5 rounded-3xl p-5",
-              step.variant === "filled"
-                ? `${step.bgColor}`
-                : `border-2 ${step.borderColor}`
-            )}
-          >
-            <span
-              className={cn(
-                "flex size-12 items-center justify-center rounded-full text-lg font-bold text-white",
-                step.numberBg
-              )}
-            >
-              {step.number}
-            </span>
-            <h3
-              className={cn("text-xl font-bold sm:text-2xl", step.textColor)}
-            >
-              {step.title}
-            </h3>
-            {step.description && (
-              <p className={cn("text-sm", step.textColor)}>
-                {step.description}
-              </p>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* Large image placeholder below the cards */}
-      <div className="h-80 w-full overflow-hidden rounded-3xl bg-muted sm:h-96 lg:h-[494px]" />
+    <section className="px-6 sm:px-10">
+      <BunduiHowItWorksSection
+        sectionLabel="Experience"
+        sectionTitle="Your Day-to-Day Experience with PLUS"
+        sectionDescription="A seamless integration designed to support your faculty and accelerate student growth."
+        layout="grid"
+        steps={experienceStepsForTemplate}
+        imageSrc={forSchoolsAssets.images.experience}
+        imageAlt=""
+      />
     </section>
   )
 }
 
-/** Data for the oversight stacking cards. */
 const OVERSIGHT_CARDS = [
   {
     title: "Align with Your Curriculum",
     description:
-      "We work with your faculty to tailor lesson strategies that complement your school's specific learning objectives and standards.",
+      "We work with your faculty to tailor lesson strategies that complement your school’s specific learning objectives and standards.",
     cta: "Get training",
     bgColor: "bg-fuchsia-200",
     textColor: "text-fuchsia-800",
+    icon: forSchoolsAssets.icons.oversight[0],
+    image: forSchoolsAssets.images.benefits,
   },
   {
     title: "Data at Your Fingertips",
@@ -251,6 +222,8 @@ const OVERSIGHT_CARDS = [
     cta: "Try our demo",
     bgColor: "bg-green-100",
     textColor: "text-green-900",
+    icon: forSchoolsAssets.icons.oversight[1],
+    image: forSchoolsAssets.images.oversightData,
   },
   {
     title: "Professional Growth & Accountability",
@@ -259,6 +232,8 @@ const OVERSIGHT_CARDS = [
     cta: "Register your tutors",
     bgColor: "bg-yellow-200",
     textColor: "text-yellow-900",
+    icon: forSchoolsAssets.icons.oversight[2],
+    image: forSchoolsAssets.images.benefits,
   },
   {
     title: "Works with Any Math Software",
@@ -267,15 +242,11 @@ const OVERSIGHT_CARDS = [
     cta: "See How it Works",
     bgColor: "bg-blue-200",
     textColor: "text-blue-900",
+    icon: forSchoolsAssets.icons.oversight[3],
+    image: forSchoolsAssets.images.benefits,
   },
 ] as const
 
-/**
- * "Maintain Excellence with Robust Oversight" section with stacking cards.
- * [NEW COMPONENT PATTERN]: Sticky stacking cards — cards that stack on top
- * of each other as user scrolls (CSS sticky positioning). This scroll-driven
- * layout pattern is not in the current component library.
- */
 export const SchoolsOversightSection = () => {
   return (
     <section className="space-y-10 px-6 sm:px-10">
@@ -283,45 +254,47 @@ export const SchoolsOversightSection = () => {
         <h2 className="text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl md:text-[40px]">
           Maintain Excellence with Robust Oversight
         </h2>
-        <p className="max-w-3xl text-lg text-muted-foreground">
-          Ensure high-impact tutoring through data-driven insights and
-          professional certification.
+        <p className="max-w-3xl text-lg text-muted-foreground sm:text-xl">
+          Ensure high-impact tutoring through data-driven insights and professional
+          certification.
         </p>
       </div>
 
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-10">
         {OVERSIGHT_CARDS.map((card, index) => (
           <div
             key={card.title}
             className="sticky"
-            style={{ top: `${80 + index * 40}px` }}
+            style={{ top: `${96 + index * 56}px` }}
           >
             <div
               className={cn(
-                "flex flex-col gap-6 rounded-3xl p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10",
+                "flex flex-col gap-8 rounded-3xl p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10",
                 card.bgColor
               )}
             >
-              <div className="flex max-w-md flex-col gap-4">
-                <span className="flex size-12 items-center justify-center rounded-full bg-white/30">
-                  <span className="size-3 rounded-full bg-current" />
-                </span>
+              <div className="flex max-w-lg flex-col gap-5">
+                <img alt="" src={card.icon} className="size-12" aria-hidden />
                 <h3
                   className={cn(
-                    "text-xl font-semibold sm:text-2xl",
+                    "text-2xl font-semibold tracking-tight sm:text-3xl",
                     card.textColor
                   )}
                 >
                   {card.title}
                 </h3>
-                <p className={cn("text-sm leading-relaxed", card.textColor)}>
+                <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
                   {card.description}
                 </p>
-                <Button className="h-11 w-fit rounded-full bg-teal-300 px-8 text-teal-950 hover:bg-teal-200">
-                  {card.cta}
-                </Button>
+                <Button className="w-fit">{card.cta}</Button>
               </div>
-              <div className="h-56 w-full rounded-3xl bg-white/20 sm:h-72 sm:w-80 md:w-96" />
+              <div className="w-full overflow-hidden rounded-3xl bg-white/30 sm:h-[350px] sm:w-[411px]">
+                <img
+                  alt=""
+                  src={card.image}
+                  className="h-64 w-full object-cover sm:h-[350px]"
+                />
+              </div>
             </div>
           </div>
         ))}
@@ -330,24 +303,61 @@ export const SchoolsOversightSection = () => {
   )
 }
 
-/**
- * "Register Your Institution" CTA section.
- */
+const SUCCESS_STORIES = [
+  {
+    author: "Math Teacher in Oregon",
+    avatar: forSchoolsAssets.avatars[0],
+    quote:
+      '"I love that PLUS Tutoring provides an opportunity for kids to have more help in the classroom. It\'s not just me trying to get to every student but it\'s more specific to their needs. I feel like they get a little bit more out of every day."',
+  },
+  {
+    author: "School District of Lancaster",
+    avatar: forSchoolsAssets.avatars[1],
+    quote:
+      "\"The students' reactions speak for themselves. They look forward to the tutoring sessions. It's not just about math. It's about relationships. It's about building confidence.\"",
+  },
+  {
+    author: "Teacher working with PLUS Tutors",
+    avatar: forSchoolsAssets.avatars[2],
+    quote:
+      '"My students were able to understand concepts more easily than before due to the one-to-one help. My students\' math confidence has also increased!"',
+  },
+] as const
+
+const successStoryTestimonials = SUCCESS_STORIES.map((story) => ({
+  name: story.author,
+  role: "Educator",
+  company: "PLUS",
+  quote: story.quote,
+  avatarUrl: story.avatar,
+}))
+
+export const SchoolsSuccessStoriesSection = () => {
+  return (
+    <section className="relative px-6 sm:px-10">
+      <BunduiTestimonialsSection
+        sectionLabel="Success Stories"
+        sectionTitle="School Success Stories"
+        sectionDescription="Here's what teachers are saying about PLUS."
+        testimonials={successStoryTestimonials}
+      />
+      <img
+        alt=""
+        src={forSchoolsAssets.decor.successStories}
+        className="pointer-events-none absolute -right-3 -top-6 hidden h-40 w-40 object-cover lg:block"
+      />
+    </section>
+  )
+}
+
 export const SchoolsRegisterCTA = () => {
   return (
-    <section className="rounded-3xl bg-white p-10 text-center sm:p-16">
-      <div className="mx-auto flex max-w-3xl flex-col items-center gap-6">
-        <h2 className="text-3xl font-bold tracking-tight text-teal-950 sm:text-4xl md:text-5xl">
-          Register Your Institution
-        </h2>
-        <p className="text-lg text-muted-foreground">
-          Want to get started? Sign up to register your organization and provide
-          your tutors access to our full training suite
-        </p>
-        <Button className="h-11 rounded-full bg-teal-300 px-10 text-base text-teal-950 hover:bg-teal-200">
-          Sign up
-        </Button>
-      </div>
-    </section>
+    <BunduiCtaSection
+      eyebrow="Get started"
+      heading="Register Your Institution"
+      body="Want to get started? Sign up to register your organization and provide your tutors access to our full training suite."
+      primaryLabel="Sign up"
+      secondaryLabel={null}
+    />
   )
 }

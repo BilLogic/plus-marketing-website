@@ -8,7 +8,8 @@ type BunduiCtaSectionProps = {
   heading?: ReactNode
   body?: ReactNode
   primaryLabel?: string
-  secondaryLabel?: string
+  /** Omit or set to empty to hide the secondary button. */
+  secondaryLabel?: string | null
   className?: string
 }
 
@@ -21,6 +22,7 @@ const BunduiCtaSection = ({
   secondaryLabel = "Talk to sales",
   className,
 }: BunduiCtaSectionProps) => {
+  const showSecondary = secondaryLabel != null && secondaryLabel !== ""
   return (
     <section
       className={cn(
@@ -42,9 +44,11 @@ const BunduiCtaSection = ({
         <div className="flex flex-col items-start gap-3 md:items-end">
           <div className="flex flex-wrap items-center gap-3">
             <Button size="lg">{primaryLabel}</Button>
-            <Button size="lg" variant="outline">
-              {secondaryLabel}
-            </Button>
+            {showSecondary && (
+              <Button size="lg" variant="outline">
+                {secondaryLabel}
+              </Button>
+            )}
           </div>
           <p className="text-[11px] text-muted-foreground">
             Inspired by Bundui marketing CTA sections. Built with Plus tokens.

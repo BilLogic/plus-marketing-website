@@ -1,7 +1,5 @@
-import {
-  PlusNavbar,
-  PlusFooterSection,
-} from "@/components/marketing/plus-landing-sections"
+import { PlusNavbar } from "@/components/marketing/plus-landing-sections"
+import { BunduiFooterSection } from "@/components/registry/bundui/footer-section"
 import {
   TutorsHeroSection,
   TutorsCompensationSection,
@@ -24,7 +22,7 @@ const ForTutorsPage = () => {
         <TutorsToolkitSection />
         <TutorsImpactCTA />
       </div>
-      <PlusFooterSection />
+      <BunduiFooterSection productName="PLUS" />
     </main>
   )
 }

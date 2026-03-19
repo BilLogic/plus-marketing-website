@@ -1,7 +1,14 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
+import path from "path"
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  /**
+   * Pin Turbopack root so a parent `~/package-lock.json` is not treated as the monorepo root.
+   * Run `npm run dev` from this repo root (so `process.cwd()` is correct).
+   */
+  turbopack: {
+    root: path.resolve(process.cwd()),
+  },
+}
 
-export default nextConfig;
+export default nextConfig

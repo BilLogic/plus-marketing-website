@@ -1,16 +1,20 @@
 import { cn } from "@/lib/utils"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 type BunduiTestimonial = {
   name: string
   role: string
   company: string
   quote: string
+  avatarUrl?: string
 }
 
 type BunduiTestimonialsSectionProps = {
   testimonials?: BunduiTestimonial[]
   className?: string
+  sectionLabel?: string
+  sectionTitle?: string
+  sectionDescription?: string
 }
 
 /** Bundui-inspired testimonial grid for social proof. */
@@ -39,6 +43,9 @@ const BunduiTestimonialsSection = ({
     },
   ],
   className,
+  sectionLabel = "Testimonials",
+  sectionTitle = "Teams shipping better marketing sites with Plus.",
+  sectionDescription = "Inspired by Bundui marketing testimonial layouts and adapted to our token system.",
 }: BunduiTestimonialsSectionProps) => {
   return (
     <section
@@ -49,13 +56,13 @@ const BunduiTestimonialsSection = ({
     >
       <header className="max-w-2xl space-y-2">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-          Testimonials
+          {sectionLabel}
         </p>
         <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
-          Teams shipping better marketing sites with Plus.
+          {sectionTitle}
         </h2>
         <p className="text-sm text-muted-foreground">
-          Inspired by Bundui marketing testimonial layouts and adapted to our token system.
+          {sectionDescription}
         </p>
       </header>
       <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -69,6 +76,9 @@ const BunduiTestimonialsSection = ({
             </blockquote>
             <figcaption className="mt-4 flex items-center gap-3">
               <Avatar className="size-8">
+                {testimonial.avatarUrl ? (
+                  <AvatarImage src={testimonial.avatarUrl} alt="" />
+                ) : null}
                 <AvatarFallback>{testimonial.name.slice(0, 2).toUpperCase()}</AvatarFallback>
               </Avatar>
               <div className="text-xs">

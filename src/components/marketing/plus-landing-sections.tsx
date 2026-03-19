@@ -39,12 +39,18 @@ const NAV_LINKS = [
   { label: "Get involved", href: "/#get-involved" },
 ] as const
 
+export type NavbarCtaStyle = "marketing" | "default"
+
 /**
  * Updated navbar matching the new Figma IA.
  * Links: About, For schools, For tutors, For researchers, Get involved.
- * CTA: "Tutor Login" pill button with arrow icon.
+ * CTA: "Tutor Login" — marketing = pill teal; default = Storybook default Button.
  */
-export const PlusNavbar = () => {
+export const PlusNavbar = ({
+  ctaStyle = "marketing",
+}: {
+  ctaStyle?: NavbarCtaStyle
+}) => {
   return (
     <header className="sticky top-0 z-40 bg-background/80 pb-3 backdrop-blur-md">
       <div className="flex justify-center px-4 pt-3 sm:px-6">
@@ -71,10 +77,17 @@ export const PlusNavbar = () => {
           </nav>
 
           {/* Tutor Login CTA */}
-          <Button size="sm" className="rounded-full gap-1.5 px-4">
-            <ArrowLeft className="size-4" />
-            Tutor Login
-          </Button>
+          {ctaStyle === "default" ? (
+            <Button size="sm">
+              <ArrowLeft className="size-4" />
+              Tutor Login
+            </Button>
+          ) : (
+            <Button size="sm" className="rounded-full gap-1.5 px-4">
+              <ArrowLeft className="size-4" />
+              Tutor Login
+            </Button>
+          )}
         </div>
       </div>
     </header>
@@ -525,7 +538,11 @@ export const PlusResearchSection = () => {
 /**
  * Newsletter + footer matching the updated Figma IA with audience-based columns.
  */
-export const PlusFooterSection = () => {
+export const PlusFooterSection = ({
+  newsletterButtonStyle = "marketing",
+}: {
+  newsletterButtonStyle?: NavbarCtaStyle
+}) => {
   return (
     <footer className="mt-12 bg-teal-950 text-white">
       {/* Newsletter strip */}
@@ -538,9 +555,16 @@ export const PlusFooterSection = () => {
               placeholder="Your email"
               className="h-10 flex-1 rounded-full border-white/30 bg-transparent text-white placeholder:text-white/50"
             />
-            <Button type="submit" className="h-10 rounded-full bg-teal-300 px-6 text-teal-950 hover:bg-teal-200">
-              Sign up
-            </Button>
+            {newsletterButtonStyle === "default" ? (
+              <Button type="submit">Sign up</Button>
+            ) : (
+              <Button
+                type="submit"
+                className="h-10 rounded-full bg-teal-300 px-6 text-teal-950 hover:bg-teal-200"
+              >
+                Sign up
+              </Button>
+            )}
           </form>
         </div>
       </div>

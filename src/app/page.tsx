@@ -10,8 +10,8 @@ import {
   PlusToolkitMetricsSection,
   PlusAwardsSection,
   PlusResearchSection,
-  PlusFooterSection,
 } from "@/components/marketing/plus-landing-sections"
+import { BunduiFooterSection } from "@/components/registry/bundui/footer-section"
 
 /** Root PLUS marketing landing page mirroring tutors.plus sections and content. */
 const Home = () => {
@@ -30,7 +30,7 @@ const Home = () => {
         <PlusAwardsSection />
         <PlusResearchSection />
       </div>
-      <PlusFooterSection />
+      <BunduiFooterSection productName="PLUS" />
     </main>
   )
 }

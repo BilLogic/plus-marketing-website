@@ -2,12 +2,21 @@ import { cn } from "@/lib/utils"
 
 type BunduiStep = {
   title: string
-  body: string
+  body?: string
+  /** Card style: default (neutral border/card), filled (primary-tinted bg), outlined (primary border). */
+  variant?: "default" | "filled" | "outlined"
 }
 
 type BunduiHowItWorksSectionProps = {
   steps?: BunduiStep[]
   className?: string
+  sectionLabel?: string
+  sectionTitle?: string
+  sectionDescription?: string
+  /** list = vertical stack (default). grid = 4-column grid with first step spanning 2. */
+  layout?: "list" | "grid"
+  imageSrc?: string
+  imageAlt?: string
 }
 
 /** Bundui-inspired "How it works" timeline section. */
@@ -27,7 +36,14 @@ const BunduiHowItWorksSection = ({
     },
   ],
   className,
+  sectionLabel = "How it works",
+  sectionTitle = "From registry blocks to shipped pages.",
+  sectionDescription = "Inspired by Bundui \"how it works\" flows with numbered steps and connecting lines.",
+  layout = "list",
+  imageSrc,
+  imageAlt = "",
 }: BunduiHowItWorksSectionProps) => {
+  const isGrid = layout === "grid"
   return (
     <section
       className={cn(
@@ -37,32 +53,89 @@ const BunduiHowItWorksSection = ({
     >
       <header className="space-y-2">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-          How it works
+          {sectionLabel}
         </p>
         <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
-          From registry blocks to shipped pages.
+          {sectionTitle}
         </h2>
         <p className="text-sm text-muted-foreground">
-          Inspired by Bundui "how it works" flows with numbered steps and connecting lines.
+          {sectionDescription}
         </p>
       </header>
 
-      <ol className="mt-6 space-y-4">
-        {steps.map((step, index) => (
-          <li
-            key={step.title}
-            className="flex gap-3 rounded-2xl border border-border/70 bg-card/80 p-4 text-sm shadow-sm"
-          >
-            <div className="mt-0.5 flex size-7 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
-              {index + 1}
-            </div>
-            <div className="space-y-1">
-              <p className="text-sm font-semibold text-foreground">{step.title}</p>
-              <p className="text-xs text-muted-foreground">{step.body}</p>
-            </div>
-          </li>
-        ))}
+      <ol
+        className={cn(
+          "mt-6",
+          isGrid
+            ? "grid gap-5 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr]"
+            : "space-y-4"
+        )}
+      >
+        {steps.map((step, index) => {
+          const variant = step.variant ?? "default"
+          const isFilled = variant === "filled"
+          const isOutlined = variant === "outlined"
+          return (
+            <li
+              key={step.title}
+              className={cn(
+                "flex rounded-3xl",
+                isGrid
+                  ? "flex-col gap-5 p-6"
+                  : "flex-row gap-3 rounded-2xl p-4",
+                variant === "default" &&
+                  "border border-border/70 bg-card/80 shadow-sm",
+                isFilled && "bg-primary/10",
+                isOutlined && "border-2 border-primary"
+              )}
+            >
+              <div
+                className={cn(
+                  "flex shrink-0 items-center justify-center rounded-full font-bold",
+                  isGrid ? "size-14 text-2xl" : "mt-0.5 size-7 text-xs font-semibold",
+                  variant === "default" &&
+                    "bg-primary/10 text-primary",
+                  isFilled && "bg-primary text-primary-foreground",
+                  isOutlined && "bg-primary text-primary-foreground"
+                )}
+              >
+                {index + 1}
+              </div>
+              <div className={cn("min-w-0", isGrid ? "space-y-2" : "space-y-1")}>
+                <p
+                  className={cn(
+                    "font-semibold tracking-tight text-foreground",
+                    isGrid ? "text-xl sm:text-2xl" : "text-sm",
+                    (isFilled || isOutlined) && "text-primary"
+                  )}
+                >
+                  {step.title}
+                </p>
+                {step.body ? (
+                  <p
+                    className={cn(
+                      "text-muted-foreground",
+                      isGrid ? "text-sm sm:text-base" : "text-xs"
+                    )}
+                  >
+                    {step.body}
+                  </p>
+                ) : null}
+              </div>
+            </li>
+          )
+        })}
       </ol>
+
+      {imageSrc ? (
+        <div className="mt-10 overflow-hidden rounded-3xl bg-muted">
+          <img
+            src={imageSrc}
+            alt={imageAlt}
+            className="h-80 w-full object-cover sm:h-96 lg:h-[494px]"
+          />
+        </div>
+      ) : null}
     </section>
   )
 }
