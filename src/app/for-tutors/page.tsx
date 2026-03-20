@@ -1,4 +1,4 @@
-import { PlusNavbar } from "@/components/marketing/plus-landing-sections"
+import { BunduiNavbar } from "@/components/registry/bundui/navbar"
 import { BunduiFooterSection } from "@/components/registry/bundui/footer-section"
 import {
   TutorsHeroSection,
@@ -13,7 +13,7 @@ import {
 const ForTutorsPage = () => {
   return (
     <main className="bg-background text-foreground">
-      <PlusNavbar />
+      <BunduiNavbar />
       <div className="mx-auto flex max-w-5xl flex-col gap-16 px-4 pb-16 pt-2 sm:px-6 sm:pb-20 md:gap-24 md:px-8 md:pb-24">
         <TutorsHeroSection />
         <TutorsCompensationSection />
