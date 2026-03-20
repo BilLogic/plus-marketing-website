@@ -52,7 +52,9 @@ export function CounterAnimation({
 
   return (
     <span ref={ref} className={cn("tabular-nums", className)}>
-      {prefix}{value.toLocaleString()}{suffix}
+      {prefix}
+      {value.toLocaleString("en-US")}
+      {suffix}
     </span>
   )
 }

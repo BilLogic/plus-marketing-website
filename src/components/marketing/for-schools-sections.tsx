@@ -2,11 +2,9 @@
 
 import { Button } from "@/components/ui/button"
 import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@/components/ui/accordion"
+  ScrollAccordion,
+  type ScrollAccordionItem,
+} from "@/components/ui/scroll-accordion"
 import {
   Carousel,
   CarouselContent,
@@ -85,7 +83,7 @@ export const SchoolsCommunitySection = () => {
   )
 }
 
-/** Benefits content from Figma node 1104-1220. Rendered with Storybook Accordion (components-marketing/Accordion). */
+/** Benefits content from Figma node 1104-1220. */
 const BENEFITS_ITEMS = [
   {
     id: "free-for-all",
@@ -117,6 +115,30 @@ const BENEFITS_ITEMS = [
   },
 ] as const
 
+const BENEFITS_SCROLL_ITEMS: readonly ScrollAccordionItem[] = BENEFITS_ITEMS.map(
+  (item) => ({
+    value: item.id,
+    title: item.title,
+    children: (
+      <div className="grid gap-4 sm:gap-6 lg:gap-8 md:grid-cols-[1fr_440px] md:items-start">
+        <div className="flex flex-col gap-4">
+          <p className={cn(marketingTypography.body, "text-muted-foreground")}>
+            {item.description}
+          </p>
+          {item.cta ? <Button className="w-fit">{item.cta}</Button> : null}
+        </div>
+        <div className="relative overflow-hidden rounded-3xl bg-muted">
+          <img
+            alt=""
+            src={forSchoolsAssets.images.benefits}
+            className="h-64 w-full object-cover sm:h-72 md:h-[440px]"
+          />
+        </div>
+      </div>
+    ),
+  })
+)
+
 export const SchoolsTrainingSection = () => {
   return (
     <section
@@ -131,42 +153,20 @@ export const SchoolsTrainingSection = () => {
         </p>
       </div>
 
-      <Accordion
-        defaultValue={[0]}
-        className="w-full rounded-xl border border-border/60 bg-card/70"
-      >
-        {BENEFITS_ITEMS.map((item) => (
-          <AccordionItem key={item.id} className="border-border/60 px-5 last:border-b-0 sm:px-6">
-            <AccordionTrigger
-              className={cn(
-                marketingTypography.h3,
-                "py-4 text-left hover:no-underline sm:py-5"
-              )}
-            >
-              {item.title}
-            </AccordionTrigger>
-            <AccordionContent className="pb-5 pt-0 sm:pb-6">
-              <div className="grid gap-4 sm:gap-6 lg:gap-8 md:grid-cols-[1fr_440px] md:items-start">
-                <div className="flex flex-col gap-4">
-                  <p className={cn(marketingTypography.body, "text-muted-foreground")}>
-                    {item.description}
-                  </p>
-                  {item.cta ? (
-                    <Button className="w-fit">{item.cta}</Button>
-                  ) : null}
-                </div>
-                <div className="relative overflow-hidden rounded-3xl bg-muted">
-                  <img
-                    alt=""
-                    src={forSchoolsAssets.images.benefits}
-                    className="h-64 w-full object-cover sm:h-72 md:h-[440px]"
-                  />
-                </div>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+      <ScrollAccordion
+        items={BENEFITS_SCROLL_ITEMS}
+        viewportSwitchThresholdPx={72}
+        viewportSwitchCooldownMs={420}
+        centerActiveInViewport
+        centerActiveCooldownMs={520}
+        centerActiveOffsetPx={-36}
+        className="w-full"
+        itemClassName="px-5 sm:px-6"
+        triggerClassName={cn(
+          marketingTypography.h3,
+          "hover:no-underline"
+        )}
+      />
     </section>
   )
 }
