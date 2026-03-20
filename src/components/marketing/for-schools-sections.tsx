@@ -20,6 +20,7 @@ import { BunduiTestimonialsSection } from "@/components/registry/bundui/testimon
 import { cn } from "@/lib/utils"
 import { forSchoolsAssets } from "@/components/marketing/for-schools-assets"
 import { marketingTypography } from "@/lib/marketing-typography"
+import { forSchoolsSectionIds } from "@/lib/plus-footer-ia"
 
 export const SchoolsHeroSection = () => {
   return (
@@ -37,7 +38,10 @@ export const SchoolsHeroSection = () => {
 
 export const SchoolsCommunitySection = () => {
   return (
-    <section className="relative space-y-6 sm:space-y-8 lg:space-y-10">
+    <section
+      id={forSchoolsSectionIds.community}
+      className="relative space-y-6 sm:space-y-8 lg:space-y-10"
+    >
       <div className="space-y-5">
         <h2 className={marketingTypography.h2}>
           Join the PLUS School Community
@@ -115,7 +119,10 @@ const BENEFITS_ITEMS = [
 
 export const SchoolsTrainingSection = () => {
   return (
-    <section className="space-y-6 sm:space-y-8 lg:space-y-10">
+    <section
+      id={forSchoolsSectionIds.benefits}
+      className="space-y-6 sm:space-y-8 lg:space-y-10"
+    >
       <div className="space-y-5">
         <h2 className={marketingTypography.h2}>Benefits of PLUS</h2>
         <p className={cn(marketingTypography.lead, "max-w-3xl")}>
@@ -192,7 +199,7 @@ const experienceStepsForTemplate = EXPERIENCE_STEPS.map((step) => ({
 
 export const SchoolsExperienceSection = () => {
   return (
-    <section>
+    <section id={forSchoolsSectionIds.experience}>
       <BunduiHowItWorksSection
         sectionLabel="Experience"
         sectionTitle="Your Day-to-Day Experience with PLUS"
@@ -251,7 +258,10 @@ const OVERSIGHT_CARDS = [
 
 export const SchoolsOversightSection = () => {
   return (
-    <section className="space-y-6 sm:space-y-8 lg:space-y-10">
+    <section
+      id={forSchoolsSectionIds.oversight}
+      className="space-y-6 sm:space-y-8 lg:space-y-10"
+    >
       <div className="space-y-5">
         <h2 className={marketingTypography.h2}>
           Maintain Excellence with Robust Oversight
@@ -331,7 +341,7 @@ const successStoryTestimonials = SUCCESS_STORIES.map((story) => ({
 
 export const SchoolsSuccessStoriesSection = () => {
   return (
-    <section className="relative">
+    <section id={forSchoolsSectionIds.successStories} className="relative">
       <BunduiTestimonialsSection
         sectionLabel="Success Stories"
         sectionTitle="School Success Stories"
@@ -349,12 +359,14 @@ export const SchoolsSuccessStoriesSection = () => {
 
 export const SchoolsRegisterCTA = () => {
   return (
-    <BunduiCtaSection
-      eyebrow="Get started"
-      heading="Register Your Institution"
-      body="Want to get started? Sign up to register your organization and provide your tutors access to our full training suite."
-      primaryLabel="Sign up"
-      secondaryLabel={null}
-    />
+    <section id={forSchoolsSectionIds.register}>
+      <BunduiCtaSection
+        eyebrow="Get started"
+        heading="Register Your Institution"
+        body="Want to get started? Sign up to register your organization and provide your tutors access to our full training suite."
+        primaryLabel="Sign up"
+        secondaryLabel={null}
+      />
+    </section>
   )
 }

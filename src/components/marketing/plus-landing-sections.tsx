@@ -99,7 +99,10 @@ export const PlusNavbar = ({
  */
 export const PlusHeroSection = () => {
   return (
-    <section className="relative overflow-hidden rounded-3xl border border-border/70 bg-card/90">
+    <section
+      id="about"
+      className="relative overflow-hidden rounded-3xl border border-border/70 bg-card/90"
+    >
       <MeteorBackground density={14} />
       {/* Subtle teal gradient wash */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-fuchsia-500/5" />
@@ -473,7 +476,10 @@ export const PlusAwardsSection = () => {
   ]
 
   return (
-    <section className="rounded-3xl border border-border/70 bg-background/80 px-6 py-10 sm:px-10 sm:py-12">
+    <section
+      id="get-involved"
+      className="rounded-3xl border border-border/70 bg-background/80 px-6 py-10 sm:px-10 sm:py-12"
+    >
       <header className="space-y-2">
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
           Recognition
@@ -508,7 +514,10 @@ export const PlusAwardsSection = () => {
  */
 export const PlusResearchSection = () => {
   return (
-    <section className="rounded-3xl border border-border/70 bg-card/90 px-6 py-10 sm:px-10 sm:py-12">
+    <section
+      id="research"
+      className="rounded-3xl border border-border/70 bg-card/90 px-6 py-10 sm:px-10 sm:py-12"
+    >
       <div className="grid gap-8 md:grid-cols-[1fr,auto] md:items-start">
         <div className="space-y-4">
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">

@@ -1,8 +1,13 @@
+import Image from "next/image"
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import {
+  PLUS_FOOTER_COLUMNS,
+  type PlusFooterLink,
+} from "@/lib/plus-footer-ia"
 
 export type FooterNewsletterButtonStyle = "marketing" | "default"
 
@@ -13,10 +18,28 @@ type BunduiFooterSectionProps = {
   newsletterButtonStyle?: FooterNewsletterButtonStyle
 }
 
+function FooterNavLink({ link }: { link: PlusFooterLink }) {
+  const className =
+    "text-white/80 underline decoration-white/30 underline-offset-2 transition-colors hover:text-white hover:decoration-white"
+
+  if (link.href === "#") {
+    return (
+      <a href="#" className={className}>
+        {link.label}
+      </a>
+    )
+  }
+
+  return (
+    <Link href={link.href} className={className}>
+      {link.label}
+    </Link>
+  )
+}
+
 /**
- * PLUS marketing footer aligned with Figma IA (node ~1206-1372): newsletter strip,
- * logo, audience columns (About, For Schools, For Tutors, For Researchers, Get Involved),
- * bottom bar (LET'S CONNECT, CMU, legal links).
+ * PLUS marketing footer — IA from `PLUS_FOOTER_COLUMNS` (align with nav + Figma ~1206-1372).
+ * Newsletter strip, wordmark, five audience columns, bottom bar.
  */
 const BunduiFooterSection = ({
   productName = "PLUS",
@@ -62,119 +85,52 @@ const BunduiFooterSection = ({
       {/* Main footer */}
       <div className="mx-auto max-w-5xl py-10 sm:py-12 lg:py-16">
         <div className="flex flex-col gap-10 sm:gap-12">
-          <Link href="/" className="flex w-fit items-center gap-2">
-            <span className="relative flex size-7 items-center justify-center rounded-md bg-white">
-              <span className="absolute inset-1.5 rounded-sm bg-teal-700" />
-            </span>
-            <span className="text-sm font-semibold tracking-tight">{productName}</span>
+          <Link
+            href="/"
+            className="flex w-fit items-center transition-opacity hover:opacity-90"
+            aria-label={`${productName} home`}
+          >
+            <Image
+              src="/plus-logo.png"
+              alt={`${productName} Personalized Learning²`}
+              width={180}
+              height={40}
+              className="h-9 w-auto max-w-[200px] brightness-0 invert"
+              priority={false}
+            />
           </Link>
 
           <div className="grid grid-cols-2 gap-6 text-sm sm:grid-cols-3 sm:gap-8 md:grid-cols-5 lg:gap-8">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-wider">About</p>
-              <ul className="mt-3 space-y-2 text-white/80">
-                <li>
-                  <a href="#" className="underline hover:text-white">
-                    Our story
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="underline hover:text-white">
-                    Our team
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="underline hover:text-white">
-                    News
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="underline hover:text-white">
-                    Success stories
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <p className="text-xs font-bold uppercase tracking-wider">For Schools</p>
-              <ul className="mt-3 space-y-2 text-white/80">
-                <li>
-                  <Link href="/for-schools" className="hover:text-white">
-                    Program Onboarding &amp; Training
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/for-schools" className="hover:text-white">
-                    Program Oversight &amp; Tutor Quality
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <p className="text-xs font-bold uppercase tracking-wider">For Tutors</p>
-              <ul className="mt-3 space-y-2 text-white/80">
-                <li>
-                  <Link href="/for-tutors" className="underline hover:text-white">
-                    Training &amp; growth
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/for-tutors" className="underline hover:text-white">
-                    In session support tools
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <p className="text-xs font-bold uppercase tracking-wider">For Researchers</p>
-              <ul className="mt-3 space-y-2 text-white/80">
-                <li>
-                  <a href="#" className="underline hover:text-white">
-                    Data access
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="underline hover:text-white">
-                    Analytics &amp; monitoring tools
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="underline hover:text-white">
-                    Publications
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <p className="text-xs font-bold uppercase tracking-wider">Get Involved</p>
-              <ul className="mt-3 space-y-2 text-white/80">
-                <li>
-                  <a href="#" className="underline hover:text-white">
-                    Careers
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="underline hover:text-white">
-                    Partnerships &amp; Collaborations
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="underline hover:text-white">
-                    Publications
-                  </a>
-                </li>
-              </ul>
-            </div>
+            {PLUS_FOOTER_COLUMNS.map((column) => (
+              <div key={column.id}>
+                <p className="text-sm font-semibold tracking-tight text-white">
+                  {column.title}
+                </p>
+                <ul className="mt-3 space-y-2">
+                  {column.links.map((link) => (
+                    <li key={`${column.id}-${link.label}`}>
+                      <FooterNavLink link={link} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
 
           <div className="flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
             <p>LET&apos;S CONNECT!</p>
             <p>Carnegie Mellon University</p>
             <div className="flex flex-wrap items-center gap-4">
-              <a href="#" className="underline hover:text-white">
+              <a
+                href="#"
+                className="underline decoration-white/30 underline-offset-2 hover:text-white"
+              >
                 Media kit
               </a>
-              <a href="#" className="underline hover:text-white">
+              <a
+                href="#"
+                className="underline decoration-white/30 underline-offset-2 hover:text-white"
+              >
                 Release notes
               </a>
             </div>

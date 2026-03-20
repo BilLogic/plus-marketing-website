@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
+import { forTutorsSectionIds } from "@/lib/plus-footer-ia"
 
 /**
  * Hero section for the "For Tutors" page.
@@ -77,7 +78,10 @@ const COMPENSATION_STATS = [
  */
 export const TutorsCompensationSection = () => {
   return (
-    <section className="space-y-10 px-6 sm:px-10">
+    <section
+      id={forTutorsSectionIds.compensation}
+      className="space-y-10 px-6 sm:px-10"
+    >
       <h2 className="max-w-2xl text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl">
         Every hour counts. Get paid for training, tutoring, and reflection
       </h2>
@@ -132,7 +136,10 @@ const TUTORING_STEPS = [
  */
 export const TutorsExperienceSection = () => {
   return (
-    <section className="space-y-10 px-6 sm:px-10">
+    <section
+      id={forTutorsSectionIds.experience}
+      className="space-y-10 px-6 sm:px-10"
+    >
       <h2 className="text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl">
         What Tutoring at PLUS Looks Like
       </h2>
@@ -168,7 +175,10 @@ export const TutorsExperienceSection = () => {
  */
 export const TutorsCertificationSection = () => {
   return (
-    <section className="space-y-10 px-6 sm:px-10">
+    <section
+      id={forTutorsSectionIds.certification}
+      className="space-y-10 px-6 sm:px-10"
+    >
       <h2 className="text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl">
         Earn Certification &amp; Digital Badges
       </h2>
@@ -270,7 +280,10 @@ const TOOLKIT_CARDS = [
  */
 export const TutorsToolkitSection = () => {
   return (
-    <section className="space-y-10 px-6 sm:px-10">
+    <section
+      id={forTutorsSectionIds.toolkit}
+      className="space-y-10 px-6 sm:px-10"
+    >
       <h2 className="text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl">
         Your Tutor Toolkit
       </h2>
@@ -309,7 +322,10 @@ export const TutorsToolkitSection = () => {
  */
 export const TutorsImpactCTA = () => {
   return (
-    <section className="rounded-3xl bg-white p-10 text-center sm:p-16">
+    <section
+      id={forTutorsSectionIds.impact}
+      className="rounded-3xl bg-white p-10 text-center sm:p-16"
+    >
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-6">
         <h2 className="text-3xl font-bold tracking-tight text-teal-950 sm:text-4xl">
           Ready to Make an Impact?

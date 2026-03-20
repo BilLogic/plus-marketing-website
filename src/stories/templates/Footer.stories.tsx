@@ -6,6 +6,12 @@ const meta = {
   title: "Templates/Footer",
   parameters: {
     layout: "fullscreen",
+    docs: {
+      description: {
+        component:
+          "PLUS footer IA lives in `src/lib/plus-footer-ia.ts` (column titles match primary nav). Figma reference ~1206-1372.",
+      },
+    },
   },
 } satisfies Meta
 
