@@ -15,7 +15,8 @@ const ForSchoolsPage = () => {
   return (
     <main className="bg-background text-foreground">
       <PlusNavbar ctaStyle="default" />
-      <div className="mx-auto flex max-w-5xl flex-col gap-16 px-4 pb-16 pt-2 sm:px-6 sm:pb-20 md:gap-24 md:px-8 md:pb-24">
+      {/* Page: max-w-5xl, px-4 sm:px-6 lg:px-8; between sections gap-8 sm:gap-12 lg:gap-16 */}
+      <div className="mx-auto flex max-w-5xl flex-col gap-8 px-4 pb-8 pt-8 sm:gap-12 sm:px-6 sm:pb-12 sm:pt-12 lg:gap-16 lg:px-8 lg:pb-16 lg:pt-16">
         <SchoolsHeroSection />
         <SchoolsCommunitySection />
         <SchoolsTrainingSection />
@@ -24,7 +25,10 @@ const ForSchoolsPage = () => {
         <SchoolsSuccessStoriesSection />
         <SchoolsRegisterCTA />
       </div>
-      <BunduiFooterSection productName="PLUS" />
+      <BunduiFooterSection
+        productName="PLUS"
+        newsletterButtonStyle="default"
+      />
     </main>
   )
 }

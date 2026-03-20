@@ -19,18 +19,17 @@ import { BunduiHowItWorksSection } from "@/components/registry/bundui/how-it-wor
 import { BunduiTestimonialsSection } from "@/components/registry/bundui/testimonials-section"
 import { cn } from "@/lib/utils"
 import { forSchoolsAssets } from "@/components/marketing/for-schools-assets"
+import { marketingTypography } from "@/lib/marketing-typography"
 
 export const SchoolsHeroSection = () => {
   return (
-    <section className="relative flex flex-col items-center gap-8 px-6 py-16 text-center sm:px-10 sm:py-20">
-      <div className="flex max-w-3xl flex-col items-center gap-5">
-        <p className="text-xl font-semibold text-teal-900 sm:text-2xl">
-          For schools
-        </p>
-        <h1 className="text-balance text-3xl font-bold leading-tight tracking-tight text-teal-950 sm:text-4xl md:text-5xl lg:text-[52px]">
+    <section className="relative flex flex-col items-center gap-8 py-8 text-center sm:py-12 lg:py-16">
+      <h1 className="flex max-w-3xl flex-col items-center gap-3">
+        <span className={marketingTypography.h2}>For schools</span>
+        <span className={marketingTypography.h1}>
           Research-driven, AI-powered Support for Every Classroom
-        </h1>
-      </div>
+        </span>
+      </h1>
       <Button>Get Started for Free</Button>
     </section>
   )
@@ -38,12 +37,12 @@ export const SchoolsHeroSection = () => {
 
 export const SchoolsCommunitySection = () => {
   return (
-    <section className="relative space-y-10 px-6 sm:px-10">
+    <section className="relative space-y-6 sm:space-y-8 lg:space-y-10">
       <div className="space-y-5">
-        <h2 className="text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl md:text-[40px]">
+        <h2 className={marketingTypography.h2}>
           Join the PLUS School Community
         </h2>
-        <p className="max-w-3xl text-lg text-muted-foreground sm:text-xl">
+        <p className={cn(marketingTypography.lead, "max-w-3xl")}>
           We partner with forward-thinking schools to bridge learning gaps. See
           the organizations already making a difference with us.
         </p>
@@ -116,12 +115,10 @@ const BENEFITS_ITEMS = [
 
 export const SchoolsTrainingSection = () => {
   return (
-    <section className="space-y-10 px-6 sm:px-10">
+    <section className="space-y-6 sm:space-y-8 lg:space-y-10">
       <div className="space-y-5">
-        <h2 className="text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl md:text-[40px]">
-          Benefits of PLUS
-        </h2>
-        <p className="max-w-3xl text-lg text-muted-foreground sm:text-xl">
+        <h2 className={marketingTypography.h2}>Benefits of PLUS</h2>
+        <p className={cn(marketingTypography.lead, "max-w-3xl")}>
           Here&apos;s how PLUS supports schools and trains tutors to guide students
           to success
         </p>
@@ -132,14 +129,19 @@ export const SchoolsTrainingSection = () => {
         className="w-full rounded-xl border border-border/60 bg-card/70"
       >
         {BENEFITS_ITEMS.map((item) => (
-          <AccordionItem key={item.id} className="border-border/60 px-4 last:border-b-0">
-            <AccordionTrigger className="py-4 text-left text-base font-semibold hover:no-underline sm:text-lg">
+          <AccordionItem key={item.id} className="border-border/60 px-5 last:border-b-0 sm:px-6">
+            <AccordionTrigger
+              className={cn(
+                marketingTypography.h3,
+                "py-4 text-left hover:no-underline sm:py-5"
+              )}
+            >
               {item.title}
             </AccordionTrigger>
-            <AccordionContent className="pb-4 pt-0">
-              <div className="grid gap-6 md:grid-cols-[1fr_440px] md:items-start">
+            <AccordionContent className="pb-5 pt-0 sm:pb-6">
+              <div className="grid gap-4 sm:gap-6 lg:gap-8 md:grid-cols-[1fr_440px] md:items-start">
                 <div className="flex flex-col gap-4">
-                  <p className="text-muted-foreground sm:text-base">
+                  <p className={cn(marketingTypography.body, "text-muted-foreground")}>
                     {item.description}
                   </p>
                   {item.cta ? (
@@ -190,7 +192,7 @@ const experienceStepsForTemplate = EXPERIENCE_STEPS.map((step) => ({
 
 export const SchoolsExperienceSection = () => {
   return (
-    <section className="px-6 sm:px-10">
+    <section>
       <BunduiHowItWorksSection
         sectionLabel="Experience"
         sectionTitle="Your Day-to-Day Experience with PLUS"
@@ -249,18 +251,18 @@ const OVERSIGHT_CARDS = [
 
 export const SchoolsOversightSection = () => {
   return (
-    <section className="space-y-10 px-6 sm:px-10">
+    <section className="space-y-6 sm:space-y-8 lg:space-y-10">
       <div className="space-y-5">
-        <h2 className="text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl md:text-[40px]">
+        <h2 className={marketingTypography.h2}>
           Maintain Excellence with Robust Oversight
         </h2>
-        <p className="max-w-3xl text-lg text-muted-foreground sm:text-xl">
+        <p className={cn(marketingTypography.lead, "max-w-3xl")}>
           Ensure high-impact tutoring through data-driven insights and professional
           certification.
         </p>
       </div>
 
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8">
         {OVERSIGHT_CARDS.map((card, index) => (
           <div
             key={card.title}
@@ -269,21 +271,16 @@ export const SchoolsOversightSection = () => {
           >
             <div
               className={cn(
-                "flex flex-col gap-8 rounded-3xl p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10",
+                "flex flex-col gap-6 rounded-3xl p-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:p-6",
                 card.bgColor
               )}
             >
-              <div className="flex max-w-lg flex-col gap-5">
+              <div className="flex max-w-lg flex-col gap-4 sm:gap-5">
                 <img alt="" src={card.icon} className="size-12" aria-hidden />
-                <h3
-                  className={cn(
-                    "text-2xl font-semibold tracking-tight sm:text-3xl",
-                    card.textColor
-                  )}
-                >
+                <h3 className={cn(marketingTypography.h2, card.textColor)}>
                   {card.title}
                 </h3>
-                <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+                <p className={cn(marketingTypography.body, "text-muted-foreground")}>
                   {card.description}
                 </p>
                 <Button className="w-fit">{card.cta}</Button>
@@ -334,7 +331,7 @@ const successStoryTestimonials = SUCCESS_STORIES.map((story) => ({
 
 export const SchoolsSuccessStoriesSection = () => {
   return (
-    <section className="relative px-6 sm:px-10">
+    <section className="relative">
       <BunduiTestimonialsSection
         sectionLabel="Success Stories"
         sectionTitle="School Success Stories"

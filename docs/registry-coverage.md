@@ -88,7 +88,7 @@ Legend:
 - ✅ Team sections → `Templates/Team` (Bundui-inspired `BunduiTeamSection`)
 - ✅ Stats sections → `Templates/Stats` (Bundui-inspired `BunduiStatsSection`)
 - ✅ Integrations → `Templates/Integrations` (Bundui-inspired `BunduiIntegrationsSection`)
-- ✅ Footers → `Templates/Footer` (Bundui-inspired `BunduiFooterSection`)
+- ✅ Footers → `Templates/Footer` (`BunduiFooterSection` — PLUS Figma IA: newsletter, five columns, bottom bar)
 - ✅ Promotional / Feature sections → `Templates/Features` (Bundui-inspired `BunduiFeatureSection`)
 - ✅ Bento grids → `Templates/Bento` (Bundui-inspired `BunduiBentoGridSection`)
 - ✅ Contact sections → `Templates/Contact` (Bundui-inspired `BunduiContactSection`)

@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 
+import { marketingTypography } from "@/lib/marketing-typography"
+
 const meta = {
   title: "Styles/Typography",
   tags: ["autodocs"],
@@ -35,13 +37,9 @@ export const Story: Story = {
               Heading hierarchy
             </h2>
             <div className="space-y-3">
-              <p className="text-5xl font-semibold tracking-tight">
-                H1 — Hero headline
-              </p>
-              <p className="text-3xl font-semibold tracking-tight">
-                H2 — Section headline
-              </p>
-              <p className="text-xl font-semibold tracking-tight">H3 — Card title</p>
+              <p className={marketingTypography.h1}>H1 — Hero headline</p>
+              <p className={marketingTypography.h2}>H2 — Section headline</p>
+              <p className={marketingTypography.h3}>H3 — Card title</p>
             </div>
           </section>
 
@@ -50,11 +48,11 @@ export const Story: Story = {
               Body text
             </h2>
             <div className="max-w-prose space-y-3">
-              <p className="text-lg text-muted-foreground">
+              <p className={marketingTypography.lead}>
                 Lead paragraph — use this for section intros and above-the-fold
                 copy.
               </p>
-              <p className="text-base leading-relaxed">
+              <p className={marketingTypography.body}>
                 Standard paragraph — keep line length readable, and prefer semantic
                 color tokens for contrast. This is the default body style.
               </p>

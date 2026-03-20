@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { marketingTypography } from "@/lib/marketing-typography"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 type BunduiTestimonial = {
@@ -50,7 +51,7 @@ const BunduiTestimonialsSection = ({
   return (
     <section
       className={cn(
-        "rounded-3xl border border-border/70 bg-background/80 px-6 py-10 sm:px-10 sm:py-12",
+        "rounded-3xl border border-border/70 bg-background/80 p-5 sm:p-6",
         className
       )}
     >
@@ -58,20 +59,18 @@ const BunduiTestimonialsSection = ({
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
           {sectionLabel}
         </p>
-        <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
-          {sectionTitle}
-        </h2>
-        <p className="text-sm text-muted-foreground">
-          {sectionDescription}
-        </p>
+        <h2 className={marketingTypography.h2}>{sectionTitle}</h2>
+        <p className={marketingTypography.lead}>{sectionDescription}</p>
       </header>
-      <div className="mt-8 grid gap-4 md:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:gap-6 md:grid-cols-3 lg:gap-8">
         {testimonials.map((testimonial) => (
           <figure
             key={testimonial.name}
-            className="flex h-full flex-col justify-between rounded-2xl border border-border/70 bg-card/80 p-5 text-sm shadow-sm"
+            className="flex h-full flex-col justify-between rounded-2xl border border-border/70 bg-card/80 p-5 shadow-sm sm:p-6"
           >
-            <blockquote className="text-sm text-muted-foreground">
+            <blockquote
+              className={cn(marketingTypography.body, "text-muted-foreground")}
+            >
               “{testimonial.quote}”
             </blockquote>
             <figcaption className="mt-4 flex items-center gap-3">

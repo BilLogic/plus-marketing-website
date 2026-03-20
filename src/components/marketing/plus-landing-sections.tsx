@@ -7,7 +7,7 @@ import { MagneticHover } from "@/components/effects/magnetic-hover"
 import { MeteorBackground } from "@/components/effects/meteor-background"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { BunduiFooterSection } from "@/components/registry/bundui/footer-section"
 
 /**
  * Top announcement bar mirroring the tutors.plus product update banner.
@@ -53,7 +53,7 @@ export const PlusNavbar = ({
 }) => {
   return (
     <header className="sticky top-0 z-40 bg-background/80 pb-3 backdrop-blur-md">
-      <div className="flex justify-center px-4 pt-3 sm:px-6">
+      <div className="flex justify-center px-4 pt-3 sm:px-6 lg:px-8">
         <div className="flex w-full max-w-5xl items-center justify-between gap-3 rounded-full border border-border/70 bg-background/90 px-4 py-2.5 shadow-sm shadow-black/[0.04]">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
@@ -535,105 +535,14 @@ export const PlusResearchSection = () => {
   )
 }
 
-/**
- * Newsletter + footer matching the updated Figma IA with audience-based columns.
- */
+/** @deprecated Prefer `BunduiFooterSection` from `@/components/registry/bundui/footer-section`. */
 export const PlusFooterSection = ({
   newsletterButtonStyle = "marketing",
 }: {
   newsletterButtonStyle?: NavbarCtaStyle
-}) => {
-  return (
-    <footer className="mt-12 bg-teal-950 text-white">
-      {/* Newsletter strip */}
-      <div className="border-b border-white/10 px-6 py-5 sm:px-10">
-        <div className="mx-auto flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm font-bold">Join our newsletter!</p>
-          <form className="flex flex-1 max-w-2xl gap-2">
-            <Input
-              type="email"
-              placeholder="Your email"
-              className="h-10 flex-1 rounded-full border-white/30 bg-transparent text-white placeholder:text-white/50"
-            />
-            {newsletterButtonStyle === "default" ? (
-              <Button type="submit">Sign up</Button>
-            ) : (
-              <Button
-                type="submit"
-                className="h-10 rounded-full bg-teal-300 px-6 text-teal-950 hover:bg-teal-200"
-              >
-                Sign up
-              </Button>
-            )}
-          </form>
-        </div>
-      </div>
-
-      {/* Main footer content */}
-      <div className="mx-auto max-w-5xl px-6 py-12 sm:px-10 sm:py-16">
-        <div className="flex flex-col gap-12">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <span className="relative flex size-7 items-center justify-center rounded-md bg-white">
-              <span className="absolute inset-1.5 rounded-sm bg-teal-700" />
-            </span>
-            <span className="text-sm font-semibold tracking-tight">PLUS</span>
-          </Link>
-
-          {/* Link columns */}
-          <div className="grid grid-cols-2 gap-8 text-sm sm:grid-cols-3 md:grid-cols-5">
-            <div>
-              <p className="font-bold uppercase text-xs tracking-wider">About</p>
-              <ul className="mt-3 space-y-2 text-white/80">
-                <li><a href="#" className="underline hover:text-white">Our story</a></li>
-                <li><a href="#" className="underline hover:text-white">Our team</a></li>
-                <li><a href="#" className="underline hover:text-white">News</a></li>
-                <li><a href="#" className="underline hover:text-white">Success stories</a></li>
-              </ul>
-            </div>
-            <div>
-              <p className="font-bold uppercase text-xs tracking-wider">For Schools</p>
-              <ul className="mt-3 space-y-2 text-white/80">
-                <li><Link href="/for-schools" className="hover:text-white">Program Onboarding &amp; Training</Link></li>
-                <li><Link href="/for-schools" className="hover:text-white">Program Oversight &amp; Tutor Quality</Link></li>
-              </ul>
-            </div>
-            <div>
-              <p className="font-bold uppercase text-xs tracking-wider">For Tutors</p>
-              <ul className="mt-3 space-y-2 text-white/80">
-                <li><Link href="/for-tutors" className="underline hover:text-white">Training &amp; growth</Link></li>
-                <li><Link href="/for-tutors" className="underline hover:text-white">In session support tools</Link></li>
-              </ul>
-            </div>
-            <div>
-              <p className="font-bold uppercase text-xs tracking-wider">For Researchers</p>
-              <ul className="mt-3 space-y-2 text-white/80">
-                <li><a href="#" className="underline hover:text-white">Data access</a></li>
-                <li><a href="#" className="underline hover:text-white">Analytics &amp; monitoring tools</a></li>
-                <li><a href="#" className="underline hover:text-white">Publications</a></li>
-              </ul>
-            </div>
-            <div>
-              <p className="font-bold uppercase text-xs tracking-wider">Get Involved</p>
-              <ul className="mt-3 space-y-2 text-white/80">
-                <li><a href="#" className="underline hover:text-white">Careers</a></li>
-                <li><a href="#" className="underline hover:text-white">Partnerships &amp; Collaborations</a></li>
-                <li><a href="#" className="underline hover:text-white">Publications</a></li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom row */}
-          <div className="flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
-            <p>LET&apos;S CONNECT!</p>
-            <p>Carnegie Mellon University</p>
-            <div className="flex flex-wrap items-center gap-4">
-              <a href="#" className="underline hover:text-white">Media kit</a>
-              <a href="#" className="underline hover:text-white">Release notes</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  )
-}
+}) => (
+  <BunduiFooterSection
+    productName="PLUS"
+    newsletterButtonStyle={newsletterButtonStyle}
+  />
+)

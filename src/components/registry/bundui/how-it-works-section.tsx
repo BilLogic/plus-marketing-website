@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { marketingTypography } from "@/lib/marketing-typography"
 
 type BunduiStep = {
   title: string
@@ -47,7 +48,7 @@ const BunduiHowItWorksSection = ({
   return (
     <section
       className={cn(
-        "rounded-3xl border border-border/70 bg-background/80 px-6 py-10 sm:px-10 sm:py-12",
+        "rounded-3xl border border-border/70 bg-background/80 p-5 sm:p-6",
         className
       )}
     >
@@ -55,20 +56,16 @@ const BunduiHowItWorksSection = ({
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
           {sectionLabel}
         </p>
-        <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
-          {sectionTitle}
-        </h2>
-        <p className="text-sm text-muted-foreground">
-          {sectionDescription}
-        </p>
+        <h2 className={marketingTypography.h2}>{sectionTitle}</h2>
+        <p className={marketingTypography.lead}>{sectionDescription}</p>
       </header>
 
       <ol
         className={cn(
           "mt-6",
           isGrid
-            ? "grid gap-5 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr]"
-            : "space-y-4"
+            ? "grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-8"
+            : "space-y-4 sm:space-y-6 lg:space-y-8"
         )}
       >
         {steps.map((step, index) => {
@@ -81,8 +78,8 @@ const BunduiHowItWorksSection = ({
               className={cn(
                 "flex rounded-3xl",
                 isGrid
-                  ? "flex-col gap-5 p-6"
-                  : "flex-row gap-3 rounded-2xl p-4",
+                  ? "flex-col gap-4 p-5 sm:gap-6 sm:p-6"
+                  : "flex-row gap-3 rounded-2xl p-4 sm:p-5",
                 variant === "default" &&
                   "border border-border/70 bg-card/80 shadow-sm",
                 isFilled && "bg-primary/10",
@@ -104,8 +101,7 @@ const BunduiHowItWorksSection = ({
               <div className={cn("min-w-0", isGrid ? "space-y-2" : "space-y-1")}>
                 <p
                   className={cn(
-                    "font-semibold tracking-tight text-foreground",
-                    isGrid ? "text-xl sm:text-2xl" : "text-sm",
+                    isGrid ? marketingTypography.h3 : "text-sm font-semibold tracking-tight text-foreground",
                     (isFilled || isOutlined) && "text-primary"
                   )}
                 >
@@ -114,8 +110,9 @@ const BunduiHowItWorksSection = ({
                 {step.body ? (
                   <p
                     className={cn(
-                      "text-muted-foreground",
-                      isGrid ? "text-sm sm:text-base" : "text-xs"
+                      isGrid
+                        ? cn(marketingTypography.body, "text-muted-foreground")
+                        : "text-sm text-muted-foreground"
                     )}
                   >
                     {step.body}
@@ -128,7 +125,7 @@ const BunduiHowItWorksSection = ({
       </ol>
 
       {imageSrc ? (
-        <div className="mt-10 overflow-hidden rounded-3xl bg-muted">
+        <div className="mt-8 overflow-hidden rounded-3xl bg-muted sm:mt-12 lg:mt-16">
           <img
             src={imageSrc}
             alt={imageAlt}

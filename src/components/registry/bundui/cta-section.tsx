@@ -1,6 +1,7 @@
 import type { ReactNode } from "react"
 
 import { cn } from "@/lib/utils"
+import { marketingTypography } from "@/lib/marketing-typography"
 import { Button } from "@/components/ui/button"
 
 type BunduiCtaSectionProps = {
@@ -26,7 +27,7 @@ const BunduiCtaSection = ({
   return (
     <section
       className={cn(
-        "relative overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-tr from-background via-background/95 to-primary/5 px-6 py-10 sm:px-10 sm:py-12",
+        "relative overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-tr from-background via-background/95 to-primary/5 p-5 sm:p-6",
         className
       )}
     >
@@ -36,10 +37,8 @@ const BunduiCtaSection = ({
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             {eyebrow}
           </p>
-          <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
-            {heading}
-          </h2>
-          <p className="max-w-prose text-sm text-muted-foreground">{body}</p>
+          <h2 className={marketingTypography.h2}>{heading}</h2>
+          <p className={marketingTypography.lead}>{body}</p>
         </div>
         <div className="flex flex-col items-start gap-3 md:items-end">
           <div className="flex flex-wrap items-center gap-3">
