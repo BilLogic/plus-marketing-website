@@ -16,6 +16,12 @@ type BunduiTestimonialsSectionProps = {
   sectionLabel?: string
   sectionTitle?: string
   sectionDescription?: string
+  /** When false, only the testimonial grid is rendered (use an external header). */
+  showHeader?: boolean
+  /** When false, no outer rounded border/padding shell — only header (if any) + card grid. */
+  showOuterContainer?: boolean
+  /** Merged into each testimonial `<figure>` (e.g. `shadow-none` for flat cards). */
+  figureClassName?: string
 }
 
 /** Bundui-inspired testimonial grid for social proof. */
@@ -47,26 +53,34 @@ const BunduiTestimonialsSection = ({
   sectionLabel = "Testimonials",
   sectionTitle = "Teams shipping better marketing sites with Plus.",
   sectionDescription = "Inspired by Bundui marketing testimonial layouts and adapted to our token system.",
+  showHeader = true,
+  showOuterContainer = true,
+  figureClassName,
 }: BunduiTestimonialsSectionProps) => {
-  return (
-    <section
-      className={cn(
-        "rounded-3xl border border-border/70 bg-background/80 p-5 sm:p-6",
-        className
-      )}
-    >
-      <header className="max-w-2xl space-y-2">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-          {sectionLabel}
-        </p>
-        <h2 className={marketingTypography.h2}>{sectionTitle}</h2>
-        <p className={marketingTypography.lead}>{sectionDescription}</p>
-      </header>
-      <div className="mt-8 grid gap-4 sm:gap-6 md:grid-cols-3 lg:gap-8">
+  const inner = (
+    <>
+      {showHeader ? (
+        <header className="max-w-2xl space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            {sectionLabel}
+          </p>
+          <h2 className={marketingTypography.h2}>{sectionTitle}</h2>
+          <p className={marketingTypography.lead}>{sectionDescription}</p>
+        </header>
+      ) : null}
+      <div
+        className={cn(
+          "grid gap-4 sm:gap-6 md:grid-cols-3 lg:gap-8",
+          showHeader ? "mt-8" : "mt-0"
+        )}
+      >
         {testimonials.map((testimonial) => (
           <figure
             key={testimonial.name}
-            className="flex h-full flex-col justify-between rounded-2xl border border-border/70 bg-card/80 p-5 shadow-sm sm:p-6"
+            className={cn(
+              "flex h-full flex-col justify-between rounded-2xl border border-border/70 bg-card/80 p-5 shadow-sm sm:p-6",
+              figureClassName
+            )}
           >
             <blockquote
               className={cn(marketingTypography.body, "text-muted-foreground")}
@@ -90,8 +104,23 @@ const BunduiTestimonialsSection = ({
           </figure>
         ))}
       </div>
-    </section>
+    </>
   )
+
+  if (showOuterContainer) {
+    return (
+      <section
+        className={cn(
+          "rounded-3xl border border-border/70 bg-background/80 p-5 sm:p-6",
+          className
+        )}
+      >
+        {inner}
+      </section>
+    )
+  }
+
+  return <div className={cn(className)}>{inner}</div>
 }
 
 export { BunduiTestimonialsSection }
