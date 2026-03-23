@@ -1,6 +1,16 @@
+# Netlify: full Next.js app (home, /for-tutors, /for-schools, API routes).
+#
+# This branch (`for-tutors-v1`) is meant for a *second* Netlify site so you keep
+# Storybook on the existing site (e.g. plus-marketing-website.netlify.app from `main`).
+#
+# In Netlify: Add new site → same repo → Production branch = for-tutors-v1 → deploy.
+# For Tutors page: https://<your-new-site>.netlify.app/for-tutors
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 [build]
-  command = "npm run build-storybook"
-  publish = "storybook-static"
+  command = "npm run build"
 
 [build.environment]
-  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+  NODE_VERSION = "20"
