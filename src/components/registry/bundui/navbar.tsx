@@ -29,19 +29,20 @@ const BunduiNavbar = ({ className }: BunduiNavbarProps) => {
     >
       <div className="flex justify-center px-4 py-3 sm:px-6">
         <div className="flex w-full max-w-5xl items-center gap-10">
-          {/* Logo: use a PNG with transparent background (public/plus-logo.png) */}
+          {/* Logo: public/plus-logo.svg (replace with plus-logo.png when asset is added) */}
           <Link
             href="/"
             className="flex shrink-0 bg-transparent transition-opacity hover:opacity-90"
             aria-label="PLUS home"
           >
             <Image
-              src="/plus-logo.png"
+              src="/plus-logo.svg"
               alt="PLUS Personalized Learning²"
-              width={180}
-              height={40}
-              className="h-10 w-auto bg-transparent"
+              width={200}
+              height={44}
+              className="h-10 w-auto max-w-[200px] bg-transparent"
               priority
+              unoptimized
             />
           </Link>
 

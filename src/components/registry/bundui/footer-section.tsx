@@ -91,12 +91,13 @@ const BunduiFooterSection = ({
             aria-label={`${productName} home`}
           >
             <Image
-              src="/plus-logo.png"
+              src="/plus-logo.svg"
               alt={`${productName} Personalized Learning²`}
-              width={180}
-              height={40}
+              width={200}
+              height={44}
               className="h-9 w-auto max-w-[200px] brightness-0 invert"
               priority={false}
+              unoptimized
             />
           </Link>
 
