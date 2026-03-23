@@ -1,6 +1,6 @@
-import Image from "next/image"
 import Link from "next/link"
 
+import { PlusFooterLogoImage } from "@/components/registry/bundui/plus-logo-image"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -90,14 +90,7 @@ const BunduiFooterSection = ({
             className="flex w-fit items-center transition-opacity hover:opacity-90"
             aria-label={`${productName} home`}
           >
-            <Image
-              src="/plus-logo.png"
-              alt={`${productName} Personalized Learning²`}
-              width={180}
-              height={40}
-              className="h-9 w-auto max-w-[200px] brightness-0 invert"
-              priority={false}
-            />
+            <PlusFooterLogoImage />
           </Link>
 
           <div className="grid grid-cols-2 gap-6 text-sm sm:grid-cols-3 sm:gap-8 md:grid-cols-5 lg:gap-8">
