@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { PlusLogoMark } from "@/components/registry/bundui/plus-logo-mark"
+import { PlusLogoImage } from "@/components/registry/bundui/plus-logo-image"
 
 /** Nav links matching PLUS website IA (Figma). */
 const NAV_LINKS = [
@@ -34,7 +34,7 @@ const BunduiNavbar = ({ className }: BunduiNavbarProps) => {
             className="flex shrink-0 bg-transparent transition-opacity hover:opacity-90"
             aria-label="PLUS home"
           >
-            <PlusLogoMark className="h-10 w-auto max-w-[200px]" title="PLUS Personalized Learning²" />
+            <PlusLogoImage />
           </Link>
 
           {/* Nav links — left-aligned toward logo, more space between links */}
