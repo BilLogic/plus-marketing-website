@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import { PlusFooterLogo } from "@/components/registry/bundui/plus-logo-image"
+import { PlusFooterLogoImage } from "@/components/registry/bundui/plus-logo-image"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -90,7 +90,7 @@ const BunduiFooterSection = ({
             className="flex w-fit items-center transition-opacity hover:opacity-90"
             aria-label={`${productName} home`}
           >
-            <PlusFooterLogo productName={productName} />
+            <PlusFooterLogoImage />
           </Link>
 
           <div className="grid grid-cols-2 gap-6 text-sm sm:grid-cols-3 sm:gap-8 md:grid-cols-5 lg:gap-8">
