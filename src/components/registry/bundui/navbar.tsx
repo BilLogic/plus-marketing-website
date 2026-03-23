@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
 import { ArrowLeft } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -29,20 +28,20 @@ const BunduiNavbar = ({ className }: BunduiNavbarProps) => {
     >
       <div className="flex justify-center px-4 py-3 sm:px-6">
         <div className="flex w-full max-w-5xl items-center gap-10">
-          {/* Logo: public/plus-logo.svg (replace with plus-logo.png when asset is added) */}
+          {/* Plain <img>: next/image breaks in Storybook (no /_next/image optimizer). */}
           <Link
             href="/"
             className="flex shrink-0 bg-transparent transition-opacity hover:opacity-90"
             aria-label="PLUS home"
           >
-            <Image
+            <img
               src="/plus-logo.svg"
               alt="PLUS Personalized Learning²"
               width={200}
               height={44}
+              decoding="async"
+              fetchPriority="high"
               className="h-10 w-auto max-w-[200px] bg-transparent"
-              priority
-              unoptimized
             />
           </Link>
 

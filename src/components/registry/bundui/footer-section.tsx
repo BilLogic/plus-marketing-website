@@ -1,4 +1,3 @@
-import Image from "next/image"
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
@@ -90,14 +89,13 @@ const BunduiFooterSection = ({
             className="flex w-fit items-center transition-opacity hover:opacity-90"
             aria-label={`${productName} home`}
           >
-            <Image
+            <img
               src="/plus-logo.svg"
               alt={`${productName} Personalized Learning²`}
               width={200}
               height={44}
+              decoding="async"
               className="h-9 w-auto max-w-[200px] brightness-0 invert"
-              priority={false}
-              unoptimized
             />
           </Link>
 
