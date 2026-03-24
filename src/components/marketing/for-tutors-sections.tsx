@@ -5,7 +5,7 @@ import Image from "next/image"
 import { Brain, LayoutDashboard, Sparkles, Star } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { BunduiTestimonialsSection } from "@/components/registry/bundui/testimonials-section"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { forSchoolsAssets } from "@/components/marketing/for-schools-assets"
 import { cn } from "@/lib/utils"
 import { forTutorsAssets } from "@/components/marketing/for-tutors-assets"
@@ -94,27 +94,42 @@ export const TutorsHeroSection = () => {
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-4">
-        <Button className="h-11 rounded-full bg-teal-600 px-8 text-base font-medium text-teal-950 hover:bg-teal-700">
+        <Button
+          className="h-11 rounded-full border-0 bg-[#A6EDF4] px-8 text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
+        >
           Check Our Demo
         </Button>
         <Button
           variant="outline"
-          className="h-11 rounded-full border-2 border-teal-800 bg-transparent px-8 text-base font-medium text-teal-950 hover:bg-teal-50"
+          className="h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-8 text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20"
         >
           Become a Tutor
         </Button>
       </div>
 
       <div className="relative mx-auto mt-2 w-full max-w-5xl">
-        <div className="relative aspect-video w-full overflow-hidden rounded-3xl bg-teal-100/80 ring-1 ring-teal-200/80">
+        <div className="relative aspect-video w-full overflow-hidden rounded-3xl bg-muted ring-1 ring-teal-200/80 dark:ring-teal-800/50">
+          <Image
+            src={forTutorsAssets.heroVideoPoster}
+            alt="Tutor at a desk using PLUS on a laptop, with coffee nearby"
+            fill
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 64rem"
+            priority
+          />
+          {/* Grey overlay — paused-video state */}
+          <div
+            className="absolute inset-0 bg-neutral-950/50"
+            aria-hidden
+          />
           <div className="absolute inset-0 flex items-center justify-center">
             <button
               type="button"
-              className="flex size-16 items-center justify-center rounded-full bg-white/95 ring-4 ring-white/50 transition-transform hover:scale-105"
+              className="relative z-10 flex size-16 items-center justify-center rounded-full bg-white/95 text-teal-800 shadow-lg ring-4 ring-white/40 transition-transform hover:scale-105"
               aria-label="Play video"
             >
               <svg
-                className="ml-1 size-7 text-teal-800"
+                className="ml-1 size-7"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -404,6 +419,36 @@ export const TutorsCertificationSection = () => {
   )
 }
 
+/** Fills toolkit card mockup slot: flush right/bottom of pink card, inset left via parent. */
+function ToolkitCardMockup({
+  src,
+  alt,
+  variant,
+}: {
+  src: string
+  alt: string
+  variant: "dashboard" | "compact"
+}) {
+  return (
+    <div
+      className={cn(
+        "relative min-h-0 flex-1 overflow-hidden ring-1 ring-inset",
+        variant === "dashboard"
+          ? "rounded-tl-xl ring-teal-100"
+          : "rounded-tl-lg ring-border/60"
+      )}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover object-left"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 480px"
+      />
+    </div>
+  )
+}
+
 /** Title row with magenta circle + white Lucide icon (toolkit cards). */
 function ToolkitCardHeading({
   icon: Icon,
@@ -457,24 +502,48 @@ export const TutorsToolkitSection = () => {
           </div>
         </div>
 
-        <div className="grid gap-4 sm:gap-5 md:grid-cols-2 md:grid-rows-2 md:gap-5">
-          <div className="flex min-h-[280px] w-full min-w-0 flex-col rounded-2xl border border-fuchsia-200/60 bg-[#FFE8F6] px-6 py-7 md:row-span-2 md:min-h-[360px] md:px-8 md:py-8">
-            <ToolkitCardHeading icon={Sparkles}>
-              Dashboard Tracking Insights
-            </ToolkitCardHeading>
-            <div className="mt-4 flex-1 rounded-xl bg-gradient-to-b from-teal-50 to-white ring-1 ring-teal-100" />
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-2 md:grid-rows-2 lg:gap-8">
+          <div className="flex min-h-[400px] w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-fuchsia-200/60 bg-[#FFE8F6] md:row-span-2 md:min-h-[520px]">
+            <div className="px-6 pt-7 md:px-8 md:pt-8">
+              <ToolkitCardHeading icon={Sparkles}>
+                Dashboard Tracking Insights
+              </ToolkitCardHeading>
+            </div>
+            <div className="mt-4 flex min-h-0 flex-1 flex-col pl-6 pr-0 pb-0 md:pl-8">
+              <ToolkitCardMockup
+                variant="dashboard"
+                src={forTutorsAssets.toolkitDashboardInsights}
+                alt="PLUS dashboard with charts, insights, and connected learner avatars"
+              />
+            </div>
           </div>
-          <div className="flex min-h-[160px] min-w-0 flex-col rounded-2xl border border-fuchsia-200/60 bg-[#FFE8F6] px-6 py-7 md:px-8 md:py-8">
-            <ToolkitCardHeading icon={LayoutDashboard}>
-              Student Progress At-A-Glance
-            </ToolkitCardHeading>
-            <div className="mt-3 flex-1 rounded-lg bg-muted/40 ring-1 ring-border/60" />
+          <div className="flex min-h-[240px] min-w-0 flex-col overflow-hidden rounded-2xl border border-fuchsia-200/60 bg-[#FFE8F6] md:min-h-[260px]">
+            <div className="px-6 pt-7 md:px-8 md:pt-8">
+              <ToolkitCardHeading icon={LayoutDashboard}>
+                Student Progress At-A-Glance
+              </ToolkitCardHeading>
+            </div>
+            <div className="mt-3 flex min-h-0 flex-1 flex-col pl-6 pr-0 pb-0 md:pl-8">
+              <ToolkitCardMockup
+                variant="compact"
+                src={forTutorsAssets.toolkitStudentProgress}
+                alt="Students overview metrics and My Students list in PLUS"
+              />
+            </div>
           </div>
-          <div className="flex min-h-[160px] min-w-0 flex-col rounded-2xl border border-fuchsia-200/60 bg-[#FFE8F6] px-6 py-7 md:px-8 md:py-8">
-            <ToolkitCardHeading icon={Brain}>
-              Session Tracking
-            </ToolkitCardHeading>
-            <div className="mt-3 flex-1 rounded-lg bg-muted/40 ring-1 ring-border/60" />
+          <div className="flex min-h-[240px] min-w-0 flex-col overflow-hidden rounded-2xl border border-fuchsia-200/60 bg-[#FFE8F6] md:min-h-[260px]">
+            <div className="px-6 pt-7 md:px-8 md:pt-8">
+              <ToolkitCardHeading icon={Brain}>
+                Session Tracking
+              </ToolkitCardHeading>
+            </div>
+            <div className="mt-3 flex min-h-0 flex-1 flex-col pl-6 pr-0 pb-0 md:pl-8">
+              <ToolkitCardMockup
+                variant="compact"
+                src={forTutorsAssets.toolkitSessionTracking}
+                alt="PLUS training modules and session overview cards"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -486,29 +555,53 @@ const TUTOR_TESTIMONIAL_VOICES = [
   {
     name: "PLUS Tutor A",
     quote:
-      "PLUS gave me the structure and tools to actually see my students improve week over week. The pay is fair and the team truly cares.",
+      "The Students’ Reactions Speak For Themselves. They Look Forward To The Tutoring Sessions. It’s Not Just About Math. It’s About Relationships. It’s About Building Confidence.",
   },
   {
     name: "PLUS Tutor B",
     quote:
-      "I love the flexibility and the training—I feel prepared for every session, even on tough topics.",
+      "Tutoring Has Affected Me And It Made Me Realize If I Didn’t Get The Help I Needed I Would Still Be Struggling. But It Made Me See Math Differently In A Good Way.",
   },
   {
     name: "PLUS Tutor C",
     quote:
-      "The platform is intuitive and the community of tutors is supportive. It’s the most rewarding work I’ve done.",
+      "My Students Were Able To Understand Concepts More Easily Than Before Due To The One-To-One Help. My Students’ Math Confidence Has Also Increased!",
   },
 ] as const
 
-const tutorVoicesBunduiTestimonials = TUTOR_TESTIMONIAL_VOICES.map(
-  (story, index) => ({
-    name: story.name,
-    role: "Tutor",
-    company: "PLUS",
-    quote: story.quote,
-    avatarUrl: forSchoolsAssets.avatars[index],
-  })
-)
+/** Figma-style tutor voice card: pale pink shell, maroon name row, white quote panel. */
+function TutorVoiceCard({
+  name,
+  quote,
+  avatarUrl,
+}: {
+  name: string
+  quote: string
+  avatarUrl: string
+}) {
+  return (
+    <article className="flex min-h-[340px] flex-col rounded-[22px] bg-[#FDECEC] p-5 sm:min-h-[380px] sm:p-6 dark:bg-[#3d2528]/40">
+      <div className="flex items-center gap-3">
+        <Avatar className="size-11 shrink-0 border border-[#B05B5B]/20 bg-white">
+          <AvatarImage src={avatarUrl} alt="" />
+          <AvatarFallback className="bg-white text-[#B05B5B] text-xs font-semibold">
+            {name.slice(0, 2).toUpperCase()}
+          </AvatarFallback>
+        </Avatar>
+        <p className="text-base font-bold tracking-tight text-[#B05B5B] dark:text-[#e8a0a0]">
+          {name}
+        </p>
+      </div>
+      <div className="mt-4 flex min-h-0 flex-1 flex-col rounded-2xl bg-white p-5 shadow-sm dark:bg-card dark:ring-1 dark:ring-white/10 sm:p-6">
+        <blockquote className="text-left text-base leading-relaxed text-[#4A4A4A] dark:text-neutral-200">
+          <span className="text-[#4A4A4A]/80 dark:text-neutral-400">“</span>
+          {quote}
+          <span className="text-[#4A4A4A]/80 dark:text-neutral-400">”</span>
+        </blockquote>
+      </div>
+    </article>
+  )
+}
 
 /**
  * Voices from Our Tutors — For Schools Success Stories layout (Bundui grid), tutor copy + heading.
@@ -535,13 +628,16 @@ export const TutorsTestimonialsSection = () => {
             />
           </div>
         </div>
-        <BunduiTestimonialsSection
-          showHeader={false}
-          showOuterContainer={false}
-          figureClassName="shadow-none"
-          testimonials={[...tutorVoicesBunduiTestimonials]}
-          className="w-full"
-        />
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-3 lg:gap-8">
+          {TUTOR_TESTIMONIAL_VOICES.map((story, index) => (
+            <TutorVoiceCard
+              key={story.name}
+              name={story.name}
+              quote={story.quote}
+              avatarUrl={forSchoolsAssets.avatars[index]!}
+            />
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -561,12 +657,14 @@ export const TutorsImpactCTA = () => {
           Join our community of tutors today and start making a difference.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <Button className="h-11 rounded-full bg-teal-600 px-8 text-base font-medium text-teal-950 hover:bg-teal-700">
+          <Button
+            className="h-11 rounded-full border-0 bg-[#A6EDF4] px-8 text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
+          >
             Check Our Demo
           </Button>
           <Button
             variant="outline"
-            className="h-11 rounded-full border-2 border-teal-800 bg-transparent px-8 text-base font-medium text-teal-950 hover:bg-teal-50"
+            className="h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-8 text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20"
           >
             Become a Tutor
           </Button>

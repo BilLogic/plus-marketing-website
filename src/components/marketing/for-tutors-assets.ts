@@ -1,5 +1,7 @@
 /** Static assets for /for-tutors (from PLUS website IA). */
 export const forTutorsAssets = {
+  /** Hero — video placeholder poster (paused-video mockup). */
+  heroVideoPoster: "/figma/for-tutors/hero-video-poster.png",
   /** Hero corner illustrations (image 9, 11, 11-1). */
   heroDecor: [
     "/figma/for-tutors/hero-decor-1.svg",
@@ -18,6 +20,12 @@ export const forTutorsAssets = {
   certificationBadgeCard: "/figma/for-tutors/certification-badge-card.png",
   /** Tutor Toolkit section (image 11-1). */
   toolkitDecor: "/figma/for-tutors/toolkit-decor.svg",
+  /** Tutor Toolkit — Dashboard Tracking Insights mockup. */
+  toolkitDashboardInsights: "/figma/for-tutors/toolkit-dashboard-insights.png",
+  /** Tutor Toolkit — Student Progress At-A-Glance mockup. */
+  toolkitStudentProgress: "/figma/for-tutors/toolkit-student-progress.png",
+  /** Tutor Toolkit — Session Tracking mockup. */
+  toolkitSessionTracking: "/figma/for-tutors/toolkit-session-tracking.png",
   /** Voices from Our Tutors section (image 10). */
   voicesDecor: "/figma/for-tutors/voices-decor.svg",
 } as const
