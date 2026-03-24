@@ -24,10 +24,7 @@ const ForSchoolsPage = () => {
         <SchoolsSuccessStoriesSection />
         <SchoolsRegisterCTA />
       </div>
-      <BunduiFooterSection
-        productName="PLUS"
-        newsletterButtonStyle="default"
-      />
+      <BunduiFooterSection productName="PLUS" />
     </main>
   )
 }

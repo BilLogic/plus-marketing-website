@@ -10,6 +10,9 @@ import {
   ScrollAccordion,
   type ScrollAccordionItem,
 } from "@/components/ui/scroll-accordion"
+import { Button } from "@/components/ui/button"
+import { marketingTypography } from "@/lib/marketing-typography"
+import { cn } from "@/lib/utils"
 
 /** Accordion displays collapsible content panels for presenting information in a limited space. */
 const meta = {
@@ -187,17 +190,32 @@ export const Bordered: Story = {
 const scrollAccordionDemoItems: readonly ScrollAccordionItem[] = [
   {
     value: "free-for-all",
-    title: "Free for All",
+    title: ({ isOpen }) =>
+      isOpen ? (
+        <span className="sr-only">Free for All</span>
+      ) : (
+        "Free for All"
+      ),
     children: (
-      <p className="text-muted-foreground">
-        High-quality education shouldn&apos;t be gated. Access our full suite of AI-driven
-        training and feedback tools at no cost to your district.
-      </p>
+      <div className="flex flex-col gap-4">
+        <p className="text-muted-foreground">
+          High-quality education shouldn&apos;t be gated. Access our full suite of AI-driven
+          training and feedback tools at no cost to your district.
+        </p>
+        <Button variant="plusNavCta" size="navCta" className="w-fit">
+          See if your school qualifies
+        </Button>
+      </div>
     ),
   },
   {
     value: "multilingual",
-    title: "Multilingual Support",
+    title: ({ isOpen }) =>
+      isOpen ? (
+        <span className="sr-only">Multilingual Support</span>
+      ) : (
+        "Multilingual Support"
+      ),
     children: (
       <p className="text-muted-foreground">
         Support your diverse student body with lessons available in both English and Spanish.
@@ -206,7 +224,12 @@ const scrollAccordionDemoItems: readonly ScrollAccordionItem[] = [
   },
   {
     value: "goals",
-    title: "Goal Setting with Students",
+    title: ({ isOpen }) =>
+      isOpen ? (
+        <span className="sr-only">Goal Setting with Students</span>
+      ) : (
+        "Goal Setting with Students"
+      ),
     children: (
       <p className="text-muted-foreground">
         Tutors set weekly math goals with students and reward them for meeting their goals.
@@ -215,7 +238,12 @@ const scrollAccordionDemoItems: readonly ScrollAccordionItem[] = [
   },
   {
     value: "human-ai",
-    title: "Human + AI Tutoring Model",
+    title: ({ isOpen }) =>
+      isOpen ? (
+        <span className="sr-only">Human + AI Tutoring Model</span>
+      ) : (
+        "Human + AI Tutoring Model"
+      ),
     children: (
       <p className="text-muted-foreground">
         Teachers select scope and sequence; we match students to support based on prior performance.
@@ -244,10 +272,13 @@ export const ScrollAccordionStory: Story = {
       <div className="min-h-dvh bg-background px-4 py-10 sm:px-8">
         <div className="mx-auto max-w-2xl space-y-4">
           <div>
-            <h2 className="text-lg font-semibold tracking-tight">Scroll Accordion (container)</h2>
-            <p className="mt-1 text-sm text-muted-foreground">
+            <h2 className={marketingTypography.h2}>Scroll Accordion (container)</h2>
+            <p className={cn(marketingTypography.lead, "mt-2 max-w-none")}>
               Scroll inside the bordered area. For page-level behavior, use{" "}
-              <code className="rounded bg-muted px-1 py-0.5 text-xs">scrollRoot=&quot;viewport&quot;</code> (default).
+              <code className="rounded bg-muted px-1 py-0.5 text-sm">
+                scrollRoot=&quot;viewport&quot;
+              </code>{" "}
+              (default).
             </p>
           </div>
           <Story />

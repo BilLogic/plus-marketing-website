@@ -545,13 +545,6 @@ export const PlusResearchSection = () => {
 }
 
 /** @deprecated Prefer `BunduiFooterSection` from `@/components/registry/bundui/footer-section`. */
-export const PlusFooterSection = ({
-  newsletterButtonStyle = "marketing",
-}: {
-  newsletterButtonStyle?: NavbarCtaStyle
-}) => (
-  <BunduiFooterSection
-    productName="PLUS"
-    newsletterButtonStyle={newsletterButtonStyle}
-  />
+export const PlusFooterSection = () => (
+  <BunduiFooterSection productName="PLUS" />
 )
