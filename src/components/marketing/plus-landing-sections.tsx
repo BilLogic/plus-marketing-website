@@ -35,7 +35,7 @@ const NAV_LINKS = [
   { label: "About", href: "/#about" },
   { label: "For schools", href: "/for-schools" },
   { label: "For tutors", href: "/for-tutors" },
-  { label: "For researchers", href: "/#research" },
+  { label: "For researchers", href: "/for-researchers" },
   { label: "Get involved", href: "/#get-involved" },
 ] as const
 

@@ -5,6 +5,10 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { forTutorsSectionIds } from "@/lib/plus-footer-ia"
+import { marketingTypography } from "@/lib/marketing-typography"
+
+const HERO_HEADLINE_CLASS = cn(marketingTypography.h1, "font-bold text-teal-950")
+const HERO_LEAD_CLASS = cn(marketingTypography.lead, "text-center")
 
 /**
  * Hero section for the "For Tutors" page.
@@ -14,10 +18,10 @@ export const TutorsHeroSection = () => {
   return (
     <section className="relative flex flex-col items-center gap-10 px-6 py-16 text-center sm:px-10 sm:py-20">
       <div className="flex max-w-3xl flex-col items-center gap-5">
-        <h1 className="text-balance text-3xl font-bold leading-tight tracking-tight text-teal-950 sm:text-4xl md:text-5xl">
+        <h1 className={HERO_HEADLINE_CLASS}>
           Teach What Matters and Earn What You Deserve
         </h1>
-        <p className="text-lg text-muted-foreground">
+        <p className={HERO_LEAD_CLASS}>
           Join 500+ tutors supporting 5,000+ students. Earn while you learn and
           teach!
         </p>
@@ -82,20 +86,22 @@ export const TutorsCompensationSection = () => {
       id={forTutorsSectionIds.compensation}
       className="space-y-10 px-6 sm:px-10"
     >
-      <h2 className="max-w-2xl text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl">
+      <h2 className={cn(marketingTypography.h2, "max-w-2xl font-bold text-teal-950")}>
         Every hour counts. Get paid for training, tutoring, and reflection
       </h2>
       <div className="grid gap-5 sm:grid-cols-3">
         {COMPENSATION_STATS.map((item) => (
           <Card key={item.stat} className="border-border/70">
             <CardHeader className="pb-2">
-              <CardTitle className="text-2xl font-bold text-teal-950">
+              <CardTitle className={cn(marketingTypography.h3, "font-bold text-teal-950")}>
                 {item.stat}
               </CardTitle>
-              <p className="text-sm text-muted-foreground">{item.label}</p>
+              <p className={cn(marketingTypography.body, "text-sm text-muted-foreground")}>
+                {item.label}
+              </p>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">
+              <p className={cn(marketingTypography.body, "text-muted-foreground")}>
                 {item.description}
               </p>
             </CardContent>
@@ -140,7 +146,7 @@ export const TutorsExperienceSection = () => {
       id={forTutorsSectionIds.experience}
       className="space-y-10 px-6 sm:px-10"
     >
-      <h2 className="text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl">
+      <h2 className={cn(marketingTypography.h2, "font-bold text-teal-950")}>
         What Tutoring at PLUS Looks Like
       </h2>
       <div className="grid gap-5 sm:grid-cols-3">
@@ -154,8 +160,12 @@ export const TutorsExperienceSection = () => {
             >
               <span className="size-3 rounded-full bg-white" />
             </span>
-            <h3 className="text-lg font-bold text-teal-950">{step.title}</h3>
-            <p className="text-sm text-muted-foreground">{step.description}</p>
+            <h3 className={cn(marketingTypography.h3, "font-bold text-teal-950")}>
+              {step.title}
+            </h3>
+            <p className={cn(marketingTypography.body, "text-muted-foreground")}>
+              {step.description}
+            </p>
           </div>
         ))}
       </div>
@@ -179,21 +189,21 @@ export const TutorsCertificationSection = () => {
       id={forTutorsSectionIds.certification}
       className="space-y-10 px-6 sm:px-10"
     >
-      <h2 className="text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl">
+      <h2 className={cn(marketingTypography.h2, "font-bold text-teal-950")}>
         Earn Certification &amp; Digital Badges
       </h2>
       <div className="grid gap-8 md:grid-cols-2">
         {/* Left: description */}
         <Card className="border-teal-200 bg-teal-50/50">
           <CardContent className="space-y-4 pt-6">
-            <h3 className="text-lg font-bold text-teal-950">
+            <h3 className={cn(marketingTypography.h3, "font-bold text-teal-950")}>
               Tutor Certification &amp; Digital Badges
             </h3>
-            <p className="text-sm text-muted-foreground">
+            <p className={cn(marketingTypography.body, "text-muted-foreground")}>
               Complete all training to earn stackable badges for your resume and
               social media.
             </p>
-            <p className="text-sm text-muted-foreground">
+            <p className={cn(marketingTypography.body, "text-muted-foreground")}>
               Make findability immediately with Contact card archives.
             </p>
             <Button
@@ -213,8 +223,10 @@ export const TutorsCertificationSection = () => {
               <span className="text-2xl">🏅</span>
             </div>
             <div>
-              <p className="text-lg font-bold text-teal-950">Certified Tutor</p>
-              <p className="text-sm text-muted-foreground">
+              <p className={cn(marketingTypography.h3, "font-bold text-teal-950")}>
+                Certified Tutor
+              </p>
+              <p className={cn(marketingTypography.body, "text-muted-foreground")}>
                 for completing all training lessons
               </p>
             </div>
@@ -284,7 +296,7 @@ export const TutorsToolkitSection = () => {
       id={forTutorsSectionIds.toolkit}
       className="space-y-10 px-6 sm:px-10"
     >
-      <h2 className="text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl">
+      <h2 className={cn(marketingTypography.h2, "font-bold text-teal-950")}>
         Your Tutor Toolkit
       </h2>
       <div className="grid gap-5 md:grid-cols-3">
@@ -302,9 +314,11 @@ export const TutorsToolkitSection = () => {
                 {card.subtitle}
               </Badge>
             )}
-            <h3 className="text-lg font-bold text-teal-950">{card.title}</h3>
+            <h3 className={cn(marketingTypography.h3, "font-bold text-teal-950")}>
+              {card.title}
+            </h3>
             {card.description && (
-              <p className="text-sm text-muted-foreground">
+              <p className={cn(marketingTypography.body, "text-muted-foreground")}>
                 {card.description}
               </p>
             )}
@@ -327,10 +341,10 @@ export const TutorsImpactCTA = () => {
       className="rounded-3xl bg-white p-10 text-center sm:p-16"
     >
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-6">
-        <h2 className="text-3xl font-bold tracking-tight text-teal-950 sm:text-4xl">
+        <h2 className={cn(marketingTypography.h2, "font-bold text-teal-950 sm:text-4xl")}>
           Ready to Make an Impact?
         </h2>
-        <p className="text-lg text-muted-foreground">
+        <p className={marketingTypography.lead}>
           Join a community of tutors committed to growth, equity, and meaningful
           math mentorship.
         </p>
