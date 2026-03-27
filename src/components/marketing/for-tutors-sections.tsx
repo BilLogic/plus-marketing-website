@@ -1,6 +1,6 @@
 "use client"
 
-import type { ComponentType, ReactNode, SVGProps } from "react"
+import { useState, type ComponentType, type ReactNode, type SVGProps } from "react"
 import Image from "next/image"
 import { Brain, LayoutDashboard, Sparkles, Star } from "lucide-react"
 
@@ -38,7 +38,7 @@ function DoodleBlob({
 }
 
 /** Hero corner illustrations (IA SVGs). */
-function TutorsHeroDecorImg({
+export function TutorsHeroDecorImg({
   src,
   className,
 }: {
@@ -191,8 +191,8 @@ export const TutorsCompensationSection = () => {
                 Get Paid for All Your Hours
               </h2>
               <p className="mx-auto max-w-2xl text-base text-teal-900/75 dark:text-white/90 sm:mx-0 sm:text-lg">
-                Join PLUS and start supporting 1:1 with students. Earn up to $20
-                per hour.
+                Earn for every hour you spend training, tutoring, and reflecting
+                on your work
               </p>
             </div>
             <img
@@ -210,7 +210,7 @@ export const TutorsCompensationSection = () => {
             {COMPENSATION_COLUMNS.map((col) => (
               <div
                 key={col.stat}
-                className="px-6 py-7 text-center md:px-8 md:py-8 md:text-left"
+                className="px-6 py-5 text-center md:px-8 md:py-6 md:text-left"
               >
                 <p className="text-3xl font-bold tracking-tight text-sky-900 dark:text-sky-100 md:text-4xl">
                   {col.stat}
@@ -252,20 +252,17 @@ const EXPERIENCE_CARDS = [
   {
     title: "Build Bonds",
     description:
-      "Begin each session by connecting with your student—trust makes learning stick.",
-    active: true,
+      "Begin each session by connecting with students.",
   },
   {
-    title: "Get support",
+    title: "1:1 Support",
     description:
-      "Access mentor feedback, office hours, and a community of fellow tutors.",
-    active: false,
+      "Lead one-on-one sessions for students’ needs.",
   },
   {
-    title: "Believe & Grow",
+    title: "Reflect & Grow",
     description:
-      "Reflect on each session and build teaching skills that last a career.",
-    active: false,
+      "Submit reflections, join tutor discussions to grow.",
   },
 ] as const
 
@@ -274,6 +271,32 @@ const EXPERIENCE_CARDS = [
  * Day-to-Day Experience), tutor copy + green palette + session photo.
  */
 export const TutorsExperienceSection = () => {
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  /** Wide column follows selection — same pattern as About foundations (order stays 1 · 2 · 3). */
+  const experienceLgGridCols =
+    selectedIndex === 0
+      ? "lg:grid-cols-[2fr_1fr_1fr]"
+      : selectedIndex === 1
+        ? "lg:grid-cols-[1fr_2fr_1fr]"
+        : "lg:grid-cols-[1fr_1fr_2fr]"
+
+  const experiencePhotoSrc =
+    selectedIndex === 1
+      ? forTutorsAssets.experienceOneToOneSupportPhoto
+      : selectedIndex === 2
+        ? forTutorsAssets.experienceReflectGrowPhoto
+        : forTutorsAssets.experienceSessionPhoto
+
+  const experiencePhotoUsesZoomCrop = selectedIndex === 1 || selectedIndex === 2
+
+  const experiencePhotoAlt =
+    selectedIndex === 1
+      ? "Student wearing headphones at a laptop during a live online tutoring session with a tutor on video"
+      : selectedIndex === 2
+        ? "PLUS Personalized Learning dashboard on the Reflection tab with session reflection and training lessons"
+        : "Student with headphones on a video call with a PLUS tutor, laptop on a desk"
+
   return (
     <section
       id={forTutorsSectionIds.experience}
@@ -286,8 +309,8 @@ export const TutorsExperienceSection = () => {
               What Tutoring at PLUS Looks Like
             </h2>
             <p className="mx-auto max-w-2xl text-base text-teal-900/75 dark:text-white/90 sm:mx-0 sm:text-lg">
-              Build meaningful relationships while helping students achieve their
-              goals.
+              Build connections, provide 1:1 student support, and reflect with
+              mentors
             </p>
           </div>
           <img
@@ -299,35 +322,51 @@ export const TutorsExperienceSection = () => {
         </div>
       </div>
 
-      <ol className="mx-auto grid max-w-5xl list-none gap-4 p-0 sm:grid-cols-2 sm:gap-6 lg:grid-cols-[2fr_1fr_1fr] lg:gap-8">
+      <ol
+        className={cn(
+          "mx-auto grid max-w-5xl list-none items-stretch gap-4 p-0 sm:grid-cols-2 sm:gap-6 lg:gap-8",
+          experienceLgGridCols
+        )}
+      >
         {EXPERIENCE_CARDS.map((card, index) => {
-          const isFilled = card.active
+          const isSelected = selectedIndex === index
           return (
-            <li
-              key={card.title}
-              className={cn(
-                "flex flex-col gap-4 rounded-3xl p-5 sm:gap-6 sm:p-6",
-                isFilled
-                  ? "border-2 border-green-400 bg-green-50/90"
-                  : "border-2 border-green-200/90 bg-white"
-              )}
-            >
-              <div
+            <li key={card.title} className="flex min-h-0">
+              <button
+                type="button"
+                onClick={() => setSelectedIndex(index)}
+                aria-pressed={isSelected}
                 className={cn(
-                  "flex size-14 shrink-0 items-center justify-center rounded-full text-2xl font-bold text-white",
-                  isFilled ? "bg-green-600" : "bg-green-500/80"
+                  "flex h-full min-h-0 w-full flex-col gap-3 rounded-3xl p-5 text-left transition-colors sm:gap-5 sm:p-6",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                  isSelected
+                    ? "border-2 border-green-400 bg-[#E8F6EA]"
+                    : "border-2 border-green-200/90 bg-white"
                 )}
               >
-                {index + 1}
-              </div>
-              <div className="min-w-0 space-y-2">
-                <p className="text-lg font-bold tracking-tight text-teal-950 sm:text-xl">
-                  {card.title}
-                </p>
-                <p className="text-sm leading-relaxed text-teal-900/75 sm:text-base">
-                  {card.description}
-                </p>
-              </div>
+                <div
+                  className={cn(
+                    "flex size-10 shrink-0 items-center justify-center rounded-full text-lg font-bold text-white",
+                    isSelected ? "bg-[#297E43]" : "bg-[#297E43]/85"
+                  )}
+                >
+                  {index + 1}
+                </div>
+                <div className="flex min-h-0 flex-1 flex-col gap-2">
+                  <p className="shrink-0 text-lg font-bold tracking-tight text-[#297E43] sm:text-xl dark:text-[#297E43]">
+                    {card.title}
+                  </p>
+                  <div className="flex min-h-0 flex-1 flex-col">
+                    {isSelected ? (
+                      <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                        {card.description}
+                      </p>
+                    ) : (
+                      <div className="flex-1" aria-hidden />
+                    )}
+                  </div>
+                </div>
+              </button>
             </li>
           )
         })}
@@ -336,10 +375,15 @@ export const TutorsExperienceSection = () => {
       <div className="mx-auto max-w-5xl">
         <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl ring-1 ring-teal-200/60 dark:ring-teal-800/50">
           <Image
-            src={forTutorsAssets.experienceSessionPhoto}
-            alt="Student with headphones on a video call with a PLUS tutor, laptop on a desk"
+            key={experiencePhotoSrc}
+            src={experiencePhotoSrc}
+            alt={experiencePhotoAlt}
             fill
-            className="object-cover"
+            className={cn(
+              "object-cover object-center",
+              experiencePhotoUsesZoomCrop &&
+                "origin-center scale-[1.07] sm:scale-[1.06]"
+            )}
             sizes="(max-width: 1024px) 100vw, 64rem"
           />
         </div>
@@ -366,8 +410,8 @@ export const TutorsCertificationSection = () => {
                 Earn Certification &amp; Digital Badges
               </h2>
               <p className="mx-auto max-w-2xl text-base text-teal-900/75 dark:text-white/90 sm:mx-0 sm:text-lg">
-                Showcase your skills and expertise with our digital badges and
-                certifications.
+                Build credentials that showcase your expertise and professional
+                growth
               </p>
             </div>
             <img
@@ -379,16 +423,16 @@ export const TutorsCertificationSection = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-8 rounded-3xl border border-amber-200/90 bg-[#FFF1C7] px-6 py-7 dark:border-amber-900/40 dark:bg-[#FFF1C7]/12 md:flex-row md:items-stretch md:gap-10 md:px-8 md:py-8">
-          <div className="flex flex-1 flex-col justify-center gap-4">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-4">
+        <div className="flex flex-col gap-8 rounded-3xl bg-[#FFF1C7] px-6 py-7 dark:bg-[#FFF1C7]/12 md:flex-row md:items-stretch md:gap-10 md:px-8 md:py-8">
+          <div className="flex flex-1 flex-col gap-4">
+            <div className="flex items-center gap-4">
               <span
-                className="mx-auto flex size-9 shrink-0 items-center justify-center rounded-full bg-amber-800 text-white dark:bg-amber-700 sm:mx-0"
+                className="flex size-10 shrink-0 items-center justify-center rounded-full bg-amber-800 text-white dark:bg-amber-700"
                 aria-hidden
               >
-                <Star className="size-[18px]" strokeWidth={2.25} />
+                <Star className="size-5" strokeWidth={2.25} />
               </span>
-              <h3 className="min-w-0 text-center text-balance text-lg font-bold tracking-tight text-amber-900 dark:text-amber-100 sm:text-left sm:text-xl">
+              <h3 className="min-w-0 text-balance text-lg font-bold tracking-tight text-amber-900 dark:text-amber-100 sm:text-xl">
                 Tutor Certification &amp; Digital Badges
               </h3>
             </div>
@@ -399,7 +443,7 @@ export const TutorsCertificationSection = () => {
             <p className="text-center text-sm leading-relaxed text-muted-foreground sm:text-left">
               Note: Available to institutions only. Contact us to activate.
             </p>
-            <Button className="mx-auto h-11 w-fit rounded-full bg-amber-400 px-8 font-medium text-teal-950 hover:bg-amber-300 sm:mx-0">
+            <Button className="mx-auto mt-auto h-11 w-fit rounded-full bg-amber-400 px-8 font-medium text-teal-950 hover:bg-amber-300 sm:mx-0">
               Register now
             </Button>
           </div>
@@ -460,10 +504,10 @@ function ToolkitCardHeading({
   return (
     <div className="flex items-center gap-3">
       <span
-        className="flex size-9 shrink-0 items-center justify-center rounded-full bg-fuchsia-900 text-white dark:bg-fuchsia-200 dark:text-fuchsia-950"
+        className="flex size-10 shrink-0 items-center justify-center rounded-full bg-fuchsia-900 text-white dark:bg-fuchsia-200 dark:text-fuchsia-950"
         aria-hidden
       >
-        <Icon className="size-[18px]" strokeWidth={2.25} />
+        <Icon className="size-5" strokeWidth={2.25} />
       </span>
       <p className="min-w-0 text-lg font-bold tracking-tight text-fuchsia-900 dark:text-fuchsia-200 sm:text-xl">
         {children}
@@ -489,8 +533,8 @@ export const TutorsToolkitSection = () => {
                 Your Tutor Toolkit
               </h2>
               <p className="mx-auto max-w-2xl text-base text-teal-900/75 dark:text-white/90 sm:mx-0 sm:text-lg">
-                Access all the tools and resources you need to support your
-                tutoring.
+                Access training, AI-powered feedback, and resources to support
+                your tutoring
               </p>
             </div>
             <img
@@ -504,12 +548,12 @@ export const TutorsToolkitSection = () => {
 
         <div className="grid gap-4 sm:gap-6 md:grid-cols-2 md:grid-rows-2 lg:gap-8">
           <div className="flex min-h-[400px] w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-fuchsia-200/60 bg-[#FFE8F6] md:row-span-2 md:min-h-[520px]">
-            <div className="px-6 pt-7 md:px-8 md:pt-8">
+            <div className="px-6 py-5 md:px-8 md:py-6">
               <ToolkitCardHeading icon={Sparkles}>
                 Dashboard Tracking Insights
               </ToolkitCardHeading>
             </div>
-            <div className="mt-4 flex min-h-0 flex-1 flex-col pl-6 pr-0 pb-0 md:pl-8">
+            <div className="flex min-h-0 flex-1 flex-col pl-6 pr-0 pb-0 md:pl-8">
               <ToolkitCardMockup
                 variant="dashboard"
                 src={forTutorsAssets.toolkitDashboardInsights}
@@ -518,12 +562,12 @@ export const TutorsToolkitSection = () => {
             </div>
           </div>
           <div className="flex min-h-[240px] min-w-0 flex-col overflow-hidden rounded-2xl border border-fuchsia-200/60 bg-[#FFE8F6] md:min-h-[260px]">
-            <div className="px-6 pt-7 md:px-8 md:pt-8">
+            <div className="px-6 py-5 md:px-8 md:py-6">
               <ToolkitCardHeading icon={LayoutDashboard}>
                 Student Progress At-A-Glance
               </ToolkitCardHeading>
             </div>
-            <div className="mt-3 flex min-h-0 flex-1 flex-col pl-6 pr-0 pb-0 md:pl-8">
+            <div className="flex min-h-0 flex-1 flex-col pl-6 pr-0 pb-0 md:pl-8">
               <ToolkitCardMockup
                 variant="compact"
                 src={forTutorsAssets.toolkitStudentProgress}
@@ -532,12 +576,12 @@ export const TutorsToolkitSection = () => {
             </div>
           </div>
           <div className="flex min-h-[240px] min-w-0 flex-col overflow-hidden rounded-2xl border border-fuchsia-200/60 bg-[#FFE8F6] md:min-h-[260px]">
-            <div className="px-6 pt-7 md:px-8 md:pt-8">
+            <div className="px-6 py-5 md:px-8 md:py-6">
               <ToolkitCardHeading icon={Brain}>
                 Session Tracking
               </ToolkitCardHeading>
             </div>
-            <div className="mt-3 flex min-h-0 flex-1 flex-col pl-6 pr-0 pb-0 md:pl-8">
+            <div className="flex min-h-0 flex-1 flex-col pl-6 pr-0 pb-0 md:pl-8">
               <ToolkitCardMockup
                 variant="compact"
                 src={forTutorsAssets.toolkitSessionTracking}
@@ -588,7 +632,7 @@ function TutorVoiceCard({
             {name.slice(0, 2).toUpperCase()}
           </AvatarFallback>
         </Avatar>
-        <p className="text-base font-bold tracking-tight text-[#B05B5B] dark:text-[#e8a0a0]">
+        <p className="text-lg font-bold tracking-tight text-[#B05B5B] dark:text-[#e8a0a0] sm:text-xl">
           {name}
         </p>
       </div>
@@ -617,7 +661,8 @@ export const TutorsTestimonialsSection = () => {
                 Voices from Our Tutors
               </h2>
               <p className="mx-auto max-w-2xl text-base text-teal-900/75 dark:text-white/90 sm:mx-0 sm:text-lg">
-                Hear from our tutors about their experience working with PLUS.
+                Learn from real tutor stories, experiences, and tips to improve
+                your practice
               </p>
             </div>
             <img
@@ -649,12 +694,13 @@ export const TutorsTestimonialsSection = () => {
 export const TutorsImpactCTA = () => {
   return (
     <section id={forTutorsSectionIds.impact}>
-      <div className="mx-auto max-w-3xl space-y-6 rounded-3xl bg-white p-8 text-center dark:bg-transparent sm:p-12">
+      <div className="mx-auto max-w-5xl space-y-6 rounded-3xl bg-white p-8 text-center dark:bg-transparent sm:p-12">
         <h2 className="text-3xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-4xl">
           Ready to Make an Impact?
         </h2>
-        <p className="text-base text-teal-900/75 dark:text-white/90 sm:text-lg">
-          Join our community of tutors today and start making a difference.
+        <p className="w-full max-w-none text-base text-teal-900/75 dark:text-white/90 sm:text-lg">
+          Join a community of tutors committed to growth, equity, and meaningful
+          math mentorship.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Button

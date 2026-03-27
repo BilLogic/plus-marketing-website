@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 
 /** Nav links matching PLUS website IA (Figma). */
 const NAV_LINKS = [
-  { label: "About", href: "/#about" },
+  { label: "About", href: "/about" },
   { label: "For schools", href: "/for-schools" },
   { label: "For tutors", href: "/for-tutors" },
   { label: "For researchers", href: "/#research" },

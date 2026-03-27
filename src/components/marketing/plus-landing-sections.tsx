@@ -32,7 +32,7 @@ export const PlusAnnouncementBar = () => {
 
 /** Navigation link items for the updated top nav. */
 const NAV_LINKS = [
-  { label: "About", href: "/#about" },
+  { label: "About", href: "/about" },
   { label: "For schools", href: "/for-schools" },
   { label: "For tutors", href: "/for-tutors" },
   { label: "For researchers", href: "/#research" },
@@ -99,10 +99,7 @@ export const PlusNavbar = ({
  */
 export const PlusHeroSection = () => {
   return (
-    <section
-      id="about"
-      className="relative overflow-hidden rounded-3xl border border-border/70 bg-card/90"
-    >
+    <section className="relative overflow-hidden rounded-3xl border border-border/70 bg-card/90">
       <MeteorBackground density={14} />
       {/* Subtle teal gradient wash */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-fuchsia-500/5" />

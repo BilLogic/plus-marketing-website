@@ -26,6 +26,15 @@ export const forSchoolsSectionIds = {
   register: "register-your-institution",
 } as const
 
+/** Sections on `/about` — IDs on `about-sections.tsx` */
+export const aboutSectionIds = {
+  foundations: "about-foundations",
+  team: "about-team",
+  latest: "about-latest",
+  successStories: "about-success-stories",
+  learnMore: "about-learn-more",
+} as const
+
 /** Sections on /for-tutors — IDs on `for-tutors-sections.tsx` */
 export const forTutorsSectionIds = {
   compensation: "compensation",
@@ -37,16 +46,17 @@ export const forTutorsSectionIds = {
 
 const fs = forSchoolsSectionIds
 const ft = forTutorsSectionIds
+const ab = aboutSectionIds
 
 export const PLUS_FOOTER_COLUMNS: readonly PlusFooterColumn[] = [
   {
     id: "about",
     title: "About",
     links: [
-      { label: "Our story", href: "#" },
-      { label: "Our team", href: "#" },
-      { label: "News", href: "#" },
-      { label: "Success stories", href: "#" },
+      { label: "Our story", href: `/about#${ab.foundations}` },
+      { label: "Our team", href: `/about#${ab.team}` },
+      { label: "News", href: `/about#${ab.latest}` },
+      { label: "Success stories", href: `/about#${ab.successStories}` },
     ],
   },
   {

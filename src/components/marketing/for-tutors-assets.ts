@@ -14,6 +14,10 @@ export const forTutorsAssets = {
   experienceDecor: "/figma/for-tutors/experience-decor.svg",
   /** What Tutoring looks like — session photo below the bento cards. */
   experienceSessionPhoto: "/figma/for-tutors/experience-session-photo.png",
+  /** 1:1 Support card — student with headphones on a laptop in a live tutoring session. */
+  experienceOneToOneSupportPhoto: "/figma/for-tutors/experience-1-1-support.png",
+  /** Reflect & Grow card — Reflection tab and training progress in PLUS tutor dashboard. */
+  experienceReflectGrowPhoto: "/figma/for-tutors/experience-reflect-grow.png",
   /** Certification & badges section (image 13). */
   certificationDecor: "/figma/for-tutors/certification-decor.svg",
   /** Certification panel — My Badge card graphic (replaces built UI). */
