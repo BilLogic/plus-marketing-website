@@ -4,8 +4,11 @@ import {
   Newspaper,
   Trophy,
   FileText,
-  Megaphone,
   Image,
+  GraduationCap,
+  School,
+  Handshake,
+  Briefcase,
 } from "lucide-react"
 
 export type NavDropdownItem = {
@@ -41,17 +44,37 @@ export const NAV_CONFIG: NavItem[] = [
       },
     ],
   },
-  { label: "For Schools", href: "/for-schools" },
-  { label: "For Tutors", href: "/for-tutors" },
-  { label: "For Researchers", href: "/research" },
+  {
+    label: "Solutions",
+    children: [
+      {
+        items: [
+          { label: "For Schools", href: "/for-schools", description: "Program onboarding, training, and oversight", icon: School },
+          { label: "For Tutors", href: "/for-tutors", description: "Training, growth, and in-session support", icon: GraduationCap },
+          { label: "For Researchers", href: "/research", description: "Publications, data access, and analytics", icon: FileText },
+        ],
+      },
+    ],
+  },
   {
     label: "Resources",
     children: [
       {
         items: [
-          { label: "Research Papers", href: "/research", description: "Browse our publications", icon: FileText },
-          { label: "News", href: "/about/news", description: "Updates and media coverage", icon: Megaphone },
-          { label: "Media Kit", href: "/media-kit", description: "Press assets and logos", icon: Image },
+          { label: "Publications", href: "/research", description: "Browse 40+ peer-reviewed papers", icon: FileText },
+          { label: "News", href: "/about/news", description: "Updates and media coverage", icon: Newspaper },
+          { label: "Media Kit", href: "/media-kit", description: "Press assets, logos, and brand guidelines", icon: Image },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Get Involved",
+    children: [
+      {
+        items: [
+          { label: "Careers", href: "#", description: "Join the PLUS team", icon: Briefcase },
+          { label: "Partnerships", href: "#", description: "Collaborate with us", icon: Handshake },
         ],
       },
     ],
@@ -65,18 +88,15 @@ export const FOOTER_LINKS = {
     { label: "News", href: "/about/news" },
     { label: "Success Stories", href: "/success-stories" },
   ],
-  forSchools: [
-    { label: "Program Onboarding & Training", href: "/for-schools" },
-    { label: "Program Oversight & Tutor Quality", href: "/for-schools" },
+  solutions: [
+    { label: "For Schools", href: "/for-schools" },
+    { label: "For Tutors", href: "/for-tutors" },
+    { label: "For Researchers", href: "/research" },
   ],
-  forTutors: [
-    { label: "Training & Growth", href: "/for-tutors" },
-    { label: "In-Session Support Tools", href: "/for-tutors" },
-  ],
-  research: [
+  resources: [
     { label: "Publications", href: "/research" },
-    { label: "Data Access", href: "/research" },
-    { label: "Analytics & Monitoring", href: "/research" },
+    { label: "News", href: "/about/news" },
+    { label: "Media Kit", href: "/media-kit" },
   ],
   getInvolved: [
     { label: "Careers", href: "#" },

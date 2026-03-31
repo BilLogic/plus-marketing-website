@@ -30,7 +30,6 @@ const parseResearchPaper = (page: any): ResearchPaper => {
 export const fetchResearchPapers = async (): Promise<ResearchPaper[]> => {
   const databaseId = process.env.NOTION_RESEARCH_DB_ID
   if (!databaseId) {
-    console.error("NOTION_RESEARCH_DB_ID is not set")
     const cached = await readCache<ResearchPaper[]>(CACHE_KEY)
     return cached ?? []
   }

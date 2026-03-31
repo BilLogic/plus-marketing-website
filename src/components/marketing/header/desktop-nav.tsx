@@ -1,5 +1,6 @@
 "use client"
 
+import { Fragment } from "react"
 import { cn } from "@/lib/utils"
 import { NAV_CONFIG } from "./nav-config"
 import {
@@ -30,11 +31,11 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-1 p-2 md:w-[480px] md:grid-cols-2">
                     {item.children.map((section, sIdx) => (
-                      <li key={sIdx} className="contents">
+                      <Fragment key={sIdx}>
                         {section.heading && (
-                          <p className="col-span-full px-3 pt-2 pb-1 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+                          <li className="col-span-full px-3 pt-2 pb-1 text-xs font-semibold tracking-wider text-muted-foreground uppercase list-none">
                             {section.heading}
-                          </p>
+                          </li>
                         )}
                         {section.items.map((child) => (
                           <li key={child.href + child.label}>
@@ -65,7 +66,7 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
                             </NavigationMenuLink>
                           </li>
                         ))}
-                      </li>
+                      </Fragment>
                     ))}
                   </ul>
                 </NavigationMenuContent>

@@ -17,10 +17,16 @@ export function PlusHeader() {
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <span className="relative flex size-7 items-center justify-center rounded-full bg-primary/10">
-              <span className="absolute inset-1.5 rounded-full bg-primary" />
-            </span>
-            <span className="text-sm font-semibold tracking-tight">PLUS</span>
+            <img
+              src="/brand/plus-icon-gradient.svg"
+              alt=""
+              className="size-8 rounded-lg"
+            />
+            <img
+              src="/brand/plus-logo-dark.svg"
+              alt="PLUS"
+              className="h-5"
+            />
           </Link>
 
           {/* Desktop Nav — hidden below md */}
@@ -28,11 +34,11 @@ export function PlusHeader() {
 
           {/* Right side: CTAs + mobile trigger */}
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
-              Log In
-            </Button>
             <Button size="sm" className="rounded-full px-4">
               Try PLUS Demo
+            </Button>
+            <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
+              Log In
             </Button>
             {/* Mobile nav trigger — visible below md */}
             <MobileNav className="md:hidden" />

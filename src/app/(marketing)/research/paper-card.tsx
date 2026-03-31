@@ -118,6 +118,7 @@ export function PaperCard({
             <Button
               variant="outline"
               size="sm"
+              nativeButton={false}
               render={<a href={paper.paperLink} target="_blank" rel="noopener noreferrer" />}
             >
               <FileText className="mr-1.5 h-3.5 w-3.5" />
@@ -128,6 +129,7 @@ export function PaperCard({
             <Button
               variant="outline"
               size="sm"
+              nativeButton={false}
               render={<a href={paper.presentationLink} target="_blank" rel="noopener noreferrer" />}
             >
               <Presentation className="mr-1.5 h-3.5 w-3.5" />
@@ -138,6 +140,7 @@ export function PaperCard({
             <Button
               variant="outline"
               size="sm"
+              nativeButton={false}
               render={<a href={paper.videoLink} target="_blank" rel="noopener noreferrer" />}
             >
               <Video className="mr-1.5 h-3.5 w-3.5" />

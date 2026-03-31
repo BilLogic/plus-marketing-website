@@ -1,5 +1,6 @@
 "use client"
 
+import { Fragment } from "react"
 import Link from "next/link"
 import { Menu, ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -38,12 +39,16 @@ export const MobileNav = ({ className }: MobileNavProps) => {
           <SheetHeader>
             <SheetTitle>
               <Link href="/" className="flex items-center gap-2">
-                <span className="relative flex size-7 items-center justify-center rounded-full bg-primary/10">
-                  <span className="absolute inset-1.5 rounded-full bg-primary" />
-                </span>
-                <span className="text-sm font-semibold tracking-tight">
-                  PLUS
-                </span>
+                <img
+                  src="/brand/plus-icon-gradient.svg"
+                  alt=""
+                  className="size-8 rounded-lg"
+                />
+                <img
+                  src="/brand/plus-logo-dark.svg"
+                  alt="PLUS"
+                  className="h-5"
+                />
               </Link>
             </SheetTitle>
           </SheetHeader>
@@ -65,11 +70,11 @@ export const MobileNav = ({ className }: MobileNavProps) => {
                       <CollapsibleContent>
                         <ul className="ml-3 flex flex-col gap-0.5 border-l border-border/50 pl-3 pt-1">
                           {item.children.map((section, sIdx) => (
-                            <li key={sIdx} className="contents">
+                            <Fragment key={sIdx}>
                               {section.heading && (
-                                <p className="px-3 pt-2 pb-1 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+                                <li className="px-3 pt-2 pb-1 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
                                   {section.heading}
-                                </p>
+                                </li>
                               )}
                               {section.items.map((child) => (
                                 <li key={child.href + child.label}>
@@ -84,7 +89,7 @@ export const MobileNav = ({ className }: MobileNavProps) => {
                                   </Link>
                                 </li>
                               ))}
-                            </li>
+                            </Fragment>
                           ))}
                         </ul>
                       </CollapsibleContent>
@@ -103,11 +108,11 @@ export const MobileNav = ({ className }: MobileNavProps) => {
           </nav>
 
           <SheetFooter>
-            <Button variant="outline" className="w-full" render={<Link href="/login" />}>
-              Log In
-            </Button>
-            <Button className="w-full rounded-full" render={<Link href="/demo" />}>
+            <Button className="w-full rounded-full" nativeButton={false} render={<Link href="/demo" />}>
               Try PLUS Demo
+            </Button>
+            <Button variant="outline" className="w-full" nativeButton={false} render={<Link href="/login" />}>
+              Log In
             </Button>
           </SheetFooter>
         </SheetContent>
