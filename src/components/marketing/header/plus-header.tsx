@@ -20,7 +20,7 @@ export function PlusHeader() {
             <img
               src="/brand/plus-icon-gradient.svg"
               alt=""
-              className="size-8 rounded-lg"
+              className="size-8"
             />
             <img
               src="/brand/plus-logo-dark.svg"

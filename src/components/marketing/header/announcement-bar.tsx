@@ -15,7 +15,7 @@ export function AnnouncementBar({
   badge,
 }: AnnouncementBarProps) {
   return (
-    <div className="relative flex items-center justify-center gap-x-4 border-b border-border/30 bg-primary/5 px-4 py-2 text-sm sm:px-6">
+    <div className="relative flex items-center justify-center gap-x-4 border-b border-border/30 bg-primary/5 px-4 py-3 text-sm sm:px-6">
       <div className="flex items-center gap-2">
         {badge && (
           <span className="shrink-0 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
