@@ -1,5 +1,17 @@
 [
   {
+    "id": "18cb7cca-4982-8069-9a0b-f14feb94282f",
+    "title": "Technology is Transforming Society, But Not Learning. The Nation Needs A Plan To Fix That.",
+    "marketingBlurb": "(e.g., News about PLUS)",
+    "summary": "(TBD: actually summary of the article)",
+    "category": "Media Coverage",
+    "publicationDate": null,
+    "author": null,
+    "featuredImage": null,
+    "externalLink": "https://www.edupexperience.com/blog/technology-is-transforming-society-not-learning-the-nation-needs-a-plan-to-fix-that/",
+    "featured": false
+  },
+  {
     "id": "19ab7cca-4982-8016-9def-f206a1bda4cd",
     "title": "CMU Researchers Help Launch Project To Improve Education",
     "marketingBlurb": null,
@@ -29,22 +41,10 @@
     "marketingBlurb": null,
     "summary": null,
     "category": null,
-    "publicationDate": "",
+    "publicationDate": null,
     "author": null,
     "featuredImage": null,
     "externalLink": null,
-    "featured": false
-  },
-  {
-    "id": "18cb7cca-4982-8069-9a0b-f14feb94282f",
-    "title": "Technology is Transforming Society, But Not Learning. The Nation Needs A Plan To Fix That.",
-    "marketingBlurb": "(e.g., News about PLUS)",
-    "summary": "(TBD: actually summary of the article)",
-    "category": "Media Coverage",
-    "publicationDate": "",
-    "author": null,
-    "featuredImage": null,
-    "externalLink": "https://www.edupexperience.com/blog/technology-is-transforming-society-not-learning-the-nation-needs-a-plan-to-fix-that/",
     "featured": false
   }
 ]
