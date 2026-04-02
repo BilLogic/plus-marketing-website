@@ -16,7 +16,8 @@ const CACHE_KEY = "team"
 const AFFILIATION_ORDER: Record<string, number> = {
   Leadership: 0,
   "PLUS Staff": 1,
-  "Current Students": 2,
+  "Independent Study Student": 2,
+  "Student Intern": 2,
   "Past Collaborators": 3,
 }
 
@@ -27,13 +28,14 @@ const parseTeamMember = (page: any): TeamMember => {
     name: getTitle(props.Name),
     affiliation: getSelect(props.Affiliation) as TeamMember["affiliation"],
     group: getSelect(props.Group) as TeamMember["group"],
-    joinedDate: getDate(props["Joined Date"]),
-    picture: getFiles(props.Picture),
-    title1: getRichText(props["Title 1"]),
-    title2: getRichText(props["Title 2"]),
+    joinedDate: getDate(props["Date Joined PLUS"]),
+    picture: getFiles(props["Profile Photo"]),
+    title1: getRichText(props["Primary Role"]),
+    title2: getRichText(props["Secondary Title"]),
     linkedIn: getUrl(props.LinkedIn),
     googleScholar: getUrl(props["Google Scholar"]),
-    bio: getRichText(props.Bio),
+    personalWebsite: getUrl(props["Personal Website"]),
+    bio: getRichText(props["Short Bio"]),
   }
 }
 

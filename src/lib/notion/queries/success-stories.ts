@@ -19,13 +19,12 @@ const parseSuccessStory = (page: any): Omit<SuccessStory, "content"> => {
     title: getTitle(props.Title),
     category: getSelect(props.Category) as SuccessStory["category"],
     summary: getRichText(props.Summary) ?? "",
-    image: getFiles(props.Image),
     coverImage: getFiles(props["Cover Image"]),
-    author: getRichText(props.Author),
-    clientPartner: getRichText(props["Client / Partner"]),
+    author: getRichText(props["Written By"]),
+    clientPartner: getRichText(props["Organization Name"]),
     quote: getRichText(props.Quote),
-    quoteAttribution: getRichText(props["Quote Attribution"]),
-    publishedDate: getDate(props["Published Date"]) ?? "",
+    quoteAttribution: getRichText(props["Who Said It?"]),
+    publishedDate: getDate(props["Date Published"]) ?? "",
   }
 }
 
@@ -46,7 +45,7 @@ export const fetchSuccessStories = async (): Promise<SuccessStory[]> => {
     const response = await notion.databases.query({
       database_id: databaseId,
       sorts: [
-        { property: "Published Date", direction: "descending" as const },
+        { property: "Date Published", direction: "descending" as const },
       ],
     })
 

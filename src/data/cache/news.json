@@ -1,18 +1,6 @@
 [
   {
-    "id": "2f7b7cca49828060841efdf1b550e213",
-    "title": "The \"5% Problem\": Why Students Don't Engage in Tutoring Enough (and How to Fix It)",
-    "marketingBlurb": null,
-    "summary": null,
-    "category": null,
-    "publicationDate": null,
-    "author": null,
-    "featuredImage": null,
-    "externalLink": null,
-    "featured": false
-  },
-  {
-    "id": "19ab7cca498280169deff206a1bda4cd",
+    "id": "19ab7cca-4982-8016-9def-f206a1bda4cd",
     "title": "CMU Researchers Help Launch Project To Improve Education",
     "marketingBlurb": null,
     "summary": null,
@@ -24,19 +12,7 @@
     "featured": true
   },
   {
-    "id": "18cb7cca498280699a0bf14feb94282f",
-    "title": "Technology is Transforming Society, But Not Learning. The Nation Needs A Plan To Fix That.",
-    "marketingBlurb": null,
-    "summary": null,
-    "category": "Media Coverage",
-    "publicationDate": null,
-    "author": null,
-    "featuredImage": null,
-    "externalLink": "https://www.edupexperience.com/blog/technology-is-transforming-society-not-learning-the-nation-needs-a-plan-to-fix-that/",
-    "featured": false
-  },
-  {
-    "id": "1a7b7cca4982804385d4f552822e5906",
+    "id": "1a7b7cca-4982-8043-85d4-f552822e5906",
     "title": "Innovative Program Expands Reach with Grant from Richard King Mellon Foundation",
     "marketingBlurb": null,
     "summary": null,
@@ -45,6 +21,30 @@
     "author": "CMU HCII",
     "featuredImage": null,
     "externalLink": "https://www.hcii.cmu.edu/news/plus-expands-reach-with-rkmellon",
+    "featured": false
+  },
+  {
+    "id": "2f7b7cca-4982-8060-841e-fdf1b550e213",
+    "title": "The “5% Problem”: Why Students Don’t Engage in Tutoring Enough (and How to Fix It)",
+    "marketingBlurb": null,
+    "summary": null,
+    "category": null,
+    "publicationDate": "",
+    "author": null,
+    "featuredImage": null,
+    "externalLink": null,
+    "featured": false
+  },
+  {
+    "id": "18cb7cca-4982-8069-9a0b-f14feb94282f",
+    "title": "Technology is Transforming Society, But Not Learning. The Nation Needs A Plan To Fix That.",
+    "marketingBlurb": "(e.g., News about PLUS)",
+    "summary": "(TBD: actually summary of the article)",
+    "category": "Media Coverage",
+    "publicationDate": "",
+    "author": null,
+    "featuredImage": null,
+    "externalLink": "https://www.edupexperience.com/blog/technology-is-transforming-society-not-learning-the-nation-needs-a-plan-to-fix-that/",
     "featured": false
   }
 ]

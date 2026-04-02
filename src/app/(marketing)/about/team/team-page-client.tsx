@@ -11,9 +11,19 @@ import { TeamMemberCard } from "./team-member-card"
 const AFFILIATIONS: TeamMember["affiliation"][] = [
   "Leadership",
   "PLUS Staff",
-  "Current Students",
+  "Independent Study Student",
+  "Student Intern",
   "Past Collaborators",
 ]
+
+// Display labels for the grouped sections on the page
+const AFFILIATION_DISPLAY_LABELS: Partial<Record<TeamMember["affiliation"], string>> = {
+  "Independent Study Student": "Students",
+  "Student Intern": "Students",
+}
+
+const getDisplayLabel = (aff: TeamMember["affiliation"]) =>
+  AFFILIATION_DISPLAY_LABELS[aff] ?? aff
 
 const GROUPS: TeamMember["group"][] = [
   "Researcher",
@@ -106,8 +116,11 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
   const grouped = useMemo(() => {
     const map = new Map<string, TeamMember[]>()
     for (const aff of AFFILIATIONS) {
+      const label = getDisplayLabel(aff)
       const items = filtered.filter((m) => m.affiliation === aff)
-      if (items.length) map.set(aff, items)
+      if (!items.length) continue
+      const existing = map.get(label) ?? []
+      map.set(label, [...existing, ...items])
     }
     return map
   }, [filtered])

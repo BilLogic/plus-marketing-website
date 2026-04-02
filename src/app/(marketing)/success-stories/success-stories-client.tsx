@@ -70,10 +70,10 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
               key={story.id}
               className="flex flex-col rounded-lg border border-border bg-card p-6 transition-shadow hover:shadow-md"
             >
-              {story.image && (
+              {story.coverImage && (
                 <div className="mb-4 overflow-hidden rounded-md">
                   <img
-                    src={story.image}
+                    src={story.coverImage}
                     alt=""
                     className="aspect-video w-full object-cover"
                   />

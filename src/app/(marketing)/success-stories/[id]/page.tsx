@@ -33,10 +33,10 @@ export default async function SuccessStoryPage({
       </Button>
 
       <article className="space-y-6">
-        {story.image && (
+        {story.coverImage && (
           <div className="overflow-hidden rounded-lg">
             <img
-              src={story.image}
+              src={story.coverImage}
               alt=""
               className="aspect-video w-full object-cover"
             />

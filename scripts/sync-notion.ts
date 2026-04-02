@@ -65,6 +65,98 @@ function getFiles(prop: any): string | null {
   return file.file?.url ?? file.external?.url ?? null
 }
 
+// Blocks-to-markdown converter (mirrors src/lib/notion/utils/blocks-to-markdown.ts)
+function richTextToMarkdown(richText: any[]): string {
+  if (!richText?.length) return ""
+  return richText
+    .map((t: any) => {
+      let text = t.plain_text ?? ""
+      const ann = t.annotations ?? {}
+      if (ann.bold) text = `**${text}**`
+      if (ann.italic) text = `*${text}*`
+      if (ann.code) text = `\`${text}\``
+      if (ann.strikethrough) text = `~~${text}~~`
+      if (t.href) text = `[${text}](${t.href})`
+      return text
+    })
+    .join("")
+}
+
+function blockToMarkdown(block: any): string {
+  const type = block.type
+  const data = block[type]
+  switch (type) {
+    case "paragraph":
+      return richTextToMarkdown(data?.rich_text) + "\n"
+    case "heading_1":
+      return `# ${richTextToMarkdown(data?.rich_text)}\n`
+    case "heading_2":
+      return `## ${richTextToMarkdown(data?.rich_text)}\n`
+    case "heading_3":
+      return `### ${richTextToMarkdown(data?.rich_text)}\n`
+    case "bulleted_list_item":
+      return `- ${richTextToMarkdown(data?.rich_text)}\n`
+    case "numbered_list_item":
+      return `1. ${richTextToMarkdown(data?.rich_text)}\n`
+    case "to_do": {
+      const checked = data?.checked ? "x" : " "
+      return `- [${checked}] ${richTextToMarkdown(data?.rich_text)}\n`
+    }
+    case "toggle":
+      return `<details><summary>${richTextToMarkdown(data?.rich_text)}</summary></details>\n`
+    case "quote":
+      return `> ${richTextToMarkdown(data?.rich_text)}\n`
+    case "callout": {
+      const icon = data?.icon?.emoji ?? ""
+      return `> ${icon} ${richTextToMarkdown(data?.rich_text)}\n`
+    }
+    case "divider":
+      return "---\n"
+    case "code": {
+      const lang = data?.language ?? ""
+      return `\`\`\`${lang}\n${richTextToMarkdown(data?.rich_text)}\n\`\`\`\n`
+    }
+    case "image": {
+      const url = data?.file?.url ?? data?.external?.url ?? ""
+      const caption = richTextToMarkdown(data?.caption)
+      return `![${caption}](${url})\n`
+    }
+    case "video": {
+      const videoUrl = data?.file?.url ?? data?.external?.url ?? ""
+      return `[Video](${videoUrl})\n`
+    }
+    case "bookmark":
+      return `[${data?.url ?? "Link"}](${data?.url ?? ""})\n`
+    case "embed":
+      return `[Embed](${data?.url ?? ""})\n`
+    default:
+      return ""
+  }
+}
+
+function blocksToMarkdown(blocks: any[]): string {
+  return blocks.map(blockToMarkdown).join("\n").trim()
+}
+
+async function fetchPageContent(pageId: string): Promise<string | null> {
+  try {
+    const blocks: any[] = []
+    let cursor: string | undefined
+    do {
+      const response = await notion.blocks.children.list({
+        block_id: pageId,
+        start_cursor: cursor,
+      })
+      blocks.push(...response.results)
+      cursor = response.has_more ? response.next_cursor! : undefined
+    } while (cursor)
+    if (blocks.length === 0) return null
+    return blocksToMarkdown(blocks)
+  } catch {
+    return null
+  }
+}
+
 async function syncTeam() {
   const dbId = process.env.NOTION_TEAM_DB_ID || "134b7cca4982801da91dd678e79d6e27"
   console.log("Syncing team members...")
@@ -76,13 +168,14 @@ async function syncTeam() {
       name: getTitle(props.Name),
       affiliation: getSelect(props.Affiliation),
       group: getSelect(props.Group),
-      joinedDate: getDate(props["Joined Date"]),
-      picture: getFiles(props.Picture),
-      title1: getRichText(props["Title 1"]),
-      title2: getRichText(props["Title 2"]),
+      joinedDate: getDate(props["Date Joined PLUS"]),
+      picture: getFiles(props["Profile Photo"]),
+      title1: getRichText(props["Primary Role"]),
+      title2: getRichText(props["Secondary Title"]),
       linkedIn: getUrl(props.LinkedIn),
       googleScholar: getUrl(props["Google Scholar"]),
-      bio: getRichText(props.Bio),
+      personalWebsite: getUrl(props["Personal Website"]),
+      bio: getRichText(props["Short Bio"]),
     }
   })
   fs.writeFileSync(path.join(CACHE_DIR, "team.json"), JSON.stringify(members, null, 2))
@@ -98,14 +191,14 @@ async function syncNews() {
     return {
       id: page.id,
       title: getTitle(props.Title),
-      marketingBlurb: getRichText(props["Marketing Blurb"]),
+      marketingBlurb: getRichText(props["One-Line Teaser"]),
       summary: getRichText(props.Summary),
       category: getSelect(props.Category),
-      publicationDate: getDate(props["Publication Date"]),
+      publicationDate: getDate(props["Date Published"]),
       author: getRichText(props.Author),
-      featuredImage: getFiles(props["Featured Image"]),
-      externalLink: getUrl(props["External Link"]),
-      featured: getCheckbox(props.Featured),
+      featuredImage: getFiles(props["Cover Image"]),
+      externalLink: getUrl(props["Link to Article or Source"]),
+      featured: getCheckbox(props["Priority / Featured?"]),
     }
   })
   fs.writeFileSync(path.join(CACHE_DIR, "news.json"), JSON.stringify(items, null, 2))
@@ -126,13 +219,13 @@ async function syncResearch() {
       id: page.id,
       title: getTitle(props.Title),
       authors: getMultiSelect(props.Authors),
-      publishDate: getDate(props["Publish Date"]),
-      venue: getRichText(props.Venue),
+      publishDate: getDate(props["Date Published"]),
+      venue: getRichText(props["Conference or Journal"]),
       abstract: getRichText(props.Abstract),
-      shortDescription: getRichText(props["Short Description"]),
-      paperLink: getUrl(props["Paper Link"]),
-      presentationLink: getUrl(props["Presentation Link"]),
-      videoLink: getUrl(props["Video Link"]),
+      shortDescription: getRichText(props["Website Summary"]),
+      paperLink: getUrl(props["Link to Paper"]),
+      presentationLink: getUrl(props["Link to Slides or Poster"]),
+      videoLink: getUrl(props["Link to Video"]),
     }
   })
   fs.writeFileSync(path.join(CACHE_DIR, "research.json"), JSON.stringify(papers, null, 2))
@@ -147,20 +240,24 @@ async function syncSuccessStories() {
   }
   console.log("Syncing success stories...")
   const pages = await queryDatabase(dbId)
-  const stories = pages.map((page: any) => {
-    const props = page.properties
-    return {
+  const stories = []
+  for (const page of pages) {
+    const props = (page as any).properties
+    const content = await fetchPageContent(page.id)
+    stories.push({
       id: page.id,
       title: getTitle(props.Title),
       category: getSelect(props.Category),
       summary: getRichText(props.Summary),
-      fullContent: getRichText(props["Full Content"]),
-      image: getFiles(props.Image),
+      content,
+      coverImage: getFiles(props["Cover Image"]),
+      author: getRichText(props["Written By"]),
+      clientPartner: getRichText(props["Organization Name"]),
       quote: getRichText(props.Quote),
-      quoteAttribution: getRichText(props["Quote Attribution"]),
-      publishedDate: getDate(props["Published Date"]),
-    }
-  })
+      quoteAttribution: getRichText(props["Who Said It?"]),
+      publishedDate: getDate(props["Date Published"]),
+    })
+  }
   fs.writeFileSync(path.join(CACHE_DIR, "success-stories.json"), JSON.stringify(stories, null, 2))
   console.log(`  Synced ${stories.length} success stories`)
 }
@@ -169,12 +266,36 @@ async function main() {
   console.log("Starting Notion sync...")
   console.log("")
 
-  await syncTeam()
-  await syncNews()
-  await syncResearch()
-  await syncSuccessStories()
+  const results: Record<string, boolean> = {}
+
+  try { await syncTeam(); results.team = true } catch (e) {
+    console.error("Team sync failed:", e)
+    results.team = false
+  }
+
+  try { await syncNews(); results.news = true } catch (e) {
+    console.error("News sync failed:", e)
+    results.news = false
+  }
+
+  try { await syncResearch(); results.research = true } catch (e) {
+    console.error("Research sync failed:", e)
+    results.research = false
+  }
+
+  try { await syncSuccessStories(); results.stories = true } catch (e) {
+    console.error("Success stories sync failed:", e)
+    results.stories = false
+  }
 
   console.log("")
+
+  const failed = Object.entries(results).filter(([, ok]) => !ok).map(([name]) => name)
+  if (failed.length > 0) {
+    console.error(`Partial sync failure: ${failed.join(", ")}`)
+    process.exit(1)
+  }
+
   console.log("Sync complete!")
 }
 

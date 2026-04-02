@@ -19,14 +19,14 @@ const parseNewsItem = (page: any): NewsItem => {
   return {
     id: page.id,
     title: getTitle(props.Title),
-    marketingBlurb: getRichText(props["Marketing Blurb"]),
+    marketingBlurb: getRichText(props["One-Line Teaser"]),
     summary: getRichText(props.Summary),
     category: getSelect(props.Category) as NewsItem["category"],
-    publicationDate: getDate(props["Publication Date"]) ?? "",
+    publicationDate: getDate(props["Date Published"]) ?? "",
     author: getRichText(props.Author),
-    featuredImage: getFiles(props["Featured Image"]),
-    externalLink: getUrl(props["External Link"]),
-    featured: getCheckbox(props.Featured),
+    featuredImage: getFiles(props["Cover Image"]),
+    externalLink: getUrl(props["Link to Article or Source"]),
+    featured: getCheckbox(props["Priority / Featured?"]),
   }
 }
 
@@ -43,7 +43,7 @@ export const fetchNews = async (
 
     const filter = options?.featured !== undefined
       ? {
-          property: "Featured",
+          property: "Priority / Featured?",
           checkbox: { equals: options.featured },
         }
       : undefined
@@ -52,7 +52,7 @@ export const fetchNews = async (
       database_id: DATABASE_ID,
       filter,
       sorts: [
-        { property: "Publication Date", direction: "descending" as const },
+        { property: "Date Published", direction: "descending" as const },
       ],
     })
 

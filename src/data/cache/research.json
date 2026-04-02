@@ -1,23 +1,7 @@
 [
   {
-    "id": "csv-1",
-    "title": "Intelligent Support for Practice Goal Setting to Enhance Learning",
-    "authors": [
-      "Conrad Borchers",
-      "Kenneth R. Koedinger",
-      "Vincent Aleven"
-    ],
-    "publishDate": "7/21/2025",
-    "venue": "26th International Conference on Artificial Intelligence in Education",
-    "abstract": "Setting practice goals, which helps students regulate their effort toward achieving engagement and mastery, can enhance the benefits of active learning. However, traditional goal-setting approaches, such as homework contingency contracts, often lack frequent feedback and require substantial human intervention. The presented research investigates integrating intelligent and scalable goal-setting support within active learning environments. In recent research, we have evaluated the impact of goal-setting contracts, performance feedback, and scalable goal support with rewards on student effort and learning. The proposed research aims to study student achievement trajectories related to achievement and the distinct impact of adaptive goal feedback. To that end, we propose developing an adaptive goal-setting dashboard that automates feedback and recommendations to support students in setting and refining their goals. Findings from a 12-week study with 110 middle school students in a hybrid tutoring program show that data-supported goal setting led to about a 25% increase in weekly practice time and about a 40% increase in skills mastered per week. These results indicate that intelligent goal setting can enhance engagement and learning while minimizing teacher workload. This research contributes to practical advancements in AI-assisted active learning and theoretical insights into self-regulatory processes related to student effort in active learning.",
-    "shortDescription": "This doctoral consortium presentation proposes research on intelligent, data-driven goal-setting to enhance engagement and self-regulation in AI-supported learning. By integrating adaptive feedback and goal recommendations into hybrid tutoring environments, the work aims to advance theory on effort calibration and self-regulated learning while informing the design of scalable, low-overhead supports for active learning.",
-    "paperLink": "https://cborchers.com/pdf/2025-aied-Borchers-DC.pdf",
-    "presentationLink": null,
-    "videoLink": null
-  },
-  {
-    "id": "csv-2",
-    "title": "Improving Open‑Response Assessment with LearnLM",
+    "id": "334b7cca-4982-818a-b120-fd929c3ead63",
+    "title": "Improving Open-Response Assessment with LearnLM",
     "authors": [
       "Danielle R. Thomas",
       "Conrad Borchers",
@@ -29,33 +13,32 @@
       "Erin Gatz",
       "Kenneth Holstein"
     ],
-    "publishDate": "7/21/2025",
-    "venue": "AIED 2025 (International Conference on Artificial Intelligence in Education)",
-    "abstract": "Automated scoring of open responses presents challenges in subjectivity and language nuance. This paper compares off‑the‑shelf LLMs (GPT‑4‑turbo, Gemini‑Pro, GPT‑4o) against LearnLM, a fine‑tuned tutoring‑oriented model, on assessing professional development responses by adult tutors. LearnLM outperforms the others, especially in predicting tutor-student reply quality. The authors propose a predictive‑validity validation method (linking open‑ and multiple‑choice scores), offer an open dataset, human rubrics, and prompts.",
-    "shortDescription": "Demonstrates LearnLM as a more accurate tool than general LLMs for scoring open‑ended tutor responses, introduces a predictive‑validity validation measure, and contributes open data and resources for future educational assessment AI research.",
+    "publishDate": "2025-07-21",
+    "venue": "AIED 2025",
+    "abstract": "Automated scoring of open responses presents challenges in subjectivity and language nuance. This paper compares off-the-shelf LLMs (GPT-4-turbo, Gemini-Pro, GPT-4o) against LearnLM, a fine-tuned tutoring-oriented model, on assessing professional development responses by adult tutors. LearnLM outperforms the others, especially in predicting tutor-student reply quality. The authors propose a predictive-validity validation method (linking open- and multiple-choice scores), offer an open dataset, human rubrics, and prompts.",
+    "shortDescription": "Demonstrates LearnLM as a more accurate tool than general LLMs for scoring open-ended tutor responses.",
     "paperLink": "https://link.springer.com/chapter/10.1007/978-3-031-98462-4_28",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-3",
-    "title": "Engagement and Learning Benefits of Goal Setting with Rewards in Human-AI Tutoring",
+    "id": "334b7cca-4982-8147-b347-cd0b11e63708",
+    "title": "Intelligent Support for Practice Goal Setting to Enhance Learning",
     "authors": [
       "Conrad Borchers",
-      "Alex Houk",
-      "Vincent Aleven",
-      "Kenneth R. Koedinger"
+      "Kenneth R. Koedinger",
+      "Vincent Aleven"
     ],
-    "publishDate": "7/20/2025",
+    "publishDate": "2025-07-21",
     "venue": "26th International Conference on Artificial Intelligence in Education",
-    "abstract": "Active learning promises improved educational outcomes yet depends on students’ sustained motivation to engage in practice. Goal setting can enhance learner engagement. However, past evidence of the effectiveness of setting goals tends to be limited to non-digital learning settings and does not scale well as it requires active teacher or parent involvement. We study goal setting in a hybrid human-AI tutoring context, where students engage with personalized learning software with feedback and hints while being supported by a human tutor. Each student set a weekly goal (e.g., how much time or how many skills to master) and was rewarded for goal achievement, while human tutors regularly checked in about goal progress. We investigate whether this intervention improves student engagement and skill mastery. We observed 110 middle school students in a hybrid tutoring program over 12 weeks, with goal-setting support integrated into the program after six weeks. Using a quasi-experimental interrupted time series model, we estimated the intervention’s impact on engagement and learning. Weekly practice time increased, on average, by about 25% after introducing goal setting, and skills mastered per week increased by about 40%. This effect remained stable over time. These findings suggest that goal-setting support can improve the quantity and quality of practice in hybrid tutoring contexts with minimal added teacher workload. The present study advances the understanding of strategies that can increase student engagement with personalized learning systems in a low-cost and scalable manner, improving the learning benefits of such systems.",
-    "shortDescription": "In a 12‑week hybrid human‑AI tutoring program, 110 middle‑schoolers set weekly goals and earned small rewards for meeting them, with tutors checking progress. Using an interrupted time‑series model, weekly practice time rose ~25% and skills mastered per week rose ~40% after goal setting, with effects remaining stable. The results suggest a low‑cost, scalable way to boost both engagement and learning in personalized tutoring.",
-    "paperLink": "https://cborchers.com/pdf/2025-aied-Borchers-Goal_Setting_Hybrid_Tutoring.pdf",
+    "abstract": "Setting practice goals, which helps students regulate their effort toward achieving engagement and mastery, can enhance the benefits of active learning. However, traditional goal-setting approaches, such as homework contingency contracts, often lack frequent feedback and require substantial human intervention. The presented research investigates integrating intelligent and scalable goal-setting support within active learning environments. In recent research, we have evaluated the impact of goal-setting contracts, performance feedback, and scalable goal support with rewards on student effort and learning. The proposed research aims to study student achievement trajectories related to achievement and the distinct impact of adaptive goal feedback. To that end, we propose developing an adaptive goal-setting dashboard that automates feedback and recommendations to support students in setting and refining their goals. Findings from a 12-week study with 110 middle school students in a hybrid tutoring program show that data-supported goal setting led to about a 25% increase in weekly practice time and about a 40% increase in skills mastered per week. These results indicate that intelligent goal setting can enhance engagement and learning while minimizing teacher workload. This research contributes to practical advancements in AI-assisted active learning and theoretical insights into self-regulatory processes related to student effort in active learning.",
+    "shortDescription": "This doctoral consortium presentation proposes research on intelligent, data-driven goal-setting to enhance engagement and self-regulation in AI-supported learning. By integrating adaptive feedback and goal recommendations into hybrid tutoring environments, the work aims to advance theory on effort calibration and self-regulated learning while informing the design of scalable, low-overhead supports for active learning.",
+    "paperLink": "https://cborchers.com/pdf/2025-aied-Borchers-DC.pdf",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-4",
+    "id": "334b7cca-4982-8137-abd9-cef6211ee0a1",
     "title": "Human Tutoring Improves the Impact of AI Tutor Use on Learning Outcomes",
     "authors": [
       "Ashish Gurung",
@@ -69,16 +52,33 @@
       "Vincent Aleven",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "7/20/2025",
-    "venue": "AIED 2025 (International Conference on Artificial Intelligence in Education)",
-    "abstract": "AI tutoring systems are cost‑effective but vary in adaptability. This paper analyzes a year‑long virtual tutoring rollout: comparing 356 seventh graders who received hybrid human‑AI tutoring against 317 from the prior year who only received AI‑only tutoring. Hybrid tutoring resulted in 0.36 grade‑level advantage. Moreover, students who used AI more (per SD increase) saw larger state test gains in the hybrid group (.28 SD) than AI‑only (.06 SD). Findings suggest human tutors amplify the effectiveness of AI tutor usage, especially with higher time‑on‑task.",
-    "shortDescription": "Through quasi‑experimental analysis, demonstrates that human‑AI hybrid tutoring boosts learning more than AI alone; in particular, human tutors help students better capitalize on AI tutor time, yielding larger academic gains.",
+    "publishDate": "2025-07-20",
+    "venue": "AIED 2025",
+    "abstract": "AI tutoring systems are cost-effective but vary in adaptability. This paper analyzes a year-long virtual tutoring rollout: comparing 356 seventh graders who received hybrid human-AI tutoring against 317 from the prior year who only received AI-only tutoring. Hybrid tutoring resulted in 0.36 grade-level advantage. Moreover, students who used AI more (per SD increase) saw larger state test gains in the hybrid group (.28 SD) than AI-only (.06 SD). Findings suggest human tutors amplify the effectiveness of AI tutor usage, especially with higher time-on-task.",
+    "shortDescription": "Human-AI hybrid tutoring boosts learning more than AI alone; human tutors help students better capitalize on AI tutor time.",
     "paperLink": "https://link.springer.com/chapter/10.1007/978-3-031-98459-4_28",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-5",
+    "id": "334b7cca-4982-8140-a620-f559d75a3b8e",
+    "title": "Engagement and Learning Benefits of Goal Setting with Rewards in Human-AI Tutoring",
+    "authors": [
+      "Conrad Borchers",
+      "Alex Houk",
+      "Vincent Aleven",
+      "Kenneth R. Koedinger"
+    ],
+    "publishDate": "2025-07-20",
+    "venue": "26th International Conference on Artificial Intelligence in Education",
+    "abstract": "Active learning promises improved educational outcomes yet depends on students' sustained motivation to engage in practice. Goal setting can enhance learner engagement. However, past evidence of the effectiveness of setting goals tends to be limited to non-digital learning settings and does not scale well as it requires active teacher or parent involvement. We study goal setting in a hybrid human-AI tutoring context, where students engage with personalized learning software with feedback and hints while being supported by a human tutor. Each student set a weekly goal and was rewarded for goal achievement, while human tutors regularly checked in about goal progress. We investigate whether this intervention improves student engagement and skill mastery. We observed 110 middle school students in a hybrid tutoring program over 12 weeks, with goal-setting support integrated into the program after six weeks. Using a quasi-experimental interrupted time series model, we estimated the intervention's impact on engagement and learning. Weekly practice time increased by about 25% after introducing goal setting, and skills mastered per week increased by about 40%. This effect remained stable over time. These findings suggest that goal-setting support can improve the quantity and quality of practice in hybrid tutoring contexts with minimal added teacher workload.",
+    "shortDescription": "Weekly practice time rose ~25% and skills mastered per week rose ~40% after goal setting in a 12-week hybrid human-AI tutoring program.",
+    "paperLink": "https://cborchers.com/pdf/2025-aied-Borchers-Goal_Setting_Hybrid_Tutoring.pdf",
+    "presentationLink": null,
+    "videoLink": null
+  },
+  {
+    "id": "334b7cca-4982-8156-927b-e6878a3718ba",
     "title": "VTutor for high-impact tutoring at scale: Managing engagement and real-time multi-screen monitoring with P2P connections.",
     "authors": [
       "Eason Chen",
@@ -90,17 +90,17 @@
       "Jionghao Lin",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "7/17/2025",
-    "venue": "In Proceedings of the Twelth ACM Conference of Learning @ Scale (L@S ‘25).",
-    "abstract": "Hybrid tutoring, where a human tutor supports multiple students in learning with educational technology, is an increasingly common application to deliver high-impact tutoring at scale. However, past hybrid tutoring applications are limited in guiding tutor attention to students that require support. Specifically, existing conferencing tools, commonly used in hybrid tutoring, do not allow tutors to monitor multiple students' screens while directly communicating and attending to multiple students simultaneously. To address this issue, this paper introduces VTutor, a web-based platform leveraging peer-to-peer screen sharing and virtual avatars to deliver real-time, context-aware tutoring feedback at scale. By integrating a multi-student monitoring dashboard with AI-powered avatar prompts, VTutor empowers a single educator or tutor to rapidly detect off-task or struggling students and intervene proactively, thus enhancing the benefits of one-on-one interactions in classroom contexts with several students. Drawing on insight from the learning sciences and past research on animated pedagogical agents, we demonstrate how stylized avatars can potentially sustain student engagement while accommodating varying infrastructure constraints. Finally, we address open questions on refining large-scale, AI-driven tutoring solutions for improved learner outcomes, and how VTutor could help interpret real-time learner interactions to support remote tutors at scale.",
-    "shortDescription": "VTutor is a web-based platform designed to enhance hybrid tutoring by enabling a single tutor to monitor and support multiple students in real time. It combines peer-to-peer screen sharing with AI-powered virtual avatars to detect off-task or struggling students and deliver timely, context-aware feedback. VTutor addresses the limitations of existing conferencing tools by integrating a multi-student dashboard and leveraging animated agents to sustain engagement. The platform aims to scale one-on-one tutoring benefits in classroom and remote settings, while raising new questions about AI-supported tutoring and real-time learner interpretation.",
+    "publishDate": "2025-07-17",
+    "venue": "In Proceedings of the Twelth ACM Conference of Learning @ Scale (L@S '25).",
+    "abstract": "Hybrid tutoring, where a human tutor supports multiple students in learning with educational technology, is an increasingly common application to deliver high-impact tutoring at scale. However, past hybrid tutoring applications are limited in guiding tutor attention to students that require support. Specifically, existing conferencing tools, commonly used in hybrid tutoring, do not allow tutors to monitor multiple students' screens while directly communicating and attending to multiple students simultaneously. To address this issue, this paper introduces VTutor, a web-based platform leveraging peer-to-peer screen sharing and virtual avatars to deliver real-time, context-aware tutoring feedback at scale. By integrating a multi-student monitoring dashboard with AI-powered avatar prompts, VTutor empowers a single educator or tutor to rapidly detect off-task or struggling students and intervene proactively, thus enhancing the benefits of one-on-one interactions in classroom contexts with several students.",
+    "shortDescription": "VTutor is a web-based platform designed to enhance hybrid tutoring by enabling a single tutor to monitor and support multiple students in real time. It combines peer-to-peer screen sharing with AI-powered virtual avatars to detect off-task or struggling students and deliver timely, context-aware feedback.",
     "paperLink": "https://arxiv.org/pdf/2505.07736",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-6",
-    "title": "Starting Seatwork Earlier as a Valid Measure of",
+    "id": "334b7cca-4982-811b-9079-e792698e34b8",
+    "title": "Starting Seatwork Earlier as a Valid Measure of Engagement",
     "authors": [
       "Ashish Gurung",
       "Jionghao Lin",
@@ -110,33 +110,33 @@
       "Vincent Aleven",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "7/15/2025",
-    "venue": "EDM 2025 (18th International Conference on Educational Data Mining)",
-    "abstract": "Log‑based detectors for self‑regulation and engagement usually focus on in‑task behaviors. This paper extends session‑level features, such as seatwork start/stop times, to classroom engagement. Using year‑long data from Cognitive Tutor (grades 8–12, N = 222) and i‑Ready for grade 7 (N = 818), the authors show that early seatwork start is a stable (G > .75) and predictive indicator of learning, beyond traditional time‑on‑task or gaming detectors. Measures generalize across platforms and improve state test score predictions.",
-    "shortDescription": "Proposes a novel, motivation-related engagement indicator (the decision to begin seatwork earlier), validates it across systems and shows it reliably predicts math learning outcomes beyond existing log‑based engagement features.",
+    "publishDate": "2025-07-15",
+    "venue": "EDM 2025",
+    "abstract": "Log‑based detectors for self‑regulation and engagement usually focus on in‑task behaviors. This paper extends session‑level features, such as seatwork start/stop times, to classroom engagement. Using year‑long data from Cognitive Tutor (grades 8–12, N = 222) and i‑Ready for grade 7 (N = 818), the authors show that early seatwork start is a stable (G > .75) and predictive indicator of learning, beyond traditional time‑on‑task or gaming detectors. Measures generalize across platforms and improve state test score predictions.",
+    "shortDescription": "Proposes a novel engagement indicator (decision to begin seatwork earlier), validates it across systems and shows it reliably predicts math learning outcomes.",
     "paperLink": "https://educationaldatamining.org/EDM2025/proceedings/2025.EDM.long-papers.22/2025.EDM.long-papers.22.pdf",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-7",
-    "title": "Exploring the Benefit of Customizing Feedback Interventions for Educators and Students With Offline Contextual Multi‑Armed Bandits",
+    "id": "334b7cca-4982-81f3-8d9b-fcedd801b0a8",
+    "title": "Exploring the Benefit of Customizing Feedback Interventions for Educators and Students",
     "authors": [
       "Joy Yun",
       "Allen Nie",
       "Emma Brunskill",
       "Dora Demszky"
     ],
-    "publishDate": "3/3/2025",
-    "venue": "LAK 2025 (15th International Learning Analytics and Knowledge Conference)",
+    "publishDate": "2025-03-03",
+    "venue": "LAK 2025",
     "abstract": "Automated feedback to teachers powered by natural language processing has been successful at improving instruction... However, existing one‑size‑fits‑all feedback interventions may not be equally effective for all educators and students. This paper investigates whether customized feedback—delivered via contextual multi‑armed bandit models—can improve session outcomes when applied during SAT Bootcamp tutoring sessions.",
-    "shortDescription": "Pilot study with four‑week SAT math tutoring groups (n≈ 10 students/tutor) evaluating tailored tutor feedback (including quotes, talk‑time data, and GPT‑generated suggestions) against a generic approach. Using contextual bandits to personalize feedback delivery led to greater tutor engagement and improved student talk time metrics over time.",
+    "shortDescription": "Using contextual bandits to personalize tutor feedback delivery led to greater tutor engagement and improved student talk time metrics.",
     "paperLink": "https://dl.acm.org/doi/pdf/10.1145/3706468.3706551",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-8",
+    "id": "334b7cca-4982-8197-8fd7-c64f8ae38a87",
     "title": "Predicting Long-Term Student Outcomes from Short-Term EdTech Log Data",
     "authors": [
       "Ge Gao",
@@ -147,16 +147,16 @@
       "Stephen Fancsali",
       "Emma Brunskill"
     ],
-    "publishDate": "1/15/2025",
+    "publishDate": "2025-01-15",
     "venue": "15th International Learning Analytics and Knowledge Conference (LAK2025)",
-    "abstract": "Educational stakeholders are often particularly interested in sparse, delayed student outcomes, like end-of-year statewide exams. The rare occurrence of such assessments makes it harder to identify students likely to fail such assessments, as well as making it slow for researchers and educators to be able to assess the effectiveness of particular educational tools. Prior work has primarily focused on using logs from students full usage (e.g. year-long) of an educational product to predict outcomes, or considered predictive accuracy using a few minutes to predict outcomes after a short (e.g. 1 hour) session. In contrast, we investigate machine learning predictors using students' logs during their first few hours of usage can provide useful predictive insight into those students' end-of-school year external assessment. We do this on three diverse datasets: from students in Uganda using a literacy game product, and from students in the US using two mathematics intelligent tutoring systems. We consider various measures of the accuracy of the resulting predictors, including its ability to identify students at different parts along the assessment performance distribution. Our findings suggest that short-term log usage data, from 2-5 hours, can be used to provide valuable signal about students' long-term external performance.",
+    "abstract": "Educational stakeholders are often particularly interested in sparse, delayed student outcomes, like end-of-year statewide exams. The rare occurrence of such assessments makes it harder to identify students likely to fail such assessments, as well as making it slow for researchers and educators to be able to assess the effectiveness of particular educational tools. Prior work has primarily focused on using logs from students full usage of an educational product to predict outcomes, or considered predictive accuracy using a few minutes to predict outcomes after a short session. In contrast, we investigate machine learning predictors using students' logs during their first few hours of usage can provide useful predictive insight into those students' end-of-school year external assessment. We do this on three diverse datasets: from students in Uganda using a literacy game product, and from students in the US using two mathematics intelligent tutoring systems. Our findings suggest that short-term log usage data, from 2-5 hours, can be used to provide valuable signal about students' long-term external performance.",
     "shortDescription": "This study investigates the potential of using short-term interaction logs from educational technology to predict long-term student outcomes, such as end-of-year assessments. Analyzing data from diverse educational contexts, the findings suggest that 2-5 hours of initial usage can provide valuable insights into students' future performance.",
     "paperLink": "https://arxiv.org/pdf/2412.15473",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-9",
+    "id": "334b7cca-4982-8173-a78f-e1fc1210c9ad",
     "title": "Do Tutors Learn from Equity Training and Can Generative AI Assess It?",
     "authors": [
       "Danielle R. Thomas",
@@ -168,17 +168,17 @@
       "Erin Gatz",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "12/15/2024",
-    "venue": "15th International Learning Analytics and Knowledge Conference (LAK2025)",
+    "publishDate": "2024-12-15",
+    "venue": "LAK 2025",
     "abstract": "Equity is a core concern of learning analytics. However, applications that teach and assess equity skills, particularly at scale are lacking, often due to barriers in evaluating language. Advances in generative AI via large language models (LLMs) are being used in a wide range of applications, with this present work assessing its use in the equity domain. We evaluate tutor performance within an online lesson on enhancing tutors' skills when responding to students in potentially inequitable situations. We apply a mixed-method approach to analyze the performance of 81 undergraduate remote tutors. We find marginally significant learning gains with increases in tutors' self-reported confidence in their knowledge in responding to middle school students experiencing possible inequities from pretest to posttest. Both GPT-4o and GPT-4-turbo demonstrate proficiency in assessing tutors ability to predict and explain the best approach. Balancing performance, efficiency, and cost, we determine that few-shot learning using GPT-4o is the preferred model. This work makes available a dataset of lesson log data, tutor responses, rubrics for human annotation, and generative AI prompts. Future work involves leveling the difficulty among scenarios and enhancing LLM prompts for large-scale grading and assessment.",
-    "shortDescription": "This research evaluates the effectiveness of equity training for tutors and explores the use of generative AI models, like GPT-4, in assessing tutors' responses to equity-related scenarios. The study found marginally significant learning gains and demonstrated that AI models can proficiently evaluate tutors' abilities to predict and explain appropriate approaches in equity situations.",
+    "shortDescription": "Evaluates equity training for tutors and explores using GPT-4 to assess tutors' responses to equity-related scenarios.",
     "paperLink": "https://arxiv.org/abs/2412.11255",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-10",
-    "title": "Does Multiple Choice Have a Future in the Age of Generative AI? A Posttest-only RCT",
+    "id": "334b7cca-4982-8182-a65c-fcda611f3660",
+    "title": "Does Multiple Choice Have a Future in the Age of Generative AI?",
     "authors": [
       "Danielle R. Thomas",
       "Conrad Borchers",
@@ -189,16 +189,16 @@
       "Erin Gatz",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "12/13/2024",
-    "venue": "15th International Learning Analytics and Knowledge Conference (LAK2025)",
+    "publishDate": "2024-12-13",
+    "venue": "LAK 2025",
     "abstract": "The role of multiple-choice questions (MCQs) as effective learning tools has been debated in past research. While MCQs are widely used due to their ease in grading, open response questions are increasingly used for instruction, given advances in large language models (LLMs) for automated grading. This study evaluates MCQs effectiveness relative to open-response questions, both individually and in combination, on learning. These activities are embedded within six tutor lessons on advocacy. Using a posttest-only randomized control design, we compare the performance of 234 tutors (790 lesson completions) across three conditions: MCQ only, open response only, and a combination of both. We find no significant learning differences across conditions at posttest, but tutors in the MCQ condition took significantly less time to complete instruction. These findings suggest that MCQs are as effective, and more efficient, than open response tasks for learning when practice time is limited. To further enhance efficiency, we autograded open responses using GPT-4o and GPT-4-turbo. GPT models demonstrate proficiency for purposes of low-stakes assessment, though further research is needed for broader use. This study contributes a dataset of lesson log data, human annotation rubrics, and LLM prompts to promote transparency and reproducibility.",
-    "shortDescription": "This study examines the effectiveness of multiple-choice questions (MCQs) compared to open-response questions in learning contexts, especially with advancements in AI-assisted grading. Results indicate no significant difference in learning outcomes between the two formats, but MCQs required less completion time, suggesting they are as effective and more efficient for learning when practice time is limited.",
+    "shortDescription": "MCQs are as effective and more efficient than open-response tasks for learning when practice time is limited.",
     "paperLink": "https://arxiv.org/abs/2412.10267",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-11",
+    "id": "334b7cca-4982-8113-83e4-f68dc177189e",
     "title": "Examining the Use of an AI-Powered Teacher Orchestration Tool at Scale",
     "authors": [
       "Emma Brunskill",
@@ -206,16 +206,16 @@
       "Stephen E Fancsali",
       "Steve Ritter"
     ],
-    "publishDate": "7/15/2024",
-    "venue": "L@S '24: Proceedings of the Eleventh ACM Conference on Learning @ Scale",
+    "publishDate": "2024-07-15",
+    "venue": "L@S '24",
     "abstract": "There is an increasing opportunity for AI-supported teacher-student orchestration. Preliminary evidence in small studies suggests that AI that better supports such coordination could lead to substantial student learning gains but much is unknown about how such orchestration might work at scale. In this work we focus on an existing tool, widely available to teachers as part of a commonly used math platform, to gain insights into how teachers perceive this tool and how they use a feature which allows them to mark when and why they help particular students as those students work on the software. Our teacher survey reveals that many teachers do use the tool's suggestion to inform which students to support, and our quantitative analysis of log files shows that when marking a student as helped, teachers most often report providing encouragement. Providing encouragement is far more frequent than providing direct math instruction, though when students are highlighted as being likely to fail the current section, teachers more frequently mark that they provided direct math help. Our work helps showcase the existing use and potential new directions for AI-supported teacher-student orchestration at scale.",
-    "shortDescription": "How teachers perceive and use an AI-supported tool within a popular math platform to aid student learning",
+    "shortDescription": "How teachers perceive and use an AI-supported tool within a popular math platform to aid student learning.",
     "paperLink": "https://dl.acm.org/doi/10.1145/3657604.3664704",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-12",
+    "id": "334b7cca-4982-8175-b53c-f53d6b95baf9",
     "title": "Learning and AI Evaluation of Tutors Responding to Students Engaging in Negative Self-Talk",
     "authors": [
       "Danielle R. Thomas",
@@ -226,16 +226,16 @@
       "Shivang Gupta",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "5/20/2024",
-    "venue": "In Proceedings of the Eleventh ACM Conference of Learning @ Scale (L@S ‘24), July 18-20, 2024, Atlanta, Georgia.",
+    "publishDate": "2024-05-20",
+    "venue": "L@S '24",
     "abstract": "Addressing negative self-talk by students, such as responding to a student when saying, \"I am dumb\" or \"I can't do this\" can be difficult for even the most experienced tutor. Despite potential tutor learning from scenario-based lessons on this topic, human-graded assessment remains time-consuming. Leveraging generative AI for evaluating textual responses in online training presents a scalable solution. Research suggests a tutor validates student's feelings when they speak negatively of themselves, e.g., by a tutor responding, \"I understand how you feel\" or \"I recognize this is difficult.\" This ongoing work assesses the performance of 60 undergraduate tutors within an online lesson on enhancing tutors' abilities to respond to students engaging in negative self-talk. We find statistically significant tutor learning gains from pretest to posttest. Additionally, we describe a method of using generative AI for assessing tutors' responses to predict the best approach and subsequently explain the rationale behind it. Using the large language model GPT-4, we find high absolute performance when evaluating tutor responses involving predicting (F1 = 0.85) and explaining (F1 = 0.83) the best approach. Minor improvements are needed to the lesson itself. A future goal of this work is to fully develop automated systems of assessing tutor learning attending to barriers to students' motivation and doing so at scale.",
-    "shortDescription": "GPT-4 can effectively evaluate tutor responses to student negative self-talk in online training, showing significant tutor learning gains and paving the way for scalable, automated assessment systems to enhance tutors' support of student motivation.",
+    "shortDescription": "GPT-4 can effectively evaluate tutor responses to student negative self-talk in online training.",
     "paperLink": "https://dl.acm.org/doi/10.1145/3657604.3664700",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-13",
+    "id": "334b7cca-4982-81e9-969e-e12aca71aea4",
     "title": "How Can I Get It Right? Using GPT to Rephrase Incorrect Trainee Responses",
     "authors": [
       "Jionghao Lin",
@@ -246,16 +246,16 @@
       "Vincent Aleven",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "5/3/2024",
+    "publishDate": "2024-05-03",
     "venue": "International Journal of Artificial Intelligence in Education",
-    "abstract": "One-on-one tutoring is widely acknowledged as an effective instructional method, conditioned on qualified tutors. However, the high demand for qualified tutors remains a challenge, often necessitating the training of novice tutors (i.e., trainees) to ensure effective tutoring. Research suggests that providing timely explanatory feedback can facilitate the training process for trainees. However, it presents challenges due to the time-consuming nature of assessing trainee performance by human experts. Inspired by the recent advancements of large language models (LLMs), our study employed the GPT-4 model to build an explanatory feedback system. This system identifies trainees’ responses in binary form (i.e., correct/incorrect) and automatically provides template-based feedback with responses appropriately rephrased by the GPT-4 model. We conducted our study using the responses of 383 trainees from three training lessons (Giving Effective Praise, Reacting to Errors, and Determining What Students Know). Our findings indicate that: 1) using a few-shot approach, the GPT-4 model effectively identifies correct/incorrect trainees’ responses from three training lessons with an average F1 score of 0.84 and AUC score of 0.85; and 2) using the few-shot approach, the GPT-4 model adeptly rephrases incorrect trainees’ responses into desired responses, achieving performance comparable to that of human experts.",
-    "shortDescription": "GPT-4 can provide timely, effective explanatory feedback in tutor training by accurately identifying and rephrasing trainees' responses, achieving performance comparable to human experts.",
+    "abstract": "One-on-one tutoring is widely acknowledged as an effective instructional method, conditioned on qualified tutors. However, the high demand for qualified tutors remains a challenge, often necessitating the training of novice tutors (i.e., trainees) to ensure effective tutoring. Research suggests that providing timely explanatory feedback can facilitate the training process for trainees. However, it presents challenges due to the time-consuming nature of assessing trainee performance by human experts. Inspired by the recent advancements of large language models (LLMs), our study employed the GPT-4 model to build an explanatory feedback system. This system identifies trainees' responses in binary form (i.e., correct/incorrect) and automatically provides template-based feedback with responses appropriately rephrased by the GPT-4 model. We conducted our study using the responses of 383 trainees from three training lessons. Our findings indicate that: 1) the GPT-4 model effectively identifies correct/incorrect trainees' responses with an average F1 score of 0.84 and AUC score of 0.85; and 2) the GPT-4 model adeptly rephrases incorrect trainees' responses into desired responses, achieving performance comparable to that of human experts.",
+    "shortDescription": "GPT-4 provides timely, effective explanatory feedback in tutor training, achieving performance comparable to human experts.",
     "paperLink": "https://link.springer.com/article/10.1007/s40593-024-00408-y",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-14",
+    "id": "334b7cca-4982-81c9-a59f-cd0a519a0ddd",
     "title": "How Can I Improve? Using GPT to Highlight the Desired and Undesired Parts of Open-ended Responses",
     "authors": [
       "Jionghao Lin",
@@ -267,16 +267,16 @@
       "Ngoc Dang Nguyen",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "5/2/2024",
-    "venue": "International Conference on Educational Data Mining (EDM), 2024",
-    "abstract": "Automated explanatory feedback systems play a crucial role in facilitating learning for a large cohort of learners by offering feedback that incorporates explanations, significantly enhancing the learning process. However, delivering such explanatory feedback in real-time poses challenges, particularly when high classification accuracy for domain-specific, nuanced responses is essential. Our study leverages the capabilities of large language models, specifically Generative Pre-Trained Transformers (GPT), to explore a sequence labeling approach focused on identifying components of desired and undesired praise for providing explanatory feedback within a tutor training dataset. Our aim is to equip tutors with actionable, explanatory feedback during online training lessons. To investigate the potential of GPT models for providing the explanatory feedback, we employed two commonly-used approaches: prompting and fine-tuning. To quantify the quality of highlighted praise components identified by GPT models, we introduced a Modified Intersection over Union (M-IoU) score. Our findings demonstrate that: (1) the M-IoU score effectively correlates with human judgment in evaluating sequence quality; (2) using two-shot prompting on GPT-3.5 resulted in decent performance in recognizing effort-based (M-IoU of 0.46) and outcome-based praise (M-IoU of 0.68); and (3) our optimally fine-tuned GPT-3.5 model achieved M-IoU scores of 0.64 for effortbased praise and 0.84 for outcome-based praise, aligning with the satisfaction levels evaluated by human coders. Our results show promise for using GPT models to provide feedback that focuses on specific elements in their open-ended responses that are desirable or could use improvement.",
-    "shortDescription": "Fine-tuned GPT models can effectively identify components of praise in tutor training feedback, achieving performance levels that align with human evaluation",
+    "publishDate": "2024-05-02",
+    "venue": "EDM 2024",
+    "abstract": "Automated explanatory feedback systems play a crucial role in facilitating learning for a large cohort of learners by offering feedback that incorporates explanations, significantly enhancing the learning process. However, delivering such explanatory feedback in real-time poses challenges, particularly when high classification accuracy for domain-specific, nuanced responses is essential. Our study leverages the capabilities of large language models, specifically Generative Pre-Trained Transformers (GPT), to explore a sequence labeling approach focused on identifying components of desired and undesired praise for providing explanatory feedback within a tutor training dataset. Our aim is to equip tutors with actionable, explanatory feedback during online training lessons. Our findings demonstrate that the M-IoU score effectively correlates with human judgment in evaluating sequence quality; using two-shot prompting on GPT-3.5 resulted in decent performance in recognizing effort-based and outcome-based praise; and our optimally fine-tuned GPT-3.5 model achieved M-IoU scores aligning with the satisfaction levels evaluated by human coders.",
+    "shortDescription": "Fine-tuned GPT models can effectively identify components of praise in tutor training feedback.",
     "paperLink": "https://educationaldatamining.org/edm2024/proceedings/2024.EDM-long-papers.20/index.html",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-15",
+    "id": "334b7cca-4982-817f-8825-de010f4118ec",
     "title": "The Neglected 15%: Positive Effects of Hybrid Human-AI Tutoring Among Students with Disabilities",
     "authors": [
       "Danielle R. Thomas",
@@ -285,17 +285,17 @@
       "Vincent Aleven",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "5/1/2024",
-    "venue": "International Conference on Artificial Intelligence in Education (AIED), 2024",
-    "abstract": "Incorporating human tutoring with AI holds promise for supporting diverse math learners. In the U.S., approximately 15% of students receive special education services, with limited previous research within AIED on the impact of AI-assisted learning among students with disabilities. Previous work combining human tutors and AI suggests that students with lower prior knowledge, such as lacking basic skills, exhibit greater learning gains compared to their more knowledgeable peers. Building upon this finding, we hypothesize that hybrid human-AI tutoring will have positive effects among students in inclusive settings, classrooms containing both students with and without identified disabilities. To investigate this hypothesis, we conduct a two-study quasi-experiment across two urban, low-income middle schools: one in Pennsylvania with 362 students and another in California comprised of 733 students, involving 27% and 16% of students with disabilities, respectively. Our findings indicate hybrid human-AI tutoring has positive effects on learning processes and outcomes among all students, including students with disabilities. The motivational benefits of the human tutoring treatment over a control group using solely math software show up in greater increases in practice and skill proficiency during math software use for students with disabilities than other students. In addition, the treatment yields significantly higher pre-to-post learning gains for all including students with disabilities whose relative gains trend higher and are statistically at least as high. These compelling findings support the promise of hybrid human-AI solutions and emphasize the collaborative focus among AIED to support diverse learners.",
-    "shortDescription": "Hybrid human-AI tutoring significantly enhances learning and motivation for all students, particularly benefiting students with disabilities in inclusive classrooms",
+    "publishDate": "2024-05-01",
+    "venue": "AIED 2024",
+    "abstract": "Incorporating human tutoring with AI holds promise for supporting diverse math learners. In the U.S., approximately 15% of students receive special education services, with limited previous research within AIED on the impact of AI-assisted learning among students with disabilities. Previous work combining human tutors and AI suggests that students with lower prior knowledge exhibit greater learning gains compared to their more knowledgeable peers. Building upon this finding, we hypothesize that hybrid human-AI tutoring will have positive effects among students in inclusive settings. To investigate this hypothesis, we conduct a two-study quasi-experiment across two urban, low-income middle schools: one in Pennsylvania with 362 students and another in California comprised of 733 students. Our findings indicate hybrid human-AI tutoring has positive effects on learning processes and outcomes among all students, including students with disabilities. The motivational benefits of the human tutoring treatment show up in greater increases in practice and skill proficiency during math software use for students with disabilities than other students. These compelling findings support the promise of hybrid human-AI solutions and emphasize the collaborative focus among AIED to support diverse learners.",
+    "shortDescription": "Hybrid human-AI tutoring significantly enhances learning and motivation for all students, particularly benefiting students with disabilities.",
     "paperLink": "https://link.springer.com/chapter/10.1007/978-3-031-64302-6_29",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-16",
-    "title": "Using Generative AI to Provide Feedback to Adult Tutors in Training and Assess Real-life Performance",
+    "id": "334b7cca-4982-8120-8158-f6865cc8a8d3",
+    "title": "Using Generative AI to Provide Feedback to Adult Tutors in Training",
     "authors": [
       "Danielle R. Thomas",
       "Erin Gatz",
@@ -304,17 +304,17 @@
       "Cindy Tipper",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "4/10/2024",
+    "publishDate": "2024-04-10",
     "venue": "The Learning Ideas Conference",
-    "abstract": "Tutoring remains among the most impactful academic interventions\nknown to improve student achievement. Despite its success, there are few avail-\nable opportunities for training and professional development for adult tutors. Fur-\nthermore, the task of assessing tutor performance during actual tutoring sessions\nis challenging and time-consuming for human evaluators—enter artificial intel-\nligence (AI). In this work, we harness generative AI, specifically large language\nmodels (LLMs) like GPT-4, to introduce an innovative approach for delivering\ntutors real-time, explanatory feedback while tutors engage in online scenario-\nbased lessons. Hosted within the Personalized Learning Squared (PLUS) tutoring\nplatform, these lessons offer tutors opportunities to practice responding to com-\nmon tutoring scenarios. For example, in the Giving Effective Praise lesson, tutors\npractice responding to students by providing praise and then receiving immediate\nand templated feedback generated by LLMs. Beyond demonstrating tutor train-\ning containing AI-generated feedback, we report past work using LLMs to assess\ntutors providing praise, revealing moderate performance, and explaining several\nprompting methods. While using generative AI shows promise as a low-cost and\nefficient method for giving adult tutors feedback on their performance in training\nand actual tutoring, it is not without limitations. Practical and ethical considera-\ntions are discussed. Human tutoring remains a robust and irreplaceable influence\non student learning, with generative AI serving as a valuable tool to complement\ntutors and enhance the impact of tutoring on student learning.",
-    "shortDescription": "Leveraging GPT-4 within the PLUS tutoring platform to provide real-time, explanatory feedback to adult tutors during scenario-based lessons, demonstrating AI's potential to support tutor training efficiently while acknowledging practical and ethical considerations.",
+    "abstract": "Tutoring remains among the most impactful academic interventions known to improve student achievement. Despite its success, there are few available opportunities for training and professional development for adult tutors. Furthermore, the task of assessing tutor performance during actual tutoring sessions is challenging and time-consuming for human evaluators. In this work, we harness generative AI, specifically large language models (LLMs) like GPT-4, to introduce an innovative approach for delivering tutors real-time, explanatory feedback while tutors engage in online scenario-based lessons. Hosted within the Personalized Learning Squared (PLUS) tutoring platform, these lessons cover topics such as giving effective praise, reacting to student errors, and responding to students experiencing negative self-talk. We evaluate tutor performance using GPT-4 for automated grading and find that GPT-4 demonstrates proficiency in assessing tutors' ability to predict and explain the best approach across multiple lesson scenarios.",
+    "shortDescription": "Leveraging GPT-4 within the PLUS tutoring platform to provide real-time, explanatory feedback to adult tutors during scenario-based lessons.",
     "paperLink": "https://cmu.app.box.com/s/u814ez60mrptjdsgx8ou7oyx7lltcg1m",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-17",
-    "title": "Improving Student Learning with Hybrid Human-AI Tutoring: A Three-Study Quasi-Experimental Investigation",
+    "id": "334b7cca-4982-81ef-a41c-d88e569bc7c8",
+    "title": "Improving Student Learning with Hybrid Human-AI Tutoring: A Three-Study Investigation",
     "authors": [
       "Danielle R. Thomas",
       "Jionghao Lin",
@@ -328,16 +328,16 @@
       "Emma Brunskill",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "3/18/2024",
-    "venue": "International Conference on Learning Analytics and Knowledge (LAK), 2024",
-    "abstract": "Artificial intelligence (AI) applications to support human tutor have potential to significantly improve learning outcomes, but engagement issues persist, especially among students from lowincome backgrounds. We introduce an AI-assisted tutoring model that combines human and AI tutoring and hypothesize this synergy will have positive impacts on learning processes. To investigate this hypothesis, we conduct a three-study quasi-experiment across three urban and low-income middle schools: 1) 125 students in a Pennsylvania school; 2) 385 students (50% Latinx) in a California school, and 3) 75 students (100% Black) in a Pennsylvania charter school, all implementing analogous tutoring models. We compare learning analytics of students engaged in human-AI tutoring compared to students using math software only. We find human-AI tutoring has positive effects, particularly in student’s proficiency and usage, with evidence suggesting lower achieving students may benefit more compared to higher achieving students. We illustrate the use of quasi-experimental methods adapted to the particulars of different schools and data-availability contexts so as to achieve the rapid data-driven iteration needed to guide an inspired creation into effective innovation. Future work focuses on improving the tutor dashboard and optimizing tutor-student ratios, while maintaining annual costs per student of approximately $700 annually.",
-    "shortDescription": "Human-AI tutoring improves proficiency and engagement, especially for lower-achieving students in low-income schools",
+    "publishDate": "2024-03-18",
+    "venue": "LAK 2024",
+    "abstract": "Artificial intelligence (AI) applications to support human tutor have potential to significantly improve learning outcomes, but engagement issues persist, especially among students from low-income backgrounds. We introduce an AI-assisted tutoring model that combines human and AI tutoring and hypothesize this synergy will have positive impacts on learning processes. To investigate this hypothesis, we conduct a three-study quasi-experiment across three urban and low-income middle schools. We compare learning analytics of students engaged in human-AI tutoring compared to students using math software only. We find human-AI tutoring has positive effects, particularly in student's proficiency and usage, with evidence suggesting lower achieving students may benefit more compared to higher achieving students. Future work focuses on improving the tutor dashboard and optimizing tutor-student ratios, while maintaining annual costs per student of approximately $700 annually.",
+    "shortDescription": "Human-AI tutoring improves proficiency and engagement, especially for lower-achieving students in low-income schools.",
     "paperLink": "https://dl.acm.org/doi/10.1145/3636555.3636896",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-18",
+    "id": "334b7cca-4982-8143-85fb-d16d4eebad51",
     "title": "Improving Assessment of Tutoring Practices using Retrieval-Augmented Generation",
     "authors": [
       "Zifei (Feifei) Han",
@@ -349,16 +349,16 @@
       "Shivang Gupta",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "2/16/2024",
-    "venue": "AAAI2024 Workshop on AI for Education - Bridging Innovation and Responsibility",
-    "abstract": "One-on-one tutoring is an effective instructional method for enhancing learning, yet its\nefficacy hinges on tutor competencies. Novice math tutors often prioritize content-specific\nguidance, neglecting aspects such as social-emotional learning. Social-emotional learning\npromotes equity and inclusion and nurturing relationships with students, which is cru-\ncial for holistic student development. Assessing the competencies of tutors accurately and\nefficiently can drive the development of tailored tutor training programs. However, eval-\nuating novice tutor ability during real-time tutoring remains challenging as it typically\nrequires experts-in-the-loop. To address this challenge, this preliminary study aims to har-\nness Generative Pre-trained Transformers (GPT), such as GPT-3.5 and GPT-4 models, to\nautomatically assess tutors’ ability of using social-emotional tutoring strategies. Moreover,\nthis study also reports on the financial dimensions and considerations of employing these\nmodels in real-time and at scale for automated assessment. The current study examined\nfour prompting strategies: two basic Zero-shot prompt strategies, Tree of Thought prompt,\nand Retrieval-Augmented Generator (RAG) based prompt. The results indicate that the\nRAG prompt demonstrated more accurate performance (assessed by the level of hallucina-\ntion and correctness in the generated assessment texts) and lower financial costs than the\nother strategies evaluated. These findings inform the development of personalized tutor\ntraining interventions to enhance the the educational effectiveness of tutored learning.",
-    "shortDescription": "Exploring the use of GPT models, particularly the RAG prompt, to assess novice tutors' social-emotional tutoring strategies accurately and cost-effectively",
+    "publishDate": "2024-02-16",
+    "venue": "AAAI 2024 Workshop on AI for Education",
+    "abstract": "One-on-one tutoring is an effective instructional method for enhancing learning, yet its efficacy hinges on tutor competencies. Novice math tutors often prioritize content-specific guidance, neglecting aspects such as social-emotional learning. Assessing the competencies of tutors accurately and efficiently can drive the development of tailored tutor training programs. However, evaluating novice tutor ability during real-time tutoring remains challenging as it typically requires experts-in-the-loop. To address this challenge, this preliminary study aims to harness GPT models to automatically assess tutors' ability of using social-emotional tutoring strategies. The results indicate that the RAG prompt demonstrated more accurate performance and lower financial costs than the other strategies evaluated. These findings inform the development of personalized tutor training interventions.",
+    "shortDescription": "Exploring GPT models with RAG prompting to assess novice tutors' social-emotional tutoring strategies.",
     "paperLink": "https://cmu.app.box.com/s/2kuhe94ltoqgxravbrig4d119avq9nm7",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-19",
+    "id": "334b7cca-4982-81be-ac6b-c68ec28eef1a",
     "title": "Using Large Language Models to Assess Tutors' Performance in Reacting to Students Making Math Errors",
     "authors": [
       "Sanjit Kakarla",
@@ -367,16 +367,16 @@
       "Shivang Gupta",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "2/16/2024",
+    "publishDate": "2024-02-16",
     "venue": "AAAI2024 Workshop on AI for Education - Bridging Innovation and Responsibility",
-    "abstract": "Research suggests that tutors should adopt a strategic approach when addressing math\nerrors made by low-efficacy students. Rather than drawing direct attention to the error,\ntutors should guide the students to identify and correct their mistakes on their own. While\ntutor lessons have introduced this pedagogical skill, human evaluation of tutors applying\nthis strategy is arduous and time-consuming. Large language models (LLMs) show promise\nin providing real-time assessment to tutors during their actual tutoring sessions, yet little\nis known regarding their accuracy in this context. In this study, we investigate the capacity\nof generative AI to evaluate real-life tutors’ performance in responding to students making\nmath errors. By analyzing 50 real-life tutoring dialogues, we find both GPT-3.5-Turbo\nand GPT-4 demonstrate proficiency in assessing the criteria related to reacting to students\nmaking errors. However, both models exhibit limitations in recognizing instances where the\nstudent made an error. Notably, GPT-4 tends to overidentify instances of students making\nerrors, often attributing student uncertainty or inferring potential errors where human\nevaluators did not. Future work will focus on enhancing generalizability by assessing a\nlarger dataset of dialogues and evaluating learning transfer. Specifically, we will analyze\nthe performance of tutors in real-life scenarios when responding to students’ math errors\nbefore and after lesson completion on this crucial tutoring skill.",
+    "abstract": "Research suggests that tutors should adopt a strategic approach when addressing math errors made by low-efficacy students. Rather than drawing direct attention to the error, tutors should guide the students to identify and correct their mistakes on their own. While tutor lessons have introduced this pedagogical skill, human evaluation of tutors applying this strategy is arduous and time-consuming. Large language models show promise in providing real-time assessment to tutors during their actual tutoring sessions, yet little is known regarding their accuracy in this context. In this study, we investigate the capacity of generative AI to evaluate real-life tutors' performance in responding to students making math errors. By analyzing 50 real-life tutoring dialogues, we find both GPT-3.5-Turbo and GPT-4 demonstrate proficiency in assessing the criteria related to reacting to students making errors. However, both models exhibit limitations in recognizing instances where the student made an error.",
     "shortDescription": "GPT-3.5-Turbo and GPT-4 can effectively assess tutors' strategies for guiding students through math errors, though GPT-4 sometimes overidentifies errors.",
     "paperLink": "https://cmu.app.box.com/s/crehx1qtkutreh1j7d1mmar7kwqmsf69",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-20",
+    "id": "334b7cca-4982-8162-bcd8-d77ada982f96",
     "title": "Personalized Learning Squared (PLUS): Doubling Math Learning through AI-assisted Tutoring",
     "authors": [
       "Jionghao Lin",
@@ -389,17 +389,17 @@
       "Cindy Tipper",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "12/5/2023",
-    "venue": "AIED 2023 workshop - Towards the Future of AI-augmented Human Tutoring in Math Learning",
-    "abstract": "Personalized Learning Squared (PLUS) is a comprehensive tutoring platform developed by Carnegie Mellon University, Carnegie Learning, and Stanford University designed to provide human and artificial intelligence (AI)-assisted tutoring. By combining human tutors, AI-powered math software, and cutting edge learning engineering, PLUS strives to double the math learning for 10,000 students by the year 2026. PLUS focuses on improving math learning for middle school students, particularly economically and racially diverse students. In this proposal summary, we plan to introduce PLUS Training, which aims to square the impact of tutoring. PLUS Training can empower tutors through customized tutor training and continuous support using research-driven instructional materials and leveraging AI to generate real-time tutor feedback. Empowering and strengthening tutor impact fuels our vision of addressing the opportunity gap by increasing learning opportunities among historically marginalized students.",
-    "shortDescription": "Personalized Learning Squared (PLUS) is a tutoring platform developed by Carnegie Mellon University, Carnegie Learning, and Stanford University that combines human tutors and AI to enhance math learning for middle school students, especially those from diverse backgrounds.",
+    "publishDate": "2023-12-05",
+    "venue": "AIED 2023 Workshop",
+    "abstract": "Personalized Learning Squared (PLUS) is a comprehensive tutoring platform developed by Carnegie Mellon University, Carnegie Learning, and Stanford University designed to provide human and artificial intelligence (AI)-assisted tutoring. By combining human tutors, AI-powered math software, and cutting edge learning engineering, PLUS strives to double the math learning for 10,000 students by the year 2026. PLUS focuses on improving math learning for middle school students, particularly economically and racially diverse students. PLUS Training can empower tutors through customized tutor training and continuous support using research-driven instructional materials and leveraging AI to generate real-time tutor feedback.",
+    "shortDescription": "PLUS combines human tutors and AI to enhance math learning for middle school students, especially those from diverse backgrounds.",
     "paperLink": "https://osf.io/preprints/edarxiv/hxp4c",
     "presentationLink": null,
     "videoLink": "https://cmu.app.box.com/s/o80bwclbh4grw8knl0029p2c5bpb6w1i"
   },
   {
-    "id": "csv-21",
-    "title": "So You Want to Be a Tutor? Professional Development and Scenario-Based Training for Adult Tutors",
+    "id": "334b7cca-4982-81f8-9d97-c35e8e404f87",
+    "title": "So You Want to Be a Tutor? Professional Development and Scenario-Based Training",
     "authors": [
       "Danielle R. Thomas",
       "Shivang Gupta",
@@ -407,17 +407,17 @@
       "Cindy Tipper",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "9/23/2023",
-    "venue": "Learning Ideas Conference Proceedings 2023. Creative Approaches to Technology-Enhanced Learning for the Workplace and Higher Education, Lecture Notes in Networks and Systems 767",
-    "abstract": "Tutoring is one of the most powerful academic interventions used to\nincrease student achievement. In response, organizations are developing tutoring\nprograms and discovering a common problem – a shortage of qualified and experi-\nenced adult tutors. We introduce Personalized Learning Squared (PLUS), a holistic\ntutoring platform designed to improve tutoring efficiency and workplace training.\nPLUS combines human tutors and artificial intelligence (AI)-powered math soft-\nware to double math learning gains for low-income middle school students. In order\nto provide differentiated student support, tutors need to be trained in supporting math\ncontent and student socio-motivation. Currently, there is a wide range of experience\namong adult tutors, especially younger, part-time tutors. Not only do these tutors have\nvaried initial skill levels, but there is also high turnover (40% annually) among such\nyouth workers. PLUS specializes in providing efficient and low-cost tutor training\nwhile delivering situational experiences to inexperienced tutors. Through previous\nresearch, we isolated key competencies of successful tutoring, Social-Emotional\nLearning, Mastering Content, Advocacy, Relationships, Technology Tools (called\nour SMART framework) and developed synchronous, interactive training and, PLUS-\nhoused, asynchronous lessons. We have documented evidence of tutor learning gain\nwith typical tutors performing ~20% better on the posttest compared to the pretest\nsimulations and scenarios. Currently, we are optimizing asynchronous lesson design\nusing learner sourced data to create real-life scenarios and authentically challenging\nmultiple-choice tasks. In addition, this present work discusses (a) determining the\nrequired training components and lessons completed by tutors to demonstrate mastery\nand (b) designing a personalized pathway to PLUS tutor certification.",
-    "shortDescription": "Personalized Learning Squared (PLUS) is an AI-supported tutoring platform that doubles math learning gains for low-income middle school students by combining human tutors and AI-powered math software, while providing cost-effective, differentiated training to improve tutor skills in social-emotional learning and math content.",
+    "publishDate": "2023-09-23",
+    "venue": "Learning Ideas Conference 2023",
+    "abstract": "Tutoring is one of the most powerful academic interventions used to increase student achievement. In response, organizations are developing tutoring programs and discovering a common problem - a shortage of qualified and experienced adult tutors. We introduce Personalized Learning Squared (PLUS), a holistic tutoring platform designed to improve tutoring efficiency and workplace training. PLUS combines human tutors and artificial intelligence (AI)-powered math software to double math learning gains for low-income middle school students. We isolated key competencies of successful tutoring - Social-Emotional Learning, Mastering Content, Advocacy, Relationships, Technology Tools (SMART framework) - and developed synchronous, interactive training and asynchronous lessons. We have documented evidence of tutor learning gain with typical tutors performing ~20% better on the posttest compared to the pretest simulations and scenarios.",
+    "shortDescription": "PLUS is an AI-supported tutoring platform that doubles math learning gains for low-income middle school students.",
     "paperLink": "https://cmu.app.box.com/s/f6n4hn6d2cn07nzbec7pr0texv1f4cq1",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-22",
-    "title": "Comparative Analysis of GPT-4 and Human Graders in Evaluating Human Tutors Giving Praise to Students",
+    "id": "334b7cca-4982-8102-9ed3-d0a4be215fb5",
+    "title": "Comparative Analysis of GPT-4 and Human Graders in Evaluating Human Tutors Giving Praise",
     "authors": [
       "Dollaya Hirunyasiri",
       "Danielle R. Thomas",
@@ -425,17 +425,17 @@
       "Kenneth R. Koedinger",
       "Vincent Aleven"
     ],
-    "publishDate": "7/5/2023",
-    "venue": "AIED 2023 workshop - Towards the Future of AI-augmented Human Tutoring in Math Learning",
-    "abstract": "Research suggests that providing specific and timely feed-\nback to human tutors enhances their performance. However, it presents\nchallenges due to the time-consuming nature of assessing tutor perfor-\nmance by human evaluators. Large language models, such as the AI-\nchatbot ChatGPT, hold potential for offering constructive feedback to\ntutors in practical settings. Nevertheless, the accuracy of AI-generated\nfeedback remains uncertain, with scant research investigating the ability\nof models like ChatGPT to deliver effective feedback. In this work-in-\nprogress, we evaluate 30 dialogues generated by GPT-4 in a tutor-student\nsetting. We use two different prompting approaches, the zero-shot chain\nof thought and the few-shot chain of thought, to identify specific com-\nponents of effective praise based on five criteria. These approaches are\nthen compared to the results of human graders for accuracy. Our goal is\nto assess the extent to which GPT-4 can accurately identify each praise\ncriterion. We found that both zero-shot and few-shot chain of thought\napproaches yield comparable results. GPT-4 performs moderately well\nin identifying instances when the tutor offers specific and immediate\npraise. However, GPT-4 underperforms in identifying the tutor’s ability\nto deliver sincere praise, particularly in the zero-shot prompting scenario\nwhere examples of sincere tutor praise statements were not provided.\nFuture work will focus on enhancing prompt engineering, developing a\nmore general tutoring rubric, and evaluating our method using real-life\ntutoring dialogues.",
-    "shortDescription": "While specific and timely feedback enhances tutor performance, assessing it is time-consuming; large language models like GPT-4 show potential in providing feedback but need further evaluation for accuracy, particularly in delivering sincere praise.",
+    "publishDate": "2023-07-05",
+    "venue": "AIED 2023 Workshop",
+    "abstract": "Research suggests that providing specific and timely feedback to human tutors enhances their performance. However, it presents challenges due to the time-consuming nature of assessing tutor performance by human evaluators. Large language models, such as the AI-chatbot ChatGPT, hold potential for offering constructive feedback to tutors in practical settings. In this work-in-progress, we evaluate 30 dialogues generated by GPT-4 in a tutor-student setting. We use two different prompting approaches to identify specific components of effective praise based on five criteria. GPT-4 performs moderately well in identifying instances when the tutor offers specific and immediate praise. However, GPT-4 underperforms in identifying the tutor's ability to deliver sincere praise, particularly in the zero-shot prompting scenario.",
+    "shortDescription": "GPT-4 shows potential in providing feedback on tutor praise but needs further evaluation for accuracy.",
     "paperLink": "https://cmu.app.box.com/s/cpjzy99jplyrucdy5f2ku15fs0q3v33i",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-23",
-    "title": "Towards the Future of AI-Augmented Human Tutoring in Math Learning.",
+    "id": "334b7cca-4982-8169-9f51-c4982fd61c70",
+    "title": "Towards the Future of AI-Augmented Human Tutoring in Math Learning",
     "authors": [
       "Vincent Aleven",
       "Richard Baraniuk",
@@ -451,32 +451,32 @@
       "Simon Woodhead",
       "Wanli Xing"
     ],
-    "publishDate": "6/30/2023",
-    "venue": "International Conference on Artificial Intelligence in Education (AIED), 2023",
-    "abstract": "One of the primary obstacles to improving middle school math achieve-\nment is lack of equitable access to high-quality learning opportunities. Human\ndelivery of high-dosage tutoring can bring significant learning gains, but stu-\ndents, particularly economically disadvantaged students, have limited access to\nwell-trained tutors. Augmenting human tutor abilities through the use of artifi-\ncial intelligence (AI) technology is one way to scale up access to tutors without\ncompromising learning quality. This workshop aims to highlight the challenges\nand opportunities of AI-in-the-loop math tutoring and encourage discourse in the\nAIED community to develop human-AI hybrid tutoring and teaching systems. We\ninvite papers that provide clearer understanding and support the progress of human\nand AI-assisted personalized learning technologies. The structure of this full-day\nhybrid workshop will include presentations of accepted papers, small or whole\ngroup discussion, and a panel discussion focusing on common themes related to\nresearch and application, key takeaways, and findings imperative to increasing\nmiddle school math learning.",
+    "publishDate": "2023-06-30",
+    "venue": "AIED 2023",
+    "abstract": "One of the primary obstacles to improving middle school math achievement is lack of equitable access to high-quality learning opportunities. Human delivery of high-dosage tutoring can bring significant learning gains, but students, particularly economically disadvantaged students, have limited access to well-trained tutors. Augmenting human tutor abilities through the use of artificial intelligence (AI) technology is one way to scale up access to tutors without compromising learning quality. This workshop aims to highlight the challenges and opportunities of AI-in-the-loop math tutoring and encourage discourse in the AIED community to develop human-AI hybrid tutoring and teaching systems.",
     "shortDescription": "Exploring how AI can enhance human tutoring to scale access and maintain learning quality.",
     "paperLink": "https://cmu.app.box.com/s/lxm3vvj6r9j5se7s0dderrtaf5y3nklc",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-24",
-    "title": "Comparative Analysis of Learnersourced Human-Graded and AI-Generated Responses for Autograding Online Tutor Lessons.",
+    "id": "334b7cca-4982-81e9-8358-cd6134fd440b",
+    "title": "Comparative Analysis of Learnersourced Human-Graded and AI-Generated Responses for Autograding",
     "authors": [
       "Danielle R. Thomas",
       "Shivang Gupta",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "6/30/2023",
-    "venue": "International Conference on Artificial Intelligence in Education (AIED), 2023",
-    "abstract": "Machine learning and artificial intelligence (AI) are ubiquitous,\nalthough accessibility and application are often misunderstood and obscure. Auto-\nmatic short answer grading (ASAG), leveraging natural language processing\n(NLP) and machine learning, has received notable attention as a method of pro-\nviding instantaneous, corrective feedback to learners without the time and energy\ndemands of human graders. However, ASAG systems are only as valid as the ref-\nerence answers, or training sets, they are compared against. We introduce an AI-\nbased, machine learning method of autograding online tutor lessons that is easily\naccessible and user friendly. We present two methods of training set creation using:\na subset of learnersourced, human-graded tutor responses from the lessons; and a\nsurrogate model using the recently released AI-chatbot, ChatGPT. Findings indi-\ncate human-created training sets perform considerably better than AI-generated\ntraining sets (F1 = 0.84 and 0.67, respectively). Our straightforward approach,\nalthough not accurate enough for wide use, demonstrates application of directly\navailable machine learning based NLP methods and highlights a constructive use\nof ChatGPT for pedagogical purposes that is not without limitations.",
-    "shortDescription": "Machine learning and AI, though often misunderstood, can enhance automatic short answer grading (ASAG) by providing instant feedback, with human-created training sets proving more effective than AI-generated ones.",
+    "publishDate": "2023-06-30",
+    "venue": "AIED 2023",
+    "abstract": "Machine learning and artificial intelligence (AI) are ubiquitous, although accessibility and application are often misunderstood and obscure. Automatic short answer grading (ASAG), leveraging natural language processing (NLP) and machine learning, has received notable attention as a method of providing instantaneous, corrective feedback to learners without the time and energy demands of human graders. We introduce an AI-based, machine learning method of autograding online tutor lessons. We present two methods of training set creation using: a subset of learnersourced, human-graded tutor responses; and a surrogate model using ChatGPT. Findings indicate human-created training sets perform considerably better than AI-generated training sets (F1 = 0.84 and 0.67, respectively).",
+    "shortDescription": "Human-created training sets prove more effective than AI-generated ones for automatic short answer grading.",
     "paperLink": "https://cmu.app.box.com/s/sjrs6uvkpvbzf8j7u1sfdmx5fv1clcza",
     "presentationLink": null,
     "videoLink": "https://www.youtube.com/watch?v=FHhJT3xXCpI"
   },
   {
-    "id": "csv-25",
+    "id": "334b7cca-4982-81e2-8b58-f26e85ee96c8",
     "title": "Using Large Language Models to Provide Explanatory Feedback to Human Tutors",
     "authors": [
       "Jionghao Lin",
@@ -487,17 +487,17 @@
       "Ngoc Dang Nguyen",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "6/27/2023",
-    "venue": "AIED 2023 workshop - Towards the Future of AI-augmented Human Tutoring in Math Learning",
-    "abstract": "Research demonstrates learners engaging in the process of\nproducing explanations to support their reasoning, can have a positive\nimpact on learning. However, providing learners real-time explanatory\nfeedback often presents challenges related to classification accuracy, par-\nticularly in domain-specific environments, containing situationally com-\nplex and nuanced responses. We present two approaches for supplying\ntutors real-time feedback within an online lesson on how to give students\neffective praise. This work-in-progress demonstrates considerable accu-\nracy in binary classification for corrective feedback of effective, or effort-\nbased (F1score = 0.811), and ineffective, or outcome-based (F1score =\n0.350), praise responses. More notably, we introduce progress towards\nan enhanced approach of providing explanatory feedback using large\nlanguage model-facilitated named entity recognition, which can provide\ntutors feedback, not only while engaging in lessons, but can potentially\nsuggest real-time tutor moves. Future work involves leveraging large lan-\nguage models for data augmentation to improve accuracy, while also\ndeveloping an explanatory feedback interface.",
-    "shortDescription": "Research shows that producing explanations enhances learning, but providing real-time feedback is challenging; this study uses large language models to improve tutor feedback accuracy and aims to enhance data augmentation and feedback interfaces.",
+    "publishDate": "2023-06-27",
+    "venue": "AIED 2023 Workshop",
+    "abstract": "Research demonstrates learners engaging in the process of producing explanations to support their reasoning can have a positive impact on learning. However, providing learners real-time explanatory feedback often presents challenges related to classification accuracy. We present two approaches for supplying tutors real-time feedback within an online lesson on how to give students effective praise. This work demonstrates considerable accuracy in binary classification for corrective feedback of effective, or effort-based (F1score = 0.811), and ineffective, or outcome-based (F1score = 0.350), praise responses. More notably, we introduce progress towards an enhanced approach of providing explanatory feedback using large language model-facilitated named entity recognition.",
+    "shortDescription": "Uses large language models to improve tutor feedback accuracy and enhance data augmentation.",
     "paperLink": "https://cmu.app.box.com/s/68tb4gbqosdvpcf9eornoi2da9ipd6c2",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-26",
-    "title": "When the Tutor Becomes the Student: Design and Evaluation of Efficient Scenario-based Lessons for Tutors.",
+    "id": "334b7cca-4982-8102-948f-ee681e90c027",
+    "title": "When the Tutor Becomes the Student: Design and Evaluation of Scenario-based Lessons",
     "authors": [
       "Danielle R. Thomas",
       "Xinyu Yang",
@@ -506,17 +506,17 @@
       "Elizabeth A. Mclaughlin",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "3/13/2023",
-    "venue": "13th International Learning Analytics and Knowledge Conference (LAK 2023), March 13–17, 2023, Arlington, TX, USA. ACM, New York, NY, USA",
-    "abstract": "Tutoring is among the most impactful educational influences on\nstudent achievement, with perhaps the greatest promise of combat-\ning student learning loss. Due to its high impact, organizations are\nrapidly developing tutoring programs and discovering a common\nproblem- a shortage of qualified, experienced tutors. This mixed\nmethods investigation focuses on the impact of short (∼15 min.), on-\nline lessons in which tutors participate in situational judgment tests\nbased on everyday tutoring scenarios. We developed three lessons\non strategies for supporting student self-efficacy and motivation\nand tested them with 80 tutors from a national, online tutoring\norganization. Using a mixed-effects logistic regression model, we\nfound a statistically significant learning effect indicating tutors per-\nformed about 20% higher post-instruction than pre-instruction (𝛽 =\n0.811, p < 0.01). Tutors scored ∼30% better on selected compared to\nconstructed responses at posttest with evidence that tutors are learn-\ning from selected-response questions alone. Learning analytics and\nqualitative feedback suggest future design modifications for larger\nscale deployment, such as creating more authentically challenging\nselected-response options, capturing common misconceptions us-\ning learnersourced data, and varying modalities of scenario delivery\nwith the aim of maintaining learning gains while reducing time\nand effort for tutor participants and trainers.",
-    "shortDescription": "Tutoring significantly boosts student achievement, but there’s a shortage of qualified tutors; this study shows that short online lessons improve tutor performance by about 20%, suggesting future design improvements for larger-scale deployment.",
+    "publishDate": "2023-03-13",
+    "venue": "LAK 2023",
+    "abstract": "Tutoring is among the most impactful educational influences on student achievement. Due to its high impact, organizations are rapidly developing tutoring programs and discovering a common problem - a shortage of qualified, experienced tutors. This mixed methods investigation focuses on the impact of short (~15 min.) online lessons in which tutors participate in situational judgment tests based on everyday tutoring scenarios. We developed three lessons on strategies for supporting student self-efficacy and motivation and tested them with 80 tutors. Using a mixed-effects logistic regression model, we found a statistically significant learning effect indicating tutors performed about 20% higher post-instruction than pre-instruction. Learning analytics and qualitative feedback suggest future design modifications for larger scale deployment.",
+    "shortDescription": "Short online lessons improve tutor performance by about 20%.",
     "paperLink": "https://cmu.app.box.com/s/zcsl8ibsvxmbjqjjuny26x6u8fj0y5lj",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-27",
-    "title": "Scenario-based Training and On-the-Job Support for Equitable Mentoring.",
+    "id": "334b7cca-4982-81b9-a09b-e877cc007fe0",
+    "title": "Scenario-based Training and On-the-Job Support for Equitable Mentoring",
     "authors": [
       "Danielle R. Thomas",
       "Pallavi Chhabra",
@@ -526,17 +526,17 @@
       "Shivang Gupta",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "12/16/2022",
-    "venue": "15th Annual The Learning Ideas Conference, NY June 15-17, 2022, Virtual",
-    "abstract": "Personalized Learning2 (PL2) is a mentor professional development\nplatform designed to improve efficiency and workplace training through\nscenario-based instruction and personalized support. Combining research-driven\nmentor training with artificial intelligence (AI)-powered software, PL2 connects\nmentors, often under-trained tutors, to personalized resources with the click of a\nbutton. These curated resources cover a range of topics from social-emotional\nlearning and math content to culturally responsive teaching practices. PL2 is\naddressing the opportunity gap among marginalized students by recommending\nspecific instructional supports and social-emotional resources based on student's\nindividual math performance and effort. This work in progress showcases our\nrecent development of the PL2 approach to mentoring in three ways. First, we\nhighlight the key functions of the PL2 system. Second, we present recent research\nresults determining the most effective competencies for successful mentorship.\nLast, in response to partner feedback on which mentor competencies are most\nneeded, we detail the development of asynchronous, scenario-based lessons,\nhoused within the PL2 platform for on-demand training. The use of human-\ncomputer teaming for on-the-job support offers a lower cost option for deliberate\npractice using scenario-based training to increase the impact and learning\ncapacity of mentors in the workplace.",
-    "shortDescription": "Personalized Learning2 (PL2) is a mentor professional development platform that enhances efficiency and training through scenario-based instruction and AI-powered personalized support",
+    "publishDate": "2022-12-16",
+    "venue": "The Learning Ideas Conference 2022",
+    "abstract": "Personalized Learning2 (PL2) is a mentor professional development platform designed to improve efficiency and workplace training through scenario-based instruction and personalized support. Combining research-driven mentor training with artificial intelligence (AI)-powered software, PL2 connects mentors to personalized resources. These curated resources cover a range of topics from social-emotional learning and math content to culturally responsive teaching practices. PL2 is addressing the opportunity gap among marginalized students by recommending specific instructional supports and social-emotional resources based on student's individual math performance and effort.",
+    "shortDescription": "PL2 mentor professional development platform enhances efficiency through scenario-based instruction and AI-powered support.",
     "paperLink": "https://cmu.app.box.com/s/oubexgo1yqmebkudoqx0epwcvpu42vg1",
     "presentationLink": "https://cmu.app.box.com/s/avf503jtqjdod3h4vhho226yq8qx97ei",
     "videoLink": null
   },
   {
-    "id": "csv-28",
-    "title": "Educational Equity Through Combined Human-AI Personalization: A Propensity Matching Evaluation.",
+    "id": "334b7cca-4982-8137-a4d8-c4b0bd6712b2",
+    "title": "Educational Equity Through Combined Human-AI Personalization",
     "authors": [
       "Danielle R. Thomas",
       "Cassandra Brentley",
@@ -547,48 +547,48 @@
       "Lee Branstetter",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "7/27/2022",
-    "venue": "In International Conference on Artificial Intelligence in Education. Springer, Cham.",
-    "abstract": "Recent developments in combined human-computer tutoring systems\nshow promise in narrowing math achievement gaps among marginalized students.\nWe present an evaluation of the use of the Personalized Learning 2 , a hybrid tutor-\ning approach whereby human mentoring and AI tutoring are combined to per-\nsonalize learning with respect to students’ motivational and cognitive needs. The\napproach assumes achievement gaps emerge from differences in learning opportu-\nnities and seeks to increase such opportunities for marginalized students through\nafter-school programs, such as the Ready to Learn program. This program engaged\ndiverse middle school students from three schools in an urban district. We com-\npared achievement growth of 70 treatment students in this program with a control\ngroup of 380 students from the same district selected by propensity matching to\nhave similar demographics and prior achievement. Based on standardized math\nassessments (NWEA Measures of Academic Progress) given one year apart, we\nfound the gain of treatment students (6.8 points) was nearly double the gain of the\ncontrol group (3.6 points). Further supporting the inference that greater learning\nwas caused by the math-focused treatment and not by some selection bias, we\nfound no significant differences in reading achievement between treatment and\ncontrol participants. These results show promise that greater educational equity\ncan be achieved at reasonable costs through after-school programs that combine\nthe use of low-cost paraprofessional mentors and computer-based tutoring.",
-    "shortDescription": "Recent developments in human-computer tutoring systems, like Personalized Learning Squared, show promise in narrowing math achievement gaps among marginalized students by combining human mentoring and AI tutoring, as evidenced by a study where treatment students nearly doubled the math gains of a control group in an after-school program.",
+    "publishDate": "2022-07-27",
+    "venue": "AIED 2022",
+    "abstract": "Recent developments in combined human-computer tutoring systems show promise in narrowing math achievement gaps among marginalized students. We present an evaluation of Personalized Learning2, a hybrid tutoring approach whereby human mentoring and AI tutoring are combined to personalize learning with respect to students' motivational and cognitive needs. We compared achievement growth of 70 treatment students with a control group of 380 students selected by propensity matching. Based on standardized math assessments given one year apart, we found the gain of treatment students (6.8 points) was nearly double the gain of the control group (3.6 points). These results show promise that greater educational equity can be achieved at reasonable costs through after-school programs that combine low-cost paraprofessional mentors and computer-based tutoring.",
+    "shortDescription": "Treatment students nearly doubled the math gains of a control group using human mentoring and AI tutoring.",
     "paperLink": "https://cmu.app.box.com/s/0dbfg21ndcdcpgqsie0ykqa5lgbn1s2o",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-29",
-    "title": "Personalized Learning ²: A Human Mentoring and AI Tutoring Platform Ensuring Equity Interactive Event.",
+    "id": "334b7cca-4982-81a6-9ce5-da6219a85f01",
+    "title": "Personalized Learning Squared: A Human Mentoring and AI Tutoring Platform",
     "authors": [
       "Danielle R. Thomas",
       "Shivang Gupta",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "7/27/2022",
-    "venue": "23rd International Conference on Artificial Intelligence in Education, Durham, UK July 27-31, 2022",
-    "abstract": "his interactive event demonstrates Personalized Learning2, an\neducation technology web application that syncs with students’ existing math\nlearning software and mentor inputs to improve students’ math achievement.\nWe combine research-driven mentor training and AI-powered personalization\ntools to increase learning opportunities among marginalized students. This\ndemo highlights key features of the app, recent upgrades, and showcases\nmotivational interventions used by mentors to enhance student learning.",
-    "shortDescription": "Personalized Learning Squared, an ed-tech web app that integrates with existing math software and mentor inputs to enhance math achievement for marginalized students, featuring mentor training, AI personalization tools, and motivational interventions.",
+    "publishDate": "2022-07-27",
+    "venue": "AIED 2022",
+    "abstract": "This interactive event demonstrates Personalized Learning2, an education technology web application that syncs with students' existing math learning software and mentor inputs to improve students' math achievement. We combine research-driven mentor training and AI-powered personalization tools to increase learning opportunities among marginalized students. This demo highlights key features of the app, recent upgrades, and showcases motivational interventions used by mentors to enhance student learning.",
+    "shortDescription": "Ed-tech web app integrating with math software and mentor inputs to enhance math achievement for marginalized students.",
     "paperLink": "https://cmu.app.box.com/s/4g7f2x52zrh8amyxf1nm299nvhw0kigc",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-30",
-    "title": "Designing for Human–AI Complementarity in K-12 Education.",
+    "id": "334b7cca-4982-81d6-b658-d7a681767df6",
+    "title": "Designing for Human-AI Complementarity in K-12 Education.",
     "authors": [
       "Kenneth Holstein",
       "Vincent Aleven"
     ],
-    "publishDate": "6/26/2022",
+    "publishDate": "2022-06-26",
     "venue": "AI Magazine, Volume 43, Issue 2 (pp. 239-248)",
-    "abstract": "Recent work has explored how complementary strengths of humans and arti-\nficial intelligence (AI) systems might be productively combined. However,\nsuccessful forms of human–AI partnership have rarely been demonstrated in\nreal-world settings. We present the iterative design and evaluation of Lumilo,\nsmart glasses that help teachers help their students in AI-supported classrooms\nby presenting real-time analytics about students’ learning, metacognition, and\nbehavior. Results from a field study conducted in K-12 classrooms indicate that\nstudents learn more when teachers and AI tutors work together during class. We\ndiscuss implications of this research for the design of human–AI partnerships.\nWe argue for more participatory approaches to research and design in this area,\nin which practitioners and other stakeholders are deeply, meaningfully involved\nthroughout the process. Furthermore, we advocate for theory-building and for\nprincipled approaches to the study of human–AI decision-making in real-world\ncontexts.",
+    "abstract": "Recent work has explored how complementary strengths of humans and artificial intelligence (AI) systems might be productively combined. However, successful forms of human-AI partnership have rarely been demonstrated in real-world settings. We present the iterative design and evaluation of Lumilo, smart glasses that help teachers help their students in AI-supported classrooms by presenting real-time analytics about students' learning, metacognition, and behavior. Results from a field study conducted in K-12 classrooms indicate that students learn more when teachers and AI tutors work together during class. We discuss implications of this research for the design of human-AI partnerships. We argue for more participatory approaches to research and design in this area, in which practitioners and other stakeholders are deeply, meaningfully involved throughout the process.",
     "shortDescription": "Students learn more when teachers use Lumilo smart glasses to collaborate with AI tutors, highlighting the benefits of human-AI partnerships in real-world classroom settings",
     "paperLink": "https://cmu.app.box.com/s/dwegqkdxhqcenzk1be4t2zfdn8an0um9",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-31",
-    "title": "Development of Scenario-based Mentor Lessons: An Iterative Design Process for Training at Scale.",
+    "id": "334b7cca-4982-81e7-87c7-dd9c2d6001ed",
+    "title": "Development of Scenario-based Mentor Lessons: An Iterative Design Process",
     "authors": [
       "Danielle R. Thomas",
       "Pallavi Chhabra",
@@ -596,17 +596,17 @@
       "Shivang Gupta",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "6/1/2022",
-    "venue": "In Proceedings of the Ninth ACM Conference on Learning@Scale.",
-    "abstract": "In this demonstration, we showcase the recent advancement of\nscenario-based tutor training with a focus to scale by applying the\nlearn-by-doing approach to teaching strategies to provide socio-\nmotivational support. These short (~15 min.) self-paced lessons use\nthe predict-observe-explain inquiry method to develop mentor\ncapacity in bolstering student motivation (i.e., fostering growth\nmindset). These custom training modules are being created to\nprovide supplemental mentor support within the Personalized\nLearning2 system, an app which combines human tutoring and\nstudent math software to improve mentoring efficiency by\nconnecting mentors to personalized resources, such as scenario-\nbased mentor lessons, based on individual needs. Enhancing mentor\ntraining will aid in better quality mentoring at low cost. Mentor\ntraining is most effective when scenario-based practice provides\ntrainees with response-specific feedback. To achieve feedback at\nscale, we illustrate an iterative design effort toward creating\nselected-response tasks that maintain some of the authenticity\nbenefits of constructed-response. These scenario-based mentor\nlessons will be used by national level mentoring organizations as\npart of our efforts to scale.",
-    "shortDescription": "The demonstration highlights the advancement of scenario-based tutor training within the Personalized Learning Squared system, using short, self-paced lessons to enhance mentor capacity and efficiency through socio-motivational support and response-specific feedback.",
+    "publishDate": "2022-06-01",
+    "venue": "ACM Conference on Learning@Scale 2022",
+    "abstract": "In this demonstration, we showcase the recent advancement of scenario-based tutor training with a focus to scale by applying the learn-by-doing approach to teaching strategies to provide socio-motivational support. These short (~15 min.) self-paced lessons use the predict-observe-explain inquiry method to develop mentor capacity in bolstering student motivation. These custom training modules are being created to provide supplemental mentor support within the Personalized Learning2 system. Enhancing mentor training will aid in better quality mentoring at low cost. Mentor training is most effective when scenario-based practice provides trainees with response-specific feedback.",
+    "shortDescription": "Scenario-based tutor training within PL2 using short, self-paced lessons to enhance mentor capacity.",
     "paperLink": "https://cmu.app.box.com/s/6ed6jvixpplojqkw55qstv1tcayp4j8j",
     "presentationLink": "https://cmu.app.box.com/s/xyzk7a48sulza81fo3fsz9lqvyjm9upk",
     "videoLink": null
   },
   {
-    "id": "csv-32",
-    "title": "An Evaluation of Perceptions Regarding Mentor Competencies for Technology-based Personalized Learning.",
+    "id": "334b7cca-4982-81fe-b29a-c57aed83e01b",
+    "title": "An Evaluation of Perceptions Regarding Mentor Competencies for Technology-based Personalized Learning",
     "authors": [
       "Pallavi Chhabra",
       "Danielle R. Thomas",
@@ -614,23 +614,23 @@
       "Shivang Gupta",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "4/11/2022",
-    "venue": "In E. Langran (Ed.), Proceedings of Society for Information Technology & Teacher Education International Conference (pp. 1812-1817). San Diego, CA, United States: Association for the Advancement of Computing in Education (AACE).",
-    "abstract": "The use of technology-based learning systems to provide individualized instruction through tutoring for K-12 students\nis gaining increased attention, especially as a result of the COVID pandemic. We discuss the development of\npedagogical components of Personalized Learning2 (PL2), a human mentoring online system that supports both\nmentors and students while improving student’s math achievement. PL2 uses AI-driven software to recommend\ncustom resources and supports based on mentor input and student math learning data. This research focuses on\ndeveloping a more efficient and research-based method of resource organization by creating a schema of mentoring\ncompetencies. A preliminary survey was completed by 18 PL2 partner members (i.e., mentors or mentor supervisors)\nto best determine the most important skills perceived to be successful. The survey results ranked mentor skills\naccording to the perceptions of partner members, which demonstrated Engage and Motivate Students as the most\nimportant skill, whereas Understand Educational Policies and Norms was perceived to be of least importance. These\nresults also guided the creation of a preliminary super-competency scheme through the creation of SMART supports\n(Social-emotional, Math Content, Advocacy, Relationships, Technology). Such schematic recategorization of mentor\nsuper-competencies will improve mentor training and optimize their efficiency in helping students with particular\nbarriers to learning (i.e. lack of motivation, low self-efficacy).",
-    "shortDescription": "The development of Personalized Learning2 (PL2), an AI-driven online mentoring system, enhances K-12 students’ math achievement by providing customized resources and supports, with a focus on improving mentor training and efficiency through a new schema of mentoring competencies.",
+    "publishDate": "2022-04-11",
+    "venue": "SITE 2022",
+    "abstract": "The use of technology-based learning systems to provide individualized instruction through tutoring for K-12 students is gaining increased attention. We discuss the development of pedagogical components of Personalized Learning2 (PL2), a human mentoring online system that supports both mentors and students while improving student's math achievement. PL2 uses AI-driven software to recommend custom resources and supports based on mentor input and student math learning data. This research focuses on developing a more efficient and research-based method of resource organization by creating a schema of mentoring competencies. The survey results ranked mentor skills according to the perceptions of partner members, demonstrating Engage and Motivate Students as the most important skill. These results guided the creation of a preliminary super-competency scheme through SMART supports (Social-emotional, Math Content, Advocacy, Relationships, Technology).",
+    "shortDescription": "AI-driven online mentoring system enhances K-12 math achievement through customized resources and mentor training.",
     "paperLink": "https://cmu.app.box.com/s/snqodxt81wykhz8526vcee0pn85kwi2a",
     "presentationLink": "https://cmu.app.box.com/s/xyzk7a48sulza81fo3fsz9lqvyjm9upk",
     "videoLink": null
   },
   {
-    "id": "csv-33",
-    "title": "Supporting Mentoring and Math Instruction with AI Software.",
+    "id": "334b7cca-4982-8177-b6fe-ea32900a9742",
+    "title": "Supporting Mentoring and Math Instruction with AI Software",
     "authors": [
       "Shivang Gupta",
       "Danielle R. Thomas"
     ],
-    "publishDate": "4/7/2022",
-    "venue": "Pennsylvania Statewide STEM Ecosystem (PSSE) Working Group, Virtual",
+    "publishDate": "2022-04-07",
+    "venue": "Pennsylvania Statewide STEM Ecosystem Working Group",
     "abstract": null,
     "shortDescription": null,
     "paperLink": null,
@@ -638,28 +638,8 @@
     "videoLink": null
   },
   {
-    "id": "csv-34",
-    "title": "Building strategies for a personalized learning mentor app: A design case.",
-    "authors": [
-      "Nikki G. Lobczowski",
-      "J. Elizabeth Richey",
-      "Patricia Yu",
-      "Laruen Herckis",
-      "Kenny Donaldson",
-      "Lee Branstetter",
-      "Kenneth R. Koedinger"
-    ],
-    "publishDate": "12/22/2021",
-    "venue": "2020 annual meeting of the American Education Research Association (AERA), San Francisco. (Conference canceled)",
-    "abstract": null,
-    "shortDescription": null,
-    "paperLink": "https://cmu.app.box.com/s/8xnnd8edy7rffdhgyuk1lce22zxr8jjj",
-    "presentationLink": null,
-    "videoLink": null
-  },
-  {
-    "id": "csv-35",
-    "title": "Student-Teacher Relationships Drive Student Help-Seeking from Teachers for Math Learning Challenges.",
+    "id": "334b7cca-4982-8149-9242-f54ed0f0f1f2",
+    "title": "Student-Teacher Relationships Drive Student Help-Seeking for Math Learning",
     "authors": [
       "Kevin Jarbo",
       "Nikki G. Lobczowski",
@@ -667,8 +647,8 @@
       "Elise Morton",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "8/23/2021",
-    "venue": "2021 annual meeting of the European Association of Research on Learning and Instruction (EARLI), Virtual",
+    "publishDate": "2021-08-23",
+    "venue": "EARLI 2021",
     "abstract": null,
     "shortDescription": null,
     "paperLink": null,
@@ -676,8 +656,8 @@
     "videoLink": null
   },
   {
-    "id": "csv-36",
-    "title": "Perceptions of Preparedness and Success Inform Undergraduates' Feelings of Belonging.",
+    "id": "334b7cca-4982-81a6-a873-c51a2f9948b0",
+    "title": "Perceptions of Preparedness and Success Inform Undergraduates' Feelings of Belonging",
     "authors": [
       "J. Elizabeth Richey",
       "Nikki G. Lobczowski",
@@ -685,8 +665,8 @@
       "Elise Morton",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "8/23/2021",
-    "venue": "2021 annual meeting of the European Association of Research on Learning and Instruction (EARLI), Virtual",
+    "publishDate": "2021-08-23",
+    "venue": "EARLI 2021",
     "abstract": null,
     "shortDescription": null,
     "paperLink": null,
@@ -694,8 +674,8 @@
     "videoLink": null
   },
   {
-    "id": "csv-37",
-    "title": "A narrative inquiry of critical moments in students' paths to math success.",
+    "id": "334b7cca-4982-81f1-b8b7-f70f6818ec87",
+    "title": "A narrative inquiry of critical moments in students' paths to math success",
     "authors": [
       "Nikki G. Lobczowski",
       "Kevin Jarbo",
@@ -703,34 +683,17 @@
       "Elise Morton",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "7/23/2021",
-    "venue": "2021 annual meeting of the American Education Research Association (AERA), Virtual",
-    "abstract": "Students’ individual experiences can contribute to a richer understanding of the personal and environmental barriers students\nexperience in learning math: however, student voices are infrequently represented in the literature on math learning. We\nconducted a narrative inquiry study of six focus groups in which students discussed their challenges in learning math, as well\nas the resources and strategies that helped them overcome barriers. We present the themes that emerged across each focus\ngroup, as well as detailed findings from one group’s conversations about the participants’ family and home environments as\nthey related to their experiences in math. Results suggest that narratives can raise new areas for investigating learning\nprocesses and practical suggestions for better supporting math learners.",
-    "shortDescription": "A narrative inquiry study of six focus groups revealed that students’ personal experiences and family environments significantly impact their math learning, highlighting the importance of incorporating student voices to better understand and support their learning processes.",
+    "publishDate": "2021-07-23",
+    "venue": "AERA 2021",
+    "abstract": "Students' individual experiences can contribute to a richer understanding of the personal and environmental barriers students experience in learning math. We conducted a narrative inquiry study of six focus groups in which students discussed their challenges in learning math, as well as the resources and strategies that helped them overcome barriers. Results suggest that narratives can raise new areas for investigating learning processes and practical suggestions for better supporting math learners.",
+    "shortDescription": "Students' personal experiences and family environments significantly impact their math learning.",
     "paperLink": "https://cmu.app.box.com/s/hy5q76b3j2obj8ejwljqxayn35dejbex",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-38",
-    "title": "Comprehensive views of math learners: A case for modeling and supporting non-math factors in adaptive math software.",
-    "authors": [
-      "J. Elizabeth Richey",
-      "Nikki G. Lobczowski",
-      "Paulo F. Carvalhoa",
-      "Kenneth R. Koedinger"
-    ],
-    "publishDate": "6/30/2021",
-    "venue": "Artificial Intelligence in Education, 21st International Conference AIED 2020, Volume 1 (pp. 460-471).",
-    "abstract": "Adaptive math software supports students’ learning by targeting spe-\ncific math knowledge components. However, widespread use of adaptive math\nsoftware in classrooms has not led to the expected changes in student achieve-\nment, particularly for racially minoritized students and students situated in poverty.\nWhile research has shown the power of human mentors to support student learn-\ning and reduce opportunity gaps, mentoring support could be optimized by using\neducational technology to identify the specific non-math factors that are disrupt-\ning students’ learning and direct mentors to appropriate resources related to those\nfactors. In this paper, we present an analysis of one non-math factor—reading com-\nprehension—that has been shown to influence math learning. We predict math per-\nformance using this non-math factor and show that it contributes novel explanatory\nvalue in modeling students’ learning behaviors. Through this analysis, we argue\nthat educational technology could better address the learning needs of the whole\nstudent by modeling non-math factors. We suggest future research should take this\nlearning analytics approach to identify the many different kinds of motivational\nand non-math content challenges that arise when students are learning from adap-\ntive math software. We envision analyses such as those presented in this paper\nenabling greater individualization within adaptive math software that takes into\naccount not only math knowledge and progress but also non-math factors.",
-    "shortDescription": "Adaptive math software has not significantly improved student achievement for marginalized groups, but integrating educational technology to address non-math factors like reading comprehension can enhance mentoring support and better meet students’ overall learning needs.",
-    "paperLink": "https://cmu.app.box.com/s/j5mgek61nyr9hy5388i692ipgczomxiw",
-    "presentationLink": null,
-    "videoLink": null
-  },
-  {
-    "id": "csv-39",
-    "title": "Computer-supported human mentoring for personalized and equitable math learning.",
+    "id": "334b7cca-4982-8111-9ae4-f609d15648ab",
+    "title": "Computer-supported human mentoring for personalized and equitable math learning",
     "authors": [
       "Peter Schaldenbrand",
       "Nikki G. Lobczowski",
@@ -740,17 +703,17 @@
       "Adetunji Adeniran",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "6/12/2021",
-    "venue": "Proceedings of the 22nd International Conference on Artificial Intelligence in Education.",
-    "abstract": "Computer tutor data indicate that more learning opportu-\nnities yield greater achievement, but also confirm there are gaps in the\nnumber and quality of opportunities marginalized students receive that\ntechnology alone does not address. Personalized learning with mentors\ncan close this gap in opportunities but is expensive to implement. We\nintroduce a free, web-based application, Personalized Learning2 (PL2),\ndesigned to improve mentoring efficiency by connecting mentors to inter-\nvention and instructional resources. Preliminary findings indicated that\nPL2’s categorization of students based on math learning software data\nenabled mentors to focus their efforts, and that mentors found PL2\nresources to positively expand how they taught and mentored.",
-    "shortDescription": "Personalized Learning2 (PL2) is a free, web-based application that enhances mentoring efficiency by connecting mentors to targeted instructional resources, helping to close opportunity gaps for marginalized students through personalized learning based on math software data.",
+    "publishDate": "2021-06-12",
+    "venue": "AIED 2021",
+    "abstract": "Computer tutor data indicate that more learning opportunities yield greater achievement, but also confirm there are gaps in the number and quality of opportunities marginalized students receive that technology alone does not address. Personalized learning with mentors can close this gap in opportunities but is expensive to implement. We introduce a free, web-based application, Personalized Learning2 (PL2), designed to improve mentoring efficiency by connecting mentors to intervention and instructional resources. Preliminary findings indicated that PL2's categorization of students based on math learning software data enabled mentors to focus their efforts, and that mentors found PL2 resources to positively expand how they taught and mentored.",
+    "shortDescription": "PL2 is a free web app that enhances mentoring efficiency and helps close opportunity gaps for marginalized students.",
     "paperLink": "https://cmu.app.box.com/s/fmw5hnrmvr7qq18ysywl31afpl4xhve9",
     "presentationLink": null,
     "videoLink": null
   },
   {
-    "id": "csv-40",
-    "title": "Interactions with peers on the path to math success.",
+    "id": "334b7cca-4982-81da-bcf7-cae2553dd904",
+    "title": "Interactions with peers on the path to math success",
     "authors": [
       "Nikki G. Lobczowski",
       "Elise Morton",
@@ -758,11 +721,48 @@
       "Kevin Jarbo",
       "Kenneth R. Koedinger"
     ],
-    "publishDate": "6/7/2021",
-    "venue": "Proceedings of the International Society of the Learning Sciences.",
-    "abstract": "A key strategy to being successful in math is help-seeking. Much research has\nfocused on how students seek help from teachers, but students also benefit from peer assistance.\nWe analyzed conversations from eight focus groups related to students’ paths to success in\nmath. We found that students frequently brought up peer interactions as critical to their success.\nThree emergent themes were: support versus comparison, balance of effort within study groups,\nand friends versus peers. Our findings qualitatively extend current research by highlighting key\nideas that impact peer interactions, such as increased reluctance to seek help in larger classes.\nOur findings have implications for classroom and group structures, including encouraging peer\nhelp-seeking and help-giving, as well as addressing belonging and sense of community.",
-    "shortDescription": "Peer interactions are crucial for math success, with key themes including support versus comparison, balance of effort in study groups, and the distinction between friends and peers, highlighting the need to encourage peer help-seeking and foster a sense of community in classrooms.",
+    "publishDate": "2021-06-07",
+    "venue": "ISLS 2021",
+    "abstract": "A key strategy to being successful in math is help-seeking. Much research has focused on how students seek help from teachers, but students also benefit from peer assistance. We analyzed conversations from eight focus groups related to students' paths to success in math. We found that students frequently brought up peer interactions as critical to their success. Three emergent themes were: support versus comparison, balance of effort within study groups, and friends versus peers. Our findings have implications for classroom and group structures, including encouraging peer help-seeking and help-giving, as well as addressing belonging and sense of community.",
+    "shortDescription": "Peer interactions are crucial for math success, highlighting the need to encourage peer help-seeking in classrooms.",
     "paperLink": "https://cmu.app.box.com/s/dx1zk315xle2tgq3gnegj9aehz194m43",
+    "presentationLink": null,
+    "videoLink": null
+  },
+  {
+    "id": "334b7cca-4982-8184-a5b2-cb7a57570d46",
+    "title": "Building strategies for a personalized learning mentor app: A design case",
+    "authors": [
+      "Nikki G. Lobczowski",
+      "J. Elizabeth Richey",
+      "Patricia Yu",
+      "Laruen Herckis",
+      "Kenny Donaldson",
+      "Lee Branstetter",
+      "Kenneth R. Koedinger"
+    ],
+    "publishDate": "2020-12-22",
+    "venue": "AERA 2020",
+    "abstract": null,
+    "shortDescription": null,
+    "paperLink": "https://cmu.app.box.com/s/8xnnd8edy7rffdhgyuk1lce22zxr8jjj",
+    "presentationLink": null,
+    "videoLink": null
+  },
+  {
+    "id": "334b7cca-4982-81ba-970c-e8a59cd8b19f",
+    "title": "Comprehensive views of math learners: A case for modeling non-math factors in adaptive software",
+    "authors": [
+      "J. Elizabeth Richey",
+      "Nikki G. Lobczowski",
+      "Paulo F. Carvalhoa",
+      "Kenneth R. Koedinger"
+    ],
+    "publishDate": "2020-06-30",
+    "venue": "AIED 2020",
+    "abstract": "Adaptive math software supports students' learning by targeting specific math knowledge components. However, widespread use of adaptive math software in classrooms has not led to the expected changes in student achievement, particularly for racially minoritized students and students situated in poverty. While research has shown the power of human mentors to support student learning and reduce opportunity gaps, mentoring support could be optimized by using educational technology to identify the specific non-math factors that are disrupting students' learning. In this paper, we present an analysis of one non-math factor - reading comprehension - that has been shown to influence math learning. We predict math performance using this non-math factor and show that it contributes novel explanatory value in modeling students' learning behaviors.",
+    "shortDescription": "Integrating educational technology to address non-math factors like reading comprehension can enhance mentoring support.",
+    "paperLink": "https://cmu.app.box.com/s/j5mgek61nyr9hy5388i692ipgczomxiw",
     "presentationLink": null,
     "videoLink": null
   }

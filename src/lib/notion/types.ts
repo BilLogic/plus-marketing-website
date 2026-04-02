@@ -4,7 +4,8 @@ export type TeamMember = {
   affiliation:
     | "Leadership"
     | "PLUS Staff"
-    | "Current Students"
+    | "Independent Study Student"
+    | "Student Intern"
     | "Past Collaborators"
   group:
     | "Researcher"
@@ -21,6 +22,7 @@ export type TeamMember = {
   title2: string | null
   linkedIn: string | null
   googleScholar: string | null
+  personalWebsite: string | null
   bio: string | null
 }
 
@@ -49,7 +51,6 @@ export type SuccessStory = {
   category: "Schools" | "Tutors" | "Researchers" | "Foundations"
   summary: string
   content: string | null // page body markdown — fetched separately via blocks API
-  image: string | null
   coverImage: string | null
   author: string | null
   clientPartner: string | null // will link to a separate clients DB in the future

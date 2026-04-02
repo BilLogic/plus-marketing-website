@@ -17,13 +17,13 @@ const parseResearchPaper = (page: any): ResearchPaper => {
     id: page.id,
     title: getTitle(props.Title),
     authors: getMultiSelect(props.Authors),
-    publishDate: getDate(props["Publish Date"]) ?? "",
-    venue: getRichText(props.Venue),
+    publishDate: getDate(props["Date Published"]) ?? "",
+    venue: getRichText(props["Conference or Journal"]),
     abstract: getRichText(props.Abstract),
-    shortDescription: getRichText(props["Short Description"]),
-    paperLink: getUrl(props["Paper Link"]),
-    presentationLink: getUrl(props["Presentation Link"]),
-    videoLink: getUrl(props["Video Link"]),
+    shortDescription: getRichText(props["Website Summary"]),
+    paperLink: getUrl(props["Link to Paper"]),
+    presentationLink: getUrl(props["Link to Slides or Poster"]),
+    videoLink: getUrl(props["Link to Video"]),
   }
 }
 
@@ -39,7 +39,7 @@ export const fetchResearchPapers = async (): Promise<ResearchPaper[]> => {
     const response = await notion.databases.query({
       database_id: databaseId,
       sorts: [
-        { property: "Publish Date", direction: "descending" as const },
+        { property: "Date Published", direction: "descending" as const },
       ],
     })
 
