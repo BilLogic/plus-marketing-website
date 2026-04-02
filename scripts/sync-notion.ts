@@ -8,6 +8,11 @@ import { Client } from "@notionhq/client"
 import * as fs from "fs"
 import * as path from "path"
 
+import { getResearchTopicsFromProperties } from "../src/lib/notion/queries/research"
+import { applyResearchGenres } from "../src/lib/research/research-genres"
+import type { ResearchPaper } from "../src/lib/notion/types"
+import { getTeamMemberPictureUrl } from "../src/lib/notion/utils/parse-properties"
+
 const CACHE_DIR = path.resolve(__dirname, "../src/data/cache")
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
@@ -77,7 +82,7 @@ async function syncTeam() {
       affiliation: getSelect(props.Affiliation),
       group: getSelect(props.Group),
       joinedDate: getDate(props["Joined Date"]),
-      picture: getFiles(props.Picture),
+      picture: getTeamMemberPictureUrl(props),
       title1: getRichText(props["Title 1"]),
       title2: getRichText(props["Title 2"]),
       linkedIn: getUrl(props.LinkedIn),
@@ -120,21 +125,24 @@ async function syncResearch() {
   }
   console.log("Syncing research papers...")
   const pages = await queryDatabase(dbId)
-  const papers = pages.map((page: any) => {
-    const props = page.properties
-    return {
-      id: page.id,
-      title: getTitle(props.Title),
-      authors: getMultiSelect(props.Authors),
-      publishDate: getDate(props["Publish Date"]),
-      venue: getRichText(props.Venue),
-      abstract: getRichText(props.Abstract),
-      shortDescription: getRichText(props["Short Description"]),
-      paperLink: getUrl(props["Paper Link"]),
-      presentationLink: getUrl(props["Presentation Link"]),
-      videoLink: getUrl(props["Video Link"]),
-    }
-  })
+  const papers = pages
+    .map((page: any) => {
+      const props = page.properties
+      return {
+        id: page.id,
+        title: getTitle(props.Title),
+        authors: getMultiSelect(props.Authors),
+        publishDate: getDate(props["Publish Date"]),
+        venue: getRichText(props.Venue),
+        abstract: getRichText(props.Abstract),
+        shortDescription: getRichText(props["Short Description"]),
+        topics: getResearchTopicsFromProperties(props as Record<string, unknown>),
+        paperLink: getUrl(props["Paper Link"]),
+        presentationLink: getUrl(props["Presentation Link"]),
+        videoLink: getUrl(props["Video Link"]),
+      }
+    })
+    .map((p) => applyResearchGenres(p as ResearchPaper))
   fs.writeFileSync(path.join(CACHE_DIR, "research.json"), JSON.stringify(papers, null, 2))
   console.log(`  Synced ${papers.length} research papers`)
 }

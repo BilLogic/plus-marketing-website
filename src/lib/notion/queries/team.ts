@@ -5,8 +5,8 @@ import {
   getRichText,
   getSelect,
   getDate,
-  getFiles,
   getUrl,
+  getTeamMemberPictureUrl,
 } from "@/lib/notion/utils/parse-properties"
 import { readCache, writeCache } from "@/lib/notion/utils/cache"
 
@@ -28,7 +28,7 @@ const parseTeamMember = (page: any): TeamMember => {
     affiliation: getSelect(props.Affiliation) as TeamMember["affiliation"],
     group: getSelect(props.Group) as TeamMember["group"],
     joinedDate: getDate(props["Joined Date"]),
-    picture: getFiles(props.Picture),
+    picture: getTeamMemberPictureUrl(props),
     title1: getRichText(props["Title 1"]),
     title2: getRichText(props["Title 2"]),
     linkedIn: getUrl(props.LinkedIn),
@@ -68,4 +68,10 @@ export const fetchTeamMembers = async (): Promise<TeamMember[]> => {
     const cached = await readCache<TeamMember[]>(CACHE_KEY)
     return cached ?? []
   }
+}
+
+/** Entries with Group = Researcher in the team Notion DB — used on `/for-researchers`. */
+export async function fetchResearchTeamMembers(): Promise<TeamMember[]> {
+  const members = await fetchTeamMembers()
+  return members.filter((m) => m.group === "Researcher")
 }

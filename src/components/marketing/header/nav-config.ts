@@ -51,7 +51,7 @@ export const NAV_CONFIG: NavItem[] = [
         items: [
           { label: "For Schools", href: "/for-schools", description: "Program onboarding, training, and oversight", icon: School },
           { label: "For Tutors", href: "/for-tutors", description: "Training, growth, and in-session support", icon: GraduationCap },
-          { label: "For Researchers", href: "/research", description: "Publications, data access, and analytics", icon: FileText },
+          { label: "For Researchers", href: "/for-researchers", description: "Partners, team, and how to collaborate", icon: FileText },
         ],
       },
     ],
@@ -91,7 +91,7 @@ export const FOOTER_LINKS = {
   solutions: [
     { label: "For Schools", href: "/for-schools" },
     { label: "For Tutors", href: "/for-tutors" },
-    { label: "For Researchers", href: "/research" },
+    { label: "For Researchers", href: "/for-researchers" },
   ],
   resources: [
     { label: "Publications", href: "/research" },

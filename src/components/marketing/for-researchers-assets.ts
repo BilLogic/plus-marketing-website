@@ -21,7 +21,6 @@ export const forResearchersAssets = {
   },
   index: {
     decor: "/figma/for-researchers/index-decor.png",
-    placeholder: "/figma/for-researchers/index-placeholder.png",
   },
   researchers: {
     decor: "/figma/for-researchers/researchers-decor.png",

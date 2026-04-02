@@ -22,8 +22,28 @@ const schoolsSectionH2 =
 const schoolsSectionLead = "max-w-3xl text-lg text-muted-foreground"
 
 export const SchoolsHeroSection = () => {
+  const { division, multiplication, equal } = forSchoolsAssets.mathDecor
   return (
-    <section className="relative flex min-h-[calc(100svh-5.5rem)] flex-col justify-center">
+    <section className="relative flex min-h-[calc(100svh-5.5rem)] flex-col justify-center overflow-hidden">
+      <img
+        alt=""
+        src={division}
+        className="pointer-events-none absolute left-2 top-12 hidden h-[7rem] w-[7rem] object-contain sm:left-4 sm:top-16 md:top-20 sm:block md:h-40 md:w-40"
+        aria-hidden
+      />
+      <img
+        alt=""
+        src={multiplication}
+        className="pointer-events-none absolute bottom-12 left-8 hidden h-[7rem] w-[7rem] object-contain sm:bottom-16 sm:left-10 md:bottom-20 sm:block md:h-40 md:w-40"
+        aria-hidden
+      />
+      <img
+        alt=""
+        src={equal}
+        className="pointer-events-none absolute right-2 bottom-12 hidden h-[7rem] w-[7rem] object-contain sm:right-5 sm:bottom-16 md:bottom-20 sm:block md:h-40 md:w-40"
+        aria-hidden
+      />
+
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-8 px-4 py-12 text-center sm:gap-10 sm:px-6 sm:py-16 md:py-20">
         <h1 className="flex flex-col items-center gap-3 sm:gap-4">
           <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">

@@ -7,10 +7,8 @@ import { cn } from "@/lib/utils"
 import { marketingTypography } from "@/lib/marketing-typography"
 
 /**
- * Bento cards — titles/body align with Storybook `Styles/Typography` (card title ≈ H3
- * stepped down to `text-lg`; body matches benefits scroll accordion
- * (`marketingTypography.lead` + `max-w-none`). Section header matches
- * other For Schools blocks.
+ * Bento cards — titles use `marketingTypography.bentoTitle`; body matches benefits scroll accordion
+ * (`marketingTypography.lead` + `max-w-none`). Section header matches other For Schools blocks.
  */
 const activeFillClass = "border-[#ffe8f5] bg-[#ffe8f5]"
 
@@ -124,9 +122,8 @@ export function DayToDayExperienceSection({
               </span>
               <span
                 className={cn(
-                  "w-full min-w-0 shrink-0 text-balance text-pretty font-bold leading-snug text-[#d31998]",
-                  /* Narrow bentos: slightly under Storybook H3 card title (`text-xl`) */
-                  "text-lg tracking-tight sm:text-xl"
+                  marketingTypography.bentoTitle,
+                  "w-full min-w-0 shrink-0 text-balance text-[#d31998]"
                 )}
               >
                 {step.title}
