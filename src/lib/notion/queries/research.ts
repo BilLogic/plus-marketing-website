@@ -21,6 +21,7 @@ const parseResearchPaper = (page: any): ResearchPaper => {
     venue: getRichText(props["Conference or Journal"]),
     abstract: getRichText(props.Abstract),
     shortDescription: getRichText(props["Website Summary"]),
+    topics: [],
     paperLink: getUrl(props["Link to Paper"]),
     presentationLink: getUrl(props["Link to Slides or Poster"]),
     videoLink: getUrl(props["Link to Video"]),

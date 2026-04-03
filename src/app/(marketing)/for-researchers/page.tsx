@@ -10,7 +10,7 @@ import {
   ResearchSuccessStoriesSection,
 } from "@/components/marketing/for-researchers-sections"
 import { fetchResearchPapers } from "@/lib/notion/queries/research"
-import { fetchResearchTeamMembers } from "@/lib/notion/queries/team"
+import { fetchTeamMembers as fetchResearchTeamMembers } from "@/lib/notion/queries/team"
 
 export const metadata: Metadata = {
   title: "For Researchers",

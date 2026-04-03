@@ -67,6 +67,8 @@ export type ResearchPaper = {
   venue: string | null
   abstract: string | null
   shortDescription: string | null
+  /** Scannable tags from Notion multi-select (Topics / Tags / Theme / Category)—use instead of long blurbs on marketing lists. */
+  topics: string[]
   paperLink: string | null
   presentationLink: string | null
   videoLink: string | null
