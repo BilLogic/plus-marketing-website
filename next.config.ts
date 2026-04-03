@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(process.cwd()),
   },
+  images: {
+    remotePatterns: [
+      { hostname: "*.amazonaws.com" },
+      { hostname: "*.notion.so" },
+    ],
+  },
 }
 
 export default nextConfig

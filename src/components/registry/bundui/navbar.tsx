@@ -1,13 +1,13 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
 import { ArrowLeft } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { PlusLogoImage } from "@/components/registry/bundui/plus-logo-image"
 
 /** Nav links matching PLUS website IA (Figma). */
 const NAV_LINKS = [
-  { label: "About", href: "/about" },
+  { label: "About", href: "/#about" },
   { label: "For schools", href: "/for-schools" },
   { label: "For tutors", href: "/for-tutors" },
   { label: "For researchers", href: "/#research" },
@@ -29,20 +29,12 @@ const BunduiNavbar = ({ className }: BunduiNavbarProps) => {
     >
       <div className="flex justify-center px-4 py-3 sm:px-6">
         <div className="flex w-full max-w-5xl items-center gap-10">
-          {/* Logo: use a PNG with transparent background (public/plus-logo.png) */}
           <Link
             href="/"
             className="flex shrink-0 bg-transparent transition-opacity hover:opacity-90"
             aria-label="PLUS home"
           >
-            <Image
-              src="/plus-logo.png"
-              alt="PLUS Personalized Learning²"
-              width={180}
-              height={40}
-              className="h-10 w-auto bg-transparent"
-              priority
-            />
+            <PlusLogoImage />
           </Link>
 
           {/* Nav links — left-aligned toward logo, more space between links */}
