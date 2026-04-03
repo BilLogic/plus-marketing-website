@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { hostname: "*.amazonaws.com" },
       { hostname: "*.notion.so" },
+      { hostname: "www.figma.com" },
     ],
   },
 }
