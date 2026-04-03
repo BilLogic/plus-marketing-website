@@ -1,7 +1,12 @@
-import type { ReactNode } from "react"
+import type { ComponentProps, ReactNode } from "react"
 
 import { cn } from "@/lib/utils"
+import { marketingTypography } from "@/lib/marketing-typography"
 import { Button } from "@/components/ui/button"
+
+type PrimaryButtonProps = Partial<
+  Pick<ComponentProps<typeof Button>, "variant" | "size" | "className">
+>
 
 type BunduiCtaSectionProps = {
   eyebrow?: ReactNode
@@ -11,6 +16,12 @@ type BunduiCtaSectionProps = {
   /** Omit or set to empty to hide the secondary button. */
   secondaryLabel?: string | null
   className?: string
+  /** Override primary button look (e.g. For Schools uses `plusNavCta` to match navbar). */
+  primaryButtonProps?: PrimaryButtonProps
+  /** Merged onto heading h2 (e.g. `text-teal-950`). */
+  headingClassName?: string
+  /** Merged onto body paragraph. */
+  bodyClassName?: string
 }
 
 /** Bundui-inspired CTA section with stacked copy and dual actions. */
@@ -21,12 +32,15 @@ const BunduiCtaSection = ({
   primaryLabel = "Get started",
   secondaryLabel = "Talk to sales",
   className,
+  primaryButtonProps,
+  headingClassName,
+  bodyClassName,
 }: BunduiCtaSectionProps) => {
   const showSecondary = secondaryLabel != null && secondaryLabel !== ""
   return (
     <section
       className={cn(
-        "relative overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-tr from-background via-background/95 to-primary/5 px-6 py-10 sm:px-10 sm:py-12",
+        "relative overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-tr from-background via-background/95 to-primary/5 p-5 sm:p-6",
         className
       )}
     >
@@ -36,14 +50,16 @@ const BunduiCtaSection = ({
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             {eyebrow}
           </p>
-          <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
+          <h2 className={cn(marketingTypography.h2, headingClassName)}>
             {heading}
           </h2>
-          <p className="max-w-prose text-sm text-muted-foreground">{body}</p>
+          <p className={cn(marketingTypography.lead, bodyClassName)}>{body}</p>
         </div>
         <div className="flex flex-col items-start gap-3 md:items-end">
           <div className="flex flex-wrap items-center gap-3">
-            <Button size="lg">{primaryLabel}</Button>
+            <Button size="lg" {...primaryButtonProps}>
+              {primaryLabel}
+            </Button>
             {showSecondary && (
               <Button size="lg" variant="outline">
                 {secondaryLabel}

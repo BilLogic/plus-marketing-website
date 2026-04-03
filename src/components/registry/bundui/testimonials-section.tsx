@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { marketingTypography } from "@/lib/marketing-typography"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 type BunduiTestimonial = {
@@ -15,6 +16,14 @@ type BunduiTestimonialsSectionProps = {
   sectionLabel?: string
   sectionTitle?: string
   sectionDescription?: string
+  /** Merged onto section h2 (e.g. `text-teal-950`). */
+  sectionTitleClassName?: string
+  /** Merged onto section description. */
+  sectionDescriptionClassName?: string
+  /** Merged onto blockquote (defaults to body + muted). */
+  quoteClassName?: string
+  /** Merged onto testimonial author name. */
+  authorNameClassName?: string
 }
 
 /** Bundui-inspired testimonial grid for social proof. */
@@ -46,11 +55,15 @@ const BunduiTestimonialsSection = ({
   sectionLabel = "Testimonials",
   sectionTitle = "Teams shipping better marketing sites with Plus.",
   sectionDescription = "Inspired by Bundui marketing testimonial layouts and adapted to our token system.",
+  sectionTitleClassName,
+  sectionDescriptionClassName,
+  quoteClassName,
+  authorNameClassName,
 }: BunduiTestimonialsSectionProps) => {
   return (
     <section
       className={cn(
-        "rounded-3xl border border-border/70 bg-background/80 px-6 py-10 sm:px-10 sm:py-12",
+        "rounded-3xl border border-border/70 bg-background/80 p-5 sm:p-6",
         className
       )}
     >
@@ -58,20 +71,28 @@ const BunduiTestimonialsSection = ({
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
           {sectionLabel}
         </p>
-        <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
+        <h2 className={cn(marketingTypography.h2, sectionTitleClassName)}>
           {sectionTitle}
         </h2>
-        <p className="text-sm text-muted-foreground">
+        <p
+          className={cn(marketingTypography.lead, sectionDescriptionClassName)}
+        >
           {sectionDescription}
         </p>
       </header>
-      <div className="mt-8 grid gap-4 md:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:gap-6 md:grid-cols-3 lg:gap-8">
         {testimonials.map((testimonial) => (
           <figure
             key={testimonial.name}
-            className="flex h-full flex-col justify-between rounded-2xl border border-border/70 bg-card/80 p-5 text-sm shadow-sm"
+            className="flex h-full flex-col justify-between rounded-2xl border border-border/70 bg-card/80 p-5 shadow-sm sm:p-6"
           >
-            <blockquote className="text-sm text-muted-foreground">
+            <blockquote
+              className={cn(
+                marketingTypography.body,
+                "text-muted-foreground",
+                quoteClassName
+              )}
+            >
               “{testimonial.quote}”
             </blockquote>
             <figcaption className="mt-4 flex items-center gap-3">
@@ -82,7 +103,14 @@ const BunduiTestimonialsSection = ({
                 <AvatarFallback>{testimonial.name.slice(0, 2).toUpperCase()}</AvatarFallback>
               </Avatar>
               <div className="text-xs">
-                <p className="font-medium text-foreground">{testimonial.name}</p>
+                <p
+                  className={cn(
+                    "font-medium text-foreground",
+                    authorNameClassName
+                  )}
+                >
+                  {testimonial.name}
+                </p>
                 <p className="text-muted-foreground">
                   {testimonial.role} · {testimonial.company}
                 </p>

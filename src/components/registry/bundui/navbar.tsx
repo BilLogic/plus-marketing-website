@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { plusNavCtaLinkClassName } from "@/components/ui/button"
 import { PlusLogoImage } from "@/components/registry/bundui/plus-logo-image"
 
 /** Nav links matching PLUS website IA (Figma). */
@@ -53,13 +54,11 @@ const BunduiNavbar = ({ className }: BunduiNavbarProps) => {
             ))}
           </nav>
 
-          {/* CTA: bg #A6EDF4, text and arrow #004247, not bold */}
           <Link
             href="/for-tutors"
-            className="ml-auto flex shrink-0 items-center gap-3 rounded-full px-4 py-2 text-base font-normal transition-opacity hover:opacity-95"
-            style={{ backgroundColor: "#A6EDF4", color: "#004247" }}
+            className={cn(plusNavCtaLinkClassName, "ml-auto shrink-0")}
           >
-            <ArrowLeft className="size-4" aria-hidden style={{ color: "#004247" }} />
+            <ArrowLeft className="size-4" aria-hidden />
             Tutor Login
           </Link>
         </div>

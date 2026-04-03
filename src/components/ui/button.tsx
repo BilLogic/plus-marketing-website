@@ -20,6 +20,9 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
+        /** PLUS nav “Tutor Login” pill — bg #A6EDF4, text #004247 */
+        plusNavCta:
+          "border-transparent bg-[#A6EDF4] text-[#004247] shadow-none hover:bg-[#A6EDF4] hover:text-[#004247] hover:opacity-95 active:translate-y-0 dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4] dark:hover:text-[#004247] [&_svg]:text-[#004247]",
       },
       size: {
         default:
@@ -33,6 +36,9 @@ const buttonVariants = cva(
         "icon-sm":
           "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
         "icon-lg": "size-9",
+        /** Pill used with `plusNavCta` — matches BunduiNavbar Tutor Login */
+        navCta:
+          "h-auto min-h-10 gap-3 rounded-full px-4 py-2 text-base font-normal has-data-[icon=inline-end]:pr-4 has-data-[icon=inline-start]:pl-4 [&_svg:not([class*='size-'])]:size-4",
       },
     },
     defaultVariants: {
@@ -57,4 +63,10 @@ function Button({
   )
 }
 
-export { Button, buttonVariants }
+/** Class string for `<Link>` CTAs that should match `Button variant="plusNavCta" size="navCta"`. */
+const plusNavCtaLinkClassName = cn(
+  buttonVariants({ variant: "plusNavCta", size: "navCta" }),
+  "inline-flex items-center justify-center no-underline"
+)
+
+export { Button, buttonVariants, plusNavCtaLinkClassName }

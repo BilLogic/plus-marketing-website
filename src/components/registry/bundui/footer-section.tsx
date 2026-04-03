@@ -9,13 +9,9 @@ import {
   type PlusFooterLink,
 } from "@/lib/plus-footer-ia"
 
-export type FooterNewsletterButtonStyle = "marketing" | "default"
-
 type BunduiFooterSectionProps = {
   productName?: string
   className?: string
-  /** Marketing = teal pill CTA; default = Storybook default Button (e.g. For Schools). */
-  newsletterButtonStyle?: FooterNewsletterButtonStyle
 }
 
 function FooterNavLink({ link }: { link: PlusFooterLink }) {
@@ -44,7 +40,6 @@ function FooterNavLink({ link }: { link: PlusFooterLink }) {
 const BunduiFooterSection = ({
   productName = "PLUS",
   className,
-  newsletterButtonStyle = "marketing",
 }: BunduiFooterSectionProps) => {
   return (
     <footer
@@ -66,18 +61,14 @@ const BunduiFooterSection = ({
               aria-label="Email for newsletter"
               className="h-10 flex-1 rounded-full border-white/30 bg-transparent text-white placeholder:text-white/50"
             />
-            {newsletterButtonStyle === "default" ? (
-              <Button type="submit" className="shrink-0">
-                Sign up
-              </Button>
-            ) : (
-              <Button
-                type="submit"
-                className="h-10 shrink-0 rounded-full bg-teal-300 px-6 text-teal-950 hover:bg-teal-200"
-              >
-                Sign up
-              </Button>
-            )}
+            <Button
+              type="submit"
+              variant="plusNavCta"
+              size="navCta"
+              className="shrink-0"
+            >
+              Sign up
+            </Button>
           </form>
         </div>
       </div>

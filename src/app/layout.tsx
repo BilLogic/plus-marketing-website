@@ -27,11 +27,15 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${dmSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${dmSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
+      >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
+          forcedTheme="light"
           disableTransitionOnChange
         >
           {children}
