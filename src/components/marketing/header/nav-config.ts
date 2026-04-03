@@ -9,6 +9,7 @@ import {
   School,
   Handshake,
   Briefcase,
+  ScrollText,
 } from "lucide-react"
 
 export type NavDropdownItem = {
@@ -61,7 +62,7 @@ export const NAV_CONFIG: NavItem[] = [
     children: [
       {
         items: [
-          { label: "Publications", href: "/research", description: "Browse 40+ peer-reviewed papers", icon: FileText },
+          { label: "Publications", href: "/research", description: "Browse 40+ peer-reviewed papers", icon: ScrollText },
           { label: "News", href: "/about/news", description: "Updates and media coverage", icon: Newspaper },
           { label: "Media Kit", href: "/media-kit", description: "Press assets, logos, and brand guidelines", icon: Image },
         ],

@@ -8,7 +8,6 @@ import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
@@ -39,12 +38,11 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
                           </li>
                         )}
                         {section.items.map((child) => (
-                          <li key={child.href + child.label}>
-                            <NavigationMenuLink
+                          <li key={`${item.label}-${child.href}-${child.label}`}>
+                            <Link
                               href={child.href}
-                              closeOnClick
-                              render={<Link href={child.href} />}
-                              className="flex select-none items-start gap-3 rounded-md p-3 leading-none no-underline"
+                              data-slot="navigation-menu-link"
+                              className="flex select-none items-start gap-3 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-muted focus:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1"
                             >
                               {child.icon && (
                                 <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-md border border-border/50 bg-muted/50">
@@ -66,7 +64,7 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
                                   </span>
                                 )}
                               </div>
-                            </NavigationMenuLink>
+                            </Link>
                           </li>
                         ))}
                       </Fragment>
@@ -75,14 +73,13 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
                 </NavigationMenuContent>
               </>
             ) : (
-              <NavigationMenuLink
+              <Link
                 href={item.href!}
-                closeOnClick
-                render={<Link href={item.href!} />}
+                data-slot="navigation-menu-link"
                 className={cn(navigationMenuTriggerStyle(), "text-sm")}
               >
                 {item.label}
-              </NavigationMenuLink>
+              </Link>
             )}
           </NavigationMenuItem>
         ))}
