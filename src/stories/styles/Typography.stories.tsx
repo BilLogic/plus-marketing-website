@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 
 import { marketingTypography } from "@/lib/marketing-typography"
+import { cn } from "@/lib/utils"
 
 const meta = {
   title: "Styles/Typography",
@@ -46,10 +47,15 @@ export const Story: Story = {
                 <code className="text-xs">{"<h3>"}</code> (section headline stays{" "}
                 <code className="text-xs">{"<h2>"}</code>).
               </p>
-              <p className="text-pretty text-lg font-bold leading-snug tracking-tight text-[#d31998] sm:text-xl">
-                Dense card / bento title — <code className="text-xs">text-lg</code>{" "}
-                default, <code className="text-xs">sm:text-xl</code> (Day-to-Day
-                Experience, For Schools).
+              <p
+                className={cn(
+                  marketingTypography.bentoTitle,
+                  "text-[#d31998]"
+                )}
+              >
+                Dense card / bento title —{" "}
+                <code className="text-xs">marketingTypography.bentoTitle</code> (
+                For Schools Day-to-Day, For Researchers highlights).
               </p>
             </div>
           </section>

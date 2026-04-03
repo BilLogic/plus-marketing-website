@@ -1,9 +1,21 @@
 import * as React from "react"
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 import { CalendarIcon } from "lucide-react"
-import { format } from "date-fns"
 
 import { cn } from "@/lib/utils"
+
+const formatLongDate = (d: Date) =>
+  d.toLocaleDateString(undefined, { dateStyle: "long" })
+
+const formatMonthDay = (d: Date) =>
+  d.toLocaleDateString(undefined, { month: "short", day: "numeric" })
+
+const formatMonthDayYear = (d: Date) =>
+  d.toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  })
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
@@ -37,7 +49,7 @@ const DatePickerDemo = () => {
         }
       >
         <CalendarIcon className="mr-2 h-4 w-4" />
-        {date ? format(date, "PPP") : <span>Pick a date</span>}
+        {date ? formatLongDate(date) : <span>Pick a date</span>}
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
@@ -61,8 +73,8 @@ const DateRangeDemo = () => {
 
   const label = from
     ? to
-      ? `${format(from, "LLL dd")} – ${format(to, "LLL dd, y")}`
-      : format(from, "LLL dd, y")
+      ? `${formatMonthDay(from)} – ${formatMonthDayYear(to)}`
+      : formatMonthDayYear(from)
     : "Pick a date range"
 
   return (

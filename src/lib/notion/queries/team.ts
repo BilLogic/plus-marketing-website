@@ -71,3 +71,9 @@ export const fetchTeamMembers = async (): Promise<TeamMember[]> => {
     return cached ?? []
   }
 }
+
+/** Entries with Group = Researcher in the team Notion DB — used on `/for-researchers`. */
+export async function fetchResearchTeamMembers(): Promise<TeamMember[]> {
+  const members = await fetchTeamMembers()
+  return members.filter((m) => m.group === "Researcher")
+}

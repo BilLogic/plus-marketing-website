@@ -44,3 +44,37 @@ export const getFiles = (prop: any): string | null => {
     ? file.external?.url ?? null
     : file.file?.url ?? null
 }
+
+/** Notion databases often name the headshot column differently — try files, then URL fields. */
+const TEAM_HEADSHOT_FILES = [
+  "Picture",
+  "Photo",
+  "Image",
+  "Headshot",
+  "Avatar",
+  "Profile photo",
+] as const
+
+const TEAM_HEADSHOT_URLS = [
+  "Picture URL",
+  "Photo URL",
+  "Image URL",
+  "Headshot URL",
+  "Photo link",
+] as const
+
+/**
+ * Resolves a team member headshot URL from page properties.
+ * Matches `/about/team` + `/api/team-photo` so naming stays consistent.
+ */
+export function getTeamMemberPictureUrl(props: Record<string, any>): string | null {
+  for (const key of TEAM_HEADSHOT_FILES) {
+    const url = getFiles(props[key])
+    if (url) return url
+  }
+  for (const key of TEAM_HEADSHOT_URLS) {
+    const url = getUrl(props[key])
+    if (url) return url
+  }
+  return null
+}
