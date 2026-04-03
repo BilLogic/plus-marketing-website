@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     "PLUS research partners, highlights, index, and team — lab research and learning science.",
 }
 
-/** Match `/research` cache window when listing publications. */
-export const revalidate = 3600
+/** ISR — keep in sync with deployed Netlify builds and Notion-backed content. */
+export const revalidate = 300
 
 /** Same page shell as `for-schools/page.tsx` — vertical rhythm + max width. */
 const ForResearchersPage = async () => {

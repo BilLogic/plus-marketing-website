@@ -132,16 +132,24 @@ export const ResearchersHeroSection = () => {
           </span>
         </h1>
         <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5">
-          <Button variant="plusNavCta" size="navCta" className="h-12 min-w-[12.5rem] px-10 text-base">
+          <Link
+            href="/research"
+            className={cn(
+              plusNavCtaLinkClassName,
+              "h-12 min-w-[12.5rem] justify-center px-10 text-base"
+            )}
+          >
             Our publications
-          </Button>
-          <Button
-            variant="outline"
-            size="navCta"
-            className="h-12 min-w-[12.5rem] rounded-full border-2 border-teal-900 bg-white px-10 text-base text-teal-950 hover:bg-teal-50"
+          </Link>
+          <Link
+            href={`#${forResearchersSectionIds.researchers}`}
+            className={cn(
+              buttonVariants({ variant: "outline", size: "navCta" }),
+              "h-12 min-w-[12.5rem] justify-center rounded-full border-2 border-teal-900 bg-white px-10 text-base text-teal-950 hover:bg-teal-50"
+            )}
           >
             Our researchers
-          </Button>
+          </Link>
         </div>
       </div>
     </section>
