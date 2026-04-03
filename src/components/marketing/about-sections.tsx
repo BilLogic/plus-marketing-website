@@ -423,7 +423,7 @@ export function AboutLatestSection() {
           Stay up to date with the latest news, updates, and opportunities at PLUS
         </p>
       </AboutSectionTitleWithDecor>
-      <div className="grid gap-4 sm:gap-6 lg:grid-cols-2 lg:grid-rows-2">
+      <div className="grid gap-4 sm:gap-6 lg:gap-8 lg:grid-cols-2 lg:grid-rows-2">
         <article className="flex min-h-[280px] flex-col rounded-3xl bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6 lg:row-span-2 lg:min-h-0">
           <div className="flex items-center gap-3">
             <span className="flex size-10 items-center justify-center rounded-full bg-[#A27707] text-white">
@@ -564,7 +564,7 @@ export function AboutFinalCtaSection() {
         <p className={aboutFinalCtaLead}>
           Want to contribute? Explore our full-time and part-time tutoring opportunities.
         </p>
-        <AboutLandingCtaRow />
+        <AboutLandingCtaRow className="mt-8" />
       </div>
     </section>
   )

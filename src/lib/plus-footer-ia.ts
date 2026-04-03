@@ -26,6 +26,15 @@ export const forSchoolsSectionIds = {
   register: "register-your-institution",
 } as const
 
+/** Sections on /about — IDs on `about-sections.tsx` */
+export const aboutSectionIds = {
+  foundations: "foundations",
+  team: "team",
+  latest: "latest",
+  successStories: "success-stories",
+  learnMore: "learn-more",
+} as const
+
 /** Sections on /for-tutors — IDs on `for-tutors-sections.tsx` */
 export const forTutorsSectionIds = {
   compensation: "compensation",

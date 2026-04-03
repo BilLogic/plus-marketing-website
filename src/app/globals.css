@@ -299,3 +299,24 @@
     @apply font-sans;
   }
 }
+
+/* For Schools — partner logos: constant-speed horizontal loop (see SchoolsCommunitySection). */
+@keyframes partner-logo-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.partner-marquee-track {
+  animation: partner-logo-marquee 80s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}

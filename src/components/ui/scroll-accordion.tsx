@@ -10,10 +10,16 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 
+export type ScrollAccordionTitleRender = (args: { isOpen: boolean }) => React.ReactNode
+
 export type ScrollAccordionItem = {
   /** Stable id — passed to `AccordionItem value` and used for scroll sync. */
   value: string
-  title: React.ReactNode
+  /**
+   * Row label when collapsed. Pass a function to vary by `isOpen` (e.g. full row when
+   * closed, `sr-only` when open so the expanded panel can own the visible title).
+   */
+  title: React.ReactNode | ScrollAccordionTitleRender
   children: React.ReactNode
 }
 
@@ -67,6 +73,8 @@ export type ScrollAccordionProps = {
   centerActiveOffsetPx?: number
   /** Minimum ms between programmatic center scrolls. */
   centerActiveCooldownMs?: number
+  /** Hide chevron indicators on each row trigger (Figma-aligned marketing accordions). */
+  hideTriggerChevron?: boolean
 }
 
 /**
@@ -100,6 +108,7 @@ function ScrollAccordion({
   centerActiveInViewport = false,
   centerActiveOffsetPx = -24,
   centerActiveCooldownMs = 320,
+  hideTriggerChevron = false,
 }: ScrollAccordionProps) {
   const containerScrollRef = React.useRef<HTMLDivElement>(null)
   const trackOuterRef = React.useRef<HTMLDivElement>(null)
@@ -343,6 +352,12 @@ function ScrollAccordion({
 
   const isContainer = scrollRoot === "container"
 
+  const renderItemTitle = (
+    title: ScrollAccordionItem["title"],
+    isItemOpen: boolean
+  ) =>
+    typeof title === "function" ? title({ isOpen: isItemOpen }) : title
+
   const accordion = (
     <Accordion
       value={openValues}
@@ -352,7 +367,7 @@ function ScrollAccordion({
         )
       }
       className={cn(
-        "flex w-full flex-col rounded-xl border border-border/60 bg-card/70",
+        "flex w-full flex-col rounded-xl bg-transparent",
         className
       )}
     >
@@ -370,9 +385,10 @@ function ScrollAccordion({
             )}
           >
             <AccordionTrigger
+              hideChevron={hideTriggerChevron}
               className={cn("py-4 text-left sm:py-5", triggerClassName)}
             >
-              {item.title}
+              {renderItemTitle(item.title, openValues[0] === item.value)}
             </AccordionTrigger>
             <AccordionContent
               className={cn("pb-5 pt-0 sm:pb-6", contentClassName)}

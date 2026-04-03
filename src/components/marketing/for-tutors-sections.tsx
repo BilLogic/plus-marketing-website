@@ -424,28 +424,30 @@ export const TutorsCertificationSection = () => {
         </div>
 
         <div className="flex flex-col gap-8 rounded-3xl bg-[#FFF1C7] px-6 py-7 dark:bg-[#FFF1C7]/12 md:flex-row md:items-stretch md:gap-10 md:px-8 md:py-8">
-          <div className="flex flex-1 flex-col gap-4">
-            <div className="flex items-center gap-4">
-              <span
-                className="flex size-10 shrink-0 items-center justify-center rounded-full bg-amber-800 text-white dark:bg-amber-700"
-                aria-hidden
-              >
-                <Star className="size-5" strokeWidth={2.25} />
-              </span>
-              <h3 className="min-w-0 text-balance text-lg font-bold tracking-tight text-amber-900 dark:text-amber-100 sm:text-xl">
-                Tutor Certification &amp; Digital Badges
-              </h3>
+          <div className="flex flex-1 gap-4">
+            <span
+              className="flex size-10 shrink-0 items-center justify-center self-start rounded-full bg-[#A27707] text-white"
+              aria-hidden
+            >
+              <Star className="size-5" strokeWidth={2.25} />
+            </span>
+            <div className="flex flex-1 flex-col justify-between gap-4">
+              <div className="space-y-4">
+                <h3 className="min-w-0 text-balance text-lg font-bold tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-xl">
+                  Tutor Certification &amp; Digital Badges
+                </h3>
+                <p className="text-base leading-relaxed text-muted-foreground">
+                  Complete all training to get sharable badges for resumes and social
+                  media.
+                </p>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Note: Available to institutions only. Contact us to activate.
+                </p>
+              </div>
+              <Button className="h-11 w-fit rounded-full bg-amber-300 px-8 font-medium text-amber-950 hover:bg-amber-400">
+                Register now
+              </Button>
             </div>
-            <p className="text-center text-base leading-relaxed text-muted-foreground sm:text-left">
-              Complete all training to get sharable badges for resumes and social
-              media.
-            </p>
-            <p className="text-center text-sm leading-relaxed text-muted-foreground sm:text-left">
-              Note: Available to institutions only. Contact us to activate.
-            </p>
-            <Button className="mx-auto mt-auto h-11 w-fit rounded-full bg-amber-400 px-8 font-medium text-teal-950 hover:bg-amber-300 sm:mx-0">
-              Register now
-            </Button>
           </div>
           <div className="min-w-0 flex-1 overflow-hidden rounded-2xl border border-border/60 bg-white shadow-sm dark:border-border dark:bg-card">
             <Image
@@ -702,7 +704,7 @@ export const TutorsImpactCTA = () => {
           Join a community of tutors committed to growth, equity, and meaningful
           math mentorship.
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Button
             className="h-11 rounded-full border-0 bg-[#A6EDF4] px-8 text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
           >

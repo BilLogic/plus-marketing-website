@@ -36,10 +36,10 @@ export const NAV_CONFIG: NavItem[] = [
     children: [
       {
         items: [
-          { label: "Our Story", href: "/about", description: "Learn about PLUS's mission", icon: BookOpen },
-          { label: "Our Team", href: "/about/team", description: "Meet the people behind PLUS", icon: Users },
-          { label: "News", href: "/about/news", description: "Latest updates and coverage", icon: Newspaper },
-          { label: "Success Stories", href: "/success-stories", description: "Impact across schools and communities", icon: Trophy },
+          { label: "Our Story", href: "/about#foundations", description: "Learn about PLUS's mission", icon: BookOpen },
+          { label: "Our Team", href: "/about#team", description: "Meet the people behind PLUS", icon: Users },
+          { label: "News", href: "/about#latest", description: "Latest updates and coverage", icon: Newspaper },
+          { label: "Success Stories", href: "/about#success-stories", description: "Impact across schools and communities", icon: Trophy },
         ],
       },
     ],
@@ -73,8 +73,8 @@ export const NAV_CONFIG: NavItem[] = [
     children: [
       {
         items: [
-          { label: "Careers", href: "#", description: "Join the PLUS team", icon: Briefcase },
-          { label: "Partnerships", href: "#", description: "Collaborate with us", icon: Handshake },
+          { label: "Careers", href: "/get-involved#careers", description: "Join the PLUS team", icon: Briefcase },
+          { label: "Partnerships", href: "/get-involved#partnerships", description: "Collaborate with us", icon: Handshake },
         ],
       },
     ],
@@ -83,10 +83,10 @@ export const NAV_CONFIG: NavItem[] = [
 
 export const FOOTER_LINKS = {
   about: [
-    { label: "Our Story", href: "/about" },
-    { label: "Our Team", href: "/about/team" },
-    { label: "News", href: "/about/news" },
-    { label: "Success Stories", href: "/success-stories" },
+    { label: "Our Story", href: "/about#foundations" },
+    { label: "Our Team", href: "/about#team" },
+    { label: "News", href: "/about#latest" },
+    { label: "Success Stories", href: "/about#success-stories" },
   ],
   solutions: [
     { label: "For Schools", href: "/for-schools" },
