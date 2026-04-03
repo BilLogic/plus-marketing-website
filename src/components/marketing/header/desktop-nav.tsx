@@ -1,6 +1,7 @@
 "use client"
 
 import { Fragment } from "react"
+import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { NAV_CONFIG } from "./nav-config"
 import {
@@ -41,6 +42,8 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
                           <li key={child.href + child.label}>
                             <NavigationMenuLink
                               href={child.href}
+                              closeOnClick
+                              render={<Link href={child.href} />}
                               className="flex select-none items-start gap-3 rounded-md p-3 leading-none no-underline"
                             >
                               {child.icon && (
@@ -74,6 +77,8 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
             ) : (
               <NavigationMenuLink
                 href={item.href!}
+                closeOnClick
+                render={<Link href={item.href!} />}
                 className={cn(navigationMenuTriggerStyle(), "text-sm")}
               >
                 {item.label}
