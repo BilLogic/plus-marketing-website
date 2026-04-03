@@ -668,9 +668,40 @@ export const ResearchIndexSection = ({
   )
 }
 
-/** Inset window on top of the placeholder card art (must stay `absolute` — do not add `relative` on the same node or the box collapses). */
-const RESEARCHER_PHOTO_INSET =
-  "absolute inset-[9%_8%_11%_8%] z-[1] overflow-hidden rounded-[22px] sm:inset-[8%_7%_10%_7%] sm:rounded-[24px]"
+/** One image fills the card header — proxy URL → Notion URL → Figma placeholder. */
+function ResearcherCardPhoto({
+  memberId,
+  name,
+  notionPictureUrl,
+  placeholderSrc,
+}: {
+  memberId: string
+  name: string
+  notionPictureUrl: string | null
+  placeholderSrc: string
+}) {
+  const [src, setSrc] = useState(`/api/team-photo/${memberId}`)
+
+  return (
+    <img
+      src={src}
+      alt={name}
+      className="h-full w-full object-cover object-[center_20%]"
+      loading="lazy"
+      decoding="async"
+      referrerPolicy="no-referrer"
+      onError={() => {
+        if (src.startsWith("/api/") && notionPictureUrl) {
+          setSrc(notionPictureUrl)
+          return
+        }
+        if (src !== placeholderSrc) {
+          setSrc(placeholderSrc)
+        }
+      }}
+    />
+  )
+}
 
 export const ResearchersGridSection = ({ members }: { members: TeamMember[] }) => {
   const fallbackPhoto = forResearchersAssets.researchers.fallbackPhoto
@@ -692,37 +723,13 @@ export const ResearchersGridSection = ({ members }: { members: TeamMember[] }) =
           {members.map((member) => {
             return (
               <article key={member.id} className="flex flex-col overflow-hidden rounded-[30px] bg-white">
-                <div className="relative aspect-[344/322] w-full overflow-hidden bg-gray-100">
-                  {/* Base: Figma placeholder card (empty photo slot) */}
-                  <img
-                    alt=""
-                    src={fallbackPhoto}
-                    className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-                    aria-hidden
+                <div className="relative aspect-[344/322] w-full overflow-hidden rounded-t-[30px] bg-muted">
+                  <ResearcherCardPhoto
+                    memberId={member.id}
+                    name={member.name}
+                    notionPictureUrl={member.picture}
+                    placeholderSrc={fallbackPhoto}
                   />
-                  {/*
-                    Load via /api/team-photo/[id] so each request gets a fresh Notion file URL
-                    (embedded URLs expire ~1h). Falls back to direct member.picture if the proxy fails.
-                  */}
-                  <div className={RESEARCHER_PHOTO_INSET}>
-                    <img
-                      src={`/api/team-photo/${member.id}`}
-                      alt={member.name}
-                      className="absolute inset-0 h-full w-full object-cover object-top"
-                      loading="lazy"
-                      decoding="async"
-                      referrerPolicy="no-referrer"
-                      onError={(e) => {
-                        const img = e.currentTarget
-                        if (member.picture && !img.dataset.fallbackTried) {
-                          img.dataset.fallbackTried = "1"
-                          img.src = member.picture
-                          return
-                        }
-                        img.parentElement?.remove()
-                      }}
-                    />
-                  </div>
                 </div>
                 <div className="flex flex-1 flex-col gap-2.5 bg-sky-100 px-6 py-6">
                   <h3 className="text-xl font-bold text-teal-950">{member.name}</h3>
