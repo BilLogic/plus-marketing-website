@@ -286,7 +286,7 @@ const VOICES_STORY_CARD =
 const VOICES_QUOTE_PANEL =
   "flex h-[280px] flex-col items-center justify-center overflow-y-auto rounded-[30px] bg-white px-5 py-6 sm:h-[300px] sm:px-6 lg:h-[320px]"
 
-const STAT_BLOCK = "flex max-w-[473px] flex-col items-start gap-[18px]"
+const STAT_BLOCK = "flex max-w-lg flex-col items-start gap-5 sm:gap-6"
 
 /**
  * Impact — Figma `1579:1929` “Serving Low-Income Students”: 2×2 grid (students + map | schools + tutors).
@@ -294,8 +294,8 @@ const STAT_BLOCK = "flex max-w-[473px] flex-col items-start gap-[18px]"
 export const PlusImpactStatsSection = () => {
   return (
     <section id="impact" className={cn("relative", schoolsSectionGap)}>
-      <div className={schoolsHeaderRow}>
-        <div className={schoolsHeaderText}>
+      <div className={cn(schoolsHeaderRow, "mb-10 sm:mb-12 lg:mb-14")}>
+        <div className={cn(schoolsHeaderText, "space-y-4 sm:space-y-5")}>
           <h2 className={schoolsSectionTitle}>Serving Low-Income Students</h2>
           <p className={schoolsSectionLead}>
             Bridging the opportunity gap in math education by empowering schools and community tutors with
@@ -310,7 +310,7 @@ export const PlusImpactStatsSection = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-8 lg:gap-x-10 lg:gap-y-12">
+      <div className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 md:gap-x-10 md:gap-y-14 lg:gap-x-12 lg:gap-y-16">
         {/* Row 1 — students + map */}
         <div className={STAT_BLOCK}>
           <div className="relative size-[58px] shrink-0">
