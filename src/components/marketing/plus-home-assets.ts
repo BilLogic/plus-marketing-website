@@ -37,3 +37,29 @@ export const plusHomeAwards = {
   headerDecor: "https://www.figma.com/api/mcp/asset/bf21a364-d6ed-4908-90be-93a4a0d508a2",
   headerCharacter: "https://www.figma.com/api/mcp/asset/6d9eb07c-ab64-4f9d-8357-b5b9d82c051a",
 } as const
+
+/** Figma `1579:1929` — US map in 2×2 impact grid (`1704:1896`). */
+export const plusHomeImpactMap =
+  "https://www.figma.com/api/mcp/asset/7ebb6bf0-0b5b-4338-9ce0-8781905c7ef1"
+
+/**
+ * Figma `1707:1917` Smart Tech, Smarter Learning — pink cards + screenshots.
+ * MCP URLs may expire; export to `/public/figma/home/` when stabilizing assets.
+ */
+export const plusHomeSmartTech = {
+  supervisor: "https://www.figma.com/api/mcp/asset/b54ac288-9952-41dc-a8bb-e0ff9fbd261a",
+  aiTutor: "https://www.figma.com/api/mcp/asset/5ac6cbb5-4443-4329-a757-7d03d242a188",
+  goalSetting: "https://www.figma.com/api/mcp/asset/f1944517-229f-4adf-9f76-de7f027edec0",
+  iconSupervisor: "https://www.figma.com/api/mcp/asset/ffe41b84-8675-4834-b017-c463046d2f49",
+  iconAiTutor: "https://www.figma.com/api/mcp/asset/c36f008a-dada-4f1b-814c-c71d0399bfcc",
+  iconGoal: "https://www.figma.com/api/mcp/asset/b9ffe870-414d-4a6c-8957-b8015884880c",
+  headerDoodle: "https://www.figma.com/api/mcp/asset/d11bdefe-ebb2-4bd5-b1e3-8b8e9ea50e5b",
+} as const
+
+/** Figma `1708:2035` Built on the Science of Learning — papers + icon. */
+export const plusHomeScience = {
+  iconPapers: "https://www.figma.com/api/mcp/asset/63cdc74f-0701-4cc8-916f-63edcd518ada",
+  papersStackA: "https://www.figma.com/api/mcp/asset/55d28495-937f-4b8a-abef-c658de1fd03c",
+  papersStackB: "https://www.figma.com/api/mcp/asset/6ef30fbf-5621-4f8d-abe7-e051a9cecdde",
+  headerDoodle: "https://www.figma.com/api/mcp/asset/5f1665e4-1489-4d84-9a3b-fb9225b3649b",
+} as const

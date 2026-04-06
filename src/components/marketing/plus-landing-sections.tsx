@@ -9,6 +9,9 @@ import {
   plusHomeAwards,
   plusHomeHero,
   plusHomeImpactDecor,
+  plusHomeImpactMap,
+  plusHomeScience,
+  plusHomeSmartTech,
   plusHomeTestimonialAvatars,
 } from "@/components/marketing/plus-home-assets"
 import { marketingTypography } from "@/lib/marketing-typography"
@@ -283,34 +286,12 @@ const VOICES_STORY_CARD =
 const VOICES_QUOTE_PANEL =
   "flex h-[280px] flex-col items-center justify-center overflow-y-auto rounded-[30px] bg-white px-5 py-6 sm:h-[300px] sm:px-6 lg:h-[320px]"
 
+const STAT_BLOCK = "flex max-w-[473px] flex-col items-start gap-[18px]"
+
 /**
- * Impact — Figma “Serving Low-Income Students”: three columns, icons, cyan pill CTAs.
+ * Impact — Figma `1579:1929` “Serving Low-Income Students”: 2×2 grid (students + map | schools + tutors).
  */
 export const PlusImpactStatsSection = () => {
-  const columns = [
-    {
-      iconSrc: plusHomeImpactDecor.iconSchools,
-      stat: "13+ schools",
-      desc: "PLUS tutors provide instructional support to middle-school math learners during the school day.",
-      cta: "Get PLUS tutoring",
-      href: "/for-schools",
-    },
-    {
-      iconSrc: plusHomeImpactDecor.iconTutors,
-      stat: "500+ tutors",
-      desc: "University and community tutors trained to support middle school math learners.",
-      cta: "Become a tutor",
-      href: "/for-tutors",
-    },
-    {
-      iconSrc: plusHomeImpactDecor.iconStudents,
-      stat: "5000+ students",
-      desc: "Students across the country receiving personalized math support through PLUS.",
-      cta: "Learn more about toolkit",
-      href: "/for-tutors",
-    },
-  ] as const
-
   return (
     <section id="impact" className={cn("relative", schoolsSectionGap)}>
       <div className={schoolsHeaderRow}>
@@ -329,32 +310,274 @@ export const PlusImpactStatsSection = () => {
         />
       </div>
 
-      <div className="grid gap-8 md:grid-cols-3 md:gap-8 lg:gap-10">
-        {columns.map(({ iconSrc, stat, desc, cta, href }) => (
-          <div key={stat} className="flex flex-col items-start gap-[18px]">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-8 lg:gap-x-10 lg:gap-y-12">
+        {/* Row 1 — students + map */}
+        <div className={STAT_BLOCK}>
+          <div className="relative size-[58px] shrink-0">
+            <Image
+              src={plusHomeImpactDecor.iconStudents}
+              alt=""
+              width={58}
+              height={58}
+              className="block size-[58px] object-contain"
+              unoptimized
+            />
+          </div>
+          <p className={cn("text-2xl font-bold leading-tight sm:text-3xl", IMPACT_STAT)}>5000+ students</p>
+          <p className={schoolsSectionLead}>
+            Students across the country receiving personalized math support through PLUS.
+          </p>
+          <Link
+            href="/for-tutors"
+            className={cn(
+              buttonVariants({ variant: "default", size: "lg" }),
+              "h-[45px] w-fit min-w-[12rem] rounded-full border-0 bg-[#a6edf4] px-10 text-base font-normal text-[#004247] hover:bg-[#94e5ee]"
+            )}
+          >
+            Learn more about toolkit
+          </Link>
+        </div>
+
+        <div className="relative aspect-[556/361] w-full overflow-hidden rounded-[30px] bg-muted/30">
+          <Image
+            src={plusHomeImpactMap}
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="(min-width: 768px) 45vw, 100vw"
+            unoptimized
+          />
+        </div>
+
+        {/* Row 2 — schools + tutors */}
+        <div className={STAT_BLOCK}>
+          <div className="relative size-[58px] shrink-0">
+            <Image
+              src={plusHomeImpactDecor.iconSchools}
+              alt=""
+              width={58}
+              height={58}
+              className="block size-[58px] object-contain"
+              unoptimized
+            />
+          </div>
+          <p className={cn("text-2xl font-bold leading-tight sm:text-3xl", IMPACT_STAT)}>13+ schools</p>
+          <p className={schoolsSectionLead}>
+            PLUS tutors provide instructional support to middle-school math learners during the school day.
+          </p>
+          <Link
+            href="/for-schools"
+            className={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "h-[45px] w-fit rounded-full border-2 border-teal-800 bg-white px-10 text-base font-normal text-[#004247] hover:bg-teal-50"
+            )}
+          >
+            Get PLUS tutoring
+          </Link>
+        </div>
+
+        <div className={STAT_BLOCK}>
+          <div className="relative size-[58px] shrink-0">
+            <Image
+              src={plusHomeImpactDecor.iconTutors}
+              alt=""
+              width={58}
+              height={58}
+              className="block size-[58px] object-contain"
+              unoptimized
+            />
+          </div>
+          <p className={cn("text-2xl font-bold leading-tight sm:text-3xl", IMPACT_STAT)}>500+ tutors</p>
+          <p className={schoolsSectionLead}>
+            University and community tutors trained to support middle school math learners.
+          </p>
+          <Link
+            href="/for-tutors"
+            className={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "h-[45px] w-fit rounded-full border-2 border-teal-800 bg-white px-10 text-base font-normal text-[#004247] hover:bg-teal-50"
+            )}
+          >
+            Become a tutor
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/** Figma `1707:1917` — Smart Tech, Smarter Learning (pink cards + product screenshots). */
+export const PlusSmartTechSection = () => {
+  const cards = [
+    {
+      title: "Supervisor Dashboard",
+      icon: plusHomeSmartTech.iconSupervisor,
+      image: plusHomeSmartTech.supervisor,
+      className: "min-h-[280px] lg:min-h-[320px]",
+    },
+    {
+      title: "AI tutor training",
+      icon: plusHomeSmartTech.iconAiTutor,
+      image: plusHomeSmartTech.aiTutor,
+      className: "min-h-[320px] lg:min-h-[360px]",
+    },
+  ] as const
+
+  return (
+    <section id="smart-tech" className={cn("relative", schoolsSectionGap)}>
+      <div className={schoolsHeaderRow}>
+        <div className={schoolsHeaderText}>
+          <h2 className={schoolsSectionTitle}>Smart Tech, Smarter Learning</h2>
+          <p className={schoolsSectionLead}>
+            Smart systems for superior outcomes. Our platform integrates AI tutor training, centralized
+            supervisor tracking, and interactive goal setting to turn complex data into clear academic
+            breakthroughs.
+          </p>
+        </div>
+        <img
+          alt=""
+          src={plusHomeSmartTech.headerDoodle}
+          className="pointer-events-none hidden h-[120px] w-auto shrink-0 object-contain sm:block max-sm:h-24"
+          aria-hidden
+        />
+      </div>
+
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
+        <div className="flex flex-1 flex-col gap-6">
+          {cards.map(({ title, icon, image, className }) => (
+            <article
+              key={title}
+              className={cn(
+                "flex flex-col overflow-hidden rounded-[30px] bg-[#ffe8f5] p-5 sm:p-6",
+                className
+              )}
+            >
+              <div className="flex flex-wrap items-start gap-4">
+                <div className="relative size-[58px] shrink-0">
+                  <Image src={icon} alt="" width={58} height={58} className="object-contain" unoptimized />
+                </div>
+                <h3 className="max-w-[18rem] text-2xl font-semibold leading-tight text-[#d31998] sm:text-3xl">
+                  {title}
+                </h3>
+              </div>
+              <div className="relative mt-4 flex min-h-0 flex-1 overflow-hidden rounded-md">
+                <Image
+                  src={image}
+                  alt=""
+                  width={800}
+                  height={480}
+                  className="h-auto w-full object-contain object-top"
+                  unoptimized
+                />
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <article className="flex flex-1 flex-col overflow-hidden rounded-[30px] bg-[#ffe8f5] p-5 sm:p-6 lg:max-w-[32rem] lg:self-stretch">
+          <div className="flex flex-wrap items-start gap-4">
             <div className="relative size-[58px] shrink-0">
               <Image
-                src={iconSrc}
+                src={plusHomeSmartTech.iconGoal}
                 alt=""
                 width={58}
                 height={58}
-                className="block size-[58px] object-contain"
+                className="object-contain"
                 unoptimized
               />
             </div>
-            <p className={cn("text-2xl font-bold leading-tight sm:text-3xl", IMPACT_STAT)}>{stat}</p>
-            <p className={schoolsSectionLead}>{desc}</p>
-            <Link
-              href={href}
-              className={cn(
-                buttonVariants({ variant: "default", size: "lg" }),
-                "h-[45px] w-fit rounded-full border-0 bg-[#a6edf4] px-10 text-base font-normal text-[#004247] hover:bg-[#94e5ee]"
-              )}
-            >
-              {cta}
-            </Link>
+            <h3 className="max-w-[18rem] text-2xl font-semibold leading-tight text-[#d31998] sm:text-3xl">
+              Collaborative Goal Setting
+            </h3>
           </div>
-        ))}
+          <div className="relative mt-4 min-h-[280px] flex-1 overflow-hidden rounded-md lg:min-h-[320px]">
+            <Image
+              src={plusHomeSmartTech.goalSetting}
+              alt=""
+              width={900}
+              height={560}
+              className="h-auto w-full object-contain object-center"
+              unoptimized
+            />
+          </div>
+        </article>
+      </div>
+    </section>
+  )
+}
+
+/** Figma `1708:2035` — Built on the Science of Learning. */
+export const PlusScienceOfLearningSection = () => {
+  return (
+    <section id="science-of-learning" className={cn("relative", schoolsSectionGap)}>
+      <div className={schoolsHeaderRow}>
+        <div className={schoolsHeaderText}>
+          <h2 className={schoolsSectionTitle}>Built on the Science of Learning</h2>
+          <p className={schoolsSectionLead}>
+            Developed within CMU&apos;s HCII, our platform is a direct result of world-class educational
+            research. We&apos;ve engineered AI tools designed to adapt to how students think.
+          </p>
+        </div>
+        <img
+          alt=""
+          src={plusHomeScience.headerDoodle}
+          className="pointer-events-none hidden h-[130px] w-auto shrink-0 object-contain sm:block"
+          aria-hidden
+        />
+      </div>
+
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-12 lg:items-center">
+        <div className={cn(STAT_BLOCK, "max-w-none")}>
+          <div className="relative size-[58px] shrink-0">
+            <Image
+              src={plusHomeScience.iconPapers}
+              alt=""
+              width={58}
+              height={58}
+              className="object-contain"
+              unoptimized
+            />
+          </div>
+          <p className="text-2xl font-semibold leading-tight text-[#0080b4] sm:text-3xl">30+ published papers</p>
+          <p className={schoolsSectionLead}>
+            PLUS is founded on decades of learning science research from leaders at Carnegie Mellon University
+            and Stanford University. PLUS&apos;s findings are freely available to all.
+          </p>
+          <Link
+            href="/research"
+            className={cn(
+              buttonVariants({ variant: "default", size: "lg" }),
+              "h-[45px] w-fit rounded-full border-0 bg-[#a6edf4] px-10 text-base font-normal text-[#004247] hover:bg-[#94e5ee]"
+            )}
+          >
+            Read our research
+          </Link>
+        </div>
+
+        <div className="relative min-h-[280px] overflow-hidden rounded-[30px] bg-[#e0f6fe] p-6 sm:min-h-[320px] sm:p-8">
+          <div className="relative mx-auto flex max-w-lg flex-col items-center gap-4">
+            <div className="relative w-full max-w-[16rem] shadow-md sm:max-w-xs">
+              <Image
+                src={plusHomeScience.papersStackA}
+                alt=""
+                width={400}
+                height={320}
+                className="h-auto w-full rounded-md object-contain"
+                unoptimized
+              />
+            </div>
+            <div className="relative -mt-8 w-full max-w-md shadow-lg sm:-mt-10">
+              <Image
+                src={plusHomeScience.papersStackB}
+                alt=""
+                width={560}
+                height={280}
+                className="h-auto w-full rounded-md object-contain"
+                unoptimized
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

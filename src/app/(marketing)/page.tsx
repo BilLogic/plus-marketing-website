@@ -1,6 +1,8 @@
 import {
   PlusHeroSection,
   PlusImpactStatsSection,
+  PlusScienceOfLearningSection,
+  PlusSmartTechSection,
   PlusVoicesSection,
   PlusAwardsSection,
 } from "@/components/marketing/plus-landing-sections"
@@ -13,7 +15,7 @@ const homeSectionsClassName =
   "mx-auto flex max-w-5xl flex-col gap-16 px-4 pb-16 pt-0 sm:px-6 sm:pb-20 md:gap-24 md:px-8 md:pb-24"
 
 /**
- * Homepage — matches Figma PLUS-website-IA node 1576:1783 (Landing → Impact → Testimonials → Awards).
+ * Homepage — Figma Content `1576:1784` (Landing → Impact 2×2 → Smart Tech → Science → Testimonials → Awards).
  * Header and footer come from `(marketing)/layout.tsx`.
  */
 const Home = () => {
@@ -21,6 +23,8 @@ const Home = () => {
     <div className={homeSectionsClassName}>
       <PlusHeroSection />
       <PlusImpactStatsSection />
+      <PlusSmartTechSection />
+      <PlusScienceOfLearningSection />
       <PlusVoicesSection />
       <PlusAwardsSection />
     </div>
