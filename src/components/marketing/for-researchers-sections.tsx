@@ -122,12 +122,7 @@ export const ResearchersHeroSection = () => {
           <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
             For researchers
           </span>
-          <span
-            className={cn(
-              marketingTypography.h1,
-              "max-w-prose text-balance text-teal-950"
-            )}
-          >
+          <span className={cn(marketingTypography.heroH1, "max-w-prose")}>
             Pioneering Lab Research, Socio-Technical Support for Every Learning Environment
           </span>
         </h1>

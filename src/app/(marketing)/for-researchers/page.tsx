@@ -9,8 +9,10 @@ import {
   ResearchPartnersSection,
   ResearchSuccessStoriesSection,
 } from "@/components/marketing/for-researchers-sections"
+import { marketingSectionStackGap } from "@/lib/marketing-layout"
 import { fetchResearchPapers } from "@/lib/notion/queries/research"
 import { fetchResearchTeamMembers } from "@/lib/notion/queries/team"
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "For Researchers",
@@ -28,7 +30,12 @@ const ForResearchersPage = async () => {
   const researchTeam = await fetchResearchTeamMembers()
 
   return (
-    <div className="mx-auto flex max-w-5xl flex-col gap-16 px-4 pb-16 pt-2 sm:px-6 sm:pb-20 md:gap-24 md:px-8 md:pb-24">
+    <div
+      className={cn(
+        "mx-auto flex max-w-5xl flex-col px-4 pb-16 pt-2 sm:px-6 sm:pb-20 md:px-8 md:pb-24",
+        marketingSectionStackGap
+      )}
+    >
       <ResearchersHeroSection />
       <ResearchPartnersSection />
       <ResearchHighlightsSection />

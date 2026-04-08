@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { forTutorsSectionIds } from "@/lib/plus-footer-ia"
 import { marketingTypography } from "@/lib/marketing-typography"
 
-const HERO_HEADLINE_CLASS = cn(marketingTypography.h1, "font-bold text-teal-950")
+const HERO_HEADLINE_CLASS = marketingTypography.heroH1
 const HERO_LEAD_CLASS = cn(marketingTypography.lead, "text-center")
 
 /**
