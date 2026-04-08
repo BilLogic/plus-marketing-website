@@ -1,8 +1,16 @@
 /**
- * Homepage hero collage — Figma PLUS-website-IA node `1608:2009` (Images).
- * MCP asset URLs may expire; replace with exports under `/public/figma/home/` when ready.
+ * Homepage hero — Figma `1714:1885` (Landing): ambient wash, dashboard, floating math ornaments.
+ * Legacy collage URLs (`1608:2009`) kept for reference / export parity; live hero uses `landing*` keys.
  */
 export const plusHomeHero = {
+  /** Centered dashboard screenshot (`1714:2168`). */
+  landingDashboard: "https://www.figma.com/api/mcp/asset/cd59591c-9ee3-4eea-9508-644a5b17ffc4",
+  /** Floating characters around headline (nodes `1714:2169` … `1714:2177`). */
+  landingOrnamentPinkPlus: "https://www.figma.com/api/mcp/asset/02746783-eb0b-44f2-ac1e-cbb5ef7177a6",
+  landingOrnamentPurpleX: "https://www.figma.com/api/mcp/asset/8a378da3-7954-491a-93a1-23edccfb126c",
+  landingOrnamentDivide: "https://www.figma.com/api/mcp/asset/a73552e9-3ad9-47a1-8ba8-83e6900b7772",
+  landingOrnamentGreenGt: "https://www.figma.com/api/mcp/asset/bd29b01f-201f-4467-8b45-a09db16de4f5",
+  landingOrnamentEquals: "https://www.figma.com/api/mcp/asset/a792493d-d967-45dd-8035-68e1cb1ba734",
   collageTopLeft: "https://www.figma.com/api/mcp/asset/44143310-9614-4417-958f-067804bbe158",
   collageTopRight: "https://www.figma.com/api/mcp/asset/45be58bd-c40e-41e0-8352-5aea81a15f3e",
   collageBottomLeft: "https://www.figma.com/api/mcp/asset/07b1e2a8-fd0b-4bba-a4da-b031c9f8dce8",

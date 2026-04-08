@@ -120,163 +120,180 @@ export const PlusNavbar = ({
   )
 }
 
-/**
- * Below global header (`5.5rem` ≈ sticky chrome). Slightly under full viewport so the next section can peek above
- * the fold. Content stays vertically centered (`justify-center`) at all breakpoints.
- */
-const MARKETING_HERO_MIN_HEIGHT = "min-h-[calc(84svh-5.5rem)]"
+const LANDING_HERO_ARTBOARD = 1280
+/** Figma `1727:1970` right-pair `left` values (`1714:2175`, `1714:2177`) + tiny nudge only. */
+const landingHeroRightOrnamentNudgePx = 8
 
 /**
- * Hero — Figma PLUS-website-IA: copy + collage node `1608:2009` (asymmetric tiles, corner doodles, toast).
+ * Floating math characters — Figma `1727:1970` on a 1280px-wide artboard (positions scale with track width).
+ */
+const LandingHeroOrnaments = () => (
+  <div
+    className="pointer-events-none absolute inset-x-0 top-0 z-0 hidden justify-center md:flex"
+    aria-hidden
+  >
+    <div className="relative h-[280px] w-full max-w-[1280px] shrink-0">
+      {/* 1714:2169 — pink +, left 0 top 115, −15° */}
+      <div className="absolute left-0 top-[115px] flex h-[76.961px] w-[83.14px] items-center justify-center">
+        <div className="-rotate-[15deg]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src={plusHomeHero.landingOrnamentPinkPlus}
+            className="h-[60.992px] w-[69.731px] max-w-none object-contain"
+          />
+        </div>
+      </div>
+      {/* 1714:2171 — purple ×, left 75 top 3, +15° */}
+      <div
+        className="absolute top-[3px] flex h-[95.093px] w-[108.563px] items-center justify-center"
+        style={{ left: "calc(75 * 100% / 1280)" }}
+      >
+        <div className="rotate-[15deg]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src={plusHomeHero.landingOrnamentPurpleX}
+            className="h-[73.617px] w-[92.667px] max-w-none object-contain"
+          />
+        </div>
+      </div>
+      {/* 1714:2173 — ÷, left 107 top 145, −15° */}
+      <div
+        className="absolute top-[145px] flex h-[93.161px] w-[90.035px] items-center justify-center"
+        style={{ left: "calc(107 * 100% / 1280)" }}
+      >
+        <div className="-rotate-[15deg]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src={plusHomeHero.landingOrnamentDivide}
+            className="h-[77px] w-[72.579px] max-w-none object-contain"
+          />
+        </div>
+      </div>
+      {/* 1714:2175 — green &gt;, left 1014 + nudge */}
+      <div
+        className="absolute top-[51px] flex h-[79.722px] w-[84.122px] items-center justify-center"
+        style={{
+          left: `calc(${1014 + landingHeroRightOrnamentNudgePx} * 100% / ${LANDING_HERO_ARTBOARD})`,
+        }}
+      >
+        <div className="rotate-[15deg]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src={plusHomeHero.landingOrnamentGreenGt}
+            className="h-[63.778px] w-[70px] max-w-none object-contain"
+          />
+        </div>
+      </div>
+      {/* 1714:2177 — =, left 1105 + same nudge */}
+      <div
+        className="absolute top-[132px] h-[57px] w-[69.687px]"
+        style={{
+          left: `calc(${1105 + landingHeroRightOrnamentNudgePx} * 100% / ${LANDING_HERO_ARTBOARD})`,
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          src={plusHomeHero.landingOrnamentEquals}
+          className="absolute inset-0 size-full max-w-none object-contain"
+        />
+      </div>
+    </div>
+  </div>
+)
+
+/**
+ * Hero — Figma `1714:1885` Landing + background group `1714:2153`.
+ * Wash begins at the top of the section (below header in layout), full viewport width on the homepage.
  */
 export const PlusHeroSection = () => {
   return (
     <section
       id="about"
-      className={cn(
-        "relative flex flex-col justify-center overflow-visible",
-        MARKETING_HERO_MIN_HEIGHT
-      )}
+      className="relative w-full overflow-x-clip overflow-y-visible bg-white pb-10 pt-10 sm:pb-14 sm:pt-12 md:pt-16"
     >
-      <div className="relative flex w-full flex-col gap-6 py-6 sm:gap-8 sm:py-8 md:py-10 lg:flex-row lg:items-stretch lg:gap-12 lg:py-12">
-        <div className={cn(schoolsHeaderText, "max-w-xl lg:self-center")}>
-          <h1
-            className={cn(
-              marketingTypography.heroH1,
-              "max-w-prose text-3xl sm:text-4xl"
-            )}
-          >
-            Scaling Up High-Impact Math Tutoring with Technology and Training
-          </h1>
-          <p className={schoolsSectionLead}>
-            <span className="font-bold text-teal-900">PLUS</span> is a virtual tutoring platform that
-            empowers middle school math learners with AI technology and research-backed methods.
-          </p>
-          <div className="flex flex-wrap items-center gap-5">
-            <Link
-              href="/about"
-              className={cn(
-                buttonVariants({ variant: "default", size: "lg" }),
-                "h-11 rounded-full border-0 bg-teal-300 px-10 text-base font-normal text-teal-950 hover:bg-teal-400"
-              )}
-            >
-              Our mission
-            </Link>
-            <Link
-              href="/for-tutors"
-              className={cn(
-                buttonVariants({ variant: "outline", size: "lg" }),
-                "h-11 rounded-full border-2 border-teal-900 bg-white px-10 text-base font-normal text-teal-950 hover:bg-teal-50"
-              )}
-            >
-              Join us
-            </Link>
-          </div>
-        </div>
+      {/* Figma `1714:2153` — blob order L→R: pink → coral → yellow → green → blue; then white veil (heavy white) */}
+      <div
+        className="pointer-events-none absolute inset-0 min-h-full w-full overflow-hidden"
+        aria-hidden
+      >
+        <div className="absolute -top-24 -left-[12%] h-[clamp(14rem,28vw,22.375rem)] w-[clamp(22rem,65vw,51.875rem)] rounded-full bg-[#ffe8f5] blur-[100px] sm:-top-28" />
+        <div className="absolute -top-20 left-[8%] h-[clamp(12rem,22vw,22.375rem)] w-[clamp(12rem,23vw,18.6875rem)] rounded-full bg-[#ffd9d8] blur-[100px] sm:-top-24 sm:left-[11%]" />
+        <div className="absolute -top-24 left-[20%] h-[clamp(14rem,28vw,22.375rem)] w-[clamp(28rem,104vw,83rem)] max-w-[1329px] rounded-full bg-[#fff0cb] blur-[100px] sm:-top-28 sm:left-[25%]" />
+        <div className="absolute -top-20 left-[48%] h-[clamp(12rem,24vw,22.375rem)] w-[clamp(12rem,26vw,20.8125rem)] rounded-full bg-[#d7f0de] blur-[100px] sm:-top-24 sm:left-[53%]" />
+        <div className="absolute -top-24 left-[58%] h-[clamp(14rem,28vw,22.375rem)] w-[clamp(18rem,66vw,53.1875rem)] rounded-full bg-[#caeffe] blur-[100px] sm:-top-28 sm:left-[66%]" />
+        {/* ~Figma `1714:2163`: thin pastel band at top, most of the fold reads white */}
+        <div
+          className="absolute inset-x-0 top-0 bottom-0 bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.45)_7%,rgba(255,255,255,0.82)_14%,#fff_22%,#fff_100%)]"
+          aria-hidden
+        />
+      </div>
 
-        {/*
-          Collage frame from Figma 1608:2009 — 676×509 reference; tiles are absolute %; doodles sit outside corners.
-        */}
-        <div className="relative mx-auto flex min-h-0 w-full min-w-0 max-w-lg flex-1 flex-col justify-center lg:mx-0 lg:max-w-none">
-          <div
-            className={cn(
-              "relative mx-auto w-full max-w-[42rem] overflow-visible pb-2",
-              "min-h-[min(17rem,42svh)] lg:min-h-[min(22rem,48svh)]"
-            )}
-          >
-            {/* Aspect + min-height — slightly shorter than full-bleed so hero + peek fit typical viewports */}
-            <div className="relative mx-auto aspect-[676/509] h-auto w-full min-h-[min(15rem,38svh)] max-w-full lg:min-h-[min(21rem,46svh)]">
-              {/* Top-left — largest tile */}
-              <div className="absolute left-[6.36%] top-0 z-[1] h-[45.4%] w-[47.49%] overflow-hidden rounded-[30px] shadow-sm">
-                <Image
-                  src={plusHomeHero.collageTopLeft}
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 340px, 45vw"
-                  unoptimized
-                />
-              </div>
-              {/* Top-right — dashboard; wide crop per Figma */}
-              <div className="absolute left-[56.36%] top-[11.2%] z-[1] h-[47.94%] w-[40.09%] overflow-hidden rounded-[30px] shadow-sm">
-                {/* eslint-disable-next-line @next/next/no-img-element -- wide crop matches Figma asset frame */}
-                <img
-                  alt=""
-                  src={plusHomeHero.collageTopRight}
-                  className="pointer-events-none absolute top-0 left-[-36.14%] h-full w-[238.45%] max-w-none object-cover"
-                />
-              </div>
-              {/* Bottom-left — UI strip; wide crop per Figma */}
-              <div className="absolute left-[9.47%] top-[48.53%] z-[1] h-[44.79%] w-[45.41%] overflow-hidden rounded-[31.93px] shadow-sm">
-                {/* eslint-disable-next-line @next/next/no-img-element -- wide crop matches Figma asset frame */}
-                <img
-                  alt=""
-                  src={plusHomeHero.collageBottomLeft}
-                  className="pointer-events-none absolute top-0 left-[-17.34%] h-full w-[167.74%] max-w-none object-cover"
-                />
-              </div>
-              {/* Bottom-right — smallest tile */}
-              <div className="absolute left-[57.4%] top-[62.48%] z-[1] h-[37.52%] w-[32.4%] overflow-hidden rounded-[21.25px] shadow-sm">
-                <Image
-                  src={plusHomeHero.collageBottomRight}
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 220px, 28vw"
-                  unoptimized
-                />
-              </div>
-
-              {/* Center blurb — Figma 1576:2443: compact avatars + caption */}
-              <div
-                className="absolute left-[29.44%] top-[31.04%] z-[15] flex h-[37.83%] w-[41.12%] flex-col items-center justify-center rounded-[34px] border border-white/60 bg-white/80 px-3 py-2.5 shadow-[0_4.5px_23px_rgba(0,0,0,0.25)] backdrop-blur-[25px] sm:px-3.5 sm:py-3"
-                role="status"
+      <div className="relative z-10 mx-auto w-full max-w-[min(80rem,100%)] px-4 text-center md:px-8 lg:px-12">
+        {/* Shared offset so Figma ornaments + copy move together; rhythm aligned with `SchoolsHeroSection` padding */}
+        <div className="relative mt-8 sm:mt-10 md:mt-12">
+          {/* Ornaments: Figma `1727:1970` — 1280px coordinate track */}
+          <LandingHeroOrnaments />
+          <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-8 sm:gap-10">
+            <div className="flex w-full flex-col gap-4 sm:gap-5">
+              <h1
+                className={cn(
+                  marketingTypography.heroH1,
+                  "mx-auto max-w-prose text-center"
+                )}
               >
-                <div className="flex w-full max-w-[92%] flex-col items-center gap-2 sm:gap-2.5">
-                  <div className="flex shrink-0 justify-center">
-                    <Image
-                      src={plusHomeHero.toastAvatarA}
-                      alt=""
-                      width={40}
-                      height={40}
-                      className="size-10 rounded-full object-cover ring-2 ring-white"
-                      unoptimized
-                    />
-                    <Image
-                      src={plusHomeHero.toastAvatarB}
-                      alt=""
-                      width={40}
-                      height={40}
-                      className="-ml-2.5 size-10 rounded-full object-cover ring-2 ring-white"
-                      unoptimized
-                    />
-                  </div>
-                  <p className="text-center text-[11px] font-normal leading-snug sm:text-[13px] md:text-[14px]">
-                    <span className="text-muted-foreground">Join </span>
-                    <span className="font-bold text-[#027f89]">5000+</span>
-                    <span className="text-muted-foreground">
-                      {" "}
-                      students who are getting AI-powered education.
-                    </span>
-                  </p>
-                </div>
-              </div>
-
-              {/* Corner doodles — anchored to collage frame, offset outside corners (not over tiles) */}
-              <img
-                alt=""
-                src={plusHomeHero.doodleX}
-                className="pointer-events-none absolute top-0 left-0 z-[5] h-[clamp(3.5rem,14vw,6.75rem)] w-[clamp(4rem,16vw,7.25rem)] -translate-x-[38%] -translate-y-[38%] rotate-[-15deg] object-contain"
-                aria-hidden
-              />
-              <img
-                alt=""
-                src={plusHomeHero.doodleBottom}
-                className="pointer-events-none absolute right-0 bottom-0 z-[5] h-[clamp(2.75rem,11vw,4.9rem)] w-[clamp(3.25rem,13vw,5.75rem)] translate-x-[32%] translate-y-[32%] object-contain"
-                aria-hidden
-              />
+                Scaling Up High-Impact Math Tutoring with Technology and Training
+              </h1>
+              <p
+                className={cn(
+                  marketingTypography.lead,
+                  "mx-auto max-w-prose text-center text-pretty"
+                )}
+              >
+                <span className="font-bold text-primary">PLUS</span> is a virtual tutoring platform that empowers
+                middle school math learners with AI technology and research-backed methods.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-5">
+              <Link
+                href="/about"
+                className={cn(
+                  buttonVariants({ variant: "default", size: "lg" }),
+                  "h-11 min-w-[169px] justify-center rounded-full border-0 bg-[#a6edf4] px-8 text-base font-normal text-[#004247] hover:bg-[#94e5ee]"
+                )}
+              >
+                Our mission
+              </Link>
+              <Link
+                href="/for-tutors"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "h-11 min-w-[132px] justify-center rounded-full border border-[#027f89] bg-white px-8 text-base font-normal text-[#004247] hover:bg-teal-50"
+                )}
+              >
+                Join us
+              </Link>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="relative z-10 mx-auto mt-10 w-full max-w-[822px] px-4 sm:mt-12">
+        <div className="overflow-hidden rounded-[5px] shadow-[0_0_4px_rgba(0,0,0,0.25)]">
+          <Image
+            src={plusHomeHero.landingDashboard}
+            alt=""
+            width={822}
+            height={406}
+            className="h-auto w-full object-cover"
+            sizes="(min-width: 1024px) 822px, 100vw"
+            unoptimized
+            priority
+          />
         </div>
       </div>
     </section>

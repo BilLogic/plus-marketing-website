@@ -9,15 +9,16 @@ import {
 import { marketingSectionStackGap } from "@/lib/marketing-layout"
 import { cn } from "@/lib/utils"
 
-/** Tighter gap from hero → first content block so the Impact headline sits closer under the fold peek. */
-const homeHeroToImpactGap = "gap-8 md:gap-10"
+/** Space between full-bleed hero and the first in-shell section (Impact). */
+const homeHeroToImpactSpacing = "pt-8 md:pt-10"
 
 /**
- * `pt-0` so the hero can align to the viewport fold (hero handles its own padding).
- * Below the hero/impact pair, spacing matches other marketing pages via `marketingSectionStackGap`.
+ * Content below the hero stays in the standard marketing column.
+ * Hero is rendered outside this shell so its wash can span the full viewport (Figma `1714:1885`).
  */
 const homePageShellClassName = cn(
-  "mx-auto flex max-w-5xl flex-col px-4 pb-16 pt-0 sm:px-6 sm:pb-20 md:px-8 md:pb-24"
+  "mx-auto flex max-w-5xl flex-col px-4 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24",
+  homeHeroToImpactSpacing
 )
 
 /**
@@ -26,18 +27,18 @@ const homePageShellClassName = cn(
  */
 const Home = () => {
   return (
-    <div className={homePageShellClassName}>
-      <div className={cn("flex flex-col", homeHeroToImpactGap)}>
-        <PlusHeroSection />
+    <>
+      <PlusHeroSection />
+      <div className={homePageShellClassName}>
         <PlusImpactStatsSection />
+        <div className={cn("mt-16 flex flex-col md:mt-24", marketingSectionStackGap)}>
+          <PlusSmartTechSection />
+          <PlusScienceOfLearningSection />
+          <PlusVoicesSection />
+          <PlusAwardsSection />
+        </div>
       </div>
-      <div className={cn("mt-16 flex flex-col md:mt-24", marketingSectionStackGap)}>
-        <PlusSmartTechSection />
-        <PlusScienceOfLearningSection />
-        <PlusVoicesSection />
-        <PlusAwardsSection />
-      </div>
-    </div>
+    </>
   )
 }
 
