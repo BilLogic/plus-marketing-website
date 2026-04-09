@@ -11,6 +11,10 @@ import {
 } from "@/components/marketing/for-researchers-sections"
 import { marketingSectionStackGap } from "@/lib/marketing-layout"
 import { fetchResearchPapers } from "@/lib/notion/queries/research"
+import {
+  fetchSuccessStories,
+  selectSuccessStoriesForResearchersPage,
+} from "@/lib/notion/queries/success-stories"
 import { fetchResearchTeamMembers } from "@/lib/notion/queries/team"
 import { cn } from "@/lib/utils"
 
@@ -28,20 +32,27 @@ const ForResearchersPage = async () => {
   const allPapers = await fetchResearchPapers()
   const indexPreview = allPapers.slice(0, 20)
   const researchTeam = await fetchResearchTeamMembers()
+  const researchSuccessStories = selectSuccessStoriesForResearchersPage(
+    await fetchSuccessStories()
+  )
 
   return (
     <div
       className={cn(
-        "mx-auto flex max-w-5xl flex-col px-4 pb-16 pt-2 sm:px-6 sm:pb-20 md:px-8 md:pb-24",
+        "mx-auto flex w-full max-w-7xl flex-col px-4 pb-16 pt-0 sm:px-6 sm:pb-20 md:pb-24",
         marketingSectionStackGap
       )}
     >
       <ResearchersHeroSection />
       <ResearchPartnersSection />
-      <ResearchHighlightsSection />
-      <ResearchIndexSection papers={indexPreview} totalCount={allPapers.length} />
+      <ResearchHighlightsSection papers={allPapers} />
+      <ResearchIndexSection
+        papers={indexPreview}
+        totalCount={allPapers.length}
+        filterSourcePapers={allPapers}
+      />
       <ResearchersGridSection members={researchTeam} />
-      <ResearchSuccessStoriesSection />
+      <ResearchSuccessStoriesSection stories={researchSuccessStories} />
       <ResearchCollaborateCtaSection />
     </div>
   )

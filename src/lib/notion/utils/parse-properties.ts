@@ -47,6 +47,7 @@ export const getFiles = (prop: any): string | null => {
 
 /** Notion databases often name the headshot column differently — try files, then URL fields. */
 const TEAM_HEADSHOT_FILES = [
+  "Profile Photo",
   "Picture",
   "Photo",
   "Image",

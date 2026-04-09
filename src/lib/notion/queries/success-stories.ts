@@ -6,6 +6,7 @@ import {
   getSelect,
   getDate,
   getFiles,
+  getUrl,
 } from "@/lib/notion/utils/parse-properties"
 import { readCache, writeCache } from "@/lib/notion/utils/cache"
 import { blocksToMarkdown } from "@/lib/notion/utils/blocks-to-markdown"
@@ -25,7 +26,32 @@ const parseSuccessStory = (page: any): Omit<SuccessStory, "content"> => {
     quote: getRichText(props.Quote),
     quoteAttribution: getRichText(props["Who Said It?"]),
     publishedDate: getDate(props["Date Published"]) ?? "",
+    publicReadUrl:
+      getUrl(props["Public URL"]) ??
+      getUrl(props["Public page URL"]) ??
+      getUrl(props["Notion public URL"]) ??
+      null,
   }
+}
+
+const byPublishedDesc = (a: SuccessStory, b: SuccessStory) =>
+  b.publishedDate.localeCompare(a.publishedDate)
+
+/**
+ * Stories for `/for-researchers` — prefers Category = Researchers; falls back to Schools entries with a quote
+ * so research-relevant pilots (e.g. Warm Springs) show until Researchers-tagged rows exist in Notion.
+ */
+export function selectSuccessStoriesForResearchersPage(
+  stories: SuccessStory[]
+): SuccessStory[] {
+  const researchers = stories
+    .filter((s) => s.category === "Researchers")
+    .sort(byPublishedDesc)
+  if (researchers.length > 0) return researchers.slice(0, 2)
+  return stories
+    .filter((s) => s.category === "Schools" && (s.quote?.trim()?.length ?? 0) > 0)
+    .sort(byPublishedDesc)
+    .slice(0, 2)
 }
 
 export const fetchSuccessStories = async (): Promise<SuccessStory[]> => {

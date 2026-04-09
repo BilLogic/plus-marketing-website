@@ -4,7 +4,6 @@ import {
   PlusScienceOfLearningSection,
   PlusSmartTechSection,
   PlusVoicesSection,
-  PlusAwardsSection,
 } from "@/components/marketing/plus-landing-sections"
 import { marketingSectionStackGap } from "@/lib/marketing-layout"
 import { cn } from "@/lib/utils"
@@ -22,7 +21,7 @@ const homePageShellClassName = cn(
 )
 
 /**
- * Homepage — Figma Content `1576:1784` (Landing → Impact 2×2 → Smart Tech → Science → Testimonials → Awards).
+ * Homepage — Figma `1714:1883` (Landing includes Our Awards) → Impact → Smart Tech → Science → Testimonials.
  * Header and footer come from `(marketing)/layout.tsx`.
  */
 const Home = () => {
@@ -35,7 +34,6 @@ const Home = () => {
           <PlusSmartTechSection />
           <PlusScienceOfLearningSection />
           <PlusVoicesSection />
-          <PlusAwardsSection />
         </div>
       </div>
     </>

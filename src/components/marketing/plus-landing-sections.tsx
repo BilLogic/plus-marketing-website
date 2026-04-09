@@ -1,7 +1,9 @@
 "use client"
 
+import { useReducedMotion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
+import { useState } from "react"
 import { ArrowLeft } from "lucide-react"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { BunduiFooterSection } from "@/components/registry/bundui/footer-section"
@@ -206,9 +208,101 @@ const LandingHeroOrnaments = () => (
   </div>
 )
 
+/** Figma `1732:3947` — four marks in a row under the dashboard (`1714:1883` Landing). */
+const landingHeroAwards = [
+  {
+    src: plusHomeHero.landingAwardEdTech,
+    label: "Edtech Awards Finalist",
+  },
+  {
+    src: plusHomeHero.landingAwardBestDemo,
+    label: "2023 Best Demo Award",
+  },
+  {
+    src: plusHomeHero.landingAwardCodie,
+    label: "2024 SIIA CODiE Finalist",
+  },
+  {
+    src: plusHomeHero.landingAwardIela,
+    label: "2022 iela Gold Star",
+  },
+] as const
+
 /**
- * Hero — Figma `1714:1885` Landing + background group `1714:2153`.
- * Wash begins at the top of the section (below header in layout), full viewport width on the homepage.
+ * Same marquee pattern as `SchoolsCommunitySection` — `partner-marquee-track` in `globals.css`.
+ */
+const LandingHeroAwardsRow = () => {
+  const reduceMotion = useReducedMotion()
+  const [marqueePaused, setMarqueePaused] = useState(false)
+
+  const awardCell = (
+    { src, label }: (typeof landingHeroAwards)[number],
+    index: number,
+    keySuffix: string
+  ) => (
+    <article
+      key={`${label}-${keySuffix}`}
+      className="flex w-[14.8125rem] shrink-0 flex-col items-center gap-3 text-center"
+      aria-hidden={index >= landingHeroAwards.length ? true : undefined}
+    >
+      <div className="flex h-[6.75rem] w-[11.1875rem] shrink-0 items-center justify-center">
+        <Image
+          src={src}
+          alt=""
+          width={179}
+          height={108}
+          className="max-h-full max-w-full object-contain"
+          unoptimized
+        />
+      </div>
+      <p className="text-pretty text-xl font-semibold text-muted-foreground">{label}</p>
+    </article>
+  )
+
+  return (
+    <div
+      id="get-involved"
+      className="relative z-10 mx-auto mt-12 w-full max-w-[min(80rem,100%)] scroll-mt-28 px-4 pb-8 sm:mt-14 sm:pb-10 md:px-8 lg:scroll-mt-32"
+    >
+      <p className="text-center text-xl font-normal text-muted-foreground">Our Awards</p>
+      <div
+        role="region"
+        aria-label="Award recognition"
+        className="relative mx-auto mt-6 w-full max-w-5xl"
+        onMouseEnter={() => setMarqueePaused(true)}
+        onMouseLeave={() => setMarqueePaused(false)}
+        onFocusCapture={() => setMarqueePaused(true)}
+        onBlurCapture={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+            setMarqueePaused(false)
+          }
+        }}
+      >
+        {reduceMotion ? (
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-8 sm:gap-x-10 lg:gap-x-[3.75rem]">
+            {landingHeroAwards.map((item, index) => awardCell(item, index, `static-${index}`))}
+          </div>
+        ) : (
+          <div className="overflow-hidden">
+            <div
+              className="partner-marquee-track flex w-max items-stretch gap-x-8 sm:gap-x-10 lg:gap-x-[3.75rem]"
+              style={{
+                animationPlayState: marqueePaused ? "paused" : "running",
+              }}
+            >
+              {[...landingHeroAwards, ...landingHeroAwards].map((item, index) =>
+                awardCell(item, index, `marquee-${index}`)
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+/**
+ * Hero — Figma `1714:1883` Landing: wash, copy, ornaments, dashboard, Our Awards (`1732:3947`).
  */
 export const PlusHeroSection = () => {
   return (
@@ -293,6 +387,8 @@ export const PlusHeroSection = () => {
           />
         </div>
       </div>
+
+      <LandingHeroAwardsRow />
     </section>
   )
 }
@@ -832,85 +928,6 @@ export const PlusVoicesSection = () => {
                 {end}&rdquo;
               </blockquote>
             </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-/** Shared image slot so award titles + leads line up — sized between the ~401px Figma marks and the tighter mobile pass. */
-const AWARD_MARK_MAX_W = "max-w-[17rem] sm:max-w-[19rem]"
-const AWARD_MARK_SLOT_H = "h-[140px] sm:h-[158px]"
-
-/**
- * Awards — compact marks; fixed-height slot keeps typography aligned between columns.
- */
-export const PlusAwardsSection = () => {
-  const awards = [
-    {
-      image: plusHomeAwards.edTechFinalist,
-      title: "The EdTech Awards Finalist",
-      sub: "The largest edtech awards program",
-    },
-    {
-      image: plusHomeAwards.bestDemo,
-      title: "2023 Best Demo Award",
-      sub: "2023 International Conference on Artificial Intelligence in Education",
-    },
-  ] as const
-
-  return (
-    <section id="get-involved" className={cn("relative", schoolsSectionGap)}>
-      <div className={schoolsHeaderRow}>
-        <div className={schoolsHeaderText}>
-          <h2 className={schoolsSectionTitle}>Our Awards</h2>
-          <p className={schoolsSectionLead}>
-            A strategic alliance of world-class universities and industry leaders committed to rigorous
-            learning engineering at scale.
-          </p>
-        </div>
-        <div
-          className={cn(
-            marketingSectionHeaderDecorSlot,
-            "hidden items-center justify-center lg:flex"
-          )}
-          aria-hidden
-        >
-          <img
-            alt=""
-            src={plusHomeAwards.headerCharacter}
-            className="pointer-events-none max-h-full max-w-full object-contain"
-          />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-x-[50px] lg:gap-y-0">
-        {awards.map(({ image, title, sub }) => (
-          <article
-            key={title}
-            className="flex w-full min-w-0 flex-col items-stretch gap-3 text-left sm:gap-4"
-          >
-            <div
-              className={cn(
-                "mx-auto flex w-full shrink-0 items-center justify-center",
-                AWARD_MARK_MAX_W,
-                AWARD_MARK_SLOT_H
-              )}
-            >
-              <div className="relative h-full w-full min-h-0">
-                <Image
-                  src={image}
-                  alt=""
-                  fill
-                  className="object-contain object-center"
-                  sizes="(min-width: 1024px) 304px, 85vw"
-                  unoptimized
-                />
-              </div>
-            </div>
-            <h3 className={cn(schoolsSectionTitle, "text-balance")}>{title}</h3>
-            <p className={schoolsSectionLead}>{sub}</p>
           </article>
         ))}
       </div>

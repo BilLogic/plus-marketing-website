@@ -5,8 +5,8 @@ import {
   getRichText,
   getSelect,
   getDate,
-  getFiles,
   getUrl,
+  getTeamMemberPictureUrl,
 } from "@/lib/notion/utils/parse-properties"
 import { readCache, writeCache } from "@/lib/notion/utils/cache"
 
@@ -29,7 +29,7 @@ const parseTeamMember = (page: any): TeamMember => {
     affiliation: getSelect(props.Affiliation) as TeamMember["affiliation"],
     group: getSelect(props.Group) as TeamMember["group"],
     joinedDate: getDate(props["Date Joined PLUS"]),
-    picture: getFiles(props["Profile Photo"]),
+    picture: getTeamMemberPictureUrl(props),
     title1: getRichText(props["Primary Role"]),
     title2: getRichText(props["Secondary Title"]),
     linkedIn: getUrl(props.LinkedIn),
@@ -73,22 +73,30 @@ export const fetchTeamMembers = async (): Promise<TeamMember[]> => {
 }
 
 /**
- * Affiliations that may appear on `/for-researchers` "Our Researchers".
- * Excludes interns and independent-study rows so the grid stays lab/research staff
- * (Notion `Group` alone is often set to Researcher too broadly).
+ * Affiliations on `/for-researchers` “Our Researchers” — Notion Group = Researcher plus one of these.
  */
 const RESEARCHERS_GRID_AFFILIATIONS: TeamMember["affiliation"][] = [
   "Leadership",
   "PLUS Staff",
-  "Past Collaborators",
 ]
 
 /** Entries with Group = Researcher and a research-staff affiliation — used on `/for-researchers`. */
 export async function fetchResearchTeamMembers(): Promise<TeamMember[]> {
   const members = await fetchTeamMembers()
-  return members.filter(
+  const grid = members.filter(
     (m) =>
       m.group === "Researcher" &&
       RESEARCHERS_GRID_AFFILIATIONS.includes(m.affiliation)
   )
+  // Leadership before PLUS Staff (cache / sync paths may not match `fetchTeamMembers` sort).
+  grid.sort((a, b) => {
+    const affA = AFFILIATION_ORDER[a.affiliation] ?? 99
+    const affB = AFFILIATION_ORDER[b.affiliation] ?? 99
+    if (affA !== affB) return affA - affB
+    const dateA = a.joinedDate ?? ""
+    const dateB = b.joinedDate ?? ""
+    if (dateA !== dateB) return dateA.localeCompare(dateB)
+    return a.name.localeCompare(b.name)
+  })
+  return grid
 }

@@ -256,6 +256,7 @@ async function syncSuccessStories() {
       quote: getRichText(props.Quote),
       quoteAttribution: getRichText(props["Who Said It?"]),
       publishedDate: getDate(props["Date Published"]),
+      publicReadUrl: getUrl(props["Public URL"]) ?? getUrl(props["Public page URL"]) ?? null,
     })
   }
   fs.writeFileSync(path.join(CACHE_DIR, "success-stories.json"), JSON.stringify(stories, null, 2))

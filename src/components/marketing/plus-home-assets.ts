@@ -19,6 +19,14 @@ export const plusHomeHero = {
   toastAvatarB: "https://www.figma.com/api/mcp/asset/92620278-302a-4e92-aac4-4028a66683e4",
   doodleX: "https://www.figma.com/api/mcp/asset/3e240f99-03b2-4afa-adfb-4c81f24f8e6b",
   doodleBottom: "https://www.figma.com/api/mcp/asset/1d33df33-be38-49bb-a299-24079530140f",
+  /**
+   * “Our Awards” row inside landing hero — Figma `1732:3947` (Homepage `1714:1883`).
+   * MCP URLs expire ~7d; export to `/public/figma/home/` when stabilizing.
+   */
+  landingAwardEdTech: "https://www.figma.com/api/mcp/asset/48005b0e-cd22-400b-a240-e5f496c03a78",
+  landingAwardBestDemo: "https://www.figma.com/api/mcp/asset/8b8c8753-4297-4164-b8ea-b50025000c4d",
+  landingAwardCodie: "https://www.figma.com/api/mcp/asset/82de1ad9-31f3-43cd-904f-a3a1488647af",
+  landingAwardIela: "https://www.figma.com/api/mcp/asset/97b915ec-2ec8-4dd2-8c61-9cb0656f01a9",
 } as const
 
 export const plusHomeTestimonialAvatars = {

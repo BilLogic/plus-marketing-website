@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 
 import { Badge } from "@/components/ui/badge"
+import { RESEARCH_GENRE_TAGS } from "@/lib/research/research-genres"
+import { researchGenreBadgeClassName } from "@/lib/research/research-index-genre-styles"
+import { cn } from "@/lib/utils"
 
 /** A small status descriptor for UI elements. */
 const meta = {
@@ -63,6 +66,23 @@ export const AllVariants: Story = {
       <Badge variant="outline">Outline</Badge>
       <Badge variant="destructive">Destructive</Badge>
       <Badge variant="ghost">Ghost</Badge>
+    </div>
+  ),
+}
+
+/** For Researchers → Research Index tag colors (student learning / Gen AI / tutor training). */
+export const ResearchGenreTags: Story = {
+  render: () => (
+    <div className="flex flex-wrap items-center gap-3">
+      {RESEARCH_GENRE_TAGS.map((tag) => (
+        <Badge
+          key={tag}
+          variant="outline"
+          className={cn("border-2 text-xs font-medium", researchGenreBadgeClassName(tag))}
+        >
+          {tag}
+        </Badge>
+      ))}
     </div>
   ),
 }

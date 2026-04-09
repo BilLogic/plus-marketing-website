@@ -57,6 +57,8 @@ export type SuccessStory = {
   quote: string | null
   quoteAttribution: string | null
   publishedDate: string
+  /** Optional full URL to the public Notion Site page; if absent, URL is derived from title + page id. */
+  publicReadUrl?: string | null
 }
 
 export type ResearchPaper = {
