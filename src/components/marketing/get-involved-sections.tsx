@@ -27,7 +27,7 @@ const sectionH2 =
   "text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
 
 const sectionLead =
-  "w-full max-w-none text-pretty text-base text-teal-900/75 dark:text-white/90 sm:text-lg"
+  "w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90"
 
 const primaryCta =
   "h-11 rounded-full border-0 bg-[#A6EDF4] px-8 text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
@@ -45,7 +45,7 @@ const sectionDecorImgClass =
 
 export function GetInvolvedHeroSection() {
   return (
-    <section className="relative flex flex-col items-center gap-8 overflow-x-visible pb-12 pt-14 text-center sm:gap-10 sm:pb-16 sm:pt-16 md:pt-20">
+    <section className="relative flex min-h-[calc(100svh-5.5rem)] flex-col items-center justify-center gap-8 overflow-x-visible py-12 text-center sm:gap-10 sm:py-16 md:py-20">
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[0]}
         className="-left-2 top-20 hidden sm:block md:left-0"
@@ -60,10 +60,10 @@ export function GetInvolvedHeroSection() {
       />
 
       <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-4 sm:gap-5">
-        <p className="text-base font-semibold tracking-wide text-teal-700 dark:text-teal-300 sm:text-lg">
+        <p className="text-2xl font-semibold text-teal-900 sm:text-3xl">
           Get Involved
         </p>
-        <h1 className="text-balance text-3xl font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-4xl md:text-5xl">
+        <h1 className="text-balance text-4xl font-semibold tracking-tight text-teal-950 sm:text-5xl">
           Join PLUS and Make a Lasting Difference in Education
         </h1>
       </div>
@@ -192,14 +192,14 @@ export function GetInvolvedWhyWorkSection() {
                   <Icon className="size-5 text-white" strokeWidth={2} />
                 </div>
                 <p className={cn(
-                  "text-xl font-bold tracking-tight transition-colors duration-300 sm:text-2xl",
+                  "text-pretty text-xl font-bold leading-snug tracking-tight transition-colors duration-300 sm:text-2xl",
                   isActive ? "text-[#007EB8]" : "text-muted-foreground"
                 )}>
                   {item.title}
                 </p>
                 {isActive && (
                   <>
-                    <p className="text-base leading-relaxed text-muted-foreground">
+                    <p className="text-lg leading-relaxed text-muted-foreground">
                       {item.description}
                     </p>
                     {item.cta && (
@@ -286,7 +286,7 @@ export function GetInvolvedCareersSection() {
                 <p className="text-xl font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-2xl">
                   {job.title}
                 </p>
-                <p className="text-base leading-relaxed text-muted-foreground">
+                <p className="text-lg leading-relaxed text-muted-foreground">
                   {job.location}
                 </p>
               </div>
@@ -335,17 +335,17 @@ export function GetInvolvedTutoringSection() {
             </div>
             <div className="flex flex-1 flex-col justify-between gap-4">
               <div className="space-y-2">
-                <p className="text-xl font-bold text-[#9A6D00] dark:text-amber-200 sm:text-2xl">
+                <p className="text-pretty text-xl font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-2xl">
                   Becoming a Tutor at PLUS
                 </p>
-                <p className="text-base leading-relaxed text-muted-foreground">
+                <p className="text-lg leading-relaxed text-muted-foreground">
                   If you're a college student or looking for flexible work, explore part-time tutoring
                   opportunities with PLUS.
                 </p>
               </div>
               <Link
                 href="/for-tutors"
-                className="inline-flex h-10 w-fit items-center justify-center rounded-full bg-amber-300 px-6 text-sm font-medium text-amber-950 transition-colors hover:bg-amber-400 dark:bg-amber-700 dark:text-white dark:hover:bg-amber-600"
+                className="inline-flex h-11 w-fit items-center justify-center rounded-full bg-amber-300 px-8 text-base font-medium text-amber-950 transition-colors hover:bg-amber-400 dark:bg-amber-700 dark:text-white dark:hover:bg-amber-600"
               >
                 Become a Tutor
               </Link>
@@ -371,10 +371,10 @@ export function GetInvolvedTutoringSection() {
               <Heart className="size-5 text-white" />
             </div>
             <div className="space-y-2">
-              <p className="text-lg font-bold tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-xl">
-                No Prior Experience Necessary
+              <p className="text-pretty text-xl font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-2xl">
+                No Prior Experience Needed
               </p>
-              <p className="text-base leading-relaxed text-muted-foreground">
+              <p className="text-lg leading-relaxed text-muted-foreground">
                 Join our team of motivated tutors! Semester-long virtual positions offer up to 10
                 hours/week at $18/hr. Apply now!
               </p>
@@ -387,10 +387,10 @@ export function GetInvolvedTutoringSection() {
               <BookOpen className="size-5 text-white" />
             </div>
             <div className="space-y-2">
-              <p className="text-lg font-bold tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-xl">
+              <p className="text-pretty text-xl font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-2xl">
                 What You'll Do
               </p>
-              <p className="text-base leading-relaxed text-muted-foreground">
+              <p className="text-lg leading-relaxed text-muted-foreground">
                 Get PLUS training while math tutoring 1–4 middle school students. Mostly virtual, with
                 some in-person opportunities.
               </p>
@@ -435,7 +435,7 @@ export function GetInvolvedPartnershipsSection() {
             <p className="text-xl font-bold text-[#C6009C] sm:text-2xl">
               Contact Us to Learn More
             </p>
-            <p className="text-base leading-relaxed text-muted-foreground">
+            <p className="text-lg leading-relaxed text-muted-foreground">
               You can book a demo, sign up to join, or reach out with any general questions or
               inquiries by filling out the form below — we&apos;d love to hear from you!
             </p>
@@ -516,10 +516,10 @@ export function GetInvolvedResearchSection() {
             <ClipboardList className="size-5 text-white" />
           </div>
           <div className="space-y-2">
-            <p className="text-xl font-bold text-[#B44F52] sm:text-2xl">
+            <p className="text-pretty text-xl font-bold leading-snug tracking-tight text-[#B44F52] sm:text-2xl">
               Contact Us for Research Partnerships
             </p>
-            <p className="text-base leading-relaxed text-muted-foreground">
+            <p className="text-lg leading-relaxed text-muted-foreground">
               You can book a demo, sign up to join, or reach out with any general questions or
               inquiries by filling out the form below — we&apos;d love to hear from you!
             </p>
@@ -579,7 +579,7 @@ export function GetInvolvedFinalCTA() {
         <h2 className="text-3xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-4xl">
           Get Involved at PLUS
         </h2>
-        <p className="text-pretty text-base text-teal-900/75 dark:text-white/90 sm:text-lg">
+        <p className="text-pretty text-lg text-teal-900/75 dark:text-white/90">
           Be part of our mission to make learning more accessible and impactful
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">

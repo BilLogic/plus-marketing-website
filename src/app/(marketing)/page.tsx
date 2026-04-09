@@ -1,29 +1,44 @@
 import {
   PlusHeroSection,
   PlusImpactStatsSection,
+  PlusScienceOfLearningSection,
+  PlusSmartTechSection,
   PlusVoicesSection,
   PlusAwardsSection,
 } from "@/components/marketing/plus-landing-sections"
+import { marketingSectionStackGap } from "@/lib/marketing-layout"
+import { cn } from "@/lib/utils"
+
+/** Space between full-bleed hero and the first in-shell section (Impact). */
+const homeHeroToImpactSpacing = "pt-8 md:pt-10"
 
 /**
- * Same section gap as `for-schools/page.tsx` (`gap-16` / `md:gap-24`).
- * `pt-0` so the hero can align to the viewport fold (hero handles its own padding).
+ * Content below the hero stays in the standard marketing column.
+ * Hero is rendered outside this shell so its wash can span the full viewport (Figma `1714:1885`).
  */
-const homeSectionsClassName =
-  "mx-auto flex max-w-5xl flex-col gap-16 px-4 pb-16 pt-0 sm:px-6 sm:pb-20 md:gap-24 md:px-8 md:pb-24"
+const homePageShellClassName = cn(
+  "mx-auto flex max-w-5xl flex-col px-4 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24",
+  homeHeroToImpactSpacing
+)
 
 /**
- * Homepage — matches Figma PLUS-website-IA node 1576:1783 (Landing → Impact → Testimonials → Awards).
+ * Homepage — Figma Content `1576:1784` (Landing → Impact 2×2 → Smart Tech → Science → Testimonials → Awards).
  * Header and footer come from `(marketing)/layout.tsx`.
  */
 const Home = () => {
   return (
-    <div className={homeSectionsClassName}>
+    <>
       <PlusHeroSection />
-      <PlusImpactStatsSection />
-      <PlusVoicesSection />
-      <PlusAwardsSection />
-    </div>
+      <div className={homePageShellClassName}>
+        <PlusImpactStatsSection />
+        <div className={cn("mt-16 flex flex-col md:mt-24", marketingSectionStackGap)}>
+          <PlusSmartTechSection />
+          <PlusScienceOfLearningSection />
+          <PlusVoicesSection />
+          <PlusAwardsSection />
+        </div>
+      </div>
+    </>
   )
 }
 

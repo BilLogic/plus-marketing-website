@@ -234,7 +234,7 @@ export const ResearchHighlightsSection = () => {
                 }
               }}
               className={cn(
-                "flex min-h-0 min-w-0 cursor-pointer flex-col rounded-[30px] px-7 outline-none",
+                "flex min-h-0 min-w-0 cursor-default flex-col rounded-[30px] px-7 outline-none",
                 "transition-[flex-grow,padding,background-color,border-color] duration-300 ease-out",
                 "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700",
                 "py-8 lg:min-h-[234px] lg:py-[31px]",
@@ -670,7 +670,7 @@ export const ResearchIndexSection = ({
 
 /** Inset window on top of the placeholder card art (must stay `absolute` — do not add `relative` on the same node or the box collapses). */
 const RESEARCHER_PHOTO_INSET =
-  "absolute inset-[9%_8%_11%_8%] z-[1] overflow-hidden rounded-[22px] sm:inset-[8%_7%_10%_7%] sm:rounded-[24px]"
+  "absolute inset-0 z-[1] overflow-hidden"
 
 export const ResearchersGridSection = ({ members }: { members: TeamMember[] }) => {
   const fallbackPhoto = forResearchersAssets.researchers.fallbackPhoto

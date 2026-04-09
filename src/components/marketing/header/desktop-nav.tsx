@@ -41,14 +41,14 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
                           <li key={child.href + child.label}>
                             <NavigationMenuLink
                               href={child.href}
-                              className="flex select-none items-start gap-3 rounded-md p-3 leading-none no-underline"
+                              className="flex select-none items-center gap-3 rounded-md p-3 leading-none no-underline"
                             >
                               {child.icon && (
-                                <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-md border border-border/50 bg-muted/50">
+                                <span className="flex size-8 shrink-0 items-center justify-center rounded-md border border-border/50 bg-muted/50">
                                   <child.icon className="size-4 text-muted-foreground" />
                                 </span>
                               )}
-                              <div className="flex flex-col gap-1">
+                              <div className="flex items-center">
                                 <span className="flex items-center gap-1.5 text-sm font-medium text-foreground">
                                   {child.label}
                                   {child.badge && (

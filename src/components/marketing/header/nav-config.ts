@@ -36,10 +36,10 @@ export const NAV_CONFIG: NavItem[] = [
     children: [
       {
         items: [
-          { label: "Our Story", href: "/about#foundations", description: "Learn about PLUS's mission", icon: BookOpen },
-          { label: "Our Team", href: "/about#team", description: "Meet the people behind PLUS", icon: Users },
-          { label: "News", href: "/about#latest", description: "Latest updates and coverage", icon: Newspaper },
-          { label: "Success Stories", href: "/about#success-stories", description: "Impact across schools and communities", icon: Trophy },
+          { label: "Our Story", href: "/about#foundations", icon: BookOpen },
+          { label: "Our Team", href: "/about#team", icon: Users },
+          { label: "Latest Updates", href: "/about#latest", icon: Newspaper },
+          { label: "Success Stories", href: "/about#success-stories", icon: Trophy },
         ],
       },
     ],
@@ -49,9 +49,9 @@ export const NAV_CONFIG: NavItem[] = [
     children: [
       {
         items: [
-          { label: "For Schools", href: "/for-schools", description: "Program onboarding, training, and oversight", icon: School },
-          { label: "For Tutors", href: "/for-tutors", description: "Training, growth, and in-session support", icon: GraduationCap },
-          { label: "For Researchers", href: "/research", description: "Publications, data access, and analytics", icon: FileText },
+          { label: "For Schools", href: "/for-schools", icon: School },
+          { label: "For Tutors", href: "/for-tutors", icon: GraduationCap },
+          { label: "For Researchers", href: "/for-researchers", icon: FileText },
         ],
       },
     ],
@@ -61,9 +61,9 @@ export const NAV_CONFIG: NavItem[] = [
     children: [
       {
         items: [
-          { label: "Publications", href: "/research", description: "Browse 40+ peer-reviewed papers", icon: FileText },
-          { label: "News", href: "/about/news", description: "Updates and media coverage", icon: Newspaper },
-          { label: "Media Kit", href: "/media-kit", description: "Press assets, logos, and brand guidelines", icon: Image },
+          { label: "Publications", href: "/research", icon: FileText },
+          { label: "News", href: "/about/news", icon: Newspaper },
+          { label: "Media Kit", href: "/media-kit", icon: Image },
         ],
       },
     ],
@@ -73,8 +73,8 @@ export const NAV_CONFIG: NavItem[] = [
     children: [
       {
         items: [
-          { label: "Careers", href: "/get-involved#careers", description: "Join the PLUS team", icon: Briefcase },
-          { label: "Partnerships", href: "/get-involved#partnerships", description: "Collaborate with us", icon: Handshake },
+          { label: "Careers", href: "/get-involved#careers", icon: Briefcase },
+          { label: "Partnerships", href: "/get-involved#partnerships", icon: Handshake },
         ],
       },
     ],
@@ -85,13 +85,13 @@ export const FOOTER_LINKS = {
   about: [
     { label: "Our Story", href: "/about#foundations" },
     { label: "Our Team", href: "/about#team" },
-    { label: "News", href: "/about#latest" },
+    { label: "Latest Updates", href: "/about#latest" },
     { label: "Success Stories", href: "/about#success-stories" },
   ],
   solutions: [
     { label: "For Schools", href: "/for-schools" },
     { label: "For Tutors", href: "/for-tutors" },
-    { label: "For Researchers", href: "/research" },
+    { label: "For Researchers", href: "/for-researchers" },
   ],
   resources: [
     { label: "Publications", href: "/research" },

@@ -38,15 +38,15 @@ const aboutSectionH2 =
  * wide screens; wrap to multiple lines naturally on narrow viewports.
  */
 const aboutSectionLead =
-  "w-full max-w-none text-pretty text-base text-teal-900/75 dark:text-white/90 sm:text-lg"
+  "w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90"
 
 /** Final CTA blurb — wider shell (`max-w-4xl`) so copy can stay one line on large viewports. */
 const aboutFinalCtaLead =
-  "text-pretty text-base text-teal-900/75 dark:text-white/90 sm:text-lg"
+  "text-pretty text-lg text-teal-900/75 dark:text-white/90"
 
 /** Card titles / body — match Tutors Experience bento cards. */
 const aboutCardTitle =
-  "text-lg font-bold tracking-tight text-teal-950 sm:text-xl"
+  "text-pretty text-xl font-bold leading-snug tracking-tight text-teal-950 sm:text-2xl"
 
 const aboutCardBody =
   "text-sm leading-relaxed text-teal-900/75 sm:text-base"
@@ -110,7 +110,7 @@ function AboutLandingCtaRow({ className }: { className?: string }) {
 
 export function AboutHeroSection() {
   return (
-    <section className="relative flex flex-col items-center gap-8 overflow-x-visible pb-12 pt-14 text-center sm:gap-10 sm:pb-16 sm:pt-16 md:pt-20">
+    <section className="relative flex min-h-[calc(100svh-5.5rem)] flex-col items-center justify-center gap-8 overflow-x-visible py-12 text-center sm:gap-10 sm:py-16 md:py-20">
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[0]}
         className="-left-2 top-20 hidden sm:block md:left-0"
@@ -125,10 +125,10 @@ export function AboutHeroSection() {
       />
 
       <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-4 sm:gap-5">
-        <p className="text-base font-semibold tracking-wide text-teal-700 dark:text-teal-300 sm:text-lg">
+        <p className="text-2xl font-semibold text-teal-900 sm:text-3xl">
           About PLUS
         </p>
-        <h1 className="text-balance text-3xl font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-4xl md:text-5xl">
+        <h1 className="text-balance text-4xl font-semibold tracking-tight text-teal-950 sm:text-5xl">
           Bridging Opportunity Gaps in
           <br />
           Math Education with AI-
@@ -210,10 +210,11 @@ export function AboutFoundationsSection() {
               <button
                 type="button"
                 onClick={() => setSelectedIndex(index)}
+                onMouseEnter={() => setSelectedIndex(index)}
                 aria-pressed={isSelected}
                 className={cn(
                   /* Colors align with `TutorsCompensationSection` card (sky band + white body). */
-                  "flex h-full min-h-0 w-full flex-col gap-3 rounded-2xl p-5 text-left transition-colors sm:gap-5 sm:p-6",
+                  "flex h-full min-h-0 w-full cursor-default flex-col gap-3 rounded-2xl p-5 text-left transition-colors sm:gap-5 sm:p-6",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                   isSelected
                     ? "border-2 border-sky-200 bg-sky-100 dark:border-sky-800/50 dark:bg-sky-950/35"
@@ -229,12 +230,12 @@ export function AboutFoundationsSection() {
                   {index + 1}
                 </div>
                 <div className="flex min-h-0 flex-1 flex-col gap-2">
-                  <p className="shrink-0 text-lg font-bold tracking-tight text-[#007EB8] sm:text-xl dark:text-sky-300">
+                  <p className="shrink-0 text-pretty text-xl font-bold leading-snug tracking-tight text-[#007EB8] sm:text-2xl dark:text-sky-300">
                     {pillar.title}
                   </p>
                   <div className="flex min-h-0 flex-1 flex-col">
                     {isSelected ? (
-                      <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                      <p className="text-lg leading-relaxed text-muted-foreground">
                         {pillar.body}
                       </p>
                     ) : (
@@ -327,7 +328,7 @@ function TeamMemberCard({
           sizes="(max-width: 1024px) 100vw, 33vw"
         />
       </div>
-      <div className="space-y-1 bg-[#E8F6EA] p-4 dark:bg-emerald-950/20">
+      <div className="space-y-3 bg-[#E8F6EA] px-4 pt-4 pb-6 dark:bg-emerald-950/20">
         <p className="text-xl font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-2xl">
           {name}
         </p>
@@ -357,7 +358,7 @@ export function AboutTeamSection() {
         className="space-y-4 sm:space-y-6 lg:space-y-8"
       >
         <AccordionItem value="leadership" className="rounded-2xl bg-[#E8F6EA] px-4 shadow-none dark:bg-emerald-950/25 sm:px-6">
-          <AccordionTrigger className="items-center py-4 text-lg font-bold tracking-tight text-[#297E43] shadow-none hover:no-underline dark:text-emerald-300 sm:py-5 sm:text-xl **:data-[slot=accordion-trigger-icon]:size-6 **:data-[slot=accordion-trigger-icon]:text-[#297E43] dark:**:data-[slot=accordion-trigger-icon]:text-emerald-300">
+          <AccordionTrigger className="items-center py-4 text-xl font-bold leading-snug tracking-tight text-[#297E43] shadow-none hover:no-underline dark:text-emerald-300 sm:py-5 sm:text-2xl **:data-[slot=accordion-trigger-icon]:size-6 **:data-[slot=accordion-trigger-icon]:text-[#297E43] dark:**:data-[slot=accordion-trigger-icon]:text-emerald-300">
             <span className="flex items-center gap-3">
               <span className="flex size-10 items-center justify-center rounded-full bg-[#297E43] text-white">
                 <Users className="size-5" />
@@ -365,13 +366,13 @@ export function AboutTeamSection() {
               Leadership
             </span>
           </AccordionTrigger>
-          <AccordionContent className="pb-5 text-base leading-relaxed text-muted-foreground">
+          <AccordionContent className="pb-5 text-lg leading-relaxed text-muted-foreground">
             Leadership bios and profiles will appear here as we publish them on the marketing
             site.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="staff" className="rounded-2xl bg-[#E8F6EA] px-4 shadow-none dark:bg-emerald-950/25 sm:px-6">
-          <AccordionTrigger className="items-center py-4 text-lg font-bold tracking-tight text-[#297E43] shadow-none hover:no-underline dark:text-emerald-300 sm:py-5 sm:text-xl **:data-[slot=accordion-trigger-icon]:size-6 **:data-[slot=accordion-trigger-icon]:text-[#297E43] dark:**:data-[slot=accordion-trigger-icon]:text-emerald-300">
+          <AccordionTrigger className="items-center py-4 text-xl font-bold leading-snug tracking-tight text-[#297E43] shadow-none hover:no-underline dark:text-emerald-300 sm:py-5 sm:text-2xl **:data-[slot=accordion-trigger-icon]:size-6 **:data-[slot=accordion-trigger-icon]:text-[#297E43] dark:**:data-[slot=accordion-trigger-icon]:text-emerald-300">
             <span className="flex items-center gap-3">
               <span className="flex size-10 items-center justify-center rounded-full bg-[#297E43] text-white">
                 <Briefcase className="size-5" />
@@ -379,7 +380,7 @@ export function AboutTeamSection() {
               PLUS Staff
             </span>
           </AccordionTrigger>
-          <AccordionContent className="pb-5 text-base leading-relaxed text-muted-foreground">
+          <AccordionContent className="pb-5 text-lg leading-relaxed text-muted-foreground">
             Staff spotlights and roles will be listed here.
           </AccordionContent>
         </AccordionItem>
@@ -389,7 +390,7 @@ export function AboutTeamSection() {
               <span className="flex size-10 items-center justify-center rounded-full bg-[#297E43] text-white">
                 <GraduationCap className="size-5" />
               </span>
-              Current Student Interns
+              <span className="text-pretty text-xl font-bold leading-snug tracking-tight sm:text-2xl">Current Student Interns</span>
             </span>
           </AccordionTrigger>
           <AccordionContent className="pt-4 pb-0 sm:pt-6 lg:pt-8">

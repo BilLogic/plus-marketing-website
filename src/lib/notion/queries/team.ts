@@ -71,3 +71,23 @@ export const fetchTeamMembers = async (): Promise<TeamMember[]> => {
     return cached ?? []
   }
 }
+
+/**
+ * Affiliations that may appear on `/for-researchers` "Our Researchers".
+ * Excludes interns and independent-study rows so the grid stays lab/research staff.
+ */
+const RESEARCHERS_GRID_AFFILIATIONS: TeamMember["affiliation"][] = [
+  "Leadership",
+  "PLUS Staff",
+  "Past Collaborators",
+]
+
+/** Entries with Group = Researcher and a research-staff affiliation — used on `/for-researchers`. */
+export async function fetchResearchTeamMembers(): Promise<TeamMember[]> {
+  const members = await fetchTeamMembers()
+  return members.filter(
+    (m) =>
+      m.group === "Researcher" &&
+      RESEARCHERS_GRID_AFFILIATIONS.includes(m.affiliation)
+  )
+}

@@ -9,8 +9,10 @@ import {
   ResearchPartnersSection,
   ResearchSuccessStoriesSection,
 } from "@/components/marketing/for-researchers-sections"
+import { marketingSectionStackGap } from "@/lib/marketing-layout"
 import { fetchResearchPapers } from "@/lib/notion/queries/research"
-import { fetchTeamMembers as fetchResearchTeamMembers } from "@/lib/notion/queries/team"
+import { fetchResearchTeamMembers } from "@/lib/notion/queries/team"
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "For Researchers",
@@ -18,8 +20,8 @@ export const metadata: Metadata = {
     "PLUS research partners, highlights, index, and team — lab research and learning science.",
 }
 
-/** Match `/research` cache window when listing publications. */
-export const revalidate = 3600
+/** ISR — keep in sync with deployed Netlify builds and Notion-backed content. */
+export const revalidate = 300
 
 /** Same page shell as `for-schools/page.tsx` — vertical rhythm + max width. */
 const ForResearchersPage = async () => {
@@ -28,7 +30,12 @@ const ForResearchersPage = async () => {
   const researchTeam = await fetchResearchTeamMembers()
 
   return (
-    <div className="mx-auto flex max-w-5xl flex-col gap-16 px-4 pb-16 pt-2 sm:px-6 sm:pb-20 md:gap-24 md:px-8 md:pb-24">
+    <div
+      className={cn(
+        "mx-auto flex max-w-5xl flex-col px-4 pb-16 pt-2 sm:px-6 sm:pb-20 md:px-8 md:pb-24",
+        marketingSectionStackGap
+      )}
+    >
       <ResearchersHeroSection />
       <ResearchPartnersSection />
       <ResearchHighlightsSection />

@@ -20,8 +20,8 @@ export const forTutorsAssets = {
   experienceReflectGrowPhoto: "/figma/for-tutors/experience-reflect-grow.png",
   /** Certification & badges section (image 13). */
   certificationDecor: "/figma/for-tutors/certification-decor.svg",
-  /** Certification panel — My Badge card graphic (replaces built UI). */
-  certificationBadgeCard: "/figma/for-tutors/certification-badge-card.png",
+  /** Certification panel — Claimed badge SVG (full size). */
+  certificationBadgeCard: "/figma/for-tutors/claimed-badge-full.svg",
   /** Tutor Toolkit section (image 11-1). */
   toolkitDecor: "/figma/for-tutors/toolkit-decor.svg",
   /** Tutor Toolkit — Dashboard Tracking Insights mockup. */

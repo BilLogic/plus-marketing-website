@@ -63,7 +63,7 @@ export function TutorsHeroDecorImg({
  */
 export const TutorsHeroSection = () => {
   return (
-    <section className="relative flex flex-col items-center gap-8 overflow-x-visible pb-12 pt-14 text-center sm:gap-10 sm:pb-16 sm:pt-16 md:pt-20">
+    <section className="relative flex min-h-[calc(100svh-5.5rem)] flex-col items-center justify-center gap-8 overflow-x-visible py-12 text-center sm:gap-10 sm:py-16 md:py-20">
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[0]}
         className="-left-2 top-20 hidden sm:block md:left-0"
@@ -78,16 +78,17 @@ export const TutorsHeroSection = () => {
       />
 
       <div className="relative flex max-w-3xl flex-col items-center gap-4 sm:gap-5">
-        <p className="text-base font-semibold tracking-wide text-teal-700 dark:text-teal-300 sm:text-lg">
+        <p className="text-2xl font-semibold text-teal-900 sm:text-3xl">
           For Tutors
         </p>
-        <h1 className="text-balance text-3xl font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-4xl md:text-5xl">
+        <h1 className="text-balance text-4xl font-semibold tracking-tight text-teal-950 sm:text-5xl">
           Teach What Matters and Earn What You Deserve
         </h1>
+
       </div>
 
       <div className="mx-auto w-full max-w-5xl text-center">
-        <p className="text-base text-teal-900/80 dark:text-white/90 sm:text-lg">
+        <p className="text-lg text-teal-900/80 dark:text-white/90">
           Join 500+ tutors supporting 4,800+ students. Earn while you learn and
           lead.
         </p>
@@ -190,7 +191,7 @@ export const TutorsCompensationSection = () => {
               <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 Get Paid for All Your Hours
               </h2>
-              <p className="mx-auto max-w-2xl text-base text-teal-900/75 dark:text-white/90 sm:mx-0 sm:text-lg">
+              <p className="mx-auto max-w-2xl text-lg text-teal-900/75 dark:text-white/90 sm:mx-0">
                 Earn for every hour you spend training, tutoring, and reflecting
                 on your work
               </p>
@@ -210,12 +211,12 @@ export const TutorsCompensationSection = () => {
             {COMPENSATION_COLUMNS.map((col) => (
               <div
                 key={col.stat}
-                className="px-6 py-5 text-center md:px-8 md:py-6 md:text-left"
+                className="px-2 py-5 text-center first:pl-6 last:pr-6 md:px-3 md:py-6 md:text-left md:first:pl-8 md:last:pr-8"
               >
                 <p className="text-3xl font-bold tracking-tight text-sky-900 dark:text-sky-100 md:text-4xl">
                   {col.stat}
                 </p>
-                <p className="mt-1 text-sm font-bold text-sky-800 dark:text-sky-300 md:text-base">
+                <p className="mt-1 text-xl font-bold leading-snug tracking-tight text-sky-800 dark:text-sky-300 sm:text-2xl">
                   {col.sub}
                 </p>
               </div>
@@ -224,12 +225,12 @@ export const TutorsCompensationSection = () => {
           {/* Bottom band — white, bullet lists */}
           <div className="grid bg-white dark:bg-card md:grid-cols-3">
             {COMPENSATION_COLUMNS.map((col) => (
-              <div key={`${col.stat}-body`} className="px-6 py-7 md:px-8 md:py-8">
+              <div key={`${col.stat}-body`} className="px-2 py-7 first:pl-6 last:pr-6 md:px-3 md:py-8 md:first:pl-8 md:last:pr-8">
                 <ul className="space-y-3 text-left">
                   {col.bullets.map((b) => (
                     <li
                       key={b}
-                      className="flex gap-3 text-sm leading-relaxed text-muted-foreground md:text-[0.9375rem]"
+                      className="flex gap-2 text-lg leading-relaxed text-muted-foreground"
                     >
                       <span
                         className="mt-2 size-1.5 shrink-0 rounded-full bg-sky-400 dark:bg-sky-500"
@@ -308,14 +309,14 @@ export const TutorsExperienceSection = () => {
             <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
               What Tutoring at PLUS Looks Like
             </h2>
-            <p className="mx-auto max-w-2xl text-base text-teal-900/75 dark:text-white/90 sm:mx-0 sm:text-lg">
+            <p className="mx-auto max-w-2xl text-lg text-teal-900/75 dark:text-white/90 sm:mx-0">
               Build connections, provide 1:1 student support, and reflect with
               mentors
             </p>
           </div>
           <img
             alt=""
-            src={forTutorsAssets.experienceDecor}
+            src={forTutorsAssets.certificationDecor}
             className="pointer-events-none hidden h-auto w-28 max-w-[140px] shrink-0 opacity-90 select-none md:block md:w-32 md:max-w-[165px] lg:w-36 lg:max-w-[180px]"
             aria-hidden
           />
@@ -335,30 +336,31 @@ export const TutorsExperienceSection = () => {
               <button
                 type="button"
                 onClick={() => setSelectedIndex(index)}
+                onMouseEnter={() => setSelectedIndex(index)}
                 aria-pressed={isSelected}
                 className={cn(
-                  "flex h-full min-h-0 w-full flex-col gap-3 rounded-3xl p-5 text-left transition-colors sm:gap-5 sm:p-6",
+                  "flex h-full min-h-0 w-full cursor-default flex-col gap-3 rounded-3xl p-5 text-left transition-colors sm:gap-5 sm:p-6",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                   isSelected
-                    ? "border-2 border-green-400 bg-[#E8F6EA]"
-                    : "border-2 border-green-200/90 bg-white"
+                    ? "border-2 border-[#EBC077] bg-[#FFF1C7]"
+                    : "border-2 border-[#EBC077]/60 bg-white"
                 )}
               >
                 <div
                   className={cn(
                     "flex size-10 shrink-0 items-center justify-center rounded-full text-lg font-bold text-white",
-                    isSelected ? "bg-[#297E43]" : "bg-[#297E43]/85"
+                    isSelected ? "bg-[#A27707]" : "bg-[#A27707]/85"
                   )}
                 >
                   {index + 1}
                 </div>
                 <div className="flex min-h-0 flex-1 flex-col gap-2">
-                  <p className="shrink-0 text-lg font-bold tracking-tight text-[#297E43] sm:text-xl dark:text-[#297E43]">
+                  <p className="shrink-0 text-pretty text-xl font-bold leading-snug tracking-tight text-[#9A6D00] sm:text-2xl dark:text-[#9A6D00]">
                     {card.title}
                   </p>
                   <div className="flex min-h-0 flex-1 flex-col">
                     {isSelected ? (
-                      <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                      <p className="text-lg leading-relaxed text-muted-foreground">
                         {card.description}
                       </p>
                     ) : (
@@ -409,54 +411,52 @@ export const TutorsCertificationSection = () => {
               <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 Earn Certification &amp; Digital Badges
               </h2>
-              <p className="mx-auto max-w-2xl text-base text-teal-900/75 dark:text-white/90 sm:mx-0 sm:text-lg">
+              <p className="mx-auto max-w-2xl text-lg text-teal-900/75 dark:text-white/90 sm:mx-0">
                 Build credentials that showcase your expertise and professional
                 growth
               </p>
             </div>
             <img
               alt=""
-              src={forTutorsAssets.certificationDecor}
+              src={forTutorsAssets.experienceDecor}
               className="pointer-events-none hidden h-auto w-28 max-w-[140px] shrink-0 opacity-90 select-none md:block md:w-32 md:max-w-[165px] lg:w-36 lg:max-w-[180px]"
               aria-hidden
             />
           </div>
         </div>
 
-        <div className="flex flex-col gap-8 rounded-3xl bg-[#FFF1C7] px-6 py-7 dark:bg-[#FFF1C7]/12 md:flex-row md:items-stretch md:gap-10 md:px-8 md:py-8">
-          <div className="flex flex-1 gap-4">
+        <div className="flex flex-col gap-8 rounded-3xl bg-[#E8F6EA] px-6 py-7 dark:bg-[#E8F6EA]/12 md:flex-row md:items-stretch md:gap-10 md:px-8 md:py-8">
+          <div className="flex flex-[3] gap-4">
             <span
-              className="flex size-10 shrink-0 items-center justify-center self-start rounded-full bg-[#A27707] text-white"
+              className="flex size-10 shrink-0 items-center justify-center self-start rounded-full bg-[#297E43] text-white"
               aria-hidden
             >
               <Star className="size-5" strokeWidth={2.25} />
             </span>
             <div className="flex flex-1 flex-col justify-between gap-4">
               <div className="space-y-4">
-                <h3 className="min-w-0 text-balance text-lg font-bold tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-xl">
+                <h3 className="min-w-0 text-balance text-xl font-bold leading-snug tracking-tight text-[#297E43] dark:text-green-200 sm:text-2xl">
                   Tutor Certification &amp; Digital Badges
                 </h3>
-                <p className="text-base leading-relaxed text-muted-foreground">
+                <p className="text-lg leading-relaxed text-muted-foreground">
                   Complete all training to get sharable badges for resumes and social
                   media.
                 </p>
-                <p className="text-sm leading-relaxed text-muted-foreground">
+                <p className="text-lg leading-relaxed text-muted-foreground">
                   Note: Available to institutions only. Contact us to activate.
                 </p>
               </div>
-              <Button className="h-11 w-fit rounded-full bg-amber-300 px-8 font-medium text-amber-950 hover:bg-amber-400">
+              <Button className="h-11 w-fit rounded-full bg-[#4CAB65] px-8 text-base font-medium text-white hover:bg-[#3d9655]">
                 Register now
               </Button>
             </div>
           </div>
-          <div className="min-w-0 flex-1 overflow-hidden rounded-2xl border border-border/60 bg-white shadow-sm dark:border-border dark:bg-card">
-            <Image
+          <div className="flex min-w-0 flex-[2] items-center justify-end">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={forTutorsAssets.certificationBadgeCard}
-              alt="My Badge card: Certified Tutor with PLUS and Carnegie Mellon University branding"
-              width={783}
-              height={505}
-              className="h-auto w-full object-contain object-center"
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 40rem"
+              alt="Claimed badge: Certified Tutor with PLUS branding"
+              className="h-auto w-full object-contain object-right"
             />
           </div>
         </div>
@@ -511,7 +511,7 @@ function ToolkitCardHeading({
       >
         <Icon className="size-5" strokeWidth={2.25} />
       </span>
-      <p className="min-w-0 text-lg font-bold tracking-tight text-fuchsia-900 dark:text-fuchsia-200 sm:text-xl">
+      <p className="min-w-0 text-pretty text-xl font-bold leading-snug tracking-tight text-fuchsia-900 dark:text-fuchsia-200 sm:text-2xl">
         {children}
       </p>
     </div>
@@ -534,7 +534,7 @@ export const TutorsToolkitSection = () => {
               <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 Your Tutor Toolkit
               </h2>
-              <p className="mx-auto max-w-2xl text-base text-teal-900/75 dark:text-white/90 sm:mx-0 sm:text-lg">
+              <p className="mx-auto max-w-2xl text-lg text-teal-900/75 dark:text-white/90 sm:mx-0">
                 Access training, AI-powered feedback, and resources to support
                 your tutoring
               </p>
@@ -634,7 +634,7 @@ function TutorVoiceCard({
             {name.slice(0, 2).toUpperCase()}
           </AvatarFallback>
         </Avatar>
-        <p className="text-lg font-bold tracking-tight text-[#B05B5B] dark:text-[#e8a0a0] sm:text-xl">
+        <p className="text-pretty text-xl font-bold leading-snug tracking-tight text-[#B05B5B] dark:text-[#e8a0a0] sm:text-2xl">
           {name}
         </p>
       </div>
@@ -662,7 +662,7 @@ export const TutorsTestimonialsSection = () => {
               <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 Voices from Our Tutors
               </h2>
-              <p className="mx-auto max-w-2xl text-base text-teal-900/75 dark:text-white/90 sm:mx-0 sm:text-lg">
+              <p className="mx-auto max-w-2xl text-lg text-teal-900/75 dark:text-white/90 sm:mx-0">
                 Learn from real tutor stories, experiences, and tips to improve
                 your practice
               </p>
@@ -700,7 +700,7 @@ export const TutorsImpactCTA = () => {
         <h2 className="text-3xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-4xl">
           Ready to Make an Impact?
         </h2>
-        <p className="w-full max-w-none text-base text-teal-900/75 dark:text-white/90 sm:text-lg">
+        <p className="w-full max-w-none text-lg text-teal-900/75 dark:text-white/90">
           Join a community of tutors committed to growth, equity, and meaningful
           math mentorship.
         </p>
