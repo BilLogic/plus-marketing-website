@@ -35,16 +35,6 @@ export const aboutSectionIds = {
   learnMore: "learn-more",
 } as const
 
-/** Sections on /for-researchers — IDs on `for-researchers-sections.tsx` */
-export const forResearchersSectionIds = {
-  partners: "research-partners",
-  highlights: "research-highlights",
-  index: "research-index",
-  researchers: "research-team",
-  successStories: "research-success-stories",
-  collaborate: "research-collaborate",
-} as const
-
 /** Sections on /for-tutors — IDs on `for-tutors-sections.tsx` */
 export const forTutorsSectionIds = {
   compensation: "compensation",
