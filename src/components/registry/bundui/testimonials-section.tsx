@@ -22,6 +22,14 @@ type BunduiTestimonialsSectionProps = {
   showOuterContainer?: boolean
   /** Merged into each testimonial `<figure>` (e.g. `shadow-none` for flat cards). */
   figureClassName?: string
+  /** Merged onto section h2 (e.g. `text-teal-950`). */
+  sectionTitleClassName?: string
+  /** Merged onto section description. */
+  sectionDescriptionClassName?: string
+  /** Merged onto blockquote (defaults to body + muted). */
+  quoteClassName?: string
+  /** Merged onto testimonial author name. */
+  authorNameClassName?: string
 }
 
 /** Bundui-inspired testimonial grid for social proof. */
@@ -56,6 +64,10 @@ const BunduiTestimonialsSection = ({
   showHeader = true,
   showOuterContainer = true,
   figureClassName,
+  sectionTitleClassName,
+  sectionDescriptionClassName,
+  quoteClassName,
+  authorNameClassName,
 }: BunduiTestimonialsSectionProps) => {
   const inner = (
     <>
@@ -64,8 +76,14 @@ const BunduiTestimonialsSection = ({
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
             {sectionLabel}
           </p>
-          <h2 className={marketingTypography.h2}>{sectionTitle}</h2>
-          <p className={marketingTypography.lead}>{sectionDescription}</p>
+          <h2 className={cn(marketingTypography.h2, sectionTitleClassName)}>
+            {sectionTitle}
+          </h2>
+          <p
+            className={cn(marketingTypography.lead, sectionDescriptionClassName)}
+          >
+            {sectionDescription}
+          </p>
         </header>
       ) : null}
       <div
@@ -83,7 +101,11 @@ const BunduiTestimonialsSection = ({
             )}
           >
             <blockquote
-              className={cn(marketingTypography.body, "text-muted-foreground")}
+              className={cn(
+                marketingTypography.body,
+                "text-muted-foreground",
+                quoteClassName
+              )}
             >
               “{testimonial.quote}”
             </blockquote>
@@ -95,7 +117,14 @@ const BunduiTestimonialsSection = ({
                 <AvatarFallback>{testimonial.name.slice(0, 2).toUpperCase()}</AvatarFallback>
               </Avatar>
               <div className="text-xs">
-                <p className="font-medium text-foreground">{testimonial.name}</p>
+                <p
+                  className={cn(
+                    "font-medium text-foreground",
+                    authorNameClassName
+                  )}
+                >
+                  {testimonial.name}
+                </p>
                 <p className="text-muted-foreground">
                   {testimonial.role} · {testimonial.company}
                 </p>
@@ -124,4 +153,3 @@ const BunduiTestimonialsSection = ({
 }
 
 export { BunduiTestimonialsSection }
-

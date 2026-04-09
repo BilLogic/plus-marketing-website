@@ -40,7 +40,12 @@ function Calendar({
       locale={locale}
       formatters={{
         formatMonthDropdown: (date) =>
-          date.toLocaleString(locale?.code, { month: "short" }),
+          date.toLocaleString(
+            locale != null && "code" in locale
+              ? (locale as { code: string }).code
+              : undefined,
+            { month: "short" }
+          ),
         ...formatters,
       }}
       classNames={{
@@ -198,7 +203,11 @@ function CalendarDayButton({
     <Button
       variant="ghost"
       size="icon"
-      data-day={day.date.toLocaleDateString(locale?.code)}
+      data-day={day.date.toLocaleDateString(
+        locale != null && "code" in locale
+          ? (locale as { code: string }).code
+          : undefined
+      )}
       data-selected-single={
         modifiers.selected &&
         !modifiers.range_start &&

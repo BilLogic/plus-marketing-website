@@ -19,7 +19,7 @@ export default meta
 
 type Story = StoryObj
 
-/** PLUS footer — Figma IA (~1206-1372): newsletter, logo, five link columns, bottom bar. */
+/** PLUS footer — Figma IA (~1206-1372): newsletter (nav-style `plusNavCta` pill), logo, columns, bottom bar. */
 export const BunduiFooter: Story = {
   render: () => (
     <div className="min-h-dvh bg-background">
@@ -27,18 +27,6 @@ export const BunduiFooter: Story = {
         <p>Page content placeholder — scroll to footer.</p>
       </div>
       <BunduiFooterSection productName="PLUS" />
-    </div>
-  ),
-}
-
-/** Same layout; default Storybook button style on newsletter CTA. */
-export const NewsletterDefaultButton: Story = {
-  render: () => (
-    <div className="min-h-dvh bg-background">
-      <BunduiFooterSection
-        productName="PLUS"
-        newsletterButtonStyle="default"
-      />
     </div>
   ),
 }

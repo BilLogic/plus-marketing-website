@@ -11,6 +11,12 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  /** Default Storybook + Autodocs preview = BunduiNavbar “Tutor Login” pill (`plusNavCta` + `navCta`). */
+  args: {
+    variant: "plusNavCta",
+    size: "navCta",
+    children: "Button",
+  },
 } satisfies Meta<typeof Button>
 
 export default meta
@@ -55,6 +61,9 @@ export const Overview: Story = {
       <div>
         <p className="text-xs font-semibold">Variants</p>
         <div className="mt-3 flex flex-wrap items-center gap-3">
+          <Button variant="plusNavCta" size="navCta">
+            PLUS nav CTA
+          </Button>
           <Button variant="default">Default</Button>
           <Button variant="secondary">Secondary</Button>
           <Button variant="outline">Outline</Button>
@@ -81,17 +90,14 @@ export const Overview: Story = {
   ),
 }
 
-/** The default button style. */
-export const Default: Story = {
-  args: {
-    children: "Button",
-  },
-}
+/** Default in Storybook = navbar Tutor Login style (`plusNavCta` + `navCta`). */
+export const Default: Story = {}
 
 /** A secondary-emphasis button. */
 export const Secondary: Story = {
   args: {
     variant: "secondary",
+    size: "default",
     children: "Secondary",
   },
 }
@@ -100,6 +106,7 @@ export const Secondary: Story = {
 export const Outline: Story = {
   args: {
     variant: "outline",
+    size: "default",
     children: "Outline",
   },
 }
@@ -108,6 +115,7 @@ export const Outline: Story = {
 export const Ghost: Story = {
   args: {
     variant: "ghost",
+    size: "default",
     children: "Ghost",
   },
 }
@@ -116,6 +124,7 @@ export const Ghost: Story = {
 export const Destructive: Story = {
   args: {
     variant: "destructive",
+    size: "default",
     children: "Destructive",
   },
 }
@@ -124,6 +133,7 @@ export const Destructive: Story = {
 export const Link: Story = {
   args: {
     variant: "link",
+    size: "default",
     children: "Link",
   },
 }
@@ -159,8 +169,8 @@ export const Icon: Story = {
 
 /** A button that combines an icon with a text label. */
 export const WithIcon: Story = {
-  render: () => (
-    <Button>
+  render: (args) => (
+    <Button {...args}>
       <Mail />
       Login with Email
     </Button>
@@ -169,8 +179,8 @@ export const WithIcon: Story = {
 
 /** A button showing a loading spinner with disabled state. */
 export const Loading: Story = {
-  render: () => (
-    <Button disabled>
+  render: (args) => (
+    <Button {...args} disabled>
       <Loader2 className="animate-spin" />
       Please wait
     </Button>
@@ -180,7 +190,10 @@ export const Loading: Story = {
 /** All button variants displayed side-by-side. */
 export const AllVariants: Story = {
   render: () => (
-    <div className="flex items-center gap-4">
+    <div className="flex flex-wrap items-center gap-4">
+      <Button variant="plusNavCta" size="navCta">
+        PLUS nav CTA
+      </Button>
       <Button variant="default">Default</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="outline">Outline</Button>

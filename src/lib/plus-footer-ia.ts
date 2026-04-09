@@ -54,8 +54,19 @@ export const forTutorsSectionIds = {
   impact: "make-an-impact",
 } as const
 
+/** Sections on /for-researchers — IDs on `for-researchers-sections.tsx` */
+export const forResearchersSectionIds = {
+  partners: "research-partners",
+  highlights: "latest-research-highlights",
+  index: "research-index",
+  researchers: "our-researchers",
+  successStories: "research-success-stories",
+  collaborate: "conduct-research-with-us",
+} as const
+
 const fs = forSchoolsSectionIds
 const ft = forTutorsSectionIds
+const fr = forResearchersSectionIds
 
 export const PLUS_FOOTER_COLUMNS: readonly PlusFooterColumn[] = [
   {
@@ -116,9 +127,21 @@ export const PLUS_FOOTER_COLUMNS: readonly PlusFooterColumn[] = [
     id: "for-researchers",
     title: "For researchers",
     links: [
-      { label: "Data access", href: "#" },
-      { label: "Analytics & monitoring tools", href: "#" },
-      { label: "Publications", href: "#" },
+      { label: "Our Research Partners", href: `/for-researchers#${fr.partners}` },
+      {
+        label: "Our Latest Research Highlights",
+        href: `/for-researchers#${fr.highlights}`,
+      },
+      { label: "Research Index", href: `/for-researchers#${fr.index}` },
+      { label: "Our Researchers", href: `/for-researchers#${fr.researchers}` },
+      {
+        label: "Research Success Stories",
+        href: `/for-researchers#${fr.successStories}`,
+      },
+      {
+        label: "Conduct Research with Us",
+        href: `/for-researchers#${fr.collaborate}`,
+      },
     ],
   },
   {

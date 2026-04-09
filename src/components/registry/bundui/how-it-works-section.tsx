@@ -18,6 +18,14 @@ type BunduiHowItWorksSectionProps = {
   layout?: "list" | "grid"
   imageSrc?: string
   imageAlt?: string
+  /** Merged onto section h2 (e.g. `text-teal-950` for marketing pages). */
+  sectionTitleClassName?: string
+  /** Merged onto section description paragraph. */
+  sectionDescriptionClassName?: string
+  /** When `layout="grid"`, merged onto step titles (defaults to `marketingTypography.h3`). */
+  stepTitleClassName?: string
+  /** When `layout="grid"`, replaces default body classes for step descriptions. */
+  gridStepBodyClassName?: string
 }
 
 /** Bundui-inspired "How it works" timeline section. */
@@ -43,6 +51,10 @@ const BunduiHowItWorksSection = ({
   layout = "list",
   imageSrc,
   imageAlt = "",
+  sectionTitleClassName,
+  sectionDescriptionClassName,
+  stepTitleClassName,
+  gridStepBodyClassName,
 }: BunduiHowItWorksSectionProps) => {
   const isGrid = layout === "grid"
   return (
@@ -56,8 +68,14 @@ const BunduiHowItWorksSection = ({
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
           {sectionLabel}
         </p>
-        <h2 className={marketingTypography.h2}>{sectionTitle}</h2>
-        <p className={marketingTypography.lead}>{sectionDescription}</p>
+        <h2 className={cn(marketingTypography.h2, sectionTitleClassName)}>
+          {sectionTitle}
+        </h2>
+        <p
+          className={cn(marketingTypography.lead, sectionDescriptionClassName)}
+        >
+          {sectionDescription}
+        </p>
       </header>
 
       <ol
@@ -101,8 +119,15 @@ const BunduiHowItWorksSection = ({
               <div className={cn("min-w-0", isGrid ? "space-y-2" : "space-y-1")}>
                 <p
                   className={cn(
-                    isGrid ? marketingTypography.h3 : "text-sm font-semibold tracking-tight text-foreground",
-                    (isFilled || isOutlined) && "text-primary"
+                    isGrid
+                      ? cn(
+                          stepTitleClassName ?? marketingTypography.h3,
+                          (isFilled || isOutlined) && "text-primary"
+                        )
+                      : cn(
+                          "text-sm font-semibold tracking-tight text-foreground",
+                          (isFilled || isOutlined) && "text-primary"
+                        )
                   )}
                 >
                   {step.title}
@@ -111,7 +136,8 @@ const BunduiHowItWorksSection = ({
                   <p
                     className={cn(
                       isGrid
-                        ? cn(marketingTypography.body, "text-muted-foreground")
+                        ? (gridStepBodyClassName ??
+                          cn(marketingTypography.body, "text-muted-foreground"))
                         : "text-sm text-muted-foreground"
                     )}
                   >

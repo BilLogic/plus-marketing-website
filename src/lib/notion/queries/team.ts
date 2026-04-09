@@ -74,7 +74,8 @@ export const fetchTeamMembers = async (): Promise<TeamMember[]> => {
 
 /**
  * Affiliations that may appear on `/for-researchers` "Our Researchers".
- * Excludes interns and independent-study rows so the grid stays lab/research staff.
+ * Excludes interns and independent-study rows so the grid stays lab/research staff
+ * (Notion `Group` alone is often set to Researcher too broadly).
  */
 const RESEARCHERS_GRID_AFFILIATIONS: TeamMember["affiliation"][] = [
   "Leadership",

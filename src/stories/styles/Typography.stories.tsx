@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 
 import { marketingTypography } from "@/lib/marketing-typography"
+import { cn } from "@/lib/utils"
 
 const meta = {
   title: "Styles/Typography",
@@ -40,6 +41,22 @@ export const Story: Story = {
               <p className={marketingTypography.h1}>H1 — Hero headline</p>
               <p className={marketingTypography.h2}>H2 — Section headline</p>
               <p className={marketingTypography.h3}>H3 — Card title</p>
+              <p className="text-sm text-muted-foreground">
+                For Schools — Robust Oversight cards use{" "}
+                <code className="text-xs">marketingTypography.h2</code> on an{" "}
+                <code className="text-xs">{"<h3>"}</code> (section headline stays{" "}
+                <code className="text-xs">{"<h2>"}</code>).
+              </p>
+              <p
+                className={cn(
+                  marketingTypography.bentoTitle,
+                  "text-[#d31998]"
+                )}
+              >
+                Dense card / bento title —{" "}
+                <code className="text-xs">marketingTypography.bentoTitle</code> (
+                For Schools Day-to-Day, For Researchers highlights).
+              </p>
             </div>
           </section>
 
@@ -58,6 +75,15 @@ export const Story: Story = {
               </p>
               <p className="text-sm text-muted-foreground">
                 Small caption — for helper text, metadata, and subtle labels.
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Testimonial cards (e.g. For Schools — School Success Stories): attribution uses{" "}
+                <code className="text-xs">marketingTypography.h3</code> with a brand color; quote
+                uses <code className="text-xs">marketingTypography.body</code> +{" "}
+                <code className="text-xs">text-muted-foreground</code>, with{" "}
+                <code className="text-xs">strong</code> as{" "}
+                <code className="text-xs">font-semibold text-teal-950</code> (matches section
+                headers).
               </p>
             </div>
           </section>

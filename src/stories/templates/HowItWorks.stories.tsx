@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 
+import { DayToDayExperienceSection } from "@/components/marketing/day-to-day-experience-section"
+import { EXPERIENCE_BENTO_STEPS } from "@/components/marketing/for-schools-experience-bento"
 import { forSchoolsAssets } from "@/components/marketing/for-schools-assets"
 import { BunduiHowItWorksSection } from "@/components/registry/bundui/how-it-works-section"
 
@@ -34,7 +36,19 @@ const experienceSteps = [
   },
 ]
 
-/** “Your Day-to-Day Experience with PLUS” — grid layout, step variants, optional image. */
+/** For Schools page — Figma IA 1379:2346 (interactive bento + hero). */
+export const DayToDayExperienceFigma: Story = {
+  name: "Day-to-Day Experience (Figma)",
+  render: () => (
+    <div className="bg-background py-16 sm:py-20 md:py-24">
+      <div className="mx-auto max-w-[1124px] px-4 sm:px-6 md:px-8">
+        <DayToDayExperienceSection steps={EXPERIENCE_BENTO_STEPS} />
+      </div>
+    </div>
+  ),
+}
+
+/** Registry template — list/grid variants (Storybook reference). */
 export const BunduiHowItWorks: Story = {
   render: () => (
     <div className="bg-background py-16 sm:py-20 md:py-24">

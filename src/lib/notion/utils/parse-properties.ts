@@ -63,6 +63,10 @@ const TEAM_HEADSHOT_URLS = [
   "Photo link",
 ] as const
 
+/**
+ * Resolves a team member headshot URL from page properties.
+ * Matches `/about/team` + `/api/team-photo` so naming stays consistent.
+ */
 export function getTeamMemberPictureUrl(props: Record<string, any>): string | null {
   for (const key of TEAM_HEADSHOT_FILES) {
     const url = getFiles(props[key])
