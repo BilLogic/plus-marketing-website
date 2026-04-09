@@ -66,15 +66,15 @@ export const TutorsHeroSection = () => {
     <section className="relative flex min-h-[calc(100svh-5.5rem)] flex-col items-center justify-center gap-8 overflow-x-visible py-12 text-center sm:gap-10 sm:py-16 md:py-20">
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[0]}
-        className="-left-2 top-20 hidden sm:block md:left-0"
+        className="-left-2 top-52 hidden sm:block md:left-0 md:top-56"
       />
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[1]}
-        className="right-0 top-5 hidden sm:right-1 sm:top-7 sm:block md:right-4 md:top-5"
+        className="right-0 top-28 hidden sm:right-1 sm:top-36 sm:block md:right-4 md:top-32"
       />
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[2]}
-        className="-right-1 top-56 hidden md:block md:-right-2 md:top-64 md:translate-x-1 lg:-right-3 lg:top-72 lg:translate-x-2"
+        className="-right-1 top-80 hidden md:block md:-right-2 md:top-[25rem] md:translate-x-1 lg:-right-3 lg:top-[29rem] lg:translate-x-2"
       />
 
       <div className="relative flex max-w-3xl flex-col items-center gap-4 sm:gap-5">

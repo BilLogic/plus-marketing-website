@@ -28,6 +28,7 @@ export const forSchoolsSectionIds = {
 
 /** Sections on /about — IDs on `about-sections.tsx` */
 export const aboutSectionIds = {
+  mission: "our-mission",
   foundations: "foundations",
   team: "team",
   latest: "latest",

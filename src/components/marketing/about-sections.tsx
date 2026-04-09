@@ -3,13 +3,13 @@
 import { useState, type ReactNode } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import type { LucideIcon } from "lucide-react"
 import {
   ArrowRight,
   BarChart3,
   BookOpen,
   Briefcase,
   GraduationCap,
-  Newspaper,
   School,
   Sparkles,
   Trophy,
@@ -113,15 +113,15 @@ export function AboutHeroSection() {
     <section className="relative flex min-h-[calc(100svh-5.5rem)] flex-col items-center justify-center gap-8 overflow-x-visible py-12 text-center sm:gap-10 sm:py-16 md:py-20">
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[0]}
-        className="-left-2 top-20 hidden sm:block md:left-0"
+        className="-left-2 top-52 hidden sm:block md:left-0 md:top-56"
       />
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[1]}
-        className="right-0 top-5 hidden sm:right-1 sm:top-7 sm:block md:right-4 md:top-5"
+        className="right-0 top-28 hidden sm:right-1 sm:top-36 sm:block md:right-4 md:top-32"
       />
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[2]}
-        className="-right-1 top-56 hidden md:block md:-right-2 md:top-64 md:translate-x-1 lg:-right-3 lg:top-72 lg:translate-x-2"
+        className="-right-1 top-80 hidden md:block md:-right-2 md:top-[25rem] md:translate-x-1 lg:-right-3 lg:top-[29rem] lg:translate-x-2"
       />
 
       <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-4 sm:gap-5">
@@ -138,6 +138,106 @@ export function AboutHeroSection() {
       </div>
 
       <AboutLandingCtaRow className="mt-6 sm:mt-8" />
+    </section>
+  )
+}
+
+/** Foundations pillar names (e.g. Community) — sky accent on interactive cards. */
+const aboutPillarHighlightTitle =
+  "text-pretty text-xl font-bold leading-snug tracking-tight text-[#007EB8] sm:text-2xl dark:text-sky-300"
+
+/** Our Mission pillar headings — same scale as foundation pillars; color matches icon circles. */
+const aboutMissionPillarTitle =
+  "text-pretty text-xl font-bold leading-snug tracking-tight text-[#a6554d] sm:text-2xl dark:text-[#c97d73]"
+
+const aboutMissionBulletList =
+  "space-y-2.5 text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg"
+
+const MISSION_MAP_SRC = "/figma/about/mission-eastern-us-map.png"
+
+const MissionBulletList = ({ items }: { items: readonly string[] }) => (
+  <ul className={aboutMissionBulletList}>
+    {items.map((text) => (
+      <li key={text} className="flex gap-3">
+        <span
+          className="mt-2 size-1.5 shrink-0 rounded-full bg-[#FCA5A4]"
+          aria-hidden
+        />
+        <span>{text}</span>
+      </li>
+    ))}
+  </ul>
+)
+
+const MissionPillarBlock = ({
+  icon: Icon,
+  title,
+  items,
+}: {
+  icon: LucideIcon
+  title: string
+  items: readonly string[]
+}) => (
+  <div className="space-y-4 sm:space-y-5">
+    <span className="flex size-10 items-center justify-center rounded-full bg-[#a6554d] text-white dark:bg-[#c97d73]">
+      <Icon className="size-5" aria-hidden />
+    </span>
+    <h3 className={aboutMissionPillarTitle}>{title}</h3>
+    <MissionBulletList items={items} />
+  </div>
+)
+
+export function AboutMissionSection() {
+  return (
+    <section id={aboutSectionIds.mission} className="scroll-mt-24 space-y-8 sm:space-y-10 lg:space-y-12">
+      <AboutSectionTitleWithDecor decorSrc={forTutorsAssets.voicesDecor}>
+        <h2 className={aboutSectionH2}>Our Mission</h2>
+        <p className={aboutSectionLead}>
+          16M+ underserved U.S. students need tutoring. We double middle school math learning.
+        </p>
+      </AboutSectionTitleWithDecor>
+
+      <div className="grid items-start gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-x-12 lg:gap-y-12">
+        <MissionPillarBlock
+          icon={Users}
+          title="A Growing Crisis"
+          items={[
+            "16M+ U.S. students lack high-impact tutoring",
+            "Many are from underserved, low-income communities",
+          ]}
+        />
+
+        <div className="flex w-full shrink-0 justify-center leading-none lg:block">
+          <Image
+            src={MISSION_MAP_SRC}
+            alt="Hand-drawn map of the Eastern United States with PLUS program location markers"
+            width={837}
+            height={966}
+            className="m-0 block h-auto w-full max-w-[min(100%,17.5rem)] object-contain object-top align-top sm:max-w-[min(100%,22rem)] md:max-w-[min(100%,26rem)] lg:max-w-none"
+            sizes="(max-width: 640px) 280px, (max-width: 1024px) min(416px, 90vw), min(920px, 50vw)"
+          />
+        </div>
+
+        <MissionPillarBlock
+          icon={School}
+          title="A Smarter Solution"
+          items={[
+            "PLUS is a hybrid human–AI tutoring program",
+            "Doubles middle school math learning",
+            "Personalized support matches each student",
+          ]}
+        />
+
+        <MissionPillarBlock
+          icon={GraduationCap}
+          title="Proven Impact"
+          items={[
+            "Serving 10+ schools across PA, NY, OR, and WV",
+            "Nearly 5,000 students helped since 2018",
+            "Technology developed with Carnegie Mellon & Stanford",
+          ]}
+        />
+      </div>
     </section>
   )
 }
@@ -230,7 +330,7 @@ export function AboutFoundationsSection() {
                   {index + 1}
                 </div>
                 <div className="flex min-h-0 flex-1 flex-col gap-2">
-                  <p className="shrink-0 text-pretty text-xl font-bold leading-snug tracking-tight text-[#007EB8] sm:text-2xl dark:text-sky-300">
+                  <p className={cn("shrink-0", aboutPillarHighlightTitle)}>
                     {pillar.title}
                   </p>
                   <div className="flex min-h-0 flex-1 flex-col">

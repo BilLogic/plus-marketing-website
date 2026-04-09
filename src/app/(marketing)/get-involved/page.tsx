@@ -5,14 +5,13 @@ import {
   GetInvolvedCareersSection,
   GetInvolvedTutoringSection,
   GetInvolvedPartnershipsSection,
-  GetInvolvedResearchSection,
   GetInvolvedFinalCTA,
 } from "@/components/marketing/get-involved-sections"
 
 export const metadata: Metadata = {
   title: "Get Involved — PLUS",
   description:
-    "Join PLUS as a tutor, staff member, or partner. Explore careers, tutoring opportunities, and research collaborations.",
+    "Join PLUS as a tutor, staff member, or partner. Explore careers, tutoring opportunities, and partnerships.",
 }
 
 const GetInvolvedPage = () => {
@@ -24,7 +23,6 @@ const GetInvolvedPage = () => {
         <GetInvolvedCareersSection />
         <GetInvolvedTutoringSection />
         <GetInvolvedPartnershipsSection />
-        <GetInvolvedResearchSection />
         <GetInvolvedFinalCTA />
       </div>
     </main>

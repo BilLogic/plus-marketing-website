@@ -10,8 +10,7 @@ import {
   Heart,
   BookOpen,
   Microscope,
-  ClipboardList,
-  ChevronDown,
+  FileText,
   HandCoins,
   DollarSign,
   Hospital,
@@ -48,15 +47,15 @@ export function GetInvolvedHeroSection() {
     <section className="relative flex min-h-[calc(100svh-5.5rem)] flex-col items-center justify-center gap-8 overflow-x-visible py-12 text-center sm:gap-10 sm:py-16 md:py-20">
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[0]}
-        className="-left-2 top-20 hidden sm:block md:left-0"
+        className="-left-2 top-52 hidden sm:block md:left-0 md:top-56"
       />
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[1]}
-        className="right-0 top-5 hidden sm:right-1 sm:top-7 sm:block md:right-4 md:top-5"
+        className="right-0 top-28 hidden sm:right-1 sm:top-36 sm:block md:right-4 md:top-32"
       />
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[2]}
-        className="-right-1 top-56 hidden md:block md:-right-2 md:top-64 md:translate-x-1 lg:-right-3 lg:top-72 lg:translate-x-2"
+        className="-right-1 top-80 hidden md:block md:-right-2 md:top-[25rem] md:translate-x-1 lg:-right-3 lg:top-[29rem] lg:translate-x-2"
       />
 
       <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-4 sm:gap-5">
@@ -405,8 +404,6 @@ export function GetInvolvedTutoringSection() {
 // ─── Building Partnerships with PLUS ─────────────────────────────────────────
 
 export function GetInvolvedPartnershipsSection() {
-  const [isOpen, setIsOpen] = useState(false)
-
   return (
     <section id="partnerships" className="scroll-mt-24 space-y-8 sm:space-y-10">
       <div className="flex flex-col items-center gap-6 sm:items-start md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
@@ -424,147 +421,32 @@ export function GetInvolvedPartnershipsSection() {
         />
       </div>
 
-      {/* Collapsible contact card */}
-      <div className="rounded-3xl bg-[#FFE8F6] px-6 py-7 dark:bg-[#FFE8F6]/10 md:px-8 md:py-8">
-        {/* Header: icon + title + description */}
+      <div className="rounded-[28px] bg-[#fdf0f6] px-6 py-8 dark:bg-[#fdf0f6]/[0.08] md:px-10 md:py-10">
         <div className="flex items-start gap-4">
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#C6009C]">
-            <ClipboardList className="size-5 text-white" />
+          <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#C6009C]">
+            <FileText className="size-5 text-white" aria-hidden />
           </div>
-          <div className="space-y-2">
-            <p className="text-xl font-bold text-[#C6009C] sm:text-2xl">
+          <div className="min-w-0 space-y-3">
+            <p className="text-pretty text-xl font-bold text-[#C6009C] sm:text-2xl dark:text-[#e879a9]">
               Contact Us to Learn More
             </p>
-            <p className="text-lg leading-relaxed text-muted-foreground">
-              You can book a demo, sign up to join, or reach out with any general questions or
-              inquiries by filling out the form below — we&apos;d love to hear from you!
+            <p className="text-pretty text-lg leading-relaxed text-muted-foreground">
+              Book a demo, explore joining a program, or reach out with general questions about
+              partnerships — we&apos;d love to hear from you.
             </p>
-          </div>
-        </div>
-
-        {/* Learn more toggle — right aligned */}
-        <div className="mt-4 flex justify-end">
-          <button
-            onClick={() => setIsOpen((v) => !v)}
-            className="flex items-center gap-1.5 text-sm font-medium text-[#C6009C] hover:underline"
-          >
-            Learn more
-            <ChevronDown
-              className={cn("size-4 transition-transform duration-300", isOpen && "rotate-180")}
-            />
-          </button>
-        </div>
-
-        {/* Expandable: PLUS logo + Google Form */}
-        {isOpen && (
-          <div className="mt-4 flex flex-col gap-4">
-            <div className="flex items-center justify-center rounded-2xl bg-white p-8 dark:bg-card">
-              <img
-                src="/plus-logo.png"
-                alt="PLUS Personalized Learning logo"
-                className="h-auto w-40 object-contain"
-              />
-            </div>
-            <div className="overflow-hidden rounded-2xl bg-white dark:bg-card">
-              <iframe
-                src="https://docs.google.com/forms/d/e/1FAIpQLSf_placeholder/viewform?embedded=true"
-                width="100%"
-                height="600"
-                frameBorder="0"
-                marginHeight={0}
-                marginWidth={0}
-                title="Contact PLUS form"
-                className="block"
+            <div id="partnerships-contact-form" className="scroll-mt-24">
+              <a
+                href="#partnerships-contact-form"
+                className={cn(
+                  ctaLinkLayout,
+                  "inline-flex h-11 min-w-[10rem] items-center justify-center rounded-full border-0 bg-[#ECA8D3] px-8 text-base font-medium text-[#690051] shadow-none transition-opacity hover:opacity-90 dark:bg-[#ECA8D3]/90 dark:text-[#690051]",
+                )}
               >
-                Loading…
-              </iframe>
+                Contact Us
+              </a>
             </div>
           </div>
-        )}
-      </div>
-    </section>
-  )
-}
-
-// ─── Research Partnership Opportunities ───────────────────────────────────────
-
-export function GetInvolvedResearchSection() {
-  const [isOpen, setIsOpen] = useState(false)
-
-  return (
-    <section id="research-partnerships" className="scroll-mt-24 space-y-8 sm:space-y-10">
-      <div className="flex flex-col items-center gap-6 sm:items-start md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
-        <div className="w-full space-y-3 md:min-w-0 md:flex-1">
-          <h2 className={sectionH2}>Research Partnership Opportunities</h2>
-          <p className={sectionLead}>
-            Partner with us to advance research and improve learning outcomes for students
-          </p>
         </div>
-        <img
-          alt=""
-          src={forTutorsAssets.voicesDecor}
-          className={sectionDecorImgClass}
-          aria-hidden
-        />
-      </div>
-
-      {/* Collapsible contact card */}
-      <div className="rounded-3xl bg-[#FFEAEA] px-6 py-7 dark:bg-[#FFEAEA]/10 md:px-8 md:py-8">
-        {/* Header: icon + title + description */}
-        <div className="flex items-start gap-4">
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#B44F52]">
-            <ClipboardList className="size-5 text-white" />
-          </div>
-          <div className="space-y-2">
-            <p className="text-pretty text-xl font-bold leading-snug tracking-tight text-[#B44F52] sm:text-2xl">
-              Contact Us for Research Partnerships
-            </p>
-            <p className="text-lg leading-relaxed text-muted-foreground">
-              You can book a demo, sign up to join, or reach out with any general questions or
-              inquiries by filling out the form below — we&apos;d love to hear from you!
-            </p>
-          </div>
-        </div>
-
-        {/* Learn more toggle — right aligned */}
-        <div className="mt-4 flex justify-end">
-          <button
-            onClick={() => setIsOpen((v) => !v)}
-            className="flex items-center gap-1.5 text-sm font-medium text-[#B44F52] hover:underline"
-          >
-            Learn more
-            <ChevronDown
-              className={cn("size-4 transition-transform duration-300", isOpen && "rotate-180")}
-            />
-          </button>
-        </div>
-
-        {/* Expandable: PLUS logo + Google Form */}
-        {isOpen && (
-          <div className="mt-4 flex flex-col gap-4">
-            <div className="flex items-center justify-center rounded-2xl bg-white p-8 dark:bg-card">
-              <img
-                src="/plus-logo.png"
-                alt="PLUS Personalized Learning logo"
-                className="h-auto w-40 object-contain"
-              />
-            </div>
-            <div className="overflow-hidden rounded-2xl bg-white dark:bg-card">
-              <iframe
-                src="https://docs.google.com/forms/d/e/1FAIpQLSf_placeholder/viewform?embedded=true"
-                width="100%"
-                height="600"
-                frameBorder="0"
-                marginHeight={0}
-                marginWidth={0}
-                title="Contact PLUS research form"
-                className="block"
-              >
-                Loading…
-              </iframe>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   )
