@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react"
 import {
   BookOpen,
   Users,
@@ -80,6 +81,33 @@ export const NAV_CONFIG: NavItem[] = [
     ],
   },
 ]
+
+/**
+ * Shared width for every desktop nav dropdown: wide enough for the longest label
+ * (in `ch`) plus icon, gaps, and padding. Update if nav copy or layout changes.
+ */
+function getNavDropdownPanelStyle(): CSSProperties {
+  let maxChars = 0
+  for (const top of NAV_CONFIG) {
+    for (const section of top.children ?? []) {
+      if (section.heading) {
+        maxChars = Math.max(maxChars, section.heading.length)
+      }
+      for (const item of section.items) {
+        const labelLen =
+          item.label.length + (item.badge ? item.badge.length + 2 : 0)
+        maxChars = Math.max(maxChars, labelLen)
+      }
+    }
+  }
+  // 5.25rem ≈ ul padding + link horizontal padding + icon (2rem) + gap (0.75rem)
+  return {
+    width: `min(calc(${maxChars}ch + 5.25rem), calc(100vw - 2rem))`,
+  }
+}
+
+/** Stable reference for desktop dropdown panels (same width for every menu). */
+export const NAV_DROPDOWN_PANEL_STYLE = getNavDropdownPanelStyle()
 
 export const FOOTER_LINKS = {
   about: [

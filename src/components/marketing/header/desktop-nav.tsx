@@ -2,7 +2,7 @@
 
 import { Fragment } from "react"
 import { cn } from "@/lib/utils"
-import { NAV_CONFIG } from "./nav-config"
+import { NAV_CONFIG, NAV_DROPDOWN_PANEL_STYLE } from "./nav-config"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -29,7 +29,10 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
                   {item.label}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-1 p-2 md:w-[480px] md:grid-cols-2">
+                  <ul
+                    className="grid grid-cols-1 gap-1 p-2"
+                    style={NAV_DROPDOWN_PANEL_STYLE}
+                  >
                     {item.children.map((section, sIdx) => (
                       <Fragment key={sIdx}>
                         {section.heading && (
