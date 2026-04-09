@@ -1,9 +1,13 @@
 "use client"
 
-import { useState, type ReactNode } from "react"
+import {
+  useState,
+  type ComponentType,
+  type ReactNode,
+  type SVGProps,
+} from "react"
 import Image from "next/image"
 import Link from "next/link"
-import type { LucideIcon } from "lucide-react"
 import {
   ArrowRight,
   BarChart3,
@@ -174,7 +178,7 @@ const MissionPillarBlock = ({
   title,
   items,
 }: {
-  icon: LucideIcon
+  icon: ComponentType<SVGProps<SVGSVGElement>>
   title: string
   items: readonly string[]
 }) => (
