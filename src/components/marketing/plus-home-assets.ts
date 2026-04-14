@@ -30,9 +30,9 @@ export const plusHomeHero = {
 } as const
 
 export const plusHomeTestimonialAvatars = {
-  student: "https://www.figma.com/api/mcp/asset/fb56b08d-cbd1-4507-8089-1df7c843bc3d",
-  district: "https://www.figma.com/api/mcp/asset/7ba00e31-b5ad-426f-ae70-fa6ec419fbbb",
-  teacher: "https://www.figma.com/api/mcp/asset/645fe774-3b68-491f-af3b-47aec3e4bb88",
+  student: "/figma/home/testimonial-student.png",
+  district: "/figma/home/testimonial-district.png",
+  teacher: "/figma/home/testimonial-teacher.png",
 } as const
 
 /**
@@ -58,27 +58,28 @@ export const plusHomeImpactMap =
   "https://www.figma.com/api/mcp/asset/efb47704-0474-476f-b65d-b182a6a2b8a4"
 
 /**
- * Figma `1707:1917` Smart Tech, Smarter Learning — pink bento + layered screenshots.
+ * Figma `1714:1957` Smart Tech, Smarter Learning — pink bento + layered screenshots.
+ * Layout: Supervisor + AI Tutor side-by-side (row 1), Collaborative Goal Setting full-width (row 2).
  * `supervisor` / `aiTutor` / `goalSetting` = single composites for small viewports.
- * Layer URLs match Figma node `1707:1917` (MCP); may expire — export to `/public/figma/home/` when stabilizing.
+ * Layer URLs match Figma node `1714:1957`; may expire — export to `/public/figma/home/` when stabilizing.
  */
 export const plusHomeSmartTech = {
   supervisor: "https://www.figma.com/api/mcp/asset/b54ac288-9952-41dc-a8bb-e0ff9fbd261a",
   aiTutor: "https://www.figma.com/api/mcp/asset/5ac6cbb5-4443-4329-a757-7d03d242a188",
   goalSetting: "https://www.figma.com/api/mcp/asset/f1944517-229f-4adf-9f76-de7f027edec0",
-  /** Supervisor card — back / front stack (nodes `1707:2027`, `1707:2025`). */
-  supervisorLayerBack: "https://www.figma.com/api/mcp/asset/34c687a8-7f47-4975-811c-65d76dfe436d",
-  supervisorLayerFront: "https://www.figma.com/api/mcp/asset/cacc5575-2fc9-4e84-8aec-4f9d73d5b0ad",
-  /** AI tutor card — back / front (`1707:2033`, `1707:2024`). */
-  aiTutorLayerBack: "https://www.figma.com/api/mcp/asset/23503111-14fa-4d8b-9af5-b10f1b40c3a3",
-  aiTutorLayerFront: "https://www.figma.com/api/mcp/asset/bb75a76f-a799-49af-bd73-df8156c6da2a",
-  /** Goal setting card — back / front (`1707:2029`, `1707:2031`). */
-  goalLayerBack: "https://www.figma.com/api/mcp/asset/82f23735-f514-49c6-9412-cb788b7ff910",
-  goalLayerFront: "https://www.figma.com/api/mcp/asset/388b5a69-e163-4950-99ac-b96e313717a6",
-  iconSupervisor: "https://www.figma.com/api/mcp/asset/ffe41b84-8675-4834-b017-c463046d2f49",
-  iconAiTutor: "https://www.figma.com/api/mcp/asset/c36f008a-dada-4f1b-814c-c71d0399bfcc",
-  iconGoal: "https://www.figma.com/api/mcp/asset/b9ffe870-414d-4a6c-8957-b8015884880c",
-  headerDoodle: "https://www.figma.com/api/mcp/asset/d11bdefe-ebb2-4bd5-b1e3-8b8e9ea50e5b",
+  /** Supervisor card — back (`1714:1974`) / front (`1714:1975`). */
+  supervisorLayerBack: "https://www.figma.com/api/mcp/asset/dc285f70-60d4-4710-9994-49dedae9801c",
+  supervisorLayerFront: "https://www.figma.com/api/mcp/asset/e0c41e41-993e-45f6-a41b-c3b25da9d369",
+  /** AI tutor card — back (`1714:1986`) / front (`1714:1987`). */
+  aiTutorLayerBack: "https://www.figma.com/api/mcp/asset/de29422b-922d-4fcb-aa83-358d4b56914e",
+  aiTutorLayerFront: "https://www.figma.com/api/mcp/asset/0b2ffd6a-e420-44de-927f-4ae0d28fa5b5",
+  /** Goal setting card — back (`1714:1996`) / front (`1714:1997`). */
+  goalLayerBack: "https://www.figma.com/api/mcp/asset/1ed1f244-e789-4347-9d98-384c89257429",
+  goalLayerFront: "https://www.figma.com/api/mcp/asset/9ccd1977-372c-4af4-8386-48f34b169308",
+  iconSupervisor: "https://www.figma.com/api/mcp/asset/de5f5606-72a7-4f22-a434-4a552649d245",
+  iconAiTutor: "https://www.figma.com/api/mcp/asset/a1a8c5d7-e8f1-478f-bb18-97ba43076b2a",
+  iconGoal: "https://www.figma.com/api/mcp/asset/5559a160-5eac-4e92-b08a-389022f9ca95",
+  headerDoodle: "https://www.figma.com/api/mcp/asset/67b6c977-6c74-4f3a-aca1-128530fd3eb0",
 } as const
 
 /**
@@ -86,7 +87,7 @@ export const plusHomeSmartTech = {
  * Layered screenshots (`papersLayer*`) + icon match node layout; stacks kept for fallbacks / older refs.
  */
 export const plusHomeScience = {
-  iconPapers: "https://www.figma.com/api/mcp/asset/f419593e-82fd-4ee8-91f4-8871b15ae5d9",
+  iconPapers: "/figma/home/icon-papers.svg",
   /** Back (paper) / front (table UI) — `1709:2116`, `1709:2114`. */
   papersLayerBack: "https://www.figma.com/api/mcp/asset/3dbdd08d-1150-42f9-a688-9e87a3d4d0bc",
   papersLayerFront: "https://www.figma.com/api/mcp/asset/622abe99-d8bb-4356-b1be-4ed075dce10d",

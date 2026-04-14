@@ -1,17 +1,28 @@
 "use client"
 
-import { useReducedMotion } from "framer-motion"
-import { useState } from "react"
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion"
+import { useRef, useState } from "react"
+
+import { ArrowRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
   ScrollAccordion,
   type ScrollAccordionItem,
 } from "@/components/ui/scroll-accordion"
-import { DayToDayExperienceSection } from "@/components/marketing/day-to-day-experience-section"
-import { EXPERIENCE_BENTO_STEPS } from "@/components/marketing/for-schools-experience-bento"
 import { cn } from "@/lib/utils"
 import { BenefitsAccordionIcon } from "@/components/marketing/benefit-accordion-icons"
+import type { SuccessStory } from "@/lib/notion/types"
+import {
+  notionSuccessStoryPublicReadUrl,
+  splitSuccessStoryQuote,
+} from "@/lib/success-stories/notion-public-read-url"
 import { forSchoolsAssets } from "@/components/marketing/for-schools-assets"
 import { marketingTypography } from "@/lib/marketing-typography"
 import { forSchoolsSectionIds } from "@/lib/plus-footer-ia"
@@ -24,23 +35,23 @@ const schoolsSectionLead = "max-w-3xl text-lg text-muted-foreground"
 export const SchoolsHeroSection = () => {
   const { division, multiplication, equal } = forSchoolsAssets.mathDecor
   return (
-    <section className="relative flex min-h-[calc(100svh-5.5rem)] flex-col justify-center overflow-hidden">
+    <section className="relative w-full min-w-0 overflow-hidden pt-8 pb-6 sm:pt-10 sm:pb-8 md:pt-12 md:pb-10 lg:pt-14 lg:pb-12">
       <img
         alt=""
         src={division}
-        className="pointer-events-none absolute left-2 top-12 hidden h-[7rem] w-[7rem] object-contain sm:left-4 sm:top-16 md:top-20 sm:block md:h-40 md:w-40"
+        className="pointer-events-none absolute left-6 top-1/2 hidden -translate-y-1/2 h-28 w-28 object-contain sm:left-8 sm:block sm:h-36 sm:w-36 md:h-40 md:w-40 lg:h-48 lg:w-48"
         aria-hidden
       />
       <img
         alt=""
         src={multiplication}
-        className="pointer-events-none absolute bottom-12 left-8 hidden h-[7rem] w-[7rem] object-contain sm:bottom-16 sm:left-10 md:bottom-20 sm:block md:h-40 md:w-40"
+        className="pointer-events-none absolute bottom-6 left-[18%] hidden h-24 w-24 object-contain sm:block sm:h-32 sm:w-32 md:h-36 md:w-36 lg:h-40 lg:w-40"
         aria-hidden
       />
       <img
         alt=""
         src={equal}
-        className="pointer-events-none absolute right-2 bottom-12 hidden h-[7rem] w-[7rem] object-contain sm:right-5 sm:bottom-16 md:bottom-20 sm:block md:h-40 md:w-40"
+        className="pointer-events-none absolute right-6 top-1/2 hidden -translate-y-1/2 h-24 w-24 object-contain sm:right-8 sm:block sm:h-32 sm:w-32 md:h-36 md:w-36 lg:h-40 lg:w-40"
         aria-hidden
       />
 
@@ -53,7 +64,7 @@ export const SchoolsHeroSection = () => {
             Research-driven, AI-powered Support for Every Classroom
           </span>
         </h1>
-        <Button variant="plusNavCta" size="navCta">
+        <Button variant="plusNavCta" size="navCta" className="h-[45px] px-10">
           Get Started for Free
         </Button>
       </div>
@@ -106,7 +117,7 @@ export const SchoolsCommunitySection = () => {
       <div
         role="region"
         aria-label="Partner school logos"
-        className="relative w-full max-w-5xl"
+        className="relative w-full"
         onMouseEnter={() => setMarqueePaused(true)}
         onMouseLeave={() => setMarqueePaused(false)}
         onFocusCapture={() => setMarqueePaused(true)}
@@ -224,14 +235,45 @@ const BENEFITS_SCROLL_ITEMS: readonly ScrollAccordionItem[] = BENEFITS_ITEMS.map
             </Button>
           ) : null}
         </div>
-        <div className="relative aspect-square w-[clamp(11rem,42vw,27.5rem)] max-w-[440px] shrink-0 overflow-hidden rounded-[38px] bg-muted">
-          {item.id === "goal-setting" ? (
+        <div
+          className={cn(
+            "relative aspect-square w-[clamp(11rem,42vw,27.5rem)] max-w-[440px] shrink-0 overflow-hidden rounded-[38px]",
+            item.id === "goal-setting" ? "bg-[#fff3dd]" : "bg-muted"
+          )}
+        >
+          {item.id === "free-for-all" ? (
+            /* Figma 1116:1392 — wider photo panned left to frame subject */
             <img
               alt=""
-              src={forSchoolsAssets.benefitsPanelArt[index]}
-              className="pointer-events-none absolute top-[-52.82%] left-[0.07%] h-[158.64%] w-[235.4%] max-w-none select-none"
+              src={forSchoolsAssets.benefitsPanelArt[0]}
+              className="pointer-events-none absolute top-0 left-[-32.71%] h-full max-w-none w-[177.78%] select-none object-cover"
               decoding="async"
             />
+          ) : item.id === "goal-setting" ? (
+            /* Figma 1116:1396 — 3 layered screenshots, back→front */
+            <>
+              <img
+                alt=""
+                src={forSchoolsAssets.benefitsPanelGoalScreenshots[0]}
+                className="pointer-events-none absolute left-1/2 -translate-x-1/2 max-w-none w-[79.5%] h-[39.3%] rounded-[5px] object-cover select-none"
+                style={{ bottom: "36.1%" }}
+                decoding="async"
+              />
+              <img
+                alt=""
+                src={forSchoolsAssets.benefitsPanelGoalScreenshots[1]}
+                className="pointer-events-none absolute left-1/2 -translate-x-1/2 max-w-none w-[87.5%] h-[43.2%] rounded-[5px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] object-cover select-none"
+                style={{ bottom: "21.4%" }}
+                decoding="async"
+              />
+              <img
+                alt=""
+                src={forSchoolsAssets.benefitsPanelGoalScreenshots[2]}
+                className="pointer-events-none absolute left-1/2 -translate-x-1/2 max-w-none w-[96.6%] h-[47.7%] rounded-[5px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] object-cover select-none"
+                style={{ bottom: "-2.5%" }}
+                decoding="async"
+              />
+            </>
           ) : (
             <img
               alt=""
@@ -292,13 +334,106 @@ export const SchoolsTrainingSection = () => {
   )
 }
 
+const EXPERIENCE_PHASES = [
+  {
+    phase: "Phase 1",
+    title: "Expert Kickoff",
+    description:
+      "We onboard your faculty and send specialists to your campus for a hands-on kickoff, ensuring a seamless integration into your school's daily schedule.",
+    icon: forSchoolsAssets.experienceIcons[0],
+    number: "1",
+  },
+  {
+    phase: "Phase 2",
+    title: "1:1 Centered Tutoring",
+    description:
+      "Students are paired with certified tutors who have mastered evidence-based engagement strategies for consistent, high-impact individual learning.",
+    icon: forSchoolsAssets.experienceIcons[1],
+    number: "2",
+  },
+  {
+    phase: "Phase 3",
+    title: "Goal-Driven Monitoring",
+    description:
+      "Tutors set specific targets for every student, using real-time data to monitor progress and adjust instruction to meet individual learning gaps.",
+    icon: forSchoolsAssets.experienceIcons[2],
+    number: "3",
+  },
+  {
+    phase: "Phase 4",
+    title: "The Teacher Loop",
+    description:
+      "We share session insights and host regular debriefs with your staff to align tutoring outcomes with your classroom goals and identify areas for growth.",
+    icon: forSchoolsAssets.experienceIcons[3],
+    number: "4",
+  },
+] as const
+
 export const SchoolsExperienceSection = () => {
   return (
     <section
       id={forSchoolsSectionIds.experience}
       className="space-y-6 sm:space-y-8 lg:space-y-10"
     >
-      <DayToDayExperienceSection steps={EXPERIENCE_BENTO_STEPS} />
+      {/* Section header — same pattern as Benefits / Community / Oversight */}
+      <div className="flex w-full flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
+        <div className="min-w-0 flex-1 basis-0 space-y-3 sm:space-y-4 md:space-y-5">
+          <h2 className="text-pretty text-lg font-bold tracking-tight text-teal-950 sm:text-2xl md:text-3xl">
+            Your Day-to-Day Experience with PLUS
+          </h2>
+          <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg">
+            A seamless integration designed to support your faculty and accelerate student growth.
+          </p>
+        </div>
+        <img
+          alt=""
+          src={forSchoolsAssets.mathDecor.multiplication}
+          className="pointer-events-none h-[clamp(4.5rem,18vw,10.9375rem)] w-[clamp(3.75rem,24vw,12rem)] shrink-0 object-contain sm:h-32 sm:w-[7.25rem] md:h-40 md:w-36 lg:h-[247px] lg:w-[222px]"
+          aria-hidden
+        />
+      </div>
+
+      {/* 2×2 card grid — Figma `1877:2175`: bg #ffe8f5, rounded-[30px], ghost number at 200px */}
+      <div className="grid grid-cols-1 gap-[38px] sm:grid-cols-2">
+        {EXPERIENCE_PHASES.map((phase) => (
+          <article
+            key={phase.phase}
+            className="relative overflow-hidden rounded-[30px] bg-[#ffe8f5] px-7 pb-8 pt-[46px]"
+          >
+            {/* Ghost number — Figma: 200px bold, rgba(211,25,152,0.1), right-aligned */}
+            <span
+              className="pointer-events-none absolute right-0 top-0 select-none font-bold leading-none text-[#d31998]/10"
+              style={{ fontSize: "clamp(7rem,18vw,12.5rem)" }}
+              aria-hidden
+            >
+              {phase.number}
+            </span>
+
+            {/* Icon */}
+            <img
+              src={phase.icon}
+              alt=""
+              className="relative z-10 size-[58px] object-contain"
+              aria-hidden
+            />
+
+            {/* Phase label + title */}
+            <div className="relative z-10 mt-[37px]">
+              <p className="text-xs font-normal uppercase tracking-wider text-[#d31998] sm:text-sm">
+                {phase.phase}
+              </p>
+              <h3 className={cn(marketingTypography.bentoTitle, "mt-1 text-[#d31998]")}>
+                {phase.title}
+              </h3>
+            </div>
+
+            {/* Description */}
+            <p className={cn(marketingTypography.sectionLead, "relative z-10 mt-4")}>
+              {phase.description}
+            </p>
+          </article>
+        ))}
+      </div>
     </section>
   )
 }
@@ -314,14 +449,14 @@ const OVERSIGHT_CARD_FRAME =
 /** md: two columns — text block max 553px in first column; image exactly 360px in second. */
 const OVERSIGHT_CARD_ROW =
   "grid w-full min-w-0 grid-cols-1 gap-8 md:grid-cols-[minmax(0,1fr)_360px] md:items-center md:gap-x-0 md:gap-y-0"
-/** 58px icon + 25px = 83px to copy column (Figma). */
+/** 58px icon + 25px gap + copy column (Figma). */
 const OVERSIGHT_LEFT =
   "flex w-full min-w-0 shrink-0 flex-row items-start gap-[25px] md:h-[260px] md:max-w-[553px]"
 const OVERSIGHT_COPY =
-  "flex min-w-0 w-full max-w-[456px] flex-1 flex-col justify-between md:h-[260px]"
+  "flex min-w-0 w-full max-w-[420px] flex-col justify-between md:h-[260px]"
 const OVERSIGHT_TITLE_BODY = "flex w-full flex-col gap-4"
-/** Title stacks with section headers (no fixed height — was sized for legacy text-4xl titles). */
-const OVERSIGHT_TITLE_WRAP = "flex w-full items-start"
+/** min-h matches the icon (58px) so the title text is always vertically centred with it. */
+const OVERSIGHT_TITLE_WRAP = "flex min-h-[58px] w-full items-center"
 /** Slightly smaller than Figma 411×350 so inset matches text; aspect preserved. */
 const OVERSIGHT_IMAGE =
   "relative aspect-[411/350] w-full max-w-[360px] shrink-0 overflow-hidden rounded-[30px] bg-background/20 md:w-full md:max-w-none"
@@ -334,58 +469,188 @@ const OVERSIGHT_CARDS = [
     description:
       "We work with your faculty to tailor lesson strategies that complement your school’s specific learning objectives and standards.",
     cta: "Get training",
-    bgColor: "bg-fuchsia-200",
-    titleColor: "text-fuchsia-900",
+    bgColor: "bg-[#ffe8f5]",
+    titleColor: "text-[#d31998]",
+    btnBg: "bg-[#d31998]",
+    btnText: "text-white",
     icon: forSchoolsAssets.icons.oversight[0],
     image: forSchoolsAssets.oversightCardImages[0],
-    imageLayout: "default" as const,
   },
   {
     title: "Data at Your Fingertips",
     description:
       "Track tutor performance, monitor student progress, and access high-level analytics to measure the ROI of your tutoring initiatives.",
     cta: "Try our demo",
-    bgColor: "bg-green-100",
-    titleColor: "text-green-900",
+    bgColor: "bg-[#f4fbf6]",
+    titleColor: "text-[#007d49]",
+    btnBg: "bg-[#007d49]",
+    btnText: "text-white",
+    panelBg: "bg-[#d7f0de]",
+    imageLayout: "dashboard" as const,
     icon: forSchoolsAssets.icons.oversight[1],
     image: forSchoolsAssets.oversightCardImages[1],
-    imageLayout: "dashboard" as const,
   },
   {
     title: "Professional Growth & Accountability",
     description:
       "Tutors earn industry-recognized credentials upon completion, ensuring they meet the standards of your institution.",
     cta: "Register your tutors",
-    bgColor: "bg-yellow-200",
-    titleColor: "text-yellow-900",
+    bgColor: "bg-[#fff0cb]",
+    titleColor: "text-[#a56d1e]",
+    btnBg: "bg-[#ffc94b]",
+    btnText: "text-[#463923]",
     icon: forSchoolsAssets.icons.oversight[2],
     image: forSchoolsAssets.oversightCardImages[2],
-    imageLayout: "default" as const,
   },
   {
     title: "Works with Any Math Software",
-    /** Renders as two lines so “Software” stays off the first line (clear of the image). */
-    titleLines: ["Works with Any Math", "Software"] as const,
     description:
       "PLUS is designed to be software-agnostic, which means no new software licenses or changes required.",
     cta: "See How it Works",
-    bgColor: "bg-blue-200",
-    titleColor: "text-blue-900",
+    bgColor: "bg-[#e0f5fe]",
+    titleColor: "text-[#0080b4]",
+    btnBg: "bg-[#0080b4]",
+    btnText: "text-white",
     icon: forSchoolsAssets.icons.oversight[3],
     image: forSchoolsAssets.oversightCardImages[3],
-    imageLayout: "default" as const,
   },
 ] as const
 
+/** Shared card inner content — used by both motion and static variants. */
+function OversightCardInner({
+  card,
+}: {
+  card: (typeof OVERSIGHT_CARDS)[number]
+}) {
+  return (
+    <article className={cn(OVERSIGHT_CARD_FRAME, card.bgColor)}>
+      <div className={OVERSIGHT_CARD_ROW}>
+        <div className={OVERSIGHT_LEFT}>
+          <img
+            alt=""
+            src={card.icon}
+            className="size-[58px] shrink-0"
+            width={58}
+            height={58}
+            aria-hidden
+          />
+          <div className={OVERSIGHT_COPY}>
+            <div className={OVERSIGHT_TITLE_BODY}>
+              <div className={OVERSIGHT_TITLE_WRAP}>
+                <h3 className={cn(marketingTypography.bentoTitle, card.titleColor)}>
+                  {card.title}
+                </h3>
+              </div>
+              <p className={cn(marketingTypography.sectionLead, "max-w-none")}>
+                {card.description}
+              </p>
+            </div>
+            <button
+              type="button"
+              className={cn(
+                "h-[45px] w-fit rounded-full px-10 text-base font-normal",
+                card.btnBg,
+                card.btnText
+              )}
+            >
+              {card.cta}
+            </button>
+          </div>
+        </div>
+
+        <div
+          className={cn(
+            OVERSIGHT_IMAGE,
+            "mx-auto md:mx-0",
+            "panelBg" in card ? card.panelBg : undefined
+          )}
+        >
+          {"imageLayout" in card && card.imageLayout === "dashboard" ? (
+            <img
+              alt=""
+              src={card.image}
+              className="pointer-events-none absolute left-[8.5%] top-[13%] w-[153%] max-w-none rounded-[5px] object-cover"
+              decoding="async"
+              aria-hidden
+            />
+          ) : (
+            <img
+              alt=""
+              src={card.image}
+              className={OVERSIGHT_IMG}
+              decoding="async"
+              aria-hidden
+            />
+          )}
+        </div>
+      </div>
+    </article>
+  )
+}
+
+/**
+ * Single card with scroll-driven exit: slides up and away during its segment of
+ * scroll progress. The last card never exits — it stays visible as the base.
+ */
+/** px each lower card is offset downward at rest, creating the "peek" effect. */
+const PEEK_PX = 16
+
+function OversightMotionCard({
+  card,
+  index,
+  scrollYProgress,
+}: {
+  card: (typeof OVERSIGHT_CARDS)[number]
+  index: number
+  scrollYProgress: MotionValue<number>
+}) {
+  const total = OVERSIGHT_CARDS.length
+  const isLast = index === total - 1
+  const peekStart = `${index * PEEK_PX}px`
+
+  // Multi-keyframe transform:
+  //   0 → index/total  : peek offset reduces to 0 as cards above peel away
+  //   index/total → (index+1)/total : this card exits upward (skipped for last card)
+  const inputRange = isLast
+    ? [0, (total - 1) / total]
+    : index === 0
+      ? [0, 1 / total]
+      : [0, index / total, (index + 1) / total]
+
+  const outputRange = isLast
+    ? [peekStart, "0px"]
+    : index === 0
+      ? ["0px", "-110vh"]
+      : [peekStart, "0px", "-110vh"]
+
+  const y = useTransform(scrollYProgress, inputRange, outputRange)
+
+  return (
+    <motion.div
+      className="col-start-1 row-start-1"
+      style={{
+        zIndex: total - index, // card 0 = highest, exits first
+        y,
+      }}
+    >
+      <OversightCardInner card={card} />
+    </motion.div>
+  )
+}
+
 export const SchoolsOversightSection = () => {
+  const prefersReducedMotion = useReducedMotion()
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  })
+
   return (
     <section
       id={forSchoolsSectionIds.oversight}
       className="space-y-8 sm:space-y-10 lg:space-y-12"
     >
-      {/*
-        Title + lead — same typography as Benefits / Community / Join sections.
-      */}
       <div className="flex w-full flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
         <div className="min-w-0 flex-1 basis-0 space-y-3 sm:space-y-4 md:space-y-5">
           <h2 className="text-pretty text-lg font-bold tracking-tight text-teal-950 sm:text-2xl md:text-3xl">
@@ -404,242 +669,157 @@ export const SchoolsOversightSection = () => {
         />
       </div>
 
-      {/*
-        Figma 1379:2359 — large vertical gaps; sticky stack with rising z-index. Each card’s
-        sticky `top` increases by step so a band of the cards below stays visible (deck effect).
-      */}
-      <div className="mx-auto flex w-full max-w-[1122px] flex-col gap-20 sm:gap-28 lg:gap-[160px]">
-        {OVERSIGHT_CARDS.map((card, index) => {
-          // Sticky top steps by 1.5rem per card (~24px) so underlying cards peek above.
-          const stackTop = `calc(4.5rem + ${index * 1.5}rem)`
-          return (
-            <div
-              key={card.title}
-              className="sticky"
-              style={{ top: stackTop, zIndex: index + 1 }}
-            >
-              <article className={cn(OVERSIGHT_CARD_FRAME, card.bgColor)}>
-                {/*
-                  Grid row: padded content box; icon column starts at left padding, image column is
-                  exactly 360px wide at the right padding (symmetric 38px card inset).
-                */}
-                <div className={OVERSIGHT_CARD_ROW}>
-                  <div className={OVERSIGHT_LEFT}>
-                    <img
-                      alt=""
-                      src={card.icon}
-                      className="size-[58px] shrink-0"
-                      width={58}
-                      height={58}
-                      aria-hidden
-                    />
-                    <div className={OVERSIGHT_COPY}>
-                      <div className={OVERSIGHT_TITLE_BODY}>
-                        <div className={OVERSIGHT_TITLE_WRAP}>
-                          <h3
-                            className={cn(
-                              "text-lg font-bold leading-tight tracking-tight sm:text-2xl md:text-3xl",
-                              !("titleLines" in card && card.titleLines) && "text-pretty",
-                              card.titleColor
-                            )}
-                          >
-                            {"titleLines" in card && card.titleLines ? (
-                              <span className="flex flex-col gap-0">
-                                {/*
-                                  Stack like natural wrap: flex + inherited tight leading matches
-                                  other cards (e.g. “Professional Growth & Accountability”).
-                                */}
-                                <span className="sm:whitespace-nowrap">
-                                  {card.titleLines[0]}
-                                </span>
-                                <span>{card.titleLines[1]}</span>
-                              </span>
-                            ) : (
-                              card.title
-                            )}
-                          </h3>
-                        </div>
-                        <p
-                          className={cn(
-                            marketingTypography.lead,
-                            "max-w-none text-pretty text-xl leading-normal"
-                          )}
-                        >
-                          {card.description}
-                        </p>
-                      </div>
-                      <Button
-                        variant="plusNavCta"
-                        size="navCta"
-                        className="h-[45px] min-h-[45px] w-fit rounded-full px-10 text-base font-normal"
-                      >
-                        {card.cta}
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className={cn(OVERSIGHT_IMAGE, "mx-auto md:mx-0")}>
-                    <img
-                      alt=""
-                      src={card.image}
-                      className={cn(
-                        OVERSIGHT_IMG,
-                        card.imageLayout === "dashboard" &&
-                          "object-[32%_center] md:object-[28%_center]"
-                      )}
-                      decoding="async"
-                      aria-hidden
-                    />
-                  </div>
-                </div>
-              </article>
+      {prefersReducedMotion ? (
+        /* Static fallback — plain vertical stack, no animation */
+        <div className="mx-auto flex w-full max-w-[1122px] flex-col gap-6">
+          {OVERSIGHT_CARDS.map((card) => (
+            <OversightCardInner key={card.title} card={card} />
+          ))}
+        </div>
+      ) : (
+        /*
+          Scroll-driven unstack: a tall container drives scroll progress while a
+          sticky inner holds the card stack in view. All cards occupy the same CSS
+          grid cell (col-start-1 row-start-1) so they are perfectly layered.
+          Card 0 (highest z-index) peels away first; each subsequent card follows
+          until the last card is revealed and the user scrolls on.
+        */
+        <div ref={containerRef} style={{ height: `${OVERSIGHT_CARDS.length * 75}vh` }}>
+          <div className="sticky top-[4.5rem] flex h-[calc(100vh-4.5rem)] items-center">
+            <div className="mx-auto w-full max-w-[1122px]">
+            <div className="grid grid-cols-1">
+              {OVERSIGHT_CARDS.map((card, index) => (
+                <OversightMotionCard
+                  key={card.title}
+                  card={card}
+                  index={index}
+                  scrollYProgress={scrollYProgress}
+                />
+              ))}
             </div>
-          )
-        })}
-      </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
 
-/**
- * Figma 1379:2428 — mint outer card, white quote panel.
- * Type: Styles/Typography — `h3` for attribution; `body` + muted for quote; semibold `text-teal-950` for emphasis.
- */
-const SUCCESS_STORY_CARD =
-  "flex flex-col gap-[25px] overflow-hidden rounded-[30px] bg-[#f4fbf6] p-[15px]"
-/** Same white panel size on every card; quote is centered inside (Figma ~364px → responsive fixed height). */
-const SUCCESS_STORY_QUOTE_PANEL =
-  "flex h-[280px] flex-col items-center justify-center overflow-y-auto rounded-[30px] bg-white px-5 py-6 sm:h-[300px] sm:px-6 lg:h-[320px]"
+const SCHOOLS_SUCCESS_STORY_GREEN = "text-[#007d49]"
 
-type SuccessStoryQuotePart = { text: string; emphasis?: boolean }
+export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStory[] }) => {
+  const titleIcon = forSchoolsAssets.successStories.cardTitleIcon
 
-const SUCCESS_STORIES: readonly {
-  author: string
-  avatar: string
-  parts: readonly SuccessStoryQuotePart[]
-}[] = [
-  {
-    author: "Math Teacher in Oregon",
-    avatar: forSchoolsAssets.successStories.avatars[0],
-    parts: [
-      {
-        text: '"I love that PLUS Tutoring provides an opportunity for kids to have more help in the classroom. ',
-      },
-      {
-        text: "It's not just me trying to get to every student but it's more specific to their needs.",
-        emphasis: true,
-      },
-      {
-        text: ' I feel like they get a little bit more out of every day."',
-      },
-    ],
-  },
-  {
-    author: "School District of Lancaster",
-    avatar: forSchoolsAssets.successStories.avatars[1],
-    parts: [
-      {
-        text: "\"The students' reactions speak for themselves. They look forward to the tutoring sessions. It's not just about math. It's about relationships. ",
-      },
-      {
-        text: "It's about building confidence.",
-        emphasis: true,
-      },
-      { text: '"' },
-    ],
-  },
-  {
-    author: "Teacher working with PLUS Tutors",
-    avatar: forSchoolsAssets.successStories.avatars[2],
-    parts: [
-      {
-        text: '"My students were able to understand concepts more easily than before due to the ',
-      },
-      { text: "one-to-one help.", emphasis: true },
-      {
-        text: " My students' math confidence has also increased!\"",
-      },
-    ],
-  },
-] as const
-
-export const SchoolsSuccessStoriesSection = () => {
   return (
     <section
       id={forSchoolsSectionIds.successStories}
       className="space-y-10 sm:space-y-12 lg:space-y-14"
     >
-      {/*
-        Left-aligned title + lead; mascot right, vertically centered with that block (matches
-        Benefits / Community section headers).
-      */}
-      <div className="mx-auto flex w-full max-w-[1124px] flex-col gap-10 sm:gap-12 lg:gap-14">
-        <div className="flex w-full flex-row items-center gap-4 sm:gap-6 md:gap-8 lg:gap-10">
-          <div className="min-w-0 flex-1 basis-0 space-y-3 text-left sm:space-y-4 md:space-y-5">
-            <h2 className="text-pretty text-lg font-bold tracking-tight text-teal-950 sm:text-2xl md:text-3xl">
-              School Success Stories
-            </h2>
-            <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg">
-              Here&apos;s what teachers are saying about PLUS.
-            </p>
-          </div>
-          <img
-            alt=""
-            src={forSchoolsAssets.successStories.headerDecor}
-            className="pointer-events-none h-[clamp(4.5rem,18vw,9.375rem)] w-auto shrink-0 object-contain sm:h-32 md:h-36 lg:h-[150px] lg:w-[165px]"
-            aria-hidden
-          />
+      <div className="flex w-full flex-row items-center gap-4 sm:gap-6 md:gap-8 lg:gap-10">
+        <div className="min-w-0 flex-1 basis-0 space-y-3 text-left sm:space-y-4 md:space-y-5">
+          <h2 className="text-pretty text-lg font-bold tracking-tight text-teal-950 sm:text-2xl md:text-3xl">
+            School Success Stories
+          </h2>
+          <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg">
+            Here&apos;s what schools are saying about PLUS.
+          </p>
         </div>
-
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-8 lg:grid-cols-3 lg:gap-10">
-          {SUCCESS_STORIES.map((story) => (
-            <article
-              key={story.author}
-              className={cn(SUCCESS_STORY_CARD, "max-w-[480px] md:max-w-none")}
-            >
-              <div className="flex w-full shrink-0 items-end gap-[19px]">
-                <div className="relative size-[62px] shrink-0 overflow-hidden rounded-full bg-muted">
-                  <img
-                    alt=""
-                    src={story.avatar}
-                    className="size-full object-cover"
-                    decoding="async"
-                  />
-                </div>
-                <p
-                  className={cn(
-                    marketingTypography.h3,
-                    "min-w-0 flex-1 text-pretty text-[#007d49]"
-                  )}
-                >
-                  {story.author}
-                </p>
-              </div>
-              <div className={SUCCESS_STORY_QUOTE_PANEL}>
-                <blockquote
-                  className={cn(
-                    marketingTypography.body,
-                    "mx-auto max-w-[22rem] text-center text-pretty text-muted-foreground"
-                  )}
-                >
-                  {story.parts.map((part, i) =>
-                    part.emphasis ? (
-                      <strong
-                        key={i}
-                        className="font-semibold text-teal-950"
-                      >
-                        {part.text}
-                      </strong>
-                    ) : (
-                      <span key={i}>{part.text}</span>
-                    )
-                  )}
-                </blockquote>
-              </div>
-            </article>
-          ))}
-        </div>
+        <img
+          alt=""
+          src={forSchoolsAssets.successStories.headerDecor}
+          className="pointer-events-none h-[clamp(4.5rem,18vw,9.375rem)] w-auto shrink-0 object-contain sm:h-32 md:h-36 lg:h-[150px] lg:w-[165px]"
+          aria-hidden
+        />
       </div>
+
+      {stories.length === 0 ? (
+        <p className="text-pretty text-sm text-muted-foreground">
+          Success stories will appear here when available.
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-8">
+          {stories.map((story) => {
+            const readUrl = notionSuccessStoryPublicReadUrl(story)
+            const quoteParts = story.quote ? splitSuccessStoryQuote(story.quote) : null
+
+            return (
+              <article
+                key={story.id}
+                className="flex flex-col gap-6 rounded-[30px] bg-[#f4fbf6] p-[15px]"
+              >
+                <div className="flex min-h-[min(28rem,70svh)] flex-col gap-8 rounded-[30px] bg-white px-6 py-12 sm:px-7 sm:py-14 md:min-h-[27.75rem] md:px-[26px] md:py-[70px]">
+                  <div className="flex gap-2.5">
+                    <img
+                      alt=""
+                      src={titleIcon}
+                      className="mt-1 size-6 shrink-0"
+                      width={24}
+                      height={24}
+                      aria-hidden
+                    />
+                    <h3
+                      className={cn(
+                        "text-pretty text-xl font-semibold leading-snug sm:text-2xl",
+                        SCHOOLS_SUCCESS_STORY_GREEN
+                      )}
+                    >
+                      {story.title}
+                    </h3>
+                  </div>
+                  {story.quote ? (
+                    <>
+                      <blockquote className="text-pretty text-lg italic leading-relaxed text-muted-foreground sm:text-xl">
+                        {quoteParts ? (
+                          <>
+                            &ldquo;{quoteParts.before}{" "}
+                            <strong
+                              className={cn(
+                                "font-semibold italic",
+                                SCHOOLS_SUCCESS_STORY_GREEN
+                              )}
+                            >
+                              {quoteParts.highlight}
+                            </strong>
+                            {quoteParts.after}&rdquo;
+                          </>
+                        ) : (
+                          <>&ldquo;{story.quote}&rdquo;</>
+                        )}
+                      </blockquote>
+                      {story.quoteAttribution ? (
+                        <p className="text-sm not-italic text-muted-foreground">
+                          — {story.quoteAttribution}
+                        </p>
+                      ) : null}
+                    </>
+                  ) : (
+                    <p className="text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">
+                      {story.summary}
+                    </p>
+                  )}
+                </div>
+                <a
+                  href={readUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    "group ml-auto flex w-fit items-center gap-2.5 text-base font-normal",
+                    SCHOOLS_SUCCESS_STORY_GREEN,
+                    "underline-offset-4 hover:underline"
+                  )}
+                >
+                  <span>Read story</span>
+                  <ArrowRight
+                    className="size-[26px] shrink-0 transition-transform group-hover:translate-x-0.5"
+                    aria-hidden
+                  />
+                  <span className="sr-only">(opens in new tab)</span>
+                </a>
+              </article>
+            )
+          })}
+        </div>
+      )}
     </section>
   )
 }

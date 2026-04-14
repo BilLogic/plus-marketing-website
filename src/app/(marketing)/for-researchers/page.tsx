@@ -28,7 +28,17 @@ export const metadata: Metadata = {
 export const revalidate = 300
 
 /** Same page shell as `for-schools/page.tsx` — vertical rhythm + max width. */
-const ForResearchersPage = async () => {
+const ForResearchersPage = async ({
+  searchParams,
+}: {
+  searchParams?: Promise<{ highlights?: string | string[] }>
+}) => {
+  const sp = searchParams ? await searchParams : {}
+  const highlightsParam = sp.highlights
+  const openAllHighlightAccordions =
+    highlightsParam === "all" ||
+    (Array.isArray(highlightsParam) && highlightsParam.includes("all"))
+
   const allPapers = await fetchResearchPapers()
   const indexPreview = allPapers.slice(0, 20)
   const researchTeam = await fetchResearchTeamMembers()
@@ -44,8 +54,11 @@ const ForResearchersPage = async () => {
       )}
     >
       <ResearchersHeroSection />
+      <ResearchHighlightsSection
+        papers={allPapers}
+        openAllAccordions={openAllHighlightAccordions}
+      />
       <ResearchPartnersSection />
-      <ResearchHighlightsSection papers={allPapers} />
       <ResearchIndexSection
         papers={indexPreview}
         totalCount={allPapers.length}

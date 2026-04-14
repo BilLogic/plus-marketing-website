@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight, ChevronDown, ExternalLink, Search } from "lucide-react"
+import { ArrowRight, ChevronDown, ChevronRight, Search } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useMemo, useState } from "react"
@@ -11,8 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { Badge } from "@/components/ui/badge"
-import { Button, buttonVariants, plusNavCtaLinkClassName } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import {
   Select,
   SelectContent,
@@ -27,12 +26,23 @@ import { forResearchersAssets } from "@/components/marketing/for-researchers-ass
 import {
   RESEARCH_GENRE_TAGS,
   type ResearchGenreTag,
-  sortResearchGenresForDisplay,
 } from "@/lib/research/research-genres"
 import {
-  researchGenreBadgeClassName,
-  researchGenreFilterChipClassName,
-} from "@/lib/research/research-index-genre-styles"
+  riFg,
+  riFilterFieldLabelCn,
+  riFilterLabelCn,
+  riFilterTagButtonCn,
+  riGenreFilterPillClass,
+  riIndexMetaCopy,
+  riSeeAllPublicationsLinkMetaClass,
+  riSelectItemCn,
+  riSelectTriggerCn,
+} from "@/components/marketing/research-index/research-index-figma-tokens"
+import { ResearchIndexPublicationCard } from "@/components/marketing/research-index/research-index-publication-card"
+import {
+  riParseYear,
+  riPublicationDescription,
+} from "@/components/marketing/research-index/research-index-utils"
 import type { ResearchPaper, SuccessStory, TeamMember } from "@/lib/notion/types"
 import {
   notionSuccessStoryPublicReadUrl,
@@ -61,53 +71,61 @@ const RESEARCH_HIGHLIGHT_TOPICS = [
 type ResearchHighlightTopicId = (typeof RESEARCH_HIGHLIGHT_TOPICS)[number]["id"]
 
 /**
- * Figma `1732:3684` / study tiles `1732:3704` — row bar, title/chevron, icons, and study-card
- * border/text/focus ring share each topic accent (Gen AI ref: `#0080b4`).
+ * Figma `1730:2003` — collapsed row: neutral grays.
+ * Figma `1732:3337` Variant2 — open row: accent icon/title/chevron; study tiles shell + inner white (`1732:3394`).
  */
 const HIGHLIGHT_TOPIC_THEME: Record<
   ResearchHighlightTopicId,
   {
-    bar: string
-    title: string
-    chevron: string
     contentLinkHover: string
-    studyCard: string
-    iconDisc: string
-    iconGlyphStroke: string
+    openTitle: string
+    openChevron: string
+    openIconDisc: string
+    openIconGlyph: string
+    studyShellBg: string
+    studyAccentText: string
+    studyFocusRing: string
   }
 > = {
   "student-learning": {
-    bar: "bg-[#ffeaea]",
-    title: "text-[#c05053]",
-    chevron: "text-[#c05053]",
     contentLinkHover: "hover:[&_a]:text-[#c05053]",
-    studyCard: "border-[#c05053] text-[#c05053] focus-visible:ring-[#c05053]/40",
-    iconDisc: "#c05053",
-    iconGlyphStroke: "#ffeaea",
+    openTitle: "group-aria-expanded/accordion-trigger:text-[#c05053]",
+    openChevron: "group-aria-expanded/accordion-trigger:text-[#c05053]",
+    openIconDisc: "#c05053",
+    openIconGlyph: "#ffffff",
+    studyShellBg: "bg-[#fff7f7]",
+    studyAccentText: "text-[#c05053]",
+    studyFocusRing: "focus-visible:ring-[#c05053]/40",
   },
   "gen-ai": {
-    bar: "bg-[#e0f5fe]",
-    title: "text-[#0080b4]",
-    chevron: "text-[#0080b4]",
     contentLinkHover: "hover:[&_a]:text-[#0080b4]",
-    studyCard: "border-[#0080b4] text-[#0080b4] focus-visible:ring-[#0080b4]/40",
-    iconDisc: "#0080b4",
-    iconGlyphStroke: "#e0f5fe",
+    openTitle: "group-aria-expanded/accordion-trigger:text-[#0080b4]",
+    openChevron: "group-aria-expanded/accordion-trigger:text-[#0080b4]",
+    openIconDisc: "#0080b4",
+    openIconGlyph: "#ffffff",
+    studyShellBg: "bg-[#e0f5fe]",
+    studyAccentText: "text-[#0080b4]",
+    studyFocusRing: "focus-visible:ring-[#0080b4]/40",
   },
   "tutor-training": {
-    bar: "bg-[#f4fbf6]",
-    title: "text-[#007d49]",
-    chevron: "text-[#007d49]",
     contentLinkHover: "hover:[&_a]:text-[#007d49]",
-    studyCard: "border-[#007d49] text-[#007d49] focus-visible:ring-[#007d49]/40",
-    iconDisc: "#007d49",
-    iconGlyphStroke: "#f4fbf6",
+    openTitle: "group-aria-expanded/accordion-trigger:text-[#007d49]",
+    openChevron: "group-aria-expanded/accordion-trigger:text-[#007d49]",
+    openIconDisc: "#007d49",
+    openIconGlyph: "#ffffff",
+    studyShellBg: "bg-[#f4fbf6]",
+    studyAccentText: "text-[#007d49]",
+    studyFocusRing: "focus-visible:ring-[#007d49]/40",
   },
 }
 
-/** Shared layout — always filled bar; colors from `HIGHLIGHT_TOPIC_THEME`. */
-const HIGHLIGHT_CARD_BASE =
-  "flex w-full items-center justify-between gap-4 overflow-hidden rounded-[22px] px-6 py-7 transition-[border-radius] duration-200 sm:px-7 sm:py-8 group-aria-expanded/accordion-trigger:rounded-b-none"
+/** Figma `1730:2003` — row inner layout (icon 59px, gap ~22px, chevron 50px). */
+const HIGHLIGHT_TRIGGER_ROW =
+  "flex w-full min-w-0 items-center justify-between gap-4"
+
+/** Figma `1730:2003` — uniform disc + white glyphs on closed rows. */
+const HIGHLIGHT_ROW_ICON_DISC = "#62636c"
+const HIGHLIGHT_ROW_ICON_GLYPH = "#ffffff"
 
 /**
  * Figma `1732:3759` — exact tutor-training study cards (left → right).
@@ -125,8 +143,9 @@ const HIGHLIGHT_STUDY_IDS_BY_TOPIC: Partial<
 /** Match `for-schools-sections` — Community / Benefits / Oversight section headers. */
 const sectionHeaderH2 =
   "text-pretty text-lg font-bold tracking-tight text-teal-950 sm:text-2xl md:text-3xl"
-const sectionHeaderLead =
-  "text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg"
+const sectionHeaderLead = marketingTypography.sectionLead
+/** Every `<h2>` on `/for-researchers` — same scale as schools sections + `riFg.title` color as Research Index. */
+const forResearchersSectionH2 = cn(sectionHeaderH2, riFg.title)
 /** Same as SchoolsCommunitySection / SchoolsTrainingSection mascot column. */
 const sectionHeaderDecor =
   "pointer-events-none h-[clamp(4.5rem,18vw,10.9375rem)] w-[clamp(3.75rem,24vw,12rem)] shrink-0 object-contain sm:h-32 sm:w-[7.25rem] md:h-40 md:w-36 lg:h-[175px] lg:w-[193px]"
@@ -134,107 +153,94 @@ const sectionHeaderDecor =
 const successStoriesHeaderDecor =
   "pointer-events-none h-[clamp(4.5rem,18vw,9.375rem)] w-auto shrink-0 object-contain sm:h-32 md:h-36 lg:h-[150px] lg:w-[165px]"
 
-/** Figma `1732:3394` / `1732:3704` — layout; border/text/ring from `HIGHLIGHT_TOPIC_THEME.studyCard`. */
-const HIGHLIGHT_STUDY_CARD_BASE =
-  "flex min-h-[227px] flex-col justify-between rounded-[30px] border-2 bg-white px-[30px] py-[31px] text-left no-underline outline-none transition-opacity hover:no-underline hover:opacity-95 focus-visible:ring-2 focus-visible:ring-offset-2"
 const SUCCESS_STORY_GREEN = "text-[#007d49]"
-/** Figma IA: search & neutral chrome */
-const FIELD_BORDER = "border-gray-600"
 
-/** Teal outline pill — hero “Our researchers”, Research Index “View all” / empty-state link. */
+/** Teal outline pill — Research Index “View all” / empty-state link. */
 const forResearchersOutlineCtaClassName = cn(
   buttonVariants({ variant: "outline", size: "navCta" }),
   "rounded-full border border-[#027f89] bg-white px-5 text-sm font-normal text-[#004247] hover:bg-teal-50 sm:px-6 sm:text-base"
 )
 
+/** Figma `1730:2451` — primary hero CTA (fill `#a6edf4`); sized for a single horizontal row with the secondary CTA. */
+const researchersHeroPrimaryCtaClassName = cn(
+  "inline-flex h-[45px] w-fit items-center justify-center rounded-full bg-[#a6edf4] px-10 text-base font-normal text-[#004247] no-underline transition-opacity hover:opacity-95"
+)
+
+/** Figma `1730:2452` — outline “Our publications”. */
+const researchersHeroSecondaryCtaClassName =
+  "inline-flex h-[45px] w-fit items-center justify-center rounded-full border border-[#027f89] bg-white px-10 text-base font-normal text-[#004247] no-underline transition-colors hover:bg-teal-50"
+
 /**
- * Figma `1730:2453` Images frame scaled for hero balance (640×542); inner collage @ (17,52).
- * Card geometry uses 676×509 reference; asset crops match generated design context 1:1.
+ * Figma `1730:2510` / `1730:2453` — 2×2 partner grid (20px gap), pink character top-left, blue bottom-right.
+ * Row 1: Learning Ideas | SIGCHI · Row 2: SOLAR | AIED. No CMU tooltip in current IA.
  */
+/**
+ * Figma `1730:2453` grid proportions, slightly shorter tiles than 231px height so the hero text column can keep CTAs on one row.
+ */
+const heroCollageTileLayout =
+  "relative flex aspect-[270/200] w-full min-h-0 items-center justify-center overflow-hidden min-[480px]:aspect-[270/210]"
+
 const ResearchHeroCollageVisual = () => {
   const c = forResearchersAssets.heroCollage
-  const H = 509
-  const W = 676
   return (
-    <div className="relative mx-auto w-full max-w-[640px] xl:h-[542px]">
-      {/* Pink character — `1730:2467` at Images (0,0); inner visual 95×109, -15° */}
-      <div className="pointer-events-none absolute left-0 top-0 z-30 hidden sm:block">
+    <div className="relative mx-auto w-full max-w-[min(100%,38rem)] pb-12 pt-12 sm:max-w-[40rem] sm:pt-14 sm:pb-16 lg:max-w-[38.5rem] lg:pt-16 lg:pb-0">
+      {/* Pink character — Figma `1730:2467` 109×95, −15°, ~44px above grid */}
+      <div className="pointer-events-none absolute left-[-3px] top-0 z-20">
         <div className="-rotate-[15deg]">
           <img
             alt=""
             src={c.characterPink}
-            className="h-[95px] w-[109px] object-cover"
+            className="h-[95px] w-[109px] object-cover max-[479px]:h-[76px] max-[479px]:w-[87px]"
             aria-hidden
           />
         </div>
       </div>
-      {/* Inner collage — `1730:2454` */}
-      <div className="relative mx-auto mt-3 w-full max-xl:max-w-[626px] sm:mt-4 xl:absolute xl:left-[17px] xl:top-[52px] xl:mt-0 xl:h-[472px] xl:w-[626px]">
-        <div className="relative aspect-[676/509] w-full xl:aspect-auto xl:h-full xl:w-full">
-          {/* Learning Ideas — 321×231 @ (43,-1); logo 225×225 centered `1730:2511` */}
+      <div
+        className={cn(
+          "relative z-0 mx-auto grid w-full max-w-[min(100%,520px)] grid-cols-1 gap-3.5 min-[480px]:grid-cols-2 min-[480px]:gap-5"
+        )}
+      >
+        {/* Learning Ideas — pink, Figma `1730:2455` */}
+        <div className={cn(heroCollageTileLayout, "rounded-[24px] bg-[#ffe8f5] min-[480px]:rounded-[30px]")}>
+          <img
+            alt=""
+            src={c.learningIdeasConference}
+            className="pointer-events-none max-h-[min(200px,86%)] max-w-[min(200px,74%)] object-cover"
+            aria-hidden
+          />
+        </div>
+        {/* SIGCHI — yellow */}
+        <div className={cn(heroCollageTileLayout, "rounded-[24px] bg-[#fff0cb] min-[480px]:rounded-[30px]")}>
+          <img
+            alt=""
+            src={c.sigchi}
+            className="pointer-events-none max-h-[min(200px,86%)] max-w-[min(200px,74%)] rounded-[96px] object-contain min-[480px]:rounded-[132px]"
+            aria-hidden
+          />
+        </div>
+        {/* SOLAR — green, inner fill 228px tall in Figma */}
+        <div
+          className={cn(
+            heroCollageTileLayout,
+            "rounded-[24px] bg-[#f4fbf6] min-[480px]:rounded-[31.932px]"
+          )}
+        >
+          <img
+            alt=""
+            src={c.solar}
+            className="pointer-events-none max-h-[min(71px,31%)] max-w-[min(165px,61%)] object-cover"
+            aria-hidden
+          />
+        </div>
+        {/* AIED — tile + "=" outside the blue box, anchored to its bottom-right corner (Figma `1730:2468`) */}
+        <div className="relative min-h-0 w-full">
           <div
-            className="absolute overflow-hidden rounded-[30px] bg-[#ffe8f5]"
-            style={{
-              left: `${(43 / W) * 100}%`,
-              top: `${(-1 / H) * 100}%`,
-              width: `${(321 / W) * 100}%`,
-              height: `${(231 / H) * 100}%`,
-            }}
+            className={cn(
+              heroCollageTileLayout,
+              "rounded-[18px] bg-[#e0f5fe] min-[480px]:rounded-[21.254px]"
+            )}
           >
-            <img
-              alt=""
-              src={c.learningIdeasConference}
-              className="pointer-events-none absolute left-1/2 top-1/2 h-[min(100%,225px)] w-[min(100%,225px)] max-h-[98%] max-w-[98%] -translate-x-1/2 -translate-y-1/2 object-cover"
-              aria-hidden
-            />
-          </div>
-          {/* SIGCHI — 271×244 @ (381,57); logo 242×255 rounded `1730:2522` */}
-          <div
-            className="absolute overflow-hidden rounded-[30px] bg-[#fff0cb]"
-            style={{
-              left: `${(381 / W) * 100}%`,
-              top: `${(57 / H) * 100}%`,
-              width: `${(271 / W) * 100}%`,
-              height: `${(244 / H) * 100}%`,
-            }}
-          >
-            <img
-              alt=""
-              src={c.sigchi}
-              className="pointer-events-none absolute left-[calc(50%+0.5px)] top-[calc(50%-0.5px)] h-[min(106%,255px)] w-[min(90%,242px)] max-w-[90%] -translate-x-1/2 -translate-y-1/2 rounded-[160px] object-contain"
-              aria-hidden
-            />
-          </div>
-          {/* SOLAR — 307×228 @ (64,247); logo 227×96.929 `1730:2524` */}
-          <div
-            className="absolute overflow-hidden bg-[#f4fbf6]"
-            style={{
-              left: `${(64 / W) * 100}%`,
-              top: `${(247 / H) * 100}%`,
-              width: `${(307 / W) * 100}%`,
-              height: `${(228 / H) * 100}%`,
-              borderRadius: "31.932px",
-            }}
-          >
-            <img
-              alt=""
-              src={c.solar}
-              className="pointer-events-none absolute left-1/2 top-[calc(50%+0.46px)] h-[min(42.5%,96.929px)] w-[min(74%,227px)] -translate-x-1/2 -translate-y-1/2 object-cover"
-              aria-hidden
-            />
-          </div>
-          {/* AIED — 219×191 @ (388,318); crop `1730:2517` */}
-          <div
-            className="absolute overflow-hidden bg-[#e0f5fe]"
-            style={{
-              left: `${(388 / W) * 100}%`,
-              top: `${(318 / H) * 100}%`,
-              width: `${(219 / W) * 100}%`,
-              height: `${(191 / H) * 100}%`,
-              borderRadius: "21.254px",
-            }}
-          >
-            <div className="pointer-events-none absolute left-1/2 top-1/2 h-[38.74%] w-[75.8%] min-h-[48px] min-w-[120px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
+            <div className="pointer-events-none relative z-0 h-[min(74px,32%)] w-[min(166px,61%)] min-h-[36px] min-w-[100px] overflow-hidden">
               <img
                 alt=""
                 src={c.aied}
@@ -249,89 +255,45 @@ const ResearchHeroCollageVisual = () => {
               />
             </div>
           </div>
-          {/* CMU tooltip — `1730:2459` 278×218 @ (199,145) */}
-          <div
-            className="absolute z-20 flex min-h-[11rem] w-[41.12%] min-w-[220px] flex-wrap content-center justify-center gap-y-3 rounded-[34.18px] border border-white/60 bg-white/80 pb-5 pl-5 pr-8 pt-4 shadow-[0px_4.557px_22.787px_rgba(0,0,0,0.25)] backdrop-blur-[25px] sm:min-h-[12.5rem] lg:h-[218px] lg:min-h-0 lg:w-[278px] lg:min-w-0 lg:gap-y-[14px] lg:pb-[25px] lg:pl-[26px] lg:pr-[54px] lg:pt-[18px]"
-            style={{
-              left: `${(199 / W) * 100}%`,
-              top: `${(145 / H) * 100}%`,
-            }}
-            role="note"
-          >
-            <img
-              alt=""
-              src={c.tooltipIconA}
-              className="relative mr-[-28px] size-[52px] shrink-0 lg:size-[58px]"
-              aria-hidden
-            />
-            <img
-              alt=""
-              src={c.tooltipIconB}
-              className="relative mr-[-28px] size-[52px] shrink-0 lg:size-[58px]"
-              aria-hidden
-            />
-            <p
-              className={cn(
-                marketingTypography.body,
-                "relative mr-[-28px] w-full max-w-[226px] text-balance text-center text-pretty text-muted-foreground"
-              )}
-            >
-              Based out of{" "}
-              <span className="font-bold text-[#027f89]">CMU HCII</span>, we focus on pioneering
-              educational research.
-            </p>
-          </div>
+          <img
+            alt=""
+            src={c.characterBlue}
+            className="pointer-events-none absolute bottom-0 right-0 z-10 hidden h-[79px] w-[97px] origin-bottom-right translate-x-[30%] translate-y-[28%] object-cover object-bottom-right sm:block"
+            aria-hidden
+          />
         </div>
       </div>
-      {/* Blue character — `1730:2468` at Images (579,506) */}
-      <img
-        alt=""
-        src={c.characterBlue}
-        className="pointer-events-none absolute bottom-0 right-[17px] z-20 hidden h-[79px] w-[97px] object-cover sm:block"
-        aria-hidden
-      />
     </div>
   )
 }
 
-/** Hero `1730:2443`: copy + collage share page gutters (`max-w-7xl`); narrow copy so 466+693 fits without overflow. */
+/** Hero `1730:2510` — copy left; collage sized to Figma `1730:2453` (560px grid, 676px frame). */
 export const ResearchersHeroSection = () => {
   return (
-    <section className="relative overflow-hidden pb-8 pt-2 sm:pb-10 sm:pt-4 md:pb-12 md:pt-6">
-      <div className="mx-auto flex w-full flex-col gap-4 sm:gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-4 xl:gap-5">
-        {/* Inner collage bottom ≈ 52+472; frame 542 — pad so CTAs match AIED bottom */}
-        <div className="flex w-full min-w-0 max-w-[23.5rem] flex-col sm:max-w-[25rem] lg:max-w-[26.5rem] xl:max-w-[28.5rem] xl:pb-[18px]">
-          {/* Figma `1744:2102` — eyebrow above hero H1 (`1730:2510`). */}
-          <h1 className="flex flex-col gap-[15px]">
-            <span className="text-2xl font-semibold leading-none text-[#027f89] sm:text-[1.75rem] xl:text-[2rem]">
+    <section className="relative w-full min-w-0 overflow-x-hidden pt-8 pb-6 sm:pt-10 sm:pb-8 md:pt-12 md:pb-10 lg:pt-14 lg:pb-12">
+      <div className="mx-auto flex w-full flex-col gap-6 sm:gap-7 lg:flex-row lg:items-end lg:justify-between lg:gap-10 xl:gap-12">
+        <div className="flex w-full min-w-0 max-w-[34rem] flex-col lg:max-w-[min(34rem,51vw)]">
+          <h1 className="flex flex-col gap-2 sm:gap-2.5 lg:gap-3">
+            <span className="text-xl font-semibold leading-none text-[#027f89] sm:text-2xl lg:text-[26px] xl:text-[28px]">
               For researchers
             </span>
-            <span className="text-balance text-[1.625rem] font-bold leading-snug tracking-tight text-[#004247] sm:text-[1.75rem] sm:leading-snug md:text-[1.875rem] lg:text-[2rem] lg:leading-snug xl:text-[2.25rem] 2xl:text-[2.375rem]">
-              Pioneering Lab Research, Social Technical Support for Every Learning Environment
+            <span className="text-balance text-[1.625rem] font-bold leading-[1.2] tracking-tight text-[#004247] sm:text-[1.875rem] md:text-[2.125rem] lg:text-[2.375rem] xl:text-[2.75rem] 2xl:text-[3rem]">
+              Pioneering CMU Research: Human-Centered AI for Personalized Math Learning
             </span>
           </h1>
-          <div className="mt-10 flex w-full flex-col gap-3 min-[400px]:mt-12 min-[400px]:flex-row min-[400px]:items-stretch min-[400px]:gap-4 lg:mt-14">
+          <div className="mt-5 flex w-full flex-row items-stretch gap-2 min-[400px]:gap-3 sm:mt-6 lg:mt-7">
             <Link
-              href="/research"
-              className={cn(
-                plusNavCtaLinkClassName,
-                "h-11 w-full min-w-0 flex-1 justify-center rounded-full px-5 text-sm font-normal text-[#004247] sm:h-[45px] sm:px-6 sm:text-base"
-              )}
+              href={`#${forResearchersSectionIds.collaborate}`}
+              className={researchersHeroPrimaryCtaClassName}
             >
-              Our publications
+              Research with us
             </Link>
-            <Link
-              href={`#${forResearchersSectionIds.researchers}`}
-              className={cn(
-                forResearchersOutlineCtaClassName,
-                "h-11 w-full min-w-0 flex-1 justify-center sm:h-[45px]"
-              )}
-            >
-              Our researchers
+            <Link href="/research" className={researchersHeroSecondaryCtaClassName}>
+              Our publications
             </Link>
           </div>
         </div>
-        <div className="relative flex min-w-0 flex-1 justify-center lg:justify-end">
+        <div className="relative flex min-w-0 flex-1 shrink-0 justify-center lg:max-w-[min(100%,38.5rem)] lg:justify-end">
           <ResearchHeroCollageVisual />
         </div>
       </div>
@@ -344,17 +306,20 @@ const SectionHeader = ({
   description,
   decor,
   titleClassName,
+  descriptionClassName,
 }: {
   title: string
   description: string
   decor: string
   /** Optional override for h2 color/weight. */
   titleClassName?: string
+  /** Optional override for lead paragraph (e.g. Research Index Figma `1730:2012`). */
+  descriptionClassName?: string
 }) => (
   <div className="flex w-full flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
     <div className="min-w-0 flex-1 basis-0 space-y-3 sm:space-y-4 md:space-y-5">
       <h2 className={cn(sectionHeaderH2, titleClassName)}>{title}</h2>
-      <p className={sectionHeaderLead}>{description}</p>
+      <p className={cn(sectionHeaderLead, descriptionClassName)}>{description}</p>
     </div>
     <img alt="" src={decor} className={sectionHeaderDecor} aria-hidden />
   </div>
@@ -362,19 +327,33 @@ const SectionHeader = ({
 
 export const ResearchPartnersSection = () => {
   return (
-    <section id={forResearchersSectionIds.partners} className="space-y-6 sm:space-y-8 lg:space-y-10">
+    <section
+      id={forResearchersSectionIds.partners}
+      className="w-full min-w-0 space-y-6 sm:space-y-8 lg:space-y-10"
+    >
       <SectionHeader
         title="Our Research Partners"
         description="A strategic alliance of world-class universities and industry leaders committed to rigorous learning engineering at scale."
         decor={forResearchersAssets.partners.decor}
+        titleClassName={riFg.title}
       />
-      <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:gap-x-12 md:grid-cols-4 md:gap-x-[50px]">
-        {forResearchersAssets.partners.logos.map((logo) => (
+      <div className="flex items-center justify-between">
+        {forResearchersAssets.partners.logos.map((logo, i) => (
           <div
             key={logo}
-            className="flex aspect-[4/3] max-h-[200px] items-center justify-center rounded-2xl bg-white p-4 md:max-h-[240px]"
+            className={cn(
+              "relative shrink-0",
+              i === 2
+                ? "size-[160px] sm:size-[210px] md:size-[260px]"
+                : "size-[120px] sm:size-[160px] md:size-[200px]",
+            )}
           >
-            <img alt="" src={logo} className="max-h-full w-full object-contain" aria-hidden />
+            <img
+              alt=""
+              src={logo}
+              className="absolute inset-0 size-full max-w-none object-contain"
+              aria-hidden
+            />
           </div>
         ))}
       </div>
@@ -550,23 +529,91 @@ function ResearchHighlightTopicIcon({
   )
 }
 
-/** Figma `1732:3394` / `1732:3704` — title + bottom-aligned “Read study →”; accent from topic theme. */
+/** Figma `1815:2160` — same SVG exports as the file (not Lucide approximations). */
+function HighlightStudyPublicationIcon({
+  topicId,
+  studyIndex,
+  className,
+}: {
+  topicId: ResearchHighlightTopicId
+  studyIndex: number
+  className?: string
+}) {
+  const row = forResearchersAssets.highlights.studyPublicationIcons[topicId]
+  const src = row[Math.min(Math.max(studyIndex, 0), row.length - 1)]
+  return (
+    <img
+      src={src}
+      alt=""
+      width={24}
+      height={24}
+      decoding="async"
+      className={cn("size-6 shrink-0 object-contain", className)}
+      aria-hidden
+    />
+  )
+}
+
+/** Figma `1732:3394` / `1732:3337` — tinted shell, white inner, footer “Read study →”. */
 function HighlightStudyCard({
   paper,
   topicId,
+  studyIndex,
 }: {
   paper: ResearchPaper
   topicId: ResearchHighlightTopicId
+  studyIndex: number
 }) {
-  const cardClass = cn(HIGHLIGHT_STUDY_CARD_BASE, HIGHLIGHT_TOPIC_THEME[topicId].studyCard)
+  const theme = HIGHLIGHT_TOPIC_THEME[topicId]
+  const summary = riPublicationDescription(paper)
+  const shellClass = cn(
+    "flex h-full min-h-[22rem] w-full min-w-0 flex-col gap-2.5 rounded-[30px] p-[15px] text-left no-underline outline-none transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-offset-2 sm:min-h-[24rem]",
+    theme.studyShellBg,
+    theme.studyFocusRing
+  )
   const inner = (
     <>
-      <p className="max-w-[min(100%,430px)] text-pretty text-xl font-semibold leading-snug text-current sm:text-2xl sm:leading-snug">
-        {paper.title}
-      </p>
-      <span className="mt-6 flex items-center justify-end gap-2.5 self-end text-base font-normal text-current">
+        <div className="flex min-h-0 flex-1 flex-col justify-center overflow-hidden rounded-[30px] bg-white p-[15px] sm:p-5">
+        <div className="flex w-full min-w-0 flex-col gap-8">
+          <div className="flex shrink-0 items-start gap-2.5">
+            <HighlightStudyPublicationIcon
+              topicId={topicId}
+              studyIndex={studyIndex}
+              className="mt-1 shrink-0"
+            />
+            <p
+              className={cn(
+                "min-w-0 flex-1 text-pretty",
+                marketingTypography.bentoTitle,
+                theme.studyAccentText
+              )}
+            >
+              {paper.title}
+            </p>
+          </div>
+          {summary ? (
+            <div className="max-h-[min(50%,12.5rem)] w-full min-w-0 overflow-y-auto overscroll-y-contain [-webkit-overflow-scrolling:touch] sm:max-h-[min(50%,15rem)]">
+              <p
+                className={cn(
+                  "text-pretty text-muted-foreground",
+                  riIndexMetaCopy
+                )}
+              >
+                {summary}
+              </p>
+            </div>
+          ) : null}
+        </div>
+      </div>
+      <span
+        className={cn(
+          "flex shrink-0 items-center justify-end gap-2.5",
+          marketingTypography.body,
+          theme.studyAccentText
+        )}
+      >
         Read study
-        <ArrowRight className="size-[26px] shrink-0 text-current" aria-hidden />
+        <ArrowRight className="size-[26px] shrink-0" strokeWidth={2} aria-hidden />
       </span>
     </>
   )
@@ -576,20 +623,27 @@ function HighlightStudyCard({
         href={paper.paperLink}
         target="_blank"
         rel="noopener noreferrer"
-        className={cardClass}
+        className={shellClass}
       >
         {inner}
       </a>
     )
   }
   return (
-    <Link href="/research" className={cardClass}>
+    <Link href="/research" className={shellClass}>
       {inner}
     </Link>
   )
 }
 
-export const ResearchHighlightsSection = ({ papers }: { papers: ResearchPaper[] }) => {
+export const ResearchHighlightsSection = ({
+  papers,
+  openAllAccordions = false,
+}: {
+  papers: ResearchPaper[]
+  /** Set via `?highlights=all` — expands every theme for Figma/screenshots (not default UX). */
+  openAllAccordions?: boolean
+}) => {
   const studiesByTopic = useMemo(() => {
     const map = new Map<string, ResearchPaper[]>()
     for (const topic of RESEARCH_HIGHLIGHT_TOPICS) {
@@ -598,52 +652,73 @@ export const ResearchHighlightsSection = ({ papers }: { papers: ResearchPaper[] 
     return map
   }, [papers])
 
+  const defaultExpandedIds = openAllAccordions
+    ? RESEARCH_HIGHLIGHT_TOPICS.map((t) => t.id)
+    : []
+
   return (
-    <section id={forResearchersSectionIds.highlights} className="space-y-6 sm:space-y-8 lg:space-y-10">
+    <section
+      id={forResearchersSectionIds.highlights}
+      className="w-full min-w-0 space-y-6 font-sans sm:space-y-8 lg:space-y-10"
+    >
       <SectionHeader
         title="Our Latest Research Highlights"
         description="Explore our most recent findings in generative artificial intelligence, tutor training, and student learning."
         decor={forResearchersAssets.highlights.decor}
+        titleClassName={riFg.title}
       />
 
       <Accordion
-        multiple={false}
-        defaultValue={[]}
+        multiple={openAllAccordions}
+        defaultValue={defaultExpandedIds}
         aria-label="Research highlight themes"
-        className="mx-auto flex w-full max-w-[70.25rem] flex-col gap-6 sm:gap-8"
+        className="flex w-full min-w-0 flex-col gap-[30px]"
       >
         {RESEARCH_HIGHLIGHT_TOPICS.map((topic) => {
           const studies = studiesByTopic.get(topic.id) ?? []
           const theme = HIGHLIGHT_TOPIC_THEME[topic.id]
           return (
-            <AccordionItem key={topic.id} value={topic.id} className="border-0 not-last:border-b-0">
+            <AccordionItem
+              key={topic.id}
+              value={topic.id}
+              className="w-full min-w-0 overflow-hidden rounded-[30px] border-0 bg-white not-last:border-b-0 shadow-none outline-none ring-0"
+            >
               <AccordionTrigger
                 hideChevron
-                className="hover:no-underline focus-visible:rounded-[22px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+                className="w-full items-center border-0 py-8 pl-0 pr-0 text-base font-normal shadow-none outline-none ring-0 hover:no-underline focus-visible:border-transparent focus-visible:shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:after:border-transparent"
               >
-                <span className={cn(HIGHLIGHT_CARD_BASE, theme.bar)}>
-                  <span className="flex min-w-0 items-center gap-4 sm:gap-5">
-                    <span className="size-[59px] shrink-0">
-                      <ResearchHighlightTopicIcon
-                        topicId={topic.id}
-                        discFill={theme.iconDisc}
-                        glyphStroke={theme.iconGlyphStroke}
-                      />
+                <span className={HIGHLIGHT_TRIGGER_ROW}>
+                  <span className="flex min-w-0 items-center gap-[22px]">
+                    <span className="relative size-[59px] shrink-0">
+                      <span className="absolute inset-0 group-aria-expanded/accordion-trigger:hidden">
+                        <ResearchHighlightTopicIcon
+                          topicId={topic.id}
+                          discFill={HIGHLIGHT_ROW_ICON_DISC}
+                          glyphStroke={HIGHLIGHT_ROW_ICON_GLYPH}
+                        />
+                      </span>
+                      <span className="absolute inset-0 hidden group-aria-expanded/accordion-trigger:block">
+                        <ResearchHighlightTopicIcon
+                          topicId={topic.id}
+                          discFill={theme.openIconDisc}
+                          glyphStroke={theme.openIconGlyph}
+                        />
+                      </span>
                     </span>
                     <span
                       className={cn(
-                        "min-w-0 text-left text-2xl font-semibold capitalize tracking-tight sm:text-[32px] sm:leading-tight",
-                        theme.title
+                        "min-w-0 text-left text-2xl font-semibold capitalize leading-snug tracking-[-0.02em] text-[#62636c] sm:text-[32px] sm:leading-[1.22]",
+                        theme.openTitle
                       )}
                     >
                       {topic.title}
                     </span>
                   </span>
-                  <ChevronDown
-                    strokeWidth={2}
+                  <ChevronRight
+                    strokeWidth={1.75}
                     className={cn(
-                      "size-10 shrink-0 transition-transform duration-200 ease-out group-aria-expanded/accordion-trigger:rotate-180 sm:size-[50px]",
-                      theme.chevron
+                      "size-10 shrink-0 text-[#62636c] transition-transform duration-200 ease-out group-aria-expanded/accordion-trigger:rotate-90 sm:size-[50px]",
+                      theme.openChevron
                     )}
                     aria-hidden
                   />
@@ -655,15 +730,20 @@ export const ResearchHighlightsSection = ({ papers }: { papers: ResearchPaper[] 
                   theme.contentLinkHover
                 )}
               >
-                <div className="pt-[30px]">
+                <div className="px-0 pb-8 pt-[30px]">
                   {studies.length > 0 ? (
-                    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
-                      {studies.map((paper) => (
-                        <HighlightStudyCard key={paper.id} paper={paper} topicId={topic.id} />
+                    <div className="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 sm:gap-6">
+                      {studies.map((paper, studyIndex) => (
+                        <HighlightStudyCard
+                          key={paper.id}
+                          paper={paper}
+                          topicId={topic.id}
+                          studyIndex={studyIndex}
+                        />
                       ))}
                     </div>
                   ) : (
-                    <p className="text-pretty text-sm text-muted-foreground">
+                    <p className="text-pretty text-base text-muted-foreground">
                       <Link
                         href="/research"
                         className="font-medium text-[#027f89] underline-offset-4 hover:underline"
@@ -683,23 +763,13 @@ export const ResearchHighlightsSection = ({ papers }: { papers: ResearchPaper[] 
   )
 }
 
-function parseResearchYear(publishDate: string): string {
-  const parts = publishDate.split("/")
-  if (parts.length === 3) {
-    const y = new Date(+parts[2], +parts[0] - 1, +parts[1]).getFullYear()
-    return Number.isNaN(y) ? "" : String(y)
-  }
-  const y = new Date(publishDate).getFullYear()
-  return Number.isNaN(y) ? "" : String(y)
-}
-
 /** Select sentinel — must not match a real venue string. */
 const INDEX_FILTER_ANY = "all"
 
 function indexYearOptionsFromPapers(papers: ResearchPaper[]): string[] {
   const years = new Set<string>()
   for (const p of papers) {
-    const y = parseResearchYear(p.publishDate)
+    const y = riParseYear(p.publishDate)
     if (y) years.add(y)
   }
   return [...years].sort((a, b) => Number(b) - Number(a))
@@ -714,26 +784,9 @@ function indexVenueOptionsFromPapers(papers: ResearchPaper[]): string[] {
   return [...venues].sort((a, b) => a.localeCompare(b))
 }
 
-function formatAuthorsShort(authors: string[]) {
-  if (authors.length === 0) return ""
-  if (authors.length <= 2) return authors.join(", ")
-  return `${authors[0]}, ${authors[1]} et al.`
-}
-
 /** Cropped scroll region — keeps the section short (card list only; full `/research` has table + cards). */
 const INDEX_PREVIEW_SCROLL =
   "max-h-[min(26rem,50svh)] overflow-y-auto overscroll-y-contain min-h-0 scroll-smooth sm:max-h-[min(30rem,55svh)]"
-
-/** Research Index — prose matches `text-muted-foreground` body/supporting grey (`globals.css`). */
-const INDEX_SECTION = "font-sans"
-const INDEX_TITLE = "text-muted-foreground"
-const INDEX_TITLE_LINK =
-  "text-muted-foreground underline-offset-2 hover:text-muted-foreground hover:underline"
-/** “All” filter chip — neutral grey (genre chips stay color-coded). */
-const INDEX_TAG_ALL_SELECTED =
-  "border-muted-foreground/35 bg-muted text-muted-foreground shadow-sm hover:bg-muted hover:text-muted-foreground"
-const INDEX_TAG_ALL_IDLE =
-  "border-border bg-background text-muted-foreground hover:bg-muted/60 hover:text-muted-foreground"
 
 /** Wider list than trigger — min = trigger width, grows for long labels (capped to viewport). */
 const INDEX_SELECT_CONTENT_CLASS =
@@ -755,22 +808,32 @@ function ResearchIndexSearchForm() {
       }}
     >
       <label className="block">
-        <span className="sr-only">Search publications — opens the full Research &amp; Publications page</span>
-        <div
-          className={cn(
-            "flex h-16 items-center gap-3 rounded-full border-2 bg-white px-6",
-            FIELD_BORDER
-          )}
-        >
-          <Search className="size-6 shrink-0 text-muted-foreground" aria-hidden />
+        <span className="sr-only">
+          Search studies — opens the full Research Index with your query
+        </span>
+        <div className="relative">
+          <Search
+            className={cn(
+              "pointer-events-none absolute left-6 top-1/2 size-6 -translate-y-1/2",
+              riFg.bodyMuted
+            )}
+            aria-hidden
+            strokeWidth={2}
+          />
           <input
             type="search"
             name="q"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search papers by title, author, or keyword…"
-            className="min-w-0 flex-1 border-0 bg-transparent font-sans text-base text-muted-foreground placeholder:text-muted-foreground/80 sm:text-lg focus:outline-none focus:ring-0"
+            placeholder="Search studies"
             autoComplete="off"
+            className={cn(
+              "h-[56px] w-full rounded-full border-0 bg-[#f9f9fb]/70 pl-14 pr-5 font-sans shadow-none sm:h-[63px]",
+              riFg.bodyMuted,
+              riIndexMetaCopy,
+              "leading-normal placeholder:text-[#62636c]/80",
+              "focus:outline-none focus:ring-2 focus:ring-[#004247]/15"
+            )}
           />
         </div>
       </label>
@@ -788,7 +851,7 @@ export const ResearchIndexSection = ({
   /** Years/conference options — defaults to `papers`. Pass full catalogue so filters stay useful on the preview slice. */
   filterSourcePapers?: ResearchPaper[]
 }) => {
-  const [tagFilter, setTagFilter] = useState<"all" | string>("all")
+  const [tagFilter, setTagFilter] = useState<"all" | ResearchGenreTag>("all")
   const [yearFilter, setYearFilter] = useState<string>(INDEX_FILTER_ANY)
   const [venueFilter, setVenueFilter] = useState<string>(INDEX_FILTER_ANY)
 
@@ -808,7 +871,7 @@ export const ResearchIndexSection = ({
         return false
       }
       if (yearFilter !== INDEX_FILTER_ANY) {
-        if (parseResearchYear(p.publishDate) !== yearFilter) return false
+        if (riParseYear(p.publishDate) !== yearFilter) return false
       }
       if (venueFilter !== INDEX_FILTER_ANY) {
         const v = p.venue?.trim()
@@ -818,28 +881,30 @@ export const ResearchIndexSection = ({
     })
   }, [papers, tagFilter, yearFilter, venueFilter])
 
+  const hasExtraFilters =
+    tagFilter !== "all" ||
+    yearFilter !== INDEX_FILTER_ANY ||
+    venueFilter !== INDEX_FILTER_ANY
+
   return (
     <section
       id={forResearchersSectionIds.index}
-      className={cn("space-y-6 sm:space-y-8 lg:space-y-10", INDEX_SECTION)}
+      className="w-full min-w-0 space-y-6 font-sans text-[#62636c] sm:space-y-8 lg:space-y-10"
     >
       <SectionHeader
         title="Research Index"
-        description="Recent peer-reviewed work from the PLUS team. Cards use color-coded tags—filter by topic, year, or conference, or open the full Research & Publications catalogue."
+        titleClassName={riFg.title}
+        description="Explore the full archive of PLUS research"
+        descriptionClassName={cn(riIndexMetaCopy, riFg.bodyMuted)}
         decor={forResearchersAssets.index.decor}
       />
       <ResearchIndexSearchForm />
 
       {papers.length === 0 ? (
-        <div
-          className={cn(
-            "rounded-[30px] border-2 bg-white px-6 py-10 text-center",
-            FIELD_BORDER
-          )}
-        >
-          <p className="text-pretty text-muted-foreground">
-            Publications could not be loaded right now. Browse the archive directly on the Research
-            &amp; Publications page.
+        <div className="rounded-[30px] bg-white px-6 py-10 text-center">
+          <p className={cn("text-pretty", riIndexMetaCopy, riFg.bodyMuted)}>
+            Publications could not be loaded right now. Browse the archive on the Research Index
+            page.
           </p>
           <Link href="/research" className={cn(forResearchersOutlineCtaClassName, "mt-6")}>
             Open publications
@@ -847,214 +912,165 @@ export const ResearchIndexSection = ({
         </div>
       ) : (
         <div
-          className={cn(
-            "overflow-hidden rounded-[30px] border-2 bg-white",
-            FIELD_BORDER
-          )}
+          className={cn("overflow-hidden rounded-[30px] shadow-none", riFg.shellBg)}
         >
-          <div>
-            <div className="border-b border-border/80 bg-muted/25 px-4 py-3 sm:px-5">
-              <p className="text-pretty text-sm text-muted-foreground">
-                Card preview: {filteredPapers.length} of {papers.length} shown · {totalCount} total in
-                catalogue (newest first)
-                {tagFilter !== "all" || yearFilter !== INDEX_FILTER_ANY || venueFilter !== INDEX_FILTER_ANY ? (
-                  <span>
-                    {" "}
-                    · Active filters
-                    {tagFilter !== "all" ? ` · ${tagFilter}` : null}
-                    {yearFilter !== INDEX_FILTER_ANY ? ` · ${yearFilter}` : null}
-                    {venueFilter !== INDEX_FILTER_ANY ? (
-                      <span className="break-words"> · {venueFilter}</span>
-                    ) : null}
-                  </span>
-                ) : null}
-              </p>
-            </div>
+          <div
+            className={cn(
+              "flex min-h-[57px] items-center px-5 sm:px-5",
+              riFg.shellRow
+            )}
+          >
+            <p className={cn("font-sans", riIndexMetaCopy, riFg.bodyMuted)}>
+              Showing {filteredPapers.length} of {papers.length} in this preview · {totalCount} total
+              in catalogue (newest first)
+              {hasExtraFilters ? (
+                <span>
+                  {" "}
+                  · Active filters
+                  {tagFilter !== "all" ? ` · ${tagFilter}` : null}
+                  {yearFilter !== INDEX_FILTER_ANY ? ` · ${yearFilter}` : null}
+                  {venueFilter !== INDEX_FILTER_ANY ? (
+                    <span className="break-words"> · {venueFilter}</span>
+                  ) : null}
+                </span>
+              ) : null}
+            </p>
+          </div>
 
-            <div
-              className="flex flex-col gap-2 border-b border-border/80 bg-muted/15 px-4 py-3 sm:px-5"
-              role="group"
-              aria-label="Filter publications by tag"
-            >
-              <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                Tags
-              </span>
-              <div className="flex flex-wrap gap-2">
-                <Button
+          <div
+            className={cn("px-5 py-3 sm:px-5", riFg.shellRow)}
+            role="group"
+            aria-label="Filter publications by tag"
+          >
+            <p className={riFilterLabelCn}>Tags</p>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => setTagFilter("all")}
+                className={cn(
+                  riFilterTagButtonCn,
+                  tagFilter === "all"
+                    ? riFg.allActive
+                    : "bg-[#f0f0f2] text-[#62636c] hover:bg-[#e8e8eb]"
+                )}
+              >
+                All
+              </button>
+              {RESEARCH_GENRE_TAGS.map((tag) => (
+                <button
+                  key={tag}
                   type="button"
-                  size="sm"
-                  variant="outline"
+                  onClick={() =>
+                    setTagFilter((prev) => (prev === tag ? "all" : tag))
+                  }
                   className={cn(
-                    "border-2 font-sans",
-                    tagFilter === "all" ? INDEX_TAG_ALL_SELECTED : INDEX_TAG_ALL_IDLE
+                    riFilterTagButtonCn,
+                    riGenreFilterPillClass(tag, tagFilter === tag)
                   )}
-                  aria-pressed={tagFilter === "all"}
-                  onClick={() => setTagFilter("all")}
                 >
-                  All
-                </Button>
-                {RESEARCH_GENRE_TAGS.map((tag) => (
-                  <Button
-                    key={tag}
-                    type="button"
-                    size="sm"
-                    variant="outline"
-                    className={cn(
-                      "border-2 font-sans",
-                      researchGenreFilterChipClassName(tag, tagFilter === tag)
-                    )}
-                    aria-pressed={tagFilter === tag}
-                    onClick={() => setTagFilter(tag)}
-                  >
-                    {tag}
-                  </Button>
-                ))}
-              </div>
+                  {tag}
+                </button>
+              ))}
             </div>
+          </div>
 
-            <div
-              className="flex flex-col gap-4 border-b border-border/80 bg-muted/15 px-4 py-3 sm:flex-row sm:flex-wrap sm:items-end sm:px-5"
-              role="group"
-              aria-label="Filter publications by year and conference"
-            >
-              <div className="flex min-w-0 flex-1 flex-col gap-1.5 sm:min-w-[11rem] sm:max-w-[14rem]">
-                <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  Year
-                </span>
-                <Select
-                  value={yearFilter}
-                  onValueChange={(v) => setYearFilter(v ?? INDEX_FILTER_ANY)}
+          <div
+            className={cn(
+              "flex flex-col gap-4 px-5 py-3 sm:flex-row sm:items-end sm:gap-2 sm:px-5",
+              riFg.shellRow
+            )}
+            role="group"
+            aria-label="Filter publications by year and conference"
+          >
+            <div className="flex w-full min-w-0 flex-col gap-2 sm:w-[173px] sm:shrink-0">
+              <span className={riFilterFieldLabelCn}>Year</span>
+              <Select
+                value={yearFilter}
+                onValueChange={(v) => setYearFilter(v ?? INDEX_FILTER_ANY)}
+              >
+                <SelectTrigger size="sm" className={riSelectTriggerCn}>
+                  <SelectValue placeholder="all" />
+                </SelectTrigger>
+                <SelectContent
+                  align="start"
+                  alignItemWithTrigger={false}
+                  className={INDEX_SELECT_CONTENT_CLASS}
                 >
-                  <SelectTrigger
-                    size="sm"
-                    className={cn(
-                      "h-10 w-full border-2 bg-white font-sans text-muted-foreground",
-                      FIELD_BORDER
-                    )}
-                  >
-                    <SelectValue placeholder="Year" />
-                  </SelectTrigger>
-                  <SelectContent
-                    align="start"
-                    alignItemWithTrigger={false}
-                    className={INDEX_SELECT_CONTENT_CLASS}
-                  >
-                    <SelectItem value={INDEX_FILTER_ANY}>Any year</SelectItem>
-                    {yearOptions.map((y) => (
-                      <SelectItem key={y} value={y}>
-                        {y}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="flex min-w-0 flex-[2] flex-col gap-1.5 sm:min-w-[min(100%,24rem)]">
-                <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  Conference
-                </span>
-                <Select
-                  value={venueFilter}
-                  onValueChange={(v) => setVenueFilter(v ?? INDEX_FILTER_ANY)}
-                >
-                  <SelectTrigger
-                    size="sm"
-                    className={cn(
-                      "h-10 w-full border-2 bg-white font-sans text-muted-foreground",
-                      FIELD_BORDER
-                    )}
-                  >
-                    <SelectValue placeholder="Conference" />
-                  </SelectTrigger>
-                  <SelectContent
-                    align="start"
-                    alignItemWithTrigger={false}
-                    className={cn("max-h-72", INDEX_SELECT_CONTENT_CLASS)}
-                  >
-                    <SelectItem value={INDEX_FILTER_ANY}>Any conference</SelectItem>
-                    {venueOptions.map((v) => (
-                      <SelectItem
-                        key={v}
-                        value={v}
-                        className="items-start whitespace-normal py-2 text-pretty"
-                      >
-                        {v}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+                  <SelectItem value={INDEX_FILTER_ANY} className={riSelectItemCn}>
+                    all
+                  </SelectItem>
+                  {yearOptions.map((y) => (
+                    <SelectItem key={y} value={y} className={riSelectItemCn}>
+                      {y}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
+            <div className="flex min-w-0 flex-1 flex-col gap-2">
+              <span className={riFilterFieldLabelCn}>Conference</span>
+              <Select
+                value={venueFilter}
+                onValueChange={(v) => setVenueFilter(v ?? INDEX_FILTER_ANY)}
+              >
+                <SelectTrigger
+                  size="sm"
+                  className={cn(riSelectTriggerCn, "sm:min-w-0")}
+                >
+                  <SelectValue placeholder="all" />
+                </SelectTrigger>
+                <SelectContent
+                  align="start"
+                  alignItemWithTrigger={false}
+                  className={cn("max-h-72", INDEX_SELECT_CONTENT_CLASS)}
+                >
+                  <SelectItem value={INDEX_FILTER_ANY} className={riSelectItemCn}>
+                    all
+                  </SelectItem>
+                  {venueOptions.map((v) => (
+                    <SelectItem
+                      key={v}
+                      value={v}
+                      className={cn(
+                        riSelectItemCn,
+                        "items-start whitespace-normal text-pretty"
+                      )}
+                    >
+                      {v}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
 
-            <div className={cn("p-4 sm:p-5", INDEX_PREVIEW_SCROLL)} tabIndex={0}>
+          <div className={cn("px-5 sm:px-5", INDEX_PREVIEW_SCROLL)} tabIndex={0}>
+            <div className="flex w-full flex-col gap-3 py-5">
               {filteredPapers.length === 0 ? (
-                <p className="text-pretty px-1 py-6 text-center text-sm text-muted-foreground">
+                <p className={cn("text-pretty py-6 text-center", riIndexMetaCopy, riFg.bodyMuted)}>
                   No papers in this preview match your filters. Try other tags, year, or conference—or
                   open the full catalogue to search the archive.
                 </p>
               ) : (
-                <ul className="flex flex-col gap-3 pr-1">
-                  {filteredPapers.map((paper) => {
-                    const year = parseResearchYear(paper.publishDate)
-                    const authorsLine = formatAuthorsShort(paper.authors)
-                    return (
-                      <li
-                        key={paper.id}
-                        className={cn(
-                          "rounded-[24px] border border-border/80 bg-background/80 px-4 py-3 transition-colors sm:px-5 sm:py-3.5",
-                          "hover:bg-muted/40"
-                        )}
-                      >
-                        <div className="min-w-0 space-y-1.5">
-                          <h3 className={cn("text-pretty font-semibold leading-snug", INDEX_TITLE)}>
-                            {paper.paperLink ? (
-                              <a
-                                href={paper.paperLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={cn("inline-flex items-start gap-1.5", INDEX_TITLE_LINK)}
-                              >
-                                {paper.title}
-                                <ExternalLink
-                                  className="mt-0.5 size-4 shrink-0 text-muted-foreground"
-                                  aria-hidden
-                                />
-                              </a>
-                            ) : (
-                              paper.title
-                            )}
-                          </h3>
-                          {(paper.topics ?? []).length > 0 ? (
-                            <div className="flex flex-wrap gap-1.5" aria-label="Genres">
-                              {sortResearchGenresForDisplay(paper.topics ?? []).map((tag) => (
-                                <Badge
-                                  key={tag}
-                                  variant="outline"
-                                  className={cn(
-                                    "border-2 font-sans text-xs font-medium",
-                                    researchGenreBadgeClassName(tag)
-                                  )}
-                                >
-                                  {tag}
-                                </Badge>
-                              ))}
-                            </div>
-                          ) : null}
-                          <p className="text-pretty text-sm leading-relaxed text-muted-foreground">
-                            {[year, paper.venue, authorsLine].filter(Boolean).join(" · ")}
-                          </p>
-                        </div>
-                      </li>
-                    )
-                  })}
+                <ul className="flex w-full min-w-0 flex-col gap-3">
+                  {filteredPapers.map((paper) => (
+                    <li key={paper.id} className="w-full min-w-0">
+                      <ResearchIndexPublicationCard paper={paper} />
+                    </li>
+                  ))}
                 </ul>
               )}
             </div>
           </div>
 
-          <div className="flex justify-center border-t border-border/80 bg-muted/10 px-4 py-4">
-            <Link href="/research" className={forResearchersOutlineCtaClassName}>
-              View all publications
-              <ArrowRight className="ml-2 size-4 shrink-0 text-[#004247]" aria-hidden />
+          <div className="flex justify-end px-5 py-4 sm:px-5">
+            <Link href="/research" className={riSeeAllPublicationsLinkMetaClass}>
+              See all publications
+              <ArrowRight
+                className="size-[26px] shrink-0"
+                strokeWidth={2}
+                aria-hidden
+              />
             </Link>
           </div>
         </div>
@@ -1063,12 +1079,73 @@ export const ResearchIndexSection = ({
   )
 }
 
-/** Figma `1730:2037` — card footer + link styling. */
-const RESEARCHER_CARD_FOOTER = "bg-[#e0f5fe]"
-const RESEARCHER_CARD_NAME = "text-2xl font-bold text-[#004247]"
-const RESEARCHER_CARD_BODY_TEXT = "text-base text-[#004247]"
+/** Figma `1730:2027` — researcher list row + accordion (header uses `sectionHeaderH2` / `sectionHeaderLead`). */
+/** Single-line names: width follows content on `sm+`; narrow screens may truncate with ellipsis. */
+const RESEARCHERS_ROW_NAME =
+  "text-xl font-bold leading-normal text-[#004247] sm:text-2xl sm:leading-normal"
+const RESEARCHERS_ROW_META = "text-pretty text-base font-normal leading-normal text-[#004247]"
 const RESEARCHER_CARD_INLINE_LINK =
   "text-[#0080b4] underline decoration-[#0080b4] underline-offset-2 hover:text-[#006a94]"
+/** Expanded bio — grey body, matches Research Index muted copy. */
+const RESEARCHERS_BIO_COPY = cn("text-pretty text-base leading-relaxed", riFg.bodyMuted)
+
+function ResearcherListRow({ member }: { member: TeamMember }) {
+  const links = researcherCardLinks(member)
+  const primaryRole = member.title1?.trim()
+  const secondaryLine = member.title2?.trim()
+  return (
+    <div className="flex min-h-0 w-full flex-col gap-3 py-1 sm:min-h-[68px] sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-5 sm:gap-y-2 sm:py-0">
+      <div
+        className={cn(
+          "min-w-0 max-w-full shrink-0 truncate sm:w-fit sm:max-w-none sm:overflow-visible sm:whitespace-nowrap",
+          RESEARCHERS_ROW_NAME
+        )}
+      >
+        {member.name}
+      </div>
+      <div
+        className={cn(
+          "min-w-0 shrink-0 text-base sm:whitespace-nowrap",
+          "flex flex-wrap items-center gap-x-1"
+        )}
+      >
+        {links.map((item, i) => (
+          <span key={`${item.label}-${item.href}`} className="inline-flex items-center gap-x-1">
+            {i > 0 ? (
+              <span className="text-[#004247]" aria-hidden>
+                |
+              </span>
+            ) : null}
+            {item.external ? (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={RESEARCHER_CARD_INLINE_LINK}
+              >
+                {item.label}
+              </a>
+            ) : (
+              <Link href={item.href} className={RESEARCHER_CARD_INLINE_LINK}>
+                {item.label}
+              </Link>
+            )}
+          </span>
+        ))}
+      </div>
+      {primaryRole ? (
+        <div className={cn("min-w-0 max-w-full sm:max-w-[min(100%,24rem)]", RESEARCHERS_ROW_META)}>
+          {primaryRole}
+        </div>
+      ) : null}
+      {secondaryLine ? (
+        <div className={cn("min-w-0 max-w-full sm:max-w-[min(100%,22rem)]", RESEARCHERS_ROW_META)}>
+          {secondaryLine}
+        </div>
+      ) : null}
+    </div>
+  )
+}
 
 function researcherCardLinks(
   member: TeamMember
@@ -1093,113 +1170,87 @@ function researcherCardLinks(
   return rows
 }
 
-/** One image fills the card header — proxy URL → Notion URL → Figma placeholder. */
-function ResearcherCardPhoto({
-  memberId,
-  name,
-  notionPictureUrl,
-  placeholderSrc,
-}: {
-  memberId: string
-  name: string
-  notionPictureUrl: string | null
-  placeholderSrc: string
-}) {
-  const [src, setSrc] = useState(`/api/team-photo/${memberId}`)
-
-  return (
-    <img
-      src={src}
-      alt={name}
-      className="h-full w-full object-cover object-[center_20%]"
-      loading="lazy"
-      decoding="async"
-      referrerPolicy="no-referrer"
-      onError={() => {
-        if (src.startsWith("/api/") && notionPictureUrl) {
-          setSrc(notionPictureUrl)
-          return
-        }
-        if (src !== placeholderSrc) {
-          setSrc(placeholderSrc)
-        }
-      }}
-    />
-  )
-}
-
 export const ResearchersGridSection = ({ members }: { members: TeamMember[] }) => {
-  const fallbackPhoto = forResearchersAssets.researchers.fallbackPhoto
+  const equalDecor = forResearchersAssets.heroDecor.equal
 
   return (
-    <section id={forResearchersSectionIds.researchers} className="space-y-6 sm:space-y-8 lg:space-y-10">
-      <SectionHeader
-        title="Our Researchers"
-        description="Meet our team who are driving evidence-based breakthroughs in learning science, HCI, and artificial intelligence."
-        decor={forResearchersAssets.researchers.decor}
-      />
+    <section
+      id={forResearchersSectionIds.researchers}
+      className="w-full min-w-0 space-y-6 sm:space-y-8 lg:space-y-10"
+    >
+      {/* Same title / lead scale as `SectionHeader`; equal mascot in Figma frame. */}
+      <div className="flex w-full flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
+        <div className="min-w-0 flex-1 basis-0 space-y-3 sm:space-y-4 md:space-y-5">
+          <h2 className={forResearchersSectionH2}>Our Researchers</h2>
+          <p className={sectionHeaderLead}>
+            Meet our team who are driving evidence-based breakthroughs in learning science, HCI, and
+            artificial intelligence.
+          </p>
+        </div>
+        <div
+          className="relative mx-auto flex h-[140px] w-[180px] shrink-0 overflow-hidden bg-white sm:mx-0 sm:h-[177px] sm:w-[229px]"
+          aria-hidden
+        >
+          <img
+            alt=""
+            src={equalDecor}
+            className="pointer-events-none absolute left-[21px] top-0 h-[140px] w-[160px] object-cover object-top sm:h-[163px] sm:w-[187px]"
+          />
+        </div>
+      </div>
 
       {members.length === 0 ? (
         <p className="text-pretty text-sm text-muted-foreground">
           Researcher profiles will appear here once loaded from our team directory.
         </p>
       ) : (
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="flex w-full min-w-0 flex-col gap-[30px]" role="list">
           {members.map((member) => {
-            const links = researcherCardLinks(member)
-            return (
-              <article
-                key={member.id}
-                className="flex flex-col overflow-hidden rounded-[30px] bg-white"
-              >
-                <div className="relative aspect-[344/322] w-full overflow-hidden rounded-t-[30px] bg-muted">
-                  <ResearcherCardPhoto
-                    memberId={member.id}
-                    name={member.name}
-                    notionPictureUrl={member.picture}
-                    placeholderSrc={fallbackPhoto}
-                  />
-                </div>
+            const bio = member.bio?.trim()
+            if (!bio) {
+              return (
                 <div
-                  className={cn(
-                    "flex flex-1 flex-col gap-2.5 px-5 py-6 sm:px-6",
-                    RESEARCHER_CARD_FOOTER
-                  )}
+                  key={member.id}
+                  className="w-full min-w-0 bg-white"
+                  role="listitem"
                 >
-                  <h3 className={cn("text-pretty", RESEARCHER_CARD_NAME)}>{member.name}</h3>
-                  <p className={cn(RESEARCHER_CARD_BODY_TEXT, "flex flex-wrap items-center gap-x-1")}>
-                    {links.map((item, i) => (
-                      <span key={`${item.label}-${item.href}`} className="inline-flex items-center gap-x-1">
-                        {i > 0 ? (
-                          <span className="text-[#004247]" aria-hidden>
-                            |
-                          </span>
-                        ) : null}
-                        {item.external ? (
-                          <a
-                            href={item.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={RESEARCHER_CARD_INLINE_LINK}
-                          >
-                            {item.label}
-                          </a>
-                        ) : (
-                          <Link href={item.href} className={RESEARCHER_CARD_INLINE_LINK}>
-                            {item.label}
-                          </Link>
-                        )}
-                      </span>
-                    ))}
-                  </p>
-                  {member.title1 ? (
-                    <p className={cn("text-pretty", RESEARCHER_CARD_BODY_TEXT)}>{member.title1}</p>
-                  ) : null}
-                  {member.title2 ? (
-                    <p className={cn("text-pretty", RESEARCHER_CARD_BODY_TEXT)}>{member.title2}</p>
-                  ) : null}
+                  <ResearcherListRow member={member} />
                 </div>
-              </article>
+              )
+            }
+            return (
+              <div key={member.id} className="w-full min-w-0" role="listitem">
+                <Accordion
+                  aria-label={`Bio for ${member.name}`}
+                  className="w-full min-w-0"
+                >
+                <AccordionItem
+                  value={member.id}
+                  className="w-full min-w-0 border-0 bg-white shadow-none not-last:border-b-0 outline-none ring-0"
+                >
+                  {/* Figma `1730:2027` — chevron on the right of the row (not below). */}
+                  <div className="flex w-full min-w-0 items-start gap-3 sm:items-center sm:gap-5">
+                    <div className="min-w-0 flex-1">
+                      <ResearcherListRow member={member} />
+                    </div>
+                    <AccordionTrigger
+                      hideChevron
+                      className="mt-0.5 flex-none shrink-0 self-start rounded-none border-0 p-0 text-base font-normal shadow-none outline-none ring-0 ring-offset-0 hover:no-underline focus:outline-none focus-visible:border-transparent focus-visible:shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:after:border-transparent sm:mt-0 sm:self-center"
+                    >
+                      <span className="sr-only">Show bio for {member.name}</span>
+                      <ChevronDown
+                        strokeWidth={2}
+                        className="size-6 shrink-0 text-[#62636c] transition-transform duration-200 ease-out group-aria-expanded/accordion-trigger:rotate-180"
+                        aria-hidden
+                      />
+                    </AccordionTrigger>
+                  </div>
+                  <AccordionContent className="!px-0 !pb-6 !pt-4 text-base">
+                    <p className={RESEARCHERS_BIO_COPY}>{bio}</p>
+                  </AccordionContent>
+                </AccordionItem>
+                </Accordion>
+              </div>
             )
           })}
         </div>
@@ -1214,36 +1265,33 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
   return (
     <section
       id={forResearchersSectionIds.successStories}
-      className="space-y-10 sm:space-y-12 lg:space-y-14"
+      className="w-full min-w-0 space-y-10 sm:space-y-12 lg:space-y-14"
     >
-      <div className="mx-auto flex w-full max-w-[1124px] flex-col gap-10 sm:gap-12 lg:gap-14">
-        <div className="flex w-full flex-row items-start gap-4 sm:gap-6 md:gap-8 lg:gap-10">
-          <div className="min-w-0 flex-1 basis-0 space-y-3 text-left sm:space-y-4 md:space-y-5">
-            <h2 className="text-pretty text-2xl font-bold tracking-tight text-[#004247] sm:text-3xl md:text-4xl">
-              Research Success Story
-            </h2>
-            <p className="text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl">
-              Here&apos;s what researchers are saying about PLUS.
-            </p>
-          </div>
-          <img
-            alt=""
-            src={forResearchersAssets.successStories.decor}
-            className={successStoriesHeaderDecor}
-            aria-hidden
-          />
-        </div>
-
-        {stories.length === 0 ? (
-          <p className="text-pretty text-sm text-muted-foreground">
-            Success stories will appear here when available.{" "}
-            <Link href="/success-stories" className="font-medium text-[#027f89] underline-offset-4 hover:underline">
-              Browse all success stories
-            </Link>
-            .
+      <div className="flex w-full flex-row items-start gap-4 sm:gap-6 md:gap-8 lg:gap-10">
+        <div className="min-w-0 flex-1 basis-0 space-y-3 text-left sm:space-y-4 md:space-y-5">
+          <h2 className={forResearchersSectionH2}>Research Success Story</h2>
+          <p className="text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl">
+            Here&apos;s what researchers are saying about PLUS.
           </p>
-        ) : (
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-8 lg:gap-9">
+        </div>
+        <img
+          alt=""
+          src={forResearchersAssets.successStories.decor}
+          className={successStoriesHeaderDecor}
+          aria-hidden
+        />
+      </div>
+
+      {stories.length === 0 ? (
+        <p className="text-pretty text-sm text-muted-foreground">
+          Success stories will appear here when available.{" "}
+          <Link href="/success-stories" className="font-medium text-[#027f89] underline-offset-4 hover:underline">
+            Browse all success stories
+          </Link>
+          .
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-8 lg:gap-9">
             {stories.map((story) => {
               const readUrl = notionSuccessStoryPublicReadUrl(story)
               const quoteParts =
@@ -1324,24 +1372,23 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
                 </article>
               )
             })}
-          </div>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   )
 }
 
-/** Match `SchoolsRegisterCTA` shell + header typography. */
+/** Match `SchoolsRegisterCTA` shell + header typography; full width within page `max-w-7xl` shell. */
 const COLLABORATE_CTA_CARD =
-  "mx-auto w-full max-w-[1022px] overflow-hidden rounded-[30px] bg-white p-8 sm:p-10 md:p-[50px]"
+  "mx-auto w-full min-w-0 overflow-hidden rounded-[30px] bg-white p-8 sm:p-10 md:p-[50px]"
 
 export const ResearchCollaborateCtaSection = () => {
   return (
-    <section id={forResearchersSectionIds.collaborate} className="scroll-mt-24">
+    <section id={forResearchersSectionIds.collaborate} className="scroll-mt-24 w-full min-w-0">
       <div className={COLLABORATE_CTA_CARD}>
         <div className="flex flex-col items-center gap-12 md:gap-14 lg:gap-[60px]">
           <div className="mx-auto w-full max-w-[49rem] space-y-3 text-center sm:space-y-4 md:space-y-5">
-            <h2 className={sectionHeaderH2}>Conduct Research with Us</h2>
+            <h2 className={forResearchersSectionH2}>Conduct Research with Us</h2>
             <p className={sectionHeaderLead}>
               Want to get involved? Reach out if you are interested in conducting research with us.
             </p>

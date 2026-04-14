@@ -22,6 +22,12 @@ export const marketingTypography = {
     "text-pretty text-xl font-bold leading-snug tracking-tight sm:text-2xl",
   /** Lead paragraph — section intros (Storybook: text-lg text-muted-foreground) */
   lead: "max-w-prose text-lg text-muted-foreground",
+  /**
+   * Section description under H2 — For Researchers / Schools (`sectionHeaderLead` scale).
+   * Use with `text-[#62636c]` or `riFg.bodyMuted` where the index uses fixed grey instead of `muted-foreground`.
+   */
+  sectionLead:
+    "text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg",
   /** Standard body (Storybook: text-base leading-relaxed) */
   body: "text-base leading-relaxed text-foreground",
 } as const

@@ -3,16 +3,14 @@ export const forResearchersAssets = {
    * Figma `1730:2510` hero collage + characters (Homepage IA `1730:1973`).
    * MCP URLs expire ~7d — export under `/public/figma/for-researchers/` when stable.
    */
+  /** Figma `1730:2510` — 2×2 grid + characters (exported PNG under `/public/figma/for-researchers/`). */
   heroCollage: {
-    learningIdeasConference:
-      "https://www.figma.com/api/mcp/asset/936758d4-1267-401c-be9f-442781d408f1",
-    sigchi: "https://www.figma.com/api/mcp/asset/b8307ba1-2a0c-482b-9317-875adaff16f6",
-    solar: "https://www.figma.com/api/mcp/asset/24ea8360-9233-4780-82d4-df59f54c1a36",
-    aied: "https://www.figma.com/api/mcp/asset/990917d9-125f-4fbd-a7aa-45f362c6aa06",
-    tooltipIconA: "https://www.figma.com/api/mcp/asset/849bd98b-4988-4219-a14c-1687a665c5a1",
-    tooltipIconB: "https://www.figma.com/api/mcp/asset/32c20366-0d0c-4590-b554-1bf6889cd189",
-    characterPink: "https://www.figma.com/api/mcp/asset/9b45eb3f-3634-473e-8e71-672ede43c983",
-    characterBlue: "https://www.figma.com/api/mcp/asset/e23688e9-d245-43c2-8474-4603fedbf51a",
+    learningIdeasConference: "/figma/for-researchers/hero-learning-ideas.png",
+    sigchi: "/figma/for-researchers/hero-sigchi.png",
+    solar: "/figma/for-researchers/hero-solar.png",
+    aied: "/figma/for-researchers/hero-aied.png",
+    characterPink: "/figma/for-researchers/hero-character-pink.png",
+    characterBlue: "/figma/for-researchers/hero-character-blue.png",
   },
   heroDecor: {
     division: "/figma/for-researchers/hero-division.png",
@@ -25,18 +23,31 @@ export const forResearchersAssets = {
       "/figma/for-researchers/partner-1.png",
       "/figma/for-researchers/partner-2.png",
       "/figma/for-researchers/partner-3.png",
-      "/figma/for-researchers/partner-4.png",
     ] as const,
   },
   highlights: {
     decor: "/figma/for-researchers/highlights-decor.png",
+    /**
+     * Figma `1815:2160` — 24×24 publication row icons (exported SVG, stroke matches each theme).
+     * Order is left card, right card within each accordion panel.
+     */
+    studyPublicationIcons: {
+      "student-learning": [
+        "/figma/for-researchers/highlight-study-student-0.svg",
+        "/figma/for-researchers/highlight-study-student-1.svg",
+      ],
+      "gen-ai": [
+        "/figma/for-researchers/highlight-study-gen-ai-0.svg",
+        "/figma/for-researchers/highlight-study-gen-ai-1.svg",
+      ],
+      "tutor-training": [
+        "/figma/for-researchers/highlight-study-tutor-0.svg",
+        "/figma/for-researchers/highlight-study-tutor-1.svg",
+      ],
+    } as const,
   },
   index: {
     decor: "/figma/for-researchers/index-decor.png",
-  },
-  researchers: {
-    decor: "/figma/for-researchers/researchers-decor.png",
-    fallbackPhoto: "/figma/for-researchers/researcher-card-photo.png",
   },
   successStories: {
     decor: "/figma/for-researchers/success-decor.png",

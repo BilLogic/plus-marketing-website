@@ -68,6 +68,7 @@ export type ResearchPaper = {
   publishDate: string
   venue: string | null
   abstract: string | null
+  /** Notion **Website Summary** — use on marketing surfaces instead of `abstract`. */
   shortDescription: string | null
   /** Scannable tags from Notion multi-select (Topics / Tags / Theme / Category)—use instead of long blurbs on marketing lists. */
   topics: string[]

@@ -19,15 +19,30 @@ export const forSchoolsAssets = {
     equal: "/figma/for-schools/equal.png",
   } as const,
   /**
-   * Benefits accordion panel images — exported from Figma PLUS website IA node 1104-1220
-   * (MCP assets). Rows 1–2 share the same frame asset in the file; row 3 uses a cropped
-   * “Continue Lessons” UI shot; row 4 is the Human + AI photography.
+   * Benefits accordion panel images — Figma node 1104-1220.
+   * Indices: 0=Free for All, 1=Multilingual Support, 2=unused, 3=Human+AI.
    */
   benefitsPanelArt: [
     "/figma/for-schools/benefits-panel-free.png",
-    "/figma/for-schools/benefits-panel-free.png",
+    "/figma/for-schools/benefits-panel-multilingual.png",
     "/figma/for-schools/benefits-panel-goal-setting.png",
     "/figma/for-schools/benefits-panel-human-ai.png",
+  ] as const,
+  /**
+   * Goal Setting panel — 3 layered dashboard screenshots (back → front).
+   * Figma: imgScreenshot20260413At103713Pm3 (top/back), Pm2 (middle), Pm1 (front/bottom).
+   */
+  benefitsPanelGoalScreenshots: [
+    "/figma/for-schools/benefits-panel-goal-3.png",
+    "/figma/for-schools/benefits-panel-goal-2.png",
+    "/figma/for-schools/benefits-panel-goal-1.png",
+  ] as const,
+  /** Day-to-Day Experience phase icons — Figma `1877:2175` (SVG circles). */
+  experienceIcons: [
+    "/figma/for-schools/experience-icon-1.svg",
+    "/figma/for-schools/experience-icon-2.svg",
+    "/figma/for-schools/experience-icon-3.svg",
+    "/figma/for-schools/experience-icon-4.svg",
   ] as const,
   icons: {
     benefits: [
@@ -79,6 +94,7 @@ export const forSchoolsAssets = {
    */
   successStories: {
     headerDecor: "/figma/for-schools/success-stories-header-decor.png",
+    cardTitleIcon: "/figma/for-researchers/icon-success-story-title.svg",
     avatars: [
       "/figma/for-schools/success-story-avatar-1.png",
       "/figma/for-schools/success-story-avatar-2.png",
@@ -86,4 +102,3 @@ export const forSchoolsAssets = {
     ] as const,
   },
 } as const
-

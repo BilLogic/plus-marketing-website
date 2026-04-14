@@ -37,6 +37,16 @@ const parseSuccessStory = (page: any): Omit<SuccessStory, "content"> => {
 const byPublishedDesc = (a: SuccessStory, b: SuccessStory) =>
   b.publishedDate.localeCompare(a.publishedDate)
 
+/** Stories for `/for-schools` — category Schools, up to 3, sorted newest first. */
+export function selectSuccessStoriesForSchoolsPage(
+  stories: SuccessStory[]
+): SuccessStory[] {
+  return stories
+    .filter((s) => s.category === "Schools")
+    .sort(byPublishedDesc)
+    .slice(0, 3)
+}
+
 /**
  * Stories for `/for-researchers` — prefers Category = Researchers; falls back to Schools entries with a quote
  * so research-relevant pilots (e.g. Warm Springs) show until Researchers-tagged rows exist in Notion.
