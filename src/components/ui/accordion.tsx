@@ -19,7 +19,7 @@ function AccordionItem({ className, ...props }: AccordionPrimitive.Item.Props) {
   return (
     <AccordionPrimitive.Item
       data-slot="accordion-item"
-      className={cn("not-last:border-b", className)}
+      className={cn(className)}
       {...props}
     />
   )
@@ -34,12 +34,18 @@ function AccordionTrigger({
   className,
   children,
   hideChevron = false,
+  onPointerDown,
   ...props
 }: AccordionTriggerProps) {
   return (
     <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
+        onPointerDown={(e) => {
+          e.currentTarget.focus({ preventScroll: true })
+          onPointerDown?.(e)
+        }}
+
         className={cn(
           "group/accordion-trigger relative flex flex-1 items-start rounded-lg border border-transparent py-2.5 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:after:border-ring aria-disabled:pointer-events-none aria-disabled:opacity-50",
           hideChevron
@@ -74,13 +80,14 @@ function AccordionContent({
 }: AccordionPrimitive.Panel.Props) {
   return (
     <AccordionPrimitive.Panel
+      keepMounted
       data-slot="accordion-content"
-      className="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up"
+      className="text-sm"
       {...props}
     >
       <div
         className={cn(
-          "h-(--accordion-panel-height) pt-0 pb-2.5 data-ending-style:h-0 data-starting-style:h-0 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
+          "pt-0 pb-2.5 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
           className
         )}
       >

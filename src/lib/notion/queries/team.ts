@@ -58,9 +58,7 @@ export const fetchTeamMembers = async (): Promise<TeamMember[]> => {
       const affB = AFFILIATION_ORDER[b.affiliation] ?? 99
       if (affA !== affB) return affA - affB
 
-      const dateA = a.joinedDate ?? ""
-      const dateB = b.joinedDate ?? ""
-      return dateA.localeCompare(dateB)
+      return a.name.localeCompare(b.name)
     })
 
     await writeCache(CACHE_KEY, members)

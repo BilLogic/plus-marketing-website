@@ -98,6 +98,7 @@
 
   --color-white: #FFFFFF;
   --color-black: #000000;
+
 }
 
 @theme inline {
@@ -300,6 +301,18 @@
   }
 }
 
+/*
+ * Base UI Accordion.Panel injects --accordion-panel-height and coordinates open/close.
+ * Do not animate grid-template-rows here — it conflicts with that height transition and glitches.
+ */
+[data-slot="accordion-content"] {
+  height: var(--accordion-panel-height);
+  overflow: hidden;
+   /* Symmetric easing: ease-out alone makes closes start too fast and feel abrupt */
+  transition: height 0.42s ease-in-out;
+}
+
+
 /* For Schools — partner logos: constant-speed horizontal loop (see SchoolsCommunitySection). */
 @keyframes partner-logo-marquee {
   from {
@@ -318,5 +331,8 @@
   .partner-marquee-track {
     animation: none !important;
     transform: none !important;
+  }
+  [data-slot="accordion-content"] {
+    transition: none;
   }
 }

@@ -101,6 +101,12 @@ export const fetchSuccessStories = async (): Promise<SuccessStory[]> => {
   }
 }
 
+/** Returns only success stories tagged as Tutors — used on /for-tutors. */
+export async function fetchTutorTestimonials(): Promise<SuccessStory[]> {
+  const all = await fetchSuccessStories()
+  return all.filter((s) => s.category === "Tutors")
+}
+
 export const fetchSuccessStoryById = async (
   id: string
 ): Promise<SuccessStory | null> => {

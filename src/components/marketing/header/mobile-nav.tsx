@@ -59,14 +59,26 @@ export const MobileNav = ({ className }: MobileNavProps) => {
                 <li key={item.label}>
                   {item.children ? (
                     <Collapsible>
-                      <CollapsibleTrigger
-                        className={cn(
-                          "flex w-full items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+                      <div className="flex items-center">
+                        {item.href ? (
+                          <Link
+                            href={item.href}
+                            className="flex-1 rounded-md px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+                          >
+                            {item.label}
+                          </Link>
+                        ) : (
+                          <span className="flex-1 px-3 py-2 text-sm font-medium text-foreground">
+                            {item.label}
+                          </span>
                         )}
-                      >
-                        {item.label}
-                        <ChevronDown className="size-4 text-muted-foreground transition-transform duration-200 [[data-panel-open]>&]:rotate-180" />
-                      </CollapsibleTrigger>
+                        <CollapsibleTrigger
+                          className="flex items-center justify-center rounded-md px-2 py-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                          aria-label={`Toggle ${item.label} menu`}
+                        >
+                          <ChevronDown className="size-4 transition-transform duration-200 [[data-panel-open]>&]:rotate-180" />
+                        </CollapsibleTrigger>
+                      </div>
                       <CollapsibleContent>
                         <ul className="ml-3 flex flex-col gap-0.5 border-l border-border/50 pl-3 pt-1">
                           {item.children.map((section, sIdx) => (

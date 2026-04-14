@@ -34,6 +34,7 @@ export type NavItem = {
 export const NAV_CONFIG: NavItem[] = [
   {
     label: "About",
+    href: "/about",
     children: [
       {
         items: [
@@ -71,6 +72,7 @@ export const NAV_CONFIG: NavItem[] = [
   },
   {
     label: "Get Involved",
+    href: "/get-involved",
     children: [
       {
         items: [

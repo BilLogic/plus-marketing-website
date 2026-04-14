@@ -40,34 +40,41 @@ const ctaLinkLayout =
 const sectionDecorImgClass =
   "pointer-events-none hidden h-auto w-28 max-w-[140px] shrink-0 opacity-90 select-none md:block md:w-32 md:max-w-[165px] lg:w-36 lg:max-w-[180px]"
 
+/** Inner padding for cards — matches About `AboutLatestSection` (Latest at PLUS). */
+const cardPaddingLatest = "p-5 sm:p-6"
+
+/** Learn more row — matches About `AboutSuccessStoriesSection` Read story link (size, arrow, interaction). */
+const careersLearnMoreLinkClass =
+  "group ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-[#297E43] no-underline transition-opacity hover:opacity-90 dark:text-[#297E43]"
+
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
 export function GetInvolvedHeroSection() {
   return (
-    <section className="relative flex min-h-[calc(100svh-5.5rem)] flex-col items-center justify-center gap-8 overflow-x-visible py-12 text-center sm:gap-10 sm:py-16 md:py-20">
+    <section className="relative flex min-h-0 flex-col items-center justify-center gap-6 overflow-x-visible py-8 text-center sm:min-h-[calc(100svh-5.5rem)] sm:gap-8 sm:py-12 md:gap-10 md:py-16 lg:py-20">
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[0]}
-        className="-left-2 top-52 hidden sm:block md:left-0 md:top-56"
+        className="-left-1 top-36 max-sm:top-3 max-sm:left-1 sm:-left-2 sm:top-52 md:left-0 md:top-56"
       />
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[1]}
-        className="right-0 top-28 hidden sm:right-1 sm:top-36 sm:block md:right-4 md:top-32"
+        className="right-0 top-20 max-sm:top-3 max-sm:right-1 sm:right-1 sm:top-36 md:right-4 md:top-32"
       />
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[2]}
-        className="-right-1 top-80 hidden md:block md:-right-2 md:top-[25rem] md:translate-x-1 lg:-right-3 lg:top-[29rem] lg:translate-x-2"
+        className="-right-1 top-[12rem] max-sm:top-[17.5rem] max-sm:right-1 sm:top-[19rem] md:-right-2 md:top-[25rem] md:translate-x-1 lg:-right-3 lg:top-[29rem] lg:translate-x-2"
       />
 
-      <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-4 sm:gap-5">
-        <p className="text-2xl font-semibold text-teal-900 sm:text-3xl">
+      <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-3 sm:gap-4 md:gap-5">
+        <p className="text-xl font-semibold text-teal-900 max-sm:text-2xl sm:text-2xl md:text-3xl">
           Get Involved
         </p>
-        <h1 className="text-balance text-4xl font-semibold tracking-tight text-teal-950 sm:text-5xl">
+        <h1 className="text-balance text-3xl font-semibold tracking-tight text-teal-950 max-sm:text-4xl sm:text-4xl md:text-5xl">
           Join PLUS and Make a Lasting Difference in Education
         </h1>
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-4 sm:mt-8">
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-3 sm:mt-6 sm:gap-4 md:mt-8">
         <Link href="/get-involved#careers" className={cn(ctaLinkLayout, primaryCta)}>
           Careers at PLUS
         </Link>
@@ -153,8 +160,8 @@ export function GetInvolvedWhyWorkSection() {
     <section id="why-work" className="scroll-mt-24">
 
       {/* Sticky section header */}
-      <div ref={headerRef} className="pb-8">
-        <div className="flex flex-col items-center gap-6 sm:items-start md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
+      <div ref={headerRef} className="pb-6 sm:pb-8">
+        <div className="flex flex-col items-start gap-4 sm:gap-6 md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
           <div className="w-full space-y-3 md:min-w-0 md:flex-1">
             <h2 className={sectionH2}>Why Work at PLUS?</h2>
             <p className={sectionLead}>
@@ -170,10 +177,57 @@ export function GetInvolvedWhyWorkSection() {
         </div>
       </div>
 
-      {/* Two-column: left scrolls, right sticky just below header */}
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
+      {/* Phone: full list — light blue card per item */}
+      <div className="flex flex-col gap-4 sm:hidden">
+        {WHY_WORK_ITEMS.map((item) => {
+          const Icon = item.icon
+          return (
+            <article
+              key={item.id}
+              className="flex flex-col gap-4 rounded-2xl bg-sky-100 p-5 dark:bg-sky-950/35"
+            >
+              <div className="flex items-center gap-3">
+                <span
+                  className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#007EB8]"
+                  aria-hidden
+                >
+                  <Icon className="size-5 text-white" strokeWidth={2} />
+                </span>
+                <h3 className="text-pretty text-xl font-bold leading-snug tracking-tight text-[#007EB8]">
+                  {item.title}
+                </h3>
+              </div>
+              <p className="text-pretty text-lg leading-relaxed text-muted-foreground">
+                {item.description}
+              </p>
+              {item.cta ? (
+                <Link
+                  href="#"
+                  className={cn(
+                    ctaLinkLayout,
+                    primaryCta,
+                    "w-fit self-start no-underline",
+                  )}
+                >
+                  {item.cta}
+                </Link>
+              ) : null}
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl">
+                <img
+                  alt=""
+                  src={item.panelArt}
+                  className="size-full object-cover"
+                  decoding="async"
+                />
+              </div>
+            </article>
+          )
+        })}
+      </div>
 
-        {/* Left: all items stacked */}
+      {/* sm+: two-column — left scrolls, right sticky image */}
+      <div className="hidden grid-cols-1 gap-6 sm:grid sm:gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
+
         <div className="pb-[5vh]">
           {WHY_WORK_ITEMS.map((item, i) => {
             const isActive = i === activeIndex
@@ -182,7 +236,7 @@ export function GetInvolvedWhyWorkSection() {
               <div
                 key={item.id}
                 ref={(el) => { itemRefs.current[i] = el }}
-                className="flex flex-col gap-5 py-16 sm:py-20"
+                className="flex flex-col gap-4 py-10 sm:gap-5 sm:py-14 md:py-16 lg:py-20"
               >
                 <div className={cn(
                   "flex size-10 shrink-0 items-center justify-center rounded-full transition-colors duration-300",
@@ -213,7 +267,6 @@ export function GetInvolvedWhyWorkSection() {
           })}
         </div>
 
-        {/* Right: sticky image pinned just below the sticky header */}
         <div className="hidden md:block" style={{ minHeight: headerHeight + 16 + 400 }}>
           <div className="sticky" style={{ top: headerHeight + 16 }}>
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl">
@@ -255,8 +308,8 @@ const CAREER_LISTINGS = [
 
 export function GetInvolvedCareersSection() {
   return (
-    <section id="careers" className="scroll-mt-24 space-y-8 sm:space-y-10">
-      <div className="flex flex-col items-center gap-6 sm:items-start md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
+    <section id="careers" className="scroll-mt-24 space-y-6 sm:space-y-8 md:space-y-10">
+      <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
         <div className="w-full space-y-3 md:min-w-0 md:flex-1">
           <h2 className={sectionH2}>Explore Career Opportunities</h2>
           <p className={sectionLead}>
@@ -275,31 +328,68 @@ export function GetInvolvedCareersSection() {
         {CAREER_LISTINGS.map((job, i) => (
           <div
             key={i}
-            className="flex flex-col gap-3 rounded-3xl bg-[#E8F6EA] px-6 py-7 dark:bg-emerald-950/20 md:px-8 md:py-8"
+            className={cn(
+              "flex flex-col gap-3 rounded-3xl bg-[#E8F6EA] dark:bg-emerald-950/20",
+              cardPaddingLatest,
+            )}
           >
-            <div className="flex items-start gap-3">
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#297E43]">
-                <Microscope className="size-5 text-white" />
+            <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-2 sm:gap-x-4">
+              <div className="row-start-1 flex items-center">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#297E43]">
+                  <Microscope className="size-5 text-white" aria-hidden />
+                </div>
               </div>
-              <div className="flex flex-col gap-1">
-                <p className="text-xl font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-2xl">
-                  {job.title}
-                </p>
-                <p className="text-lg leading-relaxed text-muted-foreground">
-                  {job.location}
-                </p>
-              </div>
+              <p className="row-start-1 col-start-2 self-center text-xl font-bold leading-tight tracking-tight text-[#297E43] sm:text-2xl">
+                {job.title}
+              </p>
+              <p className="col-start-2 row-start-2 text-lg leading-relaxed text-muted-foreground">
+                {job.location}
+              </p>
             </div>
             <div className="flex justify-end">
               <Link
                 href={job.href}
-                className="flex items-center gap-1 text-sm font-medium text-[#297E43] hover:underline"
+                className={careersLearnMoreLinkClass}
+                aria-label={`Learn more: ${job.title}`}
               >
-                Learn more <ArrowRight className="size-3.5" />
+                <span>Learn more</span>
+                <ArrowRight
+                  className="size-6 transition-transform group-hover:translate-x-0.5"
+                  aria-hidden
+                />
               </Link>
             </div>
           </div>
         ))}
+      </div>
+
+      <div
+        className={cn("rounded-3xl bg-[#E8F6EA] dark:bg-emerald-950/20", cardPaddingLatest)}
+      >
+        <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-3">
+          <div className="row-start-1 flex items-center">
+            <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#297E43]">
+              <FileText className="size-5 text-white" aria-hidden />
+            </div>
+          </div>
+          <p className="row-start-1 col-start-2 self-center text-pretty text-xl font-bold leading-tight tracking-tight text-[#297E43] sm:text-2xl">
+            Don&apos;t See a Role That Fits?
+          </p>
+          <p className="col-start-2 row-start-2 text-pretty text-lg leading-relaxed text-muted-foreground">
+            Interested in joining us? Fill out the form below with any job-related questions.
+          </p>
+          <div className="col-start-2 row-start-3 scroll-mt-24">
+            <a
+              href="#partnerships-contact-form"
+              className={cn(
+                ctaLinkLayout,
+                "inline-flex h-11 min-w-[10rem] items-center justify-center rounded-full border-0 bg-[#4CAB65] px-8 text-base font-medium text-white shadow-none transition-opacity hover:opacity-90 dark:bg-[#4CAB65] dark:text-white",
+              )}
+            >
+              Contact Us
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -309,8 +399,8 @@ export function GetInvolvedCareersSection() {
 
 export function GetInvolvedTutoringSection() {
   return (
-    <section id="tutoring" className="scroll-mt-24 space-y-8 sm:space-y-10">
-      <div className="flex flex-col items-center gap-6 sm:items-start md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
+    <section id="tutoring" className="scroll-mt-24 space-y-6 sm:space-y-8 md:space-y-10">
+      <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
         <div className="w-full space-y-3 md:min-w-0 md:flex-1">
           <h2 className={sectionH2}>Start Your Part-Time Tutoring Journey</h2>
           <p className={sectionLead}>
@@ -326,25 +416,32 @@ export function GetInvolvedTutoringSection() {
       </div>
 
       {/* Featured card */}
-      <div className="overflow-hidden rounded-3xl bg-[#FFF1C7] px-6 py-7 dark:bg-amber-950/20 md:px-8 md:py-8">
-        <div className="flex flex-col gap-6 md:flex-row md:items-stretch md:gap-8">
-          <div className="flex flex-1 gap-4">
-            <div className="flex size-10 shrink-0 items-center justify-center self-start rounded-full bg-[#A27707]">
-              <GraduationCap className="size-5 text-white" />
-            </div>
-            <div className="flex flex-1 flex-col justify-between gap-4">
-              <div className="space-y-2">
-                <p className="text-pretty text-xl font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-2xl">
-                  Becoming a Tutor at PLUS
-                </p>
-                <p className="text-lg leading-relaxed text-muted-foreground">
-                  If you're a college student or looking for flexible work, explore part-time tutoring
-                  opportunities with PLUS.
-                </p>
+      <div
+        className={cn(
+          "overflow-hidden rounded-3xl bg-[#FFF1C7] dark:bg-amber-950/20",
+          cardPaddingLatest,
+        )}
+      >
+        <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-stretch md:gap-8">
+          <div className="flex min-h-0 w-full flex-col justify-between gap-4 md:gap-6">
+            <div className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2">
+              <div className="row-start-1 flex items-start">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#A27707]">
+                  <GraduationCap className="size-5 text-white" aria-hidden />
+                </div>
               </div>
+              <p className="row-start-1 col-start-2 self-start text-pretty text-xl font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-2xl">
+                Becoming a Tutor at PLUS
+              </p>
+              <p className="col-start-2 row-start-2 text-pretty text-lg leading-relaxed text-muted-foreground">
+                If you're a college student or looking for flexible work, explore part-time tutoring
+                opportunities with PLUS.
+              </p>
+            </div>
+            <div className="flex shrink-0 justify-start pl-14 md:pt-0">
               <Link
                 href="/for-tutors"
-                className="inline-flex h-11 w-fit items-center justify-center rounded-full bg-amber-300 px-8 text-base font-medium text-amber-950 transition-colors hover:bg-amber-400 dark:bg-amber-700 dark:text-white dark:hover:bg-amber-600"
+                className="inline-flex h-11 w-fit items-center justify-center rounded-full bg-[#FFC94B] px-8 text-base font-medium text-[#463923] transition-opacity hover:opacity-95 dark:bg-[#FFC94B] dark:text-[#463923] dark:hover:opacity-95"
               >
                 Become a Tutor
               </Link>
@@ -364,36 +461,46 @@ export function GetInvolvedTutoringSection() {
 
       {/* Info cards */}
       <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:gap-8">
-        <div className="flex flex-col gap-4 rounded-3xl bg-[#FFF1C7] px-6 py-7 dark:bg-amber-950/20 md:px-8 md:py-8">
-          <div className="flex items-start gap-4">
-            <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#A27707]">
-              <Heart className="size-5 text-white" />
+        <div
+          className={cn(
+            "rounded-3xl bg-[#FFF1C7] dark:bg-amber-950/20",
+            cardPaddingLatest,
+          )}
+        >
+          <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2">
+            <div className="row-start-1 flex items-center">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#A27707]">
+                <Heart className="size-5 text-white" aria-hidden />
+              </div>
             </div>
-            <div className="space-y-2">
-              <p className="text-pretty text-xl font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-2xl">
-                No Prior Experience Needed
-              </p>
-              <p className="text-lg leading-relaxed text-muted-foreground">
-                Join our team of motivated tutors! Semester-long virtual positions offer up to 10
-                hours/week at $18/hr. Apply now!
-              </p>
-            </div>
+            <p className="row-start-1 col-start-2 self-center text-pretty text-xl font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-2xl">
+              No Prior Experience Needed
+            </p>
+            <p className="col-start-2 row-start-2 text-pretty text-lg leading-relaxed text-muted-foreground">
+              Join our team of motivated tutors! Semester-long virtual positions offer up to 10
+              hours/week at $18/hr. Apply now!
+            </p>
           </div>
         </div>
-        <div className="flex flex-col gap-4 rounded-3xl bg-[#FFF1C7] px-6 py-7 dark:bg-amber-950/20 md:px-8 md:py-8">
-          <div className="flex items-start gap-4">
-            <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#A27707]">
-              <BookOpen className="size-5 text-white" />
+        <div
+          className={cn(
+            "rounded-3xl bg-[#FFF1C7] dark:bg-amber-950/20",
+            cardPaddingLatest,
+          )}
+        >
+          <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2">
+            <div className="row-start-1 flex items-center">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#A27707]">
+                <BookOpen className="size-5 text-white" aria-hidden />
+              </div>
             </div>
-            <div className="space-y-2">
-              <p className="text-pretty text-xl font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-2xl">
-                What You'll Do
-              </p>
-              <p className="text-lg leading-relaxed text-muted-foreground">
-                Get PLUS training while math tutoring 1–4 middle school students. Mostly virtual, with
-                some in-person opportunities.
-              </p>
-            </div>
+            <p className="row-start-1 col-start-2 self-center text-pretty text-xl font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-2xl">
+              What You'll Do
+            </p>
+            <p className="col-start-2 row-start-2 text-pretty text-lg leading-relaxed text-muted-foreground">
+              Get PLUS training while math tutoring 1–4 middle school students. Mostly virtual, with
+              some in-person opportunities.
+            </p>
           </div>
         </div>
       </div>
@@ -405,8 +512,8 @@ export function GetInvolvedTutoringSection() {
 
 export function GetInvolvedPartnershipsSection() {
   return (
-    <section id="partnerships" className="scroll-mt-24 space-y-8 sm:space-y-10">
-      <div className="flex flex-col items-center gap-6 sm:items-start md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
+    <section id="partnerships" className="scroll-mt-24 space-y-6 sm:space-y-8 md:space-y-10">
+      <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
         <div className="w-full space-y-3 md:min-w-0 md:flex-1">
           <h2 className={sectionH2}>Building Partnerships with PLUS</h2>
           <p className={sectionLead}>
@@ -421,30 +528,35 @@ export function GetInvolvedPartnershipsSection() {
         />
       </div>
 
-      <div className="rounded-[28px] bg-[#fdf0f6] px-6 py-8 dark:bg-[#fdf0f6]/[0.08] md:px-10 md:py-10">
-        <div className="flex items-start gap-4">
-          <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#C6009C]">
-            <FileText className="size-5 text-white" aria-hidden />
-          </div>
-          <div className="min-w-0 space-y-3">
-            <p className="text-pretty text-xl font-bold text-[#C6009C] sm:text-2xl dark:text-[#e879a9]">
-              Contact Us to Learn More
-            </p>
-            <p className="text-pretty text-lg leading-relaxed text-muted-foreground">
-              Book a demo, explore joining a program, or reach out with general questions about
-              partnerships — we&apos;d love to hear from you.
-            </p>
-            <div id="partnerships-contact-form" className="scroll-mt-24">
-              <a
-                href="#partnerships-contact-form"
-                className={cn(
-                  ctaLinkLayout,
-                  "inline-flex h-11 min-w-[10rem] items-center justify-center rounded-full border-0 bg-[#ECA8D3] px-8 text-base font-medium text-[#690051] shadow-none transition-opacity hover:opacity-90 dark:bg-[#ECA8D3]/90 dark:text-[#690051]",
-                )}
-              >
-                Contact Us
-              </a>
+      <div
+        className={cn(
+          "rounded-[28px] bg-[#fdf0f6] dark:bg-[#fdf0f6]/[0.08]",
+          cardPaddingLatest,
+        )}
+      >
+        <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-3">
+          <div className="row-start-1 flex items-center">
+            <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#C6009C]">
+              <FileText className="size-5 text-white" aria-hidden />
             </div>
+          </div>
+          <p className="row-start-1 col-start-2 self-center text-pretty text-xl font-bold text-[#C6009C] sm:text-2xl dark:text-[#e879a9]">
+            Contact Us to Learn More
+          </p>
+          <p className="col-start-2 row-start-2 text-pretty text-lg leading-relaxed text-muted-foreground">
+            Book a demo, explore joining a program, or reach out with general questions about
+            partnerships — we&apos;d love to hear from you.
+          </p>
+          <div id="partnerships-contact-form" className="col-start-2 row-start-3 scroll-mt-24">
+            <a
+              href="#partnerships-contact-form"
+              className={cn(
+                ctaLinkLayout,
+                "inline-flex h-11 min-w-[10rem] items-center justify-center rounded-full border-0 bg-[#ECA8D3] px-8 text-base font-medium text-[#690051] shadow-none transition-opacity hover:opacity-90 dark:bg-[#ECA8D3]/90 dark:text-[#690051]",
+              )}
+            >
+              Contact Us
+            </a>
           </div>
         </div>
       </div>
@@ -457,7 +569,12 @@ export function GetInvolvedPartnershipsSection() {
 export function GetInvolvedFinalCTA() {
   return (
     <section className="scroll-mt-24">
-      <div className="mx-auto max-w-4xl space-y-6 rounded-3xl bg-white p-8 text-center dark:bg-transparent sm:p-12">
+      <div
+        className={cn(
+          "mx-auto max-w-4xl space-y-6 rounded-3xl bg-white text-center dark:bg-transparent",
+          cardPaddingLatest,
+        )}
+      >
         <h2 className="text-3xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-4xl">
           Get Involved at PLUS
         </h2>

@@ -1,11 +1,11 @@
 "use client"
 
 import {
-  useState,
   type ComponentType,
   type ReactNode,
   type SVGProps,
 } from "react"
+import type { TeamMember, SuccessStory, NewsItem } from "@/lib/notion/types"
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -13,11 +13,14 @@ import {
   BarChart3,
   BookOpen,
   Briefcase,
+  Calendar,
   GraduationCap,
+  Newspaper,
   School,
   Sparkles,
   Trophy,
   Users,
+  Zap,
 } from "lucide-react"
 import {
   Accordion,
@@ -67,8 +70,8 @@ function AboutSectionTitleWithDecor({
   children: ReactNode
 }) {
   return (
-    <div className="text-center sm:text-left">
-      <div className="flex flex-col items-center gap-6 sm:items-start md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
+    <div className="text-left">
+      <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
         <div className="w-full space-y-3 md:min-w-0 md:flex-1">{children}</div>
         <img
           alt=""
@@ -114,25 +117,25 @@ function AboutLandingCtaRow({ className }: { className?: string }) {
 
 export function AboutHeroSection() {
   return (
-    <section className="relative flex min-h-[calc(100svh-5.5rem)] flex-col items-center justify-center gap-8 overflow-x-visible py-12 text-center sm:gap-10 sm:py-16 md:py-20">
+    <section className="relative flex min-h-0 flex-col items-center justify-center gap-6 overflow-x-visible py-8 text-center sm:min-h-[calc(100svh-5.5rem)] sm:gap-8 sm:py-12 md:gap-10 md:py-16 lg:py-20">
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[0]}
-        className="-left-2 top-52 hidden sm:block md:left-0 md:top-56"
+        className="-left-1 top-36 max-sm:top-3 max-sm:left-1 sm:-left-2 sm:top-52 md:left-0 md:top-56"
       />
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[1]}
-        className="right-0 top-28 hidden sm:right-1 sm:top-36 sm:block md:right-4 md:top-32"
+        className="right-0 top-20 max-sm:top-3 max-sm:right-1 sm:right-1 sm:top-36 md:right-4 md:top-32"
       />
       <TutorsHeroDecorImg
         src={forTutorsAssets.heroDecor[2]}
-        className="-right-1 top-80 hidden md:block md:-right-2 md:top-[25rem] md:translate-x-1 lg:-right-3 lg:top-[29rem] lg:translate-x-2"
+        className="-right-1 top-[12rem] max-sm:top-[21.5rem] max-sm:right-1 sm:top-[19rem] md:-right-2 md:top-[25rem] md:translate-x-1 lg:-right-3 lg:top-[29rem] lg:translate-x-2"
       />
 
-      <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-4 sm:gap-5">
-        <p className="text-2xl font-semibold text-teal-900 sm:text-3xl">
+      <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-3 sm:gap-4 md:gap-5">
+        <p className="text-xl font-semibold text-teal-900 max-sm:text-2xl sm:text-2xl md:text-3xl">
           About PLUS
         </p>
-        <h1 className="text-balance text-4xl font-semibold tracking-tight text-teal-950 sm:text-5xl">
+        <h1 className="text-balance text-3xl font-semibold tracking-tight text-teal-950 max-sm:text-4xl sm:text-4xl md:text-5xl">
           Bridging Opportunity Gaps in
           <br />
           Math Education with AI-
@@ -141,14 +144,10 @@ export function AboutHeroSection() {
         </h1>
       </div>
 
-      <AboutLandingCtaRow className="mt-6 sm:mt-8" />
+      <AboutLandingCtaRow className="mt-4 max-sm:relative max-sm:z-[2] sm:mt-6 md:mt-8" />
     </section>
   )
 }
-
-/** Foundations pillar names (e.g. Community) — sky accent on interactive cards. */
-const aboutPillarHighlightTitle =
-  "text-pretty text-xl font-bold leading-snug tracking-tight text-[#007EB8] sm:text-2xl dark:text-sky-300"
 
 /** Our Mission pillar headings — same scale as foundation pillars; color matches icon circles. */
 const aboutMissionPillarTitle =
@@ -193,7 +192,7 @@ const MissionPillarBlock = ({
 
 export function AboutMissionSection() {
   return (
-    <section id={aboutSectionIds.mission} className="scroll-mt-24 space-y-8 sm:space-y-10 lg:space-y-12">
+    <section id={aboutSectionIds.mission} className="scroll-mt-24 space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12">
       <AboutSectionTitleWithDecor decorSrc={forTutorsAssets.voicesDecor}>
         <h2 className={aboutSectionH2}>Our Mission</h2>
         <p className={aboutSectionLead}>
@@ -211,14 +210,14 @@ export function AboutMissionSection() {
           ]}
         />
 
-        <div className="flex w-full shrink-0 justify-center leading-none lg:block">
+        <div className="flex w-full shrink-0 justify-center leading-none">
           <Image
             src={MISSION_MAP_SRC}
             alt="Hand-drawn map of the Eastern United States with PLUS program location markers"
             width={837}
             height={966}
-            className="m-0 block h-auto w-full max-w-[min(100%,17.5rem)] object-contain object-top align-top sm:max-w-[min(100%,22rem)] md:max-w-[min(100%,26rem)] lg:max-w-none"
-            sizes="(max-width: 640px) 280px, (max-width: 1024px) min(416px, 90vw), min(920px, 50vw)"
+            className="m-0 block h-auto w-full max-w-[min(100%,14rem)] object-contain object-top align-top sm:max-w-[min(100%,16rem)] md:max-w-[min(100%,18rem)] lg:max-w-[min(100%,18rem)]"
+            sizes="(max-width: 640px) 224px, (max-width: 1024px) 256px, 288px"
           />
         </div>
 
@@ -246,53 +245,11 @@ export function AboutMissionSection() {
   )
 }
 
-/** Same shape as `EXPERIENCE_CARDS` in `for-tutors-sections.tsx` — interactive: one selected, body visible only when selected. */
-const FOUNDATION_PILLARS = [
-  {
-    title: "Community",
-    body: "PLUS connects communities and researchers to improve outcomes for all students.",
-  },
-  {
-    title: "Research",
-    body:
-      "Built on decades of learning science research from CMU and Stanford.",
-  },
-  {
-    title: "Innovation",
-    body:
-      "Shaping educational technology to deliver innovative, engaging learning experiences.",
-  },
-] as const
-
 export function AboutFoundationsSection() {
-  const [selectedIndex, setSelectedIndex] = useState(0)
-
-  /** Wide column tracks with selected pillar — order stays Community, Research, Innovation (no DOM reorder). */
-  const foundationsLgGridCols =
-    selectedIndex === 0
-      ? "lg:grid-cols-[2fr_1fr_1fr]"
-      : selectedIndex === 1
-        ? "lg:grid-cols-[1fr_2fr_1fr]"
-        : "lg:grid-cols-[1fr_1fr_2fr]"
-
-  const foundationsPhotoSrc =
-    selectedIndex === 1
-      ? "/figma/about/foundations-research.png"
-      : selectedIndex === 2
-        ? "/figma/about/foundations-innovation.png"
-        : "/figma/about/foundations-community.png"
-
-  const foundationsPhotoAlt =
-    selectedIndex === 1
-      ? "University campus grounds representing research partnerships and learning science"
-      : selectedIndex === 2
-        ? "PLUS lesson interface with AI-generated feedback, representing innovation in tutoring technology"
-        : "Classroom session with students and teacher, representing community-centered learning"
-
   return (
     <section
       id={aboutSectionIds.foundations}
-      className="scroll-mt-24 space-y-8 sm:space-y-10"
+      className="scroll-mt-24 space-y-6 sm:space-y-8 md:space-y-10"
     >
       <AboutSectionTitleWithDecor decorSrc={forTutorsAssets.compensationDecor}>
         <h2 className={aboutSectionH2}>Foundations We Build Upon</h2>
@@ -301,68 +258,101 @@ export function AboutFoundationsSection() {
         </p>
       </AboutSectionTitleWithDecor>
 
-      <ol
-        className={cn(
-          "mx-auto grid max-w-5xl list-none items-stretch gap-4 p-0 sm:grid-cols-2 sm:gap-6 lg:gap-8",
-          foundationsLgGridCols
-        )}
-      >
-        {FOUNDATION_PILLARS.map((pillar, index) => {
-          const isSelected = selectedIndex === index
-          return (
-            <li key={pillar.title} className="flex min-h-0">
-              <button
-                type="button"
-                onClick={() => setSelectedIndex(index)}
-                onMouseEnter={() => setSelectedIndex(index)}
-                aria-pressed={isSelected}
-                className={cn(
-                  /* Colors align with `TutorsCompensationSection` card (sky band + white body). */
-                  "flex h-full min-h-0 w-full cursor-default flex-col gap-3 rounded-2xl p-5 text-left transition-colors sm:gap-5 sm:p-6",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                  isSelected
-                    ? "border-2 border-sky-200 bg-sky-100 dark:border-sky-800/50 dark:bg-sky-950/35"
-                    : "border-2 border-sky-200 bg-white dark:border-sky-800/50 dark:bg-card"
-                )}
-              >
-                <div
-                  className={cn(
-                    "flex size-10 shrink-0 items-center justify-center rounded-full text-lg font-bold text-white",
-                    isSelected ? "bg-[#007EB8]" : "bg-[#007EB8]/80"
-                  )}
-                >
-                  {index + 1}
-                </div>
-                <div className="flex min-h-0 flex-1 flex-col gap-2">
-                  <p className={cn("shrink-0", aboutPillarHighlightTitle)}>
-                    {pillar.title}
-                  </p>
-                  <div className="flex min-h-0 flex-1 flex-col">
-                    {isSelected ? (
-                      <p className="text-lg leading-relaxed text-muted-foreground">
-                        {pillar.body}
-                      </p>
-                    ) : (
-                      <div className="flex-1" aria-hidden />
-                    )}
-                  </div>
-                </div>
-              </button>
-            </li>
-          )
-        })}
-      </ol>
+      {/* Bento grid: Community (left, tall) + Research/Innovation (right, stacked) */}
+      <div className="mx-auto grid max-w-5xl grid-cols-1 items-stretch gap-[30px] md:grid-cols-2">
 
-      <div className="mx-auto max-w-5xl">
-        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl ring-1 ring-teal-200/60 dark:ring-teal-800/50">
-          <Image
-            key={foundationsPhotoSrc}
-            src={foundationsPhotoSrc}
-            alt={foundationsPhotoAlt}
-            fill
-            className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 64rem"
-          />
+        {/* Community — left large card: fills full height of the right column */}
+        <div className="flex flex-col overflow-hidden rounded-[33px] bg-[#E4F5FF] dark:bg-sky-950/40">
+          {/* Content row: circle | title + description */}
+          <div className="flex items-start gap-3 px-5 pt-5 sm:px-6 sm:pt-6">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#007EB8] text-sm font-bold text-[#E4F5FF]">
+              1
+            </div>
+            <div className="flex flex-col gap-2">
+              <p className="text-xl font-bold leading-snug tracking-tight text-[#007EB8] sm:text-2xl dark:text-sky-300">
+                Community
+              </p>
+              <p className="text-lg leading-relaxed text-muted-foreground">
+                PLUS connects communities and researchers to improve student outcomes.
+              </p>
+            </div>
+          </div>
+          {/* Image row: invisible spacer (aligns with circle) + image extending to card edge */}
+          <div className="mt-[22px] flex flex-1 gap-3 pl-5 sm:pl-6">
+            <div className="w-10 shrink-0" aria-hidden />
+            <div className="relative min-h-[260px] flex-1">
+              <Image
+                src="/figma/about/foundations-community.avif"
+                alt="Classroom session with students and teacher, representing community-centered learning"
+                fill
+                className="rounded-tl-[22px] object-cover object-center"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Right column: Research + Innovation stacked */}
+        <div className="flex flex-col gap-[30px]">
+
+          {/* Research */}
+          <div className="flex flex-col overflow-hidden rounded-[33px] bg-[#E4F5FF] dark:bg-sky-950/40">
+            <div className="flex items-start gap-3 px-5 pt-5 sm:px-6 sm:pt-6">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#007EB8] text-sm font-bold text-white">
+                2
+              </div>
+              <div className="flex flex-col gap-2">
+                <p className="text-xl font-bold leading-snug tracking-tight text-[#007EB8] sm:text-2xl dark:text-sky-300">
+                  Research
+                </p>
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  Built on decades of learning science research from CMU and Stanford.
+                </p>
+              </div>
+            </div>
+            <div className="mt-[22px] flex gap-3 pl-5 sm:pl-6">
+              <div className="w-10 shrink-0" aria-hidden />
+              <div className="relative aspect-[2/1] flex-1">
+                <Image
+                  src="/figma/about/foundations-research.png"
+                  alt="University campus grounds representing research partnerships and learning science"
+                  fill
+                  className="rounded-tl-[22px] object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Innovation */}
+          <div className="flex flex-col overflow-hidden rounded-[33px] bg-[#E4F5FF] dark:bg-sky-950/40">
+            <div className="flex items-start gap-3 px-5 pt-5 sm:px-6 sm:pt-6">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#007EB8] text-sm font-bold text-white">
+                3
+              </div>
+              <div className="flex flex-col gap-2">
+                <p className="text-xl font-bold leading-snug tracking-tight text-[#007EB8] sm:text-2xl dark:text-sky-300">
+                  Innovation
+                </p>
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  Shaping educational technology to deliver innovative, engaging learning experiences.
+                </p>
+              </div>
+            </div>
+            <div className="mt-[22px] flex gap-3 pl-5 sm:pl-6">
+              <div className="w-10 shrink-0" aria-hidden />
+              <div className="relative aspect-[2/1] flex-1">
+                <Image
+                  src="/figma/about/foundations-innovation.avif"
+                  alt="PLUS lesson interface with AI-generated feedback, representing innovation in tutoring technology"
+                  fill
+                  className="rounded-tl-[22px] object-cover object-center"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -413,44 +403,124 @@ const INTERN_TEAM: ReadonlyArray<InternMember> = [
 function TeamMemberCard({
   name,
   role,
+  institution,
   avatarUrl,
   avatarClassName,
+  linkedIn,
+  googleScholar,
 }: {
   name: string
   role: string
-  avatarUrl: string
+  institution?: string | null
+  avatarUrl?: string
   avatarClassName?: string
+  linkedIn?: string | null
+  googleScholar?: string | null
 }) {
+  const initials = name
+    .split(" ")
+    .map((p) => p[0])
+    .filter(Boolean)
+    .slice(0, 2)
+    .join("")
+    .toUpperCase()
+
   return (
-    <article className="overflow-hidden rounded-3xl bg-white dark:bg-card">
-      <div className="relative aspect-square w-full overflow-hidden bg-muted">
-        <Image
-          src={avatarUrl}
-          alt={`${name} profile photo`}
-          fill
-          className={cn("object-cover", avatarClassName)}
-          sizes="(max-width: 1024px) 100vw, 33vw"
-        />
+    <article className="flex h-full flex-col overflow-hidden rounded-3xl bg-[#E8F6EA] dark:bg-emerald-950/20">
+      <div className="relative aspect-square w-full overflow-hidden">
+        {avatarUrl ? (
+          <Image
+            src={avatarUrl}
+            alt={`${name} profile photo`}
+            fill
+            className={cn("object-cover", avatarClassName)}
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center text-2xl font-bold text-[#297E43]">
+            {initials}
+          </div>
+        )}
       </div>
-      <div className="space-y-3 bg-[#E8F6EA] px-4 pt-4 pb-6 dark:bg-emerald-950/20">
-        <p className="text-xl font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-2xl">
+      <div className="flex flex-col gap-4 px-4 pt-4 pb-6">
+        <div className="text-base font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-lg">
           {name}
-        </p>
-        <Link
-          href="#"
-          className="inline-block text-sm font-medium text-[#297E43] underline underline-offset-2"
-        >
-          LinkedIn
-        </Link>
-        <p className="text-[1.02rem] leading-snug text-foreground/80 dark:text-white/85">{role}</p>
+        </div>
+        {(googleScholar || linkedIn) ? (
+          <div className="flex items-center gap-1.5 text-sm font-medium leading-tight text-[#297E43]">
+            {googleScholar ? (
+              <Link
+                href={googleScholar}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2"
+              >
+                Google Scholar
+              </Link>
+            ) : null}
+            {googleScholar && linkedIn ? <span className="text-[#297E43]/50">|</span> : null}
+            {linkedIn ? (
+              <Link
+                href={linkedIn}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2"
+              >
+                LinkedIn
+              </Link>
+            ) : null}
+          </div>
+        ) : null}
+        <div className="text-sm leading-tight text-foreground/80 dark:text-white/85">{role}</div>
+        {institution ? (
+          <div className="text-sm leading-tight text-foreground/80 dark:text-white/85">{institution}</div>
+        ) : null}
       </div>
     </article>
   )
 }
 
-export function AboutTeamSection() {
+const triggerCls =
+  "cursor-pointer items-center py-4 text-xl font-bold leading-snug tracking-tight text-[#297E43] shadow-none hover:no-underline focus-visible:ring-0 focus-visible:border-transparent dark:text-emerald-300 sm:py-5 sm:text-2xl **:data-[slot=accordion-trigger-icon]:size-6 **:data-[slot=accordion-trigger-icon]:text-[#297E43] dark:**:data-[slot=accordion-trigger-icon]:text-emerald-300"
+
+const memberGrid = "grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 lg:gap-6"
+
+// Custom display order for leadership cards (matched by first name / first+last-initial).
+const LEADERSHIP_ORDER = [
+  "Ken", "Emma", "Vincent", "Shivang", "Lee",
+  "Danielle", "Erin", "Alex", "Steve F", "Steve R",
+]
+
+function leadershipSortKey(name: string): number {
+  const lower = name.toLowerCase()
+  for (let i = 0; i < LEADERSHIP_ORDER.length; i++) {
+    const token = LEADERSHIP_ORDER[i]!.toLowerCase()
+    // "Steve F" / "Steve R" → match by first name + last initial
+    if (token.includes(" ")) {
+      const [first, initial] = token.split(" ")
+      if (lower.startsWith(first!) && lower.includes(` ${initial!}`)) return i
+    } else {
+      // Match by first name anywhere in the name string (handles "Dr. Ken …")
+      const parts = lower.split(" ")
+      if (parts.includes(token)) return i
+    }
+  }
+  return LEADERSHIP_ORDER.length
+}
+
+export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
+  const leadership = members
+    .filter((m) => m.affiliation === "Leadership")
+    .sort((a, b) => leadershipSortKey(a.name) - leadershipSortKey(b.name))
+  const staff = members.filter((m) => m.affiliation === "PLUS Staff")
+  const notionStudents = members.filter(
+    (m) =>
+      m.affiliation === "Student Intern" ||
+      m.affiliation === "Independent Study Student"
+  )
+
   return (
-    <section id={aboutSectionIds.team} className="scroll-mt-24 space-y-8 sm:space-y-10">
+    <section id={aboutSectionIds.team} className="scroll-mt-24 space-y-6 sm:space-y-8 md:space-y-10">
       <AboutSectionTitleWithDecor decorSrc={forTutorsAssets.experienceDecor}>
         <h2 className={aboutSectionH2}>The PLUS Team</h2>
         <p className={aboutSectionLead}>
@@ -458,11 +528,11 @@ export function AboutTeamSection() {
         </p>
       </AboutSectionTitleWithDecor>
       <Accordion
-        defaultValue={["interns"]}
+        multiple
         className="space-y-4 sm:space-y-6 lg:space-y-8"
       >
-        <AccordionItem value="leadership" className="rounded-2xl bg-[#E8F6EA] px-4 shadow-none dark:bg-emerald-950/25 sm:px-6">
-          <AccordionTrigger className="items-center py-4 text-xl font-bold leading-snug tracking-tight text-[#297E43] shadow-none hover:no-underline dark:text-emerald-300 sm:py-5 sm:text-2xl **:data-[slot=accordion-trigger-icon]:size-6 **:data-[slot=accordion-trigger-icon]:text-[#297E43] dark:**:data-[slot=accordion-trigger-icon]:text-emerald-300">
+        <AccordionItem value="leadership" className="border-0 bg-transparent px-0">
+          <AccordionTrigger className={cn(triggerCls, "rounded-2xl bg-[#E8F6EA] px-4 sm:px-6 dark:bg-emerald-950/25")}>
             <span className="flex items-center gap-3">
               <span className="flex size-10 items-center justify-center rounded-full bg-[#297E43] text-white">
                 <Users className="size-5" />
@@ -470,13 +540,31 @@ export function AboutTeamSection() {
               Leadership
             </span>
           </AccordionTrigger>
-          <AccordionContent className="pb-5 text-lg leading-relaxed text-muted-foreground">
-            Leadership bios and profiles will appear here as we publish them on the marketing
-            site.
+          <AccordionContent className="pt-4 pb-0 sm:pt-6 lg:pt-8">
+            {leadership.length > 0 ? (
+              <div className={memberGrid}>
+                {leadership.map((m) => (
+                  <TeamMemberCard
+                    key={m.id}
+                    name={m.name}
+                    role={m.title1 ?? m.affiliation}
+                    institution={m.title2}
+                    avatarUrl={m.picture ?? undefined}
+                    linkedIn={m.linkedIn}
+                    googleScholar={m.googleScholar}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="text-lg leading-relaxed text-muted-foreground">
+                Leadership bios and profiles will appear here as we publish them on the marketing site.
+              </p>
+            )}
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="staff" className="rounded-2xl bg-[#E8F6EA] px-4 shadow-none dark:bg-emerald-950/25 sm:px-6">
-          <AccordionTrigger className="items-center py-4 text-xl font-bold leading-snug tracking-tight text-[#297E43] shadow-none hover:no-underline dark:text-emerald-300 sm:py-5 sm:text-2xl **:data-[slot=accordion-trigger-icon]:size-6 **:data-[slot=accordion-trigger-icon]:text-[#297E43] dark:**:data-[slot=accordion-trigger-icon]:text-emerald-300">
+
+        <AccordionItem value="staff" className="border-0 bg-transparent px-0">
+          <AccordionTrigger className={cn(triggerCls, "rounded-2xl bg-[#E8F6EA] px-4 sm:px-6 dark:bg-emerald-950/25")}>
             <span className="flex items-center gap-3">
               <span className="flex size-10 items-center justify-center rounded-full bg-[#297E43] text-white">
                 <Briefcase className="size-5" />
@@ -484,33 +572,62 @@ export function AboutTeamSection() {
               PLUS Staff
             </span>
           </AccordionTrigger>
-          <AccordionContent className="pb-5 text-lg leading-relaxed text-muted-foreground">
-            Staff spotlights and roles will be listed here.
+          <AccordionContent className="pt-4 pb-0 sm:pt-6 lg:pt-8">
+            {staff.length > 0 ? (
+              <div className={memberGrid}>
+                {staff.map((m) => (
+                  <TeamMemberCard
+                    key={m.id}
+                    name={m.name}
+                    role={m.title1 ?? m.affiliation}
+                    institution={m.title2}
+                    avatarUrl={m.picture ?? undefined}
+                    linkedIn={m.linkedIn}
+                    googleScholar={m.googleScholar}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="text-lg leading-relaxed text-muted-foreground">
+                Staff spotlights and roles will be listed here.
+              </p>
+            )}
           </AccordionContent>
         </AccordionItem>
+
         <AccordionItem value="interns" className="border-0 bg-transparent px-0">
-          <AccordionTrigger className="items-center rounded-2xl bg-[#E8F6EA] px-4 py-4 text-lg font-bold tracking-tight text-[#297E43] shadow-none hover:no-underline dark:bg-emerald-950/25 dark:text-emerald-300 sm:px-6 sm:py-5 sm:text-xl **:data-[slot=accordion-trigger-icon]:size-6 **:data-[slot=accordion-trigger-icon]:text-[#297E43] dark:**:data-[slot=accordion-trigger-icon]:text-emerald-300">
+          <AccordionTrigger className={cn(triggerCls, "rounded-2xl bg-[#E8F6EA] px-4 sm:px-6 dark:bg-emerald-950/25")}>
             <span className="flex items-center gap-3">
               <span className="flex size-10 items-center justify-center rounded-full bg-[#297E43] text-white">
                 <GraduationCap className="size-5" />
               </span>
-              <span className="text-pretty text-xl font-bold leading-snug tracking-tight sm:text-2xl">Current Student Interns</span>
+              Current Student Interns
             </span>
           </AccordionTrigger>
           <AccordionContent className="pt-4 pb-0 sm:pt-6 lg:pt-8">
-            <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
-              {INTERN_TEAM.map((member, i) => (
-                <TeamMemberCard
-                  key={member.name}
-                  name={member.name}
-                  role={member.role}
-                  avatarUrl={
-                    member.avatarUrl ??
-                    forSchoolsAssets.avatars[i % forSchoolsAssets.avatars.length]!
-                  }
-                  avatarClassName={member.avatarClassName}
-                />
-              ))}
+            <div className={memberGrid}>
+              {notionStudents.length > 0
+                ? notionStudents.map((m) => (
+                    <TeamMemberCard
+                      key={m.id}
+                      name={m.name}
+                      role={m.title1 ?? m.affiliation}
+                      avatarUrl={m.picture ?? undefined}
+                      linkedIn={m.linkedIn}
+                    />
+                  ))
+                : INTERN_TEAM.map((member, i) => (
+                    <TeamMemberCard
+                      key={member.name}
+                      name={member.name}
+                      role={member.role}
+                      avatarUrl={
+                        member.avatarUrl ??
+                        forSchoolsAssets.avatars[i % forSchoolsAssets.avatars.length]!
+                      }
+                      avatarClassName={member.avatarClassName}
+                    />
+                  ))}
             </div>
           </AccordionContent>
         </AccordionItem>
@@ -519,114 +636,236 @@ export function AboutTeamSection() {
   )
 }
 
-export function AboutLatestSection() {
+const latestReadMoreLinkClass =
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-[#9A6D00] no-underline transition-opacity hover:opacity-90 dark:text-amber-200"
+
+/** Matches `aboutCardTitle` metrics so `lh` on the icon matches the heading’s first line. */
+const latestCardTitleRowClass =
+  "flex gap-3 text-xl font-bold leading-snug tracking-tight sm:text-2xl"
+
+/** Vertically center `size-10` icon with the first line of the title (line box vs 2.5rem circle). */
+const latestCardIconClass =
+  "mt-[calc((1lh-2.5rem)/2)] flex size-10 shrink-0 items-center justify-center rounded-full bg-[#A27707] text-white"
+
+const NEWS_CATEGORY_ICON: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
+  "Media Coverage": Newspaper,
+  "Events": Calendar,
+  "Partnerships": Users,
+  "Research": BarChart3,
+  "Product Update": Zap,
+  "Others": BookOpen,
+}
+
+/** Single news card — used for both featured (large) and secondary (small) slots. */
+function LatestNewsCard({
+  item,
+  large = false,
+}: {
+  item: NewsItem
+  large?: boolean
+}) {
+  const Icon = NEWS_CATEGORY_ICON[item.category] ?? Trophy
+  const href = item.externalLink ?? "/about/news"
+  const rawBlurb = item.marketingBlurb ?? item.summary
+  const blurb = rawBlurb?.startsWith("(TBD") ? null : rawBlurb
+
   return (
-    <section id={aboutSectionIds.latest} className="scroll-mt-24 space-y-8 sm:space-y-10">
+    <article className={cn(
+      "flex flex-col rounded-3xl bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6",
+      large && "w-full",
+    )}>
+      <div className={latestCardTitleRowClass}>
+        <span className={latestCardIconClass}>
+          <Icon className="size-5" aria-hidden />
+        </span>
+        <h3
+          className={cn(
+            aboutCardTitle,
+            "min-w-0 text-[#9A6D00] dark:text-amber-200",
+          )}
+        >
+          {item.title}
+        </h3>
+      </div>
+      {item.featuredImage ? (
+        <div className={cn(
+          "relative mt-4 overflow-hidden rounded-2xl bg-muted",
+          large ? "min-h-[280px] flex-1 sm:min-h-[360px] lg:min-h-[420px]" : "aspect-[16/8.5]",
+        )}>
+          <Image
+            src={item.featuredImage}
+            alt={item.title}
+            fill
+            className="object-cover"
+            sizes={large ? "100vw" : "(max-width: 640px) 100vw, 50vw"}
+          />
+        </div>
+      ) : blurb ? (
+        <p className={cn(
+          aboutCardBody,
+          "mt-4 text-pretty text-teal-900/80 dark:text-amber-100/80",
+          large && "flex-1",
+        )}>
+          {blurb}
+        </p>
+      ) : null}
+      <Link
+        href={href}
+        className={latestReadMoreLinkClass}
+        aria-label={`Read more about ${item.title}`}
+        {...(item.externalLink ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      >
+        <span>Read more</span>
+        <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
+      </Link>
+    </article>
+  )
+}
+
+export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
+  const hasNotionData = news.length > 0
+  // Featured item first (or most recent), up to 3 total
+  const items = hasNotionData
+    ? [...news].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0)).slice(0, 3)
+    : null
+
+  return (
+    <section id={aboutSectionIds.latest} className="scroll-mt-24 space-y-6 sm:space-y-8 md:space-y-10">
       <AboutSectionTitleWithDecor decorSrc={forTutorsAssets.certificationDecor}>
         <h2 className={aboutSectionH2}>Latest at PLUS</h2>
         <p className={aboutSectionLead}>
           Stay up to date with the latest news, updates, and opportunities at PLUS
         </p>
       </AboutSectionTitleWithDecor>
-      <div className="grid gap-4 sm:gap-6 lg:gap-8 lg:grid-cols-2 lg:grid-rows-2">
-        <article className="flex min-h-[280px] flex-col rounded-3xl bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6 lg:row-span-2 lg:min-h-0">
-          <div className="flex items-center gap-3">
-            <span className="flex size-10 items-center justify-center rounded-full bg-[#A27707] text-white">
-              <Trophy className="size-5" aria-hidden />
-            </span>
-            <h3 className={cn(aboutCardTitle, "text-[#9A6D00] dark:text-amber-200")}>
-              Celebrating Our Datasets Win
-            </h3>
-          </div>
-          <div className="mt-4 flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl bg-white">
-            <div className="relative min-h-0 flex-1">
-              <Image
-                src="/figma/about/latest-datasets-win.png"
-                alt="Schools Competition Winners graphic"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+
+      {items ? (
+        <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8">
+          {/* First item always gets the prominent full-width slot */}
+          <LatestNewsCard item={items[0]!} large />
+          {/* Remaining items in a responsive row */}
+          {items.length > 1 && (
+            <div className={cn(
+              "grid gap-4 sm:gap-6 lg:gap-8",
+              items.length === 2 ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2",
+            )}>
+              {items.slice(1).map((item) => (
+                <LatestNewsCard key={item.id} item={item} />
+              ))}
             </div>
+          )}
+        </div>
+      ) : (
+        /* Placeholder — shown when no Notion data is available */
+        <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8">
+          <article className="flex w-full flex-col rounded-3xl bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6">
+            <div className={latestCardTitleRowClass}>
+              <span className={latestCardIconClass}>
+                <Trophy className="size-5" aria-hidden />
+              </span>
+              <h3 className={cn(aboutCardTitle, "min-w-0 text-[#9A6D00] dark:text-amber-200")}>
+                Celebrating Our Datasets Win
+              </h3>
+            </div>
+            <div className="mt-4 flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl bg-white">
+              <div className="relative min-h-[280px] flex-1 sm:min-h-[360px] lg:min-h-[420px]">
+                <Image src="/figma/about/latest-datasets-win.png" alt="Schools Competition Winners graphic" fill className="object-cover" sizes="100vw" />
+              </div>
+            </div>
+            <Link href="/about/news" className={latestReadMoreLinkClass} aria-label="Read more about Celebrating Our Datasets Win">
+              <span>Read more</span>
+              <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
+            </Link>
+          </article>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:gap-8">
+            <article className="flex flex-col rounded-3xl bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6">
+              <div className={latestCardTitleRowClass}>
+                <span className={latestCardIconClass}>
+                  <GraduationCap className="size-5" aria-hidden />
+                </span>
+                <h3 className={cn(aboutCardTitle, "min-w-0 text-[#9A6D00] dark:text-amber-200")}>Teachers Inspire Our Tutoring</h3>
+              </div>
+              <div className="relative mt-4 aspect-[16/8.5] overflow-hidden rounded-2xl bg-muted">
+                <Image src="/figma/about/latest-teachers-inspire.png" alt="Teachers and students in a school setting" fill className="object-cover" sizes="(max-width: 640px) 100vw, 50vw" />
+              </div>
+              <Link href="/about/news" className={latestReadMoreLinkClass} aria-label="Read more about Teachers Inspire Our Tutoring">
+                <span>Read more</span>
+                <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
+              </Link>
+            </article>
+            <article className="flex flex-col rounded-3xl bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6">
+              <div className={latestCardTitleRowClass}>
+                <span className={latestCardIconClass}>
+                  <School className="size-5" aria-hidden />
+                </span>
+                <h3 className={cn(aboutCardTitle, "min-w-0 text-[#9A6D00] dark:text-amber-200")}>PLUS Expands To 6 New Schools</h3>
+              </div>
+              <div className="relative mt-4 aspect-[16/8.5] overflow-hidden rounded-2xl bg-muted">
+                <Image src="/figma/about/latest-expands-schools.png" alt="Student using a learning tablet in a classroom" fill className="object-cover" sizes="(max-width: 640px) 100vw, 50vw" />
+              </div>
+              <Link href="/about/news" className={latestReadMoreLinkClass} aria-label="Read more about PLUS Expands To 6 New Schools">
+                <span>Read more</span>
+                <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
+              </Link>
+            </article>
           </div>
-          <div className="mt-4 flex items-center justify-end gap-2 text-lg font-medium text-[#9A6D00] dark:text-amber-200">
-            <span>Read more</span>
-            <ArrowRight className="size-6" aria-hidden />
-          </div>
-        </article>
-
-        <article className="flex flex-col rounded-3xl bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6">
-          <div className="flex items-center gap-3">
-            <span className="flex size-10 items-center justify-center rounded-full bg-[#A27707] text-white">
-              <GraduationCap className="size-5" aria-hidden />
-            </span>
-            <h3 className={cn(aboutCardTitle, "text-[#9A6D00] dark:text-amber-200")}>
-              Teachers Inspire Our Tutoring
-            </h3>
-          </div>
-          <div className="relative mt-4 aspect-[16/8.5] overflow-hidden rounded-2xl bg-muted">
-            <Image
-              src="/figma/about/latest-teachers-inspire.png"
-              alt="Teachers and students in a school setting"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </div>
-          <div className="mt-4 flex items-center justify-end gap-2 text-lg font-medium text-[#9A6D00] dark:text-amber-200">
-            <span>Read more</span>
-            <ArrowRight className="size-6" aria-hidden />
-          </div>
-        </article>
-
-        <article className="flex flex-col rounded-3xl bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6">
-          <div className="flex items-center gap-3">
-            <span className="flex size-10 items-center justify-center rounded-full bg-[#A27707] text-white">
-              <School className="size-5" aria-hidden />
-            </span>
-            <h3 className={cn(aboutCardTitle, "text-[#9A6D00] dark:text-amber-200")}>
-              PLUS Expands To 6 New Schools
-            </h3>
-          </div>
-          <div className="relative mt-4 aspect-[16/8.5] overflow-hidden rounded-2xl bg-muted">
-            <Image
-              src="/figma/about/latest-expands-schools.png"
-              alt="Student using a learning tablet in a classroom"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </div>
-          <div className="mt-4 flex items-center justify-end gap-2 text-lg font-medium text-[#9A6D00] dark:text-amber-200">
-            <span>Read more</span>
-            <ArrowRight className="size-6" aria-hidden />
-          </div>
-        </article>
-      </div>
+        </div>
+      )}
     </section>
   )
 }
 
+const successStoryReadLinkClass =
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-[#C6009C] no-underline transition-opacity hover:opacity-90 dark:text-[#C6009C]"
+
+/** Quote lines aligned with homepage testimonials (`PlusVoicesSection`). */
 const SUCCESS_CARDS = [
   {
     title: "Boosting Confidence in Math",
     icon: Sparkles,
+    quoteLead:
+      "Tutoring has affected me and it made me realize if I didn't get the help I needed I would still be struggling. But it made me see",
+    quoteHighlight: "math differently in a good way",
+    quoteTail: ".",
   },
   {
     title: "Empowering Teachers with Data",
     icon: BarChart3,
+    quoteLead:
+      "My students were able to understand concepts more easily than before due to the",
+    quoteHighlight: "one-to-one help",
+    quoteTail: ". My students' math confidence has also increased!",
   },
   {
     title: "Bounding Students Across Schools",
     icon: BookOpen,
+    quoteLead:
+      "The students' reactions speak for themselves. They look forward to the tutoring sessions. It's not just about math. It's about relationships. It's about",
+    quoteHighlight: "building confidence",
+    quoteTail: ".",
   },
 ] as const
 
-export function AboutSuccessStoriesSection() {
+const CATEGORY_ICON: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
+  Schools: School,
+  Tutors: GraduationCap,
+  Researchers: BarChart3,
+  Foundations: BookOpen,
+}
+
+const successStoriesGridClass: Record<number, string> = {
+  1: "grid gap-4 sm:gap-6 lg:gap-8",
+  2: "grid gap-4 sm:gap-6 md:grid-cols-2 md:items-stretch lg:gap-8",
+  3: "grid gap-4 sm:gap-6 md:grid-cols-3 md:items-stretch lg:gap-8",
+}
+
+export function AboutSuccessStoriesSection({ stories = [] }: { stories?: SuccessStory[] }) {
+  const hasNotionData = stories.length > 0
+  const count = hasNotionData ? Math.min(stories.length, 3) : SUCCESS_CARDS.length
+  const gridClass = successStoriesGridClass[count] ?? successStoriesGridClass[3]!
   return (
     <section
       id={aboutSectionIds.successStories}
-      className="scroll-mt-24 space-y-8 sm:space-y-10"
+      className="scroll-mt-24 space-y-6 sm:space-y-8 md:space-y-10"
     >
       <AboutSectionTitleWithDecor decorSrc={forTutorsAssets.toolkitDecor}>
         <h2 className={aboutSectionH2}>Success Stories at PLUS</h2>
@@ -634,26 +873,76 @@ export function AboutSuccessStoriesSection() {
           Celebrating the students, educators, and innovations making a real impact with PLUS
         </p>
       </AboutSectionTitleWithDecor>
-      <div className="grid gap-4 sm:gap-6 md:grid-cols-3 lg:gap-8">
-        {SUCCESS_CARDS.map(({ title, icon: Icon }) => (
-          <article
-            key={title}
-            className="flex min-h-[320px] flex-col rounded-3xl bg-[#FFE8F6] p-4 dark:bg-[#FFE8F6]/15 sm:min-h-[360px] sm:p-5"
-          >
-            <div className="flex min-h-0 flex-1 flex-col rounded-3xl bg-white p-6 dark:bg-card sm:p-7">
-              <span className="flex size-10 items-center justify-center rounded-full bg-[#C6009C] text-white">
-                <Icon className="size-5" aria-hidden />
-              </span>
-              <h3 className={cn(aboutCardTitle, "mt-4 text-[#C6009C] dark:text-[#C6009C]")}>
-                {title}
-              </h3>
-            </div>
-            <div className="mt-4 flex items-center justify-end gap-2 text-lg font-medium text-[#C6009C] dark:text-[#C6009C]">
-              <span>Read story</span>
-              <ArrowRight className="size-6" aria-hidden />
-            </div>
-          </article>
-        ))}
+      <div className={gridClass}>
+        {hasNotionData
+          ? stories.slice(0, 3).map((story) => {
+              const Icon = CATEGORY_ICON[story.category] ?? Sparkles
+              return (
+                <article
+                  key={story.id}
+                  className="flex h-full flex-col rounded-3xl bg-[#FFE8F6] p-4 dark:bg-[#FFE8F6]/15 sm:p-5"
+                >
+                  <div className="flex min-h-0 flex-1 flex-col rounded-3xl bg-white p-6 dark:bg-card sm:p-7">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#C6009C] text-white">
+                      <Icon className="size-5" aria-hidden />
+                    </span>
+                    <h3 className={cn(aboutCardTitle, "mt-4 shrink-0 text-[#C6009C] dark:text-[#C6009C]")}>
+                      {story.title}
+                    </h3>
+                    {story.quote ? (
+                      <p className={cn(aboutCardBody, "mt-4 min-h-0 flex-1 text-pretty italic text-muted-foreground")}>
+                        &ldquo;{story.quote}&rdquo;
+                        {story.quoteAttribution && (
+                          <span className="mt-2 block not-italic font-medium text-[#C6009C]/80 dark:text-[#C6009C]/80">
+                            — {story.quoteAttribution}
+                          </span>
+                        )}
+                      </p>
+                    ) : (
+                      <p className={cn(aboutCardBody, "mt-4 min-h-0 flex-1 text-pretty text-muted-foreground")}>
+                        {story.summary}
+                      </p>
+                    )}
+                  </div>
+                  <Link
+                    href="/success-stories"
+                    className={successStoryReadLinkClass}
+                    aria-label={`Read story: ${story.title}`}
+                  >
+                    <span>Read story</span>
+                    <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                  </Link>
+                </article>
+              )
+            })
+          : SUCCESS_CARDS.map(({ title, icon: Icon, quoteLead, quoteHighlight, quoteTail }) => (
+              <article
+                key={title}
+                className="flex h-full flex-col rounded-3xl bg-[#FFE8F6] p-4 dark:bg-[#FFE8F6]/15 sm:p-5"
+              >
+                <div className="flex min-h-0 flex-1 flex-col rounded-3xl bg-white p-6 dark:bg-card sm:p-7">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#C6009C] text-white">
+                    <Icon className="size-5" aria-hidden />
+                  </span>
+                  <h3 className={cn(aboutCardTitle, "mt-4 shrink-0 text-[#C6009C] dark:text-[#C6009C]")}>
+                    {title}
+                  </h3>
+                  <p className={cn(aboutCardBody, "mt-4 min-h-0 flex-1 text-pretty italic text-muted-foreground")}>
+                    &ldquo;{quoteLead}{" "}
+                    <strong className="font-bold italic text-[#C6009C] dark:text-[#C6009C]">{quoteHighlight}</strong>
+                    {quoteTail}&rdquo;
+                  </p>
+                </div>
+                <Link
+                  href="/success-stories"
+                  className={successStoryReadLinkClass}
+                  aria-label={`Read story: ${title}`}
+                >
+                  <span>Read story</span>
+                  <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                </Link>
+              </article>
+            ))}
       </div>
     </section>
   )

@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
       { hostname: "*.amazonaws.com" },
       { hostname: "*.notion.so" },
       { hostname: "www.figma.com" },
+      { hostname: "framerusercontent.com" },
+      { hostname: "i.ytimg.com" },
     ],
   },
 }

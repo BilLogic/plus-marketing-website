@@ -1,6 +1,7 @@
 "use client"
 
 import { Fragment } from "react"
+import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { NAV_CONFIG, NAV_DROPDOWN_PANEL_STYLE } from "./nav-config"
 import {
@@ -18,6 +19,7 @@ type DesktopNavProps = {
 }
 
 export const DesktopNav = ({ className }: DesktopNavProps) => {
+  const router = useRouter()
   return (
     <NavigationMenu className={className}>
       <NavigationMenuList>
@@ -25,7 +27,10 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
           <NavigationMenuItem key={item.label}>
             {item.children ? (
               <>
-                <NavigationMenuTrigger className="text-sm">
+                <NavigationMenuTrigger
+                  className={cn("text-sm", item.href && "cursor-pointer")}
+                  {...(item.href ? { onClick: () => router.push(item.href!) } : {})}
+                >
                   {item.label}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
