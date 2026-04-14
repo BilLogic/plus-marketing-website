@@ -11,7 +11,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { Button, buttonVariants } from "@/components/ui/button"
 import {
   Select,
   SelectContent,
@@ -140,12 +139,12 @@ const HIGHLIGHT_STUDY_IDS_BY_TOPIC: Partial<
   ],
 }
 
-/** Match `for-schools-sections` — Community / Benefits / Oversight section headers. */
+/** Match `get-involved-sections` / `for-tutors-sections` typography. */
 const sectionHeaderH2 =
-  "text-pretty text-lg font-bold tracking-tight text-teal-950 sm:text-2xl md:text-3xl"
-const sectionHeaderLead = marketingTypography.sectionLead
-/** Every `<h2>` on `/for-researchers` — same scale as schools sections + `riFg.title` color as Research Index. */
-const forResearchersSectionH2 = cn(sectionHeaderH2, riFg.title)
+  "text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+const sectionHeaderLead = "w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90"
+/** Every `<h2>` on `/for-researchers` — same scale as reference pages. */
+const forResearchersSectionH2 = sectionHeaderH2
 /** Same as SchoolsCommunitySection / SchoolsTrainingSection mascot column. */
 const sectionHeaderDecor =
   "pointer-events-none h-[clamp(4.5rem,18vw,10.9375rem)] w-[clamp(3.75rem,24vw,12rem)] shrink-0 object-contain sm:h-32 sm:w-[7.25rem] md:h-40 md:w-36 lg:h-[175px] lg:w-[193px]"
@@ -156,19 +155,20 @@ const successStoriesHeaderDecor =
 const SUCCESS_STORY_GREEN = "text-[#007d49]"
 
 /** Teal outline pill — Research Index “View all” / empty-state link. */
-const forResearchersOutlineCtaClassName = cn(
-  buttonVariants({ variant: "outline", size: "navCta" }),
-  "rounded-full border border-[#027f89] bg-white px-5 text-sm font-normal text-[#004247] hover:bg-teal-50 sm:px-6 sm:text-base"
-)
+const forResearchersOutlineCtaClassName =
+  "inline-flex items-center justify-center rounded-full border-2 border-[#A6EDF4] bg-transparent px-5 text-sm font-medium text-teal-950 transition-colors hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20 sm:px-6 sm:text-base"
 
-/** Figma `1730:2451` — primary hero CTA (fill `#a6edf4`); sized for a single horizontal row with the secondary CTA. */
+/** Primary hero CTA — matches `get-involved-sections` / `for-tutors-sections` button style. */
 const researchersHeroPrimaryCtaClassName = cn(
-  "inline-flex h-[45px] w-fit items-center justify-center rounded-full bg-[#a6edf4] px-10 text-base font-normal text-[#004247] no-underline transition-opacity hover:opacity-95"
+  "inline-flex w-fit items-center justify-center no-underline",
+  "h-11 rounded-full border-0 bg-[#A6EDF4] px-8 text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
 )
 
-/** Figma `1730:2452` — outline “Our publications”. */
-const researchersHeroSecondaryCtaClassName =
-  "inline-flex h-[45px] w-fit items-center justify-center rounded-full border border-[#027f89] bg-white px-10 text-base font-normal text-[#004247] no-underline transition-colors hover:bg-teal-50"
+/** Outline hero CTA — matches `get-involved-sections` / `for-tutors-sections` outline button style. */
+const researchersHeroSecondaryCtaClassName = cn(
+  "inline-flex w-fit items-center justify-center no-underline",
+  "h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-8 text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20"
+)
 
 /**
  * Figma `1730:2510` / `1730:2453` — 2×2 partner grid (20px gap), pink character top-left, blue bottom-right.
@@ -183,9 +183,9 @@ const heroCollageTileLayout =
 const ResearchHeroCollageVisual = () => {
   const c = forResearchersAssets.heroCollage
   return (
-    <div className="relative mx-auto w-full max-w-[min(100%,38rem)] pb-12 pt-12 sm:max-w-[40rem] sm:pt-14 sm:pb-16 lg:max-w-[38.5rem] lg:pt-16 lg:pb-0">
-      {/* Pink character — Figma `1730:2467` 109×95, −15°, ~44px above grid */}
-      <div className="pointer-events-none absolute left-[-3px] top-0 z-20">
+    <div className="relative w-full max-w-[min(100%,44rem)] pb-6 pt-14 sm:pb-8 sm:pt-16 lg:pb-4 lg:pt-16">
+      {/* Pink character — Figma `1730:2467` 109×95, −15°, above grid top-left */}
+      <div className="pointer-events-none absolute left-2 top-0 z-20">
         <div className="-rotate-[15deg]">
           <img
             alt=""
@@ -196,9 +196,7 @@ const ResearchHeroCollageVisual = () => {
         </div>
       </div>
       <div
-        className={cn(
-          "relative z-0 mx-auto grid w-full max-w-[min(100%,520px)] grid-cols-1 gap-3.5 min-[480px]:grid-cols-2 min-[480px]:gap-5"
-        )}
+        className="relative z-0 mx-auto grid w-full grid-cols-1 gap-3.5 min-[480px]:grid-cols-2 min-[480px]:gap-5"
       >
         {/* Learning Ideas — pink, Figma `1730:2455` */}
         <div className={cn(heroCollageTileLayout, "rounded-[24px] bg-[#ffe8f5] min-[480px]:rounded-[30px]")}>
@@ -218,7 +216,7 @@ const ResearchHeroCollageVisual = () => {
             aria-hidden
           />
         </div>
-        {/* SOLAR — green, inner fill 228px tall in Figma */}
+        {/* SOLAR — green */}
         <div
           className={cn(
             heroCollageTileLayout,
@@ -232,8 +230,8 @@ const ResearchHeroCollageVisual = () => {
             aria-hidden
           />
         </div>
-        {/* AIED — tile + "=" outside the blue box, anchored to its bottom-right corner (Figma `1730:2468`) */}
-        <div className="relative min-h-0 w-full">
+        {/* AIED — blue tile with "=" character anchored bottom-right (Figma `1730:2468`) */}
+        <div className="relative min-h-0 w-full overflow-visible">
           <div
             className={cn(
               heroCollageTileLayout,
@@ -255,10 +253,11 @@ const ResearchHeroCollageVisual = () => {
               />
             </div>
           </div>
+          {/* Blue "=" character — sits outside the tile bottom-right */}
           <img
             alt=""
             src={c.characterBlue}
-            className="pointer-events-none absolute bottom-0 right-0 z-10 hidden h-[79px] w-[97px] origin-bottom-right translate-x-[30%] translate-y-[28%] object-cover object-bottom-right sm:block"
+            className="pointer-events-none absolute -bottom-5 -right-5 z-10 hidden h-[79px] w-[97px] object-cover sm:block"
             aria-hidden
           />
         </div>
@@ -270,18 +269,19 @@ const ResearchHeroCollageVisual = () => {
 /** Hero `1730:2510` — copy left; collage sized to Figma `1730:2453` (560px grid, 676px frame). */
 export const ResearchersHeroSection = () => {
   return (
-    <section className="relative w-full min-w-0 overflow-x-hidden pt-8 pb-6 sm:pt-10 sm:pb-8 md:pt-12 md:pb-10 lg:pt-14 lg:pb-12">
-      <div className="mx-auto flex w-full flex-col gap-6 sm:gap-7 lg:flex-row lg:items-end lg:justify-between lg:gap-10 xl:gap-12">
-        <div className="flex w-full min-w-0 max-w-[34rem] flex-col lg:max-w-[min(34rem,51vw)]">
-          <h1 className="flex flex-col gap-2 sm:gap-2.5 lg:gap-3">
-            <span className="text-xl font-semibold leading-none text-[#027f89] sm:text-2xl lg:text-[26px] xl:text-[28px]">
+    <section className="relative w-full min-w-0 overflow-hidden pt-8 pb-4 sm:pt-10 sm:pb-6 md:pt-12 md:pb-8 lg:pt-14">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 sm:gap-8 sm:px-6 md:px-8 lg:flex-row lg:items-center lg:gap-12">
+        {/* Text column — narrower to give the collage more room */}
+        <div className="flex w-full min-w-0 max-w-[26rem] shrink-0 flex-col gap-5 sm:gap-6">
+          <h1 className="flex flex-col gap-2 sm:gap-3">
+            <span className="text-xl font-semibold text-[#027f89] sm:text-2xl">
               For researchers
             </span>
-            <span className="text-balance text-[1.625rem] font-bold leading-[1.2] tracking-tight text-[#004247] sm:text-[1.875rem] md:text-[2.125rem] lg:text-[2.375rem] xl:text-[2.75rem] 2xl:text-[3rem]">
+            <span className="text-balance text-2xl font-bold leading-[1.2] tracking-tight text-[#004247] sm:text-3xl md:text-[2.125rem]">
               Pioneering CMU Research: Human-Centered AI for Personalized Math Learning
             </span>
           </h1>
-          <div className="mt-5 flex w-full flex-row items-stretch gap-2 min-[400px]:gap-3 sm:mt-6 lg:mt-7">
+          <div className="flex w-full flex-wrap gap-3">
             <Link
               href={`#${forResearchersSectionIds.collaborate}`}
               className={researchersHeroPrimaryCtaClassName}
@@ -293,7 +293,8 @@ export const ResearchersHeroSection = () => {
             </Link>
           </div>
         </div>
-        <div className="relative flex min-w-0 flex-1 shrink-0 justify-center lg:max-w-[min(100%,38.5rem)] lg:justify-end">
+        {/* Collage column — flex-1 takes all remaining space */}
+        <div className="relative flex min-w-0 flex-1 justify-center lg:justify-end">
           <ResearchHeroCollageVisual />
         </div>
       </div>
@@ -335,7 +336,6 @@ export const ResearchPartnersSection = () => {
         title="Our Research Partners"
         description="A strategic alliance of world-class universities and industry leaders committed to rigorous learning engineering at scale."
         decor={forResearchersAssets.partners.decor}
-        titleClassName={riFg.title}
       />
       <div className="flex items-center justify-between">
         {forResearchersAssets.partners.logos.map((logo, i) => (
@@ -665,7 +665,6 @@ export const ResearchHighlightsSection = ({
         title="Our Latest Research Highlights"
         description="Explore our most recent findings in generative artificial intelligence, tutor training, and student learning."
         decor={forResearchersAssets.highlights.decor}
-        titleClassName={riFg.title}
       />
 
       <Accordion
@@ -893,9 +892,7 @@ export const ResearchIndexSection = ({
     >
       <SectionHeader
         title="Research Index"
-        titleClassName={riFg.title}
         description="Explore the full archive of PLUS research"
-        descriptionClassName={cn(riIndexMetaCopy, riFg.bodyMuted)}
         decor={forResearchersAssets.index.decor}
       />
       <ResearchIndexSearchForm />
@@ -1270,7 +1267,7 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
       <div className="flex w-full flex-row items-start gap-4 sm:gap-6 md:gap-8 lg:gap-10">
         <div className="min-w-0 flex-1 basis-0 space-y-3 text-left sm:space-y-4 md:space-y-5">
           <h2 className={forResearchersSectionH2}>Research Success Story</h2>
-          <p className="text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl">
+          <p className="w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90">
             Here&apos;s what researchers are saying about PLUS.
           </p>
         </div>
@@ -1393,14 +1390,12 @@ export const ResearchCollaborateCtaSection = () => {
               Want to get involved? Reach out if you are interested in conducting research with us.
             </p>
           </div>
-          <Button
-            type="button"
-            variant="plusNavCta"
-            size="navCta"
-            className="h-[45px] min-h-[45px] rounded-full px-10 text-base font-normal"
+          <Link
+            href="/get-involved#partnerships-contact-form"
+            className={researchersHeroPrimaryCtaClassName}
           >
             Reach out
-          </Button>
+          </Link>
         </div>
       </div>
     </section>

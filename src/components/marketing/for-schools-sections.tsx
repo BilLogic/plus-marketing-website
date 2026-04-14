@@ -7,15 +7,11 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { ArrowRight } from "lucide-react"
+import Link from "next/link"
 
-import { Button } from "@/components/ui/button"
-import {
-  ScrollAccordion,
-  type ScrollAccordionItem,
-} from "@/components/ui/scroll-accordion"
 import { cn } from "@/lib/utils"
 import { BenefitsAccordionIcon } from "@/components/marketing/benefit-accordion-icons"
 import type { SuccessStory } from "@/lib/notion/types"
@@ -27,15 +23,19 @@ import { forSchoolsAssets } from "@/components/marketing/for-schools-assets"
 import { marketingTypography } from "@/lib/marketing-typography"
 import { forSchoolsSectionIds } from "@/lib/plus-footer-ia"
 
-/** Match `for-tutors-sections` typography colors for headings and supporting text. */
+/** Match `get-involved-sections` / `for-tutors-sections` typography. */
 const schoolsSectionH2 =
-  "text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl"
-const schoolsSectionLead = "max-w-3xl text-lg text-muted-foreground"
+  "text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+const schoolsSectionLead = "w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90"
+
+/** Shared CTA button styles — match `get-involved-sections` / `for-tutors-sections`. */
+const primaryCta =
+  "inline-flex items-center justify-center h-11 rounded-full border-0 bg-[#A6EDF4] px-8 text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
 
 export const SchoolsHeroSection = () => {
   const { division, multiplication, equal } = forSchoolsAssets.mathDecor
   return (
-    <section className="relative w-full min-w-0 overflow-hidden pt-8 pb-6 sm:pt-10 sm:pb-8 md:pt-12 md:pb-10 lg:pt-14 lg:pb-12">
+    <section className="relative mx-auto w-full max-w-7xl min-w-0 overflow-hidden pt-8 pb-4 sm:pt-10 sm:pb-6 md:pt-12 md:pb-8 lg:pt-14">
       <img
         alt=""
         src={division}
@@ -64,9 +64,12 @@ export const SchoolsHeroSection = () => {
             Research-driven, AI-powered Support for Every Classroom
           </span>
         </h1>
-        <Button variant="plusNavCta" size="navCta" className="h-[45px] px-10">
+        <Link
+          href={`#${forSchoolsSectionIds.register}`}
+          className={primaryCta}
+        >
           Get Started for Free
-        </Button>
+        </Link>
       </div>
     </section>
   )
@@ -98,10 +101,10 @@ export const SchoolsCommunitySection = () => {
       */}
       <div className="flex w-full flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
         <div className="min-w-0 flex-1 basis-0 space-y-3 sm:space-y-4 md:space-y-5">
-          <h2 className="text-pretty text-lg font-bold tracking-tight text-teal-950 sm:text-2xl md:text-3xl">
+          <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Join the PLUS School Community
           </h2>
-          <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg">
+          <p className="w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90">
             We partner with forward-thinking schools to bridge learning gaps. See
             the organizations already making a difference with us.
           </p>
@@ -184,128 +187,36 @@ const BENEFITS_ITEMS = [
   },
 ] as const
 
-const BENEFITS_SCROLL_ITEMS: readonly ScrollAccordionItem[] = BENEFITS_ITEMS.map(
-  (item, index) => ({
-    value: item.id,
-    /**
-     * Closed: Figma 1102:1050 row (min-h 58px); title uses `marketingTypography.h2` + muted.
-     * Open: label is sr-only; visible title lives in panel (1104:1183) to avoid duplicate text.
-     */
-    title: ({ isOpen }) =>
-      isOpen ? (
-        <span className="sr-only">{item.title}</span>
-      ) : (
-        <span className="flex min-h-[58px] w-full max-w-[min(100%,445px)] items-center gap-[25px] text-left">
-          <BenefitsAccordionIcon index={index} tone="muted" />
-          <span
-            className={cn(
-              marketingTypography.h2,
-              "min-w-0 text-pretty text-muted-foreground"
-            )}
-          >
-            {item.title}
-          </span>
-        </span>
-      ),
-    children: (
-      /* Open panel — Figma 1104:1183; title + icon use marketing ochre when expanded. */
-      <div className="flex w-full flex-row items-start justify-between gap-3 sm:gap-5 md:gap-8 lg:gap-10">
-        <div className="flex min-w-0 flex-1 basis-0 flex-col gap-10 sm:gap-14 md:gap-[75px]">
-          <div className="flex max-w-[min(100%,445px)] flex-col items-start gap-[25px]">
-            <BenefitsAccordionIcon index={index} tone="accent" />
-            <h2
-              className={cn(
-                marketingTypography.h2,
-                "text-pretty text-[#a56d1e]"
-              )}
-            >
-              {item.title}
-            </h2>
-            <p className={cn(marketingTypography.lead, "text-pretty max-w-none")}>
-              {item.description}
-            </p>
-          </div>
-          {item.cta ? (
-            <Button
-              variant="plusNavCta"
-              size="navCta"
-              className="h-[45px] w-full max-w-[277px] rounded-full px-10 text-base font-normal"
-            >
-              {item.cta}
-            </Button>
-          ) : null}
-        </div>
-        <div
-          className={cn(
-            "relative aspect-square w-[clamp(11rem,42vw,27.5rem)] max-w-[440px] shrink-0 overflow-hidden rounded-[38px]",
-            item.id === "goal-setting" ? "bg-[#fff3dd]" : "bg-muted"
-          )}
-        >
-          {item.id === "free-for-all" ? (
-            /* Figma 1116:1392 — wider photo panned left to frame subject */
-            <img
-              alt=""
-              src={forSchoolsAssets.benefitsPanelArt[0]}
-              className="pointer-events-none absolute top-0 left-[-32.71%] h-full max-w-none w-[177.78%] select-none object-cover"
-              decoding="async"
-            />
-          ) : item.id === "goal-setting" ? (
-            /* Figma 1116:1396 — 3 layered screenshots, back→front */
-            <>
-              <img
-                alt=""
-                src={forSchoolsAssets.benefitsPanelGoalScreenshots[0]}
-                className="pointer-events-none absolute left-1/2 -translate-x-1/2 max-w-none w-[79.5%] h-[39.3%] rounded-[5px] object-cover select-none"
-                style={{ bottom: "36.1%" }}
-                decoding="async"
-              />
-              <img
-                alt=""
-                src={forSchoolsAssets.benefitsPanelGoalScreenshots[1]}
-                className="pointer-events-none absolute left-1/2 -translate-x-1/2 max-w-none w-[87.5%] h-[43.2%] rounded-[5px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] object-cover select-none"
-                style={{ bottom: "21.4%" }}
-                decoding="async"
-              />
-              <img
-                alt=""
-                src={forSchoolsAssets.benefitsPanelGoalScreenshots[2]}
-                className="pointer-events-none absolute left-1/2 -translate-x-1/2 max-w-none w-[96.6%] h-[47.7%] rounded-[5px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] object-cover select-none"
-                style={{ bottom: "-2.5%" }}
-                decoding="async"
-              />
-            </>
-          ) : (
-            <img
-              alt=""
-              src={
-                forSchoolsAssets.benefitsPanelArt[index] ??
-                forSchoolsAssets.images.benefits
-              }
-              className="pointer-events-none absolute inset-0 size-full object-cover select-none"
-              decoding="async"
-            />
-          )}
-        </div>
-      </div>
-    ),
-  })
-)
-
 export const SchoolsTrainingSection = () => {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+    itemRefs.current.forEach((el, i) => {
+      if (!el) return
+      const observer = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveIndex(i) },
+        { threshold: 0, rootMargin: "-40% 0px -40% 0px" }
+      )
+      observer.observe(el)
+      observers.push(observer)
+    })
+    return () => observers.forEach((o) => o.disconnect())
+  }, [])
+
   return (
     <section
       id={forSchoolsSectionIds.benefits}
       className="space-y-6 sm:space-y-8 lg:space-y-10"
     >
-      {/*
-        Figma 1379:2340 — copy + division mascot; mascot centered with heading + lead.
-      */}
+      {/* Figma 1379:2340 — copy + division mascot */}
       <div className="flex w-full flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
         <div className="min-w-0 flex-1 basis-0 space-y-3 sm:space-y-4 md:space-y-5">
-          <h2 className="text-pretty text-lg font-bold tracking-tight text-teal-950 sm:text-2xl md:text-3xl">
+          <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Benefits of PLUS
           </h2>
-          <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg">
+          <p className="w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90">
             Here&apos;s how PLUS supports schools and trains tutors to guide students
             to success
           </p>
@@ -318,18 +229,121 @@ export const SchoolsTrainingSection = () => {
         />
       </div>
 
-      <ScrollAccordion
-        items={BENEFITS_SCROLL_ITEMS}
-        hideTriggerChevron
-        viewportSwitchThresholdPx={72}
-        viewportSwitchCooldownMs={420}
-        centerActiveInViewport
-        centerActiveCooldownMs={520}
-        centerActiveOffsetPx={-36}
-        className="w-full"
-        itemClassName="px-4 py-1 sm:px-6 md:px-8 lg:px-[50px]"
-        triggerClassName="items-center py-4 hover:no-underline sm:py-5 aria-expanded:py-2.5"
-      />
+      {/* Two-column sticky scroll */}
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
+
+        {/* Left: scrolling benefit items */}
+        <div className="pb-[5vh]">
+          {BENEFITS_ITEMS.map((item, i) => {
+            const isActive = i === activeIndex
+            return (
+              <div
+                key={item.id}
+                ref={(el) => { itemRefs.current[i] = el }}
+                className="flex flex-col gap-5 py-16 sm:py-20"
+              >
+                <BenefitsAccordionIcon
+                  index={i}
+                  tone={isActive ? "accent" : "muted"}
+                  className="transition-colors duration-300"
+                />
+                <p
+                  className={cn(
+                    marketingTypography.h2,
+                    "text-pretty transition-colors duration-300",
+                    isActive ? "text-[#a56d1e]" : "text-muted-foreground"
+                  )}
+                >
+                  {item.title}
+                </p>
+                {isActive && (
+                  <>
+                    <p className={cn(marketingTypography.lead, "max-w-none text-pretty")}>
+                      {item.description}
+                    </p>
+                    {item.cta ? (
+                      <Link
+                        href={`#${forSchoolsSectionIds.register}`}
+                        className={cn(primaryCta, "mt-2 w-full max-w-[277px]")}
+                      >
+                        {item.cta}
+                      </Link>
+                    ) : null}
+                  </>
+                )}
+              </div>
+            )
+          })}
+        </div>
+
+        {/* Right: sticky art panel — Figma 1104:1183 */}
+        <div className="hidden md:block" style={{ minHeight: 400 }}>
+          <div className="sticky" style={{ top: 88 }}>
+            <div
+              className={cn(
+                "relative aspect-square w-full overflow-hidden rounded-[38px] transition-colors duration-500",
+                activeIndex === 2 ? "bg-[#fff3dd]" : "bg-muted"
+              )}
+            >
+              {BENEFITS_ITEMS.map((item, i) => (
+                <div
+                  key={item.id}
+                  className={cn(
+                    "absolute inset-0 transition-opacity duration-500",
+                    i === activeIndex ? "opacity-100" : "opacity-0"
+                  )}
+                >
+                  {item.id === "free-for-all" ? (
+                    /* Figma 1116:1392 — wider photo panned left to frame subject */
+                    <img
+                      alt=""
+                      src={forSchoolsAssets.benefitsPanelArt[0]}
+                      className="pointer-events-none absolute top-0 left-[-32.71%] h-full max-w-none w-[177.78%] select-none object-cover"
+                      decoding="async"
+                    />
+                  ) : item.id === "goal-setting" ? (
+                    /* Figma 1116:1396 — 3 layered screenshots, back→front */
+                    <>
+                      <img
+                        alt=""
+                        src={forSchoolsAssets.benefitsPanelGoalScreenshots[0]}
+                        className="pointer-events-none absolute left-1/2 -translate-x-1/2 max-w-none w-[79.5%] h-[39.3%] rounded-[5px] object-cover select-none"
+                        style={{ bottom: "36.1%" }}
+                        decoding="async"
+                      />
+                      <img
+                        alt=""
+                        src={forSchoolsAssets.benefitsPanelGoalScreenshots[1]}
+                        className="pointer-events-none absolute left-1/2 -translate-x-1/2 max-w-none w-[87.5%] h-[43.2%] rounded-[5px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] object-cover select-none"
+                        style={{ bottom: "21.4%" }}
+                        decoding="async"
+                      />
+                      <img
+                        alt=""
+                        src={forSchoolsAssets.benefitsPanelGoalScreenshots[2]}
+                        className="pointer-events-none absolute left-1/2 -translate-x-1/2 max-w-none w-[96.6%] h-[47.7%] rounded-[5px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] object-cover select-none"
+                        style={{ bottom: "-2.5%" }}
+                        decoding="async"
+                      />
+                    </>
+                  ) : (
+                    <img
+                      alt=""
+                      src={
+                        forSchoolsAssets.benefitsPanelArt[i] ??
+                        forSchoolsAssets.images.benefits
+                      }
+                      className="pointer-events-none absolute inset-0 size-full object-cover select-none"
+                      decoding="async"
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+      </div>
     </section>
   )
 }
@@ -378,10 +392,10 @@ export const SchoolsExperienceSection = () => {
       {/* Section header — same pattern as Benefits / Community / Oversight */}
       <div className="flex w-full flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
         <div className="min-w-0 flex-1 basis-0 space-y-3 sm:space-y-4 md:space-y-5">
-          <h2 className="text-pretty text-lg font-bold tracking-tight text-teal-950 sm:text-2xl md:text-3xl">
+          <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Your Day-to-Day Experience with PLUS
           </h2>
-          <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg">
+          <p className="w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90">
             A seamless integration designed to support your faculty and accelerate student growth.
           </p>
         </div>
@@ -653,10 +667,10 @@ export const SchoolsOversightSection = () => {
     >
       <div className="flex w-full flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
         <div className="min-w-0 flex-1 basis-0 space-y-3 sm:space-y-4 md:space-y-5">
-          <h2 className="text-pretty text-lg font-bold tracking-tight text-teal-950 sm:text-2xl md:text-3xl">
+          <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Maintain Excellence with Robust Oversight
           </h2>
-          <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg">
+          <p className="w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90">
             Ensure high-impact tutoring through data-driven insights and professional
             certification.
           </p>
@@ -717,10 +731,10 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
     >
       <div className="flex w-full flex-row items-center gap-4 sm:gap-6 md:gap-8 lg:gap-10">
         <div className="min-w-0 flex-1 basis-0 space-y-3 text-left sm:space-y-4 md:space-y-5">
-          <h2 className="text-pretty text-lg font-bold tracking-tight text-teal-950 sm:text-2xl md:text-3xl">
+          <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             School Success Stories
           </h2>
-          <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg">
+          <p className="w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90">
             Here&apos;s what schools are saying about PLUS.
           </p>
         </div>
@@ -837,22 +851,17 @@ export const SchoolsRegisterCTA = () => {
       <div className={REGISTER_CTA_CARD}>
         <div className="flex flex-col items-center gap-12 md:gap-14 lg:gap-[60px]">
           <div className="mx-auto w-full max-w-[49rem] space-y-3 text-center sm:space-y-4 md:space-y-5">
-            <h2 className="text-pretty text-lg font-bold tracking-tight text-teal-950 sm:text-2xl md:text-3xl">
+            <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
               Register Your Institution
             </h2>
-            <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg">
+            <p className="w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90">
               Want to get started? Sign up to register your organization and provide your tutors
               access to our full training suite.
             </p>
           </div>
-          <Button
-            type="button"
-            variant="plusNavCta"
-            size="navCta"
-            className="h-[45px] min-h-[45px] rounded-full px-10 text-base font-normal"
-          >
+          <Link href="/get-involved#partnerships-contact-form" className={primaryCta}>
             Sign up
-          </Button>
+          </Link>
         </div>
       </div>
     </section>

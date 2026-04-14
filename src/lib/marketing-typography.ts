@@ -6,10 +6,10 @@ export const marketingTypography = {
   /** H1 — Hero headline (Storybook: text-5xl font-semibold tracking-tight) */
   h1: "text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl",
   /**
-   * Marketing landing hero title — bold teal; same scale as `h1`.
-   * Used by homepage hero and For Tutors `TutorsHeroSection`.
+   * Marketing landing hero title — matches for-tutors / get-involved hero H1.
+   * Used by for-schools `SchoolsHeroSection`.
    */
-  heroH1: "text-balance text-4xl font-bold tracking-tight text-teal-950 sm:text-5xl",
+  heroH1: "text-balance text-4xl font-semibold tracking-tight text-teal-950 sm:text-5xl",
   /** H2 — Section headline (Storybook: text-3xl font-semibold tracking-tight) */
   h2: "text-balance text-3xl font-semibold tracking-tight text-foreground",
   /** H3 — Card / accordion titles (Storybook: text-xl font-semibold tracking-tight) */

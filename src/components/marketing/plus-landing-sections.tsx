@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useState, useEffect, useRef } from "react"
 import { ArrowLeft } from "lucide-react"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { BunduiFooterSection } from "@/components/registry/bundui/footer-section"
 import {
   plusHomeAwards,
@@ -85,11 +85,17 @@ const CountUpStat = ({
   )
 }
 
-/** Section typography + rhythm — match `for-schools-sections.tsx`. */
+/** Shared CTA button styles — match `get-involved-sections.tsx` / `for-tutors-sections.tsx`. */
+const primaryCta =
+  "inline-flex items-center justify-center h-11 rounded-full border-0 bg-[#A6EDF4] px-8 text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
+const outlineCta =
+  "inline-flex items-center justify-center h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-8 text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20"
+
+/** Section typography + rhythm — match `get-involved-sections.tsx` / `for-tutors-sections.tsx`. */
 const schoolsSectionTitle =
-  "text-pretty text-lg font-bold tracking-tight text-teal-950 sm:text-2xl md:text-3xl"
+  "text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
 const schoolsSectionLead =
-  "text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg"
+  "w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90"
 const schoolsSectionGap = "space-y-6 sm:space-y-8 lg:space-y-10"
 const schoolsHeaderRow =
   "flex w-full flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8"
@@ -420,22 +426,10 @@ export const PlusHeroSection = () => {
               </p>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-5">
-              <Link
-                href="/about"
-                className={cn(
-                  buttonVariants({ variant: "default", size: "lg" }),
-                  "h-11 min-w-[169px] justify-center rounded-full border-0 bg-[#a6edf4] px-8 text-base font-normal text-[#004247] hover:bg-[#94e5ee]"
-                )}
-              >
+              <Link href="/about" className={cn(primaryCta, "min-w-[169px]")}>
                 Our mission
               </Link>
-              <Link
-                href="/for-tutors"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "h-11 min-w-[132px] justify-center rounded-full border border-[#027f89] bg-white px-8 text-base font-normal text-[#004247] hover:bg-teal-50"
-                )}
-              >
+              <Link href="/for-tutors" className={cn(outlineCta, "min-w-[132px]")}>
                 Join us
               </Link>
             </div>
@@ -562,10 +556,7 @@ export const PlusImpactStatsSection = () => {
             </p>
             <Link
               href="/for-tutors"
-              className={cn(
-                buttonVariants({ variant: "default", size: "lg" }),
-                "mt-4 h-[45px] w-fit min-w-[263px] justify-center rounded-full border-0 bg-[#a6edf4] px-10 text-base font-normal text-[#004247] hover:bg-[#94e5ee]"
-              )}
+              className={cn(primaryCta, "mt-4 w-fit min-w-[263px]")}
             >
               Learn more about toolkit
             </Link>
@@ -603,10 +594,7 @@ export const PlusImpactStatsSection = () => {
             </p>
             <Link
               href="/for-schools"
-              className={cn(
-                buttonVariants({ variant: "outline", size: "lg" }),
-                "mt-auto h-[45px] w-fit min-w-[212px] justify-center rounded-full border border-[#027f89] bg-white px-10 text-base font-normal text-[#004247] hover:bg-teal-50"
-              )}
+              className={cn(outlineCta, "mt-auto w-fit min-w-[212px]")}
             >
               Get PLUS tutoring
             </Link>
@@ -633,10 +621,7 @@ export const PlusImpactStatsSection = () => {
             </p>
             <Link
               href="/for-tutors"
-              className={cn(
-                buttonVariants({ variant: "outline", size: "lg" }),
-                "mt-auto h-[45px] w-fit min-w-[195px] justify-center rounded-full border border-[#027f89] bg-white px-10 text-base font-normal text-[#004247] hover:bg-teal-50"
-              )}
+              className={cn(outlineCta, "mt-auto w-fit min-w-[195px]")}
             >
               Become a tutor
             </Link>
@@ -905,10 +890,7 @@ export const PlusScienceOfLearningSection = () => {
             </p>
             <Link
               href="/research"
-              className={cn(
-                buttonVariants({ variant: "default", size: "lg" }),
-                "h-[45px] w-fit min-w-[215px] justify-center rounded-full border-0 bg-[#a6edf4] px-10 text-base font-normal text-[#004247] hover:bg-[#94e5ee]"
-              )}
+              className={cn(primaryCta, "w-fit min-w-[215px]")}
             >
               Read our research
             </Link>

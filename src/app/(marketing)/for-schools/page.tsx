@@ -30,20 +30,22 @@ const ForSchoolsPage = async () => {
   )
 
   return (
-    <div
-      className={cn(
-        "mx-auto flex w-full max-w-7xl flex-col px-4 pb-16 pt-2 sm:px-6 sm:pb-20 md:pb-24",
-        marketingSectionStackGap
-      )}
-    >
+    <>
       <SchoolsHeroSection />
-      <SchoolsCommunitySection />
-      <SchoolsTrainingSection />
-      <SchoolsExperienceSection />
-      <SchoolsOversightSection />
-      <SchoolsSuccessStoriesSection stories={schoolsSuccessStories} />
-      <SchoolsRegisterCTA />
-    </div>
+      <div
+        className={cn(
+          "mx-auto flex max-w-5xl flex-col px-4 pb-16 pt-8 sm:px-6 sm:pb-20 md:px-8 md:pb-24 md:pt-10",
+          marketingSectionStackGap
+        )}
+      >
+        <SchoolsCommunitySection />
+        <SchoolsTrainingSection />
+        <SchoolsExperienceSection />
+        <SchoolsOversightSection />
+        <SchoolsSuccessStoriesSection stories={schoolsSuccessStories} />
+        <SchoolsRegisterCTA />
+      </div>
+    </>
   )
 }
 

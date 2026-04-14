@@ -47,27 +47,29 @@ const ForResearchersPage = async ({
   )
 
   return (
-    <div
-      className={cn(
-        "mx-auto flex w-full max-w-7xl flex-col px-4 pb-16 pt-0 sm:px-6 sm:pb-20 md:pb-24",
-        marketingSectionStackGap
-      )}
-    >
+    <>
       <ResearchersHeroSection />
-      <ResearchHighlightsSection
-        papers={allPapers}
-        openAllAccordions={openAllHighlightAccordions}
-      />
-      <ResearchPartnersSection />
-      <ResearchIndexSection
-        papers={indexPreview}
-        totalCount={allPapers.length}
-        filterSourcePapers={allPapers}
-      />
-      <ResearchersGridSection members={researchTeam} />
-      <ResearchSuccessStoriesSection stories={researchSuccessStories} />
-      <ResearchCollaborateCtaSection />
-    </div>
+      <div
+        className={cn(
+          "mx-auto flex max-w-5xl flex-col px-4 pb-16 pt-8 sm:px-6 sm:pb-20 md:px-8 md:pb-24 md:pt-10",
+          marketingSectionStackGap
+        )}
+      >
+        <ResearchHighlightsSection
+          papers={allPapers}
+          openAllAccordions={openAllHighlightAccordions}
+        />
+        <ResearchPartnersSection />
+        <ResearchIndexSection
+          papers={indexPreview}
+          totalCount={allPapers.length}
+          filterSourcePapers={allPapers}
+        />
+        <ResearchersGridSection members={researchTeam} />
+        <ResearchSuccessStoriesSection stories={researchSuccessStories} />
+        <ResearchCollaborateCtaSection />
+      </div>
+    </>
   )
 }
 
