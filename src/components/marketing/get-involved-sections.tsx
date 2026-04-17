@@ -315,7 +315,7 @@ export function GetInvolvedCareersSection({ jobs }: { jobs?: JobListing[] }) {
       <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8">
       {listings.length === 0 ? (
         <div className={cn("rounded-[30px] bg-[#E8F6EA] dark:bg-emerald-950/20", cardPaddingLatest)}>
-          <p className="text-lg leading-relaxed text-muted-foreground">No open jobs at this time. Check back soon!</p>
+          <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">No open jobs at this time. Check back soon!</p>
         </div>
       ) : (
       <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8">
