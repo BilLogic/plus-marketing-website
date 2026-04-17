@@ -20,8 +20,8 @@ export default async function NewsDetailPage({
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-      <Button variant="ghost" size="sm" className="mb-6 gap-1.5" render={<Link href="/about/news" />}>
+    <div className="mx-auto max-w-3xl py-12">
+      <Button variant="ghost" size="sm" className="mb-6 gap-1.5" nativeButton={false} render={<Link href="/about/news" />}>
         <ArrowLeft className="size-4" />
         Back to News
       </Button>
@@ -63,6 +63,7 @@ export default async function NewsDetailPage({
 
         {item.externalLink && (
           <Button
+            nativeButton={false}
             render={
               <a href={item.externalLink} target="_blank" rel="noopener noreferrer" />
             }

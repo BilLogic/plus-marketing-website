@@ -61,6 +61,13 @@ export type SuccessStory = {
   publicReadUrl?: string | null
 }
 
+export type JobListing = {
+  id: string
+  title: string
+  location: string
+  href: string
+}
+
 export type ResearchPaper = {
   id: string
   title: string

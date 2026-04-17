@@ -67,7 +67,7 @@ export function DayToDayExperienceSection({
         <img
           alt=""
           src={forSchoolsAssets.mathDecor.multiplication}
-          className="pointer-events-none h-[clamp(4.5rem,18vw,10.9375rem)] w-[clamp(3.75rem,24vw,12rem)] shrink-0 object-contain sm:h-32 sm:w-[7.25rem] md:h-40 md:w-36 lg:h-[247px] lg:w-[222px]"
+          className="pointer-events-none h-[95px] w-auto shrink-0 object-contain"
           aria-hidden
         />
       </div>

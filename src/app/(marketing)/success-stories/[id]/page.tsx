@@ -21,11 +21,12 @@ export default async function SuccessStoryPage({
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <div className="mx-auto max-w-3xl py-12">
       <Button
         variant="ghost"
         size="sm"
         className="mb-6 gap-1.5"
+        nativeButton={false}
         render={<Link href="/success-stories" />}
       >
         <ArrowLeft className="size-4" />

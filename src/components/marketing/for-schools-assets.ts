@@ -17,6 +17,7 @@ export const forSchoolsAssets = {
     division: "/figma/for-schools/division.png",
     multiplication: "/figma/for-schools/multiplication.png",
     equal: "/figma/for-schools/equal.png",
+    greaterThan: "/figma/home/ornament-green-gt.png",
   } as const,
   /**
    * Benefits accordion panel images — Figma node 1104-1220.

@@ -92,17 +92,17 @@ export const TutorsHeroSection = () => {
       />
 
       <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-3 sm:gap-4 md:gap-5">
-        <p className="text-xl font-semibold text-teal-900 max-sm:text-2xl sm:text-2xl md:text-3xl">
+        <p className="text-lg font-semibold text-teal-900 sm:text-xl md:text-3xl">
           For Tutors
         </p>
-        <h1 className="text-balance text-3xl font-semibold tracking-tight text-teal-950 max-sm:text-4xl sm:text-4xl md:text-5xl">
+        <h1 className="text-balance text-3xl font-semibold tracking-tight text-teal-950 sm:text-4xl md:text-5xl">
           Teach What Matters and Earn What You Deserve
         </h1>
 
       </div>
 
       <div className="relative z-[1] mx-auto w-full max-w-5xl text-center">
-        <p className="text-lg text-teal-900/80 dark:text-white/90">
+        <p className="text-base text-teal-900/80 lg:text-lg dark:text-white/90">
           Join 500+ tutors supporting 5,000+ students. Earn while you learn and
           lead.
         </p>
@@ -110,20 +110,24 @@ export const TutorsHeroSection = () => {
 
       <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
         <Button
-          className="h-11 rounded-full border-0 bg-[#A6EDF4] px-8 text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
+          className="h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-8 text-sm sm:text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
+          nativeButton={false}
+          render={<a href="https://app.tutors.plus/demo" target="_blank" rel="noopener noreferrer" />}
         >
           Check Our Demo
         </Button>
         <Button
           variant="outline"
-          className="h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-8 text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20"
+          className="h-9 sm:h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-8 text-sm sm:text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20"
+          nativeButton={false}
+          render={<a href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform" target="_blank" rel="noopener noreferrer" />}
         >
           Become a Tutor
         </Button>
       </div>
 
-      <div className="relative mx-auto mt-2 w-full max-w-5xl">
-        <div className="relative aspect-video w-full overflow-hidden rounded-3xl bg-muted ring-1 ring-teal-200/80 dark:ring-teal-800/50">
+      <div className="relative mx-auto mt-2 w-full max-w-[1000px]">
+        <div className="relative aspect-video w-full overflow-hidden rounded-[30px] bg-muted ring-1 ring-teal-200/80 dark:ring-teal-800/50">
           {heroVideoActive ? (
             <iframe
               title="PLUS for tutors — video on YouTube"
@@ -142,26 +146,25 @@ export const TutorsHeroSection = () => {
                 sizes="(max-width: 1024px) 100vw, 64rem"
                 priority
               />
-              <div
-                className="absolute inset-0 bg-neutral-950/45"
-                aria-hidden
-              />
               <button
                 type="button"
                 onClick={() => setHeroVideoActive(true)}
-                className="absolute inset-0 flex cursor-pointer items-center justify-center border-0 bg-transparent p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="group absolute inset-0 size-full border-0 bg-transparent p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 aria-label="Play PLUS for tutors video on YouTube"
               >
-                <span className="flex size-16 items-center justify-center rounded-full bg-white/95 text-teal-800 shadow-lg ring-4 ring-white/40 transition-transform hover:scale-105">
-                  <svg
-                    className="ml-1 size-7"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden
-                  >
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </span>
+                <div
+                  className="absolute inset-0 bg-[rgba(54,54,54,0.5)] transition-opacity group-hover:bg-[rgba(54,54,54,0.38)]"
+                  aria-hidden
+                />
+                <svg
+                  className="absolute left-1/2 top-1/2 size-[75px] -translate-x-1/2 -translate-y-1/2 drop-shadow-md transition-transform group-hover:scale-110"
+                  viewBox="0 0 75 75"
+                  fill="none"
+                  aria-hidden
+                >
+                  <circle cx="37.5" cy="37.5" r="37.5" fill="#a6edf4" fillOpacity="0.82" />
+                  <path d="M30 22.5L54 37.5L30 52.5V22.5Z" fill="#004247" />
+                </svg>
               </button>
             </>
           )}
@@ -218,7 +221,7 @@ export const TutorsCompensationSection = () => {
               <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 Get Paid for All Your Hours
               </h2>
-              <p className="mx-auto max-w-2xl text-lg text-teal-900/75 dark:text-white/90 sm:mx-0">
+              <p className="mx-auto max-w-2xl text-base text-teal-900/75 sm:mx-0 lg:text-lg dark:text-white/90">
                 Earn for every hour you spend training, tutoring, and reflecting
                 on your work
               </p>
@@ -237,7 +240,7 @@ export const TutorsCompensationSection = () => {
           {COMPENSATION_COLUMNS.map((col) => (
             <div
               key={col.stat}
-              className="overflow-hidden rounded-2xl border-2 border-sky-200 bg-white dark:border-sky-800/50 dark:bg-card"
+              className="overflow-hidden rounded-[30px] border-2 border-sky-200 bg-white dark:border-sky-800/50 dark:bg-card"
             >
               <div
                 className={cn(
@@ -257,7 +260,7 @@ export const TutorsCompensationSection = () => {
                   {col.bullets.map((b) => (
                     <li
                       key={b}
-                      className="flex gap-2 text-lg leading-relaxed text-muted-foreground"
+                      className="flex gap-2 text-base leading-relaxed text-muted-foreground lg:text-lg"
                     >
                       <span
                         className="mt-2 size-1.5 shrink-0 rounded-full bg-sky-400 dark:bg-sky-500"
@@ -273,7 +276,7 @@ export const TutorsCompensationSection = () => {
         </div>
 
         {/* lg+: single card, two-row three-column grid */}
-        <div className="hidden overflow-hidden rounded-2xl border-2 border-sky-200 bg-white lg:block dark:border-sky-800/50 dark:bg-card">
+        <div className="hidden overflow-hidden rounded-[30px] border-2 border-sky-200 bg-white lg:block dark:border-sky-800/50 dark:bg-card">
           <div className="grid border-b border-sky-200 bg-sky-100 dark:border-sky-800/50 dark:bg-sky-950/35 lg:grid-cols-3">
             {COMPENSATION_COLUMNS.map((col) => (
               <div
@@ -296,7 +299,7 @@ export const TutorsCompensationSection = () => {
                   {col.bullets.map((b) => (
                     <li
                       key={b}
-                      className="flex gap-2 text-lg leading-relaxed text-muted-foreground"
+                      className="flex gap-2 text-base leading-relaxed text-muted-foreground lg:text-lg"
                     >
                       <span
                         className="mt-2 size-1.5 shrink-0 rounded-full bg-sky-400 dark:bg-sky-500"
@@ -374,10 +377,10 @@ export const TutorsCompensationSection = () => {
  *       <div className="mx-auto max-w-5xl text-left">
  *         <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
  *           <div className="w-full space-y-3 md:min-w-0 md:flex-1">
- *             <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+ *             <h2 className="text-balance text-xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-2xl md:text-4xl">
  *               What Tutoring at PLUS Looks Like
  *             </h2>
- *             <p className="mx-auto max-w-2xl text-lg text-teal-900/75 dark:text-white/90 sm:mx-0">
+ *             <p className="mx-auto max-w-2xl text-sm text-teal-900/75 sm:mx-0 sm:text-base lg:text-lg dark:text-white/90">
  *               Build connections, provide 1:1 student support, and reflect with mentors
  *             </p>
  *           </div>
@@ -465,39 +468,39 @@ export const TutorsCompensationSection = () => {
 
 /** Numbered step badge — same diameter as Earn Certification star circle (`size-10`). */
 const tutoringLooksStepBadge =
-  "flex size-10 shrink-0 items-center justify-center self-start rounded-full bg-[#A27707] text-lg font-bold text-white"
+  "flex size-10 shrink-0 items-center justify-center rounded-full bg-[#A27707] text-lg font-bold text-white"
 
 /** Body copy — matches Earn Certification panel paragraphs. */
-const tutoringLooksDescription = "text-lg leading-relaxed text-muted-foreground"
+const tutoringLooksDescription = "text-base leading-relaxed text-muted-foreground lg:text-lg"
 
 /** Bottom row card titles — matches Earn Certification in-panel `h3` scale. */
 const tutoringLooksCardTitleMd =
-  "text-balance text-xl font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-[#9A6D00] sm:text-2xl"
+  "text-balance text-lg font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-[#9A6D00] sm:text-xl lg:text-2xl"
 
 /** Full-width top card title — one step larger for hierarchy (Figma reference). */
 const tutoringLooksCardTitleLg =
-  "text-balance text-2xl font-bold leading-snug tracking-tight text-[#9A6D00] sm:text-3xl dark:text-[#9A6D00]"
+  "text-balance text-lg font-bold leading-snug tracking-tight text-[#9A6D00] sm:text-xl lg:text-3xl dark:text-[#9A6D00]"
 
 /**
  * Cream card shell — minimal bottom padding so the container hugs the image edge.
  * Header row keeps horizontal padding on the right for copy.
  */
 const tutoringLooksCardShell =
-  "flex w-full min-w-0 flex-col gap-4 overflow-hidden rounded-3xl bg-[#FFF1C7] pt-5 pl-5 pb-0 pr-0 dark:bg-amber-950/20 sm:gap-4 sm:pt-6 sm:pl-6"
+  "flex w-full min-w-0 flex-col gap-4 overflow-hidden rounded-[30px] bg-[#FFF1C7] pt-5 pl-5 pb-0 pr-0 dark:bg-amber-950/20 sm:gap-4 sm:pt-6 sm:pl-6"
 
-/** `size-10` step badge + `gap-4` — aligns image block with title column. */
-const tutoringLooksImageInset = "pl-14"
+/** `size-10` step badge + `gap-3` — aligns image block with title column. */
+const tutoringLooksImageInset = "pl-[3.25rem]"
 
 const TUTORING_LOOKS_CARDS = [
   {
     step: 1,
     title: "Build Connections",
     description: "Begin each session by connecting with students.",
-    imageSrc: forTutorsAssets.experienceSessionPhoto,
+    imageSrc: "/figma/for-tutors/tutoring-build-connections.jpg",
     imageAlt:
       "Student with headphones on a video call with a PLUS tutor, laptop on a desk",
-    titleClassName: tutoringLooksCardTitleLg,
-    imageAspect: "aspect-[5/2] w-full",
+    titleClassName: tutoringLooksCardTitleMd,
+    imageAspect: "aspect-[5/2.5] w-full",
     sizes: "(max-width: 1024px) 100vw, 64rem",
   },
   {
@@ -536,14 +539,14 @@ function TutoringLooksCard({
 }: (typeof TUTORING_LOOKS_CARDS)[number]) {
   return (
     <article className={tutoringLooksCardShell}>
-      <div className="flex gap-4 pr-5 sm:pr-6">
-        <span className={tutoringLooksStepBadge} aria-hidden>
-          {step}
-        </span>
-        <div className="min-w-0 flex-1 space-y-2">
+      <div className="flex flex-col gap-2 pr-5 sm:pr-6">
+        <div className="flex items-center gap-3">
+          <span className={tutoringLooksStepBadge} aria-hidden>
+            {step}
+          </span>
           <h3 className={titleClassName}>{title}</h3>
-          <p className={tutoringLooksDescription}>{description}</p>
         </div>
+        <p className={cn(tutoringLooksDescription, tutoringLooksImageInset)}>{description}</p>
       </div>
       <div
         className={cn(
@@ -588,10 +591,10 @@ export const TutorsExperienceSection = () => {
       <div className="mx-auto max-w-5xl text-left">
         <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
           <div className="w-full space-y-3 md:min-w-0 md:flex-1">
-            <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+            <h2 className="text-balance text-xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-2xl md:text-4xl">
               What Tutoring at PLUS Looks Like
             </h2>
-            <p className="mx-auto max-w-2xl text-lg text-teal-900/75 dark:text-white/90 sm:mx-0">
+            <p className="mx-auto max-w-2xl text-sm text-teal-900/75 sm:mx-0 sm:text-base lg:text-lg dark:text-white/90">
               Build connections, provide 1:1 student support, and reflect with
               mentors
             </p>
@@ -634,7 +637,7 @@ export const TutorsCertificationSection = () => {
               <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 Earn Certification &amp; Digital Badges
               </h2>
-              <p className="mx-auto max-w-2xl text-lg text-teal-900/75 dark:text-white/90 sm:mx-0">
+              <p className="mx-auto max-w-2xl text-base text-teal-900/75 sm:mx-0 lg:text-lg dark:text-white/90">
                 Build credentials that showcase your expertise and professional
                 growth
               </p>
@@ -650,31 +653,33 @@ export const TutorsCertificationSection = () => {
 
         <div
           className={cn(
-            "flex flex-col gap-5 rounded-3xl bg-[#E8F6EA] dark:bg-[#E8F6EA]/12 sm:gap-8 md:flex-row md:items-stretch md:gap-10",
+            "flex flex-col gap-5 rounded-[30px] bg-[#E8F6EA] dark:bg-[#E8F6EA]/12 sm:gap-8 md:flex-row md:items-stretch md:gap-10",
             cardPaddingLatest,
           )}
         >
-          <div className="flex flex-[3] gap-4">
-            <span
-              className="flex size-10 shrink-0 items-center justify-center self-start rounded-full bg-[#297E43] text-white"
-              aria-hidden
-            >
-              <Star className="size-5" strokeWidth={2.25} />
-            </span>
-            <div className="flex flex-1 flex-col justify-between gap-4">
+          <div className="flex flex-[3] flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <span
+                className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#297E43] text-white"
+                aria-hidden
+              >
+                <Star className="size-5" strokeWidth={2.25} />
+              </span>
+              <h3 className="min-w-0 text-balance text-lg font-bold leading-snug tracking-tight text-[#297E43] dark:text-green-200 sm:text-xl lg:text-2xl">
+                Tutor Certification &amp; Digital Badges
+              </h3>
+            </div>
+            <div className="flex flex-1 flex-col justify-between gap-4 pl-[3.25rem]">
               <div className="space-y-4">
-                <h3 className="min-w-0 text-balance text-xl font-bold leading-snug tracking-tight text-[#297E43] dark:text-green-200 sm:text-2xl">
-                  Tutor Certification &amp; Digital Badges
-                </h3>
-                <p className="text-lg leading-relaxed text-muted-foreground">
+                <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
                   Complete all training to get sharable badges for resumes and social
                   media.
                 </p>
-                <p className="text-lg leading-relaxed text-muted-foreground">
+                <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
                   Note: Available to institutions only. Contact us to activate.
                 </p>
               </div>
-              <Button className="h-11 w-fit rounded-full bg-[#4CAB65] px-8 text-base font-medium text-white hover:bg-[#3d9655]">
+              <Button className="h-9 sm:h-11 w-fit rounded-full bg-[#4CAB65] px-8 text-sm sm:text-base font-medium text-white hover:bg-[#3d9655]">
                 Register now
               </Button>
             </div>
@@ -739,7 +744,7 @@ function ToolkitCardHeading({
       >
         <Icon className="size-5" strokeWidth={2.25} />
       </span>
-      <p className="min-w-0 text-pretty text-xl font-bold leading-snug tracking-tight text-fuchsia-900 dark:text-fuchsia-200 sm:text-2xl">
+      <p className="min-w-0 text-pretty text-lg font-bold leading-snug tracking-tight text-fuchsia-900 dark:text-fuchsia-200 sm:text-xl lg:text-2xl">
         {children}
       </p>
     </div>
@@ -762,7 +767,7 @@ export const TutorsToolkitSection = () => {
               <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 Your Tutor Toolkit
               </h2>
-              <p className="mx-auto max-w-2xl text-lg text-teal-900/75 dark:text-white/90 sm:mx-0">
+              <p className="mx-auto max-w-2xl text-base text-teal-900/75 sm:mx-0 lg:text-lg dark:text-white/90">
                 Access training, AI-powered feedback, and resources to support
                 your tutoring
               </p>
@@ -776,8 +781,8 @@ export const TutorsToolkitSection = () => {
           </div>
         </div>
 
-        <div className="grid gap-3 sm:gap-4 md:gap-6 md:grid-cols-2 md:grid-rows-2 lg:gap-8">
-          <div className="flex min-h-[280px] w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-fuchsia-200/60 bg-[#FFE8F6] sm:min-h-[340px] md:row-span-2 md:min-h-[400px] lg:min-h-[520px]">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-2 md:grid-rows-2 lg:gap-8">
+          <div className="flex min-h-[280px] w-full min-w-0 flex-col overflow-hidden rounded-[30px] border border-fuchsia-200/60 bg-[#FFE8F6] sm:min-h-[340px] md:row-span-2 md:min-h-[400px] lg:min-h-[520px]">
             <div className={cardPaddingLatest}>
               <ToolkitCardHeading icon={Sparkles}>
                 Dashboard Tracking Insights
@@ -791,7 +796,7 @@ export const TutorsToolkitSection = () => {
               />
             </div>
           </div>
-          <div className="flex min-h-[200px] min-w-0 flex-col overflow-hidden rounded-2xl border border-fuchsia-200/60 bg-[#FFE8F6] sm:min-h-[220px] md:min-h-[260px]">
+          <div className="flex min-h-[200px] min-w-0 flex-col overflow-hidden rounded-[30px] border border-fuchsia-200/60 bg-[#FFE8F6] sm:min-h-[220px] md:min-h-[260px]">
             <div className={cardPaddingLatest}>
               <ToolkitCardHeading icon={LayoutDashboard}>
                 Student Progress At-A-Glance
@@ -805,7 +810,7 @@ export const TutorsToolkitSection = () => {
               />
             </div>
           </div>
-          <div className="flex min-h-[200px] min-w-0 flex-col overflow-hidden rounded-2xl border border-fuchsia-200/60 bg-[#FFE8F6] sm:min-h-[220px] md:min-h-[260px]">
+          <div className="flex min-h-[200px] min-w-0 flex-col overflow-hidden rounded-[30px] border border-fuchsia-200/60 bg-[#FFE8F6] sm:min-h-[220px] md:min-h-[260px]">
             <div className={cardPaddingLatest}>
               <ToolkitCardHeading icon={Brain}>
                 Session Tracking
@@ -868,7 +873,7 @@ function TutorVoiceCard({
   avatarUrl: string
 }) {
   return (
-    <article className="flex h-full flex-col rounded-3xl bg-[#FDECEC] p-4 dark:bg-[#3d2528]/40 sm:p-5">
+    <article className="flex h-full flex-col rounded-[30px] bg-[#FDECEC] p-4 dark:bg-[#3d2528]/40 sm:p-5">
       <div className="flex shrink-0 items-center gap-4">
         <Avatar className="size-10 shrink-0 border border-[#A55D5D]/25 bg-white">
           <AvatarImage src={avatarUrl} alt="" aria-hidden />
@@ -876,7 +881,7 @@ function TutorVoiceCard({
             {name.slice(0, 2).toUpperCase()}
           </AvatarFallback>
         </Avatar>
-        <p className="text-pretty text-xl font-bold leading-snug tracking-tight text-[#A55D5D] dark:text-[#e8a0a0] sm:text-2xl">
+        <p className="text-pretty text-lg font-bold leading-snug tracking-tight text-[#A55D5D] dark:text-[#e8a0a0] sm:text-xl lg:text-2xl">
           {name}
         </p>
       </div>
@@ -920,7 +925,7 @@ export const TutorsTestimonialsSection = ({ stories = [] }: { stories?: SuccessS
               <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 Voices from Our Tutors
               </h2>
-              <p className="mx-auto max-w-2xl text-lg text-teal-900/75 dark:text-white/90 sm:mx-0">
+              <p className="mx-auto max-w-2xl text-base text-teal-900/75 sm:mx-0 lg:text-lg dark:text-white/90">
                 Learn from real tutor stories, experiences, and tips to improve
                 your practice
               </p>
@@ -973,22 +978,26 @@ export const TutorsImpactCTA = () => {
           cardPaddingLatest,
         )}
       >
-        <h2 className="text-3xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-4xl">
+        <h2 className="text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl lg:text-4xl">
           Ready to Make an Impact?
         </h2>
-        <p className="w-full max-w-none text-lg text-teal-900/75 dark:text-white/90">
+        <p className="w-full max-w-none text-base text-teal-900/75 lg:text-lg dark:text-white/90">
           Join a community of tutors committed to growth, equity, and meaningful
           math mentorship.
         </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-8 flex items-center justify-center gap-3 sm:gap-4">
           <Button
-            className="h-11 rounded-full border-0 bg-[#A6EDF4] px-8 text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
+            className="h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-sm sm:text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
+            nativeButton={false}
+            render={<a href="https://app.tutors.plus/demo" target="_blank" rel="noopener noreferrer" />}
           >
             Check Our Demo
           </Button>
           <Button
             variant="outline"
-            className="h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-8 text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20"
+            className="h-9 sm:h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-5 sm:px-8 text-sm sm:text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20"
+            nativeButton={false}
+            render={<a href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform" target="_blank" rel="noopener noreferrer" />}
           >
             Become a Tutor
           </Button>

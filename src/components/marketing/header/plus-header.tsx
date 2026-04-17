@@ -34,10 +34,10 @@ export function PlusHeader() {
 
           {/* Right side: CTAs + mobile trigger */}
           <div className="flex items-center gap-2">
-            <Button size="sm" className="rounded-full px-4">
+            <Button size="sm" className="rounded-full px-4" nativeButton={false} render={<a href="https://app.tutors.plus/demo" target="_blank" rel="noopener noreferrer" />}>
               Try PLUS Demo
             </Button>
-            <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
+            <Button variant="ghost" size="sm" className="hidden sm:inline-flex" nativeButton={false} render={<a href="https://app.tutors.plus/login" target="_blank" rel="noopener noreferrer" />}>
               Log In
             </Button>
             {/* Mobile nav trigger — visible below md */}

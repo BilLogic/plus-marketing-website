@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight, ChevronDown, ChevronRight, Search } from "lucide-react"
+import { ArrowRight, ChevronRight, Search } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useMemo, useState } from "react"
@@ -38,6 +38,7 @@ import {
   riSelectTriggerCn,
 } from "@/components/marketing/research-index/research-index-figma-tokens"
 import { ResearchIndexPublicationCard } from "@/components/marketing/research-index/research-index-publication-card"
+import { ResearcherCard } from "@/components/marketing/researcher-card"
 import {
   riParseYear,
   riPublicationDescription,
@@ -142,15 +143,15 @@ const HIGHLIGHT_STUDY_IDS_BY_TOPIC: Partial<
 /** Match `get-involved-sections` / `for-tutors-sections` typography. */
 const sectionHeaderH2 =
   "text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
-const sectionHeaderLead = "w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90"
+const sectionHeaderLead = "w-full max-w-none text-pretty text-lg text-[#62636C] dark:text-white/90"
 /** Every `<h2>` on `/for-researchers` — same scale as reference pages. */
 const forResearchersSectionH2 = sectionHeaderH2
 /** Same as SchoolsCommunitySection / SchoolsTrainingSection mascot column. */
 const sectionHeaderDecor =
-  "pointer-events-none h-[clamp(4.5rem,18vw,10.9375rem)] w-[clamp(3.75rem,24vw,12rem)] shrink-0 object-contain sm:h-32 sm:w-[7.25rem] md:h-40 md:w-36 lg:h-[175px] lg:w-[193px]"
+  "pointer-events-none h-[95px] w-auto shrink-0 object-contain"
 /** SchoolsSuccessStoriesSection header row — slightly wider gaps + compact decor. */
 const successStoriesHeaderDecor =
-  "pointer-events-none h-[clamp(4.5rem,18vw,9.375rem)] w-auto shrink-0 object-contain sm:h-32 md:h-36 lg:h-[150px] lg:w-[165px]"
+  "pointer-events-none h-[95px] w-auto shrink-0 object-contain"
 
 const SUCCESS_STORY_GREEN = "text-[#007d49]"
 
@@ -1076,96 +1077,6 @@ export const ResearchIndexSection = ({
   )
 }
 
-/** Figma `1730:2027` — researcher list row + accordion (header uses `sectionHeaderH2` / `sectionHeaderLead`). */
-/** Single-line names: width follows content on `sm+`; narrow screens may truncate with ellipsis. */
-const RESEARCHERS_ROW_NAME =
-  "text-xl font-bold leading-normal text-[#004247] sm:text-2xl sm:leading-normal"
-const RESEARCHERS_ROW_META = "text-pretty text-base font-normal leading-normal text-[#004247]"
-const RESEARCHER_CARD_INLINE_LINK =
-  "text-[#0080b4] underline decoration-[#0080b4] underline-offset-2 hover:text-[#006a94]"
-/** Expanded bio — grey body, matches Research Index muted copy. */
-const RESEARCHERS_BIO_COPY = cn("text-pretty text-base leading-relaxed", riFg.bodyMuted)
-
-function ResearcherListRow({ member }: { member: TeamMember }) {
-  const links = researcherCardLinks(member)
-  const primaryRole = member.title1?.trim()
-  const secondaryLine = member.title2?.trim()
-  return (
-    <div className="flex min-h-0 w-full flex-col gap-3 py-1 sm:min-h-[68px] sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-5 sm:gap-y-2 sm:py-0">
-      <div
-        className={cn(
-          "min-w-0 max-w-full shrink-0 truncate sm:w-fit sm:max-w-none sm:overflow-visible sm:whitespace-nowrap",
-          RESEARCHERS_ROW_NAME
-        )}
-      >
-        {member.name}
-      </div>
-      <div
-        className={cn(
-          "min-w-0 shrink-0 text-base sm:whitespace-nowrap",
-          "flex flex-wrap items-center gap-x-1"
-        )}
-      >
-        {links.map((item, i) => (
-          <span key={`${item.label}-${item.href}`} className="inline-flex items-center gap-x-1">
-            {i > 0 ? (
-              <span className="text-[#004247]" aria-hidden>
-                |
-              </span>
-            ) : null}
-            {item.external ? (
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={RESEARCHER_CARD_INLINE_LINK}
-              >
-                {item.label}
-              </a>
-            ) : (
-              <Link href={item.href} className={RESEARCHER_CARD_INLINE_LINK}>
-                {item.label}
-              </Link>
-            )}
-          </span>
-        ))}
-      </div>
-      {primaryRole ? (
-        <div className={cn("min-w-0 max-w-full sm:max-w-[min(100%,24rem)]", RESEARCHERS_ROW_META)}>
-          {primaryRole}
-        </div>
-      ) : null}
-      {secondaryLine ? (
-        <div className={cn("min-w-0 max-w-full sm:max-w-[min(100%,22rem)]", RESEARCHERS_ROW_META)}>
-          {secondaryLine}
-        </div>
-      ) : null}
-    </div>
-  )
-}
-
-function researcherCardLinks(
-  member: TeamMember
-): { label: string; href: string; external: boolean }[] {
-  const rows: { label: string; href: string; external: boolean }[] = []
-  if (member.googleScholar) {
-    rows.push({ label: "Google Scholar", href: member.googleScholar, external: true })
-  }
-  if (member.linkedIn) {
-    rows.push({ label: "LinkedIn", href: member.linkedIn, external: true })
-  }
-  if (member.personalWebsite) {
-    rows.push({ label: "Website", href: member.personalWebsite, external: true })
-  }
-  if (rows.length === 0) {
-    rows.push({
-      label: "Team profile",
-      href: `/about/team?q=${encodeURIComponent(member.name)}`,
-      external: false,
-    })
-  }
-  return rows
-}
 
 export const ResearchersGridSection = ({ members }: { members: TeamMember[] }) => {
   const equalDecor = forResearchersAssets.heroDecor.equal
@@ -1173,9 +1084,8 @@ export const ResearchersGridSection = ({ members }: { members: TeamMember[] }) =
   return (
     <section
       id={forResearchersSectionIds.researchers}
-      className="w-full min-w-0 space-y-6 sm:space-y-8 lg:space-y-10"
+      className="w-full min-w-0 space-y-8 sm:space-y-10 lg:space-y-12"
     >
-      {/* Same title / lead scale as `SectionHeader`; equal mascot in Figma frame. */}
       <div className="flex w-full flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
         <div className="min-w-0 flex-1 basis-0 space-y-3 sm:space-y-4 md:space-y-5">
           <h2 className={forResearchersSectionH2}>Our Researchers</h2>
@@ -1184,16 +1094,12 @@ export const ResearchersGridSection = ({ members }: { members: TeamMember[] }) =
             artificial intelligence.
           </p>
         </div>
-        <div
-          className="relative mx-auto flex h-[140px] w-[180px] shrink-0 overflow-hidden bg-white sm:mx-0 sm:h-[177px] sm:w-[229px]"
+        <img
+          alt=""
           aria-hidden
-        >
-          <img
-            alt=""
-            src={equalDecor}
-            className="pointer-events-none absolute left-[21px] top-0 h-[140px] w-[160px] object-cover object-top sm:h-[163px] sm:w-[187px]"
-          />
-        </div>
+          src={equalDecor}
+          className={sectionHeaderDecor}
+        />
       </div>
 
       {members.length === 0 ? (
@@ -1201,55 +1107,10 @@ export const ResearchersGridSection = ({ members }: { members: TeamMember[] }) =
           Researcher profiles will appear here once loaded from our team directory.
         </p>
       ) : (
-        <div className="flex w-full min-w-0 flex-col gap-[30px]" role="list">
-          {members.map((member) => {
-            const bio = member.bio?.trim()
-            if (!bio) {
-              return (
-                <div
-                  key={member.id}
-                  className="w-full min-w-0 bg-white"
-                  role="listitem"
-                >
-                  <ResearcherListRow member={member} />
-                </div>
-              )
-            }
-            return (
-              <div key={member.id} className="w-full min-w-0" role="listitem">
-                <Accordion
-                  aria-label={`Bio for ${member.name}`}
-                  className="w-full min-w-0"
-                >
-                <AccordionItem
-                  value={member.id}
-                  className="w-full min-w-0 border-0 bg-white shadow-none not-last:border-b-0 outline-none ring-0"
-                >
-                  {/* Figma `1730:2027` — chevron on the right of the row (not below). */}
-                  <div className="flex w-full min-w-0 items-start gap-3 sm:items-center sm:gap-5">
-                    <div className="min-w-0 flex-1">
-                      <ResearcherListRow member={member} />
-                    </div>
-                    <AccordionTrigger
-                      hideChevron
-                      className="mt-0.5 flex-none shrink-0 self-start rounded-none border-0 p-0 text-base font-normal shadow-none outline-none ring-0 ring-offset-0 hover:no-underline focus:outline-none focus-visible:border-transparent focus-visible:shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:after:border-transparent sm:mt-0 sm:self-center"
-                    >
-                      <span className="sr-only">Show bio for {member.name}</span>
-                      <ChevronDown
-                        strokeWidth={2}
-                        className="size-6 shrink-0 text-[#62636c] transition-transform duration-200 ease-out group-aria-expanded/accordion-trigger:rotate-180"
-                        aria-hidden
-                      />
-                    </AccordionTrigger>
-                  </div>
-                  <AccordionContent className="!px-0 !pb-6 !pt-4 text-base">
-                    <p className={RESEARCHERS_BIO_COPY}>{bio}</p>
-                  </AccordionContent>
-                </AccordionItem>
-                </Accordion>
-              </div>
-            )
-          })}
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-6">
+          {members.map((member) => (
+            <ResearcherCard key={member.id} member={member} />
+          ))}
         </div>
       )}
     </section>
@@ -1267,7 +1128,7 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
       <div className="flex w-full flex-row items-start gap-4 sm:gap-6 md:gap-8 lg:gap-10">
         <div className="min-w-0 flex-1 basis-0 space-y-3 text-left sm:space-y-4 md:space-y-5">
           <h2 className={forResearchersSectionH2}>Research Success Story</h2>
-          <p className="w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90">
+          <p className="w-full max-w-none text-pretty text-lg text-[#62636C] dark:text-white/90">
             Here&apos;s what researchers are saying about PLUS.
           </p>
         </div>
@@ -1288,7 +1149,7 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
           .
         </p>
       ) : (
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-8 lg:gap-9">
+        <div className={cn("grid grid-cols-1 gap-8", stories.length > 1 && "md:grid-cols-2 md:gap-8 lg:gap-9")}>
             {stories.map((story) => {
               const readUrl = notionSuccessStoryPublicReadUrl(story)
               const quoteParts =

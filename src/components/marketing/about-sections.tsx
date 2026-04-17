@@ -45,18 +45,18 @@ const aboutSectionH2 =
  * wide screens; wrap to multiple lines naturally on narrow viewports.
  */
 const aboutSectionLead =
-  "w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90"
+  "w-full max-w-none text-pretty text-base text-teal-900/75 lg:text-lg dark:text-white/90"
 
 /** Final CTA blurb — wider shell (`max-w-4xl`) so copy can stay one line on large viewports. */
 const aboutFinalCtaLead =
-  "text-pretty text-lg text-teal-900/75 dark:text-white/90"
+  "text-pretty text-base text-teal-900/75 lg:text-lg dark:text-white/90"
 
 /** Card titles / body — match Tutors Experience bento cards. */
 const aboutCardTitle =
-  "text-pretty text-xl font-bold leading-snug tracking-tight text-teal-950 sm:text-2xl"
+  "text-pretty text-lg font-bold leading-snug tracking-tight text-teal-950 sm:text-xl lg:text-2xl"
 
 const aboutCardBody =
-  "text-sm leading-relaxed text-teal-900/75 sm:text-base"
+  "text-base leading-relaxed text-teal-900/75"
 
 /** Beside section titles — same `<img>` sizing as `for-tutors-sections.tsx` section headers. */
 const tutorsSectionTitleDecorImgClass =
@@ -86,10 +86,10 @@ function AboutSectionTitleWithDecor({
 
 /** Same tokens as For Tutors hero — primary + outline (see `for-tutors-sections.tsx`). */
 const aboutPagePrimaryCta =
-  "h-11 rounded-full border-0 bg-[#A6EDF4] px-8 text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
+  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-sm sm:text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
 
 const aboutPageOutlineCta =
-  "h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-8 text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20"
+  "h-9 sm:h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-5 sm:px-8 text-sm sm:text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20"
 
 const aboutPageCtaLinkLayout =
   "inline-flex items-center justify-center whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
@@ -97,20 +97,22 @@ const aboutPageCtaLinkLayout =
 function AboutLandingCtaRow({ className }: { className?: string }) {
   return (
     <div
-      className={cn("flex flex-wrap items-center justify-center gap-4", className)}
+      className={cn("flex items-center justify-center gap-3 sm:gap-4", className)}
     >
       <Link
-        href="/#get-involved"
+        href="/get-involved#careers"
         className={cn(aboutPageCtaLinkLayout, aboutPagePrimaryCta)}
       >
         Careers at PLUS
       </Link>
-      <Link
-        href="/for-tutors"
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
+        target="_blank"
+        rel="noopener noreferrer"
         className={cn(aboutPageCtaLinkLayout, aboutPageOutlineCta)}
       >
         Join as a Tutor
-      </Link>
+      </a>
     </div>
   )
 }
@@ -132,10 +134,10 @@ export function AboutHeroSection() {
       />
 
       <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-3 sm:gap-4 md:gap-5">
-        <p className="text-xl font-semibold text-teal-900 max-sm:text-2xl sm:text-2xl md:text-3xl">
+        <p className="text-lg font-semibold text-teal-900 sm:text-xl md:text-3xl">
           About PLUS
         </p>
-        <h1 className="text-balance text-3xl font-semibold tracking-tight text-teal-950 max-sm:text-4xl sm:text-4xl md:text-5xl">
+        <h1 className="text-balance text-3xl font-semibold tracking-tight text-teal-950 sm:text-4xl md:text-5xl">
           Bridging Opportunity Gaps in
           <br />
           Math Education with AI-
@@ -151,10 +153,10 @@ export function AboutHeroSection() {
 
 /** Our Mission pillar headings — same scale as foundation pillars; color matches icon circles. */
 const aboutMissionPillarTitle =
-  "text-pretty text-xl font-bold leading-snug tracking-tight text-[#a6554d] sm:text-2xl dark:text-[#c97d73]"
+  "text-pretty text-lg font-bold leading-snug tracking-tight text-[#a6554d] sm:text-xl lg:text-2xl dark:text-[#c97d73]"
 
 const aboutMissionBulletList =
-  "space-y-2.5 text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg"
+  "space-y-2.5 text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg"
 
 const MISSION_MAP_SRC = "/figma/about/mission-eastern-us-map.png"
 
@@ -259,20 +261,20 @@ export function AboutFoundationsSection() {
       </AboutSectionTitleWithDecor>
 
       {/* Bento grid: Community (left, tall) + Research/Innovation (right, stacked) */}
-      <div className="mx-auto grid max-w-5xl grid-cols-1 items-stretch gap-[30px] md:grid-cols-2">
+      <div className="mx-auto grid max-w-5xl grid-cols-1 items-stretch gap-4 sm:gap-6 md:gap-[30px] md:grid-cols-2">
 
         {/* Community — left large card: fills full height of the right column */}
-        <div className="flex flex-col overflow-hidden rounded-[33px] bg-[#E4F5FF] dark:bg-sky-950/40">
+        <div className="flex flex-col overflow-hidden rounded-[30px] bg-[#E4F5FF] dark:bg-sky-950/40">
           {/* Content row: circle | title + description */}
           <div className="flex items-start gap-3 px-5 pt-5 sm:px-6 sm:pt-6">
-            <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#007EB8] text-sm font-bold text-[#E4F5FF]">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#007EB8] text-lg font-bold text-[#E4F5FF]">
               1
             </div>
             <div className="flex flex-col gap-2">
-              <p className="text-xl font-bold leading-snug tracking-tight text-[#007EB8] sm:text-2xl dark:text-sky-300">
+              <p className="text-lg font-bold leading-snug tracking-tight text-[#007EB8] sm:text-xl lg:text-2xl dark:text-sky-300">
                 Community
               </p>
-              <p className="text-lg leading-relaxed text-muted-foreground">
+              <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
                 PLUS connects communities and researchers to improve student outcomes.
               </p>
             </div>
@@ -293,19 +295,19 @@ export function AboutFoundationsSection() {
         </div>
 
         {/* Right column: Research + Innovation stacked */}
-        <div className="flex flex-col gap-[30px]">
+        <div className="flex flex-col gap-4 sm:gap-6 md:gap-[30px]">
 
           {/* Research */}
-          <div className="flex flex-col overflow-hidden rounded-[33px] bg-[#E4F5FF] dark:bg-sky-950/40">
+          <div className="flex flex-col overflow-hidden rounded-[30px] bg-[#E4F5FF] dark:bg-sky-950/40">
             <div className="flex items-start gap-3 px-5 pt-5 sm:px-6 sm:pt-6">
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#007EB8] text-sm font-bold text-white">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#007EB8] text-lg font-bold text-white">
                 2
               </div>
               <div className="flex flex-col gap-2">
-                <p className="text-xl font-bold leading-snug tracking-tight text-[#007EB8] sm:text-2xl dark:text-sky-300">
+                <p className="text-lg font-bold leading-snug tracking-tight text-[#007EB8] sm:text-xl lg:text-2xl dark:text-sky-300">
                   Research
                 </p>
-                <p className="text-lg leading-relaxed text-muted-foreground">
+                <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
                   Built on decades of learning science research from CMU and Stanford.
                 </p>
               </div>
@@ -325,16 +327,16 @@ export function AboutFoundationsSection() {
           </div>
 
           {/* Innovation */}
-          <div className="flex flex-col overflow-hidden rounded-[33px] bg-[#E4F5FF] dark:bg-sky-950/40">
+          <div className="flex flex-col overflow-hidden rounded-[30px] bg-[#E4F5FF] dark:bg-sky-950/40">
             <div className="flex items-start gap-3 px-5 pt-5 sm:px-6 sm:pt-6">
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#007EB8] text-sm font-bold text-white">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#007EB8] text-lg font-bold text-white">
                 3
               </div>
               <div className="flex flex-col gap-2">
-                <p className="text-xl font-bold leading-snug tracking-tight text-[#007EB8] sm:text-2xl dark:text-sky-300">
+                <p className="text-lg font-bold leading-snug tracking-tight text-[#007EB8] sm:text-xl lg:text-2xl dark:text-sky-300">
                   Innovation
                 </p>
-                <p className="text-lg leading-relaxed text-muted-foreground">
+                <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
                   Shaping educational technology to deliver innovative, engaging learning experiences.
                 </p>
               </div>
@@ -426,7 +428,7 @@ function TeamMemberCard({
     .toUpperCase()
 
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-3xl bg-[#E8F6EA] dark:bg-emerald-950/20">
+    <article className="flex h-full flex-col overflow-hidden rounded-[30px] bg-[#E8F6EA] dark:bg-emerald-950/20">
       <div className="relative aspect-square w-full overflow-hidden">
         {avatarUrl ? (
           <Image
@@ -434,20 +436,20 @@ function TeamMemberCard({
             alt={`${name} profile photo`}
             fill
             className={cn("object-cover", avatarClassName)}
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+            sizes="(max-width: 640px) 33vw, (max-width: 1024px) 25vw, 20vw"
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-2xl font-bold text-[#297E43]">
+          <div className="flex h-full items-center justify-center text-base font-bold text-[#297E43] sm:text-lg">
             {initials}
           </div>
         )}
       </div>
-      <div className="flex flex-col gap-4 px-4 pt-4 pb-6">
-        <div className="text-base font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-lg">
+      <div className="flex flex-col gap-3 px-2 pt-3 pb-4 sm:px-3 sm:pt-4 sm:pb-5 sm:gap-3.5">
+        <div className="text-xs font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-sm lg:text-base">
           {name}
         </div>
         {(googleScholar || linkedIn) ? (
-          <div className="flex items-center gap-1.5 text-sm font-medium leading-tight text-[#297E43]">
+          <div className="flex flex-col gap-0.5 text-[10px] font-medium leading-tight text-[#297E43] sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-1.5 sm:gap-y-0 sm:text-xs">
             {googleScholar ? (
               <Link
                 href={googleScholar}
@@ -458,7 +460,9 @@ function TeamMemberCard({
                 Google Scholar
               </Link>
             ) : null}
-            {googleScholar && linkedIn ? <span className="text-[#297E43]/50">|</span> : null}
+            {googleScholar && linkedIn ? (
+              <span className="hidden sm:inline text-[#297E43]/50 select-none" aria-hidden>|</span>
+            ) : null}
             {linkedIn ? (
               <Link
                 href={linkedIn}
@@ -471,9 +475,9 @@ function TeamMemberCard({
             ) : null}
           </div>
         ) : null}
-        <div className="text-sm leading-tight text-foreground/80 dark:text-white/85">{role}</div>
+        <div className="text-[10px] leading-tight text-foreground/80 dark:text-white/85 sm:text-xs">{role}</div>
         {institution ? (
-          <div className="text-sm leading-tight text-foreground/80 dark:text-white/85">{institution}</div>
+          <div className="text-[10px] leading-tight text-foreground/80 dark:text-white/85 sm:text-xs">{institution}</div>
         ) : null}
       </div>
     </article>
@@ -481,9 +485,9 @@ function TeamMemberCard({
 }
 
 const triggerCls =
-  "cursor-pointer items-center py-4 text-xl font-bold leading-snug tracking-tight text-[#297E43] shadow-none hover:no-underline focus-visible:ring-0 focus-visible:border-transparent dark:text-emerald-300 sm:py-5 sm:text-2xl **:data-[slot=accordion-trigger-icon]:size-6 **:data-[slot=accordion-trigger-icon]:text-[#297E43] dark:**:data-[slot=accordion-trigger-icon]:text-emerald-300"
+  "cursor-pointer items-center py-4 text-lg font-bold leading-snug tracking-tight text-[#297E43] shadow-none hover:no-underline focus-visible:ring-0 focus-visible:border-transparent dark:text-emerald-300 sm:py-5 sm:text-xl lg:text-2xl **:data-[slot=accordion-trigger-icon]:size-6 **:data-[slot=accordion-trigger-icon]:text-[#297E43] dark:**:data-[slot=accordion-trigger-icon]:text-emerald-300"
 
-const memberGrid = "grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 lg:gap-6"
+const memberGrid = "grid gap-2 grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 sm:gap-3 lg:gap-4 [&>*]:min-w-0"
 
 // Custom display order for leadership cards (matched by first name / first+last-initial).
 const LEADERSHIP_ORDER = [
@@ -532,7 +536,7 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
         className="space-y-4 sm:space-y-6 lg:space-y-8"
       >
         <AccordionItem value="leadership" className="border-0 bg-transparent px-0">
-          <AccordionTrigger className={cn(triggerCls, "rounded-2xl bg-[#E8F6EA] px-4 sm:px-6 dark:bg-emerald-950/25")}>
+          <AccordionTrigger className={cn(triggerCls, "rounded-[30px] bg-[#E8F6EA] px-4 sm:px-6 dark:bg-emerald-950/25")}>
             <span className="flex items-center gap-3">
               <span className="flex size-10 items-center justify-center rounded-full bg-[#297E43] text-white">
                 <Users className="size-5" />
@@ -540,7 +544,7 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
               Leadership
             </span>
           </AccordionTrigger>
-          <AccordionContent className="pt-4 pb-0 sm:pt-6 lg:pt-8">
+          <AccordionContent className="pt-2 pb-0 sm:pt-3 lg:pt-4">
             {leadership.length > 0 ? (
               <div className={memberGrid}>
                 {leadership.map((m) => (
@@ -556,7 +560,7 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
                 ))}
               </div>
             ) : (
-              <p className="text-lg leading-relaxed text-muted-foreground">
+              <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
                 Leadership bios and profiles will appear here as we publish them on the marketing site.
               </p>
             )}
@@ -564,7 +568,7 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
         </AccordionItem>
 
         <AccordionItem value="staff" className="border-0 bg-transparent px-0">
-          <AccordionTrigger className={cn(triggerCls, "rounded-2xl bg-[#E8F6EA] px-4 sm:px-6 dark:bg-emerald-950/25")}>
+          <AccordionTrigger className={cn(triggerCls, "rounded-[30px] bg-[#E8F6EA] px-4 sm:px-6 dark:bg-emerald-950/25")}>
             <span className="flex items-center gap-3">
               <span className="flex size-10 items-center justify-center rounded-full bg-[#297E43] text-white">
                 <Briefcase className="size-5" />
@@ -572,7 +576,7 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
               PLUS Staff
             </span>
           </AccordionTrigger>
-          <AccordionContent className="pt-4 pb-0 sm:pt-6 lg:pt-8">
+          <AccordionContent className="pt-2 pb-0 sm:pt-3 lg:pt-4">
             {staff.length > 0 ? (
               <div className={memberGrid}>
                 {staff.map((m) => (
@@ -588,7 +592,7 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
                 ))}
               </div>
             ) : (
-              <p className="text-lg leading-relaxed text-muted-foreground">
+              <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
                 Staff spotlights and roles will be listed here.
               </p>
             )}
@@ -596,7 +600,7 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
         </AccordionItem>
 
         <AccordionItem value="interns" className="border-0 bg-transparent px-0">
-          <AccordionTrigger className={cn(triggerCls, "rounded-2xl bg-[#E8F6EA] px-4 sm:px-6 dark:bg-emerald-950/25")}>
+          <AccordionTrigger className={cn(triggerCls, "rounded-[30px] bg-[#E8F6EA] px-4 sm:px-6 dark:bg-emerald-950/25")}>
             <span className="flex items-center gap-3">
               <span className="flex size-10 items-center justify-center rounded-full bg-[#297E43] text-white">
                 <GraduationCap className="size-5" />
@@ -604,7 +608,7 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
               Current Student Interns
             </span>
           </AccordionTrigger>
-          <AccordionContent className="pt-4 pb-0 sm:pt-6 lg:pt-8">
+          <AccordionContent className="pt-2 pb-0 sm:pt-3 lg:pt-4">
             <div className={memberGrid}>
               {notionStudents.length > 0
                 ? notionStudents.map((m) => (
@@ -641,7 +645,7 @@ const latestReadMoreLinkClass =
 
 /** Matches `aboutCardTitle` metrics so `lh` on the icon matches the heading’s first line. */
 const latestCardTitleRowClass =
-  "flex gap-3 text-xl font-bold leading-snug tracking-tight sm:text-2xl"
+  "flex gap-3 text-lg font-bold leading-snug tracking-tight sm:text-xl lg:text-2xl"
 
 /** Vertically center `size-10` icon with the first line of the title (line box vs 2.5rem circle). */
 const latestCardIconClass =
@@ -671,7 +675,7 @@ function LatestNewsCard({
 
   return (
     <article className={cn(
-      "flex flex-col rounded-3xl bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6",
+      "flex flex-col rounded-[30px] bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6",
       large && "w-full",
     )}>
       <div className={latestCardTitleRowClass}>
@@ -740,24 +744,14 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
 
       {items ? (
         <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8">
-          {/* First item always gets the prominent full-width slot */}
-          <LatestNewsCard item={items[0]!} large />
-          {/* Remaining items in a responsive row */}
-          {items.length > 1 && (
-            <div className={cn(
-              "grid gap-4 sm:gap-6 lg:gap-8",
-              items.length === 2 ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2",
-            )}>
-              {items.slice(1).map((item) => (
-                <LatestNewsCard key={item.id} item={item} />
-              ))}
-            </div>
-          )}
+          {items.map((item) => (
+            <LatestNewsCard key={item.id} item={item} large />
+          ))}
         </div>
       ) : (
         /* Placeholder — shown when no Notion data is available */
         <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8">
-          <article className="flex w-full flex-col rounded-3xl bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6">
+          <article className="flex w-full flex-col rounded-[30px] bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6">
             <div className={latestCardTitleRowClass}>
               <span className={latestCardIconClass}>
                 <Trophy className="size-5" aria-hidden />
@@ -777,7 +771,7 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
             </Link>
           </article>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:gap-8">
-            <article className="flex flex-col rounded-3xl bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6">
+            <article className="flex flex-col rounded-[30px] bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6">
               <div className={latestCardTitleRowClass}>
                 <span className={latestCardIconClass}>
                   <GraduationCap className="size-5" aria-hidden />
@@ -792,7 +786,7 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
                 <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
               </Link>
             </article>
-            <article className="flex flex-col rounded-3xl bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6">
+            <article className="flex flex-col rounded-[30px] bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6">
               <div className={latestCardTitleRowClass}>
                 <span className={latestCardIconClass}>
                   <School className="size-5" aria-hidden />
@@ -853,9 +847,9 @@ const CATEGORY_ICON: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
 }
 
 const successStoriesGridClass: Record<number, string> = {
-  1: "grid gap-4 sm:gap-6 lg:gap-8",
-  2: "grid gap-4 sm:gap-6 md:grid-cols-2 md:items-stretch lg:gap-8",
-  3: "grid gap-4 sm:gap-6 md:grid-cols-3 md:items-stretch lg:gap-8",
+  1: "flex flex-col gap-4 sm:gap-6 lg:gap-8",
+  2: "flex flex-col gap-4 sm:gap-6 lg:gap-8",
+  3: "flex flex-col gap-4 sm:gap-6 lg:gap-8",
 }
 
 export function AboutSuccessStoriesSection({ stories = [] }: { stories?: SuccessStory[] }) {
@@ -880,7 +874,7 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
               return (
                 <article
                   key={story.id}
-                  className="flex h-full flex-col rounded-3xl bg-[#FFE8F6] p-4 dark:bg-[#FFE8F6]/15 sm:p-5"
+                  className="flex h-full flex-col rounded-[30px] bg-[#FFE8F6] p-4 dark:bg-[#FFE8F6]/15 sm:p-5"
                 >
                   <div className="flex min-h-0 flex-1 flex-col rounded-3xl bg-white p-6 dark:bg-card sm:p-7">
                     <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#C6009C] text-white">
@@ -918,7 +912,7 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
           : SUCCESS_CARDS.map(({ title, icon: Icon, quoteLead, quoteHighlight, quoteTail }) => (
               <article
                 key={title}
-                className="flex h-full flex-col rounded-3xl bg-[#FFE8F6] p-4 dark:bg-[#FFE8F6]/15 sm:p-5"
+                className="flex h-full flex-col rounded-[30px] bg-[#FFE8F6] p-4 dark:bg-[#FFE8F6]/15 sm:p-5"
               >
                 <div className="flex min-h-0 flex-1 flex-col rounded-3xl bg-white p-6 dark:bg-card sm:p-7">
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#C6009C] text-white">
@@ -952,7 +946,7 @@ export function AboutFinalCtaSection() {
   return (
     <section id={aboutSectionIds.learnMore} className="scroll-mt-24">
       <div className="mx-auto max-w-4xl space-y-6 rounded-3xl bg-white p-8 text-center dark:bg-transparent sm:p-12">
-        <h2 className="text-3xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-4xl">
+        <h2 className="text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl lg:text-4xl">
           Learn More About PLUS
         </h2>
         <p className={aboutFinalCtaLead}>

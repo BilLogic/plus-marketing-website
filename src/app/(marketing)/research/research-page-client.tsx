@@ -1,9 +1,8 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
-import { ArrowRight, Search } from "lucide-react"
+import { ExternalLink, LayoutGrid, List, Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import {
   Select,
@@ -15,24 +14,121 @@ import {
 import { cn } from "@/lib/utils"
 import type { ResearchPaper } from "@/lib/notion/types"
 import { RESEARCH_GENRE_TAGS } from "@/lib/research/research-genres"
-import { forResearchersAssets } from "@/components/marketing/for-researchers-assets"
 import {
   riFg,
   riFilterFieldLabelCn,
   riFilterLabelCn,
   riFilterTagButtonCn,
   riGenreFilterPillClass,
-  riIndexCopy,
-  riPageTitleCn,
-  riSeeAllPublicationsLinkClass,
+  riGenrePillClass,
+  riIndexMetaCopy,
   riSelectItemCn,
   riSelectTriggerCn,
 } from "@/components/marketing/research-index/research-index-figma-tokens"
 import { ResearchIndexPublicationCard } from "@/components/marketing/research-index/research-index-publication-card"
-import { riParseDate, riParseYear } from "@/components/marketing/research-index/research-index-utils"
+import {
+  riFormatAuthorsLine,
+  riParseDate,
+  riParseYear,
+} from "@/components/marketing/research-index/research-index-utils"
 
-const PREVIEW_LIMIT = 20
 const ALL_VALUE = "__all__"
+
+const tableHeaderCn = cn(
+  "pb-2.5 pr-4 pt-4 text-left font-semibold",
+  riIndexMetaCopy,
+  riFg.bodyMuted
+)
+
+function PublicationTableRow({ paper }: { paper: ResearchPaper }) {
+  const year = paper.publishDate ? riParseYear(paper.publishDate) : ""
+  const authors = riFormatAuthorsLine(paper.authors)
+
+  const titleEl = paper.paperLink ? (
+    <a
+      href={paper.paperLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group inline-flex items-start gap-1 font-sans font-medium leading-snug text-[#62636c] underline-offset-[3px] hover:text-[#004247] hover:underline"
+    >
+      <span className="min-w-0">{paper.title}</span>
+      <ExternalLink
+        className="mt-0.5 size-3.5 shrink-0 opacity-60 group-hover:text-[#004247]"
+        aria-hidden
+      />
+      <span className="sr-only">(opens in new tab)</span>
+    </a>
+  ) : (
+    <span className="font-sans font-medium leading-snug text-[#62636c]">
+      {paper.title}
+    </span>
+  )
+
+  return (
+    <tr
+      className={cn(
+        "border-b transition-colors hover:bg-[#f9f9fb]/60",
+        riFg.borderHairline
+      )}
+    >
+      {/* Title — always visible */}
+      <td className={cn("py-3 pr-4 align-top", riIndexMetaCopy)}>{titleEl}</td>
+
+      {/* Tags — sm+ */}
+      <td className="hidden py-3 pr-4 align-top sm:table-cell">
+        {paper.topics.length > 0 && (
+          <div className="flex flex-wrap gap-1">
+            {paper.topics.map((t) => (
+              <span
+                key={t}
+                className={cn(
+                  "inline-flex items-center rounded-[26px] px-2 py-0.5 leading-snug",
+                  riIndexMetaCopy,
+                  riGenrePillClass(t)
+                )}
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        )}
+      </td>
+
+      {/* Year — always visible */}
+      <td
+        className={cn(
+          "whitespace-nowrap py-3 pr-4 align-top tabular-nums",
+          riIndexMetaCopy,
+          riFg.bodyMuted
+        )}
+      >
+        {year}
+      </td>
+
+      {/* Conference — md+ */}
+      <td
+        className={cn(
+          "hidden py-3 pr-4 align-top md:table-cell",
+          riIndexMetaCopy,
+          riFg.bodyMuted
+        )}
+      >
+        {paper.venue ?? "—"}
+      </td>
+
+      {/* Authors — lg+ */}
+      <td
+        className={cn(
+          "hidden py-3 align-top lg:table-cell",
+          riIndexMetaCopy,
+          riFg.bodyMuted
+        )}
+      >
+        {authors}
+      </td>
+    </tr>
+  )
+}
 
 export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
   const router = useRouter()
@@ -40,7 +136,7 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(null)
 
   const [query, setQuery] = useState(searchParams.get("q") ?? "")
-  const showFullCatalogue = searchParams.get("all") === "1"
+  const [viewMode, setViewMode] = useState<"card" | "table">("card")
 
   const searchQ = searchParams.get("q")?.toLowerCase() ?? ""
   const genreParam = searchParams.get("genre") ?? ""
@@ -144,38 +240,25 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
     return result
   }, [papers, searchParams, searchQ, selectedGenre, yearFilter, venueFilter])
 
-  const visiblePapers = showFullCatalogue
-    ? filtered
-    : filtered.slice(0, PREVIEW_LIMIT)
-
   const setGenre = (g: string) => {
     updateParams({ genre: g ? g : null })
   }
 
+  const toggleBtnCn = (active: boolean) =>
+    cn(
+      "flex items-center justify-center rounded-lg p-1.5 transition-colors",
+      active
+        ? "bg-[#f0f0f2] text-[#004247]"
+        : "text-[#62636c]/40 hover:text-[#62636c]"
+    )
+
   return (
     <div className="bg-white text-[#62636c]">
-      <div className="mx-auto max-w-[1122px] px-5 pb-24 pt-10 sm:px-8">
-        <header className="mb-8 flex flex-col gap-6 sm:mb-10 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-          <div className="flex max-w-[48rem] flex-col gap-5">
-            <h1 className={riPageTitleCn}>Research Index</h1>
-            <p
-              className={cn("max-w-[42rem] font-sans", riIndexCopy, riFg.bodyMuted)}
-            >
-              Explore the full archive of PLUS research
-            </p>
-          </div>
-          <div className="relative flex shrink-0 justify-center sm:justify-end sm:pt-1">
-            <div className="relative h-[140px] w-[150px] sm:h-[173px] sm:w-[163px]">
-              <Image
-                src={forResearchersAssets.index.decor}
-                alt=""
-                fill
-                className="object-contain object-right"
-                sizes="163px"
-                priority
-              />
-            </div>
-          </div>
+      <div className="mx-auto max-w-7xl px-4 pb-24 pt-10 sm:px-6 md:px-8">
+        <header className="mb-8 sm:mb-10">
+          <h1 className="text-balance text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl md:text-4xl">
+            Publications
+          </h1>
         </header>
 
         <div className="relative mb-8 sm:mb-10">
@@ -198,7 +281,7 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
             className={cn(
               "h-[56px] rounded-full border-0 bg-[#f9f9fb]/70 pl-14 pr-5 font-sans shadow-none sm:h-[63px]",
               riFg.bodyMuted,
-              riIndexCopy,
+              riIndexMetaCopy,
               "leading-normal placeholder:text-[#62636c]/80",
               "focus-visible:ring-2 focus-visible:ring-[#004247]/15"
             )}
@@ -212,19 +295,40 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
             riFg.shellBg
           )}
         >
+          {/* Count row + view toggle */}
           <div
             className={cn(
-              "flex min-h-[57px] items-center px-5 sm:px-5",
+              "flex min-h-[57px] items-center justify-between px-4 sm:px-6 md:px-8",
               riFg.shellRow
             )}
           >
-            <p className={cn("font-sans", riIndexCopy, riFg.bodyMuted)}>
-              Showing {visiblePapers.length} of {filtered.length} in this
-              preview · {papers.length} total in catalogue (newest first)
+            <p className={cn("font-sans", riIndexMetaCopy, riFg.bodyMuted)}>
+              Showing {filtered.length} of {papers.length} (newest first)
             </p>
+            <div className="flex items-center gap-0.5" role="group" aria-label="View mode">
+              <button
+                type="button"
+                onClick={() => setViewMode("card")}
+                className={toggleBtnCn(viewMode === "card")}
+                aria-label="Card view"
+                aria-pressed={viewMode === "card"}
+              >
+                <LayoutGrid className="size-4" aria-hidden />
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewMode("table")}
+                className={toggleBtnCn(viewMode === "table")}
+                aria-label="Table view"
+                aria-pressed={viewMode === "table"}
+              >
+                <List className="size-4" aria-hidden />
+              </button>
+            </div>
           </div>
 
-          <div className={cn("px-5 py-3 sm:px-5", riFg.shellRow)}>
+          {/* Tag filter */}
+          <div className={cn("px-4 py-3 sm:px-6 md:px-8", riFg.shellRow)}>
             <p className={riFilterLabelCn}>Tags</p>
             <div className="flex flex-wrap gap-2">
               <button
@@ -255,9 +359,10 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
             </div>
           </div>
 
+          {/* Year + Conference filters */}
           <div
             className={cn(
-              "flex flex-col gap-4 px-5 py-3 sm:flex-row sm:items-end sm:gap-2 sm:px-5",
+              "flex flex-col gap-4 px-4 py-3 sm:flex-row sm:items-end sm:gap-2 sm:px-6 md:px-8",
               riFg.shellRow
             )}
           >
@@ -319,50 +424,38 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
             </div>
           </div>
 
-          <div className="flex w-full min-w-0 flex-col gap-3 px-5 pb-6 pt-5 sm:px-5">
-            {visiblePapers.length === 0 && (
-              <p className={cn("py-14 text-center font-sans", riIndexCopy, riFg.bodyMuted)}>
-                No studies match your filters.
-              </p>
-            )}
-            {visiblePapers.map((paper) => (
-              <ResearchIndexPublicationCard key={paper.id} paper={paper} />
-            ))}
-          </div>
+          {/* Results — card or table */}
+          {filtered.length === 0 ? (
+            <p className={cn("px-4 py-14 text-center font-sans sm:px-6 md:px-8", riIndexMetaCopy, riFg.bodyMuted)}>
+              No studies match your filters.
+            </p>
+          ) : viewMode === "card" ? (
+            <div className="flex w-full min-w-0 flex-col gap-3 px-4 pb-6 pt-5 sm:px-6 md:px-8">
+              {filtered.map((paper) => (
+                <ResearchIndexPublicationCard key={paper.id} paper={paper} />
+              ))}
+            </div>
+          ) : (
+            <div className="overflow-x-auto px-4 pb-6 sm:px-6 md:px-8">
+              <table className="w-full border-collapse font-sans">
+                <thead>
+                  <tr className={cn("border-b", riFg.borderHairline)}>
+                    <th className={tableHeaderCn}>Title</th>
+                    <th className={cn(tableHeaderCn, "hidden sm:table-cell")}>Tags</th>
+                    <th className={tableHeaderCn}>Year</th>
+                    <th className={cn(tableHeaderCn, "hidden md:table-cell")}>Conference</th>
+                    <th className={cn(tableHeaderCn, "hidden pr-0 lg:table-cell")}>Authors</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered.map((paper) => (
+                    <PublicationTableRow key={paper.id} paper={paper} />
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
-
-        {!showFullCatalogue && filtered.length > PREVIEW_LIMIT && (
-          <div className="mt-6 flex justify-end sm:mt-8">
-            <button
-              type="button"
-              onClick={() => updateParams({ all: "1" })}
-              className={riSeeAllPublicationsLinkClass}
-            >
-              See all publications
-              <ArrowRight
-                className="size-[26px] shrink-0"
-                strokeWidth={2}
-                aria-hidden
-              />
-            </button>
-          </div>
-        )}
-
-        {showFullCatalogue && filtered.length > PREVIEW_LIMIT && (
-          <div className="mt-6 flex justify-end sm:mt-8">
-            <button
-              type="button"
-              onClick={() => updateParams({ all: null })}
-              className={cn(
-                "font-sans font-medium underline-offset-4 hover:text-[#004247] hover:underline",
-                riIndexCopy,
-                riFg.bodyMuted
-              )}
-            >
-              Show preview only
-            </button>
-          </div>
-        )}
       </div>
     </div>
   )

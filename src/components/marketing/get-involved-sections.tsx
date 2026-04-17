@@ -19,6 +19,7 @@ import {
 import { TutorsHeroDecorImg } from "@/components/marketing/for-tutors-sections"
 import { forTutorsAssets } from "@/components/marketing/for-tutors-assets"
 import { cn } from "@/lib/utils"
+import type { JobListing } from "@/lib/notion/types"
 
 // ─── Shared tokens (match about/for-tutors pages) ────────────────────────────
 
@@ -26,13 +27,13 @@ const sectionH2 =
   "text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
 
 const sectionLead =
-  "w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90"
+  "w-full max-w-none text-pretty text-base text-teal-900/75 lg:text-lg dark:text-white/90"
 
 const primaryCta =
-  "h-11 rounded-full border-0 bg-[#A6EDF4] px-8 text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
+  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-sm sm:text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
 
 const outlineCta =
-  "h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-8 text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20"
+  "h-9 sm:h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-5 sm:px-8 text-sm sm:text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20"
 
 const ctaLinkLayout =
   "inline-flex items-center justify-center whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
@@ -66,10 +67,10 @@ export function GetInvolvedHeroSection() {
       />
 
       <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-3 sm:gap-4 md:gap-5">
-        <p className="text-xl font-semibold text-teal-900 max-sm:text-2xl sm:text-2xl md:text-3xl">
+        <p className="text-lg font-semibold text-teal-900 sm:text-xl md:text-3xl">
           Get Involved
         </p>
-        <h1 className="text-balance text-3xl font-semibold tracking-tight text-teal-950 max-sm:text-4xl sm:text-4xl md:text-5xl">
+        <h1 className="text-balance text-3xl font-semibold tracking-tight text-teal-950 sm:text-4xl md:text-5xl">
           Join PLUS and Make a Lasting Difference in Education
         </h1>
       </div>
@@ -78,9 +79,14 @@ export function GetInvolvedHeroSection() {
         <Link href="/get-involved#careers" className={cn(ctaLinkLayout, primaryCta)}>
           Careers at PLUS
         </Link>
-        <Link href="/for-tutors" className={cn(ctaLinkLayout, outlineCta)}>
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={cn(ctaLinkLayout, outlineCta)}
+        >
           Join as a Tutor
-        </Link>
+        </a>
       </div>
     </section>
   )
@@ -96,7 +102,7 @@ const WHY_WORK_ITEMS = [
       "We provide robust benefits to ensure your health, financial security, work-life balance, and growth.",
     cta: "Learn more",
     icon: HandCoins,
-    panelArt: "/figma/get-involved/why-work-benefits.png",
+    panelArt: "/figma/get-involved/why-work-benefits.jpg",
   },
   {
     id: "pto",
@@ -105,7 +111,7 @@ const WHY_WORK_ITEMS = [
       "Generous PTO and flexible scheduling so you can recharge and show up at your best.",
     cta: "",
     icon: DollarSign,
-    panelArt: "/figma/get-involved/why-work-pto.png",
+    panelArt: "/figma/get-involved/why-work-pto.jpg",
   },
   {
     id: "health",
@@ -114,7 +120,7 @@ const WHY_WORK_ITEMS = [
       "Comprehensive medical, dental, and vision coverage for you and your family.",
     cta: "",
     icon: Hospital,
-    panelArt: "/figma/get-involved/why-work-health.png",
+    panelArt: "/figma/get-involved/why-work-health.jpg",
   },
   {
     id: "tuition",
@@ -123,24 +129,13 @@ const WHY_WORK_ITEMS = [
       "Invest in your future with tuition reimbursement and professional development support.",
     cta: "",
     icon: School,
-    panelArt: "/figma/get-involved/why-work-tuition.png",
+    panelArt: "/figma/get-involved/why-work-tuition.jpg",
   },
 ] as const
 
 export function GetInvolvedWhyWorkSection() {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [headerHeight, setHeaderHeight] = useState(120)
-  const headerRef = useRef<HTMLDivElement>(null)
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
-
-  useEffect(() => {
-    const measure = () => {
-      if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight)
-    }
-    measure()
-    window.addEventListener("resize", measure)
-    return () => window.removeEventListener("resize", measure)
-  }, [])
 
   useEffect(() => {
     const observers: IntersectionObserver[] = []
@@ -148,7 +143,7 @@ export function GetInvolvedWhyWorkSection() {
       if (!el) return
       const observer = new IntersectionObserver(
         ([entry]) => { if (entry.isIntersecting) setActiveIndex(i) },
-        { threshold: 0, rootMargin: "-25% 0px -25% 0px" }
+        { threshold: 0, rootMargin: "-40% 0px -40% 0px" }
       )
       observer.observe(el)
       observers.push(observer)
@@ -160,7 +155,7 @@ export function GetInvolvedWhyWorkSection() {
     <section id="why-work" className="scroll-mt-24">
 
       {/* Sticky section header */}
-      <div ref={headerRef} className="pb-6 sm:pb-8">
+      <div className="pb-6 sm:pb-8">
         <div className="flex flex-col items-start gap-4 sm:gap-6 md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
           <div className="w-full space-y-3 md:min-w-0 md:flex-1">
             <h2 className={sectionH2}>Why Work at PLUS?</h2>
@@ -184,7 +179,7 @@ export function GetInvolvedWhyWorkSection() {
           return (
             <article
               key={item.id}
-              className="flex flex-col gap-4 rounded-2xl bg-sky-100 p-5 dark:bg-sky-950/35"
+              className="flex flex-col gap-4 rounded-[30px] bg-sky-100 p-5 dark:bg-sky-950/35"
             >
               <div className="flex items-center gap-3">
                 <span
@@ -193,16 +188,18 @@ export function GetInvolvedWhyWorkSection() {
                 >
                   <Icon className="size-5 text-white" strokeWidth={2} />
                 </span>
-                <h3 className="text-pretty text-xl font-bold leading-snug tracking-tight text-[#007EB8]">
+                <h3 className="text-pretty text-lg font-bold leading-snug tracking-tight text-[#007EB8] sm:text-xl">
                   {item.title}
                 </h3>
               </div>
-              <p className="text-pretty text-lg leading-relaxed text-muted-foreground">
+              <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
                 {item.description}
               </p>
               {item.cta ? (
                 <Link
-                  href="#"
+                  href="https://www.cmu.edu/hr/benefits/staff.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     ctaLinkLayout,
                     primaryCta,
@@ -212,7 +209,7 @@ export function GetInvolvedWhyWorkSection() {
                   {item.cta}
                 </Link>
               ) : null}
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl">
+              <div className="relative aspect-square w-full overflow-hidden rounded-[30px]">
                 <img
                   alt=""
                   src={item.panelArt}
@@ -245,18 +242,18 @@ export function GetInvolvedWhyWorkSection() {
                   <Icon className="size-5 text-white" strokeWidth={2} />
                 </div>
                 <p className={cn(
-                  "text-pretty text-xl font-bold leading-snug tracking-tight transition-colors duration-300 sm:text-2xl",
+                  "text-pretty text-lg font-bold leading-snug tracking-tight transition-colors duration-300 sm:text-xl lg:text-2xl",
                   isActive ? "text-[#007EB8]" : "text-muted-foreground"
                 )}>
                   {item.title}
                 </p>
                 {isActive && (
                   <>
-                    <p className="text-lg leading-relaxed text-muted-foreground">
+                    <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
                       {item.description}
                     </p>
                     {item.cta && (
-                      <Link href="#" className={cn(ctaLinkLayout, primaryCta, "mt-2 w-fit no-underline")}>
+                      <Link href="https://www.cmu.edu/hr/benefits/staff.html" target="_blank" rel="noopener noreferrer" className={cn(ctaLinkLayout, primaryCta, "mt-2 w-fit no-underline")}>
                         {item.cta}
                       </Link>
                     )}
@@ -267,9 +264,9 @@ export function GetInvolvedWhyWorkSection() {
           })}
         </div>
 
-        <div className="hidden md:block" style={{ minHeight: headerHeight + 16 + 400 }}>
-          <div className="sticky" style={{ top: headerHeight + 16 }}>
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl">
+        <div className="hidden md:block" style={{ minHeight: 400 }}>
+          <div className="sticky" style={{ top: 88 }}>
+            <div className="relative aspect-square w-full overflow-hidden rounded-[30px]">
               {WHY_WORK_ITEMS.map((item, i) => (
                 <img
                   key={item.id}
@@ -293,23 +290,14 @@ export function GetInvolvedWhyWorkSection() {
 
 // ─── Explore Career Opportunities ─────────────────────────────────────────────
 
-const CAREER_LISTINGS = [
-  {
-    title: "Post Doctoral Fellow",
-    location: "Pittsburgh, PA",
-    href: "#",
-  },
-  {
-    title: "Post Doctoral Fellow",
-    location: "Pittsburgh, PA",
-    href: "#",
-  },
-] as const
+// Placeholder data — replace with Notion API results when wired up
+const PLACEHOLDER_CAREER_LISTINGS: JobListing[] = []
 
-export function GetInvolvedCareersSection() {
+export function GetInvolvedCareersSection({ jobs }: { jobs?: JobListing[] }) {
+  const listings = jobs ?? PLACEHOLDER_CAREER_LISTINGS
   return (
-    <section id="careers" className="scroll-mt-24 space-y-6 sm:space-y-8 md:space-y-10">
-      <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
+    <section id="careers" className="scroll-mt-24">
+      <div className="flex flex-col items-start gap-6 pb-6 sm:pb-8 md:flex-row md:items-center md:justify-between md:gap-6 md:pb-10 lg:gap-8">
         <div className="w-full space-y-3 md:min-w-0 md:flex-1">
           <h2 className={sectionH2}>Explore Career Opportunities</h2>
           <p className={sectionLead}>
@@ -324,25 +312,31 @@ export function GetInvolvedCareersSection() {
         />
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:gap-8">
-        {CAREER_LISTINGS.map((job, i) => (
+      <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8">
+      {listings.length === 0 ? (
+        <div className={cn("rounded-[30px] bg-[#E8F6EA] dark:bg-emerald-950/20", cardPaddingLatest)}>
+          <p className="text-lg leading-relaxed text-muted-foreground">No open jobs at this time. Check back soon!</p>
+        </div>
+      ) : (
+      <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8">
+        {listings.map((job) => (
           <div
-            key={i}
+            key={job.id}
             className={cn(
-              "flex flex-col gap-3 rounded-3xl bg-[#E8F6EA] dark:bg-emerald-950/20",
+              "flex flex-col gap-3 rounded-[30px] bg-[#E8F6EA] dark:bg-emerald-950/20",
               cardPaddingLatest,
             )}
           >
-            <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-2 sm:gap-x-4">
+            <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-2">
               <div className="row-start-1 flex items-center">
                 <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#297E43]">
                   <Microscope className="size-5 text-white" aria-hidden />
                 </div>
               </div>
-              <p className="row-start-1 col-start-2 self-center text-xl font-bold leading-tight tracking-tight text-[#297E43] sm:text-2xl">
+              <p className="row-start-1 col-start-2 self-center text-lg font-bold leading-tight tracking-tight text-[#297E43] sm:text-xl lg:text-2xl">
                 {job.title}
               </p>
-              <p className="col-start-2 row-start-2 text-lg leading-relaxed text-muted-foreground">
+              <p className="col-start-2 row-start-2 text-base leading-relaxed text-muted-foreground lg:text-lg">
                 {job.location}
               </p>
             </div>
@@ -362,34 +356,38 @@ export function GetInvolvedCareersSection() {
           </div>
         ))}
       </div>
+      )}
 
       <div
-        className={cn("rounded-3xl bg-[#E8F6EA] dark:bg-emerald-950/20", cardPaddingLatest)}
+        className={cn("rounded-[30px] bg-[#E8F6EA] dark:bg-emerald-950/20", cardPaddingLatest)}
       >
-        <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-3">
+        <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-3">
           <div className="row-start-1 flex items-center">
-            <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#297E43]">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#297E43]">
               <FileText className="size-5 text-white" aria-hidden />
             </div>
           </div>
-          <p className="row-start-1 col-start-2 self-center text-pretty text-xl font-bold leading-tight tracking-tight text-[#297E43] sm:text-2xl">
+          <p className="row-start-1 col-start-2 self-center text-pretty text-lg font-bold leading-tight tracking-tight text-[#297E43] sm:text-xl lg:text-2xl">
             Don&apos;t See a Role That Fits?
           </p>
-          <p className="col-start-2 row-start-2 text-pretty text-lg leading-relaxed text-muted-foreground">
+          <p className="col-start-2 row-start-2 text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
             Interested in joining us? Fill out the form below with any job-related questions.
           </p>
-          <div className="col-start-2 row-start-3 scroll-mt-24">
+          <div className="col-start-2 row-start-3 mt-2 scroll-mt-24">
             <a
-              href="#partnerships-contact-form"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform?usp=header"
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(
                 ctaLinkLayout,
-                "inline-flex h-11 min-w-[10rem] items-center justify-center rounded-full border-0 bg-[#4CAB65] px-8 text-base font-medium text-white shadow-none transition-opacity hover:opacity-90 dark:bg-[#4CAB65] dark:text-white",
+                "inline-flex h-9 sm:h-11 min-w-[10rem] items-center justify-center rounded-full border-0 bg-[#4CAB65] px-8 text-sm sm:text-base font-medium text-white shadow-none transition-opacity hover:opacity-90 dark:bg-[#4CAB65] dark:text-white",
               )}
             >
               Contact Us
             </a>
           </div>
         </div>
+      </div>
       </div>
     </section>
   )
@@ -399,8 +397,8 @@ export function GetInvolvedCareersSection() {
 
 export function GetInvolvedTutoringSection() {
   return (
-    <section id="tutoring" className="scroll-mt-24 space-y-6 sm:space-y-8 md:space-y-10">
-      <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
+    <section id="tutoring" className="scroll-mt-24">
+      <div className="flex flex-col items-start gap-6 pb-6 sm:pb-8 md:flex-row md:items-center md:justify-between md:gap-6 md:pb-10 lg:gap-8">
         <div className="w-full space-y-3 md:min-w-0 md:flex-1">
           <h2 className={sectionH2}>Start Your Part-Time Tutoring Journey</h2>
           <p className={sectionLead}>
@@ -415,41 +413,44 @@ export function GetInvolvedTutoringSection() {
         />
       </div>
 
+      <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8">
       {/* Featured card */}
       <div
         className={cn(
-          "overflow-hidden rounded-3xl bg-[#FFF1C7] dark:bg-amber-950/20",
+          "overflow-hidden rounded-[30px] bg-[#FFF1C7] dark:bg-amber-950/20",
           cardPaddingLatest,
         )}
       >
         <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-stretch md:gap-8">
           <div className="flex min-h-0 w-full flex-col justify-between gap-4 md:gap-6">
-            <div className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2">
+            <div className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-2">
               <div className="row-start-1 flex items-start">
                 <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#A27707]">
                   <GraduationCap className="size-5 text-white" aria-hidden />
                 </div>
               </div>
-              <p className="row-start-1 col-start-2 self-start text-pretty text-xl font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-2xl">
+              <p className="row-start-1 col-start-2 self-start text-pretty text-lg font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-xl lg:text-2xl">
                 Becoming a Tutor at PLUS
               </p>
-              <p className="col-start-2 row-start-2 text-pretty text-lg leading-relaxed text-muted-foreground">
+              <p className="col-start-2 row-start-2 text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
                 If you're a college student or looking for flexible work, explore part-time tutoring
                 opportunities with PLUS.
               </p>
             </div>
             <div className="flex shrink-0 justify-start pl-14 md:pt-0">
-              <Link
-                href="/for-tutors"
-                className="inline-flex h-11 w-fit items-center justify-center rounded-full bg-[#FFC94B] px-8 text-base font-medium text-[#463923] transition-opacity hover:opacity-95 dark:bg-[#FFC94B] dark:text-[#463923] dark:hover:opacity-95"
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-9 sm:h-11 w-fit items-center justify-center rounded-full bg-[#FFC94B] px-8 text-sm sm:text-base font-medium text-[#463923] transition-opacity hover:opacity-95 dark:bg-[#FFC94B] dark:text-[#463923] dark:hover:opacity-95"
               >
                 Become a Tutor
-              </Link>
+              </a>
             </div>
           </div>
           <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-2xl md:w-72 lg:w-80">
             <Image
-              src={forTutorsAssets.experienceSessionPhoto}
+              src="/figma/get-involved/tutoring-becoming-tutor.jpg"
               alt="Tutor working with a student during a PLUS session"
               fill
               className="object-cover"
@@ -463,20 +464,20 @@ export function GetInvolvedTutoringSection() {
       <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:gap-8">
         <div
           className={cn(
-            "rounded-3xl bg-[#FFF1C7] dark:bg-amber-950/20",
+            "rounded-[30px] bg-[#FFF1C7] dark:bg-amber-950/20",
             cardPaddingLatest,
           )}
         >
-          <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2">
+          <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-2">
             <div className="row-start-1 flex items-center">
               <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#A27707]">
                 <Heart className="size-5 text-white" aria-hidden />
               </div>
             </div>
-            <p className="row-start-1 col-start-2 self-center text-pretty text-xl font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-2xl">
+            <p className="row-start-1 col-start-2 self-center text-pretty text-lg font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-xl lg:text-2xl">
               No Prior Experience Needed
             </p>
-            <p className="col-start-2 row-start-2 text-pretty text-lg leading-relaxed text-muted-foreground">
+            <p className="col-start-2 row-start-2 text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
               Join our team of motivated tutors! Semester-long virtual positions offer up to 10
               hours/week at $18/hr. Apply now!
             </p>
@@ -484,25 +485,26 @@ export function GetInvolvedTutoringSection() {
         </div>
         <div
           className={cn(
-            "rounded-3xl bg-[#FFF1C7] dark:bg-amber-950/20",
+            "rounded-[30px] bg-[#FFF1C7] dark:bg-amber-950/20",
             cardPaddingLatest,
           )}
         >
-          <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2">
+          <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-2">
             <div className="row-start-1 flex items-center">
               <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#A27707]">
                 <BookOpen className="size-5 text-white" aria-hidden />
               </div>
             </div>
-            <p className="row-start-1 col-start-2 self-center text-pretty text-xl font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-2xl">
+            <p className="row-start-1 col-start-2 self-center text-pretty text-lg font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-xl lg:text-2xl">
               What You'll Do
             </p>
-            <p className="col-start-2 row-start-2 text-pretty text-lg leading-relaxed text-muted-foreground">
+            <p className="col-start-2 row-start-2 text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
               Get PLUS training while math tutoring 1–4 middle school students. Mostly virtual, with
               some in-person opportunities.
             </p>
           </div>
         </div>
+      </div>
       </div>
     </section>
   )
@@ -530,29 +532,31 @@ export function GetInvolvedPartnershipsSection() {
 
       <div
         className={cn(
-          "rounded-[28px] bg-[#fdf0f6] dark:bg-[#fdf0f6]/[0.08]",
+          "rounded-[30px] bg-[#fdf0f6] dark:bg-[#fdf0f6]/[0.08]",
           cardPaddingLatest,
         )}
       >
-        <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-3">
+        <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-3">
           <div className="row-start-1 flex items-center">
-            <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#C6009C]">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#C6009C]">
               <FileText className="size-5 text-white" aria-hidden />
             </div>
           </div>
-          <p className="row-start-1 col-start-2 self-center text-pretty text-xl font-bold text-[#C6009C] sm:text-2xl dark:text-[#e879a9]">
+          <p className="row-start-1 col-start-2 self-center text-pretty text-lg font-bold text-[#C6009C] sm:text-xl lg:text-2xl dark:text-[#e879a9]">
             Contact Us to Learn More
           </p>
-          <p className="col-start-2 row-start-2 text-pretty text-lg leading-relaxed text-muted-foreground">
+          <p className="col-start-2 row-start-2 text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
             Book a demo, explore joining a program, or reach out with general questions about
             partnerships — we&apos;d love to hear from you.
           </p>
-          <div id="partnerships-contact-form" className="col-start-2 row-start-3 scroll-mt-24">
+          <div id="partnerships-contact-form" className="col-start-2 row-start-3 mt-2 scroll-mt-24">
             <a
-              href="#partnerships-contact-form"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform?usp=header"
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(
                 ctaLinkLayout,
-                "inline-flex h-11 min-w-[10rem] items-center justify-center rounded-full border-0 bg-[#ECA8D3] px-8 text-base font-medium text-[#690051] shadow-none transition-opacity hover:opacity-90 dark:bg-[#ECA8D3]/90 dark:text-[#690051]",
+                "inline-flex h-9 sm:h-11 min-w-[10rem] items-center justify-center rounded-full border-0 bg-[#ECA8D3] px-8 text-sm sm:text-base font-medium text-[#690051] shadow-none transition-opacity hover:opacity-90 dark:bg-[#ECA8D3]/90 dark:text-[#690051]",
               )}
             >
               Contact Us
@@ -575,19 +579,24 @@ export function GetInvolvedFinalCTA() {
           cardPaddingLatest,
         )}
       >
-        <h2 className="text-3xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-4xl">
+        <h2 className="text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl lg:text-4xl">
           Get Involved at PLUS
         </h2>
-        <p className="text-pretty text-lg text-teal-900/75 dark:text-white/90">
+        <p className="text-pretty text-base text-teal-900/75 lg:text-lg dark:text-white/90">
           Be part of our mission to make learning more accessible and impactful
         </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-8 flex items-center justify-center gap-3 sm:gap-4">
           <Link href="/get-involved#careers" className={cn(ctaLinkLayout, primaryCta)}>
             Careers at PLUS
           </Link>
-          <Link href="/for-tutors" className={cn(ctaLinkLayout, outlineCta)}>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(ctaLinkLayout, outlineCta)}
+          >
             Join as a Tutor
-          </Link>
+          </a>
         </div>
       </div>
     </section>

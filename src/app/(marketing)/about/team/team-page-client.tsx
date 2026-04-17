@@ -126,13 +126,13 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
   }, [filtered])
 
   return (
-    <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-16 pt-2 sm:px-6 sm:pb-20 md:px-8 md:pb-24">
+    <div className="mx-auto flex max-w-6xl flex-col gap-10 pb-16 pt-2 sm:pb-20 md:pb-24">
       {/* Header */}
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
           Our Team
         </h1>
-        <p className="max-w-2xl text-base text-muted-foreground">
+        <p className="max-w-2xl text-sm text-muted-foreground sm:text-base">
           Meet the researchers, engineers, designers, and educators behind PLUS
           -- working together to advance learning through technology.
         </p>
@@ -188,7 +188,7 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
       {/* Team grid grouped by affiliation */}
       {grouped.size === 0 ? (
         <div className="flex flex-col items-center gap-2 py-20 text-center">
-          <p className="text-lg font-medium text-muted-foreground">
+          <p className="text-sm font-medium text-muted-foreground sm:text-base lg:text-lg">
             {members.length === 0
               ? "Team directory coming soon."
               : "No team members match your filters."}
@@ -211,7 +211,7 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
         <div className="flex flex-col gap-12">
           {[...grouped.entries()].map(([affiliation, groupMembers]) => (
             <section key={affiliation} className="flex flex-col gap-5">
-              <h2 className="text-lg font-semibold text-foreground">
+              <h2 className="text-base font-semibold text-foreground sm:text-lg">
                 {affiliation}
                 <span className="ml-2 text-sm font-normal text-muted-foreground">
                   ({groupMembers.length})

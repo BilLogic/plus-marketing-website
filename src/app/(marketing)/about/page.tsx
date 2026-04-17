@@ -30,7 +30,7 @@ const AboutPage = async () => {
   ])
   return (
     <main className="bg-background text-foreground">
-      <div className="mx-auto flex max-w-5xl flex-col gap-24 px-4 pb-8 pt-14 sm:gap-16 sm:px-6 sm:pb-12 sm:pt-0 md:gap-20 lg:gap-24 lg:px-8 lg:pb-16 lg:pt-0 xl:gap-28">
+      <div className="mx-auto flex max-w-5xl flex-col gap-24 pb-8 pt-14 sm:gap-16 sm:pb-12 sm:pt-0 md:gap-20 lg:gap-24 lg:pb-16 lg:pt-0 xl:gap-28">
         <AboutHeroSection />
         <AboutMissionSection />
         <AboutFoundationsSection />

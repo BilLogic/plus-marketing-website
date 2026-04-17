@@ -26,36 +26,43 @@ import { forSchoolsSectionIds } from "@/lib/plus-footer-ia"
 /** Match `get-involved-sections` / `for-tutors-sections` typography. */
 const schoolsSectionH2 =
   "text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
-const schoolsSectionLead = "w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90"
+const schoolsSectionLead = "w-full max-w-none text-pretty text-lg text-[#62636C] dark:text-white/90"
 
 /** Shared CTA button styles — match `get-involved-sections` / `for-tutors-sections`. */
 const primaryCta =
   "inline-flex items-center justify-center h-11 rounded-full border-0 bg-[#A6EDF4] px-8 text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
 
 export const SchoolsHeroSection = () => {
-  const { division, multiplication, equal } = forSchoolsAssets.mathDecor
+  const { division, multiplication, equal, greaterThan } = forSchoolsAssets.mathDecor
+  const heroCharCn = "pointer-events-none absolute hidden h-24 w-auto object-contain sm:block sm:h-28 md:h-32 lg:h-36 select-none"
   return (
-    <section className="relative mx-auto w-full max-w-7xl min-w-0 overflow-hidden pt-8 pb-4 sm:pt-10 sm:pb-6 md:pt-12 md:pb-8 lg:pt-14">
+    <section className="relative mx-auto w-full max-w-7xl min-w-0 overflow-hidden flex flex-col justify-center min-h-[380px] sm:min-h-[440px] md:min-h-[500px] lg:min-h-[530px] pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14">
       <img
         alt=""
         src={division}
-        className="pointer-events-none absolute left-6 top-1/2 hidden -translate-y-1/2 h-28 w-28 object-contain sm:left-8 sm:block sm:h-36 sm:w-36 md:h-40 md:w-40 lg:h-48 lg:w-48"
+        className={cn(heroCharCn, "left-4 top-1/2 -translate-y-1/2 sm:left-6")}
         aria-hidden
       />
       <img
         alt=""
         src={multiplication}
-        className="pointer-events-none absolute bottom-6 left-[18%] hidden h-24 w-24 object-contain sm:block sm:h-32 sm:w-32 md:h-36 md:w-36 lg:h-40 lg:w-40"
+        className={cn(heroCharCn, "bottom-4 left-[16%] sm:bottom-6")}
         aria-hidden
       />
       <img
         alt=""
         src={equal}
-        className="pointer-events-none absolute right-6 top-1/2 hidden -translate-y-1/2 h-24 w-24 object-contain sm:right-8 sm:block sm:h-32 sm:w-32 md:h-36 md:w-36 lg:h-40 lg:w-40"
+        className={cn(heroCharCn, "right-4 top-1/2 -translate-y-1/2 sm:right-6")}
+        aria-hidden
+      />
+      <img
+        alt=""
+        src={greaterThan}
+        className={cn(heroCharCn, "bottom-4 right-[16%] sm:bottom-6")}
         aria-hidden
       />
 
-      <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-8 px-4 py-12 text-center sm:gap-10 sm:px-6 sm:py-16 md:py-20">
+      <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center sm:gap-8 sm:px-6">
         <h1 className="flex flex-col items-center gap-3 sm:gap-4">
           <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
             For schools
@@ -104,7 +111,7 @@ export const SchoolsCommunitySection = () => {
           <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Join the PLUS School Community
           </h2>
-          <p className="w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90">
+          <p className="w-full max-w-none text-pretty text-lg text-[#62636C] dark:text-white/90">
             We partner with forward-thinking schools to bridge learning gaps. See
             the organizations already making a difference with us.
           </p>
@@ -112,7 +119,7 @@ export const SchoolsCommunitySection = () => {
         <img
           alt=""
           src={forSchoolsAssets.decor.community}
-          className="pointer-events-none h-[clamp(4.5rem,18vw,10.9375rem)] w-[clamp(3.75rem,24vw,12rem)] shrink-0 object-contain sm:h-32 sm:w-[7.25rem] md:h-40 md:w-36 lg:h-[175px] lg:w-[193px]"
+          className="pointer-events-none h-[95px] w-auto shrink-0 object-contain"
           aria-hidden
         />
       </div>
@@ -216,7 +223,7 @@ export const SchoolsTrainingSection = () => {
           <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Benefits of PLUS
           </h2>
-          <p className="w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90">
+          <p className="w-full max-w-none text-pretty text-lg text-[#62636C] dark:text-white/90">
             Here&apos;s how PLUS supports schools and trains tutors to guide students
             to success
           </p>
@@ -224,7 +231,7 @@ export const SchoolsTrainingSection = () => {
         <img
           alt=""
           src={forSchoolsAssets.mathDecor.division}
-          className="pointer-events-none h-[clamp(4.5rem,18vw,10.9375rem)] w-[clamp(3.75rem,24vw,12rem)] shrink-0 object-contain sm:h-32 sm:w-[7.25rem] md:h-40 md:w-36 lg:h-[247px] lg:w-[222px]"
+          className="pointer-events-none h-[95px] w-auto shrink-0 object-contain"
           aria-hidden
         />
       </div>
@@ -395,14 +402,14 @@ export const SchoolsExperienceSection = () => {
           <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Your Day-to-Day Experience with PLUS
           </h2>
-          <p className="w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90">
+          <p className="w-full max-w-none text-pretty text-lg text-[#62636C] dark:text-white/90">
             A seamless integration designed to support your faculty and accelerate student growth.
           </p>
         </div>
         <img
           alt=""
           src={forSchoolsAssets.mathDecor.multiplication}
-          className="pointer-events-none h-[clamp(4.5rem,18vw,10.9375rem)] w-[clamp(3.75rem,24vw,12rem)] shrink-0 object-contain sm:h-32 sm:w-[7.25rem] md:h-40 md:w-36 lg:h-[247px] lg:w-[222px]"
+          className="pointer-events-none h-[95px] w-auto shrink-0 object-contain"
           aria-hidden
         />
       </div>
@@ -670,7 +677,7 @@ export const SchoolsOversightSection = () => {
           <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Maintain Excellence with Robust Oversight
           </h2>
-          <p className="w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90">
+          <p className="w-full max-w-none text-pretty text-lg text-[#62636C] dark:text-white/90">
             Ensure high-impact tutoring through data-driven insights and professional
             certification.
           </p>
@@ -678,7 +685,7 @@ export const SchoolsOversightSection = () => {
         <img
           alt=""
           src={forSchoolsAssets.mathDecor.equal}
-          className="pointer-events-none h-[clamp(4.5rem,18vw,10.9375rem)] w-[clamp(3.75rem,24vw,12rem)] shrink-0 object-contain sm:h-32 sm:w-[7.25rem] md:h-40 md:w-36 lg:h-[247px] lg:w-[222px]"
+          className="pointer-events-none h-[95px] w-auto shrink-0 object-contain"
           aria-hidden
         />
       </div>
@@ -734,14 +741,14 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
           <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             School Success Stories
           </h2>
-          <p className="w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90">
+          <p className="w-full max-w-none text-pretty text-lg text-[#62636C] dark:text-white/90">
             Here&apos;s what schools are saying about PLUS.
           </p>
         </div>
         <img
           alt=""
           src={forSchoolsAssets.successStories.headerDecor}
-          className="pointer-events-none h-[clamp(4.5rem,18vw,9.375rem)] w-auto shrink-0 object-contain sm:h-32 md:h-36 lg:h-[150px] lg:w-[165px]"
+          className="pointer-events-none h-[95px] w-auto shrink-0 object-contain"
           aria-hidden
         />
       </div>
@@ -751,7 +758,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
           Success stories will appear here when available.
         </p>
       ) : (
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-8">
+        <div className={cn("grid grid-cols-1 gap-8", stories.length > 1 && "md:grid-cols-2 md:gap-8")}>
           {stories.map((story) => {
             const readUrl = notionSuccessStoryPublicReadUrl(story)
             const quoteParts = story.quote ? splitSuccessStoryQuote(story.quote) : null
@@ -854,7 +861,7 @@ export const SchoolsRegisterCTA = () => {
             <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
               Register Your Institution
             </h2>
-            <p className="w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90">
+            <p className="w-full max-w-none text-pretty text-lg text-[#62636C] dark:text-white/90">
               Want to get started? Sign up to register your organization and provide your tutors
               access to our full training suite.
             </p>

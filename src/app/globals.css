@@ -170,11 +170,11 @@
 :root {
   /* Surfaces – Neutral grey */
   --background: #FFFFFF;
-  --foreground: #1E1F24;
+  --foreground: #62636C;
   --card: #FCFCFD;
-  --card-foreground: #1E1F24;
+  --card-foreground: #62636C;
   --popover: #FFFFFF;
-  --popover-foreground: #1E1F24;
+  --popover-foreground: #62636C;
 
   /* Primary – Accent teal */
   --primary: #00BFCC;
@@ -182,7 +182,7 @@
 
   /* Secondary – Neutral grey soft */
   --secondary: #EFF0F3;
-  --secondary-foreground: #1E1F24;
+  --secondary-foreground: #62636C;
 
   /* Muted – Neutral grey */
   --muted: #F9F9FB;

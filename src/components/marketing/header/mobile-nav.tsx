@@ -1,6 +1,6 @@
 "use client"
 
-import { Fragment } from "react"
+import { useState, Fragment } from "react"
 import Link from "next/link"
 import { Menu, ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -25,9 +25,11 @@ type MobileNavProps = {
 }
 
 export const MobileNav = ({ className }: MobileNavProps) => {
+  const [open, setOpen] = useState(false)
+  const close = () => setOpen(false)
   return (
     <div className={className}>
-      <Sheet>
+      <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger
           render={
             <Button variant="ghost" size="icon-sm" aria-label="Open menu" />
@@ -38,7 +40,7 @@ export const MobileNav = ({ className }: MobileNavProps) => {
         <SheetContent side="right">
           <SheetHeader>
             <SheetTitle>
-              <Link href="/" className="flex items-center gap-2">
+              <Link href="/" onClick={close} className="flex items-center gap-2">
                 <img
                   src="/brand/plus-icon-gradient.svg"
                   alt=""
@@ -63,6 +65,7 @@ export const MobileNav = ({ className }: MobileNavProps) => {
                         {item.href ? (
                           <Link
                             href={item.href}
+                            onClick={close}
                             className="flex-1 rounded-md px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
                           >
                             {item.label}
@@ -92,6 +95,7 @@ export const MobileNav = ({ className }: MobileNavProps) => {
                                 <li key={child.href + child.label}>
                                   <Link
                                     href={child.href}
+                                    onClick={close}
                                     className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                                   >
                                     {child.icon && (
@@ -109,6 +113,7 @@ export const MobileNav = ({ className }: MobileNavProps) => {
                   ) : (
                     <Link
                       href={item.href!}
+                      onClick={close}
                       className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
                     >
                       {item.label}
@@ -120,10 +125,10 @@ export const MobileNav = ({ className }: MobileNavProps) => {
           </nav>
 
           <SheetFooter>
-            <Button className="w-full rounded-full" nativeButton={false} render={<Link href="/demo" />}>
+            <Button className="w-full rounded-full" nativeButton={false} render={<a href="https://app.tutors.plus/demo" target="_blank" rel="noopener noreferrer" />}>
               Try PLUS Demo
             </Button>
-            <Button variant="outline" className="w-full" nativeButton={false} render={<Link href="/login" />}>
+            <Button variant="outline" className="w-full" nativeButton={false} render={<a href="https://app.tutors.plus/login" target="_blank" rel="noopener noreferrer" />}>
               Log In
             </Button>
           </SheetFooter>

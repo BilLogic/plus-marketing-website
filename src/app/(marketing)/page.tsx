@@ -16,7 +16,7 @@ const homeHeroToImpactSpacing = "pt-8 md:pt-10"
  * Hero is rendered outside this shell so its wash can span the full viewport (Figma `1714:1885`).
  */
 const homePageShellClassName = cn(
-  "mx-auto flex max-w-5xl flex-col px-4 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24",
+  "mx-auto flex max-w-5xl flex-col pb-16 sm:pb-20 md:pb-24",
   homeHeroToImpactSpacing
 )
 
@@ -27,7 +27,10 @@ const homePageShellClassName = cn(
 const Home = () => {
   return (
     <>
-      <PlusHeroSection />
+      {/* Break hero out of the layout's horizontal padding so bg-white spans full viewport width */}
+      <div className="-mx-8 sm:-mx-14">
+        <PlusHeroSection />
+      </div>
       <div className={homePageShellClassName}>
         <PlusImpactStatsSection />
         <div className={cn("mt-16 flex flex-col md:mt-24", marketingSectionStackGap)}>

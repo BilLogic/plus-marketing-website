@@ -3,9 +3,16 @@
 import { useReducedMotion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useState, useEffect, useRef } from "react"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, ChevronDown, GraduationCap, School, FileText } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { BunduiFooterSection } from "@/components/registry/bundui/footer-section"
 import {
   plusHomeAwards,
@@ -95,7 +102,7 @@ const outlineCta =
 const schoolsSectionTitle =
   "text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
 const schoolsSectionLead =
-  "w-full max-w-none text-pretty text-lg text-teal-900/75 dark:text-white/90"
+  "w-full max-w-none text-pretty text-lg text-[#62636C] dark:text-white/90"
 const schoolsSectionGap = "space-y-6 sm:space-y-8 lg:space-y-10"
 const schoolsHeaderRow =
   "flex w-full flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8"
@@ -107,7 +114,7 @@ const schoolsHeaderText =
  * Center content with `flex items-center justify-center`; use `bg-white` when using `Image fill`.
  */
 const marketingSectionHeaderDecorSlot =
-  "relative h-[150px] w-[165px] shrink-0 overflow-hidden"
+  "relative h-[95px] w-[104px] shrink-0 overflow-hidden"
 
 /**
  * Top announcement bar mirroring the tutors.plus product update banner.
@@ -195,86 +202,97 @@ export const PlusNavbar = ({
 }
 
 const LANDING_HERO_ARTBOARD = 1280
-/** Figma `1727:1970` right-pair `left` values (`1714:2175`, `1714:2177`) + tiny nudge only. */
-const landingHeroRightOrnamentNudgePx = 8
+/** Uniform pixel size for every ornament character (width = height). */
+const ORNAMENT_SIZE = 72
 
 /**
- * Floating math characters — Figma `1727:1970` on a 1280px-wide artboard (positions scale with track width).
+ * Right-side anchor positions (x = left edge in 1280px artboard coords).
+ * Left-side mirrors are computed as `ARTBOARD - x - ORNAMENT_SIZE` so every
+ * pair sits the same distance from the centre on both sides.
+ */
+const ORNAMENT_RIGHT = {
+  greenGt:   { x: 1058, y: 5   },   // pair 1 — moved up + further out
+  equals:    { x: 1148, y: 72  },   // pair 2 — moved up + further out
+  character: { x: 1064, y: 164 },   // Figma 1940:2273
+} as const
+
+/** Mirrors each right position to the left. */
+const mirrorX = (rightX: number) => LANDING_HERO_ARTBOARD - rightX - ORNAMENT_SIZE
+
+/** CSS left value using the 1280px proportional scale. */
+const pct = (x: number) => `calc(${x} * 100% / ${LANDING_HERO_ARTBOARD})`
+
+/**
+ * Six floating ornament characters — three on each side, symmetric pairs.
+ * Pair 1: coral +  ↔  green >     (same top)
+ * Pair 2: purple × ↔  blue =      (same top)
+ * Pair 3: yellow ÷ ↔  teal figure (same top)
  */
 const LandingHeroOrnaments = () => (
   <div
     className="pointer-events-none absolute inset-x-0 top-0 z-0 hidden justify-center md:flex"
     aria-hidden
   >
-    <div className="relative h-[280px] w-full max-w-[1280px] shrink-0">
-      {/* 1714:2169 — pink +, left 0 top 115, −15° */}
-      <div className="absolute left-0 top-[115px] flex h-[76.961px] w-[83.14px] items-center justify-center">
-        <div className="-rotate-[15deg]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src={plusHomeHero.landingOrnamentPinkPlus}
-            className="h-[60.992px] w-[69.731px] max-w-none object-contain"
-          />
-        </div>
-      </div>
-      {/* 1714:2171 — purple ×, left 75 top 3, +15° */}
+    <div
+      className="relative w-full max-w-[1280px] shrink-0"
+      style={{ height: ORNAMENT_RIGHT.character.y + ORNAMENT_SIZE + 16 }}
+    >
+      {/* ── LEFT SIDE ─────────────────────────────────────────────── */}
+
+      {/* Pair 1 left — coral + (mirrors green >) */}
       <div
-        className="absolute top-[3px] flex h-[95.093px] w-[108.563px] items-center justify-center"
-        style={{ left: "calc(75 * 100% / 1280)" }}
-      >
-        <div className="rotate-[15deg]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src={plusHomeHero.landingOrnamentPurpleX}
-            className="h-[73.617px] w-[92.667px] max-w-none object-contain"
-          />
-        </div>
-      </div>
-      {/* 1714:2173 — ÷, left 107 top 145, −15° */}
-      <div
-        className="absolute top-[145px] flex h-[93.161px] w-[90.035px] items-center justify-center"
-        style={{ left: "calc(107 * 100% / 1280)" }}
-      >
-        <div className="-rotate-[15deg]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src={plusHomeHero.landingOrnamentDivide}
-            className="h-[77px] w-[72.579px] max-w-none object-contain"
-          />
-        </div>
-      </div>
-      {/* 1714:2175 — green &gt;, left 1014 + nudge */}
-      <div
-        className="absolute top-[51px] flex h-[79.722px] w-[84.122px] items-center justify-center"
-        style={{
-          left: `calc(${1014 + landingHeroRightOrnamentNudgePx} * 100% / ${LANDING_HERO_ARTBOARD})`,
-        }}
-      >
-        <div className="rotate-[15deg]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src={plusHomeHero.landingOrnamentGreenGt}
-            className="h-[63.778px] w-[70px] max-w-none object-contain"
-          />
-        </div>
-      </div>
-      {/* 1714:2177 — =, left 1105 + same nudge */}
-      <div
-        className="absolute top-[132px] h-[57px] w-[69.687px]"
-        style={{
-          left: `calc(${1105 + landingHeroRightOrnamentNudgePx} * 100% / ${LANDING_HERO_ARTBOARD})`,
-        }}
+        className="absolute flex items-center justify-center -rotate-[15deg]"
+        style={{ left: pct(mirrorX(ORNAMENT_RIGHT.greenGt.x)), top: ORNAMENT_RIGHT.greenGt.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          src={plusHomeHero.landingOrnamentEquals}
-          className="absolute inset-0 size-full max-w-none object-contain"
-        />
+        <img alt="" src={plusHomeHero.landingOrnamentPinkPlus} className="size-full object-contain" />
+      </div>
+
+      {/* Pair 2 left — purple × (mirrors =) */}
+      <div
+        className="absolute flex items-center justify-center rotate-[15deg]"
+        style={{ left: pct(mirrorX(ORNAMENT_RIGHT.equals.x)), top: ORNAMENT_RIGHT.equals.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img alt="" src={plusHomeHero.landingOrnamentPurpleX} className="size-full object-contain" />
+      </div>
+
+      {/* Pair 3 left — yellow ÷ (mirrors teal character) */}
+      <div
+        className="absolute flex items-center justify-center -rotate-[15deg]"
+        style={{ left: pct(mirrorX(ORNAMENT_RIGHT.character.x)), top: ORNAMENT_RIGHT.character.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img alt="" src={plusHomeHero.landingOrnamentDivide} className="size-full object-contain" />
+      </div>
+
+      {/* ── RIGHT SIDE ────────────────────────────────────────────── */}
+
+      {/* Pair 1 right — green > */}
+      <div
+        className="absolute flex items-center justify-center rotate-[15deg]"
+        style={{ left: pct(ORNAMENT_RIGHT.greenGt.x), top: ORNAMENT_RIGHT.greenGt.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img alt="" src={plusHomeHero.landingOrnamentGreenGt} className="size-full object-contain" />
+      </div>
+
+      {/* Pair 2 right — blue = */}
+      <div
+        className="absolute flex items-center justify-center"
+        style={{ left: pct(ORNAMENT_RIGHT.equals.x), top: ORNAMENT_RIGHT.equals.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img alt="" src={plusHomeHero.landingOrnamentEquals} className="size-full object-contain" />
+      </div>
+
+      {/* Pair 3 right — teal character figure */}
+      <div
+        className="absolute flex items-center justify-center"
+        style={{ left: pct(ORNAMENT_RIGHT.character.x), top: ORNAMENT_RIGHT.character.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img alt="" src={plusHomeHero.landingCharacterFigure} className="size-full object-contain" />
       </div>
     </div>
   </div>
@@ -378,6 +396,36 @@ const HERO_VIDEO_ID = "UGoYioREH0E"
 /**
  * Hero — Figma `1714:1883` Landing: wash, copy, ornaments, video (`1791:3805`), Our Awards (`1732:3947`).
  */
+const JOIN_US_ITEMS = [
+  { label: "For Tutors", href: "/for-tutors", icon: GraduationCap },
+  { label: "For Schools", href: "/for-schools", icon: School },
+  { label: "For Researchers", href: "/for-researchers", icon: FileText },
+] as const
+
+const JoinUsDropdown = () => {
+  const router = useRouter()
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className={cn(outlineCta, "min-w-[132px] gap-2")}>
+        Join us
+        <ChevronDown className="size-4 shrink-0 transition-transform duration-200 [[data-state=open]_&]:rotate-180" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="center" sideOffset={8} className="min-w-[180px]">
+        {JOIN_US_ITEMS.map(({ label, href, icon: Icon }) => (
+          <DropdownMenuItem
+            key={href}
+            className="gap-2 cursor-pointer focus:bg-[#A6EDF4]/30 focus:text-[#004247]"
+            onClick={() => router.push(href)}
+          >
+            <Icon className="size-4 shrink-0 !text-muted-foreground" />
+            {label}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
 export const PlusHeroSection = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
@@ -429,9 +477,7 @@ export const PlusHeroSection = () => {
               <Link href="/about" className={cn(primaryCta, "min-w-[169px]")}>
                 Our mission
               </Link>
-              <Link href="/for-tutors" className={cn(outlineCta, "min-w-[132px]")}>
-                Join us
-              </Link>
+              <JoinUsDropdown />
             </div>
           </div>
         </div>
@@ -452,7 +498,7 @@ export const PlusHeroSection = () => {
             <button
               type="button"
               onClick={() => setIsVideoPlaying(true)}
-              className="group absolute inset-0 size-full"
+              className="group absolute inset-0 size-full cursor-pointer"
               aria-label="Play PLUS platform video"
             >
               {/* YouTube maxres thumbnail as poster */}
@@ -565,11 +611,11 @@ export const PlusImpactStatsSection = () => {
 
         <div className="order-2 lg:col-start-2 lg:row-start-1 lg:self-start">
           <div className="relative h-[min(472px,78vw)] w-full overflow-hidden rounded-[30px] bg-muted/30 sm:h-[400px] lg:h-[472px]">
-            {/* eslint-disable-next-line @next/next/no-img-element -- Figma crop (`1714:1956`) */}
+            {/* eslint-disable-next-line @next/next/no-img-element -- Figma node `1714:1956` */}
             <img
               alt=""
               src={plusHomeImpactMap}
-              className="pointer-events-none absolute left-[0.05%] top-[-36.79%] h-[133.99%] w-full max-w-none object-cover"
+              className="pointer-events-none absolute inset-0 size-full object-cover object-[center_60%]"
             />
           </div>
         </div>
