@@ -176,7 +176,13 @@ const sectionHeaderDecorImgClass = cn(
   marketingSectionHeaderDecorAbsoluteClass,
 )
 
-const SUCCESS_STORY_GREEN = "text-[#007d49]"
+const SUCCESS_STORY_GREEN = "text-[#007d49] dark:text-emerald-300"
+
+/** “Read story” row — same hover as About `successStoryReadLinkClass` (opacity + arrow nudge); green accent for researchers. */
+const researchSuccessStoryReadLinkClass = cn(
+  "group ml-auto inline-flex w-fit cursor-pointer items-center gap-2 text-lg font-medium no-underline transition-opacity hover:opacity-90",
+  SUCCESS_STORY_GREEN,
+)
 
 /** Teal outline pill — Research Index “View all” / empty-state link. */
 const forResearchersOutlineCtaClassName =
@@ -1291,15 +1297,11 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
                     href={readUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={cn(
-                      "group ml-auto flex w-fit items-center gap-2.5 text-base font-normal",
-                      SUCCESS_STORY_GREEN,
-                      "underline-offset-4 hover:underline"
-                    )}
+                    className={researchSuccessStoryReadLinkClass}
                   >
                     <span>Read story</span>
                     <ArrowRight
-                      className="size-[26px] shrink-0 transition-transform group-hover:translate-x-0.5"
+                      className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
                       aria-hidden
                     />
                     <span className="sr-only">(opens in new tab)</span>

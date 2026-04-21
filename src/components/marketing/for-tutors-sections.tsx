@@ -172,7 +172,7 @@ export const TutorsHeroSection = () => {
               <button
                 type="button"
                 onClick={() => setHeroVideoActive(true)}
-                className="group absolute inset-0 size-full border-0 bg-transparent p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="group absolute inset-0 size-full cursor-pointer border-0 bg-transparent p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 aria-label="Play PLUS for tutors video on YouTube"
               >
                 <div
@@ -740,7 +740,7 @@ export const TutorsCertificationSection = () => {
                   Note: Available to institutions only. Contact us to activate.
                 </p>
               </div>
-              <Button className="h-9 sm:h-11 w-fit rounded-full bg-[#4CAB65] px-8 text-sm sm:text-base font-medium text-white hover:bg-[#3d9655]">
+              <Button className="h-9 sm:h-11 w-fit cursor-pointer rounded-full bg-[#4CAB65] px-8 text-sm sm:text-base font-medium text-white hover:bg-[#3d9655]">
                 Register now
               </Button>
             </div>
