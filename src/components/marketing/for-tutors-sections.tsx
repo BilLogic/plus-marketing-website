@@ -91,7 +91,7 @@ export function TutorsHeroDecorImg({
 const TUTORS_HERO_YOUTUBE_VIDEO_ID = "Goh0b8AqVyo"
 
 /**
- * Hero — For Tutors label, headline, subhead, CTAs, YouTube hero video, doodles.
+ * Hero — For tutors label, headline, subhead, CTAs, YouTube hero video, doodles.
  */
 export const TutorsHeroSection = () => {
   const [heroVideoActive, setHeroVideoActive] = useState(false)
@@ -112,7 +112,7 @@ export const TutorsHeroSection = () => {
         <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-6 sm:gap-8">
           <h1 className="flex flex-col items-center gap-3 sm:gap-4">
             <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
-              For Tutors
+              For tutors
             </span>
             <span className="text-balance text-3xl font-bold leading-tight tracking-tight text-teal-950 sm:text-4xl md:text-5xl">
               Teach What Matters and Earn What You Deserve
