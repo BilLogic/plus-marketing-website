@@ -34,7 +34,7 @@ const ForSchoolsPage = async () => {
       <SchoolsHeroSection />
       <div
         className={cn(
-          "mx-auto flex max-w-5xl flex-col pb-16 pt-8 sm:pb-20 md:pb-24 md:pt-10",
+          "mx-auto flex max-w-5xl flex-col pb-16 pt-14 sm:pb-20 sm:pt-16 md:pb-24 md:pt-20",
           marketingSectionStackGap
         )}
       >

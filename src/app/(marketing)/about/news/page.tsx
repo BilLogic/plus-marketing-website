@@ -3,8 +3,15 @@ import type { ComponentType } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, BarChart3, BookOpen, Calendar, Newspaper, Users, Zap } from "lucide-react"
+import {
+  marketingCardIconCircleClass,
+  marketingCardLucideGlyphClass,
+  marketingCardPaddingClass,
+  marketingCardStackGapClass,
+} from "@/lib/marketing-section-layout"
 import { fetchNews } from "@/lib/notion/queries/news"
 import type { NewsItem } from "@/lib/notion/types"
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "News — PLUS",
@@ -29,12 +36,22 @@ function NewsCard({ item }: { item: NewsItem }) {
   const blurb = rawBlurb?.startsWith("(TBD") ? null : rawBlurb
 
   return (
-    <article className="flex w-full flex-col rounded-3xl bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6">
-      <div className="flex gap-3 text-lg font-bold leading-snug tracking-tight sm:text-xl lg:text-2xl">
-        <span className="mt-[calc((1lh-2.5rem)/2)] flex size-10 shrink-0 items-center justify-center rounded-full bg-[#A27707] text-white">
-          <Icon className="size-5" aria-hidden />
+    <article
+      className={cn(
+        "flex w-full flex-col rounded-[30px] bg-[#FFF1C7] dark:bg-amber-950/20",
+        marketingCardPaddingClass,
+      )}
+    >
+      <div className="flex w-full shrink-0 items-start gap-3">
+        <span
+          className={cn(
+            marketingCardIconCircleClass,
+            "shrink-0 bg-[#A27707] text-white",
+          )}
+        >
+          <Icon className={marketingCardLucideGlyphClass} aria-hidden />
         </span>
-        <h2 className="min-w-0 text-pretty text-lg font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-xl lg:text-2xl">
+        <h2 className="min-w-0 flex-1 pt-[max(0px,calc((48px-1lh)/2))] text-pretty text-lg font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-xl lg:text-2xl">
           {item.title}
         </h2>
       </div>
@@ -82,13 +99,18 @@ export default async function NewsPage() {
         </div>
 
         {news.length === 0 ? (
-          <div className="rounded-3xl bg-[#FFF1C7] p-5 dark:bg-amber-950/20 sm:p-6">
+          <div
+            className={cn(
+              "rounded-3xl bg-[#FFF1C7] dark:bg-amber-950/20",
+              marketingCardPaddingClass,
+            )}
+          >
             <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
               No news articles yet. Check back soon!
             </p>
           </div>
         ) : (
-          <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8">
+          <div className={cn("flex flex-col", marketingCardStackGapClass)}>
             {news.map((item) => (
               <NewsCard key={item.id} item={item} />
             ))}

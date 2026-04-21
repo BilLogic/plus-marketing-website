@@ -5,6 +5,13 @@ import type { ComponentType, SVGProps } from "react"
 import Link from "next/link"
 import { ArrowRight, BarChart3, BookOpen, GraduationCap, School, Sparkles } from "lucide-react"
 import type { SuccessStory } from "@/lib/notion/types"
+import {
+  marketingCardIconCircleClass,
+  marketingCardIconTitleRowOffsetClass,
+  marketingCardLhAlignedHeaderRowClass,
+  marketingCardLucideGlyphClass,
+  marketingCardPaddingClass,
+} from "@/lib/marketing-section-layout"
 import { cn } from "@/lib/utils"
 
 const CATEGORIES = ["All", "Schools", "Tutors", "Researchers", "Foundations"] as const
@@ -83,7 +90,12 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
         </div>
 
         {filtered.length === 0 ? (
-          <div className="rounded-3xl bg-[#FFE8F6] p-5 dark:bg-[#FFE8F6]/10 sm:p-6">
+          <div
+            className={cn(
+              "rounded-[30px] bg-[#FFE8F6] dark:bg-[#FFE8F6]/10",
+              marketingCardPaddingClass,
+            )}
+          >
             <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
               No success stories in this category yet. Check back soon!
             </p>
@@ -99,13 +111,29 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
               return (
                 <article
                   key={story.id}
-                  className="flex h-full flex-col rounded-3xl bg-[#FFE8F6] p-4 dark:bg-[#FFE8F6]/10 sm:p-5"
+                  className={cn(
+                    "flex h-full flex-col rounded-[30px] bg-[#FFE8F6] dark:bg-[#FFE8F6]/10",
+                    marketingCardPaddingClass,
+                  )}
                 >
-                  <div className="flex min-h-0 flex-1 flex-col rounded-3xl bg-white p-6 dark:bg-card sm:p-7">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#C6009C] text-white">
-                      <Icon className="size-5" aria-hidden />
-                    </span>
-                    <h2 className={cn(cardTitle, "mt-4 shrink-0")}>{story.title}</h2>
+                  <div
+                    className={cn(
+                      "flex min-h-0 flex-1 flex-col rounded-3xl bg-white dark:bg-card",
+                      marketingCardPaddingClass,
+                    )}
+                  >
+                    <div className={marketingCardLhAlignedHeaderRowClass}>
+                      <span
+                        className={cn(
+                          marketingCardIconTitleRowOffsetClass,
+                          marketingCardIconCircleClass,
+                          "shrink-0 bg-[#C6009C] text-white",
+                        )}
+                      >
+                        <Icon className={marketingCardLucideGlyphClass} aria-hidden />
+                      </span>
+                      <h2 className={cn(cardTitle, "min-w-0 flex-1")}>{story.title}</h2>
+                    </div>
                     {story.quote ? (
                       <p className={cn(cardBody, "mt-4 min-h-0 flex-1 text-pretty italic text-muted-foreground")}>
                         &ldquo;{story.quote}&rdquo;

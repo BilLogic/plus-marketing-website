@@ -9,7 +9,7 @@ export const marketingTypography = {
    * Marketing landing hero title — matches for-tutors / get-involved hero H1.
    * Used by for-schools `SchoolsHeroSection`.
    */
-  heroH1: "text-balance text-4xl font-semibold tracking-tight text-teal-950 sm:text-5xl",
+  heroH1: "text-balance text-3xl font-bold leading-tight tracking-tight text-teal-950 sm:text-4xl md:text-5xl",
   /** H2 — Section headline (Storybook: text-3xl font-semibold tracking-tight) */
   h2: "text-balance text-3xl font-semibold tracking-tight text-foreground",
   /** H3 — Card / accordion titles (Storybook: text-xl font-semibold tracking-tight) */

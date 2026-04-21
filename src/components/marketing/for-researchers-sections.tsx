@@ -18,10 +18,32 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import {
+  marketingCardIconAssetFrameClass,
+  marketingCardLhHeaderRowLeadPaddingClass,
+  marketingCardLucideGlyphClass,
+  marketingCardPaddingClass,
+  marketingCardStackGapClass,
+  marketingFinalCtaButtonRowClass,
+  marketingFinalCtaLeadClass,
+  marketingFinalCtaPrimaryLinkClass,
+  marketingFinalCtaShellClass,
+  marketingFinalCtaTitleClass,
+  marketingSectionHeaderDecorAbsoluteClass,
+  marketingSectionHeaderDecorImgClass,
+  marketingSectionIntroColumnClass,
+  marketingSectionLeadColorClass,
+  marketingHeroCtaButtonRowClass,
+  marketingHeroCtaOutlineLinkClass,
+  marketingHeroCtaPrimaryLinkClass,
+  marketingSectionVerticalGapClass,
+  marketingSectionVoicesHeaderDecorImgClass,
+} from "@/lib/marketing-section-layout"
 import { cn } from "@/lib/utils"
 import { marketingTypography } from "@/lib/marketing-typography"
 import { forResearchersSectionIds } from "@/lib/plus-footer-ia"
 import { forResearchersAssets } from "@/components/marketing/for-researchers-assets"
+import { forTutorsAssets } from "@/components/marketing/for-tutors-assets"
 import {
   RESEARCH_GENRE_TAGS,
   type ResearchGenreTag,
@@ -119,7 +141,7 @@ const HIGHLIGHT_TOPIC_THEME: Record<
   },
 }
 
-/** Figma `1730:2003` — row inner layout (icon 59px, gap ~22px, chevron 50px). */
+/** Figma `1730:2003` — row inner layout (icon + gap + chevron). */
 const HIGHLIGHT_TRIGGER_ROW =
   "flex w-full min-w-0 items-center justify-between gap-4"
 
@@ -143,15 +165,16 @@ const HIGHLIGHT_STUDY_IDS_BY_TOPIC: Partial<
 /** Match `get-involved-sections` / `for-tutors-sections` typography. */
 const sectionHeaderH2 =
   "text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
-const sectionHeaderLead = "w-full max-w-none text-pretty text-lg text-[#62636C] dark:text-white/90"
+const sectionHeaderLead = cn(
+  "w-full max-w-none text-lg",
+  marketingSectionLeadColorClass,
+)
 /** Every `<h2>` on `/for-researchers` — same scale as reference pages. */
 const forResearchersSectionH2 = sectionHeaderH2
-/** Same as SchoolsCommunitySection / SchoolsTrainingSection mascot column. */
-const sectionHeaderDecor =
-  "pointer-events-none h-[95px] w-auto shrink-0 object-contain"
-/** SchoolsSuccessStoriesSection header row — slightly wider gaps + compact decor. */
-const successStoriesHeaderDecor =
-  "pointer-events-none h-[95px] w-auto shrink-0 object-contain"
+const sectionHeaderDecorImgClass = cn(
+  marketingSectionHeaderDecorImgClass,
+  marketingSectionHeaderDecorAbsoluteClass,
+)
 
 const SUCCESS_STORY_GREEN = "text-[#007d49]"
 
@@ -159,17 +182,10 @@ const SUCCESS_STORY_GREEN = "text-[#007d49]"
 const forResearchersOutlineCtaClassName =
   "inline-flex items-center justify-center rounded-full border-2 border-[#A6EDF4] bg-transparent px-5 text-sm font-medium text-teal-950 transition-colors hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20 sm:px-6 sm:text-base"
 
-/** Primary hero CTA — matches `get-involved-sections` / `for-tutors-sections` button style. */
-const researchersHeroPrimaryCtaClassName = cn(
-  "inline-flex w-fit items-center justify-center no-underline",
-  "h-11 rounded-full border-0 bg-[#A6EDF4] px-8 text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
-)
+/** Primary / outline hero CTAs — static pills (no shared final-CTA hover). */
+const researchersHeroPrimaryCtaClassName = cn("w-fit", marketingHeroCtaPrimaryLinkClass)
 
-/** Outline hero CTA — matches `get-involved-sections` / `for-tutors-sections` outline button style. */
-const researchersHeroSecondaryCtaClassName = cn(
-  "inline-flex w-fit items-center justify-center no-underline",
-  "h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-8 text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20"
-)
+const researchersHeroSecondaryCtaClassName = cn("w-fit", marketingHeroCtaOutlineLinkClass)
 
 /**
  * Figma `1730:2510` / `1730:2453` — 2×2 partner grid (20px gap), pink character top-left, blue bottom-right.
@@ -275,14 +291,14 @@ export const ResearchersHeroSection = () => {
         {/* Text column — narrower to give the collage more room */}
         <div className="flex w-full min-w-0 max-w-[26rem] shrink-0 flex-col gap-5 sm:gap-6">
           <h1 className="flex flex-col gap-2 sm:gap-3">
-            <span className="text-xl font-semibold text-[#027f89] sm:text-2xl">
+            <span className="text-2xl font-semibold text-[#027f89] sm:text-3xl">
               For researchers
             </span>
-            <span className="text-balance text-2xl font-bold leading-[1.2] tracking-tight text-[#004247] sm:text-3xl md:text-[2.125rem]">
+            <span className="text-balance text-3xl font-bold leading-tight tracking-tight text-[#004247] sm:text-4xl md:text-5xl">
               Pioneering CMU Research: Human-Centered AI for Personalized Math Learning
             </span>
           </h1>
-          <div className="flex w-full flex-wrap gap-3">
+          <div className={cn("w-full", marketingHeroCtaButtonRowClass)}>
             <Link
               href={`#${forResearchersSectionIds.collaborate}`}
               className={researchersHeroPrimaryCtaClassName}
@@ -309,6 +325,7 @@ const SectionHeader = ({
   decor,
   titleClassName,
   descriptionClassName,
+  decorVariant = "default",
 }: {
   title: string
   description: string
@@ -317,13 +334,27 @@ const SectionHeader = ({
   titleClassName?: string
   /** Optional override for lead paragraph (e.g. Research Index Figma `1730:2012`). */
   descriptionClassName?: string
+  /** `voices` — larger square header decor (matches For Tutors Voices section). */
+  decorVariant?: "default" | "voices"
 }) => (
-  <div className="flex w-full flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
-    <div className="min-w-0 flex-1 basis-0 space-y-3 sm:space-y-4 md:space-y-5">
+  <div className="relative w-full text-left">
+    <div className={marketingSectionIntroColumnClass}>
       <h2 className={cn(sectionHeaderH2, titleClassName)}>{title}</h2>
       <p className={cn(sectionHeaderLead, descriptionClassName)}>{description}</p>
     </div>
-    <img alt="" src={decor} className={sectionHeaderDecor} aria-hidden />
+    <img
+      alt=""
+      src={decor}
+      className={
+        decorVariant === "voices"
+          ? cn(
+              marketingSectionVoicesHeaderDecorImgClass,
+              marketingSectionHeaderDecorAbsoluteClass,
+            )
+          : sectionHeaderDecorImgClass
+      }
+      aria-hidden
+    />
   </div>
 )
 
@@ -331,7 +362,7 @@ export const ResearchPartnersSection = () => {
   return (
     <section
       id={forResearchersSectionIds.partners}
-      className="w-full min-w-0 space-y-6 sm:space-y-8 lg:space-y-10"
+      className={cn("w-full min-w-0", marketingSectionVerticalGapClass)}
     >
       <SectionHeader
         title="Our Research Partners"
@@ -568,15 +599,26 @@ function HighlightStudyCard({
   const theme = HIGHLIGHT_TOPIC_THEME[topicId]
   const summary = riPublicationDescription(paper)
   const shellClass = cn(
-    "flex h-full min-h-[22rem] w-full min-w-0 flex-col gap-2.5 rounded-[30px] p-[15px] text-left no-underline outline-none transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-offset-2 sm:min-h-[24rem]",
+    "flex h-full min-h-[22rem] w-full min-w-0 flex-col gap-2.5 rounded-[30px] text-left no-underline outline-none transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-offset-2 sm:min-h-[24rem]",
+    marketingCardPaddingClass,
     theme.studyShellBg,
     theme.studyFocusRing
   )
   const inner = (
     <>
-        <div className="flex min-h-0 flex-1 flex-col justify-center overflow-hidden rounded-[30px] bg-white p-[15px] sm:p-5">
-        <div className="flex w-full min-w-0 flex-col gap-8">
-          <div className="flex shrink-0 items-start gap-2.5">
+        <div
+          className={cn(
+            "flex min-h-0 flex-1 flex-col justify-center overflow-hidden rounded-[30px] bg-white",
+            marketingCardPaddingClass,
+          )}
+        >
+        <div className={cn("flex w-full min-w-0 flex-col", marketingCardStackGapClass)}>
+          <div
+            className={cn(
+              "flex shrink-0 items-start gap-2.5",
+              marketingCardLhHeaderRowLeadPaddingClass,
+            )}
+          >
             <HighlightStudyPublicationIcon
               topicId={topicId}
               studyIndex={studyIndex}
@@ -660,12 +702,13 @@ export const ResearchHighlightsSection = ({
   return (
     <section
       id={forResearchersSectionIds.highlights}
-      className="w-full min-w-0 space-y-6 font-sans sm:space-y-8 lg:space-y-10"
+      className={cn("w-full min-w-0 font-sans", marketingSectionVerticalGapClass)}
     >
       <SectionHeader
         title="Our Latest Research Highlights"
         description="Explore our most recent findings in generative artificial intelligence, tutor training, and student learning."
-        decor={forResearchersAssets.highlights.decor}
+        decor={forTutorsAssets.voicesDecor}
+        decorVariant="voices"
       />
 
       <Accordion
@@ -688,8 +731,8 @@ export const ResearchHighlightsSection = ({
                 className="w-full items-center border-0 py-8 pl-0 pr-0 text-base font-normal shadow-none outline-none ring-0 hover:no-underline focus-visible:border-transparent focus-visible:shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:after:border-transparent"
               >
                 <span className={HIGHLIGHT_TRIGGER_ROW}>
-                  <span className="flex min-w-0 items-center gap-[22px]">
-                    <span className="relative size-[59px] shrink-0">
+                  <span className="flex min-w-0 items-center gap-[18px]">
+                    <span className={cn("relative", marketingCardIconAssetFrameClass)}>
                       <span className="absolute inset-0 group-aria-expanded/accordion-trigger:hidden">
                         <ResearchHighlightTopicIcon
                           topicId={topic.id}
@@ -707,21 +750,30 @@ export const ResearchHighlightsSection = ({
                     </span>
                     <span
                       className={cn(
-                        "min-w-0 text-left text-2xl font-semibold capitalize leading-snug tracking-[-0.02em] text-[#62636c] sm:text-[32px] sm:leading-[1.22]",
-                        theme.openTitle
+                        marketingTypography.bentoTitle,
+                        "min-w-0 text-left capitalize text-[#62636c]",
+                        theme.openTitle,
                       )}
                     >
                       {topic.title}
                     </span>
                   </span>
-                  <ChevronRight
-                    strokeWidth={1.75}
+                  <span
                     className={cn(
-                      "size-10 shrink-0 text-[#62636c] transition-transform duration-200 ease-out group-aria-expanded/accordion-trigger:rotate-90 sm:size-[50px]",
-                      theme.openChevron
+                      marketingCardIconAssetFrameClass,
+                      "flex shrink-0 items-center justify-center",
                     )}
                     aria-hidden
-                  />
+                  >
+                    <ChevronRight
+                      strokeWidth={1.75}
+                      className={cn(
+                        marketingCardLucideGlyphClass,
+                        "shrink-0 text-[#62636c] transition-transform duration-200 ease-out group-aria-expanded/accordion-trigger:rotate-90",
+                        theme.openChevron
+                      )}
+                    />
+                  </span>
                 </span>
               </AccordionTrigger>
               <AccordionContent
@@ -732,7 +784,12 @@ export const ResearchHighlightsSection = ({
               >
                 <div className="px-0 pb-8 pt-[30px]">
                   {studies.length > 0 ? (
-                    <div className="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 sm:gap-6">
+                    <div
+                      className={cn(
+                        "grid grid-cols-1 items-stretch sm:grid-cols-2",
+                        marketingCardStackGapClass,
+                      )}
+                    >
                       {studies.map((paper, studyIndex) => (
                         <HighlightStudyCard
                           key={paper.id}
@@ -889,12 +946,15 @@ export const ResearchIndexSection = ({
   return (
     <section
       id={forResearchersSectionIds.index}
-      className="w-full min-w-0 space-y-6 font-sans text-[#62636c] sm:space-y-8 lg:space-y-10"
+      className={cn(
+        "w-full min-w-0 font-sans text-[#62636c]",
+        marketingSectionVerticalGapClass,
+      )}
     >
       <SectionHeader
         title="Research Index"
-        description="Explore the full archive of PLUS research"
-        decor={forResearchersAssets.index.decor}
+        description="Explore the full archive of PLUS research."
+        decor={forTutorsAssets.certificationDecor}
       />
       <ResearchIndexSearchForm />
 
@@ -1079,15 +1139,13 @@ export const ResearchIndexSection = ({
 
 
 export const ResearchersGridSection = ({ members }: { members: TeamMember[] }) => {
-  const equalDecor = forResearchersAssets.heroDecor.equal
-
   return (
     <section
       id={forResearchersSectionIds.researchers}
-      className="w-full min-w-0 space-y-8 sm:space-y-10 lg:space-y-12"
+      className={cn("w-full min-w-0", marketingSectionVerticalGapClass)}
     >
-      <div className="flex w-full flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
-        <div className="min-w-0 flex-1 basis-0 space-y-3 sm:space-y-4 md:space-y-5">
+      <div className="relative w-full text-left">
+        <div className={marketingSectionIntroColumnClass}>
           <h2 className={forResearchersSectionH2}>Our Researchers</h2>
           <p className={sectionHeaderLead}>
             Meet our team who are driving evidence-based breakthroughs in learning science, HCI, and
@@ -1097,8 +1155,8 @@ export const ResearchersGridSection = ({ members }: { members: TeamMember[] }) =
         <img
           alt=""
           aria-hidden
-          src={equalDecor}
-          className={sectionHeaderDecor}
+          src={forTutorsAssets.compensationDecor}
+          className={sectionHeaderDecorImgClass}
         />
       </div>
 
@@ -1123,19 +1181,19 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
   return (
     <section
       id={forResearchersSectionIds.successStories}
-      className="w-full min-w-0 space-y-10 sm:space-y-12 lg:space-y-14"
+      className={cn("w-full min-w-0", marketingSectionVerticalGapClass)}
     >
-      <div className="flex w-full flex-row items-start gap-4 sm:gap-6 md:gap-8 lg:gap-10">
-        <div className="min-w-0 flex-1 basis-0 space-y-3 text-left sm:space-y-4 md:space-y-5">
+      <div className="relative w-full text-left">
+        <div className={marketingSectionIntroColumnClass}>
           <h2 className={forResearchersSectionH2}>Research Success Story</h2>
-          <p className="w-full max-w-none text-pretty text-lg text-[#62636C] dark:text-white/90">
+          <p className={sectionHeaderLead}>
             Here&apos;s what researchers are saying about PLUS.
           </p>
         </div>
         <img
           alt=""
-          src={forResearchersAssets.successStories.decor}
-          className={successStoriesHeaderDecor}
+          src={forTutorsAssets.experienceDecor}
+          className={sectionHeaderDecorImgClass}
           aria-hidden
         />
       </div>
@@ -1149,7 +1207,13 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
           .
         </p>
       ) : (
-        <div className={cn("grid grid-cols-1 gap-8", stories.length > 1 && "md:grid-cols-2 md:gap-8 lg:gap-9")}>
+        <div
+          className={cn(
+            "grid grid-cols-1",
+            marketingCardStackGapClass,
+            stories.length > 1 && "md:grid-cols-2 md:gap-8 lg:gap-9",
+          )}
+        >
             {stories.map((story) => {
               const readUrl = notionSuccessStoryPublicReadUrl(story)
               const quoteParts =
@@ -1158,10 +1222,23 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
               return (
                 <article
                   key={story.id}
-                  className="flex flex-col gap-6 rounded-[30px] bg-[#f4fbf6] p-[15px]"
+                  className={cn(
+                    "flex flex-col gap-6 rounded-[30px] bg-[#f4fbf6]",
+                    marketingCardPaddingClass,
+                  )}
                 >
-                  <div className="flex min-h-[min(28rem,70svh)] flex-col gap-8 rounded-[30px] bg-white px-6 py-12 sm:px-7 sm:py-14 md:min-h-[27.75rem] md:px-[26px] md:py-[70px]">
-                    <div className="flex gap-2.5">
+                  <div
+                    className={cn(
+                      "flex min-h-[min(28rem,70svh)] flex-col gap-8 rounded-[30px] bg-white md:min-h-[27.75rem]",
+                      marketingCardPaddingClass,
+                    )}
+                  >
+                    <div
+                      className={cn(
+                        "flex items-start gap-2.5",
+                        marketingCardLhHeaderRowLeadPaddingClass,
+                      )}
+                    >
                       <img
                         alt=""
                         src={titleIcon}
@@ -1236,24 +1313,19 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
   )
 }
 
-/** Match `SchoolsRegisterCTA` shell + header typography; full width within page `max-w-7xl` shell. */
-const COLLABORATE_CTA_CARD =
-  "mx-auto w-full min-w-0 overflow-hidden rounded-[30px] bg-white p-8 sm:p-10 md:p-[50px]"
-
+/** Bottom CTA matches `TutorsImpactCTA` (spacing, title/lead scale, pill CTA). */
 export const ResearchCollaborateCtaSection = () => {
   return (
     <section id={forResearchersSectionIds.collaborate} className="scroll-mt-24 w-full min-w-0">
-      <div className={COLLABORATE_CTA_CARD}>
-        <div className="flex flex-col items-center gap-12 md:gap-14 lg:gap-[60px]">
-          <div className="mx-auto w-full max-w-[49rem] space-y-3 text-center sm:space-y-4 md:space-y-5">
-            <h2 className={forResearchersSectionH2}>Conduct Research with Us</h2>
-            <p className={sectionHeaderLead}>
-              Want to get involved? Reach out if you are interested in conducting research with us.
-            </p>
-          </div>
+      <div className={marketingFinalCtaShellClass}>
+        <h2 className={marketingFinalCtaTitleClass}>Conduct Research with Us</h2>
+        <p className={marketingFinalCtaLeadClass}>
+          Want to get involved? Reach out if you are interested in conducting research with us.
+        </p>
+        <div className={marketingFinalCtaButtonRowClass}>
           <Link
             href="/get-involved#partnerships-contact-form"
-            className={researchersHeroPrimaryCtaClassName}
+            className={marketingFinalCtaPrimaryLinkClass}
           >
             Reach out
           </Link>

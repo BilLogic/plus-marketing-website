@@ -8,7 +8,9 @@ import {
   TutorsTestimonialsSection,
   TutorsImpactCTA,
 } from "@/components/marketing/for-tutors-sections"
+import { marketingSectionStackGap } from "@/lib/marketing-layout"
 import { fetchTutorTestimonials } from "@/lib/notion/queries/success-stories"
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "For Tutors",
@@ -23,8 +25,8 @@ const ForTutorsPage = async () => {
   const tutorStories = await fetchTutorTestimonials()
   return (
     <main className="bg-background text-foreground">
-      <div className="mx-auto flex max-w-5xl flex-col gap-24 pb-8 pt-14 sm:gap-16 sm:pb-12 sm:pt-0 md:gap-20 lg:gap-24 lg:pb-16 lg:pt-0 xl:gap-28">
-        <TutorsHeroSection />
+      <TutorsHeroSection />
+      <div className={cn("mx-auto flex max-w-5xl flex-col pb-16 pt-14 sm:pb-20 sm:pt-16 md:pb-24 md:pt-20", marketingSectionStackGap)}>
         <TutorsCompensationSection />
         <TutorsExperienceSection />
         <TutorsCertificationSection />

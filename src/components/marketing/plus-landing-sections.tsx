@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState, useEffect, useRef } from "react"
-import { ArrowLeft, ChevronDown, GraduationCap, School, FileText } from "lucide-react"
+import { ArrowLeft, ArrowRight, ChevronDown, GraduationCap, School, FileText } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -14,8 +14,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { BunduiFooterSection } from "@/components/registry/bundui/footer-section"
+import { forTutorsAssets } from "@/components/marketing/for-tutors-assets"
 import {
-  plusHomeAwards,
   plusHomeHero,
   plusHomeImpactDecor,
   plusHomeImpactMap,
@@ -23,6 +23,22 @@ import {
   plusHomeSmartTech,
   plusHomeTestimonialAvatars,
 } from "@/components/marketing/plus-home-assets"
+import {
+  MARKETING_CARD_ICON_DIAMETER_PX,
+  marketingCardIconAssetFrameClass,
+  marketingCardPaddingClass,
+  marketingCardStackGapClass,
+  marketingFinalCtaOutlineLinkClass,
+  marketingFinalCtaPrimaryLinkClass,
+  marketingHeroCtaOutlineLinkClass,
+  marketingHeroCtaPrimaryLinkClass,
+  marketingSectionHeaderDecorAbsoluteClass,
+  marketingSectionHeaderDecorImgClass,
+  marketingSectionIntroColumnClass,
+  marketingSectionLeadColorClass,
+  marketingHeroCtaButtonRowClass,
+  marketingSectionVerticalGapClass,
+} from "@/lib/marketing-section-layout"
 import { marketingTypography } from "@/lib/marketing-typography"
 import { cn } from "@/lib/utils"
 
@@ -92,29 +108,13 @@ const CountUpStat = ({
   )
 }
 
-/** Shared CTA button styles — match `get-involved-sections.tsx` / `for-tutors-sections.tsx`. */
-const primaryCta =
-  "inline-flex items-center justify-center h-11 rounded-full border-0 bg-[#A6EDF4] px-8 text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]"
-const outlineCta =
-  "inline-flex items-center justify-center h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-8 text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20"
-
 /** Section typography + rhythm — match `get-involved-sections.tsx` / `for-tutors-sections.tsx`. */
 const schoolsSectionTitle =
   "text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
-const schoolsSectionLead =
-  "w-full max-w-none text-pretty text-lg text-[#62636C] dark:text-white/90"
-const schoolsSectionGap = "space-y-6 sm:space-y-8 lg:space-y-10"
-const schoolsHeaderRow =
-  "flex w-full flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8"
-const schoolsHeaderText =
-  "min-w-0 flex-1 basis-0 space-y-3 sm:space-y-4 md:space-y-5"
-
-/**
- * Trailing header character — same footprint everywhere (compact vs. full Figma frame).
- * Center content with `flex items-center justify-center`; use `bg-white` when using `Image fill`.
- */
-const marketingSectionHeaderDecorSlot =
-  "relative h-[95px] w-[104px] shrink-0 overflow-hidden"
+const schoolsSectionLead = cn(
+  "w-full max-w-none text-lg",
+  marketingSectionLeadColorClass,
+)
 
 /**
  * Top announcement bar mirroring the tutors.plus product update banner.
@@ -406,7 +406,9 @@ const JoinUsDropdown = () => {
   const router = useRouter()
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className={cn(outlineCta, "min-w-[132px] gap-2")}>
+      <DropdownMenuTrigger
+        className={cn(marketingHeroCtaOutlineLinkClass, "min-w-[132px] gap-2")}
+      >
         Join us
         <ChevronDown className="size-4 shrink-0 transition-transform duration-200 [[data-state=open]_&]:rotate-180" />
       </DropdownMenuTrigger>
@@ -456,8 +458,7 @@ export const PlusHeroSection = () => {
         <div className="relative mt-8 sm:mt-10 md:mt-12">
           {/* Ornaments: Figma `1727:1970` — 1280px coordinate track */}
           <LandingHeroOrnaments />
-          <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-8 sm:gap-10">
-            <div className="flex w-full flex-col gap-4 sm:gap-5">
+          <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-6 sm:gap-8">
               <h1
                 className="mx-auto max-w-prose text-balance text-center text-3xl font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-4xl md:text-5xl"
               >
@@ -472,9 +473,8 @@ export const PlusHeroSection = () => {
                 <span className="font-bold text-primary">PLUS</span> is a virtual tutoring platform that empowers
                 middle school math learners with AI technology and research-backed methods.
               </p>
-            </div>
-            <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-5">
-              <Link href="/about" className={cn(primaryCta, "min-w-[169px]")}>
+            <div className={marketingHeroCtaButtonRowClass}>
+              <Link href="/about" className={cn(marketingHeroCtaPrimaryLinkClass, "min-w-[169px]")}>
                 Our mission
               </Link>
               <JoinUsDropdown />
@@ -513,7 +513,7 @@ export const PlusHeroSection = () => {
                 className="absolute inset-0 bg-[rgba(54,54,54,0.5)] transition-opacity group-hover:bg-[rgba(54,54,54,0.38)]"
                 aria-hidden
               />
-              {/* Play button — Figma `1791:3797` icon-park-solid:play, 75px */}
+              {/* Play button — Figma `1791:3797` icon-park-solid:play, 75px (not tied to card icon tokens). */}
               <svg
                 className="absolute left-1/2 top-1/2 size-[75px] -translate-x-1/2 -translate-y-1/2 transition-transform group-hover:scale-110 drop-shadow-md"
                 viewBox="0 0 75 75"
@@ -537,11 +537,28 @@ export const PlusHeroSection = () => {
 /** Figma IA — brown stat color (#a56d1e) */
 const IMPACT_STAT = "text-[#a56d1e]"
 
-/** Match `SchoolsSuccessStoriesSection` card + quote panel (`for-schools-sections.tsx`). */
-const VOICES_STORY_CARD =
-  "flex flex-col gap-[25px] overflow-hidden rounded-[30px] bg-[#f4fbf6] p-[15px]"
-const VOICES_QUOTE_PANEL =
-  "flex h-[280px] flex-col items-center justify-center overflow-y-auto rounded-[30px] bg-white px-5 py-6 sm:h-[300px] sm:px-6 lg:h-[320px]"
+/** Tinted shell — matches `TutorVoiceCard` rhythm (`for-tutors-sections` Voices from Our Tutors). */
+const VOICES_STORY_CARD = cn(
+  "flex h-full flex-col overflow-hidden rounded-[30px] bg-[#f4fbf6] dark:bg-emerald-950/20",
+  marketingCardPaddingClass,
+)
+
+/** Inner white quote panel — same `mt-4` + `rounded-3xl` + padding as `TutorVoiceCard`. */
+const VOICES_QUOTE_SHELL = cn(
+  "mt-4 flex min-h-0 flex-1 flex-col rounded-3xl bg-white dark:bg-card dark:ring-1 dark:ring-white/10",
+  marketingCardPaddingClass,
+)
+
+/** “Read story” row — same interaction as tutor voices; emerald accent for homepage testimonials. */
+const VOICES_READ_STORY_CLASS =
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-[#007d49] no-underline transition-opacity hover:opacity-90 dark:text-emerald-300"
+
+/** Avatar + attribution — flush to card `p-*` top; `items-center` vertically centers copy with the disc. */
+const VOICES_ATTRIBUTION_ROW = "flex w-full shrink-0 items-center gap-3"
+
+/** Testimonial profile photo — `size-16` (64px) circle; larger than 48px marketing disc, smaller than prior 96px. */
+const VOICES_AVATAR_BOX =
+  "relative size-16 shrink-0 overflow-hidden rounded-full bg-muted"
 
 /**
  * Figma `1714:1912` — 473px + 93px + 556px; stat stacks 395px wide, 18px vertical rhythm inside each.
@@ -554,43 +571,39 @@ const IMPACT_STAT_STACK =
  */
 export const PlusImpactStatsSection = () => {
   return (
-    <section id="impact" className={cn("relative", schoolsSectionGap)}>
-      <div className={schoolsHeaderRow}>
-        <div className={schoolsHeaderText}>
+    <section id="impact" className={cn("relative", marketingSectionVerticalGapClass)}>
+      <div className="relative w-full text-left">
+        <div className={marketingSectionIntroColumnClass}>
           <h2 className={schoolsSectionTitle}>Serving Low-Income Students</h2>
           <p className={schoolsSectionLead}>
             Bridging the opportunity gap in math education by empowering schools and community tutors with
             AI-enhanced tools designed for every student&apos;s success.
           </p>
         </div>
-        <div
+        <img
+          alt=""
+          src={forTutorsAssets.certificationDecor}
           className={cn(
-            marketingSectionHeaderDecorSlot,
-            "hidden items-center justify-center lg:flex"
+            marketingSectionHeaderDecorImgClass,
+            marketingSectionHeaderDecorAbsoluteClass,
           )}
           aria-hidden
-        >
-          <img
-            alt=""
-            src={plusHomeImpactDecor.equalSign}
-            className="pointer-events-none max-h-full max-w-full object-contain"
-          />
-        </div>
+        />
       </div>
 
       {/*
         Figma `1714:1912`: lg 2×2 grid (473 + 93 + 556, row gap 61). Mobile reading order: students → map → schools → tutors.
       */}
-      <div className="mx-auto mt-10 grid w-full max-w-[1122px] grid-cols-1 gap-y-10 sm:mt-12 lg:mt-14 lg:grid-cols-[minmax(0,473fr)_minmax(0,556fr)] lg:gap-x-[93px] lg:gap-y-[61px]">
+      <div className="mx-auto grid w-full max-w-[1122px] grid-cols-1 gap-y-10 lg:grid-cols-[minmax(0,473fr)_minmax(0,556fr)] lg:gap-x-[93px] lg:gap-y-[61px]">
         <div className="order-1 lg:col-start-1 lg:row-start-1 lg:self-start lg:pt-14">
           <div className={IMPACT_STAT_STACK}>
-            <div className="relative size-[58px] shrink-0">
+            <div className={cn("relative", marketingCardIconAssetFrameClass)}>
               <Image
                 src={plusHomeImpactDecor.iconStudents}
                 alt=""
-                width={58}
-                height={58}
-                className="block size-[58px] object-contain"
+                width={MARKETING_CARD_ICON_DIAMETER_PX}
+                height={MARKETING_CARD_ICON_DIAMETER_PX}
+                className={cn("block object-contain", marketingCardIconAssetFrameClass)}
                 unoptimized
               />
             </div>
@@ -602,7 +615,7 @@ export const PlusImpactStatsSection = () => {
             </p>
             <Link
               href="/for-tutors"
-              className={cn(primaryCta, "mt-4 w-fit min-w-[263px]")}
+              className={cn(marketingFinalCtaPrimaryLinkClass, "mt-4 w-fit min-w-[263px]")}
             >
               Learn more about toolkit
             </Link>
@@ -622,13 +635,13 @@ export const PlusImpactStatsSection = () => {
 
         <div className="order-3 lg:col-start-1 lg:row-start-2 lg:flex lg:flex-col">
           <div className={cn(IMPACT_STAT_STACK, "lg:h-full")}>
-            <div className="relative size-[58px] shrink-0">
+            <div className={cn("relative", marketingCardIconAssetFrameClass)}>
               <Image
                 src={plusHomeImpactDecor.iconSchools}
                 alt=""
-                width={58}
-                height={58}
-                className="block size-[58px] object-contain"
+                width={MARKETING_CARD_ICON_DIAMETER_PX}
+                height={MARKETING_CARD_ICON_DIAMETER_PX}
+                className={cn("block object-contain", marketingCardIconAssetFrameClass)}
                 unoptimized
               />
             </div>
@@ -640,7 +653,7 @@ export const PlusImpactStatsSection = () => {
             </p>
             <Link
               href="/for-schools"
-              className={cn(outlineCta, "mt-auto w-fit min-w-[212px]")}
+              className={cn(marketingFinalCtaOutlineLinkClass, "mt-auto w-fit min-w-[212px]")}
             >
               Get PLUS tutoring
             </Link>
@@ -649,13 +662,13 @@ export const PlusImpactStatsSection = () => {
 
         <div className="order-4 lg:col-start-2 lg:row-start-2 lg:flex lg:flex-col lg:pl-[83px]">
           <div className={cn(IMPACT_STAT_STACK, "lg:h-full")}>
-            <div className="relative size-[58px] shrink-0">
+            <div className={cn("relative", marketingCardIconAssetFrameClass)}>
               <Image
                 src={plusHomeImpactDecor.iconTutors}
                 alt=""
-                width={58}
-                height={58}
-                className="block size-[58px] object-contain"
+                width={MARKETING_CARD_ICON_DIAMETER_PX}
+                height={MARKETING_CARD_ICON_DIAMETER_PX}
+                className={cn("block object-contain", marketingCardIconAssetFrameClass)}
                 unoptimized
               />
             </div>
@@ -667,7 +680,7 @@ export const PlusImpactStatsSection = () => {
             </p>
             <Link
               href="/for-tutors"
-              className={cn(outlineCta, "mt-auto w-fit min-w-[195px]")}
+              className={cn(marketingFinalCtaOutlineLinkClass, "mt-auto w-fit min-w-[195px]")}
             >
               Become a tutor
             </Link>
@@ -678,10 +691,7 @@ export const PlusImpactStatsSection = () => {
   )
 }
 
-/** Figma `1707:1917` — bento column gap + row heights (556+520+46 ≈ 1122). */
-const SMART_TECH_BENTO_GAP = "gap-[46px]"
-
-/** Icon + title row — Figma `gap-[25px]`; titles use shared `marketingTypography.bentoTitle` + brand pink. */
+/** Icon + title row — `gap-3` matches `getInvolvedDiscTitleRowClass` on tutoring cards. */
 const SmartTechCardHeader = ({
   iconSrc,
   title,
@@ -693,9 +703,16 @@ const SmartTechCardHeader = ({
   className?: string
   titleClassName?: string
 }) => (
-  <div className={cn("relative z-20 flex items-center gap-[25px]", className)}>
-    <div className="relative size-[58px] shrink-0">
-      <Image src={iconSrc} alt="" width={58} height={58} className="object-contain" unoptimized />
+  <div className={cn("relative z-20 flex w-full shrink-0 items-center gap-3", className)}>
+    <div className={cn("relative", marketingCardIconAssetFrameClass)}>
+      <Image
+        src={iconSrc}
+        alt=""
+        width={MARKETING_CARD_ICON_DIAMETER_PX}
+        height={MARKETING_CARD_ICON_DIAMETER_PX}
+        className={cn("object-contain", marketingCardIconAssetFrameClass)}
+        unoptimized
+      />
     </div>
     <h3 className={cn(marketingTypography.bentoTitle, "max-w-[18rem] text-[#d31998] lg:max-w-[289px]", titleClassName)}>
       {title}
@@ -705,14 +722,20 @@ const SmartTechCardHeader = ({
 
 /**
  * Smart Tech, Smarter Learning — Figma `1714:1957`.
- * Layout: Supervisor (526×423) + AI Tutor (526×423) side-by-side in row 1;
- *         Collaborative Goal Setting (~1094×520) full-width in row 2.
+ * Layout: Supervisor + AI Tutor side-by-side in row 1; Collaborative Goal Setting full-width in row 2.
+ * Card gaps use `marketingCardStackGapClass`; icon→title gap matches tutoring (`gap-3`).
+ *
+ * Bento `<article>`s intentionally skip `marketingCardPaddingClass` on the shell: mobile uses
+ * split insets on the header vs image row, with `pt-6 sm:pt-6` / `sm:px-6` / `sm:pb-6` so top
+ * and horizontal rhythm match that token; at `lg` the header uses `left-6 top-6` so the disc
+ * lines up with the same 24px inset as `marketingCardPaddingClass` (`sm:p-6`), while layers
+ * fill the fixed-height frame.
  */
 export const PlusSmartTechSection = () => {
   return (
-    <section id="smart-tech" className={cn("relative", schoolsSectionGap)}>
-      <div className={schoolsHeaderRow}>
-        <div className={schoolsHeaderText}>
+    <section id="smart-tech" className={cn("relative", marketingSectionVerticalGapClass)}>
+      <div className="relative w-full text-left">
+        <div className={marketingSectionIntroColumnClass}>
           <h2 className={schoolsSectionTitle}>Smart Tech, Smarter Learning</h2>
           <p className={schoolsSectionLead}>
             Smart systems for superior outcomes. Our platform integrates AI tutor training, centralized
@@ -720,39 +743,35 @@ export const PlusSmartTechSection = () => {
             breakthroughs.
           </p>
         </div>
-        <div
+        <img
+          alt=""
+          src={forTutorsAssets.toolkitDecor}
           className={cn(
-            marketingSectionHeaderDecorSlot,
-            "mx-auto hidden bg-white sm:mx-0 sm:block"
+            marketingSectionHeaderDecorImgClass,
+            marketingSectionHeaderDecorAbsoluteClass,
           )}
-        >
-          <Image
-            src={plusHomeSmartTech.headerDoodle}
-            alt=""
-            fill
-            className="object-contain object-center"
-            sizes="165px"
-            unoptimized
-          />
-        </div>
+          aria-hidden
+        />
       </div>
 
       <div
         className={cn(
-          "mx-auto mt-10 flex w-full max-w-[1122px] flex-col sm:mt-12 lg:mt-[69px]",
-          SMART_TECH_BENTO_GAP
+          "mx-auto flex w-full max-w-[1122px] flex-col",
+          marketingCardStackGapClass,
         )}
       >
         {/* Row 1: Supervisor Dashboard + AI Tutor Training — Figma `1714:1965` + `1714:1976` */}
-        <div className={cn("grid grid-cols-1 lg:grid-cols-2", SMART_TECH_BENTO_GAP)}>
+        <div
+          className={cn("grid grid-cols-1 lg:grid-cols-2", marketingCardStackGapClass)}
+        >
           {/* Supervisor Dashboard — Figma `1714:1965` (526×423) */}
           <article className="relative overflow-hidden rounded-[30px] bg-[#ffe8f5] lg:h-[423px]">
             <SmartTechCardHeader
               iconSrc={plusHomeSmartTech.iconSupervisor}
               title="Supervisor Dashboard"
-              className="px-5 pt-5 lg:absolute lg:left-[23px] lg:top-[17px] lg:px-0 lg:pt-0"
+              className="px-5 pt-6 sm:px-6 sm:pt-6 lg:absolute lg:left-6 lg:top-6 lg:px-0 lg:pt-0"
             />
-            <div className="relative mt-4 px-5 pb-5 lg:hidden">
+            <div className="relative mt-4 px-5 pb-5 sm:px-6 sm:pb-6 lg:hidden">
               <Image
                 src={plusHomeSmartTech.supervisor}
                 alt=""
@@ -794,9 +813,9 @@ export const PlusSmartTechSection = () => {
             <SmartTechCardHeader
               iconSrc={plusHomeSmartTech.iconAiTutor}
               title="AI tutor training"
-              className="px-5 pt-5 lg:absolute lg:left-[23px] lg:top-[17px] lg:px-0 lg:pt-0"
+              className="px-5 pt-6 sm:px-6 sm:pt-6 lg:absolute lg:left-6 lg:top-6 lg:px-0 lg:pt-0"
             />
-            <div className="relative mt-4 px-5 pb-5 lg:hidden">
+            <div className="relative mt-4 px-5 pb-5 sm:px-6 sm:pb-6 lg:hidden">
               <Image
                 src={plusHomeSmartTech.aiTutor}
                 alt=""
@@ -837,10 +856,10 @@ export const PlusSmartTechSection = () => {
           <SmartTechCardHeader
             iconSrc={plusHomeSmartTech.iconGoal}
             title="Collaborative Goal Setting"
-            className="px-5 pt-5 lg:absolute lg:left-[23px] lg:top-[17px] lg:px-0 lg:pt-0"
+            className="px-5 pt-6 sm:px-6 sm:pt-6 lg:absolute lg:left-6 lg:top-6 lg:px-0 lg:pt-0"
             titleClassName="lg:max-w-[539px] lg:whitespace-nowrap"
           />
-          <div className="relative mt-4 px-5 pb-5 lg:hidden">
+          <div className="relative mt-4 px-5 pb-5 sm:px-6 sm:pb-6 lg:hidden">
             <Image
               src={plusHomeSmartTech.goalSetting}
               alt=""
@@ -887,43 +906,37 @@ export const PlusSmartTechSection = () => {
  */
 export const PlusScienceOfLearningSection = () => {
   return (
-    <section id="science-of-learning" className={cn("relative", schoolsSectionGap)}>
-      <div className={schoolsHeaderRow}>
-        <div className={schoolsHeaderText}>
+    <section id="science-of-learning" className={cn("relative", marketingSectionVerticalGapClass)}>
+      <div className="relative w-full text-left">
+        <div className={marketingSectionIntroColumnClass}>
           <h2 className={schoolsSectionTitle}>Built on the Science of Learning</h2>
           <p className={schoolsSectionLead}>
             Developed within CMU&apos;s HCII, our platform is a direct result of world-class educational
             research. We&apos;ve engineered AI tools designed to adapt to how students think.
           </p>
         </div>
-        <div
+        <img
+          alt=""
+          src={forTutorsAssets.compensationDecor}
           className={cn(
-            marketingSectionHeaderDecorSlot,
-            "mx-auto hidden bg-white sm:mx-0 sm:block"
+            marketingSectionHeaderDecorImgClass,
+            marketingSectionHeaderDecorAbsoluteClass,
           )}
-        >
-          <Image
-            src={plusHomeScience.headerDoodle}
-            alt=""
-            fill
-            className="object-contain object-center"
-            sizes="165px"
-            unoptimized
-          />
-        </div>
+          aria-hidden
+        />
       </div>
 
-      <div className="mx-auto mt-10 grid w-full max-w-[1122px] grid-cols-1 gap-10 lg:mt-14 lg:grid-cols-[minmax(0,473fr)_minmax(0,556fr)] lg:items-start lg:gap-[72px]">
+      <div className="mx-auto grid w-full max-w-[1122px] grid-cols-1 gap-10 lg:grid-cols-[minmax(0,473fr)_minmax(0,556fr)] lg:items-start lg:gap-[72px]">
         {/* Left — Figma `1709:2079`: 395px-wide stack, gap 18px, vertically centered in 473px column */}
         <div className="flex w-full justify-center lg:min-h-[397px] lg:items-center lg:justify-center">
           <div className="flex w-full max-w-[395px] flex-col gap-[18px]">
-            <div className="relative size-[58px] shrink-0">
+            <div className={cn("relative", marketingCardIconAssetFrameClass)}>
               <Image
                 src={plusHomeScience.iconPapers}
                 alt=""
-                width={58}
-                height={58}
-                className="object-contain"
+                width={MARKETING_CARD_ICON_DIAMETER_PX}
+                height={MARKETING_CARD_ICON_DIAMETER_PX}
+                className={cn("object-contain", marketingCardIconAssetFrameClass)}
                 unoptimized
               />
             </div>
@@ -936,7 +949,7 @@ export const PlusScienceOfLearningSection = () => {
             </p>
             <Link
               href="/research"
-              className={cn(primaryCta, "w-fit min-w-[215px]")}
+              className={cn(marketingFinalCtaPrimaryLinkClass, "w-fit min-w-[215px]")}
             >
               Read our research
             </Link>
@@ -946,7 +959,7 @@ export const PlusScienceOfLearningSection = () => {
         {/* Right — Figma `1709:2094`: 556×397, #e0f6fe, layered paper + table (positions from `1709:2116` / `1709:2114`) */}
         <div className="relative mx-auto min-h-[280px] w-full max-w-[556px] overflow-hidden rounded-[30px] bg-[#e0f6fe] lg:mx-0 lg:h-[397px] lg:min-h-0">
           {/* Mobile: stacked layers (Figma asset order) */}
-          <div className="relative flex flex-col gap-3 p-4 sm:p-6 lg:hidden">
+          <div className={cn("relative flex flex-col gap-3 lg:hidden", marketingCardPaddingClass)}>
             <Image
               src={plusHomeScience.papersLayerBack}
               alt=""
@@ -993,7 +1006,8 @@ export const PlusScienceOfLearningSection = () => {
 }
 
 /**
- * Testimonials — same card + quote panel pattern as `SchoolsSuccessStoriesSection` (For Schools).
+ * Testimonials — card layout aligned with `TutorVoiceCard` (Voices from Our Tutors): inner white
+ * quote shell, left-aligned copy, “Read story” + arrow linking to success stories.
  */
 export const PlusVoicesSection = () => {
   const testimonials = [
@@ -1002,7 +1016,7 @@ export const PlusVoicesSection = () => {
       quote: "Tutoring has affected me and it made me realize if I didn't get the help I needed I would still be struggling. But it made me see",
       highlight: "math differently in a good way",
       end: ".",
-      attribution: "Student Receiving PLUS Tutoring",
+      attribution: "Student with PLUS Tutoring",
     },
     {
       avatar: plusHomeTestimonialAvatars.district,
@@ -1021,67 +1035,76 @@ export const PlusVoicesSection = () => {
   ] as const
 
   return (
-    <section className={cn("relative", schoolsSectionGap)}>
-      <div className={schoolsHeaderRow}>
-        <div className={schoolsHeaderText}>
+    <section className={cn("relative", marketingSectionVerticalGapClass)}>
+      <div className="relative w-full text-left">
+        <div className={marketingSectionIntroColumnClass}>
           <h2 className={schoolsSectionTitle}>Testimonials</h2>
           <p className={schoolsSectionLead}>
             Here&apos;s what students, faculty, and researchers are saying about PLUS.
           </p>
         </div>
-        <div
+        <img
+          alt=""
+          src={forTutorsAssets.experienceDecor}
           className={cn(
-            marketingSectionHeaderDecorSlot,
-            "mx-auto hidden items-center justify-center sm:mx-0 sm:flex"
+            marketingSectionHeaderDecorImgClass,
+            marketingSectionHeaderDecorAbsoluteClass,
           )}
           aria-hidden
-        >
-          <img
-            alt=""
-            src={plusHomeAwards.headerDecor}
-            className="pointer-events-none max-h-full max-w-full object-contain"
-          />
-        </div>
+        />
       </div>
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-8 lg:grid-cols-3 lg:gap-10">
+      <div
+        className={cn(
+          "grid grid-cols-1 md:grid-cols-2 md:items-stretch md:gap-8 lg:grid-cols-3",
+          marketingCardStackGapClass,
+        )}
+      >
         {testimonials.map(({ avatar, quote, highlight, end, attribution }) => (
           <article
             key={attribution}
             className={cn(VOICES_STORY_CARD, "max-w-[480px] md:max-w-none")}
           >
-            <div className="flex w-full shrink-0 items-end gap-[19px]">
-              <div className="relative size-[62px] shrink-0 overflow-hidden rounded-full bg-muted">
+            <div className={VOICES_ATTRIBUTION_ROW}>
+              <div className={VOICES_AVATAR_BOX}>
                 <Image
                   src={avatar}
                   alt=""
                   fill
                   className="object-cover"
-                  sizes="62px"
+                  sizes="64px"
                   unoptimized
                 />
               </div>
               <p
                 className={cn(
-                  marketingTypography.h3,
-                  "min-w-0 flex-1 text-pretty text-[#007d49]"
+                  marketingTypography.bentoTitle,
+                  "min-w-0 flex-1 text-pretty text-[#007d49]",
                 )}
               >
                 {attribution}
               </p>
             </div>
-            <div className={VOICES_QUOTE_PANEL}>
-              <blockquote
-                className={cn(
-                  marketingTypography.body,
-                  "mx-auto max-w-[22rem] text-center text-pretty text-muted-foreground"
-                )}
-              >
+            <div className={VOICES_QUOTE_SHELL}>
+              <blockquote className="text-pretty text-left text-base font-normal italic leading-relaxed text-[#4A4A4A] dark:text-neutral-200">
                 &ldquo;{quote}{" "}
-                <strong className="font-semibold text-teal-950">{highlight}</strong>
+                <strong className="font-bold italic text-[#007d49] dark:text-emerald-300">
+                  {highlight}
+                </strong>
                 {end}&rdquo;
               </blockquote>
             </div>
+            <Link
+              href="/success-stories"
+              className={VOICES_READ_STORY_CLASS}
+              aria-label={`Read story: ${attribution}`}
+            >
+              <span>Read story</span>
+              <ArrowRight
+                className="size-6 transition-transform group-hover:translate-x-0.5"
+                aria-hidden
+              />
+            </Link>
           </article>
         ))}
       </div>

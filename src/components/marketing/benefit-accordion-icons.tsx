@@ -1,13 +1,14 @@
+import { marketingCardIconAssetFrameClass } from "@/lib/marketing-section-layout"
 import { cn } from "@/lib/utils"
 
 /**
- * Figma 1379:2340 — 58×58 benefit row icons. Circle uses `currentColor` so closed rows
- * can use `text-muted-foreground` and open panels use the marketing ochre accent.
+ * Figma 1379:2340 — benefit row icons (viewBox 58×58; CSS frame matches shared card icon diameter).
+ * Circle uses `currentColor` so closed rows can use `text-muted-foreground` and open panels use the marketing ochre accent.
  */
 function BenefitIcon1({ className }: { className?: string }) {
   return (
     <svg
-      className={cn("block size-[58px] shrink-0 select-none", className)}
+      className={cn("block select-none", marketingCardIconAssetFrameClass, className)}
       viewBox="0 0 58 58"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +36,7 @@ function BenefitIcon1({ className }: { className?: string }) {
 function BenefitIcon2({ className }: { className?: string }) {
   return (
     <svg
-      className={cn("block size-[58px] shrink-0 select-none", className)}
+      className={cn("block select-none", marketingCardIconAssetFrameClass, className)}
       viewBox="0 0 58 58"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +92,7 @@ function BenefitIcon2({ className }: { className?: string }) {
 function BenefitIcon3({ className }: { className?: string }) {
   return (
     <svg
-      className={cn("block size-[58px] shrink-0 select-none", className)}
+      className={cn("block select-none", marketingCardIconAssetFrameClass, className)}
       viewBox="0 0 58 58"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +127,7 @@ function BenefitIcon3({ className }: { className?: string }) {
 function BenefitIcon4({ className }: { className?: string }) {
   return (
     <svg
-      className={cn("block size-[58px] shrink-0 select-none", className)}
+      className={cn("block select-none", marketingCardIconAssetFrameClass, className)}
       viewBox="0 0 58 58"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

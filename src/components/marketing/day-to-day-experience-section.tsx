@@ -2,7 +2,16 @@
 
 import * as React from "react"
 
-import { forSchoolsAssets } from "@/components/marketing/for-schools-assets"
+import { forTutorsAssets } from "@/components/marketing/for-tutors-assets"
+import {
+  marketingCardIconCircleClass,
+  marketingCardStepDigitClass,
+  marketingSectionHeaderDecorAbsoluteClass,
+  marketingSectionHeaderDecorImgClass,
+  marketingSectionIntroColumnClass,
+  marketingSectionLeadColorClass,
+  marketingSectionVerticalGapClass,
+} from "@/lib/marketing-section-layout"
 import { cn } from "@/lib/utils"
 import { marketingTypography } from "@/lib/marketing-typography"
 
@@ -51,23 +60,28 @@ export function DayToDayExperienceSection({
   const displayStep = steps[safeIndex]
 
   return (
-    <div className={cn("relative w-full space-y-6 sm:space-y-8 lg:space-y-10", className)}>
-      {/*
-        Heading + lead + multiplication mascot — `items-center` matches Benefits / Community.
-      */}
-      <div className="flex w-full flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
-        <div className="min-w-0 flex-1 basis-0 space-y-3 sm:space-y-4 md:space-y-5">
+    <div className={cn("relative w-full", marketingSectionVerticalGapClass, className)}>
+      <div className="relative w-full text-left">
+        <div className={marketingSectionIntroColumnClass}>
           <h2 className="text-pretty text-lg font-bold tracking-tight text-teal-950 sm:text-2xl md:text-3xl">
             {sectionTitle}
           </h2>
-          <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg">
+          <p
+            className={cn(
+              "text-pretty text-sm leading-relaxed sm:text-base md:text-lg",
+              marketingSectionLeadColorClass,
+            )}
+          >
             {sectionDescription}
           </p>
         </div>
         <img
           alt=""
-          src={forSchoolsAssets.mathDecor.multiplication}
-          className="pointer-events-none h-[95px] w-auto shrink-0 object-contain"
+          src={forTutorsAssets.toolkitDecor}
+          className={cn(
+            marketingSectionHeaderDecorImgClass,
+            marketingSectionHeaderDecorAbsoluteClass,
+          )}
           aria-hidden
         />
       </div>
@@ -113,8 +127,9 @@ export function DayToDayExperienceSection({
             >
               <span
                 className={cn(
-                  "flex size-[58px] shrink-0 items-center justify-center rounded-full text-[32px] font-bold text-white",
-                  "bg-[#d31998]"
+                  marketingCardIconCircleClass,
+                  marketingCardStepDigitClass,
+                  "bg-[#d31998] text-white",
                 )}
                 aria-hidden
               >
@@ -164,7 +179,13 @@ export function DayToDayExperienceSection({
             className="pointer-events-none absolute inset-0 flex items-center justify-center"
             aria-hidden
           >
-            <span className="flex size-[73px] items-center justify-center text-[48px] font-bold text-white drop-shadow-md">
+            <span
+              className={cn(
+                marketingCardIconCircleClass,
+                marketingCardStepDigitClass,
+                "bg-[#d31998]/90 text-white drop-shadow-md",
+              )}
+            >
               {displayStep.heroOverlayNumber}
             </span>
           </div>

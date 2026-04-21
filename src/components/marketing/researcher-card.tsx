@@ -1,5 +1,7 @@
 import Link from "next/link"
 import { User } from "lucide-react"
+import { marketingCardPaddingClass } from "@/lib/marketing-section-layout"
+import { cn } from "@/lib/utils"
 import type { TeamMember } from "@/lib/notion/types"
 
 const LINK_CN =
@@ -74,7 +76,7 @@ export function ResearcherCard({ member }: { member: TeamMember }) {
   return (
     <article className="flex flex-col overflow-hidden rounded-[30px] bg-[#e0f5fe]">
       <ResearcherPhoto id={member.id} cachedSrc={member.picture} name={member.name} />
-      <div className="flex flex-col gap-2 p-5">
+      <div className={cn("flex flex-col gap-2", marketingCardPaddingClass)}>
         <p className="font-bold text-lg leading-snug text-[#004247] sm:text-xl">
           {member.name}
         </p>

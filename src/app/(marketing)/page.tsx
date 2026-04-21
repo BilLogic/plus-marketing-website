@@ -33,7 +33,7 @@ const Home = () => {
       </div>
       <div className={homePageShellClassName}>
         <PlusImpactStatsSection />
-        <div className={cn("mt-16 flex flex-col md:mt-24", marketingSectionStackGap)}>
+        <div className={cn("mt-16 flex flex-col md:mt-32", marketingSectionStackGap)}>
           <PlusSmartTechSection />
           <PlusScienceOfLearningSection />
           <PlusVoicesSection />

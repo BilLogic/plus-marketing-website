@@ -13,6 +13,12 @@ export const forSchoolsAssets = {
    * Large hero mascots — Figma node 1379-2316 (exported PNGs).
    * Benefit row icons — Figma 58×58 circles (`benefit-icon-*.svg`).
    */
+  heroDecor: [
+    "/figma/for-schools/hero-decor-1.svg",
+    "/figma/for-schools/hero-decor-3.svg",
+    "/figma/for-schools/hero-decor-2.svg",
+    "/figma/for-schools/hero-decor-4.svg",
+  ] as const,
   mathDecor: {
     division: "/figma/for-schools/division.png",
     multiplication: "/figma/for-schools/multiplication.png",
