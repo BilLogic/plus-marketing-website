@@ -7,15 +7,18 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, School } from "lucide-react"
 import Link from "next/link"
 
 import {
   MARKETING_CARD_ICON_DIAMETER_PX,
   marketingCardIconAssetFrameClass,
-  marketingCardLhHeaderRowLeadPaddingClass,
+  marketingCardIconCircleClass,
+  marketingCardIconTitleRowOffsetClass,
+  marketingCardLhAlignedHeaderRowClass,
+  marketingCardLucideGlyphClass,
   marketingCardPaddingClass,
   marketingFinalCtaButtonRowClass,
   marketingFinalCtaLeadClass,
@@ -57,25 +60,25 @@ export const SchoolsHeroSection = () => {
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[0]}
-        className={cn(heroCharCn, "max-w-[72px] sm:max-w-[130px] md:max-w-[150px] left-4 top-1/2 -translate-y-1/2 sm:left-6")}
+        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[10%] top-[18%]")}
         aria-hidden
       />
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[1]}
-        className={cn(heroCharCn, "bottom-4 left-[16%] sm:bottom-6")}
+        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[5%] top-[54%]")}
         aria-hidden
       />
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[2]}
-        className={cn(heroCharCn, "right-4 top-1/2 -translate-y-1/2 sm:right-6")}
+        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[10%] top-[18%]")}
         aria-hidden
       />
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[3]}
-        className={cn(heroCharCn, "bottom-4 right-[16%] sm:bottom-6")}
+        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[5%] top-[54%]")}
         aria-hidden
       />
 
@@ -569,6 +572,7 @@ const OVERSIGHT_CARDS = [
     description:
       "We work with your faculty to tailor lesson strategies that complement your school’s specific learning objectives and standards.",
     cta: "Get training",
+    href: "/get-involved#partnerships-contact-form",
     bgColor: "bg-[#ffe8f5]",
     titleColor: "text-[#d31998]",
     btnBg: "bg-[#d31998]",
@@ -581,6 +585,7 @@ const OVERSIGHT_CARDS = [
     description:
       "Track tutor performance, monitor student progress, and access high-level analytics to measure the ROI of your tutoring initiatives.",
     cta: "Try our demo",
+    href: "https://app.tutors.plus/demo",
     bgColor: "bg-[#f4fbf6]",
     titleColor: "text-[#007d49]",
     btnBg: "bg-[#007d49]",
@@ -595,6 +600,7 @@ const OVERSIGHT_CARDS = [
     description:
       "Tutors earn industry-recognized credentials upon completion, ensuring they meet the standards of your institution.",
     cta: "Register your tutors",
+    href: "/get-involved#partnerships-contact-form",
     bgColor: "bg-[#fff0cb]",
     titleColor: "text-[#a56d1e]",
     btnBg: "bg-[#ffc94b]",
@@ -607,6 +613,7 @@ const OVERSIGHT_CARDS = [
     description:
       "PLUS is designed to be software-agnostic, which means no new software licenses or changes required.",
     cta: "See How it Works",
+    href: "https://app.tutors.plus/demo",
     bgColor: "bg-[#e0f5fe]",
     titleColor: "text-[#0080b4]",
     btnBg: "bg-[#0080b4]",
@@ -648,16 +655,19 @@ function OversightCardInner({
                 {card.description}
               </p>
             </div>
-            <button
-              type="button"
+            <a
+              href={card.href}
+              {...(card.href.startsWith("http")
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
               className={cn(
-                "h-[45px] w-fit rounded-full px-10 text-base font-normal",
+                "inline-flex h-[45px] w-fit items-center justify-center rounded-full px-10 text-base font-normal transition-opacity hover:opacity-90",
                 card.btnBg,
                 card.btnText
               )}
             >
               {card.cta}
-            </button>
+            </a>
           </div>
         </div>
 
@@ -744,17 +754,55 @@ function OversightMotionCard({
 export const SchoolsOversightSection = () => {
   const prefersReducedMotion = useReducedMotion()
   const containerRef = useRef<HTMLDivElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
+  // Computed so cards center in the available viewport (below the nav) when sticky.
+  // Measured on mount and on resize to avoid any overlap with the section header.
+  const [stickyTop, setStickyTop] = useState("50vh")
+
+  useLayoutEffect(() => {
+    const el = cardsRef.current
+    if (!el) return
+    const measure = () => {
+      const h = el.getBoundingClientRect().height
+      // At scrollYProgress=0, cards are in their initial peek state: card i is
+      // translated down by i * PEEK_PX. The total visual height of the stack is
+      // h + PEEK_PX * (total - 1). Centering the visual midpoint in the area below
+      // the nav (center = 50vh + 2.25rem) requires offsetting by half that height.
+      const total = OVERSIGHT_CARDS.length
+      const halfVisualHeight = h / 2 + (PEEK_PX * (total - 1)) / 2
+      setStickyTop(`calc(50vh + 2.25rem - ${halfVisualHeight}px)`)
+    }
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   })
+
+  // A second tracker on the same container with an offset window that fires
+  // after the cards have locked into place. "start 0.35" ≈ container top at
+  // 35 vh from viewport top, which is right around the sticky engagement point.
+  // "start 0.05" ≈ container top at 5 vh — intro is gone just before the card
+  // animation begins (scrollYProgress = 0, container top = viewport top).
+  const { scrollYProgress: introFadeProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 0.35", "start 0.05"],
+  })
+  const introOpacity = useTransform(introFadeProgress, [0, 1], [1, 0])
 
   return (
     <section
       id={forSchoolsSectionIds.oversight}
       className={marketingSectionVerticalGapClass}
     >
-      <div className="relative w-full text-left">
+      <motion.div
+        className="relative w-full text-left"
+        style={prefersReducedMotion ? undefined : { opacity: introOpacity }}
+      >
         <div className={marketingSectionIntroColumnClass}>
           <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Maintain Excellence with Robust Oversight
@@ -772,11 +820,11 @@ export const SchoolsOversightSection = () => {
           )}
           aria-hidden
         />
-      </div>
+      </motion.div>
 
       {prefersReducedMotion ? (
         /* Static fallback — plain vertical stack, no animation */
-        <div className="mx-auto flex w-full max-w-5xl flex-col gap-6">
+        <div className={cn("mx-auto flex w-full max-w-5xl flex-col", marketingCardStackGapClass)}>
           {OVERSIGHT_CARDS.map((card) => (
             <OversightCardInner key={card.title} card={card} />
           ))}
@@ -789,19 +837,21 @@ export const SchoolsOversightSection = () => {
           Card 0 (highest z-index) peels away first; each subsequent card follows
           until the last card is revealed and the user scrolls on.
         */
-        <div ref={containerRef} style={{ height: `${OVERSIGHT_CARDS.length * 75}vh` }}>
-          <div className="sticky top-[4.5rem] flex h-[calc(100vh-4.5rem)] items-center">
-            <div className="mx-auto w-full max-w-5xl">
-            <div className="grid grid-cols-1">
-              {OVERSIGHT_CARDS.map((card, index) => (
-                <OversightMotionCard
-                  key={card.title}
-                  card={card}
-                  index={index}
-                  scrollYProgress={scrollYProgress}
-                />
-              ))}
-            </div>
+        <div ref={containerRef} style={{ height: `${OVERSIGHT_CARDS.length * 50}vh` }}>
+          {/* stickyTop is measured so the card stack's midpoint lands at the
+              viewport center when pinned — no transform needed, no layout shift. */}
+          <div className="sticky" style={{ top: stickyTop }}>
+            <div ref={cardsRef} className="mx-auto w-full max-w-5xl">
+              <div className="grid grid-cols-1">
+                {OVERSIGHT_CARDS.map((card, index) => (
+                  <OversightMotionCard
+                    key={card.title}
+                    card={card}
+                    index={index}
+                    scrollYProgress={scrollYProgress}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -845,13 +895,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
           Success stories will appear here when available.
         </p>
       ) : (
-        <div
-          className={cn(
-            "grid grid-cols-1",
-            marketingCardStackGapClass,
-            stories.length > 1 && "md:grid-cols-2 md:gap-8",
-          )}
-        >
+        <div className={cn("flex flex-col", marketingCardStackGapClass)}>
           {stories.map((story) => {
             const readUrl = notionSuccessStoryPublicReadUrl(story)
             const quoteParts = story.quote ? splitSuccessStoryQuote(story.quote) : null
@@ -860,34 +904,30 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
               <article
                 key={story.id}
                 className={cn(
-                  "flex flex-col gap-6 rounded-[30px] bg-[#f4fbf6]",
+                  "flex h-full flex-col rounded-[30px] bg-[#f4fbf6] dark:bg-teal-950/30",
                   marketingCardPaddingClass,
                 )}
               >
                 <div
                   className={cn(
-                    "flex min-h-[min(28rem,70svh)] flex-col gap-8 rounded-[30px] bg-white md:min-h-[27.75rem]",
+                    "flex min-h-0 flex-1 flex-col rounded-3xl bg-white dark:bg-card dark:ring-1 dark:ring-white/10",
                     marketingCardPaddingClass,
                   )}
                 >
-                  <div
-                    className={cn(
-                      "flex items-start gap-2.5",
-                      marketingCardLhHeaderRowLeadPaddingClass,
-                    )}
-                  >
-                    <img
-                      alt=""
-                      src={titleIcon}
-                      className="mt-1 size-6 shrink-0"
-                      width={24}
-                      height={24}
-                      aria-hidden
-                    />
+                  <div className={marketingCardLhAlignedHeaderRowClass}>
+                    <span
+                      className={cn(
+                        marketingCardIconTitleRowOffsetClass,
+                        marketingCardIconCircleClass,
+                        "shrink-0 bg-[#007d49] text-white",
+                      )}
+                    >
+                      <School className={marketingCardLucideGlyphClass} aria-hidden />
+                    </span>
                     <h3
                       className={cn(
-                        "text-pretty text-xl font-semibold leading-snug sm:text-2xl",
-                        SCHOOLS_SUCCESS_STORY_GREEN
+                        "min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight sm:text-xl lg:text-2xl",
+                        SCHOOLS_SUCCESS_STORY_GREEN,
                       )}
                     >
                       {story.title}
@@ -895,15 +935,12 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                   </div>
                   {story.quote ? (
                     <>
-                      <blockquote className="text-pretty text-lg italic leading-relaxed text-muted-foreground sm:text-xl">
+                      <blockquote className="mt-4 min-h-0 flex-1 text-pretty text-base italic leading-relaxed text-muted-foreground">
                         {quoteParts ? (
                           <>
                             &ldquo;{quoteParts.before}{" "}
                             <strong
-                              className={cn(
-                                "font-semibold italic",
-                                SCHOOLS_SUCCESS_STORY_GREEN
-                              )}
+                              className={cn("font-semibold italic", SCHOOLS_SUCCESS_STORY_GREEN)}
                             >
                               {quoteParts.highlight}
                             </strong>
@@ -914,13 +951,13 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                         )}
                       </blockquote>
                       {story.quoteAttribution ? (
-                        <p className="text-sm not-italic text-muted-foreground">
+                        <p className="mt-2 text-sm not-italic text-muted-foreground">
                           — {story.quoteAttribution}
                         </p>
                       ) : null}
                     </>
                   ) : (
-                    <p className="text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">
+                    <p className="mt-4 min-h-0 flex-1 text-pretty text-base leading-relaxed text-muted-foreground">
                       {story.summary}
                     </p>
                   )}
@@ -930,14 +967,13 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "group ml-auto flex w-fit items-center gap-2.5 text-base font-normal",
+                    "group mt-4 ml-auto flex w-fit items-center gap-2 text-lg font-medium no-underline transition-opacity hover:opacity-90",
                     SCHOOLS_SUCCESS_STORY_GREEN,
-                    "underline-offset-4 hover:underline"
                   )}
                 >
                   <span>Read story</span>
                   <ArrowRight
-                    className="size-[26px] shrink-0 transition-transform group-hover:translate-x-0.5"
+                    className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
                     aria-hidden
                   />
                   <span className="sr-only">(opens in new tab)</span>

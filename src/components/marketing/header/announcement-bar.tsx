@@ -15,19 +15,19 @@ export function AnnouncementBar({
   badge,
 }: AnnouncementBarProps) {
   return (
-    <div className="relative flex items-center justify-center gap-x-4 border-b border-border/30 bg-primary/5 px-4 py-3 text-sm sm:px-6">
+    <div className="relative flex items-center justify-center gap-x-2 border-b border-[rgba(231,232,236,0.3)] bg-[rgba(166,237,244,0.5)] px-4 py-3 sm:px-6">
       <div className="flex items-center gap-2">
         {badge && (
-          <span className="shrink-0 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
+          <span className="shrink-0 rounded-full bg-[#a6edf4] px-2 py-0.5 text-xs font-semibold text-[#004247]">
             {badge}
           </span>
         )}
-        <p className="text-muted-foreground">{message}</p>
+        <p className="text-[14px] text-[#62636c]">{message}</p>
       </div>
       {linkText && linkHref && (
         <Link
           href={linkHref}
-          className="group inline-flex shrink-0 items-center gap-1 text-sm font-medium text-foreground transition-colors hover:text-primary"
+          className="group inline-flex shrink-0 items-center gap-1 text-[14px] font-medium text-[#027f89] transition-opacity hover:opacity-75"
         >
           {linkText}
           <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />

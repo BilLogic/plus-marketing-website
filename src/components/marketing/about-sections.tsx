@@ -141,19 +141,19 @@ export function AboutHeroSection() {
     <section className="relative flex flex-col items-center justify-center gap-6 overflow-hidden pt-8 pb-8 text-center min-h-[380px] sm:gap-8 sm:min-h-[440px] sm:pt-10 sm:pb-10 md:min-h-[500px] md:pt-12 md:pb-12 lg:min-h-[530px] lg:pt-14 lg:pb-14">
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[0]}
-        className="max-w-[72px] sm:max-w-[130px] md:max-w-[150px] left-4 top-1/2 -translate-y-1/2 sm:left-6"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[10%] top-[18%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[1]}
-        className="bottom-4 left-[16%] sm:bottom-6"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[5%] top-[54%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[2]}
-        className="right-4 top-1/2 -translate-y-1/2 sm:right-6"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[10%] top-[18%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[3]}
-        className="bottom-4 right-[16%] sm:bottom-6"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[5%] top-[54%]"
       />
 
       <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-3 sm:gap-4 md:gap-5">

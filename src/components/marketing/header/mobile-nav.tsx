@@ -125,12 +125,22 @@ export const MobileNav = ({ className }: MobileNavProps) => {
           </nav>
 
           <SheetFooter>
-            <Button className="w-full rounded-full" nativeButton={false} render={<a href="https://app.tutors.plus/demo" target="_blank" rel="noopener noreferrer" />}>
+            <a
+              href="https://app.tutors.plus/demo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-full h-9 items-center justify-center rounded-full bg-[#a6edf4] px-5 text-base font-normal text-[#004247] transition-opacity hover:opacity-90"
+            >
               Try PLUS Demo
-            </Button>
-            <Button variant="outline" className="w-full" nativeButton={false} render={<a href="https://app.tutors.plus/login" target="_blank" rel="noopener noreferrer" />}>
+            </a>
+            <a
+              href="https://app.tutors.plus/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-full h-7 items-center justify-center rounded-lg px-2.5 text-base font-medium text-[#62636c] transition-opacity hover:opacity-60"
+            >
               Log In
-            </Button>
+            </a>
           </SheetFooter>
         </SheetContent>
       </Sheet>

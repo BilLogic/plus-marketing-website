@@ -28,7 +28,7 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
             {item.children ? (
               <>
                 <NavigationMenuTrigger
-                  className={cn("text-sm", item.href && "cursor-pointer")}
+                  className={cn("text-base", item.href && "cursor-pointer")}
                   {...(item.href ? { onClick: () => router.push(item.href!) } : {})}
                 >
                   {item.label}
@@ -82,7 +82,7 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
             ) : (
               <NavigationMenuLink
                 href={item.href!}
-                className={cn(navigationMenuTriggerStyle(), "text-sm")}
+                className={cn(navigationMenuTriggerStyle(), "text-base")}
               >
                 {item.label}
               </NavigationMenuLink>

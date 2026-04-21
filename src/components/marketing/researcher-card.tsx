@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { User } from "lucide-react"
-import { marketingCardPaddingClass } from "@/lib/marketing-section-layout"
 import { cn } from "@/lib/utils"
 import type { TeamMember } from "@/lib/notion/types"
 
@@ -76,30 +75,28 @@ export function ResearcherCard({ member }: { member: TeamMember }) {
   return (
     <article className="flex flex-col overflow-hidden rounded-[30px] bg-[#e0f5fe]">
       <ResearcherPhoto id={member.id} cachedSrc={member.picture} name={member.name} />
-      <div className={cn("flex flex-col gap-2", marketingCardPaddingClass)}>
-        <p className="font-bold text-lg leading-snug text-[#004247] sm:text-xl">
+      <div className="flex flex-col gap-2 px-2 pt-3 pb-4 sm:px-3 sm:pt-4 sm:pb-5">
+        <p className="text-xs font-bold leading-tight tracking-tight text-[#004247] sm:text-sm lg:text-base">
           {member.name}
         </p>
         {links.length > 0 && (
-          <div className="flex flex-wrap items-center gap-x-1 text-sm">
+          <div className="flex flex-col gap-0.5 text-[10px] font-medium leading-tight text-[#0080b4] sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-1.5 sm:gap-y-0 sm:text-xs">
             {links.map((link, i) => (
               <span key={link.href} className="inline-flex items-center gap-1">
                 {i > 0 && (
-                  <span className="text-[#004247]/50" aria-hidden>
-                    |
-                  </span>
+                  <span className="hidden sm:inline text-[#004247]/50 select-none" aria-hidden>|</span>
                 )}
                 {link.external ? (
                   <a
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={LINK_CN}
+                    className="underline underline-offset-2"
                   >
                     {link.label}
                   </a>
                 ) : (
-                  <Link href={link.href} className={LINK_CN}>
+                  <Link href={link.href} className="underline underline-offset-2">
                     {link.label}
                   </Link>
                 )}
@@ -108,10 +105,10 @@ export function ResearcherCard({ member }: { member: TeamMember }) {
           </div>
         )}
         {member.title1 && (
-          <p className="text-sm leading-snug text-[#004247]">{member.title1}</p>
+          <p className="text-[10px] leading-snug text-[#004247] sm:text-xs">{member.title1}</p>
         )}
         {member.title2 && (
-          <p className="text-sm leading-snug text-[#004247]/75">{member.title2}</p>
+          <p className="text-[10px] leading-snug text-[#004247]/75 sm:text-xs">{member.title2}</p>
         )}
       </div>
     </article>

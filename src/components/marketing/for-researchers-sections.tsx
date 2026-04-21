@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight, ChevronRight, Search } from "lucide-react"
+import { ArrowRight, BookOpen, ChevronRight, Search } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useMemo, useState } from "react"
@@ -20,6 +20,9 @@ import {
 } from "@/components/ui/select"
 import {
   marketingCardIconAssetFrameClass,
+  marketingCardIconCircleClass,
+  marketingCardIconTitleRowOffsetClass,
+  marketingCardLhAlignedHeaderRowClass,
   marketingCardLhHeaderRowLeadPaddingClass,
   marketingCardLucideGlyphClass,
   marketingCardPaddingClass,
@@ -295,12 +298,12 @@ export const ResearchersHeroSection = () => {
     <section className="relative w-full min-w-0 overflow-hidden pt-8 pb-4 sm:pt-10 sm:pb-6 md:pt-12 md:pb-8 lg:pt-14">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 sm:gap-8 sm:px-6 md:px-8 lg:flex-row lg:items-center lg:gap-12">
         {/* Text column — narrower to give the collage more room */}
-        <div className="flex w-full min-w-0 max-w-[26rem] shrink-0 flex-col gap-5 sm:gap-6">
+        <div className="mx-auto flex w-full min-w-0 shrink-0 flex-col gap-5 sm:gap-6 lg:mx-0 lg:max-w-[26rem]">
           <h1 className="flex flex-col gap-2 sm:gap-3">
-            <span className="text-2xl font-semibold text-[#027f89] sm:text-3xl">
+            <span className="text-center text-2xl font-semibold text-[#027f89] sm:text-3xl lg:text-left">
               For researchers
             </span>
-            <span className="text-balance text-3xl font-bold leading-tight tracking-tight text-[#004247] sm:text-4xl md:text-5xl">
+            <span className="text-balance text-center text-3xl font-bold leading-tight tracking-tight text-[#004247] sm:text-4xl md:text-5xl lg:text-left">
               Pioneering CMU Research: Human-Centered AI for Personalized Math Learning
             </span>
           </h1>
@@ -1171,7 +1174,7 @@ export const ResearchersGridSection = ({ members }: { members: TeamMember[] }) =
           Researcher profiles will appear here once loaded from our team directory.
         </p>
       ) : (
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-6">
+        <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-3 lg:grid-cols-5 lg:gap-4 [&>*]:min-w-0">
           {members.map((member) => (
             <ResearcherCard key={member.id} member={member} />
           ))}
@@ -1213,102 +1216,90 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
           .
         </p>
       ) : (
-        <div
-          className={cn(
-            "grid grid-cols-1",
-            marketingCardStackGapClass,
-            stories.length > 1 && "md:grid-cols-2 md:gap-8 lg:gap-9",
-          )}
-        >
-            {stories.map((story) => {
-              const readUrl = notionSuccessStoryPublicReadUrl(story)
-              const quoteParts =
-                story.quote ? splitSuccessStoryQuote(story.quote) : null
+        <div className={cn("flex flex-col", marketingCardStackGapClass)}>
+          {stories.map((story) => {
+            const readUrl = notionSuccessStoryPublicReadUrl(story)
+            const quoteParts = story.quote ? splitSuccessStoryQuote(story.quote) : null
 
-              return (
-                <article
-                  key={story.id}
+            return (
+              <article
+                key={story.id}
+                className={cn(
+                  "flex h-full flex-col rounded-[30px] bg-[#f4fbf6] dark:bg-teal-950/30",
+                  marketingCardPaddingClass,
+                )}
+              >
+                <div
                   className={cn(
-                    "flex flex-col gap-6 rounded-[30px] bg-[#f4fbf6]",
+                    "flex min-h-0 flex-1 flex-col rounded-3xl bg-white dark:bg-card dark:ring-1 dark:ring-white/10",
                     marketingCardPaddingClass,
                   )}
                 >
-                  <div
-                    className={cn(
-                      "flex min-h-[min(28rem,70svh)] flex-col gap-8 rounded-[30px] bg-white md:min-h-[27.75rem]",
-                      marketingCardPaddingClass,
-                    )}
-                  >
-                    <div
+                  <div className={marketingCardLhAlignedHeaderRowClass}>
+                    <span
                       className={cn(
-                        "flex items-start gap-2.5",
-                        marketingCardLhHeaderRowLeadPaddingClass,
+                        marketingCardIconTitleRowOffsetClass,
+                        marketingCardIconCircleClass,
+                        "shrink-0 bg-[#007d49] text-white",
                       )}
                     >
-                      <img
-                        alt=""
-                        src={titleIcon}
-                        className="mt-1 size-6 shrink-0"
-                        width={24}
-                        height={24}
-                        aria-hidden
-                      />
-                      <h3
-                        className={cn(
-                          "text-pretty text-xl font-semibold leading-snug sm:text-2xl",
-                          SUCCESS_STORY_GREEN
-                        )}
-                      >
-                        {story.title}
-                      </h3>
-                    </div>
-                    {story.quote ? (
-                      <>
-                        <blockquote
-                          className={cn(
-                            "text-pretty text-lg italic leading-relaxed text-muted-foreground sm:text-xl"
-                          )}
-                        >
-                          {quoteParts ? (
-                            <>
-                              &ldquo;{quoteParts.before}{" "}
-                              <strong className={cn("font-semibold italic", SUCCESS_STORY_GREEN)}>
-                                {quoteParts.highlight}
-                              </strong>
-                              {quoteParts.after}&rdquo;
-                            </>
-                          ) : (
-                            <>&ldquo;{story.quote}&rdquo;</>
-                          )}
-                        </blockquote>
-                        {story.quoteAttribution ? (
-                          <p className="text-sm not-italic text-muted-foreground">
-                            — {story.quoteAttribution}
-                          </p>
-                        ) : null}
-                      </>
-                    ) : (
-                      <p className="text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">
-                        {story.summary}
-                      </p>
-                    )}
+                      <BookOpen className={marketingCardLucideGlyphClass} aria-hidden />
+                    </span>
+                    <h3
+                      className={cn(
+                        "min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight sm:text-xl lg:text-2xl",
+                        SUCCESS_STORY_GREEN,
+                      )}
+                    >
+                      {story.title}
+                    </h3>
                   </div>
-                  <a
-                    href={readUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={researchSuccessStoryReadLinkClass}
-                  >
-                    <span>Read story</span>
-                    <ArrowRight
-                      className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
-                      aria-hidden
-                    />
-                    <span className="sr-only">(opens in new tab)</span>
-                  </a>
-                </article>
-              )
-            })}
+                  {story.quote ? (
+                    <>
+                      <blockquote className="mt-4 min-h-0 flex-1 text-pretty text-base italic leading-relaxed text-muted-foreground">
+                        {quoteParts ? (
+                          <>
+                            &ldquo;{quoteParts.before}{" "}
+                            <strong className={cn("font-semibold italic", SUCCESS_STORY_GREEN)}>
+                              {quoteParts.highlight}
+                            </strong>
+                            {quoteParts.after}&rdquo;
+                          </>
+                        ) : (
+                          <>&ldquo;{story.quote}&rdquo;</>
+                        )}
+                      </blockquote>
+                      {story.quoteAttribution ? (
+                        <p className="mt-2 text-sm not-italic text-muted-foreground">
+                          — {story.quoteAttribution}
+                        </p>
+                      ) : null}
+                    </>
+                  ) : (
+                    <p className="mt-4 min-h-0 flex-1 text-pretty text-base leading-relaxed text-muted-foreground">
+                      {story.summary}
+                    </p>
+                  )}
+                </div>
+                <a
+                  href={readUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    "group mt-4 ml-auto flex w-fit items-center gap-2 text-lg font-medium no-underline transition-opacity hover:opacity-90",
+                    SUCCESS_STORY_GREEN,
+                  )}
+                >
+                  <span>Read story</span>
+                  <ArrowRight
+                    className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
+                    aria-hidden
+                  />
+                  <span className="sr-only">(opens in new tab)</span>
+                </a>
+              </article>
+            )
+          })}
         </div>
       )}
     </section>
