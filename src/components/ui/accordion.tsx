@@ -38,7 +38,7 @@ function AccordionTrigger({
   ...props
 }: AccordionTriggerProps) {
   return (
-    <AccordionPrimitive.Header className="flex">
+    <AccordionPrimitive.Header className="flex w-full min-w-0">
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         onPointerDown={(e) => {
@@ -47,7 +47,7 @@ function AccordionTrigger({
         }}
 
         className={cn(
-          "group/accordion-trigger relative flex flex-1 items-start rounded-lg border border-transparent py-2.5 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:after:border-ring aria-disabled:pointer-events-none aria-disabled:opacity-50",
+          "group/accordion-trigger relative flex w-full min-w-0 flex-1 cursor-pointer items-start rounded-lg border border-transparent py-2.5 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:after:border-ring aria-disabled:pointer-events-none aria-disabled:opacity-50",
           hideChevron
             ? "justify-start"
             : "justify-between **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-muted-foreground",

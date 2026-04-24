@@ -574,16 +574,42 @@ const VOICES_AVATAR_BOX =
   "relative size-16 shrink-0 overflow-hidden rounded-full bg-muted"
 
 /**
- * Figma `2127:2274` — 395px-wide copy stack, 18px vertical rhythm, 58px stat icons; photos 556×472.
+ * Copy column — matches get-involved **Why Work at PLUS** zigzag (responsive widths + `gap-[18px]`).
  */
-const impactStatTextColClass = cn("flex w-full max-w-[395px] flex-col items-start gap-[18px] lg:max-w-none")
+const impactZigzagTextColClass = cn(
+  "flex w-full min-w-0 flex-col items-start gap-[18px]",
+  "max-md:max-w-[min(36rem,100%)] max-md:self-start",
+  "md:min-w-0 md:flex-1 md:basis-0 md:max-w-[min(28rem,52%)]",
+  "lg:w-[473px] lg:max-w-[473px] lg:flex-none lg:basis-auto",
+)
 
-const impactRowGap = "gap-8 md:gap-10 lg:gap-[93px]"
+/** Stat line — original impact scale (unchanged color). */
+const impactStatTitleClass = cn("text-2xl font-bold leading-tight sm:text-3xl", IMPACT_STAT)
 
-const IMPACT_STAT_ICON_PX = 58
+/** Body — matches get-involved section lead (`text-base lg:text-lg`). */
+const impactZigzagBodyClass = cn(
+  "w-full max-w-none text-pretty text-base leading-relaxed lg:text-lg",
+  marketingSectionLeadColorClass,
+)
+
+/** Raster in 48×48 frame — same as `SmartTechCardHeader` (`marketingCardIconAssetFrameClass`). */
+function ImpactStatIcon({ src }: { src: string }) {
+  return (
+    <div className={cn("relative shrink-0", marketingCardIconAssetFrameClass)}>
+      <Image
+        src={src}
+        alt=""
+        width={MARKETING_CARD_ICON_DIAMETER_PX}
+        height={MARKETING_CARD_ICON_DIAMETER_PX}
+        className={cn("object-contain", marketingCardIconAssetFrameClass)}
+        unoptimized
+      />
+    </div>
+  )
+}
 
 const ImpactRowPhoto = ({ src, alt = "" }: { src: string; alt?: string }) => (
-  <div className="relative w-full min-w-0 max-w-[556px] sm:mx-auto lg:mx-0">
+  <div className="relative w-full min-w-0">
     <div className="relative w-full overflow-hidden rounded-[30px] bg-muted/30">
       <div className="relative aspect-[556/472] w-full">
         {/* eslint-disable-next-line @next/next/no-img-element -- public static asset; object-cover in ratio frame */}
@@ -600,56 +626,63 @@ const ImpactRowPhoto = ({ src, alt = "" }: { src: string; alt?: string }) => (
 /**
  * Impact — Figma `2127:2274` Z-layout: (students | photo) → (photo | schools) → (tutors | photo).
  */
+const impactZigzagRowClass = cn(
+  "flex w-full flex-col items-stretch gap-6 sm:gap-8",
+  "md:flex-row md:items-center md:justify-between md:gap-5 lg:gap-8 xl:gap-[93px]",
+)
+
+const impactZigzagPhotoColClass = (orderClass: "md:order-1" | "md:order-2") =>
+  cn(
+    "w-full min-w-0 shrink-0",
+    "max-md:mx-auto max-md:max-w-[min(36rem,100%)]",
+    "md:max-w-[min(320px,44%)] md:basis-[min(320px,44%)]",
+    "lg:min-w-0 lg:max-w-[556px] lg:flex-1 lg:basis-0",
+    orderClass,
+  )
+
 export const PlusImpactStatsSection = () => {
   return (
     <section id="impact" className={cn("relative", marketingSectionVerticalGapClass)}>
       <div className="relative w-full text-left">
-        <div className={marketingSectionIntroColumnClass}>
-          <h2 className={schoolsSectionTitle}>Serving Students from Low-Income Families</h2>
-          <p className={schoolsSectionLead}>
-            Bridging the opportunity gap in math education by empowering schools and community tutors with
-            AI-enhanced tools designed for every student&apos;s success.
-          </p>
+        <div className="relative">
+          <div className={cn(marketingSectionIntroColumnClass, "sm:space-y-1")}>
+            <h2 className={schoolsSectionTitle}>Serving Students from Low-Income Families</h2>
+            <p className={impactZigzagBodyClass}>
+              Bridging the opportunity gap in math education by empowering schools and community tutors with
+              AI-enhanced tools designed for every student&apos;s success.
+            </p>
+          </div>
+          <img
+            alt=""
+            src={plusHomeImpactDecor.equalSign}
+            className={cn(
+              marketingSectionHeaderDecorImgClass,
+              marketingSectionHeaderDecorAbsoluteClass,
+            )}
+            aria-hidden
+          />
         </div>
-        <img
-          alt=""
-          src={plusHomeImpactDecor.equalSign}
-          className={cn(
-            marketingSectionHeaderDecorImgClass,
-            marketingSectionHeaderDecorAbsoluteClass,
-          )}
-          aria-hidden
-        />
       </div>
 
       <div className="mx-auto flex w-full max-w-[1122px] flex-col space-y-10 md:space-y-12 lg:space-y-16">
-        {/* Row 1: copy | classroom photo */}
-        <div className={cn("flex w-full flex-col items-stretch lg:flex-row lg:items-center", impactRowGap)}>
-          <div className={cn(impactStatTextColClass, "shrink-0 lg:w-[473px]")}>
-            <div className="relative size-[58px]">
-              <Image
-                src={plusHomeImpactDecor.iconStudents}
-                alt=""
-                width={IMPACT_STAT_ICON_PX}
-                height={IMPACT_STAT_ICON_PX}
-                className="block size-full object-contain"
-                unoptimized
-              />
-            </div>
-            <p className={cn("text-2xl font-bold leading-tight sm:text-3xl", IMPACT_STAT)}>
+        {/* Row 1: copy | photo (wide); stacked copy → photo below md */}
+        <div className={impactZigzagRowClass}>
+          <div className={cn(impactZigzagTextColClass, "shrink-0", "md:order-1")}>
+            <ImpactStatIcon src={plusHomeImpactDecor.iconStudents} />
+            <p className={impactStatTitleClass}>
               <CountUpStat target={5000} suffix="+" /> students
             </p>
-            <p className={schoolsSectionLead}>
+            <p className={impactZigzagBodyClass}>
               Students across the country receiving personalized math support through PLUS.
             </p>
             <Link
               href="/success-stories"
-              className={cn(marketingFinalCtaPrimaryLinkClass, "w-fit min-w-[180px]")}
+              className={cn(marketingHeroCtaPrimaryLinkClass, "w-fit self-start")}
             >
               See impact
             </Link>
           </div>
-          <div className="min-w-0 flex-1 lg:max-w-[556px]">
+          <div className={impactZigzagPhotoColClass("md:order-2")}>
             <ImpactRowPhoto
               src={plusHomeImpactRowStudents}
               alt="Students in a classroom with laptops and headphones"
@@ -657,67 +690,49 @@ export const PlusImpactStatsSection = () => {
           </div>
         </div>
 
-        {/* Row 2: school team photo | copy */}
-        <div className={cn("flex w-full flex-col items-stretch lg:flex-row lg:items-center", impactRowGap)}>
-          <div className="min-w-0 flex-1 lg:order-1 lg:max-w-[556px]">
+        {/* Row 2: photo left on wide (order); DOM copy first for stacked */}
+        <div className={impactZigzagRowClass}>
+          <div className={cn(impactZigzagTextColClass, "shrink-0", "md:order-2")}>
+            <ImpactStatIcon src={plusHomeImpactDecor.iconSchools} />
+            <p className={impactStatTitleClass}>
+              <CountUpStat target={13} suffix="+" /> schools
+            </p>
+            <p className={impactZigzagBodyClass}>
+              PLUS tutors provide instructional support to middle-school math learners during the school day.
+            </p>
+            <Link
+              href="/for-schools"
+              className={cn(marketingHeroCtaOutlineLinkClass, "w-fit self-start")}
+            >
+              Get PLUS tutoring
+            </Link>
+          </div>
+          <div className={impactZigzagPhotoColClass("md:order-1")}>
             <ImpactRowPhoto
               src={plusHomeImpactRowSchools}
               alt="Team members in front of a school building"
             />
           </div>
-          <div className={cn(impactStatTextColClass, "shrink-0 lg:order-2 lg:w-[473px]")}>
-            <div className="relative size-[58px]">
-              <Image
-                src={plusHomeImpactDecor.iconSchools}
-                alt=""
-                width={IMPACT_STAT_ICON_PX}
-                height={IMPACT_STAT_ICON_PX}
-                className="block size-full object-contain"
-                unoptimized
-              />
-            </div>
-            <p className={cn("text-2xl font-bold leading-tight sm:text-3xl", IMPACT_STAT)}>
-              <CountUpStat target={13} suffix="+" /> schools
-            </p>
-            <p className={schoolsSectionLead}>
-              PLUS tutors provide instructional support to middle-school math learners during the school day.
-            </p>
-            <Link
-              href="/for-schools"
-              className={cn(marketingFinalCtaOutlineLinkClass, "w-fit min-w-[212px]")}
-            >
-              Get PLUS tutoring
-            </Link>
-          </div>
         </div>
 
-        {/* Row 3: copy | remote tutoring photo */}
-        <div className={cn("flex w-full flex-col items-stretch lg:flex-row lg:items-center", impactRowGap)}>
-          <div className={cn(impactStatTextColClass, "shrink-0 lg:w-[473px]")}>
-            <div className="relative size-[58px]">
-              <Image
-                src={plusHomeImpactDecor.iconTutors}
-                alt=""
-                width={IMPACT_STAT_ICON_PX}
-                height={IMPACT_STAT_ICON_PX}
-                className="block size-full object-contain"
-                unoptimized
-              />
-            </div>
-            <p className={cn("text-2xl font-bold leading-tight sm:text-3xl", IMPACT_STAT)}>
+        {/* Row 3: copy | photo */}
+        <div className={impactZigzagRowClass}>
+          <div className={cn(impactZigzagTextColClass, "shrink-0", "md:order-1")}>
+            <ImpactStatIcon src={plusHomeImpactDecor.iconTutors} />
+            <p className={impactStatTitleClass}>
               <CountUpStat target={500} suffix="+" /> tutors
             </p>
-            <p className={schoolsSectionLead}>
+            <p className={impactZigzagBodyClass}>
               University and community tutors trained to support middle school math learners.
             </p>
             <Link
               href="/for-tutors"
-              className={cn(marketingFinalCtaOutlineLinkClass, "w-fit min-w-[195px]")}
+              className={cn(marketingHeroCtaOutlineLinkClass, "w-fit self-start")}
             >
               Become a tutor
             </Link>
           </div>
-          <div className="min-w-0 flex-1 lg:max-w-[556px]">
+          <div className={impactZigzagPhotoColClass("md:order-2")}>
             <ImpactRowPhoto
               src={plusHomeImpactRowTutors}
               alt="Student on a video call with a tutor on a laptop"

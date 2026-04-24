@@ -97,18 +97,18 @@ export const TutorsHeroSection = () => {
   const [heroVideoActive, setHeroVideoActive] = useState(false)
 
   return (
-    <section className="flex flex-col items-center gap-6 overflow-hidden pt-[4.5rem] pb-8 text-center sm:gap-8 sm:pt-[5.5rem] sm:pb-10 md:pt-28 md:pb-12 lg:pb-14">
-      {/* Relative wrapper so decors position against text+CTA block, not the full section */}
-      <div className="relative w-full flex flex-col items-center gap-6 sm:gap-8 px-4 sm:px-6">
-        <TutorsHeroDecorImg
-          src={forSchoolsAssets.heroDecor[0]}
-          className="max-w-[72px] sm:max-w-[130px] md:max-w-[150px] left-4 top-1/2 -translate-y-1/2 sm:left-6"
-        />
-        <TutorsHeroDecorImg
-          src={forSchoolsAssets.heroDecor[2]}
-          className="right-4 top-1/2 -translate-y-1/2 sm:right-6"
-        />
+    <section className="relative flex flex-col items-center gap-6 overflow-hidden pt-[4.5rem] pb-8 text-center sm:gap-8 sm:pt-[5.5rem] sm:pb-10 md:pt-28 md:pb-12 lg:pb-14">
+      {/** Same decor size + `lg` visibility as `AboutHeroSection` (uses `heroDecor[0]` / `[2]` only). */}
+      <TutorsHeroDecorImg
+        src={forSchoolsAssets.heroDecor[0]}
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[10%] top-[18%]"
+      />
+      <TutorsHeroDecorImg
+        src={forSchoolsAssets.heroDecor[2]}
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[10%] top-[18%]"
+      />
 
+      <div className="relative z-[1] w-full flex flex-col items-center gap-6 sm:gap-8 px-4 sm:px-6">
         <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-6 sm:gap-8">
           <h1 className="flex flex-col items-center gap-3 sm:gap-4">
             <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
@@ -199,12 +199,12 @@ export const TutorsHeroSection = () => {
 
 const COMPENSATION_COLUMNS = [
   {
-    stat: "$18/hr",
+    stat: "$18+",
     sub: "Starting pay",
     bullets: [
       "Competitive base rate for every session",
       "Paid for prep, tutoring, and reflection",
-      "Reliable weekly payouts",
+      "Reliable bi-weekly payouts",
     ],
   },
   {

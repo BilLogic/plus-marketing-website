@@ -1,6 +1,3 @@
-"use client"
-
-import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -37,7 +34,6 @@ import {
   marketingSectionLeadColorClass,
   marketingSectionVerticalGapClass,
 } from "@/lib/marketing-section-layout"
-import { useMarketingStickyPanelTop } from "@/lib/use-marketing-sticky-panel-top"
 import { cn } from "@/lib/utils"
 import type { JobListing } from "@/lib/notion/types"
 
@@ -89,21 +85,22 @@ const getInvolvedDiscTitleRowClass = "flex w-full shrink-0 items-center gap-3"
 export function GetInvolvedHeroSection() {
   return (
     <section className="relative flex flex-col items-center justify-center gap-6 overflow-hidden pt-8 pb-8 text-center min-h-[380px] sm:gap-8 sm:min-h-[440px] sm:pt-10 sm:pb-10 md:min-h-[500px] md:pt-12 md:pb-12 lg:min-h-[530px] lg:pt-14 lg:pb-14">
+      {/** Same four-corner hero art + breakpoints as `AboutHeroSection`. */}
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[0]}
-        className="max-w-[72px] sm:max-w-[130px] md:max-w-[150px] left-4 top-1/2 -translate-y-1/2 sm:left-6"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[10%] top-[18%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[1]}
-        className="bottom-4 left-[16%] sm:bottom-6"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[5%] top-[54%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[2]}
-        className="right-4 top-1/2 -translate-y-1/2 sm:right-6"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[10%] top-[18%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[3]}
-        className="bottom-4 right-[16%] sm:bottom-6"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[5%] top-[54%]"
       />
 
       <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-3 sm:gap-4 md:gap-5">
@@ -115,7 +112,7 @@ export function GetInvolvedHeroSection() {
         </h1>
       </div>
 
-      <div className={marketingHeroCtaButtonRowClass}>
+      <div className={cn(marketingHeroCtaButtonRowClass, "max-sm:relative max-sm:z-[2]")}>
         <Link href="/get-involved#careers" className={marketingHeroCtaPrimaryLinkClass}>
           Careers at PLUS
         </Link>
@@ -173,70 +170,37 @@ const WHY_WORK_ITEMS = [
   },
 ] as const
 
-/**
- * Sticky "Why Work" column — same behavior as for-schools `SchoolsTrainingSection` benefits
- * (equal fixed row heights, scroll-spy to viewport center, measured sticky `top` on art).
- */
-const WHY_WORK_STICKY_ITEM_CLASS =
-  "box-border flex h-[26rem] flex-col justify-center sm:h-[27rem] md:h-[28rem] lg:h-[30rem] py-5 sm:py-6 md:py-7 lg:py-8"
-const WHY_WORK_STICKY_TITLE_H =
-  "h-[2.5rem] sm:h-[2.75rem] md:h-[3rem] lg:h-[3.5rem] lg:leading-snug"
-const WHY_WORK_STICKY_BODY_H =
-  "h-[7.25rem] shrink-0 overflow-y-auto sm:h-[7.75rem] md:h-[8.5rem] lg:h-[9.5rem] xl:h-[10rem]"
-const WHY_WORK_STICKY_CTA_ROW = "h-[2.5rem] shrink-0"
+/** Copy column — full width when stacked (`max-md`); shares row with art from `md` up. */
+const whyWorkZigzagTextColClass = cn(
+  "flex w-full min-w-0 flex-col items-start gap-[18px]",
+  "max-md:max-w-[min(36rem,100%)] max-md:self-start",
+  "md:min-w-0 md:flex-1 md:basis-0 md:max-w-[min(28rem,52%)]",
+  "lg:w-[473px] lg:max-w-[473px] lg:flex-none lg:basis-auto",
+)
+
+function WhyWorkZigzagPhoto({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="relative w-full min-w-0">
+      <div className="relative w-full overflow-hidden rounded-[30px] bg-muted/30">
+        <div className="relative aspect-[556/472] w-full">
+          {/* eslint-disable-next-line @next/next/no-img-element -- public static asset; parity with ImpactRowPhoto */}
+          <img alt={alt} src={src} className="absolute inset-0 size-full object-cover" />
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export function GetInvolvedWhyWorkSection() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([])
-  const { ref: whyWorkStickyPanelRef, top: whyWorkStickyTop } = useMarketingStickyPanelTop()
-
-  useEffect(() => {
-    let raf = 0
-    const update = () => {
-      raf = 0
-      const mid = window.innerHeight * 0.5
-      let bestI = 0
-      let bestD = Number.POSITIVE_INFINITY
-      itemRefs.current.forEach((el, i) => {
-        if (!el) return
-        const r = el.getBoundingClientRect()
-        if (r.height === 0) return
-        const c = r.top + r.height * 0.5
-        const d = Math.abs(c - mid)
-        if (d < bestD) {
-          bestD = d
-          bestI = i
-        }
-      })
-      setActiveIndex((p) => (p === bestI ? p : bestI))
-    }
-    const onScroll = () => {
-      if (raf) return
-      raf = requestAnimationFrame(() => { update() })
-    }
-    update()
-    window.addEventListener("scroll", onScroll, { passive: true })
-    window.addEventListener("resize", onScroll)
-    return () => {
-      if (raf) cancelAnimationFrame(raf)
-      window.removeEventListener("scroll", onScroll)
-      window.removeEventListener("resize", onScroll)
-    }
-  }, [])
-
   return (
     <section id="why-work" className={cn("scroll-mt-24", marketingSectionVerticalGapClass)}>
-      <div className="relative z-10 text-left">
+      <div className="relative w-full text-left">
         <div className="relative">
-          <div
-            className={cn(
-              marketingSectionIntroColumnClass,
-              "sm:space-y-1",
-            )}
-          >
+          <div className={cn(marketingSectionIntroColumnClass, "sm:space-y-1")}>
             <h2 className={sectionH2}>Why Work at PLUS?</h2>
             <p className={sectionLead}>
-              Join a team shaping the future of personalized learning. Become part of PLUS.
+              Join our full-time staff team shaping the future of personalized learning. Become part
+              of PLUS!
             </p>
           </div>
           <img
@@ -248,155 +212,77 @@ export function GetInvolvedWhyWorkSection() {
         </div>
       </div>
 
-      {/* Phone: full list — light blue card per item */}
-      <div className={cn("flex flex-col sm:hidden", marketingCardStackGapClass)}>
-        {WHY_WORK_ITEMS.map((item) => {
+      <div className="mx-auto flex w-full max-w-[1122px] flex-col space-y-10 md:space-y-12 lg:space-y-16">
+        {WHY_WORK_ITEMS.map((item, i) => {
           const Icon = item.icon
-          return (
-            <article
-              key={item.id}
+          /** From `md` up: zigzag via flex order. Below `md`: stacked copy → photo. */
+          const imageOnLeftWide = i % 2 === 1
+          const copyCol = (
+            <div
               className={cn(
-                "flex flex-col gap-4 rounded-[30px] bg-sky-100 dark:bg-sky-950/35",
-                marketingCardPaddingClass,
+                whyWorkZigzagTextColClass,
+                "shrink-0",
+                imageOnLeftWide ? "md:order-2" : "md:order-1",
               )}
             >
-              <div className="flex items-start gap-3">
-                <span
-                  className={cn(marketingCardIconCircleClass, "shrink-0 bg-[#007EB8] text-white")}
-                  aria-hidden
-                >
-                  <Icon
-                    className={cn(marketingCardLucideGlyphClass, "text-white")}
-                    strokeWidth={2}
-                  />
-                </span>
-                <div className="flex min-w-0 flex-col gap-3">
-                  <h3 className="pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-bold leading-tight tracking-tight text-[#007EB8] sm:text-xl">
-                    {item.title}
-                  </h3>
-                  <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
-                    {item.description}
-                  </p>
-                  {item.cta ? (
-                    <Link
-                      href="https://www.cmu.edu/hr/benefits/staff.html"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={cn(marketingFinalCtaPrimaryLinkClass, "mt-1 w-fit")}
-                    >
-                      {item.cta}
-                    </Link>
-                  ) : null}
-                </div>
-              </div>
-              <div className="relative aspect-square w-full overflow-hidden rounded-[30px]">
-                <img
-                  alt=""
-                  src={item.panelArt}
-                  className="size-full object-cover"
-                  decoding="async"
+              <span
+                className={cn(
+                  marketingCardIconCircleClass,
+                  "shrink-0 bg-[#007EB8] text-white",
+                )}
+                aria-hidden
+              >
+                <Icon
+                  className={cn(marketingCardLucideGlyphClass, "text-white")}
+                  strokeWidth={2}
                 />
-              </div>
-            </article>
+              </span>
+              <p
+                className={cn(
+                  "text-pretty text-lg font-bold leading-snug tracking-tight text-[#007EB8] dark:text-sky-300 sm:text-xl lg:text-2xl",
+                )}
+              >
+                {item.title}
+              </p>
+              <p className={sectionLead}>{item.description}</p>
+              {item.cta ? (
+                <Link
+                  href="https://www.cmu.edu/hr/benefits/staff.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(marketingHeroCtaPrimaryLinkClass, "w-fit self-start")}
+                >
+                  {item.cta}
+                </Link>
+              ) : null}
+            </div>
+          )
+          const photoCol = (
+            <div
+              className={cn(
+                "w-full min-w-0 shrink-0",
+                "max-md:mx-auto max-md:max-w-[min(36rem,100%)]",
+                "md:max-w-[min(320px,44%)] md:basis-[min(320px,44%)]",
+                "lg:min-w-0 lg:max-w-[556px] lg:flex-1 lg:basis-0",
+                imageOnLeftWide ? "md:order-1" : "md:order-2",
+              )}
+            >
+              <WhyWorkZigzagPhoto src={item.panelArt} alt={item.title} />
+            </div>
+          )
+          return (
+            <div
+              key={item.id}
+              className={cn(
+                "flex w-full flex-col items-stretch gap-6 sm:gap-8",
+                "md:flex-row md:items-center md:justify-between md:gap-5 lg:gap-8 xl:gap-[93px]",
+              )}
+            >
+              {copyCol}
+              {photoCol}
+            </div>
           )
         })}
-      </div>
-
-      {/* sm+: two-column — left scrolls, right sticky image (see for-schools benefits) */}
-      <div
-        className={cn(
-          "relative z-0 hidden grid-cols-1 items-stretch sm:grid md:grid-cols-2",
-          marketingCardStackGapClass,
-        )}
-      >
-
-        <div className="relative z-0 min-w-0 pb-[5vh]">
-          {WHY_WORK_ITEMS.map((item, i) => {
-            const isActive = i === activeIndex
-            const Icon = item.icon
-            return (
-              <div
-                key={item.id}
-                ref={(el) => { itemRefs.current[i] = el }}
-                className={WHY_WORK_STICKY_ITEM_CLASS}
-              >
-                <div className="flex flex-col gap-5">
-                  <div
-                    className={cn(
-                      marketingCardIconCircleClass,
-                      "shrink-0 transition-colors duration-300",
-                      isActive ? "bg-[#007EB8]" : "bg-muted-foreground",
-                    )}
-                  >
-                    <Icon
-                      className={cn(marketingCardLucideGlyphClass, "text-white")}
-                      strokeWidth={2}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    <h3
-                      className={cn(
-                        "line-clamp-3 text-pretty text-lg font-bold leading-tight tracking-tight transition-colors duration-300 sm:text-xl lg:text-2xl",
-                        WHY_WORK_STICKY_TITLE_H,
-                        isActive ? "text-[#007EB8]" : "text-muted-foreground",
-                      )}
-                    >
-                      {item.title}
-                    </h3>
-                    <div className={WHY_WORK_STICKY_BODY_H}>
-                      {isActive ? (
-                        <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
-                          {item.description}
-                        </p>
-                      ) : null}
-                    </div>
-                    <div className={cn(WHY_WORK_STICKY_CTA_ROW, "flex items-end")}>
-                      {isActive && item.cta ? (
-                        <Link
-                          href="https://www.cmu.edu/hr/benefits/staff.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={cn(marketingFinalCtaPrimaryLinkClass, "w-fit")}
-                        >
-                          {item.cta}
-                        </Link>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )
-          })}
-        </div>
-
-        <div
-          className={cn(
-            "relative z-0 hidden min-h-0 md:flex md:h-full md:min-h-0 md:flex-col",
-            "pb-[5vh]",
-          )}
-        >
-          <div
-            ref={whyWorkStickyPanelRef}
-            className="sticky w-full"
-            style={{ top: whyWorkStickyTop }}
-          >
-            <div className="relative aspect-square w-full overflow-hidden rounded-[30px]">
-              {WHY_WORK_ITEMS.map((item, i) => (
-                <img
-                  key={item.id}
-                  alt=""
-                  src={item.panelArt}
-                  className={cn(
-                    "pointer-events-none absolute inset-0 size-full object-cover select-none transition-opacity duration-500",
-                    i === activeIndex ? "opacity-100" : "opacity-0"
-                  )}
-                  decoding="async"
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-
       </div>
     </section>
   )
@@ -618,7 +504,7 @@ export function GetInvolvedTutoringSection() {
             )}
           >
             Join our team of motivated tutors! Semester-long virtual positions offer up to 10
-            hours/week at $18/hr. Apply now!
+            hours/week at $18+. Apply now!
           </p>
         </div>
         <div

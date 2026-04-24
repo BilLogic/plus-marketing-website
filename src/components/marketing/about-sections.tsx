@@ -989,6 +989,45 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
 const successStoryReadLinkClass =
   "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-[#C6009C] no-underline transition-opacity hover:opacity-90 dark:text-[#C6009C]"
 
+const successStoryReadLinkBlueClass =
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-[#007EB8] no-underline transition-opacity hover:opacity-90 dark:text-sky-300"
+
+/**
+ * Cycles pink → blue → amber for each success-story card (Notion + placeholders).
+ * Shell/accent tokens match **Success Stories** (pink), **Foundations We Build Upon** (blue),
+ * and **Latest at PLUS** (amber) on this page.
+ */
+const SUCCESS_STORY_CARD_THEMES = [
+  {
+    shell: "bg-[#FFE8F6] dark:bg-[#FFE8F6]/15",
+    iconCircle: "bg-[#C6009C] text-white",
+    title: "text-[#C6009C] dark:text-[#C6009C]",
+    attribution: "text-[#C6009C]/80 dark:text-[#C6009C]/80",
+    quoteStrong: "text-[#C6009C] dark:text-[#C6009C]",
+    readLink: successStoryReadLinkClass,
+  },
+  {
+    shell: "bg-[#E4F5FF] dark:bg-sky-950/40",
+    iconCircle: "bg-[#007EB8] text-white",
+    title: "text-[#007EB8] dark:text-sky-300",
+    attribution: "text-[#007EB8]/80 dark:text-sky-300/80",
+    quoteStrong: "text-[#007EB8] dark:text-sky-300",
+    readLink: successStoryReadLinkBlueClass,
+  },
+  {
+    shell: "bg-[#FFF1C7] dark:bg-amber-950/20",
+    iconCircle: "bg-[#A27707] text-white",
+    title: "text-[#9A6D00] dark:text-amber-200",
+    attribution: "text-[#9A6D00]/80 dark:text-amber-200/80",
+    quoteStrong: "text-[#9A6D00] dark:text-amber-200",
+    readLink: latestReadMoreLinkClass,
+  },
+] as const
+
+function successStoryThemeAt(index: number) {
+  return SUCCESS_STORY_CARD_THEMES[index % SUCCESS_STORY_CARD_THEMES.length]!
+}
+
 /** Quote lines aligned with homepage testimonials (`PlusVoicesSection`). */
 const SUCCESS_CARDS = [
   {
@@ -1039,13 +1078,15 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
       </AboutSectionTitleWithDecor>
       <div className={cn("flex flex-col", marketingCardStackGapClass)}>
         {hasNotionData
-          ? stories.slice(0, 3).map((story) => {
+          ? stories.slice(0, 3).map((story, index) => {
+              const theme = successStoryThemeAt(index)
               const Icon = CATEGORY_ICON[story.category] ?? Sparkles
               return (
                 <article
                   key={story.id}
                   className={cn(
-                    "flex h-full flex-col rounded-[30px] bg-[#FFE8F6] dark:bg-[#FFE8F6]/15",
+                    "flex h-full flex-col rounded-[30px]",
+                    theme.shell,
                     marketingCardPaddingClass,
                   )}
                 >
@@ -1060,12 +1101,13 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
                         className={cn(
                           marketingCardIconTitleRowOffsetClass,
                           marketingCardIconCircleClass,
-                          "shrink-0 bg-[#C6009C] text-white",
+                          "shrink-0",
+                          theme.iconCircle,
                         )}
                       >
                         <Icon className={marketingCardLucideGlyphClass} aria-hidden />
                       </span>
-                      <h3 className={cn(aboutCardTitle, "min-w-0 flex-1 text-[#C6009C] dark:text-[#C6009C]")}>
+                      <h3 className={cn(aboutCardTitle, "min-w-0 flex-1", theme.title)}>
                         {story.title}
                       </h3>
                     </div>
@@ -1073,7 +1115,12 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
                       <p className={cn(aboutCardBody, "mt-4 min-h-0 flex-1 text-pretty italic text-muted-foreground")}>
                         &ldquo;{story.quote}&rdquo;
                         {story.quoteAttribution && (
-                          <span className="mt-2 block not-italic font-medium text-[#C6009C]/80 dark:text-[#C6009C]/80">
+                          <span
+                            className={cn(
+                              "mt-2 block not-italic font-medium",
+                              theme.attribution,
+                            )}
+                          >
                             — {story.quoteAttribution}
                           </span>
                         )}
@@ -1086,7 +1133,7 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
                   </div>
                   <Link
                     href="/success-stories"
-                    className={successStoryReadLinkClass}
+                    className={theme.readLink}
                     aria-label={`Read story: ${story.title}`}
                   >
                     <span>Read story</span>
@@ -1095,11 +1142,14 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
                 </article>
               )
             })
-          : SUCCESS_CARDS.map(({ title, icon: Icon, quoteLead, quoteHighlight, quoteTail }) => (
+          : SUCCESS_CARDS.map(({ title, icon: Icon, quoteLead, quoteHighlight, quoteTail }, index) => {
+              const theme = successStoryThemeAt(index)
+              return (
               <article
                 key={title}
                 className={cn(
-                  "flex h-full flex-col rounded-[30px] bg-[#FFE8F6] dark:bg-[#FFE8F6]/15",
+                  "flex h-full flex-col rounded-[30px]",
+                  theme.shell,
                   marketingCardPaddingClass,
                 )}
               >
@@ -1114,31 +1164,34 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
                       className={cn(
                         marketingCardIconTitleRowOffsetClass,
                         marketingCardIconCircleClass,
-                        "shrink-0 bg-[#C6009C] text-white",
+                        "shrink-0",
+                        theme.iconCircle,
                       )}
                     >
                       <Icon className={marketingCardLucideGlyphClass} aria-hidden />
                     </span>
-                    <h3 className={cn(aboutCardTitle, "min-w-0 flex-1 text-[#C6009C] dark:text-[#C6009C]")}>
+                    <h3 className={cn(aboutCardTitle, "min-w-0 flex-1", theme.title)}>
                       {title}
                     </h3>
                   </div>
                   <p className={cn(aboutCardBody, "mt-4 min-h-0 flex-1 text-pretty italic text-muted-foreground")}>
                     &ldquo;{quoteLead}{" "}
-                    <strong className="font-bold italic text-[#C6009C] dark:text-[#C6009C]">{quoteHighlight}</strong>
+                    <strong className={cn("font-bold italic", theme.quoteStrong)}>{quoteHighlight}</strong>
                     {quoteTail}&rdquo;
                   </p>
                 </div>
                 <Link
                   href="/success-stories"
-                  className={successStoryReadLinkClass}
+                  className={theme.readLink}
                   aria-label={`Read story: ${title}`}
                 >
                   <span>Read story</span>
                   <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
                 </Link>
               </article>
-            ))}
+              )
+            })
+        }
       </div>
     </section>
   )
