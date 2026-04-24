@@ -53,8 +53,16 @@ export const plusHomeAwards = {
   headerCharacter: "/figma/home/awards-header-character.png",
 } as const
 
-/** Figma `1714:1956` — US map (472px-tall frame). */
+/** Legacy — US map (was used in the older 2×2 impact grid; kept for reference). */
 export const plusHomeImpactMap = "/figma/home/impact-map.png"
+
+/**
+ * Figma `2127:2274` — “Serving students…” Z-pattern: classroom → school team → remote tutoring
+ * (556×472px frames, alternating with 473px-wide text columns, 93px gutter).
+ */
+export const plusHomeImpactRowStudents = "/figma/home/impact-row-students.png"
+export const plusHomeImpactRowSchools = "/figma/home/impact-row-schools.png"
+export const plusHomeImpactRowTutors = "/figma/home/impact-row-tutors.png"
 
 /**
  * Figma `1714:1957` Smart Tech, Smarter Learning — pink bento + layered screenshots.

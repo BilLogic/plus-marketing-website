@@ -21,16 +21,21 @@ const GetInvolvedPage = async () => {
   // TODO: const jobs = await fetchJobListings()
   // Pass jobs={jobs} to GetInvolvedCareersSection once the Notion query is wired up.
   return (
-    <main className="bg-background text-foreground">
+    <>
       <GetInvolvedHeroSection />
-      <div className={cn("mx-auto flex max-w-5xl flex-col pb-16 pt-14 sm:pb-20 sm:pt-16 md:pb-24 md:pt-20", marketingSectionStackGap)}>
+      <div
+        className={cn(
+          "mx-auto flex max-w-5xl flex-col pb-16 pt-14 sm:pb-20 sm:pt-16 md:pb-24 md:pt-20",
+          marketingSectionStackGap,
+        )}
+      >
         <GetInvolvedWhyWorkSection />
         <GetInvolvedCareersSection />
         <GetInvolvedTutoringSection />
         <GetInvolvedPartnershipsSection />
         <GetInvolvedFinalCTA />
       </div>
-    </main>
+    </>
   )
 }
 

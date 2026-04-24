@@ -42,6 +42,7 @@ import {
 } from "@/lib/success-stories/notion-public-read-url"
 import { forSchoolsAssets } from "@/components/marketing/for-schools-assets"
 import { forTutorsAssets } from "@/components/marketing/for-tutors-assets"
+import { useMarketingStickyPanelTop } from "@/lib/use-marketing-sticky-panel-top"
 import { marketingTypography } from "@/lib/marketing-typography"
 import { forSchoolsSectionIds } from "@/lib/plus-footer-ia"
 
@@ -210,22 +211,64 @@ const BENEFITS_ITEMS = [
   },
 ] as const
 
+/**
+ * Sticky + scroll–spy column: fixed equal heights (not `min-h`) so rows never grow
+ * when a long blurb is active. Body slot uses a fixed `h-` with overflow as a safety
+ * net for very small viewports.
+ */
+const BENEFITS_STICKY_ITEM_CLASS =
+  "box-border flex h-[26rem] flex-col justify-center sm:h-[27rem] md:h-[28rem] lg:h-[30rem] py-5 sm:py-6 md:py-7 lg:py-8"
+/** Room for 2 title lines at `lg:text-2xl` — fixed so row height is identical. */
+const BENEFITS_STICKY_TITLE_H =
+  "h-[2.5rem] sm:h-[2.75rem] md:h-[3rem] lg:h-[3.5rem] lg:leading-snug"
+/** Fills longest copy (`goal-setting`); fixed `h-` + scroll if a viewport wraps more. */
+const BENEFITS_STICKY_BODY_H =
+  "h-[7.25rem] shrink-0 overflow-y-auto sm:h-[7.75rem] md:h-[8.5rem] lg:h-[9.5rem] xl:h-[10rem]"
+/** CTA row — fixed so rows with/without a link match. */
+const BENEFITS_STICKY_CTA_ROW = "h-[2.5rem] shrink-0"
+
 export const SchoolsTrainingSection = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
+  const { ref: benefitsStickyPanelRef, top: benefitsStickyTop } = useMarketingStickyPanelTop()
 
+  /**
+   * Pick the benefit whose block center is closest to the viewport center. More stable
+   * than a narrow IntersectionObserver rootMargin (avoids “skipping” when frames differ
+   * or two regions overlap the band). Uses rAF; lengths are fixed with `BENEFITS_STICKY_ITEM_CLASS`.
+   */
   useEffect(() => {
-    const observers: IntersectionObserver[] = []
-    itemRefs.current.forEach((el, i) => {
-      if (!el) return
-      const observer = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveIndex(i) },
-        { threshold: 0, rootMargin: "-40% 0px -40% 0px" }
-      )
-      observer.observe(el)
-      observers.push(observer)
-    })
-    return () => observers.forEach((o) => o.disconnect())
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const mid = window.innerHeight * 0.5
+      let bestI = 0
+      let bestD = Number.POSITIVE_INFINITY
+      itemRefs.current.forEach((el, i) => {
+        if (!el) return
+        const r = el.getBoundingClientRect()
+        if (r.height === 0) return
+        const c = r.top + r.height * 0.5
+        const d = Math.abs(c - mid)
+        if (d < bestD) {
+          bestD = d
+          bestI = i
+        }
+      })
+      setActiveIndex((p) => (p === bestI ? p : bestI))
+    }
+    const onScroll = () => {
+      if (raf) return
+      raf = requestAnimationFrame(() => { update() })
+    }
+    update()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("resize", onScroll)
+    return () => {
+      if (raf) cancelAnimationFrame(raf)
+      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("resize", onScroll)
+    }
   }, [])
 
   return (
@@ -233,7 +276,7 @@ export const SchoolsTrainingSection = () => {
       id={forSchoolsSectionIds.benefits}
       className={marketingSectionVerticalGapClass}
     >
-      <div className="relative w-full text-left">
+      <div className="relative z-10 w-full text-left">
         <div
           className={cn(
             marketingSectionIntroColumnClass,
@@ -303,23 +346,23 @@ export const SchoolsTrainingSection = () => {
         ))}
       </div>
 
-      {/* sm+: two-column sticky scroll */}
+      {/* sm+: two-column (intro + lead are above this grid so art never sits beside the h2) */}
       <div
         className={cn(
-          "hidden grid-cols-1 sm:grid md:grid-cols-2 md:gap-12 lg:gap-16",
+          "relative z-0 hidden grid-cols-1 items-stretch sm:grid md:grid-cols-2 md:gap-12 lg:gap-16",
           marketingCardStackGapClass,
         )}
       >
 
         {/* Left: scrolling benefit items */}
-        <div className="pb-[5vh]">
+        <div className="relative z-0 min-w-0 pb-[5vh]">
           {BENEFITS_ITEMS.map((item, i) => {
             const isActive = i === activeIndex
             return (
               <div
                 key={item.id}
                 ref={(el) => { itemRefs.current[i] = el }}
-                className="py-10 sm:py-14 md:py-16 lg:py-20"
+                className={BENEFITS_STICKY_ITEM_CLASS}
               >
                 <div className="flex flex-col gap-5">
                   <BenefitsAccordionIcon
@@ -330,25 +373,30 @@ export const SchoolsTrainingSection = () => {
                   <div className="flex flex-col gap-3">
                     <h3
                       className={cn(
-                        "text-pretty text-lg font-bold leading-tight tracking-tight transition-colors duration-300 sm:text-xl lg:text-2xl",
+                        "line-clamp-3 text-pretty text-lg font-bold leading-tight tracking-tight transition-colors duration-300 sm:text-xl lg:text-2xl",
+                        BENEFITS_STICKY_TITLE_H,
                         isActive ? "text-[#a56d1e]" : "text-muted-foreground",
                       )}
                     >
                       {item.title}
                     </h3>
-                    {isActive ? (
-                      <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
-                        {item.description}
-                      </p>
-                    ) : null}
-                    {isActive && item.cta ? (
-                      <Link
-                        href={`#${forSchoolsSectionIds.register}`}
-                        className={cn(marketingFinalCtaPrimaryLinkClass, "mt-1 w-fit")}
-                      >
-                        {item.cta}
-                      </Link>
-                    ) : null}
+                    <div className={BENEFITS_STICKY_BODY_H}>
+                      {isActive ? (
+                        <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
+                          {item.description}
+                        </p>
+                      ) : null}
+                    </div>
+                    <div className={cn(BENEFITS_STICKY_CTA_ROW, "flex items-end")}>
+                      {isActive && item.cta ? (
+                        <Link
+                          href={`#${forSchoolsSectionIds.register}`}
+                          className={cn(marketingFinalCtaPrimaryLinkClass, "w-fit")}
+                        >
+                          {item.cta}
+                        </Link>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -356,9 +404,18 @@ export const SchoolsTrainingSection = () => {
           })}
         </div>
 
-        {/* Right: sticky art panel — Figma 1104:1183 */}
-        <div className="hidden md:block" style={{ minHeight: 400 }}>
-          <div className="sticky" style={{ top: 88 }}>
+        {/* Right: sticky art — `top` is measured (viewport center − half block height) so the frame isn’t yanked with transform, keeping section start/end alignment. Intro z-10. */}
+        <div
+          className={cn(
+            "relative z-0 hidden min-h-0 md:flex md:h-full md:min-h-0 md:flex-col",
+            "pb-[5vh]",
+          )}
+        >
+          <div
+            ref={benefitsStickyPanelRef}
+            className="sticky w-full"
+            style={{ top: benefitsStickyTop }}
+          >
             <div
               className={cn(
                 "relative aspect-square w-full overflow-hidden rounded-[38px] transition-colors duration-500",

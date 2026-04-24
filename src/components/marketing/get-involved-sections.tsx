@@ -37,6 +37,7 @@ import {
   marketingSectionLeadColorClass,
   marketingSectionVerticalGapClass,
 } from "@/lib/marketing-section-layout"
+import { useMarketingStickyPanelTop } from "@/lib/use-marketing-sticky-panel-top"
 import { cn } from "@/lib/utils"
 import type { JobListing } from "@/lib/notion/types"
 
@@ -172,27 +173,60 @@ const WHY_WORK_ITEMS = [
   },
 ] as const
 
+/**
+ * Sticky "Why Work" column — same behavior as for-schools `SchoolsTrainingSection` benefits
+ * (equal fixed row heights, scroll-spy to viewport center, measured sticky `top` on art).
+ */
+const WHY_WORK_STICKY_ITEM_CLASS =
+  "box-border flex h-[26rem] flex-col justify-center sm:h-[27rem] md:h-[28rem] lg:h-[30rem] py-5 sm:py-6 md:py-7 lg:py-8"
+const WHY_WORK_STICKY_TITLE_H =
+  "h-[2.5rem] sm:h-[2.75rem] md:h-[3rem] lg:h-[3.5rem] lg:leading-snug"
+const WHY_WORK_STICKY_BODY_H =
+  "h-[7.25rem] shrink-0 overflow-y-auto sm:h-[7.75rem] md:h-[8.5rem] lg:h-[9.5rem] xl:h-[10rem]"
+const WHY_WORK_STICKY_CTA_ROW = "h-[2.5rem] shrink-0"
+
 export function GetInvolvedWhyWorkSection() {
   const [activeIndex, setActiveIndex] = useState(0)
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
+  const { ref: whyWorkStickyPanelRef, top: whyWorkStickyTop } = useMarketingStickyPanelTop()
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = []
-    itemRefs.current.forEach((el, i) => {
-      if (!el) return
-      const observer = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveIndex(i) },
-        { threshold: 0, rootMargin: "-40% 0px -40% 0px" }
-      )
-      observer.observe(el)
-      observers.push(observer)
-    })
-    return () => observers.forEach((o) => o.disconnect())
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const mid = window.innerHeight * 0.5
+      let bestI = 0
+      let bestD = Number.POSITIVE_INFINITY
+      itemRefs.current.forEach((el, i) => {
+        if (!el) return
+        const r = el.getBoundingClientRect()
+        if (r.height === 0) return
+        const c = r.top + r.height * 0.5
+        const d = Math.abs(c - mid)
+        if (d < bestD) {
+          bestD = d
+          bestI = i
+        }
+      })
+      setActiveIndex((p) => (p === bestI ? p : bestI))
+    }
+    const onScroll = () => {
+      if (raf) return
+      raf = requestAnimationFrame(() => { update() })
+    }
+    update()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("resize", onScroll)
+    return () => {
+      if (raf) cancelAnimationFrame(raf)
+      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("resize", onScroll)
+    }
   }, [])
 
   return (
     <section id="why-work" className={cn("scroll-mt-24", marketingSectionVerticalGapClass)}>
-      <div className="text-left">
+      <div className="relative z-10 text-left">
         <div className="relative">
           <div
             className={cn(
@@ -268,15 +302,15 @@ export function GetInvolvedWhyWorkSection() {
         })}
       </div>
 
-      {/* sm+: two-column — left scrolls, right sticky image */}
+      {/* sm+: two-column — left scrolls, right sticky image (see for-schools benefits) */}
       <div
         className={cn(
-          "hidden grid-cols-1 sm:grid md:grid-cols-2",
+          "relative z-0 hidden grid-cols-1 items-stretch sm:grid md:grid-cols-2",
           marketingCardStackGapClass,
         )}
       >
 
-        <div className="pb-[5vh]">
+        <div className="relative z-0 min-w-0 pb-[5vh]">
           {WHY_WORK_ITEMS.map((item, i) => {
             const isActive = i === activeIndex
             const Icon = item.icon
@@ -284,14 +318,14 @@ export function GetInvolvedWhyWorkSection() {
               <div
                 key={item.id}
                 ref={(el) => { itemRefs.current[i] = el }}
-                className="py-10 sm:py-14 md:py-16 lg:py-20"
+                className={WHY_WORK_STICKY_ITEM_CLASS}
               >
                 <div className="flex flex-col gap-5">
                   <div
                     className={cn(
                       marketingCardIconCircleClass,
                       "shrink-0 transition-colors duration-300",
-                      isActive ? "bg-[#007EB8]" : "bg-foreground/20",
+                      isActive ? "bg-[#007EB8]" : "bg-muted-foreground",
                     )}
                   >
                     <Icon
@@ -300,29 +334,34 @@ export function GetInvolvedWhyWorkSection() {
                     />
                   </div>
                   <div className="flex flex-col gap-3">
-                    <p
+                    <h3
                       className={cn(
-                        "text-pretty text-lg font-bold leading-tight tracking-tight transition-colors duration-300 sm:text-xl lg:text-2xl",
+                        "line-clamp-3 text-pretty text-lg font-bold leading-tight tracking-tight transition-colors duration-300 sm:text-xl lg:text-2xl",
+                        WHY_WORK_STICKY_TITLE_H,
                         isActive ? "text-[#007EB8]" : "text-muted-foreground",
                       )}
                     >
                       {item.title}
-                    </p>
-                    {isActive ? (
-                      <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
-                        {item.description}
-                      </p>
-                    ) : null}
-                    {isActive && item.cta ? (
-                      <Link
-                        href="https://www.cmu.edu/hr/benefits/staff.html"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={cn(marketingFinalCtaPrimaryLinkClass, "mt-1 w-fit")}
-                      >
-                        {item.cta}
-                      </Link>
-                    ) : null}
+                    </h3>
+                    <div className={WHY_WORK_STICKY_BODY_H}>
+                      {isActive ? (
+                        <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
+                          {item.description}
+                        </p>
+                      ) : null}
+                    </div>
+                    <div className={cn(WHY_WORK_STICKY_CTA_ROW, "flex items-end")}>
+                      {isActive && item.cta ? (
+                        <Link
+                          href="https://www.cmu.edu/hr/benefits/staff.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={cn(marketingFinalCtaPrimaryLinkClass, "w-fit")}
+                        >
+                          {item.cta}
+                        </Link>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -330,8 +369,17 @@ export function GetInvolvedWhyWorkSection() {
           })}
         </div>
 
-        <div className="hidden md:block" style={{ minHeight: 400 }}>
-          <div className="sticky" style={{ top: 88 }}>
+        <div
+          className={cn(
+            "relative z-0 hidden min-h-0 md:flex md:h-full md:min-h-0 md:flex-col",
+            "pb-[5vh]",
+          )}
+        >
+          <div
+            ref={whyWorkStickyPanelRef}
+            className="sticky w-full"
+            style={{ top: whyWorkStickyTop }}
+          >
             <div className="relative aspect-square w-full overflow-hidden rounded-[30px]">
               {WHY_WORK_ITEMS.map((item, i) => (
                 <img

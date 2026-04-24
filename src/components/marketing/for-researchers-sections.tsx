@@ -296,7 +296,7 @@ const ResearchHeroCollageVisual = () => {
 export const ResearchersHeroSection = () => {
   return (
     <section className="relative w-full min-w-0 overflow-hidden pt-8 pb-4 sm:pt-10 sm:pb-6 md:pt-12 md:pb-8 lg:pt-14">
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 sm:gap-8 sm:px-6 md:px-8 lg:flex-row lg:items-center lg:gap-12">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 sm:gap-8 lg:flex-row lg:items-center lg:gap-12">
         {/* Text column — narrower to give the collage more room */}
         <div className="mx-auto flex w-full min-w-0 shrink-0 flex-col gap-5 sm:gap-6 lg:mx-0 lg:max-w-[26rem]">
           <h1 className="flex flex-col gap-2 sm:gap-3">

@@ -5,7 +5,14 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState, useEffect, useRef } from "react"
-import { ArrowLeft, ArrowRight, ChevronDown, GraduationCap, School, FileText } from "lucide-react"
+import {
+  ArrowLeft,
+  ArrowRight,
+  ChevronDown,
+  FileText,
+  GraduationCap,
+  School,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -18,7 +25,9 @@ import { forTutorsAssets } from "@/components/marketing/for-tutors-assets"
 import {
   plusHomeHero,
   plusHomeImpactDecor,
-  plusHomeImpactMap,
+  plusHomeImpactRowSchools,
+  plusHomeImpactRowStudents,
+  plusHomeImpactRowTutors,
   plusHomeScience,
   plusHomeSmartTech,
   plusHomeTestimonialAvatars,
@@ -393,33 +402,34 @@ const LandingHeroAwardsRow = () => {
 
 const HERO_VIDEO_ID = "UGoYioREH0E"
 
-/**
- * Hero — Figma `1714:1883` Landing: wash, copy, ornaments, video (`1791:3805`), Our Awards (`1732:3947`).
- */
-const JOIN_US_ITEMS = [
-  { label: "For Tutors", href: "/for-tutors", icon: GraduationCap },
-  { label: "For Schools", href: "/for-schools", icon: School },
-  { label: "For Researchers", href: "/for-researchers", icon: FileText },
+const LEARN_MORE_AUDIENCE_ITEMS = [
+  { label: "For schools", href: "/for-schools", icon: School },
+  { label: "For tutors", href: "/for-tutors", icon: GraduationCap },
+  { label: "For researchers", href: "/for-researchers", icon: FileText },
 ] as const
 
-const JoinUsDropdown = () => {
+const LearnMoreDropdown = () => {
   const router = useRouter()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        className={cn(marketingHeroCtaOutlineLinkClass, "min-w-[132px] gap-2")}
+        className={cn(marketingHeroCtaOutlineLinkClass, "min-w-[140px] gap-2")}
       >
-        Join us
+        Learn more
         <ChevronDown className="size-4 shrink-0 transition-transform duration-200 [[data-state=open]_&]:rotate-180" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" sideOffset={8} className="min-w-[180px]">
-        {JOIN_US_ITEMS.map(({ label, href, icon: Icon }) => (
+      <DropdownMenuContent align="center" sideOffset={8} className="min-w-[200px]">
+        {LEARN_MORE_AUDIENCE_ITEMS.map(({ label, href, icon: Icon }) => (
           <DropdownMenuItem
             key={href}
-            className="gap-2 cursor-pointer focus:bg-[#A6EDF4]/30 focus:text-[#004247]"
+            className={cn(
+              "cursor-pointer gap-2 focus:bg-[#A6EDF4]/30 focus:text-[#004247]",
+              /* Keep label teal on focus; keep icons muted (override menu `focus:**:text-accent-foreground` on svgs) */
+              "[&>svg]:!text-[#62636C] focus:[&>svg]:!text-[#62636C] data-[highlighted]:[&>svg]:!text-[#62636C] data-focus-visible:[&>svg]:!text-[#62636C]",
+            )}
             onClick={() => router.push(href)}
           >
-            <Icon className="size-4 shrink-0 !text-muted-foreground" />
+            <Icon className="size-4 shrink-0" aria-hidden />
             {label}
           </DropdownMenuItem>
         ))}
@@ -428,6 +438,9 @@ const JoinUsDropdown = () => {
   )
 }
 
+/**
+ * Hero — Figma `1714:1883` Landing: wash, copy, ornaments, video (`1791:3805`), Our Awards (`1732:3947`).
+ */
 export const PlusHeroSection = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
@@ -470,14 +483,14 @@ export const PlusHeroSection = () => {
                   "mx-auto max-w-prose text-center text-pretty"
                 )}
               >
-                <span className="font-bold text-primary">PLUS</span> is a virtual tutoring platform that empowers
+                <span className="font-bold text-[#027f89]">PLUS</span> is a virtual tutoring platform that empowers
                 middle school math learners with AI technology and research-backed methods.
               </p>
             <div className={marketingHeroCtaButtonRowClass}>
               <Link href="/about" className={cn(marketingHeroCtaPrimaryLinkClass, "min-w-[169px]")}>
                 Our mission
               </Link>
-              <JoinUsDropdown />
+              <LearnMoreDropdown />
             </div>
           </div>
         </div>
@@ -561,20 +574,38 @@ const VOICES_AVATAR_BOX =
   "relative size-16 shrink-0 overflow-hidden rounded-full bg-muted"
 
 /**
- * Figma `1714:1912` — 473px + 93px + 556px; stat stacks 395px wide, 18px vertical rhythm inside each.
+ * Figma `2127:2274` — 395px-wide copy stack, 18px vertical rhythm, 58px stat icons; photos 556×472.
  */
-const IMPACT_STAT_STACK =
-  "mx-auto flex w-full max-w-[395px] flex-col items-start gap-[18px] lg:mx-0"
+const impactStatTextColClass = cn("flex w-full max-w-[395px] flex-col items-start gap-[18px] lg:max-w-none")
+
+const impactRowGap = "gap-8 md:gap-10 lg:gap-[93px]"
+
+const IMPACT_STAT_ICON_PX = 58
+
+const ImpactRowPhoto = ({ src, alt = "" }: { src: string; alt?: string }) => (
+  <div className="relative w-full min-w-0 max-w-[556px] sm:mx-auto lg:mx-0">
+    <div className="relative w-full overflow-hidden rounded-[30px] bg-muted/30">
+      <div className="relative aspect-[556/472] w-full">
+        {/* eslint-disable-next-line @next/next/no-img-element -- public static asset; object-cover in ratio frame */}
+        <img
+          alt={alt}
+          src={src}
+          className="absolute inset-0 size-full object-cover"
+        />
+      </div>
+    </div>
+  </div>
+)
 
 /**
- * Impact — “Serving Low-Income Students” — Figma `1714:1912` (asymmetric columns + map height 472).
+ * Impact — Figma `2127:2274` Z-layout: (students | photo) → (photo | schools) → (tutors | photo).
  */
 export const PlusImpactStatsSection = () => {
   return (
     <section id="impact" className={cn("relative", marketingSectionVerticalGapClass)}>
       <div className="relative w-full text-left">
         <div className={marketingSectionIntroColumnClass}>
-          <h2 className={schoolsSectionTitle}>Serving Low-Income Students</h2>
+          <h2 className={schoolsSectionTitle}>Serving Students from Low-Income Families</h2>
           <p className={schoolsSectionLead}>
             Bridging the opportunity gap in math education by empowering schools and community tutors with
             AI-enhanced tools designed for every student&apos;s success.
@@ -582,7 +613,7 @@ export const PlusImpactStatsSection = () => {
         </div>
         <img
           alt=""
-          src={forTutorsAssets.certificationDecor}
+          src={plusHomeImpactDecor.equalSign}
           className={cn(
             marketingSectionHeaderDecorImgClass,
             marketingSectionHeaderDecorAbsoluteClass,
@@ -591,19 +622,17 @@ export const PlusImpactStatsSection = () => {
         />
       </div>
 
-      {/*
-        Figma `1714:1912`: lg 2×2 grid (473 + 93 + 556, row gap 61). Mobile reading order: students → map → schools → tutors.
-      */}
-      <div className="mx-auto grid w-full max-w-[1122px] grid-cols-1 gap-y-10 lg:grid-cols-[minmax(0,473fr)_minmax(0,556fr)] lg:gap-x-[93px] lg:gap-y-[61px]">
-        <div className="order-1 lg:col-start-1 lg:row-start-1 lg:self-start lg:pt-14">
-          <div className={IMPACT_STAT_STACK}>
-            <div className={cn("relative", marketingCardIconAssetFrameClass)}>
+      <div className="mx-auto flex w-full max-w-[1122px] flex-col space-y-10 md:space-y-12 lg:space-y-16">
+        {/* Row 1: copy | classroom photo */}
+        <div className={cn("flex w-full flex-col items-stretch lg:flex-row lg:items-center", impactRowGap)}>
+          <div className={cn(impactStatTextColClass, "shrink-0 lg:w-[473px]")}>
+            <div className="relative size-[58px]">
               <Image
                 src={plusHomeImpactDecor.iconStudents}
                 alt=""
-                width={MARKETING_CARD_ICON_DIAMETER_PX}
-                height={MARKETING_CARD_ICON_DIAMETER_PX}
-                className={cn("block object-contain", marketingCardIconAssetFrameClass)}
+                width={IMPACT_STAT_ICON_PX}
+                height={IMPACT_STAT_ICON_PX}
+                className="block size-full object-contain"
                 unoptimized
               />
             </div>
@@ -614,34 +643,36 @@ export const PlusImpactStatsSection = () => {
               Students across the country receiving personalized math support through PLUS.
             </p>
             <Link
-              href="/for-tutors"
-              className={cn(marketingFinalCtaPrimaryLinkClass, "mt-4 w-fit min-w-[263px]")}
+              href="/success-stories"
+              className={cn(marketingFinalCtaPrimaryLinkClass, "w-fit min-w-[180px]")}
             >
-              Learn more about toolkit
+              See impact
             </Link>
           </div>
-        </div>
-
-        <div className="order-2 lg:col-start-2 lg:row-start-1 lg:self-start">
-          <div className="relative h-[min(472px,78vw)] w-full overflow-hidden rounded-[30px] bg-muted/30 sm:h-[400px] lg:h-[472px]">
-            {/* eslint-disable-next-line @next/next/no-img-element -- Figma node `1714:1956` */}
-            <img
-              alt=""
-              src={plusHomeImpactMap}
-              className="pointer-events-none absolute inset-0 size-full object-cover object-[center_60%]"
+          <div className="min-w-0 flex-1 lg:max-w-[556px]">
+            <ImpactRowPhoto
+              src={plusHomeImpactRowStudents}
+              alt="Students in a classroom with laptops and headphones"
             />
           </div>
         </div>
 
-        <div className="order-3 lg:col-start-1 lg:row-start-2 lg:flex lg:flex-col">
-          <div className={cn(IMPACT_STAT_STACK, "lg:h-full")}>
-            <div className={cn("relative", marketingCardIconAssetFrameClass)}>
+        {/* Row 2: school team photo | copy */}
+        <div className={cn("flex w-full flex-col items-stretch lg:flex-row lg:items-center", impactRowGap)}>
+          <div className="min-w-0 flex-1 lg:order-1 lg:max-w-[556px]">
+            <ImpactRowPhoto
+              src={plusHomeImpactRowSchools}
+              alt="Team members in front of a school building"
+            />
+          </div>
+          <div className={cn(impactStatTextColClass, "shrink-0 lg:order-2 lg:w-[473px]")}>
+            <div className="relative size-[58px]">
               <Image
                 src={plusHomeImpactDecor.iconSchools}
                 alt=""
-                width={MARKETING_CARD_ICON_DIAMETER_PX}
-                height={MARKETING_CARD_ICON_DIAMETER_PX}
-                className={cn("block object-contain", marketingCardIconAssetFrameClass)}
+                width={IMPACT_STAT_ICON_PX}
+                height={IMPACT_STAT_ICON_PX}
+                className="block size-full object-contain"
                 unoptimized
               />
             </div>
@@ -653,22 +684,23 @@ export const PlusImpactStatsSection = () => {
             </p>
             <Link
               href="/for-schools"
-              className={cn(marketingFinalCtaOutlineLinkClass, "mt-auto w-fit min-w-[212px]")}
+              className={cn(marketingFinalCtaOutlineLinkClass, "w-fit min-w-[212px]")}
             >
               Get PLUS tutoring
             </Link>
           </div>
         </div>
 
-        <div className="order-4 lg:col-start-2 lg:row-start-2 lg:flex lg:flex-col lg:pl-[83px]">
-          <div className={cn(IMPACT_STAT_STACK, "lg:h-full")}>
-            <div className={cn("relative", marketingCardIconAssetFrameClass)}>
+        {/* Row 3: copy | remote tutoring photo */}
+        <div className={cn("flex w-full flex-col items-stretch lg:flex-row lg:items-center", impactRowGap)}>
+          <div className={cn(impactStatTextColClass, "shrink-0 lg:w-[473px]")}>
+            <div className="relative size-[58px]">
               <Image
                 src={plusHomeImpactDecor.iconTutors}
                 alt=""
-                width={MARKETING_CARD_ICON_DIAMETER_PX}
-                height={MARKETING_CARD_ICON_DIAMETER_PX}
-                className={cn("block object-contain", marketingCardIconAssetFrameClass)}
+                width={IMPACT_STAT_ICON_PX}
+                height={IMPACT_STAT_ICON_PX}
+                className="block size-full object-contain"
                 unoptimized
               />
             </div>
@@ -680,10 +712,16 @@ export const PlusImpactStatsSection = () => {
             </p>
             <Link
               href="/for-tutors"
-              className={cn(marketingFinalCtaOutlineLinkClass, "mt-auto w-fit min-w-[195px]")}
+              className={cn(marketingFinalCtaOutlineLinkClass, "w-fit min-w-[195px]")}
             >
               Become a tutor
             </Link>
+          </div>
+          <div className="min-w-0 flex-1 lg:max-w-[556px]">
+            <ImpactRowPhoto
+              src={plusHomeImpactRowTutors}
+              alt="Student on a video call with a tutor on a laptop"
+            />
           </div>
         </div>
       </div>
