@@ -67,21 +67,18 @@ export const plusHomeImpactRowTutors = "/figma/home/impact-row-tutors.png"
 /**
  * Figma `1714:1957` Smart Tech, Smarter Learning — pink bento + layered screenshots.
  * Layout: Supervisor + AI Tutor side-by-side (row 1), Collaborative Goal Setting full-width (row 2).
- * `supervisor` / `aiTutor` / `goalSetting` = single composites for small viewports.
+ * Goal row: two PNGs (`goalLeft` / `goalRight`) — Figma `2193:2400`, `2193:2436`.
  */
 export const plusHomeSmartTech = {
-  supervisor: "https://www.figma.com/api/mcp/asset/b54ac288-9952-41dc-a8bb-e0ff9fbd261a",
-  aiTutor: "https://www.figma.com/api/mcp/asset/5ac6cbb5-4443-4329-a757-7d03d242a188",
-  goalSetting: "https://www.figma.com/api/mcp/asset/f1944517-229f-4adf-9f76-de7f027edec0",
-  /** Supervisor card — back (`1714:1974`) / front (`1714:1975`). */
+  goalLeft: "/figma/home/smarttech-goal-left.png",
+  goalRight: "/figma/home/smarttech-goal-right.png",
+  /** Supervisor — left donut `2193:2305`, right donut `2193:2314` inside `1714:1965` (526×423). */
   supervisorLayerBack: "/figma/home/smarttech-supervisor-back.png",
   supervisorLayerFront: "/figma/home/smarttech-supervisor-front.png",
-  /** AI tutor card — back (`1714:1986`) / front (`1714:1987`). */
-  aiTutorLayerBack: "/figma/home/smarttech-aitutor-back.png",
-  aiTutorLayerFront: "/figma/home/smarttech-aitutor-front.png",
-  /** Goal setting card — back (`1714:1996`) / front (`1714:1997`). */
-  goalLayerBack: "/figma/home/smarttech-goal-back.png",
-  goalLayerFront: "/figma/home/smarttech-goal-front.png",
+  /** AI tutor — stacked profile cards `2193:2378` → `2193:2356` → `2193:2326` inside `1714:1976`. */
+  aiTutorLayerBack: "/figma/home/smarttech-aitutor-layer-back.png",
+  aiTutorLayerMid: "/figma/home/smarttech-aitutor-layer-mid.png",
+  aiTutorLayerFront: "/figma/home/smarttech-aitutor-layer-front.png",
   iconSupervisor: "/figma/home/smarttech-icon-supervisor.svg",
   iconAiTutor: "/figma/home/smarttech-icon-aitutor.svg",
   iconGoal: "/figma/home/smarttech-icon-goal.svg",
@@ -89,14 +86,13 @@ export const plusHomeSmartTech = {
 } as const
 
 /**
- * Figma `1708:2035` Built on the Science of Learning.
- * Layered screenshots (`papersLayer*`) + icon match node layout; stacks kept for fallbacks / older refs.
+ * Figma `1714:1998` Built on the Science of Learning (homepage).
+ * Right panel: single composite `1714:2017` — conference / venue logo grid.
  */
 export const plusHomeScience = {
   iconPapers: "/figma/home/icon-papers.svg",
-  /** Back (paper) / front (table UI) — `1709:2116`, `1709:2114`. */
-  papersLayerBack: "/figma/home/science-papers-back.png",
-  papersLayerFront: "/figma/home/science-papers-front.png",
+  /** Right column 556×397 panel — `1714:2017` under `1714:1998`. */
+  papersPanel: "/figma/home/science-learning-panel.png",
   /** Header decor in white frame — `1708:2077`. */
   headerDoodle: "/figma/home/science-header-doodle.png",
 } as const

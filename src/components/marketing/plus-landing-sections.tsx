@@ -744,7 +744,7 @@ export const PlusImpactStatsSection = () => {
   )
 }
 
-/** Icon + title row — `gap-3` matches `getInvolvedDiscTitleRowClass` on tutoring cards. */
+/** Icon + title row — Figma bento headers use 25px icon→title gap (`1714:1966`, `1714:1977`, `1714:1989`). */
 const SmartTechCardHeader = ({
   iconSrc,
   title,
@@ -756,7 +756,7 @@ const SmartTechCardHeader = ({
   className?: string
   titleClassName?: string
 }) => (
-  <div className={cn("relative z-20 flex w-full shrink-0 items-center gap-3", className)}>
+  <div className={cn("relative z-20 flex w-full shrink-0 items-center gap-[25px]", className)}>
     <div className={cn("relative", marketingCardIconAssetFrameClass)}>
       <Image
         src={iconSrc}
@@ -773,16 +773,24 @@ const SmartTechCardHeader = ({
   </div>
 )
 
+/** Figma `1714:1965` / `1714:1976` — bento frame size (px). */
+const SMART_TECH_TOP_W = 526
+const SMART_TECH_TOP_H = 423
+
+const pctX = (px: number) => `${(px / SMART_TECH_TOP_W) * 100}%`
+const pctY = (px: number) => `${(px / SMART_TECH_TOP_H) * 100}%`
+
+/** Rose/mauve-tinted depth on `#ffe8f5` — reads richer than neutral grey (multiply-like on pink). */
+const smartTechCardShadowStrong =
+  "shadow-[0_14px_42px_-10px_rgba(118,42,72,0.26),0_6px_20px_-6px_rgba(92,32,58,0.16)]"
+const smartTechCardShadowSoft =
+  "shadow-[0_12px_36px_-10px_rgba(118,42,72,0.14),0_4px_14px_-4px_rgba(92,32,58,0.1)]"
+
 /**
  * Smart Tech, Smarter Learning — Figma `1714:1957`.
- * Layout: Supervisor + AI Tutor side-by-side in row 1; Collaborative Goal Setting full-width in row 2.
- * Card gaps use `marketingCardStackGapClass`; icon→title gap matches tutoring (`gap-3`).
- *
- * Bento `<article>`s intentionally skip `marketingCardPaddingClass` on the shell: mobile uses
- * split insets on the header vs image row, with `pt-6 sm:pt-6` / `sm:px-6` / `sm:pb-6` so top
- * and horizontal rhythm match that token; at `lg` the header uses `left-6 top-6` so the disc
- * lines up with the same 24px inset as `marketingCardPaddingClass` (`sm:p-6`), while layers
- * fill the fixed-height frame.
+ * Top bentos: absolute PNG slots match the MCP export (left-anchored supervisor; AI cards use
+ * `left-1/2` + `translateX(-50%)` like the file, not raw metadata x). Goal row: typography stays
+ * in normal flow; PNGs are inset and nudged down (`1714:1988`).
  */
 export const PlusSmartTechSection = () => {
   return (
@@ -798,7 +806,7 @@ export const PlusSmartTechSection = () => {
         </div>
         <img
           alt=""
-          src={forTutorsAssets.toolkitDecor}
+          src={plusHomeSmartTech.headerDoodle}
           className={cn(
             marketingSectionHeaderDecorImgClass,
             marketingSectionHeaderDecorAbsoluteClass,
@@ -813,137 +821,188 @@ export const PlusSmartTechSection = () => {
           marketingCardStackGapClass,
         )}
       >
-        {/* Row 1: Supervisor Dashboard + AI Tutor Training — Figma `1714:1965` + `1714:1976` */}
-        <div
-          className={cn("grid grid-cols-1 lg:grid-cols-2", marketingCardStackGapClass)}
-        >
-          {/* Supervisor Dashboard — Figma `1714:1965` (526×423) */}
-          <article className="relative overflow-hidden rounded-[30px] bg-[#ffe8f5] lg:h-[423px]">
-            <SmartTechCardHeader
-              iconSrc={plusHomeSmartTech.iconSupervisor}
-              title="Supervisor Dashboard"
-              className="px-5 pt-6 sm:px-6 sm:pt-6 lg:absolute lg:left-6 lg:top-6 lg:px-0 lg:pt-0"
-            />
-            <div className="relative mt-4 px-5 pb-5 sm:px-6 sm:pb-6 lg:hidden">
-              <Image
-                src={plusHomeSmartTech.supervisor}
-                alt=""
-                width={800}
-                height={480}
-                className="h-auto w-full rounded-[5px] object-contain object-top"
-                unoptimized
-              />
-            </div>
-            {/*
-              Figma `1714:1965` (526×423):
-              Back `1714:1974`: left=28px→5.32%, top=215px→50.83%, w=430px→81.75%, h=212px→50.12%
-              Front `1714:1975`: left=148px→28.14%, top=164px→38.77%, w=532px→101.14%, h=263px→62.17%
-            */}
-            <div className="pointer-events-none hidden lg:absolute lg:inset-0 lg:block" aria-hidden>
-              <div className="absolute left-[5.32%] top-[50.83%] h-[50.12%] w-[81.75%] overflow-hidden rounded-[5px]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  alt=""
-                  src={plusHomeSmartTech.supervisorLayerBack}
-                  className="absolute h-[99.83%] w-[100.27%] max-w-none object-cover"
-                  style={{ left: "-0.27%", top: "0.08%" }}
-                />
-              </div>
-              <div className="absolute left-[28.14%] top-[38.77%] h-[62.17%] w-[101.14%] overflow-hidden rounded-[5px] shadow-[-2px_-2px_53px_rgba(0,0,0,0.25)]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  alt=""
-                  src={plusHomeSmartTech.supervisorLayerFront}
-                  className="absolute h-[100.1%] w-[100.4%] max-w-none object-cover"
-                  style={{ left: "-0.4%", top: "-0.05%" }}
-                />
+        <div className="flex w-full flex-col items-center gap-4 md:gap-8 lg:flex-row lg:justify-center lg:gap-[42px]">
+          {/* Supervisor — `1714:1965` */}
+          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-[30px] bg-[#ffe8f5]">
+            <div className="relative w-full" style={{ aspectRatio: `${SMART_TECH_TOP_W} / ${SMART_TECH_TOP_H}` }}>
+              <div className="absolute inset-0 bg-[#ffe8f5]">
+                <div
+                  className="absolute z-20 flex"
+                  style={{ left: pctX(23), top: pctY(17) }}
+                >
+                  <SmartTechCardHeader
+                    iconSrc={plusHomeSmartTech.iconSupervisor}
+                    title="Supervisor Dashboard"
+                    className="max-w-[min(100%,372px)]"
+                  />
+                </div>
+                <div
+                  className="pointer-events-none absolute overflow-hidden"
+                  style={{
+                    left: pctX(43),
+                    top: pctY(211),
+                    width: pctX(257),
+                    height: pctY(224.99266052246094),
+                    borderRadius: "14.121px",
+                  }}
+                  aria-hidden
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    alt=""
+                    src={plusHomeSmartTech.supervisorLayerBack}
+                    className="absolute inset-0 size-full max-w-none object-cover"
+                  />
+                </div>
+                <div
+                  className={cn(
+                    "pointer-events-none absolute z-[1] overflow-hidden",
+                    smartTechCardShadowStrong,
+                  )}
+                  style={{
+                    left: pctX(251),
+                    top: pctY(163),
+                    width: pctX(324.4017028808594),
+                    height: pctY(284),
+                    borderRadius: "17.824px",
+                  }}
+                  aria-hidden
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    alt=""
+                    src={plusHomeSmartTech.supervisorLayerFront}
+                    className="absolute inset-0 size-full max-w-none object-cover"
+                  />
+                </div>
               </div>
             </div>
           </article>
 
-          {/* AI tutor training — Figma `1714:1976` (526×423) */}
-          <article className="relative overflow-hidden rounded-[30px] bg-[#ffe8f5] lg:h-[423px]">
-            <SmartTechCardHeader
-              iconSrc={plusHomeSmartTech.iconAiTutor}
-              title="AI tutor training"
-              className="px-5 pt-6 sm:px-6 sm:pt-6 lg:absolute lg:left-6 lg:top-6 lg:px-0 lg:pt-0"
-            />
-            <div className="relative mt-4 px-5 pb-5 sm:px-6 sm:pb-6 lg:hidden">
-              <Image
-                src={plusHomeSmartTech.aiTutor}
-                alt=""
-                width={800}
-                height={480}
-                className="h-auto w-full rounded-[5px] object-contain object-top"
-                unoptimized
-              />
-            </div>
-            {/*
-              Figma `1714:1976` (526×423):
-              Back `1714:1986`: centered, top=124px→29.31%, w=415px→78.90%, h=204px→48.23%
-              Front `1714:1987`: centered, top=199px→47.05%, w=469px→89.16%, h=230px→54.37%
-            */}
-            <div className="pointer-events-none hidden lg:absolute lg:inset-0 lg:block" aria-hidden>
-              <div className="absolute left-1/2 top-[29.31%] h-[48.23%] w-[78.90%] -translate-x-1/2 overflow-hidden rounded-[5px]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  alt=""
-                  src={plusHomeSmartTech.aiTutorLayerBack}
-                  className="size-full max-w-none object-contain"
-                />
-              </div>
-              <div className="absolute left-1/2 top-[47.05%] h-[54.37%] w-[89.16%] -translate-x-1/2 overflow-hidden rounded-[5px] shadow-[0_-2px_40px_rgba(0,0,0,0.25)]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  alt=""
-                  src={plusHomeSmartTech.aiTutorLayerFront}
-                  className="size-full max-w-none object-contain"
-                />
+          {/* AI tutor — `1714:1976` (stacked cards centered on x-axis per Figma export) */}
+          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-[30px] bg-[#ffe8f5]">
+            <div className="relative w-full" style={{ aspectRatio: `${SMART_TECH_TOP_W} / ${SMART_TECH_TOP_H}` }}>
+              <div className="absolute inset-0 bg-[#ffe8f5]">
+                <div
+                  className="absolute z-20 flex"
+                  style={{ left: pctX(21), top: pctY(21) }}
+                >
+                  <SmartTechCardHeader
+                    iconSrc={plusHomeSmartTech.iconAiTutor}
+                    title="AI tutor training"
+                    className="max-w-[min(100%,372px)]"
+                  />
+                </div>
+                <div
+                  className="pointer-events-none absolute z-[1] overflow-hidden"
+                  style={{
+                    left: "calc(50% + 0px)",
+                    top: pctY(120),
+                    width: pctX(354),
+                    height: pctY(172.36090087890625),
+                    borderRadius: "14.274px",
+                    transform: "translateX(-50%)",
+                  }}
+                  aria-hidden
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    alt=""
+                    src={plusHomeSmartTech.aiTutorLayerBack}
+                    className="absolute inset-0 size-full max-w-none object-cover"
+                  />
+                </div>
+                <div
+                  className={cn(
+                    "pointer-events-none absolute z-[2] overflow-hidden",
+                    smartTechCardShadowSoft,
+                  )}
+                  style={{
+                    left: "calc(50% + 0.5px)",
+                    top: pctY(168.38204956054688),
+                    width: pctX(415),
+                    height: pctY(202.06150817871094),
+                    borderRadius: "16.734px",
+                    transform: "translateX(-50%)",
+                  }}
+                  aria-hidden
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    alt=""
+                    src={plusHomeSmartTech.aiTutorLayerMid}
+                    className="absolute inset-0 size-full max-w-none object-cover"
+                  />
+                </div>
+                <div
+                  className={cn(
+                    "pointer-events-none absolute z-[3] overflow-hidden",
+                    smartTechCardShadowStrong,
+                  )}
+                  style={{
+                    left: "calc(50% + 0.22px)",
+                    top: pctY(220),
+                    width: pctX(466.4396057128906),
+                    height: pctY(227.107177734375),
+                    borderRadius: "18.808px",
+                    transform: "translateX(-50%)",
+                  }}
+                  aria-hidden
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    alt=""
+                    src={plusHomeSmartTech.aiTutorLayerFront}
+                    className="absolute inset-0 size-full max-w-none object-cover"
+                  />
+                </div>
               </div>
             </div>
           </article>
         </div>
 
-        {/* Row 2: Collaborative Goal Setting — Figma `1714:1988` (full-width ~1094×465) */}
-        <article className="relative overflow-hidden rounded-[30px] bg-[#ffe8f5] lg:h-[465px]">
+        {/* Goal setting — `1714:1988`: ~400×300 frames, `object-cover` fills frame, 25px gap */}
+        <article className="mx-auto w-full max-w-[1097px] overflow-hidden rounded-[30px] bg-[#ffe8f5] px-5 pb-5 pt-6 sm:px-7 sm:pb-6 sm:pt-8 md:px-8">
           <SmartTechCardHeader
             iconSrc={plusHomeSmartTech.iconGoal}
             title="Collaborative Goal Setting"
-            className="px-5 pt-6 sm:px-6 sm:pt-6 lg:absolute lg:left-6 lg:top-6 lg:px-0 lg:pt-0"
-            titleClassName="lg:max-w-[539px] lg:whitespace-nowrap"
+            className="mb-6 max-w-full sm:mb-8"
+            titleClassName="max-w-[539px]"
           />
-          <div className="relative mt-4 px-5 pb-5 sm:px-6 sm:pb-6 lg:hidden">
-            <Image
-              src={plusHomeSmartTech.goalSetting}
-              alt=""
-              width={900}
-              height={560}
-              className="h-auto w-full rounded-[5px] object-contain object-center"
-              unoptimized
-            />
-          </div>
-          {/*
-            Figma `1714:1988` (wide ~1094×465, rotation-derived coordinates):
-            Front `1714:1997` (shadow): left=3.9%, top=30.1%, w=55.9%, h=66.7%
-            Back `1714:1996`: left=39.8%, top=46%, w=55.8%, h=65%
-          */}
-          <div className="pointer-events-none hidden lg:absolute lg:inset-0 lg:block" aria-hidden>
-            <div className="absolute left-[39.8%] top-[46%] z-[1] h-[65%] w-[55.8%] overflow-hidden rounded-[5px]">
+          <div
+            className={cn(
+              "mt-2 flex flex-col items-center justify-center gap-[25px] sm:mt-4 md:mt-6 md:flex-row",
+              "-mb-8 translate-y-1.5 sm:-mb-10 sm:translate-y-2 md:-mb-12 md:translate-y-3",
+            )}
+          >
+            <div
+              className={cn(
+                "flex h-[300px] w-full max-w-[400px] shrink-0 items-center justify-center overflow-hidden rounded-[41.09px] md:w-[400px]",
+                smartTechCardShadowStrong,
+              )}
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 alt=""
-                src={plusHomeSmartTech.goalLayerBack}
-                className="absolute h-[99.91%] w-[100.19%] max-w-none object-cover"
-                style={{ left: "-0.19%", top: "0.05%" }}
+                src={plusHomeSmartTech.goalLeft}
+                width={1006}
+                height={737}
+                className="block h-full w-full min-h-0 min-w-0 object-cover"
               />
             </div>
-            <div className="absolute left-[3.9%] top-[30.1%] z-[2] h-[66.7%] w-[55.9%] overflow-hidden rounded-[5px] shadow-[-2px_-2px_40px_rgba(0,0,0,0.25)]">
+            <div
+              className={cn(
+                "flex h-[300px] w-full max-w-[400px] shrink-0 items-center justify-center overflow-hidden rounded-[41.09px] md:w-[400px]",
+                smartTechCardShadowStrong,
+              )}
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 alt=""
-                src={plusHomeSmartTech.goalLayerFront}
-                className="absolute h-[99.82%] w-full max-w-none object-cover"
-                style={{ left: 0, top: "0.09%" }}
+                src={plusHomeSmartTech.goalRight}
+                width={1006}
+                height={737}
+                className="block h-full w-full min-h-0 min-w-0 object-cover"
               />
             </div>
           </div>
@@ -954,7 +1013,7 @@ export const PlusSmartTechSection = () => {
 }
 
 /**
- * Figma `1708:2035` — two columns (473 + 72 gap + 556), 397px-tall row; right panel layered screenshots.
+ * Figma `1714:1998` — two columns (473 + 72 gap + 556), 397px-tall row; right panel single image (`1714:2017`).
  * Typography: shared `schoolsSection*` + `marketingTypography.bentoTitle` for the stat line (brand blue).
  */
 export const PlusScienceOfLearningSection = () => {
@@ -1009,48 +1068,17 @@ export const PlusScienceOfLearningSection = () => {
           </div>
         </div>
 
-        {/* Right — Figma `1709:2094`: 556×397, #e0f6fe, layered paper + table (positions from `1709:2116` / `1709:2114`) */}
-        <div className="relative mx-auto min-h-[280px] w-full max-w-[556px] overflow-hidden rounded-[30px] bg-[#e0f6fe] lg:mx-0 lg:h-[397px] lg:min-h-0">
-          {/* Mobile: stacked layers (Figma asset order) */}
-          <div className={cn("relative flex flex-col gap-3 lg:hidden", marketingCardPaddingClass)}>
-            <Image
-              src={plusHomeScience.papersLayerBack}
-              alt=""
-              width={266}
-              height={278}
-              className="h-auto w-full max-w-[16rem] rounded-[5px] object-contain"
-              unoptimized
+        {/* Right — Figma `1714:2017`: 556×397 rounded panel; crop matches MCP export (`1714:1998`) */}
+        <div className="relative mx-auto w-full max-w-[556px] overflow-hidden rounded-[30px] bg-[#e0f6fe] lg:mx-0 lg:h-[397px]">
+          <div className="relative aspect-[556/397] w-full lg:aspect-auto lg:h-full">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt="Research and conference logos: Learning Ideas, EDM, SoLAR, IEEE, SIGCHI, AIED"
+              src={plusHomeScience.papersPanel}
+              width={1550}
+              height={1442}
+              className="absolute inset-0 size-full object-cover lg:inset-auto lg:left-[-0.02%] lg:top-[-30.38%] lg:h-[130.29%] lg:w-full lg:max-w-none"
             />
-            <Image
-              src={plusHomeScience.papersLayerFront}
-              alt=""
-              width={558}
-              height={278}
-              className="h-auto w-full rounded-[5px] object-contain shadow-[-2px_2px_40px_rgba(0,0,0,0.25)]"
-              unoptimized
-            />
-          </div>
-
-          {/* Desktop — Figma `1709:2116` + `1709:2114` (556×397 panel) */}
-          <div className="pointer-events-none relative hidden h-[397px] w-full lg:block" aria-hidden>
-            <div className="absolute left-[calc(50%-111px)] top-[119px] h-[278px] w-[266px] -translate-x-1/2 overflow-hidden rounded-[5px]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                src={plusHomeScience.papersLayerBack}
-                className="absolute h-full max-w-none object-cover"
-                style={{ left: "0.02%", top: 0, width: "99.96%" }}
-              />
-            </div>
-            <div className="absolute left-[calc(50%+144px)] top-[54px] h-[278px] w-[558px] -translate-x-1/2 overflow-hidden rounded-[5px] shadow-[-2px_2px_40px_rgba(0,0,0,0.25)]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                src={plusHomeScience.papersLayerFront}
-                className="absolute h-full max-w-none object-cover"
-                style={{ left: "-0.04%", top: 0, width: "98.79%" }}
-              />
-            </div>
           </div>
         </div>
       </div>

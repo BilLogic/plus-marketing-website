@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Script from "next/script"
 import "./globals.css"
+import { ScrollToTopButton } from "@/components/scroll-to-top-button"
 import { ThemeProvider } from "@/components/theme-provider"
 import { dmSans, geistMono } from "./fonts"
 
@@ -45,6 +46,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <ScrollToTopButton />
         </ThemeProvider>
       </body>
     </html>
