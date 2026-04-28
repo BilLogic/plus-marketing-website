@@ -1,6 +1,6 @@
 import { PlusHeader } from "@/components/marketing/header/plus-header"
 import { PlusFooter } from "@/components/marketing/footer/plus-footer"
-import { marketingShellPadX } from "@/lib/marketing-layout"
+import { marketingShellPadX, marketingWideTypeScale } from "@/lib/marketing-layout"
 
 export default function MarketingLayout({
   children,
@@ -10,7 +10,7 @@ export default function MarketingLayout({
   return (
     <main className="bg-background text-foreground">
       <PlusHeader />
-      <div className={marketingShellPadX}>{children}</div>
+      <div className={`${marketingShellPadX} ${marketingWideTypeScale}`}>{children}</div>
       <PlusFooter />
     </main>
   )

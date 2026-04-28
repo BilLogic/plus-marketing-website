@@ -13,4 +13,20 @@ export const marketingSectionStackGap = "gap-16 md:gap-32"
  * Desktop (lg+): sections use `max-w-5xl mx-auto` for centering so extra
  * outer padding is skipped.
  */
-export const marketingShellPadX = "px-8 sm:px-14"
+export const marketingShellPadX = "px-8 sm:px-14 min-[1800px]:px-20"
+
+/**
+ * Extra-wide screen shell expansion. Keeps existing mobile/tablet/desktop widths
+ * while widening content only at very large viewport sizes.
+ */
+export const marketingWideShell = "min-[1800px]:max-w-7xl"
+
+/**
+ * Slightly increase type scale only for very large displays so page content does
+ * not feel too small relative to viewport size.
+ */
+export const marketingWideTypeScale = "min-[1800px]:text-[1.0625rem]"
+
+/** Shared footer content track used by newsletter and lower footer sections. */
+export const marketingFooterInnerShell =
+  "mx-auto max-w-7xl px-6 sm:px-10 min-[1800px]:max-w-[1360px] min-[1800px]:px-0"

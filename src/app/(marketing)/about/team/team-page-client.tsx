@@ -126,7 +126,7 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
   }, [filtered])
 
   return (
-    <div className="mx-auto flex max-w-6xl flex-col gap-10 pb-16 pt-2 sm:pb-20 md:pb-24">
+    <div className="mx-auto flex max-w-6xl flex-col gap-10 pb-16 pt-2 sm:pb-20 md:pb-24 min-[1800px]:max-w-7xl min-[1800px]:gap-12 min-[1800px]:pb-32 min-[1800px]:pt-8">
       {/* Header */}
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
@@ -220,7 +220,7 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
               <div
                 className={cn(
                   "grid gap-4",
-                  "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+                  "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 min-[1800px]:grid-cols-5"
                 )}
               >
                 {groupMembers.map((member) => (

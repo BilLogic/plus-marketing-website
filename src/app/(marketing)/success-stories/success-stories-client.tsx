@@ -46,7 +46,7 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
 
   return (
     <main className="bg-background text-foreground">
-      <div className="mx-auto flex max-w-5xl flex-col gap-10 pb-8 pt-14 sm:gap-12 sm:pb-12 sm:pt-16 lg:gap-16 lg:pb-16 lg:pt-20">
+      <div className="mx-auto flex max-w-5xl flex-col gap-10 pb-8 pt-14 sm:gap-12 sm:pb-12 sm:pt-16 lg:gap-16 lg:pb-16 lg:pt-20 min-[1800px]:max-w-7xl min-[1800px]:gap-20 min-[1800px]:pb-24 min-[1800px]:pt-24">
         <div className="space-y-3">
           <h1 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Success Stories

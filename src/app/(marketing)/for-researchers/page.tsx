@@ -51,7 +51,7 @@ const ForResearchersPage = async ({
       <ResearchersHeroSection />
       <div
         className={cn(
-          "mx-auto flex max-w-5xl flex-col pb-16 pt-8 sm:pb-20 md:pb-24 md:pt-10",
+          "mx-auto flex max-w-5xl flex-col pb-16 pt-8 sm:pb-20 md:pb-24 md:pt-10 min-[1800px]:max-w-7xl min-[1800px]:pb-32 min-[1800px]:pt-14",
           marketingSectionStackGap
         )}
       >

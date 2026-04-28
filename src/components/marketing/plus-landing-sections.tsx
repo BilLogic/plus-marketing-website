@@ -131,7 +131,7 @@ const schoolsSectionLead = cn(
 export const PlusAnnouncementBar = () => {
   return (
     <div className="w-full border-b border-border/60 bg-primary/5 px-4 py-2.5 text-xs text-muted-foreground sm:px-6">
-      <div className="mx-auto flex max-w-5xl flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex max-w-5xl flex-col gap-1 sm:flex-row sm:items-center sm:justify-between min-[1800px]:max-w-7xl">
         <p className="text-xs">
           <span className="mr-1.5 inline-flex items-center rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-primary uppercase">
             New
@@ -170,7 +170,7 @@ export const PlusNavbar = ({
   return (
     <header className="sticky top-0 z-40 bg-background/80 pb-3 backdrop-blur-md">
       <div className="flex justify-center px-4 pt-3 sm:px-6 lg:px-8">
-        <div className="flex w-full max-w-5xl items-center justify-between gap-3 rounded-full border border-border/70 bg-background/90 px-4 py-2.5 shadow-sm shadow-black/[0.04]">
+        <div className="flex w-full max-w-5xl items-center justify-between gap-3 rounded-full border border-border/70 bg-background/90 px-4 py-2.5 shadow-sm shadow-black/[0.04] min-[1800px]:max-w-7xl">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <span className="relative flex size-7 items-center justify-center rounded-full bg-primary/10">
@@ -250,7 +250,7 @@ const LandingHeroOrnaments = () => (
 
       {/* Pair 1 left — coral + (mirrors green >) */}
       <div
-        className="absolute flex items-center justify-center -rotate-[15deg]"
+        className="absolute flex items-center justify-center -rotate-[15deg] min-[1800px]:-translate-x-8"
         style={{ left: pct(mirrorX(ORNAMENT_RIGHT.greenGt.x)), top: ORNAMENT_RIGHT.greenGt.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -259,7 +259,7 @@ const LandingHeroOrnaments = () => (
 
       {/* Pair 2 left — purple × (mirrors =) */}
       <div
-        className="absolute flex items-center justify-center rotate-[15deg]"
+        className="absolute flex items-center justify-center rotate-[15deg] min-[1800px]:-translate-x-8"
         style={{ left: pct(mirrorX(ORNAMENT_RIGHT.equals.x)), top: ORNAMENT_RIGHT.equals.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -268,7 +268,7 @@ const LandingHeroOrnaments = () => (
 
       {/* Pair 3 left — yellow ÷ (mirrors teal character) */}
       <div
-        className="absolute flex items-center justify-center -rotate-[15deg]"
+        className="absolute flex items-center justify-center -rotate-[15deg] min-[1800px]:-translate-x-8"
         style={{ left: pct(mirrorX(ORNAMENT_RIGHT.character.x)), top: ORNAMENT_RIGHT.character.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -279,7 +279,7 @@ const LandingHeroOrnaments = () => (
 
       {/* Pair 1 right — green > */}
       <div
-        className="absolute flex items-center justify-center rotate-[15deg]"
+        className="absolute flex items-center justify-center rotate-[15deg] min-[1800px]:translate-x-8"
         style={{ left: pct(ORNAMENT_RIGHT.greenGt.x), top: ORNAMENT_RIGHT.greenGt.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -288,7 +288,7 @@ const LandingHeroOrnaments = () => (
 
       {/* Pair 2 right — blue = */}
       <div
-        className="absolute flex items-center justify-center"
+        className="absolute flex items-center justify-center min-[1800px]:translate-x-8"
         style={{ left: pct(ORNAMENT_RIGHT.equals.x), top: ORNAMENT_RIGHT.equals.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -297,7 +297,7 @@ const LandingHeroOrnaments = () => (
 
       {/* Pair 3 right — teal character figure */}
       <div
-        className="absolute flex items-center justify-center"
+        className="absolute flex items-center justify-center min-[1800px]:translate-x-8"
         style={{ left: pct(ORNAMENT_RIGHT.character.x), top: ORNAMENT_RIGHT.character.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -361,13 +361,13 @@ const LandingHeroAwardsRow = () => {
   return (
     <div
       id="get-involved"
-      className="relative z-10 mx-auto mt-12 w-full max-w-[min(80rem,100%)] scroll-mt-28 px-4 pb-8 sm:mt-14 sm:pb-10 md:px-8 lg:scroll-mt-32"
+      className="relative z-10 mx-auto mt-12 w-full max-w-[min(80rem,100%)] scroll-mt-28 px-4 pb-8 sm:mt-14 sm:pb-10 md:px-8 lg:scroll-mt-32 min-[1800px]:max-w-[min(96rem,100%)]"
     >
       <p className="text-center text-xl font-normal text-muted-foreground">Our Awards</p>
       <div
         role="region"
         aria-label="Award recognition"
-        className="relative mx-auto mt-6 w-full max-w-5xl"
+        className="relative mx-auto mt-6 w-full max-w-5xl min-[1800px]:max-w-7xl"
         onMouseEnter={() => setMarqueePaused(true)}
         onMouseLeave={() => setMarqueePaused(false)}
         onFocusCapture={() => setMarqueePaused(true)}
@@ -466,12 +466,12 @@ export const PlusHeroSection = () => {
         />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[min(80rem,100%)] px-4 text-center md:px-8 lg:px-12">
+      <div className="relative z-10 mx-auto w-full max-w-[min(80rem,100%)] px-4 text-center md:px-8 lg:px-12 min-[1800px]:max-w-[min(96rem,100%)]">
         {/* Shared offset so Figma ornaments + copy move together; rhythm aligned with `SchoolsHeroSection` padding */}
         <div className="relative mt-8 sm:mt-10 md:mt-12">
           {/* Ornaments: Figma `1727:1970` — 1280px coordinate track */}
           <LandingHeroOrnaments />
-          <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-6 sm:gap-8">
+          <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-6 sm:gap-8 min-[1800px]:max-w-5xl">
               <h1
                 className="mx-auto max-w-prose text-balance text-center text-3xl font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-4xl md:text-5xl"
               >
@@ -497,7 +497,7 @@ export const PlusHeroSection = () => {
       </div>
 
       {/* Figma `1791:3805` — video player: 822×406, rounded-[22px], dark overlay + centered play button */}
-      <div className="relative z-10 mx-auto mt-10 w-full max-w-[1000px] px-4 sm:mt-12">
+      <div className="relative z-10 mx-auto mt-10 w-full max-w-[1000px] px-4 sm:mt-12 min-[1800px]:max-w-[1280px] min-[1800px]:px-0">
         <div className="relative aspect-video overflow-hidden rounded-[22px]">
           {isVideoPlaying ? (
             <iframe
@@ -580,7 +580,7 @@ const impactZigzagTextColClass = cn(
   "flex w-full min-w-0 flex-col items-start gap-[18px]",
   "max-md:max-w-[min(36rem,100%)] max-md:self-start",
   "md:min-w-0 md:flex-1 md:basis-0 md:max-w-[min(28rem,52%)]",
-  "lg:w-[473px] lg:max-w-[473px] lg:flex-none lg:basis-auto",
+  "lg:w-[473px] lg:max-w-[473px] lg:flex-none lg:basis-auto min-[1800px]:w-[560px] min-[1800px]:max-w-[560px]",
 )
 
 /** Stat line — original impact scale (unchanged color). */
@@ -636,7 +636,7 @@ const impactZigzagPhotoColClass = (orderClass: "md:order-1" | "md:order-2") =>
     "w-full min-w-0 shrink-0",
     "max-md:mx-auto max-md:max-w-[min(36rem,100%)]",
     "md:max-w-[min(320px,44%)] md:basis-[min(320px,44%)]",
-    "lg:min-w-0 lg:max-w-[556px] lg:flex-1 lg:basis-0",
+    "lg:min-w-0 lg:max-w-[556px] lg:flex-1 lg:basis-0 min-[1800px]:max-w-[680px]",
     orderClass,
   )
 
@@ -664,7 +664,7 @@ export const PlusImpactStatsSection = () => {
         </div>
       </div>
 
-      <div className="mx-auto flex w-full max-w-[1122px] flex-col space-y-10 md:space-y-12 lg:space-y-16">
+      <div className="mx-auto flex w-full max-w-[1122px] flex-col space-y-10 md:space-y-12 lg:space-y-16 min-[1800px]:max-w-[1400px] min-[1800px]:space-y-20">
         {/* Row 1: copy | photo (wide); stacked copy → photo below md */}
         <div className={impactZigzagRowClass}>
           <div className={cn(impactZigzagTextColClass, "shrink-0", "md:order-1")}>
@@ -817,13 +817,13 @@ export const PlusSmartTechSection = () => {
 
       <div
         className={cn(
-          "mx-auto flex w-full max-w-[1122px] flex-col",
+          "mx-auto flex w-full max-w-[1122px] flex-col min-[1800px]:max-w-[1400px]",
           marketingCardStackGapClass,
         )}
       >
         <div className="flex w-full flex-col items-center gap-4 md:gap-8 lg:flex-row lg:justify-center lg:gap-[42px]">
           {/* Supervisor — `1714:1965` */}
-          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-[30px] bg-[#ffe8f5]">
+          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-[30px] bg-[#ffe8f5] min-[1800px]:max-w-[680px]">
             <div className="relative w-full" style={{ aspectRatio: `${SMART_TECH_TOP_W} / ${SMART_TECH_TOP_H}` }}>
               <div className="absolute inset-0 bg-[#ffe8f5]">
                 <div
@@ -880,7 +880,7 @@ export const PlusSmartTechSection = () => {
           </article>
 
           {/* AI tutor — `1714:1976` (stacked cards centered on x-axis per Figma export) */}
-          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-[30px] bg-[#ffe8f5]">
+          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-[30px] bg-[#ffe8f5] min-[1800px]:max-w-[680px]">
             <div className="relative w-full" style={{ aspectRatio: `${SMART_TECH_TOP_W} / ${SMART_TECH_TOP_H}` }}>
               <div className="absolute inset-0 bg-[#ffe8f5]">
                 <div
@@ -962,7 +962,7 @@ export const PlusSmartTechSection = () => {
         </div>
 
         {/* Goal setting — `1714:1988`: ~400×300 frames, `object-cover` fills frame, 25px gap */}
-        <article className="mx-auto w-full max-w-[1097px] overflow-hidden rounded-[30px] bg-[#ffe8f5] px-5 pb-5 pt-6 sm:px-7 sm:pb-6 sm:pt-8 md:px-8">
+        <article className="mx-auto w-full max-w-[1097px] overflow-hidden rounded-[30px] bg-[#ffe8f5] px-5 pb-5 pt-6 sm:px-7 sm:pb-6 sm:pt-8 md:px-8 min-[1800px]:max-w-[1400px]">
           <SmartTechCardHeader
             iconSrc={plusHomeSmartTech.iconGoal}
             title="Collaborative Goal Setting"
@@ -977,7 +977,7 @@ export const PlusSmartTechSection = () => {
           >
             <div
               className={cn(
-                "flex h-[300px] w-full max-w-[400px] shrink-0 items-center justify-center overflow-hidden rounded-[41.09px] md:w-[400px]",
+                "flex h-[300px] w-full max-w-[400px] shrink-0 items-center justify-center overflow-hidden rounded-[41.09px] md:w-[400px] min-[1800px]:h-[360px] min-[1800px]:max-w-[480px] min-[1800px]:w-[480px]",
                 smartTechCardShadowStrong,
               )}
             >
@@ -992,7 +992,7 @@ export const PlusSmartTechSection = () => {
             </div>
             <div
               className={cn(
-                "flex h-[300px] w-full max-w-[400px] shrink-0 items-center justify-center overflow-hidden rounded-[41.09px] md:w-[400px]",
+                "flex h-[300px] w-full max-w-[400px] shrink-0 items-center justify-center overflow-hidden rounded-[41.09px] md:w-[400px] min-[1800px]:h-[360px] min-[1800px]:max-w-[480px] min-[1800px]:w-[480px]",
                 smartTechCardShadowStrong,
               )}
             >
@@ -1038,10 +1038,10 @@ export const PlusScienceOfLearningSection = () => {
         />
       </div>
 
-      <div className="mx-auto grid w-full max-w-[1122px] grid-cols-1 gap-10 lg:grid-cols-[minmax(0,473fr)_minmax(0,556fr)] lg:items-start lg:gap-[72px]">
+      <div className="mx-auto grid w-full max-w-[1122px] grid-cols-1 gap-10 lg:grid-cols-[minmax(0,473fr)_minmax(0,556fr)] lg:items-start lg:gap-[72px] min-[1800px]:max-w-[1400px] min-[1800px]:grid-cols-[minmax(0,560fr)_minmax(0,700fr)] min-[1800px]:gap-[96px]">
         {/* Left — Figma `1709:2079`: 395px-wide stack, gap 18px, vertically centered in 473px column */}
         <div className="flex w-full justify-center lg:min-h-[397px] lg:items-center lg:justify-center">
-          <div className="flex w-full max-w-[395px] flex-col gap-[18px]">
+          <div className="flex w-full max-w-[395px] flex-col gap-[18px] min-[1800px]:max-w-[500px]">
             <div className={cn("relative", marketingCardIconAssetFrameClass)}>
               <Image
                 src={plusHomeScience.iconPapers}
@@ -1069,7 +1069,7 @@ export const PlusScienceOfLearningSection = () => {
         </div>
 
         {/* Right — Figma `1714:2017`: 556×397 rounded panel; crop matches MCP export (`1714:1998`) */}
-        <div className="relative mx-auto w-full max-w-[556px] overflow-hidden rounded-[30px] bg-[#e0f6fe] lg:mx-0 lg:h-[397px]">
+        <div className="relative mx-auto w-full max-w-[556px] overflow-hidden rounded-[30px] bg-[#e0f6fe] lg:mx-0 lg:h-[397px] min-[1800px]:max-w-[700px] min-[1800px]:h-[470px]">
           <div className="relative aspect-[556/397] w-full lg:aspect-auto lg:h-full">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

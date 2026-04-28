@@ -209,27 +209,27 @@ const heroCollageTileLayout =
 const ResearchHeroCollageVisual = () => {
   const c = forResearchersAssets.heroCollage
   return (
-    <div className="relative w-full max-w-[min(100%,44rem)] pb-6 pt-14 sm:pb-8 sm:pt-16 lg:pb-4 lg:pt-16">
+    <div className="relative w-full max-w-[min(100%,44rem)] pb-6 pt-14 sm:pb-8 sm:pt-16 lg:pb-4 lg:pt-16 min-[1800px]:max-w-[min(100%,52rem)]">
       {/* Pink character — Figma `1730:2467` 109×95, −15°, above grid top-left */}
       <div className="pointer-events-none absolute left-2 top-0 z-20">
         <div className="-rotate-[15deg]">
           <img
             alt=""
             src={c.characterPink}
-            className="h-[95px] w-[109px] object-cover max-[479px]:h-[76px] max-[479px]:w-[87px]"
+            className="h-[95px] w-[109px] object-cover max-[479px]:h-[76px] max-[479px]:w-[87px] min-[1800px]:h-[116px] min-[1800px]:w-[133px]"
             aria-hidden
           />
         </div>
       </div>
       <div
-        className="relative z-0 mx-auto grid w-full grid-cols-1 gap-3.5 min-[480px]:grid-cols-2 min-[480px]:gap-5"
+        className="relative z-0 mx-auto grid w-full grid-cols-1 gap-3.5 min-[480px]:grid-cols-2 min-[480px]:gap-5 min-[1800px]:gap-6"
       >
         {/* Learning Ideas — pink, Figma `1730:2455` */}
         <div className={cn(heroCollageTileLayout, "rounded-[24px] bg-[#ffe8f5] min-[480px]:rounded-[30px]")}>
           <img
             alt=""
             src={c.learningIdeasConference}
-            className="pointer-events-none max-h-[min(200px,86%)] max-w-[min(200px,74%)] object-cover"
+            className="pointer-events-none max-h-[min(200px,86%)] max-w-[min(200px,74%)] object-cover min-[1800px]:max-h-[min(240px,86%)] min-[1800px]:max-w-[min(240px,74%)]"
             aria-hidden
           />
         </div>
@@ -238,7 +238,7 @@ const ResearchHeroCollageVisual = () => {
           <img
             alt=""
             src={c.sigchi}
-            className="pointer-events-none max-h-[min(200px,86%)] max-w-[min(200px,74%)] rounded-[96px] object-contain min-[480px]:rounded-[132px]"
+            className="pointer-events-none max-h-[min(200px,86%)] max-w-[min(200px,74%)] rounded-[96px] object-contain min-[480px]:rounded-[132px] min-[1800px]:max-h-[min(240px,86%)] min-[1800px]:max-w-[min(240px,74%)]"
             aria-hidden
           />
         </div>
@@ -252,7 +252,7 @@ const ResearchHeroCollageVisual = () => {
           <img
             alt=""
             src={c.solar}
-            className="pointer-events-none max-h-[min(71px,31%)] max-w-[min(165px,61%)] object-cover"
+            className="pointer-events-none max-h-[min(71px,31%)] max-w-[min(165px,61%)] object-cover min-[1800px]:max-h-[min(90px,31%)] min-[1800px]:max-w-[min(210px,61%)]"
             aria-hidden
           />
         </div>
@@ -283,7 +283,7 @@ const ResearchHeroCollageVisual = () => {
           <img
             alt=""
             src={c.characterBlue}
-            className="pointer-events-none absolute -bottom-5 -right-5 z-10 hidden h-[79px] w-[97px] object-cover sm:block"
+            className="pointer-events-none absolute -bottom-5 -right-5 z-10 hidden h-[79px] w-[97px] object-cover sm:block min-[1800px]:h-[98px] min-[1800px]:w-[120px]"
             aria-hidden
           />
         </div>
@@ -296,9 +296,9 @@ const ResearchHeroCollageVisual = () => {
 export const ResearchersHeroSection = () => {
   return (
     <section className="relative w-full min-w-0 overflow-hidden pt-8 pb-4 sm:pt-10 sm:pb-6 md:pt-12 md:pb-8 lg:pt-14">
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 sm:gap-8 lg:flex-row lg:items-center lg:gap-12">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 sm:gap-8 lg:flex-row lg:items-center lg:gap-12 min-[1800px]:max-w-7xl min-[1800px]:gap-16">
         {/* Text column — narrower to give the collage more room */}
-        <div className="mx-auto flex w-full min-w-0 shrink-0 flex-col gap-5 sm:gap-6 lg:mx-0 lg:max-w-[26rem]">
+        <div className="mx-auto flex w-full min-w-0 shrink-0 flex-col gap-5 sm:gap-6 lg:mx-0 lg:max-w-[26rem] min-[1800px]:max-w-[32rem]">
           <h1 className="flex flex-col gap-2 sm:gap-3">
             <span className="text-center text-2xl font-semibold text-[#027f89] sm:text-3xl lg:text-left">
               For researchers

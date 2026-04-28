@@ -13,7 +13,8 @@ export const marketingSectionVerticalGapClass = "space-y-6 md:space-y-8"
 export const marketingCardStackGapClass = "gap-4 md:gap-8"
 
 /** Narrow column shell with consistent intro → cards gap */
-export const marketingSectionContentShellClass = "mx-auto max-w-5xl space-y-8"
+export const marketingSectionContentShellClass =
+  "mx-auto max-w-5xl space-y-8 min-[1800px]:max-w-7xl min-[1800px]:space-y-10"
 
 /** Title → lead; right padding on md+ reserves space for absolutely positioned decors */
 export const marketingSectionIntroColumnClass =
@@ -62,15 +63,15 @@ export const marketingCardLhAlignedHeaderRowClass = cn(
  * `TutorsImpactCTA` (For Tutors). Use on For Schools / For Researchers final blocks too.
  */
 export const marketingFinalCtaShellClass = cn(
-  "mx-auto max-w-5xl space-y-6 rounded-3xl bg-white text-center dark:bg-transparent",
+  "mx-auto max-w-5xl space-y-6 rounded-3xl bg-white text-center dark:bg-transparent min-[1800px]:max-w-7xl min-[1800px]:space-y-8",
   marketingCardPaddingClass,
 )
 
 export const marketingFinalCtaTitleClass =
-  "text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl lg:text-4xl"
+  "text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl lg:text-4xl min-[1800px]:text-5xl"
 
 export const marketingFinalCtaLeadClass = cn(
-  "w-full max-w-none text-base lg:text-lg",
+  "w-full max-w-none text-base lg:text-lg min-[1800px]:text-xl",
   marketingSectionLeadColorClass,
 )
 
@@ -95,7 +96,7 @@ export const marketingHeroCtaButtonRowClass = cn(
 export const marketingHeroCtaPrimaryLinkClass = cn(
   "inline-flex items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-sm sm:text-base font-normal text-[#004247] shadow-none",
+  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-sm sm:text-base font-normal text-[#004247] shadow-none min-[1800px]:h-12 min-[1800px]:px-9 min-[1800px]:text-lg",
   "hover:bg-[#A6EDF4] hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4] dark:hover:text-[#004247]",
 )
 
@@ -103,14 +104,14 @@ export const marketingHeroCtaPrimaryLinkClass = cn(
 export const marketingFinalCtaPrimaryLinkClass = cn(
   "inline-flex items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-sm sm:text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4]",
+  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-sm sm:text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4] min-[1800px]:h-12 min-[1800px]:px-9 min-[1800px]:text-lg",
 )
 
 /** Outline pill — matches `TutorsImpactCTA` “Become a Tutor” button. */
 export const marketingFinalCtaOutlineLinkClass = cn(
   "inline-flex items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-5 sm:px-8 text-sm sm:text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20",
+  "h-9 sm:h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-5 sm:px-8 text-sm sm:text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20 min-[1800px]:h-12 min-[1800px]:px-9 min-[1800px]:text-lg",
 )
 
 /**
@@ -129,32 +130,32 @@ export const MARKETING_CARD_ICON_DIAMETER_PX = 48
  * Card-row circular badge — step numbers + Lucide icons (home, about, tutors, schools, etc.).
  */
 export const marketingCardIconCircleClass =
-  "flex size-[48px] shrink-0 items-center justify-center rounded-full"
+  "flex size-[48px] shrink-0 items-center justify-center rounded-full min-[1800px]:size-[56px]"
 
 /** Step number (1, 2, 3…) inside `marketingCardIconCircleClass` */
 export const marketingCardStepDigitClass =
-  "text-[26px] font-bold leading-none tabular-nums"
+  "text-[26px] font-bold leading-none tabular-nums min-[1800px]:text-[30px]"
 
 /** Lucide icon inside `marketingCardIconCircleClass` */
-export const marketingCardLucideGlyphClass = "size-6"
+export const marketingCardLucideGlyphClass = "size-6 min-[1800px]:size-7"
 
 /**
  * Horizontal inset for copy/images under a row of circle + `gap-3` (0.75rem) + title.
  */
 export const marketingCardContentInsetFromStepRowClass =
-  "pl-[calc(48px+0.75rem)]"
+  "pl-[calc(48px+0.75rem)] min-[1800px]:pl-[calc(56px+0.75rem)]"
 
 /** Width-only spacer under stacked titles (e.g. Foundations bento image rows). */
-export const marketingCardIconColumnSpacerClass = "w-[48px] shrink-0"
+export const marketingCardIconColumnSpacerClass = "w-[48px] shrink-0 min-[1800px]:w-[56px]"
 
 /**
  * Square footprint for rasters / inline SVGs / avatars — **same outer size** as
  * `marketingCardIconCircleClass` (48px) so every “disc” reads at one scale.
  */
-export const marketingCardIconAssetFrameClass = "size-[48px] shrink-0"
+export const marketingCardIconAssetFrameClass = "size-[48px] shrink-0 min-[1800px]:size-[56px]"
 
 /**
  * Vertically center the icon circle with the first line of an adjacent title (`1lh` vs circle height).
  */
 export const marketingCardIconTitleRowOffsetClass =
-  "mt-[calc((1lh-48px)/2)]"
+  "mt-[calc((1lh-48px)/2)] min-[1800px]:mt-[calc((1lh-56px)/2)]"

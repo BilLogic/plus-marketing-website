@@ -3,6 +3,7 @@ import { Instagram } from "lucide-react"
 import { FooterNewsletter } from "./footer-newsletter"
 import { FooterLinkColumns } from "./footer-link-columns"
 import { FooterBottomBar } from "./footer-bottom-bar"
+import { marketingFooterInnerShell } from "@/lib/marketing-layout"
 
 const SOCIAL_LINKS = [
   {
@@ -26,7 +27,7 @@ export function PlusFooter() {
     <footer className="mt-12 bg-teal-950 text-white">
       <FooterNewsletter />
 
-      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-10 sm:py-16">
+      <div className={`${marketingFooterInnerShell} py-12 sm:py-16`}>
         <div className="flex flex-col gap-10 md:flex-row md:gap-16">
           {/* Logo + tagline + social */}
           <div className="flex shrink-0 flex-col gap-4 md:max-w-xs">

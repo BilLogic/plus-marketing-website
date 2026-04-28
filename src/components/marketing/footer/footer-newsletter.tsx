@@ -3,11 +3,12 @@
 import { ArrowRight } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { marketingFooterInnerShell } from "@/lib/marketing-layout"
 
 export const FooterNewsletter = () => {
   return (
-    <div className="border-b border-white/10 px-6 py-16 sm:px-10">
-      <div className="mx-auto flex max-w-7xl flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+    <div className="border-b border-white/10 py-16">
+      <div className={`${marketingFooterInnerShell} flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between`}>
         <h2 className="max-w-sm text-2xl font-bold leading-tight sm:text-3xl">
           Subscribe to our newsletter
         </h2>

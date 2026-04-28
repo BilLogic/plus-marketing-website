@@ -26,7 +26,7 @@ const ForTutorsPage = async () => {
   return (
     <main className="bg-background text-foreground">
       <TutorsHeroSection />
-      <div className={cn("mx-auto flex max-w-5xl flex-col pb-16 pt-14 sm:pb-20 sm:pt-16 md:pb-24 md:pt-20", marketingSectionStackGap)}>
+      <div className={cn("mx-auto flex max-w-5xl flex-col pb-16 pt-14 sm:pb-20 sm:pt-16 md:pb-24 md:pt-20 min-[1800px]:max-w-7xl min-[1800px]:pb-32 min-[1800px]:pt-24", marketingSectionStackGap)}>
         <TutorsCompensationSection />
         <TutorsExperienceSection />
         <TutorsCertificationSection />

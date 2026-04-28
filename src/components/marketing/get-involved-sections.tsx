@@ -34,6 +34,7 @@ import {
   marketingSectionLeadColorClass,
   marketingSectionVerticalGapClass,
 } from "@/lib/marketing-section-layout"
+import { marketingTypography } from "@/lib/marketing-typography"
 import { cn } from "@/lib/utils"
 import type { JobListing } from "@/lib/notion/types"
 
@@ -84,46 +85,47 @@ const getInvolvedDiscTitleRowClass = "flex w-full shrink-0 items-center gap-3"
 
 export function GetInvolvedHeroSection() {
   return (
-    <section className="relative flex flex-col items-center justify-center gap-6 overflow-hidden pt-8 pb-8 text-center min-h-[380px] sm:gap-8 sm:min-h-[440px] sm:pt-10 sm:pb-10 md:min-h-[500px] md:pt-12 md:pb-12 lg:min-h-[530px] lg:pt-14 lg:pb-14">
+    <section className="relative mx-auto w-full max-w-7xl min-w-0 overflow-hidden flex flex-col justify-center min-h-[380px] sm:min-h-[440px] md:min-h-[500px] lg:min-h-[530px] pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14">
       {/** Same four-corner hero art + breakpoints as `AboutHeroSection`. */}
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[0]}
-        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[10%] top-[18%]"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[10%] top-[18%] min-[1800px]:left-[4%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[1]}
-        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[5%] top-[54%]"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[5%] top-[54%] min-[1800px]:left-[0%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[2]}
-        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[10%] top-[18%]"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[10%] top-[18%] min-[1800px]:right-[4%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[3]}
-        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[5%] top-[54%]"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[5%] top-[54%] min-[1800px]:right-[0%]"
       />
 
-      <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-3 sm:gap-4 md:gap-5">
-        <p className="text-2xl font-semibold text-teal-900 sm:text-3xl">
-          Get Involved
-        </p>
-        <h1 className="text-balance text-3xl font-bold leading-tight tracking-tight text-teal-950 sm:text-4xl md:text-5xl">
-          Join PLUS and Make a Lasting Difference in Education
+      <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center sm:gap-8 sm:px-6 min-[1800px]:max-w-5xl">
+        <h1 className="flex flex-col items-center gap-3 sm:gap-4">
+          <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
+            Get Involved
+          </span>
+          <span className={cn(marketingTypography.heroH1, "max-w-prose")}>
+            Join PLUS and Make a Lasting Difference in Education
+          </span>
         </h1>
-      </div>
-
-      <div className={cn(marketingHeroCtaButtonRowClass, "max-sm:relative max-sm:z-[2]")}>
-        <Link href="/get-involved#careers" className={marketingHeroCtaPrimaryLinkClass}>
-          Careers at PLUS
-        </Link>
-        <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={marketingHeroCtaOutlineLinkClass}
-        >
-          Join as a Tutor
-        </a>
+        <div className={marketingHeroCtaButtonRowClass}>
+          <Link href="/get-involved#careers" className={marketingHeroCtaPrimaryLinkClass}>
+            Careers at PLUS
+          </Link>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={marketingHeroCtaOutlineLinkClass}
+          >
+            Join as a Tutor
+          </a>
+        </div>
       </div>
     </section>
   )
@@ -175,7 +177,7 @@ const whyWorkZigzagTextColClass = cn(
   "flex w-full min-w-0 flex-col items-start gap-[18px]",
   "max-md:max-w-[min(36rem,100%)] max-md:self-start",
   "md:min-w-0 md:flex-1 md:basis-0 md:max-w-[min(28rem,52%)]",
-  "lg:w-[473px] lg:max-w-[473px] lg:flex-none lg:basis-auto",
+  "lg:w-[473px] lg:max-w-[473px] lg:flex-none lg:basis-auto min-[1800px]:w-[560px] min-[1800px]:max-w-[560px]",
 )
 
 function WhyWorkZigzagPhoto({ src, alt }: { src: string; alt: string }) {
@@ -212,7 +214,7 @@ export function GetInvolvedWhyWorkSection() {
         </div>
       </div>
 
-      <div className="mx-auto flex w-full max-w-[1122px] flex-col space-y-10 md:space-y-12 lg:space-y-16">
+      <div className="mx-auto flex w-full max-w-[1122px] flex-col space-y-10 md:space-y-12 lg:space-y-16 min-[1800px]:max-w-[1400px] min-[1800px]:space-y-20">
         {WHY_WORK_ITEMS.map((item, i) => {
           const Icon = item.icon
           /** From `md` up: zigzag via flex order. Below `md`: stacked copy → photo. */
@@ -263,7 +265,7 @@ export function GetInvolvedWhyWorkSection() {
                 "w-full min-w-0 shrink-0",
                 "max-md:mx-auto max-md:max-w-[min(36rem,100%)]",
                 "md:max-w-[min(320px,44%)] md:basis-[min(320px,44%)]",
-                "lg:min-w-0 lg:max-w-[556px] lg:flex-1 lg:basis-0",
+                "lg:min-w-0 lg:max-w-[556px] lg:flex-1 lg:basis-0 min-[1800px]:max-w-[680px]",
                 imageOnLeftWide ? "md:order-1" : "md:order-2",
               )}
             >

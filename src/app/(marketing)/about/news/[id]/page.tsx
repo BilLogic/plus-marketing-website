@@ -20,7 +20,7 @@ export default async function NewsDetailPage({
   }
 
   return (
-    <div className="mx-auto max-w-3xl py-12">
+    <div className="mx-auto max-w-3xl py-12 min-[1800px]:max-w-5xl min-[1800px]:py-16">
       <Button variant="ghost" size="sm" className="mb-6 gap-1.5" nativeButton={false} render={<Link href="/about/news" />}>
         <ArrowLeft className="size-4" />
         Back to News

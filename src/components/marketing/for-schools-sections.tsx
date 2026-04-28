@@ -61,29 +61,29 @@ export const SchoolsHeroSection = () => {
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[0]}
-        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[10%] top-[18%]")}
+        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[10%] top-[18%] min-[1800px]:left-[4%]")}
         aria-hidden
       />
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[1]}
-        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[5%] top-[54%]")}
+        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[5%] top-[54%] min-[1800px]:left-[0%]")}
         aria-hidden
       />
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[2]}
-        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[10%] top-[18%]")}
+        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[10%] top-[18%] min-[1800px]:right-[4%]")}
         aria-hidden
       />
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[3]}
-        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[5%] top-[54%]")}
+        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[5%] top-[54%] min-[1800px]:right-[0%]")}
         aria-hidden
       />
 
-      <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center sm:gap-8 sm:px-6">
+      <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center sm:gap-8 sm:px-6 min-[1800px]:max-w-5xl">
         <h1 className="flex flex-col items-center gap-3 sm:gap-4">
           <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
             For schools
@@ -605,7 +605,7 @@ export const SchoolsExperienceSection = () => {
  * Grid: 1fr + 360px image. Card width matches About shell (`max-w-5xl`).
  */
 const OVERSIGHT_CARD_FRAME =
-  "flex w-full max-w-5xl flex-col overflow-clip rounded-[30px]"
+  "flex w-full max-w-5xl flex-col overflow-clip rounded-[30px] min-[1800px]:max-w-7xl"
 /** md: two columns — copy column max 553px; image 360px; stretch so CTA can sit on bottom padding. */
 const OVERSIGHT_CARD_ROW =
   "grid w-full min-w-0 grid-cols-1 md:grid-cols-[minmax(0,1fr)_360px] md:items-stretch md:gap-x-0 md:gap-y-0"
@@ -881,7 +881,7 @@ export const SchoolsOversightSection = () => {
 
       {prefersReducedMotion ? (
         /* Static fallback — plain vertical stack, no animation */
-        <div className={cn("mx-auto flex w-full max-w-5xl flex-col", marketingCardStackGapClass)}>
+        <div className={cn("mx-auto flex w-full max-w-5xl flex-col min-[1800px]:max-w-7xl", marketingCardStackGapClass)}>
           {OVERSIGHT_CARDS.map((card) => (
             <OversightCardInner key={card.title} card={card} />
           ))}
@@ -898,7 +898,7 @@ export const SchoolsOversightSection = () => {
           {/* stickyTop is measured so the card stack's midpoint lands at the
               viewport center when pinned — no transform needed, no layout shift. */}
           <div className="sticky" style={{ top: stickyTop }}>
-            <div ref={cardsRef} className="mx-auto w-full max-w-5xl">
+            <div ref={cardsRef} className="mx-auto w-full max-w-5xl min-[1800px]:max-w-7xl">
               <div className="grid grid-cols-1">
                 {OVERSIGHT_CARDS.map((card, index) => (
                   <OversightMotionCard

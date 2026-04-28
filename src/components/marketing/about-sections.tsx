@@ -54,6 +54,7 @@ import {
   marketingSectionVerticalGapClass,
   marketingSectionVoicesHeaderDecorImgClass,
 } from "@/lib/marketing-section-layout"
+import { marketingTypography } from "@/lib/marketing-typography"
 import { cn } from "@/lib/utils"
 import { aboutSectionIds } from "@/lib/plus-footer-ia"
 
@@ -138,38 +139,35 @@ function AboutLandingCtaRow({
 
 export function AboutHeroSection() {
   return (
-    <section className="relative flex flex-col items-center justify-center gap-6 overflow-hidden pt-8 pb-8 text-center min-h-[380px] sm:gap-8 sm:min-h-[440px] sm:pt-10 sm:pb-10 md:min-h-[500px] md:pt-12 md:pb-12 lg:min-h-[530px] lg:pt-14 lg:pb-14">
+    <section className="relative mx-auto w-full max-w-7xl min-w-0 overflow-hidden flex flex-col justify-center min-h-[380px] sm:min-h-[440px] md:min-h-[500px] lg:min-h-[530px] pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14">
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[0]}
-        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[10%] top-[18%]"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[10%] top-[18%] min-[1800px]:left-[4%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[1]}
-        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[5%] top-[54%]"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[5%] top-[54%] min-[1800px]:left-[0%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[2]}
-        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[10%] top-[18%]"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[10%] top-[18%] min-[1800px]:right-[4%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[3]}
-        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[5%] top-[54%]"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[5%] top-[54%] min-[1800px]:right-[0%]"
       />
 
-      <div className="relative z-[1] flex max-w-3xl flex-col items-center gap-3 sm:gap-4 md:gap-5">
-        <p className="text-2xl font-semibold text-teal-900 sm:text-3xl">
-          About PLUS
-        </p>
-        <h1 className="text-balance text-3xl font-bold leading-tight tracking-tight text-teal-950 sm:text-4xl md:text-5xl">
-          Bridging Opportunity Gaps in
-          <br />
-          Math Education with AI-
-          <br />
-          Powered Tutoring
+      <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center sm:gap-8 sm:px-6 min-[1800px]:max-w-5xl">
+        <h1 className="flex flex-col items-center gap-3 sm:gap-4">
+          <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
+            About PLUS
+          </span>
+          <span className={cn(marketingTypography.heroH1, "max-w-prose")}>
+            Bridging Opportunity Gaps in Math Education with AI-Powered Tutoring
+          </span>
         </h1>
+        <AboutLandingCtaRow variant="hero" />
       </div>
-
-      <AboutLandingCtaRow variant="hero" className="max-sm:relative max-sm:z-[2]" />
     </section>
   )
 }
@@ -299,7 +297,7 @@ export function AboutFoundationsSection() {
       {/* Bento grid: Community (left, tall) + Research/Innovation (right, stacked) */}
       <div
         className={cn(
-          "mx-auto grid max-w-5xl grid-cols-1 items-stretch md:grid-cols-2",
+          "mx-auto grid max-w-5xl grid-cols-1 items-stretch md:grid-cols-2 min-[1800px]:max-w-7xl",
           marketingCardStackGapClass,
         )}
       >

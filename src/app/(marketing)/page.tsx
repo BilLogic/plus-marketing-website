@@ -16,7 +16,7 @@ const homeHeroToImpactSpacing = "pt-8 md:pt-10"
  * Hero is rendered outside this shell so its wash can span the full viewport (Figma `1714:1885`).
  */
 const homePageShellClassName = cn(
-  "mx-auto flex max-w-5xl flex-col pb-16 sm:pb-20 md:pb-24",
+  "mx-auto flex max-w-5xl flex-col pb-16 sm:pb-20 md:pb-24 min-[1800px]:max-w-7xl min-[1800px]:pb-32",
   homeHeroToImpactSpacing
 )
 
