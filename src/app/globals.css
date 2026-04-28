@@ -299,6 +299,45 @@
   html {
     @apply font-sans;
   }
+
+  /*
+   * Interactive affordance: anything that navigates or activates an action
+   * should show a pointer (Tailwind preflight uses `cursor: default` on buttons).
+   */
+  a[href]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+  a[href][aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+  summary {
+    cursor: pointer;
+  }
+  [role="link"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+  [role="tab"]:not([aria-disabled="true"]),
+  [role="menuitem"]:not([aria-disabled="true"]),
+  [role="option"]:not([aria-disabled="true"]),
+  [role="switch"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+  button:enabled:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+  button:disabled,
+  button[aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+  input:is([type="checkbox"], [type="radio"]):enabled {
+    cursor: pointer;
+  }
+  select:enabled {
+    cursor: pointer;
+  }
+  label[for] {
+    cursor: pointer;
+  }
 }
 
 /*

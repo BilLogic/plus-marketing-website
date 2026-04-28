@@ -62,7 +62,6 @@ const ForResearchersPage = async ({
         <ResearchPartnersSection />
         <ResearchIndexSection
           papers={indexPreview}
-          totalCount={allPapers.length}
           filterSourcePapers={allPapers}
         />
         <ResearchersGridSection members={researchTeam} />

@@ -42,6 +42,7 @@ import {
 } from "@/lib/success-stories/notion-public-read-url"
 import { forSchoolsAssets } from "@/components/marketing/for-schools-assets"
 import { forTutorsAssets } from "@/components/marketing/for-tutors-assets"
+import { FOR_SCHOOLS_BENEFITS_ITEMS } from "@/lib/marketing/for-schools-benefits"
 import { useMarketingStickyPanelTop } from "@/lib/use-marketing-sticky-panel-top"
 import { marketingTypography } from "@/lib/marketing-typography"
 import { forSchoolsSectionIds } from "@/lib/plus-footer-ia"
@@ -55,41 +56,52 @@ const schoolsSectionLead = cn(
 )
 
 export const SchoolsHeroSection = () => {
-  const heroCharCn = "pointer-events-none absolute block h-auto w-[min(22vw,4.5rem)] max-w-[88px] opacity-90 select-none sm:w-[min(28vw,8.75rem)] sm:max-w-[160px] md:max-w-[180px]"
+  /**
+   * Peak sizes match pre–overlap-fix art (`lg` 110px, `xl` 150px). When the section is
+   * narrow, `min(...)` shrinks so sprites stay inside the side margin past `max-w-3xl`.
+   */
+  const heroDecorBase =
+    "pointer-events-none absolute z-0 block h-auto w-auto opacity-90 select-none " +
+    "hidden lg:block " +
+    "lg:max-w-[min(110px,max(4.5rem,calc((100%-48rem)/2-2rem)))] " +
+    "xl:max-w-[min(150px,max(4.5rem,calc((100%-48rem)/2-2rem)))]"
+  /** ~35rem reserves space for the wider `xl` cap (150px) without covering the headline. */
+  const heroDecorLeft = "left-[max(0.5rem,calc(50%-35rem))]"
+  const heroDecorRight = "right-[max(0.5rem,calc(50%-35rem))]"
   return (
     <section className="relative mx-auto w-full max-w-7xl min-w-0 overflow-hidden flex flex-col justify-center min-h-[380px] sm:min-h-[440px] md:min-h-[500px] lg:min-h-[530px] pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14">
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[0]}
-        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[10%] top-[18%] min-[1800px]:left-[4%]")}
+        className={cn(heroDecorBase, heroDecorLeft, "top-[18%]")}
         aria-hidden
       />
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[1]}
-        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[5%] top-[54%] min-[1800px]:left-[0%]")}
+        className={cn(heroDecorBase, heroDecorLeft, "top-[54%]")}
         aria-hidden
       />
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[2]}
-        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[10%] top-[18%] min-[1800px]:right-[4%]")}
+        className={cn(heroDecorBase, heroDecorRight, "top-[18%]")}
         aria-hidden
       />
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[3]}
-        className={cn(heroCharCn, "hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[5%] top-[54%] min-[1800px]:right-[0%]")}
+        className={cn(heroDecorBase, heroDecorRight, "top-[54%]")}
         aria-hidden
       />
 
-      <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center sm:gap-8 sm:px-6 min-[1800px]:max-w-5xl">
+      <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center sm:gap-8 sm:px-6 min-[1800px]:max-w-5xl">
         <h1 className="flex flex-col items-center gap-3 sm:gap-4">
           <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
             For schools
           </span>
           <span className={cn(marketingTypography.heroH1, "max-w-prose")}>
-            Research-driven, AI-powered Support for Every Classroom
+            Research-backed, AI-powered Math Tutoring to Supplement Classroom Instruction.
           </span>
         </h1>
         <Link href={`#${forSchoolsSectionIds.register}`} className={marketingHeroCtaPrimaryLinkClass}>
@@ -126,8 +138,7 @@ export const SchoolsCommunitySection = () => {
             Join the PLUS School Community
           </h2>
           <p className={schoolsSectionLead}>
-            We partner with forward-thinking schools to bridge learning gaps. See the organizations
-            already making a difference with us.
+            Our school partners have seen big improvements in student learning through PLUS Tutoring.
           </p>
         </div>
         <img
@@ -179,39 +190,8 @@ export const SchoolsCommunitySection = () => {
 
 /**
  * Benefits — Figma 1379:2340 / 1104-1220. Icons: `BenefitsAccordionIcon`; panel art from IA export.
- */
-const BENEFITS_ITEMS = [
-  {
-    id: "free-for-all",
-    title: "Free for All",
-    description:
-      "High-quality education shouldn't be gated. Access our full suite of AI-driven training and feedback tools at no cost to your district.",
-    cta: "See if your school qualifies",
-  },
-  {
-    id: "multilingual-support",
-    title: "Multilingual Support",
-    description:
-      "Support your diverse student body with lessons available in both English and Spanish.",
-    cta: "",
-  },
-  {
-    id: "goal-setting",
-    title: "Goal Setting with Students",
-    description:
-      "Tutors set weekly math goals with students and reward them for meeting their goals. By using this goal-setting method, there is a 25% increase in time spent practicing and a 40% increase in skill mastery.",
-    cta: "",
-  },
-  {
-    id: "human-ai",
-    title: "Human + AI Tutoring Model",
-    description:
-      "We allow teachers to select the scope and sequence of what is taught. We also determine which students get taught by looking at their past performance on math software.",
-    cta: "",
-  },
-] as const
-
-/**
+ * Copy lives in `@/lib/marketing/for-schools-benefits` (`FOR_SCHOOLS_BENEFITS_ITEMS`) for stable SSR + hydration.
+ *
  * Sticky + scroll–spy column: fixed equal heights (not `min-h`) so rows never grow
  * when a long blurb is active. Body slot uses a fixed `h-` with overflow as a safety
  * net for very small viewports.
@@ -303,7 +283,7 @@ export const SchoolsTrainingSection = () => {
 
       {/* Phone: full list — amber card per item */}
       <div className={cn("flex flex-col sm:hidden", marketingCardStackGapClass)}>
-        {BENEFITS_ITEMS.map((item, i) => (
+        {FOR_SCHOOLS_BENEFITS_ITEMS.map((item, i) => (
           <article
             key={item.id}
             className={cn(
@@ -356,7 +336,7 @@ export const SchoolsTrainingSection = () => {
 
         {/* Left: scrolling benefit items */}
         <div className="relative z-0 min-w-0 pb-[5vh]">
-          {BENEFITS_ITEMS.map((item, i) => {
+          {FOR_SCHOOLS_BENEFITS_ITEMS.map((item, i) => {
             const isActive = i === activeIndex
             return (
               <div
@@ -422,7 +402,7 @@ export const SchoolsTrainingSection = () => {
                 activeIndex === 2 ? "bg-[#fff3dd]" : "bg-muted"
               )}
             >
-              {BENEFITS_ITEMS.map((item, i) => (
+              {FOR_SCHOOLS_BENEFITS_ITEMS.map((item, i) => (
                 <div
                   key={item.id}
                   className={cn(
@@ -624,6 +604,7 @@ const OVERSIGHT_IMG =
   "pointer-events-none absolute inset-0 size-full max-w-none rounded-[30px] object-cover"
 
 const OVERSIGHT_CARDS = [
+  /** CTA pill fills + label colors — Figma `1877:2183` (title hues may differ from buttons). */
   {
     title: "Align with Your Curriculum",
     description:
@@ -645,7 +626,7 @@ const OVERSIGHT_CARDS = [
     href: "https://app.tutors.plus/demo",
     bgColor: "bg-[#f4fbf6]",
     titleColor: "text-[#007d49]",
-    btnBg: "bg-[#007d49]",
+    btnBg: "bg-[#2ca96b]",
     btnText: "text-white",
     panelBg: "bg-[#d7f0de]",
     imageLayout: "dashboard" as const,
@@ -673,7 +654,7 @@ const OVERSIGHT_CARDS = [
     href: "https://app.tutors.plus/demo",
     bgColor: "bg-[#e0f5fe]",
     titleColor: "text-[#0080b4]",
-    btnBg: "bg-[#0080b4]",
+    btnBg: "bg-[#00c3fb]",
     btnText: "text-white",
     icon: forSchoolsAssets.icons.oversight[3],
     image: forSchoolsAssets.oversightCardImages[3],
@@ -764,6 +745,12 @@ function OversightCardInner({
  */
 /** px each lower card is offset downward at rest, creating the "peek" effect. */
 const PEEK_PX = 16
+/**
+ * Viewport height budget per card for scroll-driven peel — matches `ScrollAccordion`’s
+ * default `pinScrollVhPerItem` (100) so this block doesn’t advance faster than other
+ * long-form sections on the page.
+ */
+const OVERSIGHT_SCROLL_VH_PER_CARD = 100
 
 function OversightMotionCard({
   card,
@@ -894,7 +881,10 @@ export const SchoolsOversightSection = () => {
           Card 0 (highest z-index) peels away first; each subsequent card follows
           until the last card is revealed and the user scrolls on.
         */
-        <div ref={containerRef} style={{ height: `${OVERSIGHT_CARDS.length * 50}vh` }}>
+        <div
+          ref={containerRef}
+          style={{ height: `${OVERSIGHT_CARDS.length * OVERSIGHT_SCROLL_VH_PER_CARD}vh` }}
+        >
           {/* stickyTop is measured so the card stack's midpoint lands at the
               viewport center when pinned — no transform needed, no layout shift. */}
           <div className="sticky" style={{ top: stickyTop }}>
@@ -1053,7 +1043,7 @@ export const SchoolsRegisterCTA = () => {
       <div className={marketingFinalCtaShellClass}>
         <h2 className={marketingFinalCtaTitleClass}>Register Your Institution</h2>
         <p className={marketingFinalCtaLeadClass}>
-          Want to get started? Sign up to register your organization and provide your tutors
+          Want to get started? Sign up to register your organization and provide your tutors with
           access to our full training suite.
         </p>
         <div className={marketingFinalCtaButtonRowClass}>

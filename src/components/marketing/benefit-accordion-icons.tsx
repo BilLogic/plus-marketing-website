@@ -2,9 +2,14 @@ import { marketingCardIconAssetFrameClass } from "@/lib/marketing-section-layout
 import { cn } from "@/lib/utils"
 
 /**
- * Figma 1379:2340 — benefit row icons (viewBox 58×58; CSS frame matches shared card icon diameter).
- * Circle uses `currentColor` so closed rows can use `text-muted-foreground` and open panels use the marketing ochre accent.
+ * Figma 1379:2340 / 1104:1220 — benefit row icons (viewBox 58×58; frame matches card icon diameter).
+ * Circle uses `currentColor` so inactive rows use `text-muted-foreground` and active rows use ochre.
+ * — Free for all: slashed dollar (no-cost) per IA.
+ * — Multilingual / goal / human+AI: Lucide-based glyphs (languages, target) + original multi-sparkle for human+AI.
  */
+const G = 1.42
+const SW = 2.5 / G
+
 function BenefitIcon1({ className }: { className?: string }) {
   return (
     <svg
@@ -15,20 +20,27 @@ function BenefitIcon1({ className }: { className?: string }) {
       aria-hidden
     >
       <circle cx="29" cy="29" r="29" fill="currentColor" />
-      <path
-        d="M29 16.5V41.5"
+      <g
+        transform={`translate(${29 - 12 * G} ${29 - 12 * G}) scale(${G})`}
         stroke="white"
-        strokeWidth="2.5"
+        strokeWidth={SW}
         strokeLinecap="round"
         strokeLinejoin="round"
-      />
-      <path
-        d="M35.25 20.25H25.875C24.7147 20.25 23.6019 20.7109 22.7814 21.5314C21.9609 22.3519 21.5 23.4647 21.5 24.625C21.5 25.7853 21.9609 26.8981 22.7814 27.7186C23.6019 28.5391 24.7147 29 25.875 29H32.125C33.2853 29 34.3981 29.4609 35.2186 30.2814C36.0391 31.1019 36.5 32.2147 36.5 33.375C36.5 34.5353 36.0391 35.6481 35.2186 36.4686C34.3981 37.2891 33.2853 37.75 32.125 37.75H21.5"
-        stroke="white"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      >
+        <line x1="12" x2="12" y1="2" y2="22" />
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+        {/* Slashed “no cost” mark — outer stroke matches disc (`currentColor`), inner white */}
+        <line
+          x1="5"
+          x2="19"
+          y1="19"
+          y2="5"
+          stroke="currentColor"
+          strokeWidth={SW * 2.35}
+          strokeLinecap="round"
+        />
+        <line x1="5" x2="19" y1="19" y2="5" stroke="white" strokeWidth={SW} strokeLinecap="round" />
+      </g>
     </svg>
   )
 }
@@ -43,48 +55,20 @@ function BenefitIcon2({ className }: { className?: string }) {
       aria-hidden
     >
       <circle cx="29" cy="29" r="29" fill="currentColor" />
-      <path
-        d="M20.25 24L27.75 31.5"
+      <g
+        transform={`translate(${29 - 12 * G} ${29 - 12 * G}) scale(${G})`}
         stroke="white"
-        strokeWidth="2.5"
+        strokeWidth={SW}
         strokeLinecap="round"
         strokeLinejoin="round"
-      />
-      <path
-        d="M19 31.5L26.5 24L29 20.25"
-        stroke="white"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M16.5 20.25H31.5"
-        stroke="white"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M22.75 16.5H24"
-        stroke="white"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M41.5 41.5L35.25 29L29 41.5"
-        stroke="white"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M31.5 36.5H39"
-        stroke="white"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      >
+        <path d="m5 8 6 6" />
+        <path d="m4 14 6-6 2-3" />
+        <path d="M2 5h12" />
+        <path d="M7 2h1" />
+        <path d="m22 22-5-10-5 10" />
+        <path d="M14 18h6" />
+      </g>
     </svg>
   )
 }
@@ -99,27 +83,17 @@ function BenefitIcon3({ className }: { className?: string }) {
       aria-hidden
     >
       <circle cx="29" cy="29" r="29" fill="currentColor" />
-      <path
-        d="M29 30.25V16.5L39 21.5L29 26.5"
+      <g
+        transform={`translate(${29 - 12 * G} ${29 - 12 * G}) scale(${G})`}
         stroke="white"
-        strokeWidth="2.5"
+        strokeWidth={SW}
         strokeLinecap="round"
         strokeLinejoin="round"
-      />
-      <path
-        d="M39.7009 26.7774C40.366 28.8275 40.4283 31.0256 39.8802 33.1102C39.332 35.1947 38.1967 37.0779 36.6091 38.5357C35.0215 39.9935 33.0485 40.9646 30.9249 41.3334C28.8013 41.7022 26.6165 41.4532 24.6303 40.616C22.6441 39.7788 20.9403 38.3887 19.7215 36.611C18.5026 34.8333 17.8201 32.7429 17.7551 30.5885C17.6901 28.4341 18.2454 26.3064 19.3549 24.4585C20.4643 22.6106 22.0813 21.1202 24.0134 20.1649"
-        stroke="white"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M24.003 26.4963C23.3766 27.3301 22.9688 28.3074 22.8168 29.3391C22.6647 30.3708 22.7733 31.4241 23.1325 32.4031C23.4917 33.3822 24.0902 34.2558 24.8734 34.9443C25.6566 35.6328 26.5997 36.1145 27.6166 36.3453C28.6336 36.5761 29.6922 36.5488 30.6959 36.2658C31.6996 35.9828 32.6166 35.4532 33.3632 34.7252C34.1099 33.9972 34.6625 33.0939 34.9708 32.0976C35.279 31.1014 35.333 30.0438 35.128 29.0213"
-        stroke="white"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      >
+        <circle cx="12" cy="12" r="10" />
+        <circle cx="12" cy="12" r="6" />
+        <circle cx="12" cy="12" r="2" />
+      </g>
     </svg>
   )
 }

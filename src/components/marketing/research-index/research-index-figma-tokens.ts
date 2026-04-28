@@ -56,13 +56,13 @@ export const riFilterFieldLabelCn = cn("font-medium", riIndexMetaCopy, riFg.body
 
 /** “See all publications” — same type scale as index body; teal link color. */
 export const riSeeAllPublicationsLinkClass = cn(
-  "inline-flex items-center gap-2.5 font-sans font-normal text-[#027f89] transition-opacity hover:opacity-90",
+  "group inline-flex items-center gap-2.5 font-sans font-normal text-[#027f89] transition-opacity hover:opacity-90",
   riIndexCopy
 )
 
 /** Embedded For Researchers preview — smaller link matching `riIndexMetaCopy`. */
 export const riSeeAllPublicationsLinkMetaClass = cn(
-  "inline-flex items-center gap-2.5 font-sans font-normal text-[#027f89] transition-opacity hover:opacity-90",
+  "group inline-flex items-center gap-2.5 font-sans font-normal text-[#027f89] transition-opacity hover:opacity-90",
   riIndexMetaCopy
 )
 

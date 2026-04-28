@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight, BookOpen, ChevronRight, Search } from "lucide-react"
+import { ArrowRight, BookOpen, ChevronRight, CircleQuestionMark, Search } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useMemo, useState } from "react"
@@ -304,7 +304,7 @@ export const ResearchersHeroSection = () => {
               For researchers
             </span>
             <span className="text-balance text-center text-3xl font-bold leading-tight tracking-tight text-[#004247] sm:text-4xl md:text-5xl lg:text-left">
-              Pioneering CMU Research: Human-Centered AI for Personalized Math Learning
+              Pioneering Research in Human-Centered AI for Personalized Math Learning
             </span>
           </h1>
           <div className={cn("w-full", marketingHeroCtaButtonRowClass)}>
@@ -608,7 +608,7 @@ function HighlightStudyCard({
   const theme = HIGHLIGHT_TOPIC_THEME[topicId]
   const summary = riPublicationDescription(paper)
   const shellClass = cn(
-    "flex h-full min-h-[22rem] w-full min-w-0 flex-col gap-2.5 rounded-[30px] text-left no-underline outline-none transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-offset-2 sm:min-h-[24rem]",
+    "group flex h-full min-h-[22rem] w-full min-w-0 flex-col gap-2.5 rounded-[30px] text-left no-underline outline-none transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-offset-2 sm:min-h-[24rem]",
     marketingCardPaddingClass,
     theme.studyShellBg,
     theme.studyFocusRing
@@ -665,7 +665,11 @@ function HighlightStudyCard({
         )}
       >
         Read study
-        <ArrowRight className="size-[26px] shrink-0" strokeWidth={2} aria-hidden />
+        <ArrowRight
+          className="size-[26px] shrink-0 transition-transform group-hover:translate-x-0.5"
+          strokeWidth={2}
+          aria-hidden
+        />
       </span>
     </>
   )
@@ -704,9 +708,13 @@ export const ResearchHighlightsSection = ({
     return map
   }, [papers])
 
-  const defaultExpandedIds = openAllAccordions
-    ? RESEARCH_HIGHLIGHT_TOPICS.map((t) => t.id)
-    : []
+  const defaultExpandedIds = useMemo(
+    () =>
+      openAllAccordions
+        ? RESEARCH_HIGHLIGHT_TOPICS.map((t) => t.id)
+        : (["student-learning"] satisfies readonly ResearchHighlightTopicId[]),
+    [openAllAccordions],
+  )
 
   return (
     <section
@@ -909,11 +917,9 @@ function ResearchIndexSearchForm() {
 
 export const ResearchIndexSection = ({
   papers,
-  totalCount,
   filterSourcePapers,
 }: {
   papers: ResearchPaper[]
-  totalCount: number
   /** Years/conference options — defaults to `papers`. Pass full catalogue so filters stay useful on the preview slice. */
   filterSourcePapers?: ResearchPaper[]
 }) => {
@@ -988,8 +994,7 @@ export const ResearchIndexSection = ({
             )}
           >
             <p className={cn("font-sans", riIndexMetaCopy, riFg.bodyMuted)}>
-              Showing {filteredPapers.length} of {papers.length} in this preview · {totalCount} total
-              in catalogue (newest first)
+              Showing {filteredPapers.length} of {papers.length} in this preview (newest first)
               {hasExtraFilters ? (
                 <span>
                   {" "}
@@ -1134,7 +1139,7 @@ export const ResearchIndexSection = ({
             <Link href="/research" className={riSeeAllPublicationsLinkMetaClass}>
               See all publications
               <ArrowRight
-                className="size-[26px] shrink-0"
+                className="size-[26px] shrink-0 transition-transform group-hover:translate-x-0.5"
                 strokeWidth={2}
                 aria-hidden
               />
@@ -1208,13 +1213,56 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
       </div>
 
       {stories.length === 0 ? (
-        <p className="text-pretty text-sm text-muted-foreground">
-          Success stories will appear here when available.{" "}
-          <Link href="/success-stories" className="font-medium text-[#027f89] underline-offset-4 hover:underline">
-            Browse all success stories
+        <article
+          className={cn(
+            "flex h-full flex-col rounded-[30px] bg-[#f4fbf6] dark:bg-teal-950/30",
+            marketingCardPaddingClass,
+          )}
+        >
+          <div
+            className={cn(
+              "flex min-h-0 flex-1 flex-col rounded-3xl bg-white dark:bg-card dark:ring-1 dark:ring-white/10",
+              marketingCardPaddingClass,
+            )}
+          >
+            <div className={marketingCardLhAlignedHeaderRowClass}>
+              <span
+                className={cn(
+                  marketingCardIconTitleRowOffsetClass,
+                  marketingCardIconCircleClass,
+                  "shrink-0 bg-[#007d49] text-white",
+                )}
+              >
+                <CircleQuestionMark className={marketingCardLucideGlyphClass} aria-hidden />
+              </span>
+              <h3
+                className={cn(
+                  "min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight sm:text-xl lg:text-2xl",
+                  SUCCESS_STORY_GREEN,
+                )}
+              >
+                No research stories yet
+              </h3>
+            </div>
+            <p className="mt-4 text-pretty text-base leading-relaxed text-muted-foreground">
+              We don&apos;t have any research partner success stories to feature yet. When new voices
+              from our research community are published in our archive, they&apos;ll show up here.
+            </p>
+          </div>
+          <Link
+            href="/success-stories"
+            className={cn(
+              "group mt-4 ml-auto flex w-fit items-center gap-2 text-lg font-medium no-underline transition-opacity hover:opacity-90",
+              SUCCESS_STORY_GREEN,
+            )}
+          >
+            <span>Browse all success stories</span>
+            <ArrowRight
+              className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
+              aria-hidden
+            />
           </Link>
-          .
-        </p>
+        </article>
       ) : (
         <div className={cn("flex flex-col", marketingCardStackGapClass)}>
           {stories.map((story) => {

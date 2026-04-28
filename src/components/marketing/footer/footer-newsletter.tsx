@@ -41,9 +41,9 @@ export const FooterNewsletter = () => {
               type="submit"
               variant="ghost"
               size="icon"
-              className="shrink-0 text-white/60 hover:text-white"
+              className="group shrink-0 text-white/60 hover:text-white"
             >
-              <ArrowRight className="size-5" />
+              <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5" />
             </Button>
           </form>
           <p className="text-xs text-white/50">

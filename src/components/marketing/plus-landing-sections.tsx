@@ -211,97 +211,150 @@ export const PlusNavbar = ({
 }
 
 const LANDING_HERO_ARTBOARD = 1280
-/** Uniform pixel size for every ornament character (width = height). */
+/** Full artboard — Figma `1727:1970` (xl+). */
 const ORNAMENT_SIZE = 72
 
 /**
  * Right-side anchor positions (x = left edge in 1280px artboard coords).
- * Left-side mirrors are computed as `ARTBOARD - x - ORNAMENT_SIZE` so every
- * pair sits the same distance from the centre on both sides.
+ * Left-side mirrors are computed as `ARTBOARD - x - size` so each pair aligns.
  */
 const ORNAMENT_RIGHT = {
-  greenGt:   { x: 1058, y: 5   },   // pair 1 — moved up + further out
-  equals:    { x: 1148, y: 72  },   // pair 2 — moved up + further out
-  character: { x: 1064, y: 164 },   // Figma 1940:2273
+  greenGt:   { x: 1058, y: 5   },
+  equals:    { x: 1148, y: 72  },
+  character: { x: 1064, y: 164 },
 } as const
 
-/** Mirrors each right position to the left. */
-const mirrorX = (rightX: number) => LANDING_HERO_ARTBOARD - rightX - ORNAMENT_SIZE
+/**
+ * Tighter layout for lg–xl: smaller glyphs and right anchors pushed toward the
+ * artboard edge so inner corners stay past the `max-w-3xl` headline column.
+ */
+const ORNAMENT_RIGHT_COMPACT = {
+  greenGt:   { x: 1188, y: 5   },
+  equals:    { x: 1208, y: 72  },
+  character: { x: 1168, y: 164 },
+} as const
+
+const ORNAMENT_SIZE_COMPACT = 58
 
 /** CSS left value using the 1280px proportional scale. */
 const pct = (x: number) => `calc(${x} * 100% / ${LANDING_HERO_ARTBOARD})`
 
+const mirrorX = (rightX: number, size: number) =>
+  LANDING_HERO_ARTBOARD - rightX - size
+
+type OrnamentRightSpec = {
+  greenGt: { x: number; y: number }
+  equals: { x: number; y: number }
+  character: { x: number; y: number }
+}
+
+const LandingHeroOrnamentTrack = ({
+  right,
+  size,
+}: {
+  right: OrnamentRightSpec
+  size: number
+}) => (
+  <div
+    className="relative w-full max-w-[1280px] shrink-0"
+    style={{ height: right.character.y + size + 16 }}
+  >
+    <div
+      className="absolute flex items-center justify-center -rotate-[15deg]"
+      style={{
+        left: pct(mirrorX(right.greenGt.x, size)),
+        top: right.greenGt.y,
+        width: size,
+        height: size,
+      }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img alt="" src={plusHomeHero.landingOrnamentPinkPlus} className="size-full object-contain" />
+    </div>
+
+    <div
+      className="absolute flex items-center justify-center rotate-[15deg]"
+      style={{
+        left: pct(mirrorX(right.equals.x, size)),
+        top: right.equals.y,
+        width: size,
+        height: size,
+      }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img alt="" src={plusHomeHero.landingOrnamentPurpleX} className="size-full object-contain" />
+    </div>
+
+    <div
+      className="absolute flex items-center justify-center -rotate-[15deg]"
+      style={{
+        left: pct(mirrorX(right.character.x, size)),
+        top: right.character.y,
+        width: size,
+        height: size,
+      }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img alt="" src={plusHomeHero.landingOrnamentDivide} className="size-full object-contain" />
+    </div>
+
+    <div
+      className="absolute flex items-center justify-center rotate-[15deg]"
+      style={{
+        left: pct(right.greenGt.x),
+        top: right.greenGt.y,
+        width: size,
+        height: size,
+      }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img alt="" src={plusHomeHero.landingOrnamentGreenGt} className="size-full object-contain" />
+    </div>
+
+    <div
+      className="absolute flex items-center justify-center"
+      style={{
+        left: pct(right.equals.x),
+        top: right.equals.y,
+        width: size,
+        height: size,
+      }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img alt="" src={plusHomeHero.landingOrnamentEquals} className="size-full object-contain" />
+    </div>
+
+    <div
+      className="absolute flex items-center justify-center"
+      style={{
+        left: pct(right.character.x),
+        top: right.character.y,
+        width: size,
+        height: size,
+      }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img alt="" src={plusHomeHero.landingCharacterFigure} className="size-full object-contain" />
+    </div>
+  </div>
+)
+
 /**
  * Six floating ornament characters — three on each side, symmetric pairs.
- * Pair 1: coral +  ↔  green >     (same top)
- * Pair 2: purple × ↔  blue =      (same top)
- * Pair 3: yellow ÷ ↔  teal figure (same top)
+ * `lg`–`xl`: smaller glyphs + compact coordinates so they clear the headline;
+ * `xl`+: full Figma artboard layout.
  */
 const LandingHeroOrnaments = () => (
   <div
-    className="pointer-events-none absolute inset-x-0 top-0 z-0 hidden justify-center md:flex"
+    className="pointer-events-none absolute inset-x-0 top-0 z-0 hidden justify-center lg:flex"
     aria-hidden
   >
-    <div
-      className="relative w-full max-w-[1280px] shrink-0"
-      style={{ height: ORNAMENT_RIGHT.character.y + ORNAMENT_SIZE + 16 }}
-    >
-      {/* ── LEFT SIDE ─────────────────────────────────────────────── */}
-
-      {/* Pair 1 left — coral + (mirrors green >) */}
-      <div
-        className="absolute flex items-center justify-center -rotate-[15deg] min-[1800px]:-translate-x-8"
-        style={{ left: pct(mirrorX(ORNAMENT_RIGHT.greenGt.x)), top: ORNAMENT_RIGHT.greenGt.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="" src={plusHomeHero.landingOrnamentPinkPlus} className="size-full object-contain" />
+    <div className="relative w-full max-w-[1280px]">
+      <div className="hidden lg:block xl:hidden">
+        <LandingHeroOrnamentTrack right={ORNAMENT_RIGHT_COMPACT} size={ORNAMENT_SIZE_COMPACT} />
       </div>
-
-      {/* Pair 2 left — purple × (mirrors =) */}
-      <div
-        className="absolute flex items-center justify-center rotate-[15deg] min-[1800px]:-translate-x-8"
-        style={{ left: pct(mirrorX(ORNAMENT_RIGHT.equals.x)), top: ORNAMENT_RIGHT.equals.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="" src={plusHomeHero.landingOrnamentPurpleX} className="size-full object-contain" />
-      </div>
-
-      {/* Pair 3 left — yellow ÷ (mirrors teal character) */}
-      <div
-        className="absolute flex items-center justify-center -rotate-[15deg] min-[1800px]:-translate-x-8"
-        style={{ left: pct(mirrorX(ORNAMENT_RIGHT.character.x)), top: ORNAMENT_RIGHT.character.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="" src={plusHomeHero.landingOrnamentDivide} className="size-full object-contain" />
-      </div>
-
-      {/* ── RIGHT SIDE ────────────────────────────────────────────── */}
-
-      {/* Pair 1 right — green > */}
-      <div
-        className="absolute flex items-center justify-center rotate-[15deg] min-[1800px]:translate-x-8"
-        style={{ left: pct(ORNAMENT_RIGHT.greenGt.x), top: ORNAMENT_RIGHT.greenGt.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="" src={plusHomeHero.landingOrnamentGreenGt} className="size-full object-contain" />
-      </div>
-
-      {/* Pair 2 right — blue = */}
-      <div
-        className="absolute flex items-center justify-center min-[1800px]:translate-x-8"
-        style={{ left: pct(ORNAMENT_RIGHT.equals.x), top: ORNAMENT_RIGHT.equals.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="" src={plusHomeHero.landingOrnamentEquals} className="size-full object-contain" />
-      </div>
-
-      {/* Pair 3 right — teal character figure */}
-      <div
-        className="absolute flex items-center justify-center min-[1800px]:translate-x-8"
-        style={{ left: pct(ORNAMENT_RIGHT.character.x), top: ORNAMENT_RIGHT.character.y, width: ORNAMENT_SIZE, height: ORNAMENT_SIZE }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="" src={plusHomeHero.landingCharacterFigure} className="size-full object-contain" />
+      <div className="hidden xl:block">
+        <LandingHeroOrnamentTrack right={ORNAMENT_RIGHT} size={ORNAMENT_SIZE} />
       </div>
     </div>
   </div>
@@ -851,7 +904,7 @@ export const PlusSmartTechSection = () => {
                   <img
                     alt=""
                     src={plusHomeSmartTech.supervisorLayerBack}
-                    className="absolute inset-0 size-full max-w-none object-cover"
+                    className="absolute inset-0 size-full max-w-none object-contain object-center lg:object-cover"
                   />
                 </div>
                 <div
@@ -872,7 +925,7 @@ export const PlusSmartTechSection = () => {
                   <img
                     alt=""
                     src={plusHomeSmartTech.supervisorLayerFront}
-                    className="absolute inset-0 size-full max-w-none object-cover"
+                    className="absolute inset-0 size-full max-w-none object-contain object-center lg:object-cover"
                   />
                 </div>
               </div>
@@ -909,7 +962,7 @@ export const PlusSmartTechSection = () => {
                   <img
                     alt=""
                     src={plusHomeSmartTech.aiTutorLayerBack}
-                    className="absolute inset-0 size-full max-w-none object-cover"
+                    className="absolute inset-0 size-full max-w-none object-contain object-center lg:object-cover"
                   />
                 </div>
                 <div
@@ -931,7 +984,7 @@ export const PlusSmartTechSection = () => {
                   <img
                     alt=""
                     src={plusHomeSmartTech.aiTutorLayerMid}
-                    className="absolute inset-0 size-full max-w-none object-cover"
+                    className="absolute inset-0 size-full max-w-none object-contain object-center lg:object-cover"
                   />
                 </div>
                 <div
@@ -953,7 +1006,7 @@ export const PlusSmartTechSection = () => {
                   <img
                     alt=""
                     src={plusHomeSmartTech.aiTutorLayerFront}
-                    className="absolute inset-0 size-full max-w-none object-cover"
+                    className="absolute inset-0 size-full max-w-none object-contain object-center lg:object-cover"
                   />
                 </div>
               </div>
@@ -961,7 +1014,7 @@ export const PlusSmartTechSection = () => {
           </article>
         </div>
 
-        {/* Goal setting — `1714:1988`: ~400×300 frames, `object-cover` fills frame, 25px gap */}
+        {/* Goal setting — narrow: natural aspect + contain; lg+: fixed 400×300 + cover; ultra-wide per IA */}
         <article className="mx-auto w-full max-w-[1097px] overflow-hidden rounded-[30px] bg-[#ffe8f5] px-5 pb-5 pt-6 sm:px-7 sm:pb-6 sm:pt-8 md:px-8 min-[1800px]:max-w-[1400px]">
           <SmartTechCardHeader
             iconSrc={plusHomeSmartTech.iconGoal}
@@ -977,7 +1030,9 @@ export const PlusSmartTechSection = () => {
           >
             <div
               className={cn(
-                "flex h-[300px] w-full max-w-[400px] shrink-0 items-center justify-center overflow-hidden rounded-[41.09px] md:w-[400px] min-[1800px]:h-[360px] min-[1800px]:max-w-[480px] min-[1800px]:w-[480px]",
+                "relative w-full max-w-[400px] shrink-0 overflow-hidden rounded-[41.09px] bg-[#ffe8f5] md:w-[400px]",
+                "aspect-[1006/737] max-h-[min(22rem,92vw)] lg:aspect-auto lg:max-h-none lg:h-[300px]",
+                "min-[1800px]:h-[360px] min-[1800px]:max-w-[480px] min-[1800px]:w-[480px]",
                 smartTechCardShadowStrong,
               )}
             >
@@ -987,12 +1042,14 @@ export const PlusSmartTechSection = () => {
                 src={plusHomeSmartTech.goalLeft}
                 width={1006}
                 height={737}
-                className="block h-full w-full min-h-0 min-w-0 object-cover"
+                className="absolute inset-0 size-full object-contain object-center lg:object-cover"
               />
             </div>
             <div
               className={cn(
-                "flex h-[300px] w-full max-w-[400px] shrink-0 items-center justify-center overflow-hidden rounded-[41.09px] md:w-[400px] min-[1800px]:h-[360px] min-[1800px]:max-w-[480px] min-[1800px]:w-[480px]",
+                "relative w-full max-w-[400px] shrink-0 overflow-hidden rounded-[41.09px] bg-[#ffe8f5] md:w-[400px]",
+                "aspect-[1006/737] max-h-[min(22rem,92vw)] lg:aspect-auto lg:max-h-none lg:h-[300px]",
+                "min-[1800px]:h-[360px] min-[1800px]:max-w-[480px] min-[1800px]:w-[480px]",
                 smartTechCardShadowStrong,
               )}
             >
@@ -1002,7 +1059,7 @@ export const PlusSmartTechSection = () => {
                 src={plusHomeSmartTech.goalRight}
                 width={1006}
                 height={737}
-                className="block h-full w-full min-h-0 min-w-0 object-cover"
+                className="absolute inset-0 size-full object-contain object-center lg:object-cover"
               />
             </div>
           </div>
@@ -1023,8 +1080,9 @@ export const PlusScienceOfLearningSection = () => {
         <div className={marketingSectionIntroColumnClass}>
           <h2 className={schoolsSectionTitle}>Built on the Science of Learning</h2>
           <p className={schoolsSectionLead}>
-            Developed within CMU&apos;s HCII, our platform is a direct result of world-class educational
-            research. We&apos;ve engineered AI tools designed to adapt to how students think.
+            Developed within CMU&apos;s Human-Computer Interaction Institute, our platform is a
+            direct result of world-class educational research. We&apos;ve engineered AI tools designed
+            to adapt to how students think.
           </p>
         </div>
         <img

@@ -114,7 +114,7 @@ export function DayToDayExperienceSection({
                 transition: "flex-grow 320ms ease-out",
               }}
               className={cn(
-                "flex cursor-default flex-col items-start gap-4 rounded-[30px] border-2 px-5 py-7 text-left sm:py-8",
+                "flex cursor-pointer flex-col items-start gap-4 rounded-[30px] border-2 px-5 py-7 text-left sm:py-8",
                 "h-[min(400px,78svh)] min-h-0 overflow-hidden",
                 "min-w-0",
                 isActive

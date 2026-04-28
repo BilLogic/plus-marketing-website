@@ -48,18 +48,14 @@ export function selectSuccessStoriesForSchoolsPage(
 }
 
 /**
- * Stories for `/for-researchers` — prefers Category = Researchers; falls back to Schools entries with a quote
- * so research-relevant pilots (e.g. Warm Springs) show until Researchers-tagged rows exist in Notion.
+ * Stories for `/for-researchers` — Category = Researchers only (newest first, up to 2).
+ * School or tutor stories are not mixed into this block; add Researchers-tagged rows in Notion to surface them here.
  */
 export function selectSuccessStoriesForResearchersPage(
   stories: SuccessStory[]
 ): SuccessStory[] {
-  const researchers = stories
-    .filter((s) => s.category === "Researchers")
-    .sort(byPublishedDesc)
-  if (researchers.length > 0) return researchers.slice(0, 2)
   return stories
-    .filter((s) => s.category === "Schools" && (s.quote?.trim()?.length ?? 0) > 0)
+    .filter((s) => s.category === "Researchers")
     .sort(byPublishedDesc)
     .slice(0, 2)
 }
