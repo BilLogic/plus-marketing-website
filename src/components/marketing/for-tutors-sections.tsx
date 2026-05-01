@@ -134,7 +134,7 @@ export const TutorsHeroSection = () => {
             rel="noopener noreferrer"
             className={marketingHeroCtaPrimaryLinkClass}
           >
-            Check Our Demo
+            Try the Demo
           </a>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
@@ -358,15 +358,15 @@ export const TutorsCompensationSection = () => {
  * const EXPERIENCE_CARDS = [
  *   {
  *     title: "Build Bonds",
- *     description: "Begin each session by connecting with students.",
+ *     description: "Begin each session by getting to know the student, fostering personal connections and trusting relationships that enhance the learning experience.",
  *   },
  *   {
  *     title: "1:1 Support",
- *     description: "Lead one-on-one sessions for students’ needs.",
+ *     description: "Lead one-on-one sessions, delivering personalized math support.",
  *   },
  *   {
  *     title: "Reflect & Grow",
- *     description: "Submit reflections, join tutor discussions to grow.",
+ *     description: "Submit reflections, join discussions and grow as a tutor!",
  *   },
  * ] as const
  *
@@ -504,10 +504,10 @@ const tutoringLooksStepBadge = cn(
   marketingCardStepDigitClass,
 )
 
-/** Body copy — matches Earn Certification panel paragraphs. */
+/** Body copy — matches Get Certified panel paragraphs. */
 const tutoringLooksDescription = "text-base leading-relaxed text-muted-foreground lg:text-lg"
 
-/** Bottom row card titles — matches Earn Certification in-panel `h3` scale. */
+/** Bottom row card titles — matches certification in-panel `h3` scale. */
 const tutoringLooksCardTitleMd =
   "text-balance text-lg font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-[#9A6D00] sm:text-xl lg:text-2xl"
 
@@ -529,7 +529,7 @@ const TUTORING_LOOKS_CARDS = [
   {
     step: 1,
     title: "Build Connections",
-    description: "Begin each session by connecting with students.",
+    description: "Begin each session by getting to know the student, fostering personal connections and trusting relationships that enhance the learning experience.",
     imageSrc: "/figma/for-tutors/tutoring-build-connections.jpg",
     imageAlt:
       "Student with headphones on a video call with a PLUS tutor, laptop on a desk",
@@ -540,7 +540,7 @@ const TUTORING_LOOKS_CARDS = [
   {
     step: 2,
     title: "Personalized Support",
-    description: "Lead one-on-one sessions with students.",
+    description: "Lead one-on-one sessions, delivering personalized math support.",
     imageSrc: forTutorsAssets.experienceOneToOneSupportPhoto,
     imageAlt:
       "Student wearing headphones at a laptop during a live online tutoring session with a tutor on video",
@@ -551,7 +551,7 @@ const TUTORING_LOOKS_CARDS = [
   {
     step: 3,
     title: "Reflect & Grow",
-    description: "Submit reflections, join discussions, grow.",
+    description: "Submit reflections, join discussions and grow as a tutor!",
     imageSrc: forTutorsAssets.experienceReflectGrowPhoto,
     imageAlt:
       "PLUS Personalized Learning dashboard on the Reflection tab with session reflection and training lessons",
@@ -621,14 +621,17 @@ export const TutorsExperienceSection = () => {
     <section id={forTutorsSectionIds.experience} className="relative">
       <div className={marketingSectionContentShellClass}>
         <div className="text-left">
-          <div className="relative">
-            <div className={marketingSectionIntroColumnClass}>
-              <h2 className="text-balance text-xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-2xl md:text-4xl">
+          {/*
+            Same header grid as `TutorsCertificationSection`: copy fills to decor’s left edge; decor sizes match `marketingSectionHeaderDecorImgClass`.
+          */}
+          <div className="relative grid w-full md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
+            <div className="min-w-0 space-y-3">
+              <h2 className="text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 What Tutoring at PLUS Looks Like
               </h2>
               <p
                 className={cn(
-                  "mx-auto max-w-2xl text-sm sm:mx-0 sm:text-base lg:text-lg",
+                  "max-w-2xl text-base sm:mx-0 lg:text-lg",
                   marketingSectionLeadColorClass,
                 )}
               >
@@ -640,8 +643,8 @@ export const TutorsExperienceSection = () => {
               alt=""
               src={forTutorsAssets.certificationDecor}
               className={cn(
-                marketingSectionHeaderDecorImgClass,
-                marketingSectionHeaderDecorAbsoluteClass
+                "pointer-events-none aspect-square shrink-0 object-contain opacity-90 select-none",
+                "hidden md:block md:w-[110px] lg:w-[124px]",
               )}
               aria-hidden
             />
@@ -678,27 +681,31 @@ export const TutorsCertificationSection = () => {
     >
       <div className={marketingSectionContentShellClass}>
         <div className="text-left">
-          <div className="relative">
-            <div className={marketingSectionIntroColumnClass}>
-              <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
-                Earn Certification &amp; Digital Badges
+          {/*
+            Grid: copy uses all space up to the decor (no column gap — art abuts the text edge).
+            Decor sizes match `marketingSectionHeaderDecorImgClass`.
+          */}
+          <div className="relative grid w-full md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
+            <div className="min-w-0 space-y-3">
+              <h2 className="text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+                Get Certified &amp; Receive Shareable Digital Credentials
               </h2>
               <p
                 className={cn(
-                  "mx-auto max-w-2xl text-base sm:mx-0 lg:text-lg",
+                  "max-w-2xl text-base sm:mx-0 lg:text-lg",
                   marketingSectionLeadColorClass,
                 )}
               >
-                Build credentials that showcase your expertise and professional
-                growth.
+                Showcase your expertise and professional growth on your CV and social
+                media.
               </p>
             </div>
             <img
               alt=""
               src={forTutorsAssets.experienceDecor}
               className={cn(
-                marketingSectionHeaderDecorImgClass,
-                marketingSectionHeaderDecorAbsoluteClass
+                "pointer-events-none aspect-square shrink-0 object-contain opacity-90 select-none",
+                "hidden md:block md:w-[110px] lg:w-[124px]",
               )}
               aria-hidden
             />
@@ -720,7 +727,7 @@ export const TutorsCertificationSection = () => {
                 <Star className={cn(marketingCardLucideGlyphClass)} strokeWidth={2.25} />
               </span>
               <h3 className="min-w-0 text-balance text-lg font-bold leading-snug tracking-tight text-[#297E43] dark:text-green-200 sm:text-xl lg:text-2xl">
-                Tutor Certification &amp; Digital Badges
+                Tutor Certification &amp; Shareable Badges
               </h3>
             </div>
             <div
@@ -1027,7 +1034,7 @@ export const TutorsTestimonialsSection = ({ stories = [] }: { stories?: SuccessS
 }
 
 /**
- * Final CTA — Check Our Demo / Become a Tutor.
+ * Final CTA — Try the Demo / Become a Tutor.
  */
 export const TutorsImpactCTA = () => {
   return (
@@ -1045,7 +1052,7 @@ export const TutorsImpactCTA = () => {
             rel="noopener noreferrer"
             className={marketingFinalCtaPrimaryLinkClass}
           >
-            Check Our Demo
+            Try the Demo
           </a>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"

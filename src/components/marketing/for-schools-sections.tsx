@@ -26,10 +26,7 @@ import {
   marketingHeroCtaPrimaryLinkClass,
   marketingFinalCtaShellClass,
   marketingFinalCtaTitleClass,
-  marketingSectionHeaderDecorAbsoluteClass,
-  marketingSectionHeaderDecorImgClass,
   marketingCardStackGapClass,
-  marketingSectionIntroColumnClass,
   marketingSectionLeadColorClass,
   marketingSectionVerticalGapClass,
 } from "@/lib/marketing-section-layout"
@@ -47,13 +44,35 @@ import { useMarketingStickyPanelTop } from "@/lib/use-marketing-sticky-panel-top
 import { marketingTypography } from "@/lib/marketing-typography"
 import { forSchoolsSectionIds } from "@/lib/plus-footer-ia"
 
-/** Match `get-involved-sections` / `for-tutors-sections` section headers. */
+/** Match `get-involved-sections` / `for-tutors-sections` section headers (`sectionH2` / `sectionLead`). */
 const schoolsSectionH2 =
   "text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
 /** Same breakpoint rhythm as `marketingTypography.sectionLead` + For Tutors intro copy (not hero). */
 const schoolsSectionLead = cn(
-  "mx-auto max-w-2xl text-pretty text-sm leading-relaxed sm:mx-0 sm:text-base md:text-lg",
+  "w-full max-w-none text-base lg:text-lg",
   marketingSectionLeadColorClass,
+)
+
+/**
+ * Card title + body — same responsive type scale as Benefits of PLUS (`SchoolsTrainingSection`
+ * stacked cards + sticky column), for sections that should read consistently with Benefits.
+ */
+const schoolsBenefitsCardTitleClass =
+  "text-pretty text-lg font-bold leading-tight tracking-tight sm:text-xl lg:text-2xl"
+const schoolsBenefitsCardBodyClass =
+  "text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg"
+
+/** Section intros — grid + in-flow decor (`grid-cols-1` below `md` avoids implicit track bugs + overflow). */
+const schoolsSectionHeaderGridClass =
+  "relative grid w-full min-w-0 grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto] md:items-center"
+/** Square header decors — `marketingSectionHeaderDecorImgClass` footprint without absolute. */
+const schoolsSectionHeaderSquareDecorClass = cn(
+  "pointer-events-none aspect-square shrink-0 object-contain opacity-90 select-none",
+  "hidden md:block md:w-[110px] lg:w-[124px]",
+)
+/** Oversight hero decor — wide asset; `auto` column sizes from intrinsic width. */
+const schoolsSectionHeaderOversightDecorClass = cn(
+  "pointer-events-none hidden h-[104px] w-auto max-w-[150px] shrink-0 object-contain opacity-90 select-none md:block md:h-[118px] md:max-w-[170px]",
 )
 
 export const SchoolsHeroSection = () => {
@@ -70,7 +89,14 @@ export const SchoolsHeroSection = () => {
   const heroDecorLeft = "left-[max(0.5rem,calc(50%-35rem))]"
   const heroDecorRight = "right-[max(0.5rem,calc(50%-35rem))]"
   return (
-    <section className="relative mx-auto w-full max-w-7xl min-w-0 overflow-hidden flex flex-col justify-center min-h-[380px] sm:min-h-[440px] md:min-h-[500px] lg:min-h-[530px] pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14">
+    <section
+      className={cn(
+        "relative w-full min-w-0 overflow-x-clip lg:overflow-hidden",
+        "flex flex-col items-center justify-center",
+        "min-h-[380px] sm:min-h-[440px] md:min-h-[500px] lg:min-h-[530px]",
+        "pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14",
+      )}
+    >
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[0]}
@@ -96,18 +122,25 @@ export const SchoolsHeroSection = () => {
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center sm:gap-8 sm:px-6 min-[1800px]:max-w-5xl">
-        <h1 className="flex flex-col items-center gap-3 sm:gap-4">
-          <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
-            For schools
-          </span>
-          <span className={cn(marketingTypography.heroH1, "max-w-prose")}>
-            Research-backed, AI-powered Math Tutoring to Supplement Classroom Instruction.
-          </span>
-        </h1>
-        <Link href={`#${forSchoolsSectionIds.register}`} className={marketingHeroCtaPrimaryLinkClass}>
-          Get Started for Free
-        </Link>
+      {/*
+        Full-width section + centered copy track — same idea as `PlusHeroSection`
+        (`mx-auto w-full max-w-[min(80rem,100%)]`), not `mx-auto max-w-7xl` on the section
+        (that narrowed the positioning box and mis-centered copy vs the negated shell).
+      */}
+      <div className="relative z-10 mx-auto flex w-full max-w-[min(80rem,100%)] flex-col items-center px-4 sm:px-6 min-[1800px]:max-w-[min(96rem,100%)]">
+        <div className="flex w-full max-w-3xl flex-col items-center gap-6 text-center sm:gap-8 min-[1800px]:max-w-5xl">
+          <h1 className="flex flex-col items-center gap-3 sm:gap-4">
+            <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
+              For schools
+            </span>
+            <span className={cn(marketingTypography.heroH1, "max-w-prose")}>
+              Research-backed, AI-powered Math Tutoring to Supplement Classroom Instruction
+            </span>
+          </h1>
+          <Link href={`#${forSchoolsSectionIds.register}`} className={marketingHeroCtaPrimaryLinkClass}>
+            Get Started for Free
+          </Link>
+        </div>
       </div>
     </section>
   )
@@ -131,32 +164,30 @@ export const SchoolsCommunitySection = () => {
   return (
     <section
       id={forSchoolsSectionIds.community}
-      className={cn("relative", marketingSectionVerticalGapClass)}
+      className={cn("relative scroll-mt-24", marketingSectionVerticalGapClass)}
     >
       <div className="relative w-full text-left">
-        <div className={marketingSectionIntroColumnClass}>
-          <h2 className={schoolsSectionH2}>
-            Join the PLUS School Community
-          </h2>
-          <p className={schoolsSectionLead}>
-            Our school partners have seen big improvements in student learning through PLUS Tutoring.
-          </p>
+        <div className={schoolsSectionHeaderGridClass}>
+          <div className="min-w-0 space-y-3">
+            <h2 className={schoolsSectionH2}>Join the PLUS School Community</h2>
+            <p className={schoolsSectionLead}>
+              Our school partners have seen big improvements in student learning through PLUS
+              Tutoring.
+            </p>
+          </div>
+          <img
+            alt=""
+            src={forSchoolsAssets.decor.community}
+            className={schoolsSectionHeaderSquareDecorClass}
+            aria-hidden
+          />
         </div>
-        <img
-          alt=""
-          src={forSchoolsAssets.decor.community}
-          className={cn(
-            marketingSectionHeaderDecorImgClass,
-            marketingSectionHeaderDecorAbsoluteClass,
-          )}
-          aria-hidden
-        />
       </div>
 
       <div
         role="region"
         aria-label="Partner school logos"
-        className="relative w-full"
+        className="relative w-full min-w-0"
         onMouseEnter={() => setMarqueePaused(true)}
         onMouseLeave={() => setMarqueePaused(false)}
         onFocusCapture={() => setMarqueePaused(true)}
@@ -255,31 +286,24 @@ export const SchoolsTrainingSection = () => {
   return (
     <section
       id={forSchoolsSectionIds.benefits}
-      className={marketingSectionVerticalGapClass}
+      className={cn("scroll-mt-24", marketingSectionVerticalGapClass)}
     >
       <div className="relative z-10 w-full text-left">
-        <div
-          className={cn(
-            marketingSectionIntroColumnClass,
-            "sm:space-y-1",
-          )}
-        >
-          <h2 className={schoolsSectionH2}>
-            Benefits of PLUS
-          </h2>
-          <p className={schoolsSectionLead}>
-            Here&apos;s how PLUS supports schools and trains tutors to guide students to success.
-          </p>
+        <div className={schoolsSectionHeaderGridClass}>
+          <div className="min-w-0 space-y-3 sm:space-y-1">
+            <h2 className={schoolsSectionH2}>Benefits of PLUS</h2>
+            <p className={schoolsSectionLead}>
+              Here&apos;s how PLUS supports schools and trains tutors to guide students to
+              success.
+            </p>
+          </div>
+          <img
+            alt=""
+            src={forTutorsAssets.certificationDecor}
+            className={schoolsSectionHeaderSquareDecorClass}
+            aria-hidden
+          />
         </div>
-        <img
-          alt=""
-          src={forTutorsAssets.certificationDecor}
-          className={cn(
-            marketingSectionHeaderDecorImgClass,
-            marketingSectionHeaderDecorAbsoluteClass,
-          )}
-          aria-hidden
-        />
       </div>
 
       {/* Below md: stacked amber cards (+ art); at md+ match two-column Benefits + sticky panel */}
@@ -505,26 +529,24 @@ export const SchoolsExperienceSection = () => {
   return (
     <section
       id={forSchoolsSectionIds.experience}
-      className={marketingSectionVerticalGapClass}
+      className={cn("scroll-mt-24", marketingSectionVerticalGapClass)}
     >
       <div className="relative w-full text-left">
-        <div className={marketingSectionIntroColumnClass}>
-          <h2 className={schoolsSectionH2}>
-            Your Day-to-Day Experience with PLUS
-          </h2>
-          <p className={schoolsSectionLead}>
-            A seamless integration designed to support your faculty and accelerate student growth.
-          </p>
+        <div className={schoolsSectionHeaderGridClass}>
+          <div className="min-w-0 space-y-3 sm:space-y-1">
+            <h2 className={schoolsSectionH2}>Your Day-to-Day Experience with PLUS</h2>
+            <p className={schoolsSectionLead}>
+              A seamless integration designed to support your faculty and accelerate student
+              growth.
+            </p>
+          </div>
+          <img
+            alt=""
+            src={forTutorsAssets.toolkitDecor}
+            className={schoolsSectionHeaderSquareDecorClass}
+            aria-hidden
+          />
         </div>
-        <img
-          alt=""
-          src={forTutorsAssets.toolkitDecor}
-          className={cn(
-            marketingSectionHeaderDecorImgClass,
-            marketingSectionHeaderDecorAbsoluteClass,
-          )}
-          aria-hidden
-        />
       </div>
 
       {/* 2×2 card grid — icon stacked above phase/title/body; shared left edge with card padding. */}
@@ -561,14 +583,14 @@ export const SchoolsExperienceSection = () => {
               />
               <div className="flex w-full min-w-0 flex-col gap-4">
                 <div>
-                  <p className="text-xs font-normal uppercase tracking-wider text-[#d31998] sm:text-sm">
+                  <p className="text-sm font-normal uppercase tracking-wider text-[#d31998] sm:text-base">
                     {phase.phase}
                   </p>
-                  <h3 className={cn(marketingTypography.bentoTitle, "mt-1 text-[#d31998]")}>
+                  <h3 className={cn(schoolsBenefitsCardTitleClass, "mt-1 text-[#d31998]")}>
                     {phase.title}
                   </h3>
                 </div>
-                <p className={cn(marketingTypography.sectionLead, "max-w-none text-pretty")}>
+                <p className={cn(schoolsBenefitsCardBodyClass, "max-w-none")}>
                   {phase.description}
                 </p>
               </div>
@@ -586,24 +608,37 @@ export const SchoolsExperienceSection = () => {
  * text column fills the row height: icon + title + body flush to top inset, CTA flush to bottom.
  * Grid: 1fr + 360px image. Card width matches About shell (`max-w-5xl`).
  */
+/** No outer `overflow-clip` — it was clipping copy/CTAs on narrow viewports; images use their own `overflow-hidden`. */
 const OVERSIGHT_CARD_FRAME =
-  "flex w-full max-w-5xl flex-col overflow-clip rounded-[30px] min-[1800px]:max-w-7xl"
-/** md: two columns — copy column max 553px; image 360px; stretch so CTA can sit on bottom padding. */
-const OVERSIGHT_CARD_ROW =
-  "grid w-full min-w-0 grid-cols-1 md:grid-cols-[minmax(0,1fr)_360px] md:items-stretch md:gap-x-0 md:gap-y-0"
-/** Icon + gap + copy; copy flex-1 fills row height under stretched grid. */
-const OVERSIGHT_LEFT =
-  "flex w-full min-w-0 shrink-0 flex-row items-stretch gap-[25px] md:h-full md:min-h-0 md:max-w-[553px]"
-const OVERSIGHT_COPY =
-  "flex min-h-0 min-w-0 w-full max-w-[420px] flex-1 flex-col gap-5 sm:gap-6 md:gap-0 md:justify-between"
+  "flex w-full min-w-0 max-w-5xl flex-col rounded-[30px] min-[1800px]:max-w-7xl"
+/** Stack until `lg` (avoids `1fr` + fixed 360px overflow on tablets); two columns from `lg` up. */
+const OVERSIGHT_CARD_ROW = cn(
+  "grid w-full min-w-0 grid-cols-1 items-stretch gap-6",
+  "lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-x-0 lg:gap-y-0",
+)
+/** Icon + gap + copy; full width when stacked, capped when side-by-side with art. */
+const OVERSIGHT_LEFT = cn(
+  "flex w-full min-w-0 shrink-0 flex-row items-stretch gap-[25px]",
+  "max-w-full lg:h-full lg:min-h-0 lg:max-w-[553px]",
+)
+const OVERSIGHT_COPY = cn(
+  "flex min-h-0 min-w-0 w-full max-w-full flex-1 flex-col gap-5 sm:gap-6 sm:max-w-[420px] lg:gap-0 lg:justify-between",
+)
 const OVERSIGHT_TITLE_BODY = "flex w-full flex-col gap-4"
 /** min-h matches the icon so the title text is vertically centred with it. */
-const OVERSIGHT_TITLE_WRAP = "flex min-h-[48px] w-full items-center"
+const OVERSIGHT_TITLE_WRAP = "flex min-h-[48px] w-full min-w-0 items-center"
 /** Slightly smaller than Figma 411×350 so inset matches text; aspect preserved. */
 const OVERSIGHT_IMAGE =
   "relative aspect-[411/350] w-full max-w-[360px] shrink-0 overflow-hidden rounded-[30px] bg-background/20 md:w-full md:max-w-none"
 const OVERSIGHT_IMG =
   "pointer-events-none absolute inset-0 size-full max-w-none rounded-[30px] object-cover"
+
+/** Pill sizing + type scale — same as `marketingFinalCtaPrimaryLinkClass` / Benefits CTAs; colors come from each card’s `btnBg` / `btnText`. */
+const oversightCardCtaClass = cn(
+  "inline-flex w-fit items-center justify-center whitespace-nowrap no-underline outline-none",
+  "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+  "h-9 sm:h-11 rounded-full border-0 px-5 sm:px-8 text-sm sm:text-base font-normal shadow-none transition-opacity hover:opacity-95 min-[1800px]:h-12 min-[1800px]:px-9 min-[1800px]:text-lg",
+)
 
 const OVERSIGHT_CARDS = [
   /** CTA pill fills + label colors — Figma `1877:2183` (title hues may differ from buttons). */
@@ -671,7 +706,7 @@ function OversightCardInner({
 }) {
   return (
     <article className={cn(OVERSIGHT_CARD_FRAME, marketingCardPaddingClass, card.bgColor)}>
-      <div className={cn(OVERSIGHT_CARD_ROW, marketingCardStackGapClass)}>
+      <div className={OVERSIGHT_CARD_ROW}>
         <div className={OVERSIGHT_LEFT}>
           <img
             alt=""
@@ -687,11 +722,11 @@ function OversightCardInner({
           <div className={OVERSIGHT_COPY}>
             <div className={OVERSIGHT_TITLE_BODY}>
               <div className={OVERSIGHT_TITLE_WRAP}>
-                <h3 className={cn(marketingTypography.bentoTitle, card.titleColor)}>
+                <h3 className={cn(schoolsBenefitsCardTitleClass, "min-w-0", card.titleColor)}>
                   {card.title}
                 </h3>
               </div>
-              <p className={cn(marketingTypography.sectionLead, "max-w-none")}>
+              <p className={cn(schoolsBenefitsCardBodyClass, "max-w-none")}>
                 {card.description}
               </p>
             </div>
@@ -700,11 +735,7 @@ function OversightCardInner({
               {...(card.href.startsWith("http")
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
-              className={cn(
-                "inline-flex h-10 min-h-[40px] w-fit items-center justify-center rounded-full px-6 text-sm font-normal transition-opacity hover:opacity-90 sm:h-11 sm:min-h-[44px] sm:px-10 sm:text-base",
-                card.btnBg,
-                card.btnText
-              )}
+              className={cn(oversightCardCtaClass, card.btnBg, card.btnText)}
             >
               {card.cta}
             </a>
@@ -843,31 +874,29 @@ export const SchoolsOversightSection = () => {
   return (
     <section
       id={forSchoolsSectionIds.oversight}
-      className={marketingSectionVerticalGapClass}
+      className={cn("scroll-mt-24", marketingSectionVerticalGapClass)}
     >
       <motion.div
-        className="relative w-full text-left"
+        className="relative w-full min-w-0 text-left"
         style={prefersReducedMotion ? undefined : { opacity: introOpacity }}
       >
-        <div className={marketingSectionIntroColumnClass}>
-          <h2 className={schoolsSectionH2}>
-            Maintain Excellence with Robust Oversight
-          </h2>
-          <p className={schoolsSectionLead}>
-            Ensure high-impact tutoring through data-driven insights and professional certification.
-          </p>
+        <div className={schoolsSectionHeaderGridClass}>
+          <div className="min-w-0 space-y-3 sm:space-y-1">
+            <h2 className={schoolsSectionH2}>Maintain Excellence with Robust Oversight</h2>
+            <p className={schoolsSectionLead}>
+              Ensure high-impact tutoring through data-driven insights and professional
+              certification.
+            </p>
+          </div>
+          <img
+            alt=""
+            src={forSchoolsAssets.oversightHeaderEqual}
+            className={schoolsSectionHeaderOversightDecorClass}
+            width={467}
+            height={371}
+            aria-hidden
+          />
         </div>
-        <img
-          alt=""
-          src={forSchoolsAssets.oversightHeaderEqual}
-          className={cn(
-            "pointer-events-none hidden h-[104px] w-auto max-w-[150px] shrink-0 object-contain opacity-90 select-none md:block md:h-[118px] md:max-w-[170px]",
-            marketingSectionHeaderDecorAbsoluteClass,
-          )}
-          width={467}
-          height={371}
-          aria-hidden
-        />
       </motion.div>
 
       {prefersReducedMotion ? (
@@ -921,26 +950,21 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
   return (
     <section
       id={forSchoolsSectionIds.successStories}
-      className={marketingSectionVerticalGapClass}
+      className={cn("scroll-mt-24", marketingSectionVerticalGapClass)}
     >
-      <div className="relative w-full text-left">
-        <div className={marketingSectionIntroColumnClass}>
-          <h2 className={schoolsSectionH2}>
-            School Success Stories
-          </h2>
-          <p className={schoolsSectionLead}>
-            Here&apos;s what schools are saying about PLUS.
-          </p>
+      <div className="relative w-full min-w-0 text-left">
+        <div className={schoolsSectionHeaderGridClass}>
+          <div className="min-w-0 space-y-3">
+            <h2 className={schoolsSectionH2}>School Success Stories</h2>
+            <p className={schoolsSectionLead}>Here&apos;s what schools are saying about PLUS.</p>
+          </div>
+          <img
+            alt=""
+            src={forTutorsAssets.experienceDecor}
+            className={schoolsSectionHeaderSquareDecorClass}
+            aria-hidden
+          />
         </div>
-        <img
-          alt=""
-          src={forTutorsAssets.experienceDecor}
-          className={cn(
-            marketingSectionHeaderDecorImgClass,
-            marketingSectionHeaderDecorAbsoluteClass,
-          )}
-          aria-hidden
-        />
       </div>
 
       <div className={cn("flex flex-col", marketingCardStackGapClass)}>

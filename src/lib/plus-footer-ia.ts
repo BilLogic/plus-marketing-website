@@ -107,7 +107,7 @@ export const PLUS_FOOTER_COLUMNS: readonly PlusFooterColumn[] = [
         href: `/for-tutors#${ft.experience}`,
       },
       {
-        label: "Earn Certification & Digital Badges",
+        label: "Get Certified & Receive Shareable Digital Credentials",
         href: `/for-tutors#${ft.certification}`,
       },
       { label: "Your Tutor Toolkit", href: `/for-tutors#${ft.toolkit}` },

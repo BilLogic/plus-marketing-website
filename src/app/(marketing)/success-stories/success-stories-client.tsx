@@ -11,7 +11,13 @@ import {
   marketingCardLhAlignedHeaderRowClass,
   marketingCardLucideGlyphClass,
   marketingCardPaddingClass,
+  marketingSectionLeadColorClass,
 } from "@/lib/marketing-section-layout"
+import { marketingListingShellClass } from "@/lib/marketing-layout"
+import {
+  successStoriesReadStoryArrowClass,
+  successStoriesReadStoryLinkClass,
+} from "@/lib/success-stories-link-classes"
 import { cn } from "@/lib/utils"
 
 const CATEGORIES = ["All", "Schools", "Tutors", "Researchers", "Foundations"] as const
@@ -29,9 +35,6 @@ const cardTitle =
 const cardBody =
   "text-base leading-relaxed text-teal-900/75 dark:text-white/80"
 
-const readLinkClass =
-  "group ml-auto mt-4 inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-[#C6009C] no-underline transition-opacity hover:opacity-90 dark:text-[#C6009C]"
-
 type Props = {
   stories: SuccessStory[]
 }
@@ -46,12 +49,17 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
 
   return (
     <main className="bg-background text-foreground">
-      <div className="mx-auto flex max-w-5xl flex-col gap-10 pb-8 pt-14 sm:gap-12 sm:pb-12 sm:pt-16 lg:gap-16 lg:pb-16 lg:pt-20 min-[1800px]:max-w-7xl min-[1800px]:gap-20 min-[1800px]:pb-24 min-[1800px]:pt-24">
+      <div className={marketingListingShellClass}>
         <div className="space-y-3">
           <h1 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Success Stories
           </h1>
-          <p className="w-full max-w-none text-pretty text-base text-teal-900/75 lg:text-lg dark:text-white/90">
+          <p
+            className={cn(
+              "w-full max-w-none text-base lg:text-lg",
+              marketingSectionLeadColorClass,
+            )}
+          >
             See how PLUS is making an impact across schools, tutors, researchers, and foundations.
           </p>
         </div>
@@ -152,12 +160,12 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
                   {href && (
                     <Link
                       href={href}
-                      className={readLinkClass}
+                      className={successStoriesReadStoryLinkClass}
                       aria-label={`Read story: ${story.title}`}
                       {...(story.publicReadUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     >
                       <span>Read story</span>
-                      <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                      <ArrowRight className={successStoriesReadStoryArrowClass} aria-hidden />
                     </Link>
                   )}
                 </article>

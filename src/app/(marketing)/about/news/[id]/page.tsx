@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { marketingListingShellClass } from "@/lib/marketing-layout"
 import { fetchNewsById } from "@/lib/notion/queries/news"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -20,13 +21,14 @@ export default async function NewsDetailPage({
   }
 
   return (
-    <div className="mx-auto max-w-3xl py-12 min-[1800px]:max-w-5xl min-[1800px]:py-16">
-      <Button variant="ghost" size="sm" className="mb-6 gap-1.5" nativeButton={false} render={<Link href="/about/news" />}>
-        <ArrowLeft className="size-4" />
-        Back to News
-      </Button>
+    <main className="bg-background text-foreground">
+      <div className={marketingListingShellClass}>
+        <Button variant="ghost" size="sm" className="gap-1.5" nativeButton={false} render={<Link href="/about/news" />}>
+          <ArrowLeft className="size-4" />
+          Back to News
+        </Button>
 
-      <article className="space-y-6">
+        <article className="space-y-6">
         {item.featuredImage && (
           <div className="overflow-hidden rounded-lg">
             <img
@@ -71,7 +73,8 @@ export default async function NewsDetailPage({
             Read full article
           </Button>
         )}
-      </article>
-    </div>
+        </article>
+      </div>
+    </main>
   )
 }

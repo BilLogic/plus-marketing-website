@@ -615,7 +615,7 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
       <AboutSectionTitleWithDecor decorSrc={forTutorsAssets.experienceDecor}>
         <h2 className={aboutSectionH2}>The PLUS Team</h2>
         <p className={aboutSectionLead}>
-          Educators, researchers, and technologists united to close the math opportunity gap.
+          Educators, researchers, and technologists committed to closing opportunity gaps in math.
         </p>
       </AboutSectionTitleWithDecor>
       <Accordion

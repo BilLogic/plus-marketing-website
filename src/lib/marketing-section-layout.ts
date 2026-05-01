@@ -100,7 +100,7 @@ export const marketingHeroCtaPrimaryLinkClass = cn(
   "hover:bg-[#A6EDF4] hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4] dark:hover:text-[#004247]",
 )
 
-/** Primary pill — matches `TutorsImpactCTA` “Check Our Demo” button (use on `<a>` or `<Link>`). */
+/** Primary pill — matches `TutorsImpactCTA` “Try the Demo” button (use on `<a>` or `<Link>`). */
 export const marketingFinalCtaPrimaryLinkClass = cn(
   "inline-flex items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",

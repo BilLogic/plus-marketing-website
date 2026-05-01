@@ -48,6 +48,7 @@ import {
   marketingHeroCtaButtonRowClass,
   marketingSectionVerticalGapClass,
 } from "@/lib/marketing-section-layout"
+import { marketingShellPadX } from "@/lib/marketing-layout"
 import { marketingTypography } from "@/lib/marketing-typography"
 import { cn } from "@/lib/utils"
 
@@ -414,7 +415,10 @@ const LandingHeroAwardsRow = () => {
   return (
     <div
       id="get-involved"
-      className="relative z-10 mx-auto mt-12 w-full max-w-[min(80rem,100%)] scroll-mt-28 px-4 pb-8 sm:mt-14 sm:pb-10 md:px-8 lg:scroll-mt-32 min-[1800px]:max-w-[min(96rem,100%)]"
+      className={cn(
+        "relative z-10 mx-auto mt-12 w-full max-w-[min(80rem,100%)] scroll-mt-28 pb-8 sm:mt-14 sm:pb-10 lg:scroll-mt-32 min-[1800px]:max-w-[min(96rem,100%)]",
+        marketingShellPadX,
+      )}
     >
       <p className="text-center text-xl font-normal text-muted-foreground">Our Awards</p>
       <div
@@ -519,12 +523,23 @@ export const PlusHeroSection = () => {
         />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[min(80rem,100%)] px-4 text-center md:px-8 lg:px-12 min-[1800px]:max-w-[min(96rem,100%)]">
-        {/* Shared offset so Figma ornaments + copy move together; rhythm aligned with `SchoolsHeroSection` padding */}
+      <div
+        className={cn(
+          "relative z-10 mx-auto w-full max-w-[min(80rem,100%)] text-center min-[1800px]:max-w-[min(96rem,100%)]",
+          /* Re-applies `(marketing)/layout` horizontal inset — hero is wrapped in `marketingShellNegatePadX` on the homepage. */
+          marketingShellPadX,
+        )}
+      >
+        {/* Shared offset — copy + ornaments; inner `px-4 sm:px-6` matches `TutorsHeroSection` headline column. */}
         <div className="relative mt-8 sm:mt-10 md:mt-12">
           {/* Ornaments: Figma `1727:1970` — 1280px coordinate track */}
           <LandingHeroOrnaments />
-          <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-6 sm:gap-8 min-[1800px]:max-w-5xl">
+          <div
+            className={cn(
+              "relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-6 text-center sm:gap-8 min-[1800px]:max-w-5xl",
+              "px-4 sm:px-6",
+            )}
+          >
               <h1
                 className="mx-auto max-w-prose text-balance text-center text-3xl font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-4xl md:text-5xl"
               >
@@ -547,51 +562,51 @@ export const PlusHeroSection = () => {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Figma `1791:3805` — video player: 822×406, rounded-[22px], dark overlay + centered play button */}
-      <div className="relative z-10 mx-auto mt-10 w-full max-w-[1000px] px-4 sm:mt-12 min-[1800px]:max-w-[1280px] min-[1800px]:px-0">
-        <div className="relative aspect-video overflow-hidden rounded-[22px]">
-          {isVideoPlaying ? (
-            <iframe
-              className="absolute inset-0 size-full"
-              src={`https://www.youtube.com/embed/${HERO_VIDEO_ID}?autoplay=1&rel=0`}
-              title="PLUS platform walkthrough"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          ) : (
-            <button
-              type="button"
-              onClick={() => setIsVideoPlaying(true)}
-              className="group absolute inset-0 size-full cursor-pointer"
-              aria-label="Play PLUS platform video"
-            >
-              {/* YouTube maxres thumbnail as poster */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`https://img.youtube.com/vi/${HERO_VIDEO_ID}/maxresdefault.jpg`}
-                alt=""
-                className="size-full object-cover"
+        {/* Figma `1791:3805` — video: same horizontal track as `TutorsHeroSection` (shell pad on outer wrapper). */}
+        <div className="relative z-10 mx-auto mt-10 w-full max-w-[1000px] sm:mt-12 min-[1800px]:max-w-[1280px]">
+          <div className="relative aspect-video overflow-hidden rounded-[22px]">
+            {isVideoPlaying ? (
+              <iframe
+                className="absolute inset-0 size-full"
+                src={`https://www.youtube.com/embed/${HERO_VIDEO_ID}?autoplay=1&rel=0`}
+                title="PLUS platform walkthrough"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
               />
-              {/* Dark overlay — Figma rgba(54,54,54,0.5) */}
-              <div
-                className="absolute inset-0 bg-[rgba(54,54,54,0.5)] transition-opacity group-hover:bg-[rgba(54,54,54,0.38)]"
-                aria-hidden
-              />
-              {/* Play button — Figma `1791:3797` icon-park-solid:play, 75px (not tied to card icon tokens). */}
-              <svg
-                className="absolute left-1/2 top-1/2 size-[75px] -translate-x-1/2 -translate-y-1/2 transition-transform group-hover:scale-110 drop-shadow-md"
-                viewBox="0 0 75 75"
-                fill="none"
-                aria-hidden
+            ) : (
+              <button
+                type="button"
+                onClick={() => setIsVideoPlaying(true)}
+                className="group absolute inset-0 size-full cursor-pointer"
+                aria-label="Play PLUS platform video"
               >
-                <circle cx="37.5" cy="37.5" r="37.5" fill="#a6edf4" fillOpacity="0.82" />
-                {/* Play triangle — optically centred with +2px right nudge */}
-                <path d="M30 22.5L54 37.5L30 52.5V22.5Z" fill="#004247" />
-              </svg>
-            </button>
-          )}
+                {/* YouTube maxres thumbnail as poster */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`https://img.youtube.com/vi/${HERO_VIDEO_ID}/maxresdefault.jpg`}
+                  alt=""
+                  className="size-full object-cover"
+                />
+                {/* Dark overlay — Figma rgba(54,54,54,0.5) */}
+                <div
+                  className="absolute inset-0 bg-[rgba(54,54,54,0.5)] transition-opacity group-hover:bg-[rgba(54,54,54,0.38)]"
+                  aria-hidden
+                />
+                {/* Play button — Figma `1791:3797` icon-park-solid:play, 75px (not tied to card icon tokens). */}
+                <svg
+                  className="absolute left-1/2 top-1/2 size-[75px] -translate-x-1/2 -translate-y-1/2 transition-transform group-hover:scale-110 drop-shadow-md"
+                  viewBox="0 0 75 75"
+                  fill="none"
+                  aria-hidden
+                >
+                  <circle cx="37.5" cy="37.5" r="37.5" fill="#a6edf4" fillOpacity="0.82" />
+                  {/* Play triangle — optically centred with +2px right nudge */}
+                  <path d="M30 22.5L54 37.5L30 52.5V22.5Z" fill="#004247" />
+                </svg>
+              </button>
+            )}
+          </div>
         </div>
       </div>
 

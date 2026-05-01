@@ -29,6 +29,15 @@ export const marketingShellNegatePadX =
 export const marketingWideShell = "min-[1800px]:max-w-7xl"
 
 /**
+ * Inset marketing shell for list + article views (`/about/news`, `/success-stories`,
+ * `/about/news/[id]`, `/success-stories/[id]`).
+ * Horizontal inset comes from `(marketing)/layout` (`marketingShellPadX`). Vertical padding
+ * matches `/for-schools` / `/for-tutors` body shells (`pb-16 pt-14 sm:… md:… min-[1800px]:…`).
+ */
+export const marketingListingShellClass =
+  "mx-auto flex w-full min-w-0 max-w-5xl flex-col gap-10 pb-16 pt-14 sm:gap-12 sm:pb-20 sm:pt-16 md:pb-24 md:pt-20 min-[1800px]:max-w-7xl min-[1800px]:gap-20 min-[1800px]:pb-32 min-[1800px]:pt-24"
+
+/**
  * Slightly increase type scale only for very large displays so page content does
  * not feel too small relative to viewport size.
  */

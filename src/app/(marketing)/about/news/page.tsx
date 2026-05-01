@@ -8,9 +8,11 @@ import {
   marketingCardLucideGlyphClass,
   marketingCardPaddingClass,
   marketingCardStackGapClass,
+  marketingSectionLeadColorClass,
 } from "@/lib/marketing-section-layout"
 import { fetchNews } from "@/lib/notion/queries/news"
 import type { NewsItem } from "@/lib/notion/types"
+import { marketingListingShellClass } from "@/lib/marketing-layout"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
@@ -88,12 +90,17 @@ export default async function NewsPage() {
 
   return (
     <main className="bg-background text-foreground">
-      <div className="mx-auto flex max-w-5xl flex-col gap-10 pb-8 pt-14 sm:gap-12 sm:pb-12 sm:pt-16 lg:gap-16 lg:pb-16 lg:pt-20 min-[1800px]:max-w-7xl min-[1800px]:gap-20 min-[1800px]:pb-24 min-[1800px]:pt-24">
+      <div className={marketingListingShellClass}>
         <div className="space-y-3">
           <h1 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             News
           </h1>
-          <p className="w-full max-w-none text-pretty text-base text-teal-900/75 lg:text-lg dark:text-white/90">
+          <p
+            className={cn(
+              "w-full max-w-none text-base lg:text-lg",
+              marketingSectionLeadColorClass,
+            )}
+          >
             Latest updates, media coverage, and announcements from PLUS.
           </p>
         </div>
