@@ -254,7 +254,7 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
 
   return (
     <div className="bg-white text-[#62636c]">
-      <div className="mx-auto flex max-w-5xl flex-col pb-24 pt-14 sm:pt-16 lg:pt-20 min-[1800px]:max-w-7xl min-[1800px]:pb-32 min-[1800px]:pt-24">
+      <div className="mx-auto flex max-w-5xl flex-col pb-12 pt-14 sm:pb-14 sm:pt-16 lg:pb-16 lg:pt-20 min-[1800px]:max-w-7xl min-[1800px]:pb-20 min-[1800px]:pt-24">
         <header className="mb-8 sm:mb-10">
           <h1 className="text-balance text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl md:text-4xl">
             Publications

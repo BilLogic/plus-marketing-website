@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import Script from "next/script"
 import "./globals.css"
 import { ScrollToTopButton } from "@/components/scroll-to-top-button"
@@ -10,13 +10,19 @@ export const metadata: Metadata = {
   description: "Plus marketing website",
 }
 
+/** Required for real mobile reflow; without it many browsers keep a ~980px layout width. */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="min-h-0">
       <head>
         {process.env.NEXT_PUBLIC_FIGMA_HTML_CAPTURE === "1" ? (
           <Script
@@ -35,7 +41,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body
-        className={`${dmSans.variable} ${geistMono.variable} antialiased`}
+        className={`${dmSans.variable} ${geistMono.variable} min-h-0 bg-background antialiased`}
         suppressHydrationWarning
       >
         <ThemeProvider

@@ -65,20 +65,18 @@ export const plusHomeImpactRowSchools = "/figma/home/impact-row-schools.png"
 export const plusHomeImpactRowTutors = "/figma/home/impact-row-tutors.png"
 
 /**
- * Figma `1714:1957` Smart Tech, Smarter Learning — pink bento + layered screenshots.
- * Layout: Supervisor + AI Tutor side-by-side (row 1), Collaborative Goal Setting full-width (row 2).
- * Goal row: two PNGs (`goalLeft` / `goalRight`) — Figma `2193:2400`, `2193:2436`.
+ * Figma `1714:1957` Smart Tech assets — supervisor / AI coaching rasters & icons + goal composite (`1714:1988`).
  */
 export const plusHomeSmartTech = {
-  goalLeft: "/figma/home/smarttech-goal-left.png",
-  goalRight: "/figma/home/smarttech-goal-right.png",
-  /** Supervisor — left donut `2193:2305`, right donut `2193:2314` inside `1714:1965` (526×423). */
+  /** Collaborative Goal Setting — flattened composite `1714:1988` (incl. form, pills, sparkles; shadows baked in export). */
+  goalComposite: "/figma/home/smarttech-goal-composite.png",
+  /** Supervisor — `2193:2305`, `2193:2314` inside `1714:1965` (526×423). */
   supervisorLayerBack: "/figma/home/smarttech-supervisor-back.png",
   supervisorLayerFront: "/figma/home/smarttech-supervisor-front.png",
-  /** AI tutor — stacked profile cards `2193:2378` → `2193:2356` → `2193:2326` inside `1714:1976`. */
-  aiTutorLayerBack: "/figma/home/smarttech-aitutor-layer-back.png",
-  aiTutorLayerMid: "/figma/home/smarttech-aitutor-layer-mid.png",
-  aiTutorLayerFront: "/figma/home/smarttech-aitutor-layer-front.png",
+  /** AI coaching — `1714:1976`; PNG alpha includes pill/header cutout — pair with CSS `drop-shadow()` on `<img>` */
+  aiCoachLayerBack: "/figma/home/smarttech-ai-coach-back.png",
+  aiCoachLayerMid: "/figma/home/smarttech-ai-coach-mid.png",
+  aiCoachLayerFront: "/figma/home/smarttech-ai-coach-front.png",
   iconSupervisor: "/figma/home/smarttech-icon-supervisor.svg",
   iconAiTutor: "/figma/home/smarttech-icon-aitutor.svg",
   iconGoal: "/figma/home/smarttech-icon-goal.svg",

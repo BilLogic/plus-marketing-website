@@ -13,7 +13,7 @@ export const getConsentPreferences = (): ConsentPreferences => {
     return { analytics: false, marketing: false }
   }
 
-  const raw = window.localStorage.getItem(CONSENT_STORAGE_KEY)
+  const raw = window.localStorage.getItem(CONSENT_STORAGE_KEY)?.trim()
 
   if (!raw) {
     return { analytics: false, marketing: false }

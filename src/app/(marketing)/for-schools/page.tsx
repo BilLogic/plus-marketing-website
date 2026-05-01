@@ -9,7 +9,7 @@ import {
   SchoolsSuccessStoriesSection,
   SchoolsRegisterCTA,
 } from "@/components/marketing/for-schools-sections"
-import { marketingSectionStackGap } from "@/lib/marketing-layout"
+import { marketingSectionStackGap, marketingShellNegatePadX } from "@/lib/marketing-layout"
 import {
   fetchSuccessStories,
   selectSuccessStoriesForSchoolsPage,
@@ -31,7 +31,10 @@ const ForSchoolsPage = async () => {
 
   return (
     <>
-      <SchoolsHeroSection />
+      {/* Break hero out of layout horizontal padding — same shell pattern as homepage (`page.tsx`). */}
+      <div className={marketingShellNegatePadX}>
+        <SchoolsHeroSection />
+      </div>
       <div
         className={cn(
           "mx-auto flex max-w-5xl flex-col pb-16 pt-14 sm:pb-20 sm:pt-16 md:pb-24 md:pt-20 min-[1800px]:max-w-7xl min-[1800px]:pb-32 min-[1800px]:pt-24",

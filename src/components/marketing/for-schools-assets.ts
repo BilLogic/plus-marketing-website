@@ -66,6 +66,8 @@ export const forSchoolsAssets = {
       "/figma/for-schools/oversight-icon-4.svg",
     ] as const,
   },
+  /** Figma `1877:2254` / `2273:2568` — pink “=” character beside oversight intro. */
+  oversightHeaderEqual: "/figma/for-schools/oversight-header-equal.png",
   /**
    * Robust Oversight sticky cards — right-hand panel art, Figma node 1379-2353 (IA export).
    * Order matches cards: curriculum, data dashboard, credentials, math tools.

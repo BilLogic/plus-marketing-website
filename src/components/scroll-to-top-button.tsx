@@ -1,12 +1,18 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { createPortal } from "react-dom"
 
 import { cn } from "@/lib/utils"
 
 /** Figma `1889:3826` — 74×74 circle `#a6edf4`; icon `1889:3827` 40×40 with ~20.83% inset per file. */
 export const ScrollToTopButton = () => {
+  const [mounted, setMounted] = useState(false)
   const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 300)
@@ -19,7 +25,7 @@ export const ScrollToTopButton = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
-  return (
+  const node = (
     <button
       type="button"
       onClick={handleClick}
@@ -48,4 +54,7 @@ export const ScrollToTopButton = () => {
       </span>
     </button>
   )
+
+  if (!mounted) return null
+  return createPortal(node, document.body)
 }

@@ -293,11 +293,17 @@
   * {
     @apply border-border outline-ring/50;
   }
+  /* Root paint matches body so overscroll doesn't flash a mismatched canvas.
+   * Avoid overflow-x on html/body — it breaks `position: sticky` + scroll-pin sections
+   * (e.g. For Schools Benefits / Oversight). overscroll-* only affects bounce/chaining past the scroll edge.
+   */
+  html {
+    @apply bg-background font-sans;
+    overscroll-behavior-y: none;
+  }
   body {
     @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
+    overscroll-behavior-y: none;
   }
 
   /*

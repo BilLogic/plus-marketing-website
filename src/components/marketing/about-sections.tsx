@@ -991,7 +991,7 @@ const successStoryReadLinkBlueClass =
   "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-[#007EB8] no-underline transition-opacity hover:opacity-90 dark:text-sky-300"
 
 /**
- * Cycles pink → blue → amber for each success-story card (Notion + placeholders).
+ * Cycles pink → blue → amber for each success-story card from Notion.
  * Shell/accent tokens match **Success Stories** (pink), **Foundations We Build Upon** (blue),
  * and **Latest at PLUS** (amber) on this page.
  */
@@ -1026,34 +1026,6 @@ function successStoryThemeAt(index: number) {
   return SUCCESS_STORY_CARD_THEMES[index % SUCCESS_STORY_CARD_THEMES.length]!
 }
 
-/** Quote lines aligned with homepage testimonials (`PlusVoicesSection`). */
-const SUCCESS_CARDS = [
-  {
-    title: "Boosting Confidence in Math",
-    icon: Sparkles,
-    quoteLead:
-      "Tutoring has affected me and it made me realize if I didn't get the help I needed I would still be struggling. But it made me see",
-    quoteHighlight: "math differently in a good way",
-    quoteTail: ".",
-  },
-  {
-    title: "Empowering Teachers with Data",
-    icon: BarChart3,
-    quoteLead:
-      "My students were able to understand concepts more easily than before due to the",
-    quoteHighlight: "one-to-one help",
-    quoteTail: ". My students' math confidence has also increased!",
-  },
-  {
-    title: "Bounding Students Across Schools",
-    icon: BookOpen,
-    quoteLead:
-      "The students' reactions speak for themselves. They look forward to the tutoring sessions. It's not just about math. It's about relationships. It's about",
-    quoteHighlight: "building confidence",
-    quoteTail: ".",
-  },
-] as const
-
 const CATEGORY_ICON: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
   Schools: School,
   Tutors: GraduationCap,
@@ -1062,7 +1034,8 @@ const CATEGORY_ICON: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
 }
 
 export function AboutSuccessStoriesSection({ stories = [] }: { stories?: SuccessStory[] }) {
-  const hasNotionData = stories.length > 0
+  if (stories.length === 0) return null
+
   return (
     <section
       id={aboutSectionIds.successStories}
@@ -1075,121 +1048,70 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
         </p>
       </AboutSectionTitleWithDecor>
       <div className={cn("flex flex-col", marketingCardStackGapClass)}>
-        {hasNotionData
-          ? stories.slice(0, 3).map((story, index) => {
-              const theme = successStoryThemeAt(index)
-              const Icon = CATEGORY_ICON[story.category] ?? Sparkles
-              return (
-                <article
-                  key={story.id}
-                  className={cn(
-                    "flex h-full flex-col rounded-[30px]",
-                    theme.shell,
-                    marketingCardPaddingClass,
-                  )}
-                >
-                  <div
-                    className={cn(
-                      "flex min-h-0 flex-1 flex-col rounded-3xl bg-white dark:bg-card",
-                      marketingCardPaddingClass,
-                    )}
-                  >
-                    <div className={marketingCardLhAlignedHeaderRowClass}>
-                      <span
-                        className={cn(
-                          marketingCardIconTitleRowOffsetClass,
-                          marketingCardIconCircleClass,
-                          "shrink-0",
-                          theme.iconCircle,
-                        )}
-                      >
-                        <Icon className={marketingCardLucideGlyphClass} aria-hidden />
-                      </span>
-                      <h3 className={cn(aboutCardTitle, "min-w-0 flex-1", theme.title)}>
-                        {story.title}
-                      </h3>
-                    </div>
-                    {story.quote ? (
-                      <p className={cn(aboutCardBody, "mt-4 min-h-0 flex-1 text-pretty italic text-muted-foreground")}>
-                        &ldquo;{story.quote}&rdquo;
-                        {story.quoteAttribution && (
-                          <span
-                            className={cn(
-                              "mt-2 block not-italic font-medium",
-                              theme.attribution,
-                            )}
-                          >
-                            — {story.quoteAttribution}
-                          </span>
-                        )}
-                      </p>
-                    ) : (
-                      <p className={cn(aboutCardBody, "mt-4 min-h-0 flex-1 text-pretty text-muted-foreground")}>
-                        {story.summary}
-                      </p>
-                    )}
-                  </div>
-                  <Link
-                    href="/success-stories"
-                    className={theme.readLink}
-                    aria-label={`Read story: ${story.title}`}
-                  >
-                    <span>Read story</span>
-                    <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
-                  </Link>
-                </article>
-              )
-            })
-          : SUCCESS_CARDS.map(({ title, icon: Icon, quoteLead, quoteHighlight, quoteTail }, index) => {
-              const theme = successStoryThemeAt(index)
-              return (
-              <article
-                key={title}
+        {stories.slice(0, 3).map((story, index) => {
+          const theme = successStoryThemeAt(index)
+          const Icon = CATEGORY_ICON[story.category] ?? Sparkles
+          return (
+            <article
+              key={story.id}
+              className={cn(
+                "flex h-full flex-col rounded-[30px]",
+                theme.shell,
+                marketingCardPaddingClass,
+              )}
+            >
+              <div
                 className={cn(
-                  "flex h-full flex-col rounded-[30px]",
-                  theme.shell,
+                  "flex min-h-0 flex-1 flex-col rounded-3xl bg-white dark:bg-card",
                   marketingCardPaddingClass,
                 )}
               >
-                <div
-                  className={cn(
-                    "flex min-h-0 flex-1 flex-col rounded-3xl bg-white dark:bg-card",
-                    marketingCardPaddingClass,
-                  )}
-                >
-                  <div className={marketingCardLhAlignedHeaderRowClass}>
-                    <span
-                      className={cn(
-                        marketingCardIconTitleRowOffsetClass,
-                        marketingCardIconCircleClass,
-                        "shrink-0",
-                        theme.iconCircle,
-                      )}
-                    >
-                      <Icon className={marketingCardLucideGlyphClass} aria-hidden />
-                    </span>
-                    <h3 className={cn(aboutCardTitle, "min-w-0 flex-1", theme.title)}>
-                      {title}
-                    </h3>
-                  </div>
-                  <p className={cn(aboutCardBody, "mt-4 min-h-0 flex-1 text-pretty italic text-muted-foreground")}>
-                    &ldquo;{quoteLead}{" "}
-                    <strong className={cn("font-bold italic", theme.quoteStrong)}>{quoteHighlight}</strong>
-                    {quoteTail}&rdquo;
-                  </p>
+                <div className={marketingCardLhAlignedHeaderRowClass}>
+                  <span
+                    className={cn(
+                      marketingCardIconTitleRowOffsetClass,
+                      marketingCardIconCircleClass,
+                      "shrink-0",
+                      theme.iconCircle,
+                    )}
+                  >
+                    <Icon className={marketingCardLucideGlyphClass} aria-hidden />
+                  </span>
+                  <h3 className={cn(aboutCardTitle, "min-w-0 flex-1", theme.title)}>
+                    {story.title}
+                  </h3>
                 </div>
-                <Link
-                  href="/success-stories"
-                  className={theme.readLink}
-                  aria-label={`Read story: ${title}`}
-                >
-                  <span>Read story</span>
-                  <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
-                </Link>
-              </article>
-              )
-            })
-        }
+                {story.quote ? (
+                  <p className={cn(aboutCardBody, "mt-4 min-h-0 flex-1 text-pretty italic text-muted-foreground")}>
+                    &ldquo;{story.quote}&rdquo;
+                    {story.quoteAttribution && (
+                      <span
+                        className={cn(
+                          "mt-2 block not-italic font-medium",
+                          theme.attribution,
+                        )}
+                      >
+                        — {story.quoteAttribution}
+                      </span>
+                    )}
+                  </p>
+                ) : (
+                  <p className={cn(aboutCardBody, "mt-4 min-h-0 flex-1 text-pretty text-muted-foreground")}>
+                    {story.summary}
+                  </p>
+                )}
+              </div>
+              <Link
+                href="/success-stories"
+                className={theme.readLink}
+                aria-label={`Read story: ${story.title}`}
+              >
+                <span>Read story</span>
+                <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
+              </Link>
+            </article>
+          )
+        })}
       </div>
     </section>
   )

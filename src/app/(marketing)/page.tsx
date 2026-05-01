@@ -5,7 +5,10 @@ import {
   PlusSmartTechSection,
   PlusVoicesSection,
 } from "@/components/marketing/plus-landing-sections"
-import { marketingSectionStackGap } from "@/lib/marketing-layout"
+import {
+  marketingSectionStackGap,
+  marketingShellNegatePadX,
+} from "@/lib/marketing-layout"
 import { cn } from "@/lib/utils"
 
 /** Space between full-bleed hero and the first in-shell section (Impact). */
@@ -28,7 +31,7 @@ const Home = () => {
   return (
     <>
       {/* Break hero out of the layout's horizontal padding so bg-white spans full viewport width */}
-      <div className="-mx-8 sm:-mx-14">
+      <div className={marketingShellNegatePadX}>
         <PlusHeroSection />
       </div>
       <div className={homePageShellClassName}>

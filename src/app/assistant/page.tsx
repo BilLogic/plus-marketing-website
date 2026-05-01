@@ -13,7 +13,7 @@ const AssistantPage = () => {
   }, [])
 
   return (
-    <main className="bg-background text-foreground">
+    <main className="flex min-h-0 flex-1 flex-col bg-background text-foreground">
       <div className="mx-auto flex min-h-screen max-w-4xl flex-col gap-8 px-4 pb-16 pt-10 sm:px-6 md:px-8 md:pt-14">
         <header className="space-y-3">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">

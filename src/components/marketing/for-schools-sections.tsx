@@ -281,8 +281,8 @@ export const SchoolsTrainingSection = () => {
         />
       </div>
 
-      {/* Phone: full list — amber card per item */}
-      <div className={cn("flex flex-col sm:hidden", marketingCardStackGapClass)}>
+      {/* Below md: stacked amber cards (+ art); at md+ match two-column Benefits + sticky panel */}
+      <div className={cn("flex flex-col md:hidden", marketingCardStackGapClass)}>
         {FOR_SCHOOLS_BENEFITS_ITEMS.map((item, i) => (
           <article
             key={item.id}
@@ -326,10 +326,10 @@ export const SchoolsTrainingSection = () => {
         ))}
       </div>
 
-      {/* sm+: two-column (intro + lead are above this grid so art never sits beside the h2) */}
+      {/* md+: spy + sticky art — activate grid only when both columns participate (right is `md:flex`). */}
       <div
         className={cn(
-          "relative z-0 hidden grid-cols-1 items-stretch sm:grid md:grid-cols-2 md:gap-12 lg:gap-16",
+          "relative z-0 hidden min-w-0 grid-cols-1 items-stretch md:grid md:grid-cols-2 md:gap-12 lg:gap-16",
           marketingCardStackGapClass,
         )}
       >
@@ -579,6 +579,7 @@ export const SchoolsExperienceSection = () => {
   )
 }
 
+
 /**
  * Robust Oversight — card uses `marketingCardPaddingClass`; inner grid stretches so the
  * text column fills the row height: icon + title + body flush to top inset, CTA flush to bottom.
@@ -593,7 +594,7 @@ const OVERSIGHT_CARD_ROW =
 const OVERSIGHT_LEFT =
   "flex w-full min-w-0 shrink-0 flex-row items-stretch gap-[25px] md:h-full md:min-h-0 md:max-w-[553px]"
 const OVERSIGHT_COPY =
-  "flex min-h-0 min-w-0 w-full max-w-[420px] flex-1 flex-col justify-between"
+  "flex min-h-0 min-w-0 w-full max-w-[420px] flex-1 flex-col gap-5 sm:gap-6 md:gap-0 md:justify-between"
 const OVERSIGHT_TITLE_BODY = "flex w-full flex-col gap-4"
 /** min-h matches the icon so the title text is vertically centred with it. */
 const OVERSIGHT_TITLE_WRAP = "flex min-h-[48px] w-full items-center"
@@ -611,9 +612,9 @@ const OVERSIGHT_CARDS = [
       "We work with your faculty to tailor lesson strategies that complement your school’s specific learning objectives and standards.",
     cta: "Get training",
     href: "/get-involved#partnerships-contact-form",
-    bgColor: "bg-[#ffe8f5]",
-    titleColor: "text-[#d31998]",
-    btnBg: "bg-[#d31998]",
+    bgColor: "bg-[#ffeaea]",
+    titleColor: "text-[#c05053]",
+    btnBg: "bg-[#ff8789]",
     btnText: "text-white",
     icon: forSchoolsAssets.icons.oversight[0],
     image: forSchoolsAssets.oversightCardImages[0],
@@ -857,11 +858,13 @@ export const SchoolsOversightSection = () => {
         </div>
         <img
           alt=""
-          src={forTutorsAssets.compensationDecor}
+          src={forSchoolsAssets.oversightHeaderEqual}
           className={cn(
-            marketingSectionHeaderDecorImgClass,
+            "pointer-events-none hidden h-[104px] w-auto max-w-[150px] shrink-0 object-contain opacity-90 select-none md:block md:h-[118px] md:max-w-[170px]",
             marketingSectionHeaderDecorAbsoluteClass,
           )}
+          width={467}
+          height={371}
           aria-hidden
         />
       </motion.div>
@@ -883,6 +886,7 @@ export const SchoolsOversightSection = () => {
         */
         <div
           ref={containerRef}
+          className="min-w-0"
           style={{ height: `${OVERSIGHT_CARDS.length * OVERSIGHT_SCROLL_VH_PER_CARD}vh` }}
         >
           {/* stickyTop is measured so the card stack's midpoint lands at the
@@ -909,8 +913,9 @@ export const SchoolsOversightSection = () => {
 
 const SCHOOLS_SUCCESS_STORY_GREEN = "text-[#007d49]"
 
+/** Notion-backed school stories — omitted entirely when `stories` is empty (no footer gap). */
 export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStory[] }) => {
-  const titleIcon = forSchoolsAssets.successStories.cardTitleIcon
+  if (stories.length === 0) return null
 
   return (
     <section
@@ -937,13 +942,8 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
         />
       </div>
 
-      {stories.length === 0 ? (
-        <p className="text-pretty text-sm text-muted-foreground">
-          Success stories will appear here when available.
-        </p>
-      ) : (
-        <div className={cn("flex flex-col", marketingCardStackGapClass)}>
-          {stories.map((story) => {
+      <div className={cn("flex flex-col", marketingCardStackGapClass)}>
+        {stories.map((story) => {
             const readUrl = notionSuccessStoryPublicReadUrl(story)
             const quoteParts = story.quote ? splitSuccessStoryQuote(story.quote) : null
 
@@ -1027,9 +1027,8 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                 </a>
               </article>
             )
-          })}
-        </div>
-      )}
+        })}
+      </div>
     </section>
   )
 }

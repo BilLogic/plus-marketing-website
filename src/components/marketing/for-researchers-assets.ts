@@ -27,24 +27,6 @@ export const forResearchersAssets = {
   },
   highlights: {
     decor: "/figma/for-researchers/highlights-decor.png",
-    /**
-     * Figma `1815:2160` — 24×24 publication row icons (exported SVG, stroke matches each theme).
-     * Order is left card, right card within each accordion panel.
-     */
-    studyPublicationIcons: {
-      "student-learning": [
-        "/figma/for-researchers/highlight-study-student-0.svg",
-        "/figma/for-researchers/highlight-study-student-1.svg",
-      ],
-      "gen-ai": [
-        "/figma/for-researchers/highlight-study-gen-ai-0.svg",
-        "/figma/for-researchers/highlight-study-gen-ai-1.svg",
-      ],
-      "tutor-training": [
-        "/figma/for-researchers/highlight-study-tutor-0.svg",
-        "/figma/for-researchers/highlight-study-tutor-1.svg",
-      ],
-    } as const,
   },
   index: {
     decor: "/figma/for-researchers/index-decor.png",

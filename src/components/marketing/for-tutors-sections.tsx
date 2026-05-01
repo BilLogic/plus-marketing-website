@@ -907,30 +907,6 @@ const tutorVoiceReadStoryClass =
 /** Avatar + name — same 64px disc + `gap-3` row as homepage `PlusVoicesSection` testimonials. */
 const tutorVoicesAvatarRowClass = "flex w-full shrink-0 items-center gap-3"
 
-const TUTOR_TESTIMONIAL_VOICES = [
-  {
-    name: "PLUS Tutor A",
-    quoteLead:
-      "The students' reactions speak for themselves. They look forward to the tutoring sessions. It's not just about math. ",
-    quoteHighlight: "It's about relationships and about building confidence.",
-    quoteTail: "",
-  },
-  {
-    name: "PLUS Tutor B",
-    quoteLead:
-      "Tutoring has affected me and it made me realize if I didn't get the help I needed I would still be struggling. But it made me see ",
-    quoteHighlight: "math differently in a good way",
-    quoteTail: ".",
-  },
-  {
-    name: "PLUS Tutor C",
-    quoteLead:
-      "My students were able to understand concepts more easily than before due to the ",
-    quoteHighlight: "one-to-one help",
-    quoteTail: ". My students' math confidence has also increased!",
-  },
-] as const
-
 /** Tutor voice card — tinted shell and inner white both use `marketingCardPaddingClass` (matches About success stories). */
 function TutorVoiceCard({
   name,
@@ -997,11 +973,11 @@ function TutorVoiceCard({
 }
 
 /**
- * Voices from Our Tutors — For Schools Success Stories layout (Bundui grid), tutor copy + heading.
- * Accepts Notion-fetched tutor success stories; falls back to placeholder data when none are available.
+ * Voices from Our Tutors — Notion-backed **Tutors** category only (`fetchTutorTestimonials`).
+ * Returns `null` when there are no stories so the layout ends at the preceding section + footer with no spacer.
  */
 export const TutorsTestimonialsSection = ({ stories = [] }: { stories?: SuccessStory[] }) => {
-  const hasNotionData = stories.length > 0
+  if (stories.length === 0) return null
 
   return (
     <section className="relative" id="tutor-testimonials">
@@ -1034,27 +1010,16 @@ export const TutorsTestimonialsSection = ({ stories = [] }: { stories?: SuccessS
           </div>
         </div>
         <div className={cn("grid md:grid-cols-3 md:items-stretch", marketingCardStackGapClass)}>
-          {hasNotionData
-            ? stories.map((story, index) => (
-                <TutorVoiceCard
-                  key={story.id}
-                  name={story.quoteAttribution ?? story.title}
-                  quoteLead={story.quote ?? ""}
-                  quoteHighlight=""
-                  quoteTail=""
-                  avatarUrl={story.coverImage ?? forSchoolsAssets.avatars[index % forSchoolsAssets.avatars.length]!}
-                />
-              ))
-            : TUTOR_TESTIMONIAL_VOICES.map((story, index) => (
-                <TutorVoiceCard
-                  key={story.name}
-                  name={story.name}
-                  quoteLead={story.quoteLead}
-                  quoteHighlight={story.quoteHighlight}
-                  quoteTail={story.quoteTail}
-                  avatarUrl={forSchoolsAssets.avatars[index]!}
-                />
-              ))}
+          {stories.map((story, index) => (
+              <TutorVoiceCard
+                key={story.id}
+                name={story.quoteAttribution ?? story.title}
+                quoteLead={story.quote ?? ""}
+                quoteHighlight=""
+                quoteTail=""
+                avatarUrl={story.coverImage ?? forSchoolsAssets.avatars[index % forSchoolsAssets.avatars.length]!}
+              />
+            ))}
         </div>
       </div>
     </section>

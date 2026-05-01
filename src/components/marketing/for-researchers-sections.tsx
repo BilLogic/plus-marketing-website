@@ -1,9 +1,9 @@
 "use client"
 
-import { ArrowRight, BookOpen, ChevronRight, CircleQuestionMark, Search } from "lucide-react"
+import { ArrowRight, BookOpen, ChevronRight, Search } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 
 import {
   Accordion,
@@ -44,8 +44,10 @@ import {
 } from "@/lib/marketing-section-layout"
 import { cn } from "@/lib/utils"
 import { marketingTypography } from "@/lib/marketing-typography"
+import { useMarketingStickyPanelTop } from "@/lib/use-marketing-sticky-panel-top"
 import { forResearchersSectionIds } from "@/lib/plus-footer-ia"
 import { forResearchersAssets } from "@/components/marketing/for-researchers-assets"
+import { ResearchHighlightStudyLucideIcon } from "@/components/marketing/research-highlight-study-icons"
 import { forTutorsAssets } from "@/components/marketing/for-tutors-assets"
 import {
   RESEARCH_GENRE_TAGS,
@@ -95,6 +97,15 @@ const RESEARCH_HIGHLIGHT_TOPICS = [
 
 type ResearchHighlightTopicId = (typeof RESEARCH_HIGHLIGHT_TOPICS)[number]["id"]
 
+/** Spy column body copy — short theme summary (not pulled from individual papers). */
+const HIGHLIGHT_SPY_THEME_LEAD: Record<ResearchHighlightTopicId, string> = {
+  "student-learning":
+    "How learners build understanding with feedback, practice, and human-centered support.",
+  "gen-ai": "Generative AI for math tutoring—tools, safeguards, and real classroom use.",
+  "tutor-training":
+    "Training and guidance that help tutors lead strong human–AI tutoring sessions.",
+}
+
 /**
  * Figma `1730:2003` — collapsed row: neutral grays.
  * Figma `1732:3337` Variant2 — open row: accent icon/title/chevron; study tiles shell + inner white (`1732:3394`).
@@ -105,6 +116,9 @@ const HIGHLIGHT_TOPIC_THEME: Record<
     contentLinkHover: string
     openTitle: string
     openChevron: string
+    /** Title accent when spy row / mobile row is active. */
+    titleWhenOpen: string
+    chevronWhenOpen: string
     openIconDisc: string
     openIconGlyph: string
     studyShellBg: string
@@ -116,6 +130,8 @@ const HIGHLIGHT_TOPIC_THEME: Record<
     contentLinkHover: "hover:[&_a]:text-[#c05053]",
     openTitle: "group-aria-expanded/accordion-trigger:text-[#c05053]",
     openChevron: "group-aria-expanded/accordion-trigger:text-[#c05053]",
+    titleWhenOpen: "text-[#c05053]",
+    chevronWhenOpen: "text-[#c05053]",
     openIconDisc: "#c05053",
     openIconGlyph: "#ffffff",
     studyShellBg: "bg-[#fff7f7]",
@@ -126,6 +142,8 @@ const HIGHLIGHT_TOPIC_THEME: Record<
     contentLinkHover: "hover:[&_a]:text-[#0080b4]",
     openTitle: "group-aria-expanded/accordion-trigger:text-[#0080b4]",
     openChevron: "group-aria-expanded/accordion-trigger:text-[#0080b4]",
+    titleWhenOpen: "text-[#0080b4]",
+    chevronWhenOpen: "text-[#0080b4]",
     openIconDisc: "#0080b4",
     openIconGlyph: "#ffffff",
     studyShellBg: "bg-[#e0f5fe]",
@@ -136,6 +154,8 @@ const HIGHLIGHT_TOPIC_THEME: Record<
     contentLinkHover: "hover:[&_a]:text-[#007d49]",
     openTitle: "group-aria-expanded/accordion-trigger:text-[#007d49]",
     openChevron: "group-aria-expanded/accordion-trigger:text-[#007d49]",
+    titleWhenOpen: "text-[#007d49]",
+    chevronWhenOpen: "text-[#007d49]",
     openIconDisc: "#007d49",
     openIconGlyph: "#ffffff",
     studyShellBg: "bg-[#f4fbf6]",
@@ -180,12 +200,6 @@ const sectionHeaderDecorImgClass = cn(
 )
 
 const SUCCESS_STORY_GREEN = "text-[#007d49] dark:text-emerald-300"
-
-/** “Read story” row — same hover as About `successStoryReadLinkClass` (opacity + arrow nudge); green accent for researchers. */
-const researchSuccessStoryReadLinkClass = cn(
-  "group ml-auto inline-flex w-fit cursor-pointer items-center gap-2 text-lg font-medium no-underline transition-opacity hover:opacity-90",
-  SUCCESS_STORY_GREEN,
-)
 
 /** Teal outline pill — Research Index “View all” / empty-state link. */
 const forResearchersOutlineCtaClassName =
@@ -412,10 +426,13 @@ function highlightPublishTime(paper: ResearchPaper): number {
   return Number.isNaN(t) ? 0 : t
 }
 
+/** Papers per theme for highlight carousel (single visible + “Next study”). */
+const HIGHLIGHT_TOPIC_CAROUSEL_LIMIT = 8
+
 function pickHighlightStudies(
   papers: ResearchPaper[],
   genre: ResearchGenreTag,
-  limit = 2
+  limit = HIGHLIGHT_TOPIC_CAROUSEL_LIMIT
 ): ResearchPaper[] {
   return [...papers]
     .filter((p) => (p.topics ?? []).includes(genre))
@@ -434,17 +451,21 @@ function pickStudiesForHighlightTopic(
     for (const id of curated) {
       const p = byId.get(id)
       if (p) chosen.push(p)
-      if (chosen.length >= 2) return chosen
+      if (chosen.length >= HIGHLIGHT_TOPIC_CAROUSEL_LIMIT) return chosen
     }
   }
   const exclude = new Set(chosen.map((p) => p.id))
   const filler = pickHighlightStudies(
     papers.filter((p) => !exclude.has(p.id)),
     topic.genre,
-    2 - chosen.length
+    HIGHLIGHT_TOPIC_CAROUSEL_LIMIT - chosen.length
   )
   return [...chosen, ...filler]
 }
+
+const INITIAL_STUDY_INDEX_BY_TOPIC = Object.fromEntries(
+  RESEARCH_HIGHLIGHT_TOPICS.map((t) => [t.id, 0]),
+) as Record<ResearchHighlightTopicId, number>
 
 /**
  * Figma highlight row icons — inline SVG so disc + strokes match each topic accent (external `<img>`
@@ -570,98 +591,108 @@ function ResearchHighlightTopicIcon({
   )
 }
 
-/** Figma `1815:2160` — same SVG exports as the file (not Lucide approximations). */
-function HighlightStudyPublicationIcon({
-  topicId,
-  studyIndex,
-  className,
-}: {
-  topicId: ResearchHighlightTopicId
-  studyIndex: number
-  className?: string
-}) {
-  const row = forResearchersAssets.highlights.studyPublicationIcons[topicId]
-  const src = row[Math.min(Math.max(studyIndex, 0), row.length - 1)]
-  return (
-    <img
-      src={src}
-      alt=""
-      width={24}
-      height={24}
-      decoding="async"
-      className={cn("size-6 shrink-0 object-contain", className)}
-      aria-hidden
-    />
-  )
-}
+/**
+ * Highlights study tiles: baseline height via min-h so short stacks stay vertically centered.
+ * Title is never clipped (no max-height, no overflow on title). Only the description scrolls when long.
+ */
+const HIGHLIGHT_STUDY_CARD_MIN_H =
+  "min-h-[22rem] sm:min-h-[24rem] md:min-h-[25rem] lg:min-h-[26rem]"
+const HIGHLIGHT_STUDY_DESC_SCROLL_MAX_H =
+  "max-h-[min(11.5rem,34svh)] sm:max-h-[min(13rem,38svh)]"
 
 /** Figma `1732:3394` / `1732:3337` — tinted shell, white inner, footer “Read study →”. */
 function HighlightStudyCard({
   paper,
   topicId,
-  studyIndex,
 }: {
   paper: ResearchPaper
   topicId: ResearchHighlightTopicId
-  studyIndex: number
 }) {
   const theme = HIGHLIGHT_TOPIC_THEME[topicId]
   const summary = riPublicationDescription(paper)
   const shellClass = cn(
-    "group flex h-full min-h-[22rem] w-full min-w-0 flex-col gap-2.5 rounded-[30px] text-left no-underline outline-none transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-offset-2 sm:min-h-[24rem]",
+    HIGHLIGHT_STUDY_CARD_MIN_H,
+    "group flex w-full min-w-0 flex-col gap-2 rounded-[26px] text-left no-underline outline-none transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-offset-2",
     marketingCardPaddingClass,
     theme.studyShellBg,
     theme.studyFocusRing
   )
+  const titleRow = (
+    <div className="flex w-full min-w-0 items-start gap-2.5">
+      <ResearchHighlightStudyLucideIcon
+        paper={paper}
+        topicId={topicId}
+        className={cn("mt-1 shrink-0", theme.studyAccentText)}
+      />
+      <p
+        className={cn(
+          "min-w-0 flex-1 text-pretty [overflow-wrap:anywhere]",
+          marketingTypography.bentoTitle,
+          theme.studyAccentText,
+        )}
+      >
+        {paper.title}
+      </p>
+    </div>
+  )
   const inner = (
     <>
+      <div
+        className={cn(
+          "flex min-h-0 flex-1 flex-col justify-center overflow-hidden rounded-[26px] bg-white",
+          marketingCardPaddingClass,
+        )}
+      >
         <div
           className={cn(
-            "flex min-h-0 flex-1 flex-col justify-center overflow-hidden rounded-[30px] bg-white",
-            marketingCardPaddingClass,
+            "flex w-full max-h-full min-h-0 flex-col justify-center overflow-hidden text-left",
+            marketingCardStackGapClass,
           )}
         >
-        <div className={cn("flex w-full min-w-0 flex-col", marketingCardStackGapClass)}>
-          <div
-            className={cn(
-              "flex shrink-0 items-start gap-2.5",
-              marketingCardLhHeaderRowLeadPaddingClass,
-            )}
-          >
-            <HighlightStudyPublicationIcon
-              topicId={topicId}
-              studyIndex={studyIndex}
-              className="mt-1 shrink-0"
-            />
-            <p
-              className={cn(
-                "min-w-0 flex-1 text-pretty",
-                marketingTypography.bentoTitle,
-                theme.studyAccentText
-              )}
-            >
-              {paper.title}
-            </p>
-          </div>
           {summary ? (
-            <div className="max-h-[min(50%,12.5rem)] w-full min-w-0 overflow-y-auto overscroll-y-contain [-webkit-overflow-scrolling:touch] sm:max-h-[min(50%,15rem)]">
-              <p
+            <>
+              <div
                 className={cn(
-                  "text-pretty text-muted-foreground",
-                  riIndexMetaCopy
+                  "flex w-full shrink-0 flex-col gap-2",
+                  marketingCardLhHeaderRowLeadPaddingClass,
                 )}
               >
-                {summary}
-              </p>
+                {titleRow}
+              </div>
+              <div
+                className={cn(
+                  "w-full shrink-0 overflow-y-auto overscroll-y-contain [-webkit-overflow-scrolling:touch]",
+                  HIGHLIGHT_STUDY_DESC_SCROLL_MAX_H,
+                )}
+                tabIndex={0}
+              >
+                <p
+                  className={cn(
+                    "w-full max-w-none text-pretty text-muted-foreground",
+                    riIndexMetaCopy,
+                  )}
+                >
+                  {summary}
+                </p>
+              </div>
+            </>
+          ) : (
+            <div
+              className={cn(
+                "w-full shrink-0 text-left",
+                marketingCardLhHeaderRowLeadPaddingClass,
+              )}
+            >
+              {titleRow}
             </div>
-          ) : null}
+          )}
         </div>
       </div>
       <span
         className={cn(
           "flex shrink-0 items-center justify-end gap-2.5",
           marketingTypography.body,
-          theme.studyAccentText
+          theme.studyAccentText,
         )}
       >
         Read study
@@ -692,6 +723,115 @@ function HighlightStudyCard({
   )
 }
 
+/** One study + optional “Next study”; `activeStudyIndex` is owned by parent so spy blurbs stay in sync. */
+function HighlightStudiesCarousel({
+  topicId,
+  studies,
+  activeStudyIndex,
+  onNextStudy,
+  className,
+}: {
+  topicId: ResearchHighlightTopicId
+  studies: ResearchPaper[]
+  /** Clamped modulo list length inside. */
+  activeStudyIndex: number
+  onNextStudy: () => void
+  className?: string
+}) {
+  const theme = HIGHLIGHT_TOPIC_THEME[topicId]
+  if (studies.length === 0) {
+    return (
+      <p className={cn("text-pretty text-base text-muted-foreground", className)}>
+        <Link
+          href="/research"
+          className="font-medium text-[#027f89] underline-offset-4 hover:underline"
+        >
+          Browse all research
+        </Link>{" "}
+        for papers in this theme.
+      </p>
+    )
+  }
+  const n = studies.length
+  const idx = ((activeStudyIndex % n) + n) % n
+  const paper = studies[idx]!
+  return (
+    <div className={cn("flex w-full min-w-0 flex-col gap-4", className)}>
+      <HighlightStudyCard paper={paper} topicId={topicId} />
+      {n > 1 ? (
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-sm text-muted-foreground" aria-live="polite">
+            Study {idx + 1} of {n}
+          </p>
+          <button
+            type="button"
+            onClick={onNextStudy}
+            className={cn(
+              "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-colors",
+              "bg-muted/70 text-foreground hover:bg-muted",
+              theme.studyAccentText,
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+              theme.studyFocusRing,
+            )}
+          >
+            Next study
+            <ChevronRight className="size-4 shrink-0" strokeWidth={2} aria-hidden />
+          </button>
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
+/** All studies — `?highlights=all` accordion screenshots. */
+function HighlightStudiesBlock({
+  topicId,
+  studies,
+  gridClassName,
+}: {
+  topicId: ResearchHighlightTopicId
+  studies: ResearchPaper[]
+  gridClassName?: string
+}) {
+  if (studies.length === 0) {
+    return (
+      <p className="text-pretty text-base text-muted-foreground">
+        <Link
+          href="/research"
+          className="font-medium text-[#027f89] underline-offset-4 hover:underline"
+        >
+          Browse all research
+        </Link>{" "}
+        for papers in this theme.
+      </p>
+    )
+  }
+  return (
+    <div
+      className={cn(
+        "grid grid-cols-1 items-stretch sm:grid-cols-2",
+        marketingCardStackGapClass,
+        gridClassName,
+      )}
+    >
+      {studies.map((paper) => (
+        <HighlightStudyCard key={paper.id} paper={paper} topicId={topicId} />
+      ))}
+    </div>
+  )
+}
+
+/**
+ * Highlights — default desktop UX matches `/for-schools` Benefits: scroll spy (left)
+ * drives `activeIndex`, sticky panel (`useMarketingStickyPanelTop`) swaps study cards on the right.
+ */
+const HIGHLIGHTS_STICKY_ITEM_CLASS =
+  "box-border flex h-[26rem] flex-col justify-center sm:h-[27rem] md:h-[28rem] lg:h-[30rem] py-5 sm:py-6 md:py-7 lg:py-8"
+const HIGHLIGHTS_STICKY_TITLE_H =
+  "h-[2.5rem] sm:h-[2.75rem] md:h-[3rem] lg:h-[3.5rem] lg:leading-snug"
+const HIGHLIGHTS_STICKY_BODY_H =
+  "h-[7.25rem] shrink-0 overflow-y-auto sm:h-[7.75rem] md:h-[8.5rem] lg:h-[9.5rem] xl:h-[10rem]"
+
 export const ResearchHighlightsSection = ({
   papers,
   openAllAccordions = false,
@@ -716,6 +856,80 @@ export const ResearchHighlightsSection = ({
     [openAllAccordions],
   )
 
+  const [highlightsSpyIndex, setHighlightsSpyIndex] = useState(0)
+  const [studyIndexByTopic, setStudyIndexByTopic] =
+    useState<Record<ResearchHighlightTopicId, number>>(() => ({
+      ...INITIAL_STUDY_INDEX_BY_TOPIC,
+    }))
+  const highlightSpyItemRefs = useRef<(HTMLDivElement | null)[]>([])
+  const { ref: highlightsStickyPanelRef, top: highlightsStickyTop } =
+    useMarketingStickyPanelTop()
+
+  useEffect(() => {
+    setStudyIndexByTopic((prev) => {
+      let changed = false
+      const next = { ...prev }
+      for (const t of RESEARCH_HIGHLIGHT_TOPICS) {
+        const list = studiesByTopic.get(t.id) ?? []
+        const maxIdx = Math.max(0, list.length - 1)
+        const cur = next[t.id] ?? 0
+        if (cur > maxIdx) {
+          next[t.id] = maxIdx
+          changed = true
+        }
+      }
+      return changed ? next : prev
+    })
+  }, [studiesByTopic])
+
+  useEffect(() => {
+    let raf = 0
+    const updateHighlightsSpy = () => {
+      raf = 0
+      const mid = window.innerHeight * 0.5
+      let bestI = 0
+      let bestD = Number.POSITIVE_INFINITY
+      highlightSpyItemRefs.current.forEach((el, i) => {
+        if (!el) return
+        const r = el.getBoundingClientRect()
+        if (r.height === 0) return
+        const c = r.top + r.height * 0.5
+        const d = Math.abs(c - mid)
+        if (d < bestD) {
+          bestD = d
+          bestI = i
+        }
+      })
+      setHighlightsSpyIndex((p) => (p === bestI ? p : bestI))
+    }
+    const onSpyScrollOrResize = () => {
+      if (raf) return
+      raf = requestAnimationFrame(() => {
+        updateHighlightsSpy()
+      })
+    }
+    updateHighlightsSpy()
+    window.addEventListener("scroll", onSpyScrollOrResize, { passive: true })
+    window.addEventListener("resize", onSpyScrollOrResize)
+    return () => {
+      if (raf) cancelAnimationFrame(raf)
+      window.removeEventListener("scroll", onSpyScrollOrResize)
+      window.removeEventListener("resize", onSpyScrollOrResize)
+    }
+  }, [])
+
+  const handleNextHighlightStudy = (topicId: ResearchHighlightTopicId) => {
+    setStudyIndexByTopic((prev) => {
+      const list = studiesByTopic.get(topicId) ?? []
+      const len = list.length
+      if (len <= 1) return prev
+      return {
+        ...prev,
+        [topicId]: ((prev[topicId] ?? 0) + 1) % len,
+      }
+    })
+  }
+
   return (
     <section
       id={forResearchersSectionIds.highlights}
@@ -728,111 +942,246 @@ export const ResearchHighlightsSection = ({
         decorVariant="voices"
       />
 
-      <Accordion
-        multiple={openAllAccordions}
-        defaultValue={defaultExpandedIds}
-        aria-label="Research highlight themes"
-        className="flex w-full min-w-0 flex-col gap-[30px]"
-      >
-        {RESEARCH_HIGHLIGHT_TOPICS.map((topic) => {
-          const studies = studiesByTopic.get(topic.id) ?? []
-          const theme = HIGHLIGHT_TOPIC_THEME[topic.id]
-          return (
-            <AccordionItem
-              key={topic.id}
-              value={topic.id}
-              className="w-full min-w-0 overflow-hidden rounded-[30px] border-0 bg-white not-last:border-b-0 shadow-none outline-none ring-0"
-            >
-              <AccordionTrigger
-                hideChevron
-                className="w-full items-center border-0 py-8 pl-0 pr-0 text-base font-normal shadow-none outline-none ring-0 hover:no-underline focus-visible:border-transparent focus-visible:shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:after:border-transparent"
+      {openAllAccordions ? (
+        <Accordion
+          multiple
+          defaultValue={defaultExpandedIds}
+          aria-label="Research highlight themes"
+          className="flex w-full min-w-0 flex-col gap-[30px]"
+        >
+          {RESEARCH_HIGHLIGHT_TOPICS.map((topic) => {
+            const studies = studiesByTopic.get(topic.id) ?? []
+            const theme = HIGHLIGHT_TOPIC_THEME[topic.id]
+            return (
+              <AccordionItem
+                key={topic.id}
+                value={topic.id}
+                className="w-full min-w-0 overflow-hidden rounded-[30px] border-0 bg-white not-last:border-b-0 shadow-none outline-none ring-0"
               >
-                <span className={HIGHLIGHT_TRIGGER_ROW}>
-                  <span className="flex min-w-0 items-center gap-[18px]">
-                    <span className={cn("relative", marketingCardIconAssetFrameClass)}>
-                      <span className="absolute inset-0 group-aria-expanded/accordion-trigger:hidden">
-                        <ResearchHighlightTopicIcon
-                          topicId={topic.id}
-                          discFill={HIGHLIGHT_ROW_ICON_DISC}
-                          glyphStroke={HIGHLIGHT_ROW_ICON_GLYPH}
-                        />
+                <AccordionTrigger
+                  hideChevron
+                  className="w-full items-center border-0 py-8 pl-0 pr-0 text-base font-normal shadow-none outline-none ring-0 hover:no-underline focus-visible:border-transparent focus-visible:shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:after:border-transparent"
+                >
+                  <span className={HIGHLIGHT_TRIGGER_ROW}>
+                    <span className="flex min-w-0 items-center gap-[18px]">
+                      <span className={cn("relative", marketingCardIconAssetFrameClass)}>
+                        <span className="absolute inset-0 group-aria-expanded/accordion-trigger:hidden">
+                          <ResearchHighlightTopicIcon
+                            topicId={topic.id}
+                            discFill={HIGHLIGHT_ROW_ICON_DISC}
+                            glyphStroke={HIGHLIGHT_ROW_ICON_GLYPH}
+                          />
+                        </span>
+                        <span className="absolute inset-0 hidden group-aria-expanded/accordion-trigger:block">
+                          <ResearchHighlightTopicIcon
+                            topicId={topic.id}
+                            discFill={theme.openIconDisc}
+                            glyphStroke={theme.openIconGlyph}
+                          />
+                        </span>
                       </span>
-                      <span className="absolute inset-0 hidden group-aria-expanded/accordion-trigger:block">
-                        <ResearchHighlightTopicIcon
-                          topicId={topic.id}
-                          discFill={theme.openIconDisc}
-                          glyphStroke={theme.openIconGlyph}
-                        />
+                      <span
+                        className={cn(
+                          marketingTypography.bentoTitle,
+                          "min-w-0 text-left capitalize text-[#62636c]",
+                          theme.openTitle,
+                        )}
+                      >
+                        {topic.title}
                       </span>
                     </span>
                     <span
                       className={cn(
-                        marketingTypography.bentoTitle,
-                        "min-w-0 text-left capitalize text-[#62636c]",
-                        theme.openTitle,
+                        marketingCardIconAssetFrameClass,
+                        "flex shrink-0 items-center justify-center",
+                      )}
+                      aria-hidden
+                    >
+                      <ChevronRight
+                        strokeWidth={1.75}
+                        className={cn(
+                          marketingCardLucideGlyphClass,
+                          "shrink-0 text-[#62636c] transition-transform duration-200 ease-out group-aria-expanded/accordion-trigger:rotate-90",
+                          theme.openChevron,
+                        )}
+                      />
+                    </span>
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="!p-0 !pb-0">
+                  <div
+                    className={cn(
+                      "px-0 pb-8 pt-[30px] [&_a]:no-underline hover:[&_a]:no-underline",
+                      theme.contentLinkHover,
+                    )}
+                  >
+                    <HighlightStudiesBlock topicId={topic.id} studies={studies} />
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            )
+          })}
+        </Accordion>
+      ) : (
+        <div className="w-full min-w-0" role="region" aria-label="Research highlight themes">
+          {/* Phones & tablets: one open block per topic (title + study), same UX as legacy mobile */}
+          <div className={cn("flex flex-col lg:hidden", marketingCardStackGapClass)}>
+            {RESEARCH_HIGHLIGHT_TOPICS.map((topic) => {
+              const studies = studiesByTopic.get(topic.id) ?? []
+              const theme = HIGHLIGHT_TOPIC_THEME[topic.id]
+              return (
+                <article
+                  key={topic.id}
+                  className={cn(
+                    "flex w-full min-w-0 flex-col gap-5 overflow-hidden rounded-[30px] bg-white",
+                    marketingCardPaddingClass,
+                  )}
+                >
+                  <div className="flex items-start gap-3">
+                    <span className={cn("relative shrink-0", marketingCardIconAssetFrameClass)}>
+                      <ResearchHighlightTopicIcon
+                        topicId={topic.id}
+                        discFill={theme.openIconDisc}
+                        glyphStroke={theme.openIconGlyph}
+                      />
+                    </span>
+                    <h3
+                      className={cn(
+                        "pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-bold leading-tight tracking-tight sm:text-xl",
+                        theme.titleWhenOpen,
                       )}
                     >
                       {topic.title}
-                    </span>
-                  </span>
-                  <span
+                    </h3>
+                  </div>
+                  <div
                     className={cn(
-                      marketingCardIconAssetFrameClass,
-                      "flex shrink-0 items-center justify-center",
+                      "[&_a]:no-underline hover:[&_a]:no-underline",
+                      theme.contentLinkHover,
                     )}
-                    aria-hidden
                   >
-                    <ChevronRight
-                      strokeWidth={1.75}
-                      className={cn(
-                        marketingCardLucideGlyphClass,
-                        "shrink-0 text-[#62636c] transition-transform duration-200 ease-out group-aria-expanded/accordion-trigger:rotate-90",
-                        theme.openChevron
-                      )}
+                    <HighlightStudiesCarousel
+                      topicId={topic.id}
+                      studies={studies}
+                      activeStudyIndex={studyIndexByTopic[topic.id] ?? 0}
+                      onNextStudy={() => {
+                        handleNextHighlightStudy(topic.id)
+                      }}
                     />
-                  </span>
-                </span>
-              </AccordionTrigger>
-              <AccordionContent
-                className={cn(
-                  "!p-0 !pb-0 [&_a]:no-underline hover:[&_a]:no-underline",
-                  theme.contentLinkHover
-                )}
-              >
-                <div className="px-0 pb-8 pt-[30px]">
-                  {studies.length > 0 ? (
-                    <div
-                      className={cn(
-                        "grid grid-cols-1 items-stretch sm:grid-cols-2",
-                        marketingCardStackGapClass,
-                      )}
-                    >
-                      {studies.map((paper, studyIndex) => (
-                        <HighlightStudyCard
-                          key={paper.id}
-                          paper={paper}
-                          topicId={topic.id}
-                          studyIndex={studyIndex}
-                        />
-                      ))}
+                  </div>
+                </article>
+              )
+            })}
+          </div>
+
+          {/* lg+: scroll spy + single sticky carousel (benefits-parity desktop) */}
+          <div
+            className={cn(
+              "relative z-0 hidden grid-cols-1 items-stretch lg:grid lg:grid-cols-2",
+              marketingCardStackGapClass,
+              "lg:gap-12 xl:gap-16",
+            )}
+          >
+            <div className="relative z-0 min-w-0 pb-4 lg:pb-6">
+              {RESEARCH_HIGHLIGHT_TOPICS.map((topic, i) => {
+                const isActive = i === highlightsSpyIndex
+                const theme = HIGHLIGHT_TOPIC_THEME[topic.id]
+                const sectionLead = HIGHLIGHT_SPY_THEME_LEAD[topic.id]
+                return (
+                  <div
+                    key={topic.id}
+                    ref={(el) => {
+                      highlightSpyItemRefs.current[i] = el
+                    }}
+                    className={HIGHLIGHTS_STICKY_ITEM_CLASS}
+                  >
+                    <div className="flex flex-col gap-5">
+                      <span className={cn("relative", marketingCardIconAssetFrameClass)}>
+                        <span className={cn("absolute inset-0", isActive ? "hidden" : "block")}>
+                          <ResearchHighlightTopicIcon
+                            topicId={topic.id}
+                            discFill={HIGHLIGHT_ROW_ICON_DISC}
+                            glyphStroke={HIGHLIGHT_ROW_ICON_GLYPH}
+                          />
+                        </span>
+                        <span className={cn("absolute inset-0", isActive ? "block" : "hidden")}>
+                          <ResearchHighlightTopicIcon
+                            topicId={topic.id}
+                            discFill={theme.openIconDisc}
+                            glyphStroke={theme.openIconGlyph}
+                          />
+                        </span>
+                      </span>
+                      <div className="flex flex-col gap-3">
+                        <h3
+                          className={cn(
+                            "line-clamp-3 text-pretty text-lg font-bold leading-tight tracking-tight transition-colors duration-300 sm:text-xl lg:text-2xl",
+                            HIGHLIGHTS_STICKY_TITLE_H,
+                            isActive ? theme.titleWhenOpen : "text-muted-foreground",
+                          )}
+                        >
+                          {topic.title}
+                        </h3>
+                        <div className={HIGHLIGHTS_STICKY_BODY_H}>
+                          {isActive ? (
+                            <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
+                              {sectionLead}
+                            </p>
+                          ) : null}
+                        </div>
+                      </div>
                     </div>
-                  ) : (
-                    <p className="text-pretty text-base text-muted-foreground">
-                      <Link
-                        href="/research"
-                        className="font-medium text-[#027f89] underline-offset-4 hover:underline"
+                  </div>
+                )
+              })}
+            </div>
+
+            <div
+              className="relative z-0 flex min-h-0 w-full min-w-0 shrink-0 flex-col pb-4 lg:pb-6"
+            >
+              <div
+                ref={highlightsStickyPanelRef}
+                className="w-full lg:sticky"
+                style={{ top: highlightsStickyTop }}
+              >
+                <div className="relative w-full min-h-0">
+                  {RESEARCH_HIGHLIGHT_TOPICS.map((topic, i) => {
+                    const studies = studiesByTopic.get(topic.id) ?? []
+                    const theme = HIGHLIGHT_TOPIC_THEME[topic.id]
+                    return (
+                      <div
+                        key={topic.id}
+                        className={cn(
+                          "w-full transition-opacity duration-500",
+                          i === highlightsSpyIndex
+                            ? "relative z-[1] opacity-100"
+                            : "pointer-events-none absolute inset-0 z-0 overflow-y-auto opacity-0",
+                        )}
                       >
-                        Browse all research
-                      </Link>{" "}
-                      for papers in this theme.
-                    </p>
-                  )}
+                        <div
+                          className={cn(
+                            "[&_a]:no-underline hover:[&_a]:no-underline",
+                            theme.contentLinkHover,
+                          )}
+                        >
+                          <HighlightStudiesCarousel
+                            topicId={topic.id}
+                            studies={studies}
+                            activeStudyIndex={studyIndexByTopic[topic.id] ?? 0}
+                            onNextStudy={() => {
+                              handleNextHighlightStudy(topic.id)
+                            }}
+                          />
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
-              </AccordionContent>
-            </AccordionItem>
-          )
-        })}
-      </Accordion>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
@@ -860,7 +1209,7 @@ function indexVenueOptionsFromPapers(papers: ResearchPaper[]): string[] {
 
 /** Cropped scroll region — keeps the section short (card list only; full `/research` has table + cards). */
 const INDEX_PREVIEW_SCROLL =
-  "max-h-[min(26rem,50svh)] overflow-y-auto overscroll-y-contain min-h-0 scroll-smooth sm:max-h-[min(30rem,55svh)]"
+  "max-h-[min(26rem,50svh)] overflow-y-auto overscroll-y-contain min-h-0 scroll-smooth sm:max-h-[min(30rem,55svh)] [contain:layout]"
 
 /** Wider list than trigger — min = trigger width, grows for long labels (capped to viewport). */
 const INDEX_SELECT_CONTENT_CLASS =
@@ -1190,7 +1539,7 @@ export const ResearchersGridSection = ({ members }: { members: TeamMember[] }) =
 }
 
 export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessStory[] }) => {
-  const titleIcon = forResearchersAssets.successStories.cardTitleIcon
+  if (stories.length === 0) return null
 
   return (
     <section
@@ -1212,144 +1561,91 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
         />
       </div>
 
-      {stories.length === 0 ? (
-        <article
-          className={cn(
-            "flex h-full flex-col rounded-[30px] bg-[#f4fbf6] dark:bg-teal-950/30",
-            marketingCardPaddingClass,
-          )}
-        >
-          <div
-            className={cn(
-              "flex min-h-0 flex-1 flex-col rounded-3xl bg-white dark:bg-card dark:ring-1 dark:ring-white/10",
-              marketingCardPaddingClass,
-            )}
-          >
-            <div className={marketingCardLhAlignedHeaderRowClass}>
-              <span
-                className={cn(
-                  marketingCardIconTitleRowOffsetClass,
-                  marketingCardIconCircleClass,
-                  "shrink-0 bg-[#007d49] text-white",
-                )}
-              >
-                <CircleQuestionMark className={marketingCardLucideGlyphClass} aria-hidden />
-              </span>
-              <h3
-                className={cn(
-                  "min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight sm:text-xl lg:text-2xl",
-                  SUCCESS_STORY_GREEN,
-                )}
-              >
-                No research stories yet
-              </h3>
-            </div>
-            <p className="mt-4 text-pretty text-base leading-relaxed text-muted-foreground">
-              We don&apos;t have any research partner success stories to feature yet. When new voices
-              from our research community are published in our archive, they&apos;ll show up here.
-            </p>
-          </div>
-          <Link
-            href="/success-stories"
-            className={cn(
-              "group mt-4 ml-auto flex w-fit items-center gap-2 text-lg font-medium no-underline transition-opacity hover:opacity-90",
-              SUCCESS_STORY_GREEN,
-            )}
-          >
-            <span>Browse all success stories</span>
-            <ArrowRight
-              className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
-              aria-hidden
-            />
-          </Link>
-        </article>
-      ) : (
-        <div className={cn("flex flex-col", marketingCardStackGapClass)}>
-          {stories.map((story) => {
-            const readUrl = notionSuccessStoryPublicReadUrl(story)
-            const quoteParts = story.quote ? splitSuccessStoryQuote(story.quote) : null
+      <div className={cn("flex flex-col", marketingCardStackGapClass)}>
+        {stories.map((story) => {
+          const readUrl = notionSuccessStoryPublicReadUrl(story)
+          const quoteParts = story.quote ? splitSuccessStoryQuote(story.quote) : null
 
-            return (
-              <article
-                key={story.id}
+          return (
+            <article
+              key={story.id}
+              className={cn(
+                "flex h-full flex-col rounded-[30px] bg-[#f4fbf6] dark:bg-teal-950/30",
+                marketingCardPaddingClass,
+              )}
+            >
+              <div
                 className={cn(
-                  "flex h-full flex-col rounded-[30px] bg-[#f4fbf6] dark:bg-teal-950/30",
+                  "flex min-h-0 flex-1 flex-col rounded-3xl bg-white dark:bg-card dark:ring-1 dark:ring-white/10",
                   marketingCardPaddingClass,
                 )}
               >
-                <div
-                  className={cn(
-                    "flex min-h-0 flex-1 flex-col rounded-3xl bg-white dark:bg-card dark:ring-1 dark:ring-white/10",
-                    marketingCardPaddingClass,
-                  )}
-                >
-                  <div className={marketingCardLhAlignedHeaderRowClass}>
-                    <span
-                      className={cn(
-                        marketingCardIconTitleRowOffsetClass,
-                        marketingCardIconCircleClass,
-                        "shrink-0 bg-[#007d49] text-white",
-                      )}
-                    >
-                      <BookOpen className={marketingCardLucideGlyphClass} aria-hidden />
-                    </span>
-                    <h3
-                      className={cn(
-                        "min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight sm:text-xl lg:text-2xl",
-                        SUCCESS_STORY_GREEN,
-                      )}
-                    >
-                      {story.title}
-                    </h3>
-                  </div>
-                  {story.quote ? (
-                    <>
-                      <blockquote className="mt-4 min-h-0 flex-1 text-pretty text-base italic leading-relaxed text-muted-foreground">
-                        {quoteParts ? (
-                          <>
-                            &ldquo;{quoteParts.before}{" "}
-                            <strong className={cn("font-semibold italic", SUCCESS_STORY_GREEN)}>
-                              {quoteParts.highlight}
-                            </strong>
-                            {quoteParts.after}&rdquo;
-                          </>
-                        ) : (
-                          <>&ldquo;{story.quote}&rdquo;</>
-                        )}
-                      </blockquote>
-                      {story.quoteAttribution ? (
-                        <p className="mt-2 text-sm not-italic text-muted-foreground">
-                          — {story.quoteAttribution}
-                        </p>
-                      ) : null}
-                    </>
-                  ) : (
-                    <p className="mt-4 min-h-0 flex-1 text-pretty text-base leading-relaxed text-muted-foreground">
-                      {story.summary}
-                    </p>
-                  )}
+                <div className={marketingCardLhAlignedHeaderRowClass}>
+                  <span
+                    className={cn(
+                      marketingCardIconTitleRowOffsetClass,
+                      marketingCardIconCircleClass,
+                      "shrink-0 bg-[#007d49] text-white",
+                    )}
+                  >
+                    <BookOpen className={marketingCardLucideGlyphClass} aria-hidden />
+                  </span>
+                  <h3
+                    className={cn(
+                      "min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight sm:text-xl lg:text-2xl",
+                      SUCCESS_STORY_GREEN,
+                    )}
+                  >
+                    {story.title}
+                  </h3>
                 </div>
-                <a
-                  href={readUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(
-                    "group mt-4 ml-auto flex w-fit items-center gap-2 text-lg font-medium no-underline transition-opacity hover:opacity-90",
-                    SUCCESS_STORY_GREEN,
-                  )}
-                >
-                  <span>Read story</span>
-                  <ArrowRight
-                    className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
-                    aria-hidden
-                  />
-                  <span className="sr-only">(opens in new tab)</span>
-                </a>
-              </article>
-            )
-          })}
-        </div>
-      )}
+                {story.quote ? (
+                  <>
+                    <blockquote className="mt-4 min-h-0 flex-1 text-pretty text-base italic leading-relaxed text-muted-foreground">
+                      {quoteParts ? (
+                        <>
+                          &ldquo;{quoteParts.before}{" "}
+                          <strong className={cn("font-semibold italic", SUCCESS_STORY_GREEN)}>
+                            {quoteParts.highlight}
+                          </strong>
+                          {quoteParts.after}&rdquo;
+                        </>
+                      ) : (
+                        <>&ldquo;{story.quote}&rdquo;</>
+                      )}
+                    </blockquote>
+                    {story.quoteAttribution ? (
+                      <p className="mt-2 text-sm not-italic text-muted-foreground">
+                        — {story.quoteAttribution}
+                      </p>
+                    ) : null}
+                  </>
+                ) : (
+                  <p className="mt-4 min-h-0 flex-1 text-pretty text-base leading-relaxed text-muted-foreground">
+                    {story.summary}
+                  </p>
+                )}
+              </div>
+              <a
+                href={readUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "group mt-4 ml-auto flex w-fit items-center gap-2 text-lg font-medium no-underline transition-opacity hover:opacity-90",
+                  SUCCESS_STORY_GREEN,
+                )}
+              >
+                <span>Read story</span>
+                <ArrowRight
+                  className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
+                  aria-hidden
+                />
+                <span className="sr-only">(opens in new tab)</span>
+              </a>
+            </article>
+          )
+        })}
+      </div>
     </section>
   )
 }

@@ -2,9 +2,9 @@
 <g id="Icon">
 <circle id="Ellipse 3" cx="29" cy="29" r="29" fill="var(--fill-0, #D31998)"/>
 <g id="Frame">
-<path id="Vector" d="M16.5 17.75H41.5" stroke="var(--stroke-0, #FFE8F5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_2" d="M40.25 17.75V31.5C40.25 32.163 39.9866 32.7989 39.5178 33.2678C39.0489 33.7366 38.413 34 37.75 34H20.25C19.587 34 18.9511 33.7366 18.4822 33.2678C18.0134 32.7989 17.75 32.163 17.75 31.5V17.75" stroke="var(--stroke-0, #FFE8F5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_3" d="M22.75 40.25L29 34L35.25 40.25" stroke="var(--stroke-0, #FFE8F5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector" d="M16.5 17.75H41.5" stroke="var(--stroke-0, #ffffff)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M40.25 17.75V31.5C40.25 32.163 39.9866 32.7989 39.5178 33.2678C39.0489 33.7366 38.413 34 37.75 34H20.25C19.587 34 18.9511 33.7366 18.4822 33.2678C18.0134 32.7989 17.75 32.163 17.75 31.5V17.75" stroke="var(--stroke-0, #ffffff)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M22.75 40.25L29 34L35.25 40.25" stroke="var(--stroke-0, #ffffff)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 </g>
 </svg>

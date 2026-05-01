@@ -22,18 +22,38 @@ Production marketing site for [PLUS (tutors.plus)](https://www.tutors.plus/) —
 
 ---
 
-## Getting Started
+## Getting Started (localhost)
+
+Prerequisites:
+
+- **Node.js ≥ 20.9** (see `package.json` `engines`)
 
 ```bash
-# Install dependencies
+cd plus-marketing-website
+
 npm install
 
-# Start marketing site on localhost:3000
-npm run dev
+# Pages that pull from Notion (research index, stories, team, etc.) expect secrets in `.env.local`.
+cp .env.example .env.local
+# Edit `.env.local` and add NOTION_API_KEY + database IDs, or rely on ISR/cache where configured.
 
-# Start Storybook component docs on localhost:6006
-npm run storybook
+# Dev server — Webpack (default; avoids Turbopack watcher issues such as `/` returning 404 on some macOS setups)
+npm run dev
 ```
+
+Then open **`http://localhost:3000/`** (homepage). Other examples: **`/for-schools`**, **`/for-researchers`**, **`/research`**.
+
+| Script | Purpose |
+| --- | --- |
+| `npm run dev` | Next.js marketing site (**Webpack**) on **`http://localhost:3000`** |
+| `npm run dev:turbo` | Turbopack on **3000** (use only if watchers are stable; raise `ulimit -n` on `EMFILE`) |
+| `npm run dev:8686` | Webpack on port **8686** |
+| `npm run storybook` | Storybook docs on **`http://localhost:6006`** |
+| `npm run build && npm run start` | Production build preview on port **3000** |
+
+If **`Unable to acquire lock ... .next/dev/lock`**: stop every running `next dev`, then `rm -f .next/dev/lock` and run `npm run dev` again. If the port is busy, stop the other process or use `npm run dev:8686`.
+
+If the browser says **can't connect**, **site can't be reached**, or **`ERR_CONNECTION_REFUSED`**, the dev server is not running: run `npm run dev` from the repo root and wait until the terminal prints **Ready**. Use **`http://`** (not **`https://`**). Try **`http://127.0.0.1:3000/`** if `localhost` fails.
 
 ---
 
@@ -42,7 +62,7 @@ npm run storybook
 ```
 src/
   app/
-    page.tsx              ← Landing page composition (section order)
+    (marketing)/page.tsx  ← Landing + other marketing routes (shared marketing layout)
     layout.tsx            ← Root layout with ThemeProvider + fonts
     globals.css           ← OKLCH design tokens, Tailwind config
     theme/plus-colors.ts  ← Brand color scale generator

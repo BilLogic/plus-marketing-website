@@ -24,7 +24,7 @@ const SOCIAL_LINKS = [
 
 export function PlusFooter() {
   return (
-    <footer className="mt-12 bg-teal-950 text-white">
+    <footer className="bg-teal-950 pb-[env(safe-area-inset-bottom,0px)] text-white">
       <FooterNewsletter />
 
       <div className={`${marketingFooterInnerShell} py-12 sm:py-16`}>

@@ -16,6 +16,13 @@ export const marketingSectionStackGap = "gap-16 md:gap-32"
 export const marketingShellPadX = "px-8 sm:px-14 min-[1800px]:px-20"
 
 /**
+ * Negates `marketingShellPadX` applied by `(marketing)/layout.tsx` — use once per page
+ * for a viewport-edge band (e.g. heroes with full-width wash — see homepage).
+ */
+export const marketingShellNegatePadX =
+  "-mx-8 sm:-mx-14 min-[1800px]:-mx-20"
+
+/**
  * Extra-wide screen shell expansion. Keeps existing mobile/tablet/desktop widths
  * while widening content only at very large viewport sizes.
  */

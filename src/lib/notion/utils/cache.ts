@@ -7,7 +7,9 @@ export const readCache = async <T>(key: string): Promise<T | null> => {
   try {
     const filePath = path.join(CACHE_DIR, `${key}.json`)
     const raw = await fs.readFile(filePath, "utf-8")
-    return JSON.parse(raw) as T
+    const trimmed = raw.trim()
+    if (!trimmed) return null
+    return JSON.parse(trimmed) as T
   } catch {
     return null
   }
