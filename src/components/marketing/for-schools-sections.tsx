@@ -47,11 +47,12 @@ import { useMarketingStickyPanelTop } from "@/lib/use-marketing-sticky-panel-top
 import { marketingTypography } from "@/lib/marketing-typography"
 import { forSchoolsSectionIds } from "@/lib/plus-footer-ia"
 
-/** Match `get-involved-sections` / `for-tutors-sections` typography. */
+/** Match `get-involved-sections` / `for-tutors-sections` section headers. */
 const schoolsSectionH2 =
   "text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+/** Same breakpoint rhythm as `marketingTypography.sectionLead` + For Tutors intro copy (not hero). */
 const schoolsSectionLead = cn(
-  "w-full max-w-none text-lg",
+  "mx-auto max-w-2xl text-pretty text-sm leading-relaxed sm:mx-0 sm:text-base md:text-lg",
   marketingSectionLeadColorClass,
 )
 
@@ -134,7 +135,7 @@ export const SchoolsCommunitySection = () => {
     >
       <div className="relative w-full text-left">
         <div className={marketingSectionIntroColumnClass}>
-          <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+          <h2 className={schoolsSectionH2}>
             Join the PLUS School Community
           </h2>
           <p className={schoolsSectionLead}>
@@ -263,7 +264,7 @@ export const SchoolsTrainingSection = () => {
             "sm:space-y-1",
           )}
         >
-          <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+          <h2 className={schoolsSectionH2}>
             Benefits of PLUS
           </h2>
           <p className={schoolsSectionLead}>
@@ -294,10 +295,10 @@ export const SchoolsTrainingSection = () => {
             <div className="flex items-start gap-3">
               <BenefitsAccordionIcon index={i} tone="accent" />
               <div className="flex min-w-0 flex-col gap-3">
-                <h3 className="pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-bold leading-tight tracking-tight text-[#a56d1e] sm:text-xl">
+                <h3 className="pt-[calc((3rem-1lh)/2)] text-pretty text-base font-bold leading-tight tracking-tight text-[#a56d1e] sm:text-lg md:text-xl">
                   {item.title}
                 </h3>
-                <p className="text-pretty text-base leading-relaxed text-muted-foreground">
+                <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
                   {item.description}
                 </p>
                 {item.cta ? (
@@ -353,7 +354,7 @@ export const SchoolsTrainingSection = () => {
                   <div className="flex flex-col gap-3">
                     <h3
                       className={cn(
-                        "line-clamp-3 text-pretty text-lg font-bold leading-tight tracking-tight transition-colors duration-300 sm:text-xl lg:text-2xl",
+                        "line-clamp-3 text-pretty text-base font-bold leading-tight tracking-tight transition-colors duration-300 sm:text-lg md:text-xl lg:text-2xl",
                         BENEFITS_STICKY_TITLE_H,
                         isActive ? "text-[#a56d1e]" : "text-muted-foreground",
                       )}
@@ -362,7 +363,7 @@ export const SchoolsTrainingSection = () => {
                     </h3>
                     <div className={BENEFITS_STICKY_BODY_H}>
                       {isActive ? (
-                        <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
+                        <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
                           {item.description}
                         </p>
                       ) : null}
@@ -508,7 +509,7 @@ export const SchoolsExperienceSection = () => {
     >
       <div className="relative w-full text-left">
         <div className={marketingSectionIntroColumnClass}>
-          <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+          <h2 className={schoolsSectionH2}>
             Your Day-to-Day Experience with PLUS
           </h2>
           <p className={schoolsSectionLead}>
@@ -700,7 +701,7 @@ function OversightCardInner({
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
               className={cn(
-                "inline-flex h-[45px] w-fit items-center justify-center rounded-full px-10 text-base font-normal transition-opacity hover:opacity-90",
+                "inline-flex h-10 min-h-[40px] w-fit items-center justify-center rounded-full px-6 text-sm font-normal transition-opacity hover:opacity-90 sm:h-11 sm:min-h-[44px] sm:px-10 sm:text-base",
                 card.btnBg,
                 card.btnText
               )}
@@ -849,7 +850,7 @@ export const SchoolsOversightSection = () => {
         style={prefersReducedMotion ? undefined : { opacity: introOpacity }}
       >
         <div className={marketingSectionIntroColumnClass}>
-          <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+          <h2 className={schoolsSectionH2}>
             Maintain Excellence with Robust Oversight
           </h2>
           <p className={schoolsSectionLead}>
@@ -924,7 +925,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
     >
       <div className="relative w-full text-left">
         <div className={marketingSectionIntroColumnClass}>
-          <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+          <h2 className={schoolsSectionH2}>
             School Success Stories
           </h2>
           <p className={schoolsSectionLead}>
@@ -973,7 +974,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                     </span>
                     <h3
                       className={cn(
-                        "min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight sm:text-xl lg:text-2xl",
+                        "min-w-0 flex-1 text-pretty text-base font-bold leading-snug tracking-tight sm:text-lg lg:text-2xl",
                         SCHOOLS_SUCCESS_STORY_GREEN,
                       )}
                     >
@@ -982,7 +983,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                   </div>
                   {story.quote ? (
                     <>
-                      <blockquote className="mt-4 min-h-0 flex-1 text-pretty text-base italic leading-relaxed text-muted-foreground">
+                      <blockquote className="mt-4 min-h-0 flex-1 text-pretty text-sm italic leading-relaxed text-muted-foreground sm:text-base">
                         {quoteParts ? (
                           <>
                             &ldquo;{quoteParts.before}{" "}
@@ -1004,7 +1005,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                       ) : null}
                     </>
                   ) : (
-                    <p className="mt-4 min-h-0 flex-1 text-pretty text-base leading-relaxed text-muted-foreground">
+                    <p className="mt-4 min-h-0 flex-1 text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
                       {story.summary}
                     </p>
                   )}
@@ -1014,7 +1015,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "group mt-4 ml-auto flex w-fit items-center gap-2 text-lg font-medium no-underline transition-opacity hover:opacity-90",
+                    "group mt-4 ml-auto flex w-fit items-center gap-2 text-base font-medium no-underline transition-opacity hover:opacity-90 sm:text-lg",
                     SCHOOLS_SUCCESS_STORY_GREEN,
                   )}
                 >
