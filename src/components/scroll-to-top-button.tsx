@@ -31,7 +31,7 @@ export const ScrollToTopButton = () => {
       onClick={handleClick}
       aria-label="Back to top"
       className={cn(
-        "fixed bottom-6 right-6 z-50 size-[74px] cursor-pointer overflow-hidden rounded-full bg-[#a6edf4]",
+        "fixed bottom-4 right-4 z-50 size-14 cursor-pointer overflow-hidden rounded-full bg-[#a6edf4] md:bottom-5 md:right-5 md:size-16 lg:bottom-6 lg:right-6 lg:size-[74px]",
         "transition-[opacity,transform] duration-300 ease-out",
         "hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#027f89] focus-visible:ring-offset-2",
         visible
@@ -40,10 +40,10 @@ export const ScrollToTopButton = () => {
       )}
     >
       <span
-        className="absolute left-1/2 top-1/2 flex size-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center"
+        className="absolute left-1/2 top-1/2 flex size-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center md:size-8 lg:size-10"
         aria-hidden
       >
-        <span className="relative size-10 rotate-90 overflow-clip">
+        <span className="relative size-7 rotate-90 overflow-clip md:size-8 lg:size-10">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""

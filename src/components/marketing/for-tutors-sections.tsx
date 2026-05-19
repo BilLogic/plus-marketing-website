@@ -177,7 +177,7 @@ export const TutorsHeroSection = () => {
                   aria-hidden
                 />
                 <svg
-                  className="absolute left-1/2 top-1/2 size-[75px] -translate-x-1/2 -translate-y-1/2 drop-shadow-md transition-transform group-hover:scale-110"
+                  className="absolute left-1/2 top-1/2 size-14 -translate-x-1/2 -translate-y-1/2 drop-shadow-md transition-transform group-hover:scale-110 md:size-16 lg:size-[75px]"
                   viewBox="0 0 75 75"
                   fill="none"
                   aria-hidden

@@ -621,7 +621,7 @@ export const PlusHeroSection = () => {
                 />
                 {/* Play button — Figma `1791:3797` icon-park-solid:play, 75px (not tied to card icon tokens). */}
                 <svg
-                  className="absolute left-1/2 top-1/2 size-[75px] -translate-x-1/2 -translate-y-1/2 transition-transform group-hover:scale-110 drop-shadow-md"
+                  className="absolute left-1/2 top-1/2 size-14 -translate-x-1/2 -translate-y-1/2 transition-transform group-hover:scale-110 drop-shadow-md md:size-16 lg:size-[75px]"
                   viewBox="0 0 75 75"
                   fill="none"
                   aria-hidden
