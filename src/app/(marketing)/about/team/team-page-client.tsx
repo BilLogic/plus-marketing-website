@@ -2,13 +2,13 @@
 
 import { useMemo, useState, useCallback, useEffect } from "react"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
-import type { TeamMember } from "@/lib/notion/types"
+import type { TeamAffiliation, TeamMember } from "@/lib/notion/types"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { TeamMemberCard } from "./team-member-card"
 
-const AFFILIATIONS: TeamMember["affiliation"][] = [
+const AFFILIATIONS: TeamAffiliation[] = [
   "Leadership",
   "PLUS Staff",
   "Independent Study Student",
@@ -17,12 +17,12 @@ const AFFILIATIONS: TeamMember["affiliation"][] = [
 ]
 
 // Display labels for the grouped sections on the page
-const AFFILIATION_DISPLAY_LABELS: Partial<Record<TeamMember["affiliation"], string>> = {
+const AFFILIATION_DISPLAY_LABELS: Partial<Record<TeamAffiliation, string>> = {
   "Independent Study Student": "Students",
   "Student Intern": "Students",
 }
 
-const getDisplayLabel = (aff: TeamMember["affiliation"]) =>
+const getDisplayLabel = (aff: TeamAffiliation) =>
   AFFILIATION_DISPLAY_LABELS[aff] ?? aff
 
 const GROUPS: TeamMember["group"][] = [
@@ -99,7 +99,10 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
   const filtered = useMemo(() => {
     const q = debouncedQuery.toLowerCase()
     return members.filter((m) => {
-      if (selectedAffiliations.size && !selectedAffiliations.has(m.affiliation))
+      if (
+        selectedAffiliations.size &&
+        (!m.affiliation || !selectedAffiliations.has(m.affiliation))
+      )
         return false
       if (selectedGroups.size && !selectedGroups.has(m.group)) return false
       if (q) {
@@ -121,6 +124,10 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
       if (!items.length) continue
       const existing = map.get(label) ?? []
       map.set(label, [...existing, ...items])
+    }
+    const unaffiliated = filtered.filter((m) => !m.affiliation)
+    if (unaffiliated.length) {
+      map.set("Team", [...(map.get("Team") ?? []), ...unaffiliated])
     }
     return map
   }, [filtered])

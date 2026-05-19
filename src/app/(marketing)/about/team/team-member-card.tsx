@@ -3,22 +3,11 @@
 import { cn } from "@/lib/utils"
 import type { TeamMember } from "@/lib/notion/types"
 import { Badge } from "@/components/ui/badge"
-import {
-  Avatar,
-  AvatarImage,
-  AvatarFallback,
-} from "@/components/ui/avatar"
 import { useState } from "react"
-
-function getInitials(name: string) {
-  return name
-    .split(" ")
-    .map((part) => part[0])
-    .filter(Boolean)
-    .slice(0, 2)
-    .join("")
-    .toUpperCase()
-}
+import {
+  TeamMemberPhoto,
+  teamMemberInitials,
+} from "@/components/marketing/team-member-photo"
 
 function getHueFromName(name: string) {
   let hash = 0
@@ -50,20 +39,24 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
         member.bio && "cursor-pointer"
       )}
     >
-      <Avatar size="lg" className="size-20">
-        {member.picture ? (
-          <AvatarImage src={member.picture} alt={member.name} />
-        ) : null}
-        <AvatarFallback
-          className="text-lg font-semibold"
+      <div className="relative size-20 shrink-0 overflow-hidden rounded-full">
+        <div
+          className="absolute inset-0 flex items-center justify-center text-lg font-semibold"
           style={{
             backgroundColor: `oklch(0.85 0.08 ${hue})`,
             color: `oklch(0.3 0.08 ${hue})`,
           }}
+          aria-hidden
         >
-          {getInitials(member.name)}
-        </AvatarFallback>
-      </Avatar>
+          {teamMemberInitials(member.name)}
+        </div>
+        <TeamMemberPhoto
+          memberId={member.id}
+          name={member.name}
+          cachedSrc={member.picture}
+          className="z-10"
+        />
+      </div>
 
       <div className="flex flex-col items-center gap-1 text-center">
         <h3 className="text-sm font-semibold text-foreground">
@@ -77,9 +70,11 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
         )}
       </div>
 
-      <Badge variant={AFFILIATION_VARIANT[member.affiliation] ?? "outline"}>
-        {member.affiliation}
-      </Badge>
+      {member.affiliation ? (
+        <Badge variant={AFFILIATION_VARIANT[member.affiliation] ?? "outline"}>
+          {member.affiliation}
+        </Badge>
+      ) : null}
 
       {(member.linkedIn || member.googleScholar) && (
         <div className="flex items-center gap-2">

@@ -1,5 +1,5 @@
 import { getNotionClient } from "@/lib/notion/client"
-import type { TeamMember } from "@/lib/notion/types"
+import type { TeamAffiliation, TeamMember } from "@/lib/notion/types"
 import {
   getTitle,
   getRichText,
@@ -26,7 +26,7 @@ const parseTeamMember = (page: any): TeamMember => {
   return {
     id: page.id,
     name: getTitle(props.Name),
-    affiliation: getSelect(props.Affiliation) as TeamMember["affiliation"],
+    affiliation: getSelect(props.Affiliation) as TeamMember["affiliation"] | null,
     group: getSelect(props.Group) as TeamMember["group"],
     joinedDate: getDate(props["Date Joined PLUS"]),
     picture: getTeamMemberPictureUrl(props),
@@ -47,15 +47,25 @@ export const fetchTeamMembers = async (): Promise<TeamMember[]> => {
 
   try {
     const notion = getNotionClient()
-    const response = await notion.databases.query({
-      database_id: DATABASE_ID,
-    })
+    const pages: Awaited<
+      ReturnType<typeof notion.databases.query>
+    >["results"] = []
+    let cursor: string | undefined
 
-    const members = response.results.map(parseTeamMember)
+    do {
+      const response = await notion.databases.query({
+        database_id: DATABASE_ID,
+        start_cursor: cursor,
+      })
+      pages.push(...response.results)
+      cursor = response.has_more ? response.next_cursor! : undefined
+    } while (cursor)
+
+    const members = pages.map(parseTeamMember)
 
     members.sort((a, b) => {
-      const affA = AFFILIATION_ORDER[a.affiliation] ?? 99
-      const affB = AFFILIATION_ORDER[b.affiliation] ?? 99
+      const affA = a.affiliation ? (AFFILIATION_ORDER[a.affiliation] ?? 99) : 98
+      const affB = b.affiliation ? (AFFILIATION_ORDER[b.affiliation] ?? 99) : 98
       if (affA !== affB) return affA - affB
 
       return a.name.localeCompare(b.name)
@@ -73,7 +83,7 @@ export const fetchTeamMembers = async (): Promise<TeamMember[]> => {
 /**
  * Affiliations on `/for-researchers` “Our Researchers” — Notion Group = Researcher plus one of these.
  */
-const RESEARCHERS_GRID_AFFILIATIONS: TeamMember["affiliation"][] = [
+const RESEARCHERS_GRID_AFFILIATIONS: TeamAffiliation[] = [
   "Leadership",
   "PLUS Staff",
 ]
@@ -84,12 +94,13 @@ export async function fetchResearchTeamMembers(): Promise<TeamMember[]> {
   const grid = members.filter(
     (m) =>
       m.group === "Researcher" &&
+      m.affiliation != null &&
       RESEARCHERS_GRID_AFFILIATIONS.includes(m.affiliation)
   )
   // Leadership before PLUS Staff (cache / sync paths may not match `fetchTeamMembers` sort).
   grid.sort((a, b) => {
-    const affA = AFFILIATION_ORDER[a.affiliation] ?? 99
-    const affB = AFFILIATION_ORDER[b.affiliation] ?? 99
+    const affA = a.affiliation ? (AFFILIATION_ORDER[a.affiliation] ?? 99) : 99
+    const affB = b.affiliation ? (AFFILIATION_ORDER[b.affiliation] ?? 99) : 99
     if (affA !== affB) return affA - affB
     const dateA = a.joinedDate ?? ""
     const dateB = b.joinedDate ?? ""

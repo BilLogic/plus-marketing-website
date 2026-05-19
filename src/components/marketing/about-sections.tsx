@@ -6,6 +6,10 @@ import {
   type SVGProps,
 } from "react"
 import type { TeamMember, SuccessStory, NewsItem } from "@/lib/notion/types"
+import {
+  TeamMemberPhoto,
+  teamMemberInitials,
+} from "@/components/marketing/team-member-photo"
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -492,6 +496,7 @@ const INTERN_TEAM: ReadonlyArray<InternMember> = [
 ]
 
 function TeamMemberCard({
+  memberId,
   name,
   role,
   institution,
@@ -500,6 +505,7 @@ function TeamMemberCard({
   linkedIn,
   googleScholar,
 }: {
+  memberId?: string
   name: string
   role: string
   institution?: string | null
@@ -508,30 +514,30 @@ function TeamMemberCard({
   linkedIn?: string | null
   googleScholar?: string | null
 }) {
-  const initials = name
-    .split(" ")
-    .map((p) => p[0])
-    .filter(Boolean)
-    .slice(0, 2)
-    .join("")
-    .toUpperCase()
+  const initials = teamMemberInitials(name)
 
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-[30px] bg-[#E8F6EA] dark:bg-emerald-950/20">
       <div className="relative aspect-square w-full overflow-hidden">
-        {avatarUrl ? (
+        <div className="absolute inset-0 flex items-center justify-center text-base font-bold text-[#297E43] sm:text-lg">
+          {initials}
+        </div>
+        {memberId ? (
+          <TeamMemberPhoto
+            memberId={memberId}
+            name={name}
+            cachedSrc={avatarUrl}
+            className={cn("z-10", avatarClassName)}
+          />
+        ) : avatarUrl ? (
           <Image
             src={avatarUrl}
             alt={`${name} profile photo`}
             fill
-            className={cn("object-cover", avatarClassName)}
+            className={cn("z-10 object-cover", avatarClassName)}
             sizes="(max-width: 640px) 33vw, (max-width: 1024px) 25vw, 20vw"
           />
-        ) : (
-          <div className="flex h-full items-center justify-center text-base font-bold text-[#297E43] sm:text-lg">
-            {initials}
-          </div>
-        )}
+        ) : null}
       </div>
       <div className="flex flex-col gap-3 px-2 pt-3 pb-4 sm:px-3 sm:pt-4 sm:pb-5 sm:gap-3.5">
         <div className="text-xs font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-sm lg:text-base">
@@ -647,8 +653,9 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
                 {leadership.map((m) => (
                   <TeamMemberCard
                     key={m.id}
+                    memberId={m.id}
                     name={m.name}
-                    role={m.title1 ?? m.affiliation}
+                    role={m.title1 ?? m.affiliation ?? "Leadership"}
                     institution={m.title2}
                     avatarUrl={m.picture ?? undefined}
                     linkedIn={m.linkedIn}
@@ -687,8 +694,9 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
                 {staff.map((m) => (
                   <TeamMemberCard
                     key={m.id}
+                    memberId={m.id}
                     name={m.name}
-                    role={m.title1 ?? m.affiliation}
+                    role={m.title1 ?? m.affiliation ?? "PLUS Staff"}
                     institution={m.title2}
                     avatarUrl={m.picture ?? undefined}
                     linkedIn={m.linkedIn}
@@ -727,8 +735,9 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
                 ? notionStudents.map((m) => (
                     <TeamMemberCard
                       key={m.id}
+                      memberId={m.id}
                       name={m.name}
-                      role={m.title1 ?? m.affiliation}
+                      role={m.title1 ?? m.affiliation ?? "Student"}
                       avatarUrl={m.picture ?? undefined}
                       linkedIn={m.linkedIn}
                     />

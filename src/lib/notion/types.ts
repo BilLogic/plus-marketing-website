@@ -1,12 +1,14 @@
+export type TeamAffiliation =
+  | "Leadership"
+  | "PLUS Staff"
+  | "Independent Study Student"
+  | "Student Intern"
+  | "Past Collaborators"
+
 export type TeamMember = {
   id: string
   name: string
-  affiliation:
-    | "Leadership"
-    | "PLUS Staff"
-    | "Independent Study Student"
-    | "Student Intern"
-    | "Past Collaborators"
+  affiliation: TeamAffiliation | null
   group:
     | "Researcher"
     | "Software Developer"
