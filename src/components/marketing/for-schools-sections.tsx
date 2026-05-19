@@ -33,10 +33,8 @@ import {
 import { cn } from "@/lib/utils"
 import { BenefitsAccordionIcon } from "@/components/marketing/benefit-accordion-icons"
 import type { SuccessStory } from "@/lib/notion/types"
-import {
-  notionSuccessStoryPublicReadUrl,
-  splitSuccessStoryQuote,
-} from "@/lib/success-stories/notion-public-read-url"
+import { splitSuccessStoryQuote } from "@/lib/success-stories/notion-public-read-url"
+import { successStoryPagePath } from "@/lib/success-stories/success-story-path"
 import { forSchoolsAssets } from "@/components/marketing/for-schools-assets"
 import { forTutorsAssets } from "@/components/marketing/for-tutors-assets"
 import { FOR_SCHOOLS_BENEFITS_ITEMS } from "@/lib/marketing/for-schools-benefits"
@@ -137,9 +135,14 @@ export const SchoolsHeroSection = () => {
               Research-backed, AI-powered Math Tutoring to Supplement Classroom Instruction
             </span>
           </h1>
-          <Link href={`#${forSchoolsSectionIds.register}`} className={marketingHeroCtaPrimaryLinkClass}>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={marketingHeroCtaPrimaryLinkClass}
+          >
             Get Started for Free
-          </Link>
+          </a>
         </div>
       </div>
     </section>
@@ -326,12 +329,23 @@ export const SchoolsTrainingSection = () => {
                   {item.description}
                 </p>
                 {item.cta ? (
-                  <Link
-                    href={`#${forSchoolsSectionIds.register}`}
-                    className={cn(marketingFinalCtaPrimaryLinkClass, "mt-1 w-fit")}
-                  >
-                    {item.cta}
-                  </Link>
+                  "ctaHref" in item && item.ctaHref ? (
+                    <a
+                      href={item.ctaHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn(marketingFinalCtaPrimaryLinkClass, "mt-1 w-fit")}
+                    >
+                      {item.cta}
+                    </a>
+                  ) : (
+                    <Link
+                      href={`#${forSchoolsSectionIds.register}`}
+                      className={cn(marketingFinalCtaPrimaryLinkClass, "mt-1 w-fit")}
+                    >
+                      {item.cta}
+                    </Link>
+                  )
                 ) : null}
               </div>
             </div>
@@ -394,12 +408,23 @@ export const SchoolsTrainingSection = () => {
                     </div>
                     <div className={cn(BENEFITS_STICKY_CTA_ROW, "flex items-end")}>
                       {isActive && item.cta ? (
-                        <Link
-                          href={`#${forSchoolsSectionIds.register}`}
-                          className={cn(marketingFinalCtaPrimaryLinkClass, "w-fit")}
-                        >
-                          {item.cta}
-                        </Link>
+                        "ctaHref" in item && item.ctaHref ? (
+                          <a
+                            href={item.ctaHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={cn(marketingFinalCtaPrimaryLinkClass, "w-fit")}
+                          >
+                            {item.cta}
+                          </a>
+                        ) : (
+                          <Link
+                            href={`#${forSchoolsSectionIds.register}`}
+                            className={cn(marketingFinalCtaPrimaryLinkClass, "w-fit")}
+                          >
+                            {item.cta}
+                          </Link>
+                        )
                       ) : null}
                     </div>
                   </div>
@@ -490,6 +515,21 @@ export const SchoolsTrainingSection = () => {
   )
 }
 
+/** Pink palette (School Success Stories). */
+const SCHOOLS_PINK_BG = "bg-[#ffe8f5]"
+const SCHOOLS_PINK_ACCENT = "text-[#d31998]"
+const SCHOOLS_PINK_ACCENT_FAINT = "text-[#d31998]/10"
+const SCHOOLS_PINK_ICON_BG = "bg-[#d31998]"
+
+/** Green palette (Day-to-Day Experience) — `#007d49` matches experience icon SVG circles. */
+const SCHOOLS_GREEN_BG = "bg-[#f4fbf6]"
+const SCHOOLS_GREEN_ACCENT = "text-[#007d49]"
+const SCHOOLS_GREEN_ICON_BG = "bg-[#007d49]"
+/** Ghost numbers: icon green at 10% opacity. */
+const schoolsExperienceGhostNumberStyle = {
+  color: "rgba(0, 125, 73, 0.1)",
+} as const
+
 const EXPERIENCE_PHASES = [
   {
     phase: "Phase 1",
@@ -542,7 +582,7 @@ export const SchoolsExperienceSection = () => {
           </div>
           <img
             alt=""
-            src={forTutorsAssets.toolkitDecor}
+            src={forTutorsAssets.experienceDecor}
             className={schoolsSectionHeaderSquareDecorClass}
             aria-hidden
           />
@@ -555,14 +595,18 @@ export const SchoolsExperienceSection = () => {
           <article
             key={phase.phase}
             className={cn(
-              "relative overflow-hidden rounded-[30px] bg-[#ffe8f5]",
+              "relative overflow-hidden rounded-[30px]",
+              SCHOOLS_GREEN_BG,
               marketingCardPaddingClass,
             )}
           >
             {/* Ghost number — decorative, top-right */}
             <span
-              className="pointer-events-none absolute right-0 top-0 select-none font-bold leading-none text-[#d31998]/10"
-              style={{ fontSize: "clamp(7rem,18vw,12.5rem)" }}
+              className="pointer-events-none absolute right-0 top-0 select-none font-bold leading-none"
+              style={{
+                fontSize: "clamp(7rem,18vw,12.5rem)",
+                ...schoolsExperienceGhostNumberStyle,
+              }}
               aria-hidden
             >
               {phase.number}
@@ -583,10 +627,15 @@ export const SchoolsExperienceSection = () => {
               />
               <div className="flex w-full min-w-0 flex-col gap-4">
                 <div>
-                  <p className="text-sm font-normal uppercase tracking-wider text-[#d31998] sm:text-base">
+                  <p
+                    className={cn(
+                      "text-sm font-normal uppercase tracking-wider sm:text-base",
+                      SCHOOLS_GREEN_ACCENT,
+                    )}
+                  >
                     {phase.phase}
                   </p>
-                  <h3 className={cn(schoolsBenefitsCardTitleClass, "mt-1 text-[#d31998]")}>
+                  <h3 className={cn(schoolsBenefitsCardTitleClass, "mt-1", SCHOOLS_GREEN_ACCENT)}>
                     {phase.title}
                   </h3>
                 </div>
@@ -647,7 +696,7 @@ const OVERSIGHT_CARDS = [
     description:
       "We work with your faculty to tailor lesson strategies that complement your school’s specific learning objectives and standards.",
     cta: "Get training",
-    href: "/get-involved#partnerships-contact-form",
+    href: "https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform",
     bgColor: "bg-[#ffeaea]",
     titleColor: "text-[#c05053]",
     btnBg: "bg-[#ff8789]",
@@ -675,7 +724,7 @@ const OVERSIGHT_CARDS = [
     description:
       "Tutors earn industry-recognized credentials upon completion, ensuring they meet the standards of your institution.",
     cta: "Register your tutors",
-    href: "/get-involved#partnerships-contact-form",
+    href: "https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform",
     bgColor: "bg-[#fff0cb]",
     titleColor: "text-[#a56d1e]",
     btnBg: "bg-[#ffc94b]",
@@ -941,8 +990,6 @@ export const SchoolsOversightSection = () => {
   )
 }
 
-const SCHOOLS_SUCCESS_STORY_GREEN = "text-[#007d49]"
-
 /** Notion-backed school stories — omitted entirely when `stories` is empty (no footer gap). */
 export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStory[] }) => {
   if (stories.length === 0) return null
@@ -960,7 +1007,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
           </div>
           <img
             alt=""
-            src={forTutorsAssets.experienceDecor}
+            src={forTutorsAssets.toolkitDecor}
             className={schoolsSectionHeaderSquareDecorClass}
             aria-hidden
           />
@@ -969,14 +1016,16 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
 
       <div className={cn("flex flex-col", marketingCardStackGapClass)}>
         {stories.map((story) => {
-            const readUrl = notionSuccessStoryPublicReadUrl(story)
+            const readHref = successStoryPagePath(story)
+            const readOnSite = readHref?.startsWith("/") ?? false
             const quoteParts = story.quote ? splitSuccessStoryQuote(story.quote) : null
 
             return (
               <article
                 key={story.id}
                 className={cn(
-                  "flex h-full flex-col rounded-[30px] bg-[#f4fbf6] dark:bg-teal-950/30",
+                  "flex h-full flex-col rounded-[30px] dark:bg-rose-950/30",
+                  SCHOOLS_PINK_BG,
                   marketingCardPaddingClass,
                 )}
               >
@@ -991,7 +1040,8 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                       className={cn(
                         marketingCardIconTitleRowOffsetClass,
                         marketingCardIconCircleClass,
-                        "shrink-0 bg-[#007d49] text-white",
+                        "shrink-0 text-white",
+                        SCHOOLS_PINK_ICON_BG,
                       )}
                     >
                       <School className={marketingCardLucideGlyphClass} aria-hidden />
@@ -999,7 +1049,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                     <h3
                       className={cn(
                         "min-w-0 flex-1 text-pretty text-base font-bold leading-snug tracking-tight sm:text-lg lg:text-2xl",
-                        SCHOOLS_SUCCESS_STORY_GREEN,
+                        SCHOOLS_PINK_ACCENT,
                       )}
                     >
                       {story.title}
@@ -1012,7 +1062,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                           <>
                             &ldquo;{quoteParts.before}{" "}
                             <strong
-                              className={cn("font-semibold italic", SCHOOLS_SUCCESS_STORY_GREEN)}
+                              className={cn("font-semibold italic", SCHOOLS_PINK_ACCENT)}
                             >
                               {quoteParts.highlight}
                             </strong>
@@ -1034,22 +1084,40 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                     </p>
                   )}
                 </div>
-                <a
-                  href={readUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(
-                    "group mt-4 ml-auto flex w-fit items-center gap-2 text-base font-medium no-underline transition-opacity hover:opacity-90 sm:text-lg",
-                    SCHOOLS_SUCCESS_STORY_GREEN,
-                  )}
-                >
-                  <span>Read story</span>
-                  <ArrowRight
-                    className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
-                    aria-hidden
-                  />
-                  <span className="sr-only">(opens in new tab)</span>
-                </a>
+                {readHref ? (
+                  readOnSite ? (
+                    <Link
+                      href={readHref}
+                      className={cn(
+                        "group mt-4 ml-auto flex w-fit items-center gap-2 text-base font-medium no-underline transition-opacity hover:opacity-90 sm:text-lg",
+                        SCHOOLS_PINK_ACCENT,
+                      )}
+                    >
+                      <span>Read story</span>
+                      <ArrowRight
+                        className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
+                        aria-hidden
+                      />
+                    </Link>
+                  ) : (
+                    <a
+                      href={readHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn(
+                        "group mt-4 ml-auto flex w-fit items-center gap-2 text-base font-medium no-underline transition-opacity hover:opacity-90 sm:text-lg",
+                        SCHOOLS_PINK_ACCENT,
+                      )}
+                    >
+                      <span>Read story</span>
+                      <ArrowRight
+                        className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
+                        aria-hidden
+                      />
+                      <span className="sr-only">(opens in new tab)</span>
+                    </a>
+                  )
+                ) : null}
               </article>
             )
         })}
@@ -1071,12 +1139,14 @@ export const SchoolsRegisterCTA = () => {
           access to our full training suite.
         </p>
         <div className={marketingFinalCtaButtonRowClass}>
-          <Link
-            href="/get-involved#partnerships-contact-form"
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
             className={marketingFinalCtaPrimaryLinkClass}
           >
             Sign up
-          </Link>
+          </a>
         </div>
       </div>
     </section>

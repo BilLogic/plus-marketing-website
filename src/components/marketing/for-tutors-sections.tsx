@@ -10,7 +10,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Brain, LayoutDashboard, Sparkles, Star } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { forSchoolsAssets } from "@/components/marketing/for-schools-assets"
 import {
@@ -745,9 +744,14 @@ export const TutorsCertificationSection = () => {
                   Note: Available to institutions only. Contact us to activate.
                 </p>
               </div>
-              <Button className="h-9 sm:h-11 w-fit cursor-pointer rounded-full bg-[#4CAB65] px-8 text-sm sm:text-base font-medium text-white hover:bg-[#3d9655]">
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-9 w-fit cursor-pointer items-center justify-center rounded-full bg-[#4CAB65] px-8 text-sm font-medium text-white no-underline hover:bg-[#3d9655] sm:h-11 sm:text-base"
+              >
                 Register now
-              </Button>
+              </a>
             </div>
           </div>
           <div className="flex min-w-0 flex-[2] items-center justify-end max-sm:justify-center">

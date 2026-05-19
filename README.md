@@ -41,7 +41,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Then open **`http://localhost:3000/`** (homepage). Other examples: **`/for-schools`**, **`/for-researchers`**, **`/research`**.
+Then open **`http://localhost:3000/`** (homepage). Other examples: **`/for-schools`**, **`/for-researchers`**, **`/publications`**.
 
 | Script | Purpose |
 | --- | --- |

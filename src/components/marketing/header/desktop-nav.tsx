@@ -1,9 +1,19 @@
 "use client"
 
 import { Fragment } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { NAV_CONFIG, NAV_DROPDOWN_PANEL_STYLE } from "./nav-config"
+import {
+  NAV_CONFIG,
+  NAV_DROPDOWN_PANEL_STYLE,
+  navDropdownHoverCloseDelayMs,
+  navDropdownHoverOpenDelayMs,
+  navDropdownItemClass,
+  navDropdownLabelClass,
+  navDropdownListClass,
+  navDropdownTriggerClass,
+} from "./nav-config"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -21,23 +31,28 @@ type DesktopNavProps = {
 export const DesktopNav = ({ className }: DesktopNavProps) => {
   const router = useRouter()
   return (
-    <NavigationMenu className={className}>
+    <NavigationMenu
+      className={className}
+      delay={navDropdownHoverOpenDelayMs}
+      closeDelay={navDropdownHoverCloseDelayMs}
+    >
       <NavigationMenuList>
         {NAV_CONFIG.map((item) => (
           <NavigationMenuItem key={item.label}>
             {item.children ? (
               <>
                 <NavigationMenuTrigger
-                  className={cn("text-base min-[1800px]:text-lg", item.href && "cursor-pointer")}
+                  className={cn(
+                    navDropdownTriggerClass,
+                    item.href && "cursor-pointer",
+                    "text-base min-[1800px]:text-lg",
+                  )}
                   {...(item.href ? { onClick: () => router.push(item.href!) } : {})}
                 >
                   {item.label}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul
-                    className="grid grid-cols-1 gap-1 p-2"
-                    style={NAV_DROPDOWN_PANEL_STYLE}
-                  >
+                  <ul className={navDropdownListClass} style={NAV_DROPDOWN_PANEL_STYLE}>
                     {item.children.map((section, sIdx) => (
                       <Fragment key={sIdx}>
                         {section.heading && (
@@ -46,10 +61,12 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
                           </li>
                         )}
                         {section.items.map((child) => (
-                          <li key={child.href + child.label}>
+                          <li key={`${item.label}-${child.href}-${child.label}`}>
                             <NavigationMenuLink
-                              href={child.href}
-                              className="flex select-none items-center gap-3 rounded-md p-3 leading-none no-underline"
+                              closeOnClick
+                              render={
+                                <Link href={child.href} className={navDropdownItemClass} />
+                              }
                             >
                               {child.icon && (
                                 <span className="flex size-8 shrink-0 items-center justify-center rounded-md border border-border/50 bg-muted/50">
@@ -57,7 +74,12 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
                                 </span>
                               )}
                               <div className="flex items-center">
-                                <span className="flex items-center gap-1.5 text-sm font-medium text-foreground">
+                                <span
+                                  className={cn(
+                                    navDropdownLabelClass,
+                                    "flex items-center gap-1.5",
+                                  )}
+                                >
                                   {child.label}
                                   {child.badge && (
                                     <span className="rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-semibold text-primary">
@@ -81,8 +103,15 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
               </>
             ) : (
               <NavigationMenuLink
-                href={item.href!}
-                className={cn(navigationMenuTriggerStyle(), "text-base min-[1800px]:text-lg")}
+                render={
+                  <Link
+                    href={item.href!}
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "text-base min-[1800px]:text-lg",
+                    )}
+                  />
+                }
               >
                 {item.label}
               </NavigationMenuLink>

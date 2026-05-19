@@ -72,9 +72,9 @@ import {
 } from "@/components/marketing/research-index/research-index-utils"
 import type { ResearchPaper, SuccessStory, TeamMember } from "@/lib/notion/types"
 import {
-  notionSuccessStoryPublicReadUrl,
   splitSuccessStoryQuote,
 } from "@/lib/success-stories/notion-public-read-url"
+import { successStoryPagePath } from "@/lib/success-stories/success-story-path"
 
 /** Figma `1732:3684` — row label + `genre` for picking two papers (`1732:3685`). */
 const RESEARCH_HIGHLIGHT_TOPICS = [
@@ -322,13 +322,15 @@ export const ResearchersHeroSection = () => {
             </span>
           </h1>
           <div className={cn("w-full", marketingHeroCtaButtonRowClass)}>
-            <Link
-              href={`#${forResearchersSectionIds.collaborate}`}
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
               className={researchersHeroPrimaryCtaClassName}
             >
               Research with us
-            </Link>
-            <Link href="/research" className={researchersHeroSecondaryCtaClassName}>
+            </a>
+            <Link href="/publications" className={researchersHeroSecondaryCtaClassName}>
               Our publications
             </Link>
           </div>
@@ -717,7 +719,7 @@ function HighlightStudyCard({
     )
   }
   return (
-    <Link href="/research" className={shellClass}>
+    <Link href="/publications" className={shellClass}>
       {inner}
     </Link>
   )
@@ -743,7 +745,7 @@ function HighlightStudiesCarousel({
     return (
       <p className={cn("text-pretty text-base text-muted-foreground", className)}>
         <Link
-          href="/research"
+          href="/publications"
           className="font-medium text-[#027f89] underline-offset-4 hover:underline"
         >
           Browse all research
@@ -797,7 +799,7 @@ function HighlightStudiesBlock({
     return (
       <p className="text-pretty text-base text-muted-foreground">
         <Link
-          href="/research"
+          href="/publications"
           className="font-medium text-[#027f89] underline-offset-4 hover:underline"
         >
           Browse all research
@@ -831,6 +833,9 @@ const HIGHLIGHTS_STICKY_TITLE_H =
   "h-[2.5rem] sm:h-[2.75rem] md:h-[3rem] lg:h-[3.5rem] lg:leading-snug"
 const HIGHLIGHTS_STICKY_BODY_H =
   "h-[7.25rem] shrink-0 overflow-y-auto sm:h-[7.75rem] md:h-[8.5rem] lg:h-[9.5rem] xl:h-[10rem]"
+/** Room for study card + “Next study” row — all spy panels are absolute for opacity crossfade. */
+const HIGHLIGHTS_STICKY_PANEL_MIN_H =
+  "min-h-[28rem] sm:min-h-[30rem] md:min-h-[32rem]"
 
 export const ResearchHighlightsSection = ({
   papers,
@@ -1025,7 +1030,7 @@ export const ResearchHighlightsSection = ({
       ) : (
         <div className="w-full min-w-0" role="region" aria-label="Research highlight themes">
           {/* Phones & tablets: one open block per topic (title + study), same UX as legacy mobile */}
-          <div className={cn("flex flex-col lg:hidden", marketingCardStackGapClass)}>
+          <div className={cn("flex flex-col md:hidden", marketingCardStackGapClass)}>
             {RESEARCH_HIGHLIGHT_TOPICS.map((topic) => {
               const studies = studiesByTopic.get(topic.id) ?? []
               const theme = HIGHLIGHT_TOPIC_THEME[topic.id]
@@ -1074,15 +1079,15 @@ export const ResearchHighlightsSection = ({
             })}
           </div>
 
-          {/* lg+: scroll spy + single sticky carousel (benefits-parity desktop) */}
+          {/* md+: scroll spy + single sticky carousel (benefits-parity desktop) */}
           <div
             className={cn(
-              "relative z-0 hidden grid-cols-1 items-stretch lg:grid lg:grid-cols-2",
+              "relative z-0 hidden min-w-0 grid-cols-1 items-stretch md:grid md:grid-cols-2",
               marketingCardStackGapClass,
-              "lg:gap-12 xl:gap-16",
+              "md:gap-12 lg:gap-16",
             )}
           >
-            <div className="relative z-0 min-w-0 pb-4 lg:pb-6">
+            <div className="relative z-0 min-w-0 pb-[5vh]">
               {RESEARCH_HIGHLIGHT_TOPICS.map((topic, i) => {
                 const isActive = i === highlightsSpyIndex
                 const theme = HIGHLIGHT_TOPIC_THEME[topic.id]
@@ -1136,15 +1141,15 @@ export const ResearchHighlightsSection = ({
               })}
             </div>
 
-            <div
-              className="relative z-0 flex min-h-0 w-full min-w-0 shrink-0 flex-col pb-4 lg:pb-6"
-            >
+            <div className="relative z-0 flex min-h-0 w-full min-w-0 shrink-0 flex-col pb-[5vh]">
               <div
                 ref={highlightsStickyPanelRef}
-                className="w-full lg:sticky"
+                className="sticky w-full"
                 style={{ top: highlightsStickyTop }}
               >
-                <div className="relative w-full min-h-0">
+                <div
+                  className={cn("relative w-full", HIGHLIGHTS_STICKY_PANEL_MIN_H)}
+                >
                   {RESEARCH_HIGHLIGHT_TOPICS.map((topic, i) => {
                     const studies = studiesByTopic.get(topic.id) ?? []
                     const theme = HIGHLIGHT_TOPIC_THEME[topic.id]
@@ -1152,10 +1157,10 @@ export const ResearchHighlightsSection = ({
                       <div
                         key={topic.id}
                         className={cn(
-                          "w-full transition-opacity duration-500",
+                          "absolute inset-x-0 top-0 w-full transition-opacity duration-500 motion-reduce:transition-none",
                           i === highlightsSpyIndex
-                            ? "relative z-[1] opacity-100"
-                            : "pointer-events-none absolute inset-0 z-0 overflow-y-auto opacity-0",
+                            ? "z-[1] opacity-100"
+                            : "pointer-events-none z-0 opacity-0",
                         )}
                       >
                         <div
@@ -1207,7 +1212,7 @@ function indexVenueOptionsFromPapers(papers: ResearchPaper[]): string[] {
   return [...venues].sort((a, b) => a.localeCompare(b))
 }
 
-/** Cropped scroll region — keeps the section short (card list only; full `/research` has table + cards). */
+/** Cropped scroll region — keeps the section short (card list only; full `/publications` has table + cards). */
 const INDEX_PREVIEW_SCROLL =
   "max-h-[min(26rem,50svh)] overflow-y-auto overscroll-y-contain min-h-0 scroll-smooth sm:max-h-[min(30rem,55svh)] [contain:layout]"
 
@@ -1227,7 +1232,7 @@ function ResearchIndexSearchForm() {
         e.preventDefault()
         const params = new URLSearchParams()
         if (query.trim()) params.set("q", query.trim())
-        router.push(`/research${params.toString() ? `?${params}` : ""}`)
+        router.push(`/publications${params.toString() ? `?${params}` : ""}`)
       }}
     >
       <label className="block">
@@ -1328,7 +1333,7 @@ export const ResearchIndexSection = ({
             Publications could not be loaded right now. Browse the archive on the Research Index
             page.
           </p>
-          <Link href="/research" className={cn(forResearchersOutlineCtaClassName, "mt-6")}>
+          <Link href="/publications" className={cn(forResearchersOutlineCtaClassName, "mt-6")}>
             Open publications
           </Link>
         </div>
@@ -1485,7 +1490,7 @@ export const ResearchIndexSection = ({
           </div>
 
           <div className="flex justify-end px-5 py-4 sm:px-5">
-            <Link href="/research" className={riSeeAllPublicationsLinkMetaClass}>
+            <Link href="/publications" className={riSeeAllPublicationsLinkMetaClass}>
               See all publications
               <ArrowRight
                 className="size-[26px] shrink-0 transition-transform group-hover:translate-x-0.5"
@@ -1563,7 +1568,8 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
 
       <div className={cn("flex flex-col", marketingCardStackGapClass)}>
         {stories.map((story) => {
-          const readUrl = notionSuccessStoryPublicReadUrl(story)
+          const readHref = successStoryPagePath(story)
+          const readOnSite = readHref?.startsWith("/") ?? false
           const quoteParts = story.quote ? splitSuccessStoryQuote(story.quote) : null
 
           return (
@@ -1626,22 +1632,40 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
                   </p>
                 )}
               </div>
-              <a
-                href={readUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  "group mt-4 ml-auto flex w-fit items-center gap-2 text-lg font-medium no-underline transition-opacity hover:opacity-90",
-                  SUCCESS_STORY_GREEN,
-                )}
-              >
-                <span>Read story</span>
-                <ArrowRight
-                  className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
-                  aria-hidden
-                />
-                <span className="sr-only">(opens in new tab)</span>
-              </a>
+              {readHref ? (
+                readOnSite ? (
+                  <Link
+                    href={readHref}
+                    className={cn(
+                      "group mt-4 ml-auto flex w-fit items-center gap-2 text-lg font-medium no-underline transition-opacity hover:opacity-90",
+                      SUCCESS_STORY_GREEN,
+                    )}
+                  >
+                    <span>Read story</span>
+                    <ArrowRight
+                      className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
+                      aria-hidden
+                    />
+                  </Link>
+                ) : (
+                  <a
+                    href={readHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      "group mt-4 ml-auto flex w-fit items-center gap-2 text-lg font-medium no-underline transition-opacity hover:opacity-90",
+                      SUCCESS_STORY_GREEN,
+                    )}
+                  >
+                    <span>Read story</span>
+                    <ArrowRight
+                      className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
+                      aria-hidden
+                    />
+                    <span className="sr-only">(opens in new tab)</span>
+                  </a>
+                )
+              ) : null}
             </article>
           )
         })}
@@ -1660,12 +1684,14 @@ export const ResearchCollaborateCtaSection = () => {
           Want to get involved? Reach out if you are interested in conducting research with us.
         </p>
         <div className={marketingFinalCtaButtonRowClass}>
-          <Link
-            href="/get-involved#partnerships-contact-form"
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
             className={marketingFinalCtaPrimaryLinkClass}
           >
             Reach out
-          </Link>
+          </a>
         </div>
       </div>
     </section>

@@ -18,6 +18,7 @@ import {
   successStoriesReadStoryArrowClass,
   successStoriesReadStoryLinkClass,
 } from "@/lib/success-stories-link-classes"
+import { successStoryPagePath } from "@/lib/success-stories/success-story-path"
 import { cn } from "@/lib/utils"
 
 const CATEGORIES = ["All", "Schools", "Tutors", "Researchers", "Foundations"] as const
@@ -112,9 +113,7 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
           <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8">
             {filtered.map((story) => {
               const Icon = CATEGORY_ICON[story.category] ?? Sparkles
-              const href =
-                story.publicReadUrl ??
-                (story.content ? `/success-stories/${story.id}` : null)
+              const href = successStoryPagePath(story)
 
               return (
                 <article
@@ -162,7 +161,7 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
                       href={href}
                       className={successStoriesReadStoryLinkClass}
                       aria-label={`Read story: ${story.title}`}
-                      {...(story.publicReadUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     >
                       <span>Read story</span>
                       <ArrowRight className={successStoriesReadStoryArrowClass} aria-hidden />

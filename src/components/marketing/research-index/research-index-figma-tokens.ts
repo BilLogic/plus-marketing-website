@@ -2,7 +2,7 @@ import { marketingTypography } from "@/lib/marketing-typography"
 import { cn } from "@/lib/utils"
 import { RESEARCH_GENRE_TAGS } from "@/lib/research/research-genres"
 
-/** Figma PLUS-website-IA `1730:2012` — shared by `/research` and For Researchers → Research Index. */
+/** Figma PLUS-website-IA `1730:2012` — shared by `/publications` and For Researchers → Research Index. */
 export const riFg = {
   title: "text-[#004247]",
   bodyMuted: "text-[#62636c]",

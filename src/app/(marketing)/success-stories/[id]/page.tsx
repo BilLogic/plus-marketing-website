@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft, Quote } from "lucide-react"
-import { fetchSuccessStoryById } from "@/lib/notion/queries/success-stories"
+import { fetchSuccessStoryBySlugOrId } from "@/lib/notion/queries/success-stories"
 import { formatMarketingLongDate } from "@/lib/format-marketing-date"
 import { marketingListingShellClass } from "@/lib/marketing-layout"
 import { marketingSectionLeadColorClass } from "@/lib/marketing-section-layout"
@@ -41,7 +41,7 @@ export default async function SuccessStoryPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const story = await fetchSuccessStoryById(id)
+  const story = await fetchSuccessStoryBySlugOrId(id)
 
   if (!story) {
     notFound()

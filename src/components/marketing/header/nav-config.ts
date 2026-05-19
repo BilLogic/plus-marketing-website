@@ -63,7 +63,7 @@ export const NAV_CONFIG: NavItem[] = [
     children: [
       {
         items: [
-          { label: "Publications", href: "/research", icon: FileText },
+          { label: "Publications", href: "/publications", icon: FileText },
           { label: "News", href: "/about/news", icon: Newspaper },
           { label: "Media Kit", href: "/media-kit", icon: Image },
         ],
@@ -111,6 +111,22 @@ function getNavDropdownPanelStyle(): CSSProperties {
 /** Stable reference for desktop dropdown panels (same width for every menu). */
 export const NAV_DROPDOWN_PANEL_STYLE = getNavDropdownPanelStyle()
 
+/** Shared markup/classes for desktop nav + homepage “Learn more” dropdown panels. */
+export const navDropdownHoverOpenDelayMs = 50
+export const navDropdownHoverCloseDelayMs = 150
+/** Triggers open on hover — default cursor (items inside keep `cursor-pointer`). */
+export const navDropdownTriggerClass = "cursor-default"
+export const navDropdownListClass = "grid grid-cols-1 gap-1 p-2"
+export const navDropdownItemClass =
+  "flex w-full cursor-pointer select-none items-center gap-3 rounded-md p-3 leading-none no-underline outline-none transition-all hover:bg-muted focus:bg-muted! data-[highlighted]:bg-muted! focus:text-foreground! data-[highlighted]:text-foreground! not-data-[variant=destructive]:focus:**:text-foreground! data-[highlighted]:**:text-foreground! focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1 [&_svg]:text-muted-foreground focus:[&_svg]:text-muted-foreground! data-[highlighted]:[&_svg]:text-muted-foreground!"
+export const navDropdownIconWrapClass =
+  "flex size-8 shrink-0 items-center justify-center rounded-md border border-border/50 bg-muted/50"
+export const navDropdownIconClass = "size-4 text-muted-foreground"
+/** Body grey (`--foreground` / `--popover-foreground` = #62636C) — matches top nav dropdown labels. */
+export const navDropdownLabelClass = "text-sm font-medium text-foreground"
+export const navDropdownContentClass =
+  "min-w-0 w-auto rounded-lg bg-popover p-0 text-popover-foreground shadow ring-1 ring-foreground/10"
+
 export const FOOTER_LINKS = {
   about: [
     { label: "Our Story", href: "/about#foundations" },
@@ -124,7 +140,7 @@ export const FOOTER_LINKS = {
     { label: "For Researchers", href: "/for-researchers" },
   ],
   resources: [
-    { label: "Publications", href: "/research" },
+    { label: "Publications", href: "/publications" },
     { label: "News", href: "/about/news" },
     { label: "Media Kit", href: "/media-kit" },
   ],

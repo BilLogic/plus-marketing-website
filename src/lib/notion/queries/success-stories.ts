@@ -10,6 +10,10 @@ import {
 } from "@/lib/notion/utils/parse-properties"
 import { readCache, writeCache } from "@/lib/notion/utils/cache"
 import { blocksToMarkdown } from "@/lib/notion/utils/blocks-to-markdown"
+import {
+  isNotionPageId,
+  successStorySlug,
+} from "@/lib/success-stories/success-story-path"
 
 const CACHE_KEY = "success-stories"
 
@@ -101,6 +105,22 @@ export const fetchSuccessStories = async (): Promise<SuccessStory[]> => {
 export async function fetchTutorTestimonials(): Promise<SuccessStory[]> {
   const all = await fetchSuccessStories()
   return all.filter((s) => s.category === "Tutors")
+}
+
+/** Resolves `/success-stories/[slug]` or legacy `/success-stories/[notion-page-id]`. */
+export const fetchSuccessStoryBySlugOrId = async (
+  slugOrId: string
+): Promise<SuccessStory | null> => {
+  const key = slugOrId.trim()
+  if (isNotionPageId(key)) {
+    return fetchSuccessStoryById(key)
+  }
+  const normalized = key.toLowerCase()
+  const all = await fetchSuccessStories()
+  return (
+    all.find((s) => successStorySlug(s.title).toLowerCase() === normalized) ??
+    null
+  )
 }
 
 export const fetchSuccessStoryById = async (

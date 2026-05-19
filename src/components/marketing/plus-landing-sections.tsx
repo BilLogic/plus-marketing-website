@@ -3,7 +3,6 @@
 import { useReducedMotion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { useState, useEffect, useRef } from "react"
 import {
   ArrowLeft,
@@ -20,6 +19,18 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import {
+  NAV_DROPDOWN_PANEL_STYLE,
+  navDropdownContentClass,
+  navDropdownIconClass,
+  navDropdownIconWrapClass,
+  navDropdownItemClass,
+  navDropdownLabelClass,
+  navDropdownHoverCloseDelayMs,
+  navDropdownHoverOpenDelayMs,
+  navDropdownListClass,
+  navDropdownTriggerClass,
+} from "@/components/marketing/header/nav-config"
 import { BunduiFooterSection } from "@/components/registry/bundui/footer-section"
 import { forTutorsAssets } from "@/components/marketing/for-tutors-assets"
 import {
@@ -466,30 +477,45 @@ const LEARN_MORE_AUDIENCE_ITEMS = [
 ] as const
 
 const LearnMoreDropdown = () => {
-  const router = useRouter()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        className={cn(marketingHeroCtaOutlineLinkClass, "min-w-[140px] gap-2")}
+        openOnHover
+        delay={navDropdownHoverOpenDelayMs}
+        closeDelay={navDropdownHoverCloseDelayMs}
+        className={cn(
+          marketingHeroCtaOutlineLinkClass,
+          navDropdownTriggerClass,
+          "group min-w-[140px] gap-2",
+        )}
       >
         Learn more
-        <ChevronDown className="size-4 shrink-0 transition-transform duration-200 [[data-state=open]_&]:rotate-180" />
+        <ChevronDown
+          className="size-4 shrink-0 transition-transform duration-300 group-data-popup-open:rotate-180"
+          aria-hidden
+        />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" sideOffset={8} className="min-w-[200px]">
-        {LEARN_MORE_AUDIENCE_ITEMS.map(({ label, href, icon: Icon }) => (
-          <DropdownMenuItem
-            key={href}
-            className={cn(
-              "cursor-pointer gap-2 focus:bg-[#A6EDF4]/30 focus:text-[#004247]",
-              /* Keep label teal on focus; keep icons muted (override menu `focus:**:text-accent-foreground` on svgs) */
-              "[&>svg]:!text-[#62636C] focus:[&>svg]:!text-[#62636C] data-[highlighted]:[&>svg]:!text-[#62636C] data-focus-visible:[&>svg]:!text-[#62636C]",
-            )}
-            onClick={() => router.push(href)}
-          >
-            <Icon className="size-4 shrink-0" aria-hidden />
-            {label}
-          </DropdownMenuItem>
-        ))}
+      <DropdownMenuContent
+        align="center"
+        sideOffset={8}
+        style={NAV_DROPDOWN_PANEL_STYLE}
+        className={navDropdownContentClass}
+      >
+        <ul className={navDropdownListClass}>
+          {LEARN_MORE_AUDIENCE_ITEMS.map(({ label, href, icon: Icon }) => (
+            <li key={href}>
+              <DropdownMenuItem
+                className={navDropdownItemClass}
+                render={<Link href={href} />}
+              >
+                <span className={navDropdownIconWrapClass}>
+                  <Icon className={navDropdownIconClass} aria-hidden />
+                </span>
+                <span className={navDropdownLabelClass}>{label}</span>
+              </DropdownMenuItem>
+            </li>
+          ))}
+        </ul>
       </DropdownMenuContent>
     </DropdownMenu>
   )
@@ -768,12 +794,14 @@ export const PlusImpactStatsSection = () => {
             <p className={impactZigzagBodyClass}>
               PLUS tutors provide instructional support to middle-school math learners during the school day.
             </p>
-            <Link
-              href="/for-schools"
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(marketingHeroCtaOutlineLinkClass, "w-fit self-start")}
             >
               Get PLUS tutoring
-            </Link>
+            </a>
           </div>
           <div className={impactZigzagPhotoColClass("md:order-1")}>
             <ImpactRowPhoto
@@ -793,12 +821,14 @@ export const PlusImpactStatsSection = () => {
             <p className={impactZigzagBodyClass}>
               University and community tutors trained to support middle school math learners.
             </p>
-            <Link
-              href="/for-tutors"
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(marketingHeroCtaOutlineLinkClass, "w-fit self-start")}
             >
               Become a tutor
-            </Link>
+            </a>
           </div>
           <div className={impactZigzagPhotoColClass("md:order-2")}>
             <ImpactRowPhoto
@@ -1089,7 +1119,7 @@ export const PlusScienceOfLearningSection = () => {
               and Stanford University. PLUS&apos;s findings are freely available to all.
             </p>
             <Link
-              href="/research"
+              href="/publications"
               className={cn(marketingFinalCtaPrimaryLinkClass, "w-fit min-w-[215px]")}
             >
               Read our research

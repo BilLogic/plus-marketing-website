@@ -33,6 +33,8 @@ import {
 } from "@/components/marketing/for-tutors-sections"
 import { forTutorsAssets } from "@/components/marketing/for-tutors-assets"
 import { forSchoolsAssets } from "@/components/marketing/for-schools-assets"
+import { splitSuccessStoryQuote } from "@/lib/success-stories/notion-public-read-url"
+import { successStoryPagePath } from "@/lib/success-stories/success-story-path"
 import {
   marketingCardIconCircleClass,
   marketingCardIconColumnSpacerClass,
@@ -1000,7 +1002,6 @@ const SUCCESS_STORY_CARD_THEMES = [
     shell: "bg-[#FFE8F6] dark:bg-[#FFE8F6]/15",
     iconCircle: "bg-[#C6009C] text-white",
     title: "text-[#C6009C] dark:text-[#C6009C]",
-    attribution: "text-[#C6009C]/80 dark:text-[#C6009C]/80",
     quoteStrong: "text-[#C6009C] dark:text-[#C6009C]",
     readLink: successStoryReadLinkClass,
   },
@@ -1008,7 +1009,6 @@ const SUCCESS_STORY_CARD_THEMES = [
     shell: "bg-[#E4F5FF] dark:bg-sky-950/40",
     iconCircle: "bg-[#007EB8] text-white",
     title: "text-[#007EB8] dark:text-sky-300",
-    attribution: "text-[#007EB8]/80 dark:text-sky-300/80",
     quoteStrong: "text-[#007EB8] dark:text-sky-300",
     readLink: successStoryReadLinkBlueClass,
   },
@@ -1016,7 +1016,6 @@ const SUCCESS_STORY_CARD_THEMES = [
     shell: "bg-[#FFF1C7] dark:bg-amber-950/20",
     iconCircle: "bg-[#A27707] text-white",
     title: "text-[#9A6D00] dark:text-amber-200",
-    attribution: "text-[#9A6D00]/80 dark:text-amber-200/80",
     quoteStrong: "text-[#9A6D00] dark:text-amber-200",
     readLink: latestReadMoreLinkClass,
   },
@@ -1051,6 +1050,9 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
         {stories.slice(0, 3).map((story, index) => {
           const theme = successStoryThemeAt(index)
           const Icon = CATEGORY_ICON[story.category] ?? Sparkles
+          const quoteParts = story.quote ? splitSuccessStoryQuote(story.quote) : null
+          const readHref = successStoryPagePath(story)
+          const readOnSite = readHref?.startsWith("/") ?? false
           return (
             <article
               key={story.id}
@@ -1082,33 +1084,67 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
                   </h3>
                 </div>
                 {story.quote ? (
-                  <p className={cn(aboutCardBody, "mt-4 min-h-0 flex-1 text-pretty italic text-muted-foreground")}>
-                    &ldquo;{story.quote}&rdquo;
-                    {story.quoteAttribution && (
-                      <span
-                        className={cn(
-                          "mt-2 block not-italic font-medium",
-                          theme.attribution,
-                        )}
-                      >
+                  <>
+                    <blockquote
+                      className={cn(
+                        aboutCardBody,
+                        "mt-4 min-h-0 flex-1 text-pretty italic leading-relaxed text-muted-foreground",
+                      )}
+                    >
+                      {quoteParts ? (
+                        <>
+                          &ldquo;{quoteParts.before}{" "}
+                          <strong className={cn("font-semibold italic", theme.quoteStrong)}>
+                            {quoteParts.highlight}
+                          </strong>
+                          {quoteParts.after}&rdquo;
+                        </>
+                      ) : (
+                        <>&ldquo;{story.quote}&rdquo;</>
+                      )}
+                    </blockquote>
+                    {story.quoteAttribution ? (
+                      <p className="mt-2 text-sm not-italic text-muted-foreground">
                         — {story.quoteAttribution}
-                      </span>
-                    )}
-                  </p>
+                      </p>
+                    ) : null}
+                  </>
                 ) : (
                   <p className={cn(aboutCardBody, "mt-4 min-h-0 flex-1 text-pretty text-muted-foreground")}>
                     {story.summary}
                   </p>
                 )}
               </div>
-              <Link
-                href="/success-stories"
-                className={theme.readLink}
-                aria-label={`Read story: ${story.title}`}
-              >
-                <span>Read story</span>
-                <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
-              </Link>
+              {readHref ? (
+                readOnSite ? (
+                  <Link
+                    href={readHref}
+                    className={theme.readLink}
+                    aria-label={`Read story: ${story.title}`}
+                  >
+                    <span>Read story</span>
+                    <ArrowRight
+                      className="size-6 transition-transform group-hover:translate-x-0.5"
+                      aria-hidden
+                    />
+                  </Link>
+                ) : (
+                  <a
+                    href={readHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={theme.readLink}
+                    aria-label={`Read story: ${story.title}`}
+                  >
+                    <span>Read story</span>
+                    <ArrowRight
+                      className="size-6 transition-transform group-hover:translate-x-0.5"
+                      aria-hidden
+                    />
+                    <span className="sr-only">(opens in new tab)</span>
+                  </a>
+                )
+              ) : null}
             </article>
           )
         })}

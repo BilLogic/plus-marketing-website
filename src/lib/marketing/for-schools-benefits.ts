@@ -9,6 +9,8 @@ export const FOR_SCHOOLS_BENEFITS_ITEMS = [
     description:
       "High-quality education shouldn't be gated. Access our full suite of AI-driven training and feedback tools at no cost to your district.",
     cta: "See if your school qualifies",
+    ctaHref:
+      "https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform",
   },
   {
     id: "multilingual-support",

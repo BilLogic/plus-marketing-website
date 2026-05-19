@@ -16,6 +16,9 @@ export const readCache = async <T>(key: string): Promise<T | null> => {
 }
 
 export const writeCache = async <T>(key: string, data: T): Promise<void> => {
+  // Dev: skip writes — updating `src/data/cache` retriggers Webpack HMR and causes compile/reload loops.
+  if (process.env.NODE_ENV === "development") return
+
   try {
     const filePath = path.join(CACHE_DIR, `${key}.json`)
     await fs.mkdir(CACHE_DIR, { recursive: true })
