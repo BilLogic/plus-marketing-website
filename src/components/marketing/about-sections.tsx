@@ -738,6 +738,7 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
                       memberId={m.id}
                       name={m.name}
                       role={m.title1 ?? m.affiliation ?? "Student"}
+                      institution={m.title2}
                       avatarUrl={m.picture ?? undefined}
                       linkedIn={m.linkedIn}
                     />
