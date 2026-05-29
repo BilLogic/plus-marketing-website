@@ -11,10 +11,10 @@ export const riFg = {
   shellBg: "bg-white",
   /** Toolbar rows inside shell — white; grey reserved for search + selects only. */
   shellRow: "bg-white",
-  allActive: "bg-[#ffc75e] text-white shadow-none",
-  tagStudentBg: "bg-[#fff7f7] text-[#c05053]",
-  tagGenAiBg: "bg-[#e0f5fe] text-[#0080b4]",
-  tagTutorBg: "bg-[#f4fbf6] text-[#007d49]",
+  allActive: "bg-yellow-800 text-white shadow-none",
+  tagStudentBg: "bg-red-200 text-red-900",
+  tagGenAiBg: "bg-blue-200 text-blue-900",
+  tagTutorBg: "bg-green-200 text-green-900",
   cardSurface: "bg-white",
   linkTeal: "text-[#004247]",
 } as const
@@ -86,11 +86,11 @@ function riGenreFilterPillActiveClass(
 ): string {
   switch (genre) {
     case "Student learning":
-      return "bg-[#c05053] text-white shadow-none"
+      return "bg-red-900 text-white shadow-none"
     case "Gen AI":
-      return "bg-[#0080b4] text-white shadow-none"
+      return "bg-blue-900 text-white shadow-none"
     case "Tutor training":
-      return "bg-[#007d49] text-white shadow-none"
+      return "bg-green-900 text-white shadow-none"
   }
 }
 

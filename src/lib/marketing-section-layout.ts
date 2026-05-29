@@ -12,13 +12,13 @@ export const marketingSectionVerticalGapClass = "space-y-6 md:space-y-8"
 /** Gap between stacked/gridded cards — tighter on mobile, standard from `md` up */
 export const marketingCardStackGapClass = "gap-4 md:gap-8"
 
-/** Narrow column shell with consistent intro → cards gap */
+/** Narrow column shell with consistent intro → cards gap (matches `marketingSectionVerticalGapClass`) */
 export const marketingSectionContentShellClass =
-  "mx-auto max-w-5xl space-y-8 min-[1800px]:max-w-7xl min-[1800px]:space-y-10"
+  "mx-auto max-w-5xl space-y-6 md:space-y-8 min-[1800px]:max-w-7xl"
 
 /** Title → lead; right padding on md+ reserves space for absolutely positioned decors */
 export const marketingSectionIntroColumnClass =
-  "w-full space-y-3 md:min-w-0 md:pr-[10rem] lg:pr-[10rem]"
+  "w-full space-y-3 md:min-w-0 md:pr-[8rem] lg:pr-[9rem]"
 
 /** Header decors sit out of flow on md+ (hidden below md when paired with `hidden md:block` on the asset) */
 export const marketingSectionHeaderDecorAbsoluteClass =

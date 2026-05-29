@@ -32,7 +32,7 @@ import {
   riParseYear,
 } from "@/components/marketing/research-index/research-index-utils"
 
-const ALL_VALUE = "__all__"
+const ALL_VALUE = "all"
 
 const tableHeaderCn = cn(
   "pb-2.5 pr-4 pt-4 text-left font-semibold",
@@ -377,7 +377,7 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
                 <SelectTrigger size="sm" className={riSelectTriggerCn}>
                   <SelectValue placeholder="all" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent align="start" alignItemWithTrigger={false}>
                   <SelectItem value={ALL_VALUE} className={riSelectItemCn}>
                     all
                   </SelectItem>
@@ -403,7 +403,7 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
                 >
                   <SelectValue placeholder="all" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent align="start" alignItemWithTrigger={false}>
                   <SelectItem value={ALL_VALUE} className={riSelectItemCn}>
                     all
                   </SelectItem>

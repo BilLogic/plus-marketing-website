@@ -27,6 +27,9 @@ import {
   marketingFinalCtaShellClass,
   marketingFinalCtaTitleClass,
   marketingCardStackGapClass,
+  marketingSectionHeaderDecorAbsoluteClass,
+  marketingSectionHeaderDecorImgClass,
+  marketingSectionIntroColumnClass,
   marketingSectionLeadColorClass,
   marketingSectionVerticalGapClass,
 } from "@/lib/marketing-section-layout"
@@ -44,7 +47,7 @@ import { forSchoolsSectionIds } from "@/lib/plus-footer-ia"
 
 /** Match `get-involved-sections` / `for-tutors-sections` section headers (`sectionH2` / `sectionLead`). */
 const schoolsSectionH2 =
-  "text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+  "text-pretty text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
 /** Same breakpoint rhythm as `marketingTypography.sectionLead` + For Tutors intro copy (not hero). */
 const schoolsSectionLead = cn(
   "w-full max-w-none text-base lg:text-lg",
@@ -60,15 +63,7 @@ const schoolsBenefitsCardTitleClass =
 const schoolsBenefitsCardBodyClass =
   "text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg"
 
-/** Section intros — grid + in-flow decor (`grid-cols-1` below `md` avoids implicit track bugs + overflow). */
-const schoolsSectionHeaderGridClass =
-  "relative grid w-full min-w-0 grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto] md:items-center"
-/** Square header decors — `marketingSectionHeaderDecorImgClass` footprint without absolute. */
-const schoolsSectionHeaderSquareDecorClass = cn(
-  "pointer-events-none aspect-square shrink-0 object-contain opacity-90 select-none",
-  "hidden md:block md:w-[110px] lg:w-[124px]",
-)
-/** Oversight hero decor — wide asset; `auto` column sizes from intrinsic width. */
+/** Oversight hero decor — wide asset; absolutely positioned beside the intro copy. */
 const schoolsSectionHeaderOversightDecorClass = cn(
   "pointer-events-none hidden h-[104px] w-auto max-w-[150px] shrink-0 object-contain opacity-90 select-none md:block md:h-[118px] md:max-w-[170px]",
 )
@@ -170,21 +165,19 @@ export const SchoolsCommunitySection = () => {
       className={cn("relative scroll-mt-24", marketingSectionVerticalGapClass)}
     >
       <div className="relative w-full text-left">
-        <div className={schoolsSectionHeaderGridClass}>
-          <div className="min-w-0 space-y-3">
-            <h2 className={schoolsSectionH2}>Join the PLUS School Community</h2>
-            <p className={schoolsSectionLead}>
-              Our school partners have seen big improvements in student learning through PLUS
-              Tutoring.
-            </p>
-          </div>
-          <img
-            alt=""
-            src={forSchoolsAssets.decor.community}
-            className={schoolsSectionHeaderSquareDecorClass}
-            aria-hidden
-          />
+        <div className={marketingSectionIntroColumnClass}>
+          <h2 className={schoolsSectionH2}>Join the PLUS School Community</h2>
+          <p className={schoolsSectionLead}>
+            Our school partners have seen big improvements in student learning through PLUS
+            Tutoring.
+          </p>
         </div>
+        <img
+          alt=""
+          src={forSchoolsAssets.decor.community}
+          className={cn(marketingSectionHeaderDecorImgClass, marketingSectionHeaderDecorAbsoluteClass)}
+          aria-hidden
+        />
       </div>
 
       <div
@@ -292,21 +285,19 @@ export const SchoolsTrainingSection = () => {
       className={cn("scroll-mt-24", marketingSectionVerticalGapClass)}
     >
       <div className="relative z-10 w-full text-left">
-        <div className={schoolsSectionHeaderGridClass}>
-          <div className="min-w-0 space-y-3 sm:space-y-1">
-            <h2 className={schoolsSectionH2}>Benefits of PLUS</h2>
-            <p className={schoolsSectionLead}>
-              Here&apos;s how PLUS supports schools and trains tutors to guide students to
-              success.
-            </p>
-          </div>
-          <img
-            alt=""
-            src={forTutorsAssets.certificationDecor}
-            className={schoolsSectionHeaderSquareDecorClass}
-            aria-hidden
-          />
+        <div className={cn(marketingSectionIntroColumnClass, "sm:space-y-1")}>
+          <h2 className={schoolsSectionH2}>Benefits of PLUS</h2>
+          <p className={schoolsSectionLead}>
+            Here&apos;s how PLUS supports schools and trains tutors to guide students to
+            success.
+          </p>
         </div>
+        <img
+          alt=""
+          src={forTutorsAssets.certificationDecor}
+          className={cn(marketingSectionHeaderDecorImgClass, marketingSectionHeaderDecorAbsoluteClass)}
+          aria-hidden
+        />
       </div>
 
       {/* Below md: stacked amber cards (+ art); at md+ match two-column Benefits + sticky panel */}
@@ -315,14 +306,14 @@ export const SchoolsTrainingSection = () => {
           <article
             key={item.id}
             className={cn(
-              "flex flex-col gap-4 rounded-[30px] bg-amber-50 dark:bg-amber-950/20",
+              "flex flex-col gap-4 rounded-[30px] bg-yellow-200 dark:bg-amber-950/20",
               marketingCardPaddingClass,
             )}
           >
             <div className="flex items-start gap-3">
               <BenefitsAccordionIcon index={i} tone="accent" />
               <div className="flex min-w-0 flex-col gap-3">
-                <h3 className="pt-[calc((3rem-1lh)/2)] text-pretty text-base font-bold leading-tight tracking-tight text-[#a56d1e] sm:text-lg md:text-xl">
+                <h3 className="pt-[calc((3rem-1lh)/2)] text-pretty text-base font-bold leading-tight tracking-tight text-yellow-900 sm:text-lg md:text-xl">
                   {item.title}
                 </h3>
                 <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -394,7 +385,7 @@ export const SchoolsTrainingSection = () => {
                       className={cn(
                         "line-clamp-3 text-pretty text-base font-bold leading-tight tracking-tight transition-colors duration-300 sm:text-lg md:text-xl lg:text-2xl",
                         BENEFITS_STICKY_TITLE_H,
-                        isActive ? "text-[#a56d1e]" : "text-muted-foreground",
+                        isActive ? "text-yellow-900" : "text-muted-foreground",
                       )}
                     >
                       {item.title}
@@ -515,19 +506,19 @@ export const SchoolsTrainingSection = () => {
   )
 }
 
-/** Pink palette (School Success Stories). */
-const SCHOOLS_PINK_BG = "bg-[#ffe8f5]"
-const SCHOOLS_PINK_ACCENT = "text-[#d31998]"
-const SCHOOLS_PINK_ACCENT_FAINT = "text-[#d31998]/10"
-const SCHOOLS_PINK_ICON_BG = "bg-[#d31998]"
+/** School Success Stories — cycles pink → blue → amber (matches the About page). */
+const SCHOOLS_STORY_THEMES = [
+  { shell: "bg-fuchsia-200 dark:bg-fuchsia-200/15", iconBg: "bg-fuchsia-900", accent: "text-fuchsia-900" },
+  { shell: "bg-blue-200 dark:bg-sky-950/40", iconBg: "bg-blue-900", accent: "text-blue-900" },
+  { shell: "bg-yellow-200 dark:bg-amber-950/20", iconBg: "bg-yellow-900", accent: "text-yellow-900" },
+] as const
 
-/** Green palette (Day-to-Day Experience) — `#007d49` matches experience icon SVG circles. */
-const SCHOOLS_GREEN_BG = "bg-[#f4fbf6]"
-const SCHOOLS_GREEN_ACCENT = "text-[#007d49]"
-const SCHOOLS_GREEN_ICON_BG = "bg-[#007d49]"
-/** Ghost numbers: icon green at 10% opacity. */
+/** Green palette (Day-to-Day Experience). Phase icon SVG circles are baked at ~#007d49 (asset, not recolorable here). */
+const SCHOOLS_GREEN_BG = "bg-green-200"
+const SCHOOLS_GREEN_ACCENT = "text-green-900"
+/** Ghost numbers: brand dark green at low opacity — a touch darker than the light-green card. */
 const schoolsExperienceGhostNumberStyle = {
-  color: "rgba(0, 125, 73, 0.1)",
+  color: "rgba(41, 126, 67, 0.18)",
 } as const
 
 const EXPERIENCE_PHASES = [
@@ -572,21 +563,19 @@ export const SchoolsExperienceSection = () => {
       className={cn("scroll-mt-24", marketingSectionVerticalGapClass)}
     >
       <div className="relative w-full text-left">
-        <div className={schoolsSectionHeaderGridClass}>
-          <div className="min-w-0 space-y-3 sm:space-y-1">
-            <h2 className={schoolsSectionH2}>Your Day-to-Day Experience with PLUS</h2>
-            <p className={schoolsSectionLead}>
-              A seamless integration designed to support your faculty and accelerate student
-              growth.
-            </p>
-          </div>
-          <img
-            alt=""
-            src={forTutorsAssets.experienceDecor}
-            className={schoolsSectionHeaderSquareDecorClass}
-            aria-hidden
-          />
+        <div className={cn(marketingSectionIntroColumnClass, "sm:space-y-1")}>
+          <h2 className={schoolsSectionH2}>Your Day-to-Day Experience with PLUS</h2>
+          <p className={schoolsSectionLead}>
+            A seamless integration designed to support your faculty and accelerate student
+            growth.
+          </p>
         </div>
+        <img
+          alt=""
+          src={forTutorsAssets.experienceDecor}
+          className={cn(marketingSectionHeaderDecorImgClass, marketingSectionHeaderDecorAbsoluteClass)}
+          aria-hidden
+        />
       </div>
 
       {/* 2×2 card grid — icon stacked above phase/title/body; shared left edge with card padding. */}
@@ -602,11 +591,8 @@ export const SchoolsExperienceSection = () => {
           >
             {/* Ghost number — decorative, top-right */}
             <span
-              className="pointer-events-none absolute right-0 top-0 select-none font-bold leading-none"
-              style={{
-                fontSize: "clamp(7rem,18vw,12.5rem)",
-                ...schoolsExperienceGhostNumberStyle,
-              }}
+              className="pointer-events-none absolute right-0 top-0 select-none font-bold leading-none text-[max(8rem,36vw)] sm:text-[clamp(7rem,18vw,12.5rem)]"
+              style={schoolsExperienceGhostNumberStyle}
               aria-hidden
             >
               {phase.number}
@@ -667,7 +653,7 @@ const OVERSIGHT_CARD_ROW = cn(
 )
 /** Icon + gap + copy; full width when stacked, capped when side-by-side with art. */
 const OVERSIGHT_LEFT = cn(
-  "flex w-full min-w-0 shrink-0 flex-row items-stretch gap-[25px]",
+  "flex w-full min-w-0 shrink-0 flex-row items-stretch gap-3",
   "max-w-full lg:h-full lg:min-h-0 lg:max-w-[553px]",
 )
 const OVERSIGHT_COPY = cn(
@@ -697,9 +683,9 @@ const OVERSIGHT_CARDS = [
       "We work with your faculty to tailor lesson strategies that complement your school’s specific learning objectives and standards.",
     cta: "Get training",
     href: "https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform",
-    bgColor: "bg-[#ffeaea]",
-    titleColor: "text-[#c05053]",
-    btnBg: "bg-[#ff8789]",
+    bgColor: "bg-red-200",
+    titleColor: "text-red-900",
+    btnBg: "bg-red-700",
     btnText: "text-white",
     icon: forSchoolsAssets.icons.oversight[0],
     image: forSchoolsAssets.oversightCardImages[0],
@@ -710,11 +696,11 @@ const OVERSIGHT_CARDS = [
       "Track tutor performance, monitor student progress, and access high-level analytics to measure the ROI of your tutoring initiatives.",
     cta: "Try our demo",
     href: "https://app.tutors.plus/demo",
-    bgColor: "bg-[#f4fbf6]",
-    titleColor: "text-[#007d49]",
-    btnBg: "bg-[#2ca96b]",
+    bgColor: "bg-green-200",
+    titleColor: "text-green-900",
+    btnBg: "bg-green-800",
     btnText: "text-white",
-    panelBg: "bg-[#d7f0de]",
+    panelBg: "bg-green-300",
     imageLayout: "dashboard" as const,
     icon: forSchoolsAssets.icons.oversight[1],
     image: forSchoolsAssets.oversightCardImages[1],
@@ -725,10 +711,10 @@ const OVERSIGHT_CARDS = [
       "Tutors earn industry-recognized credentials upon completion, ensuring they meet the standards of your institution.",
     cta: "Register your tutors",
     href: "https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform",
-    bgColor: "bg-[#fff0cb]",
-    titleColor: "text-[#a56d1e]",
-    btnBg: "bg-[#ffc94b]",
-    btnText: "text-[#463923]",
+    bgColor: "bg-yellow-200",
+    titleColor: "text-yellow-900",
+    btnBg: "bg-yellow-800",
+    btnText: "text-yellow-950",
     icon: forSchoolsAssets.icons.oversight[2],
     image: forSchoolsAssets.oversightCardImages[2],
   },
@@ -738,9 +724,9 @@ const OVERSIGHT_CARDS = [
       "PLUS is designed to be software-agnostic, which means no new software licenses or changes required.",
     cta: "See How it Works",
     href: "https://app.tutors.plus/demo",
-    bgColor: "bg-[#e0f5fe]",
-    titleColor: "text-[#0080b4]",
-    btnBg: "bg-[#00c3fb]",
+    bgColor: "bg-blue-200",
+    titleColor: "text-blue-900",
+    btnBg: "bg-blue-800",
     btnText: "text-white",
     icon: forSchoolsAssets.icons.oversight[3],
     image: forSchoolsAssets.oversightCardImages[3],
@@ -929,23 +915,21 @@ export const SchoolsOversightSection = () => {
         className="relative w-full min-w-0 text-left"
         style={prefersReducedMotion ? undefined : { opacity: introOpacity }}
       >
-        <div className={schoolsSectionHeaderGridClass}>
-          <div className="min-w-0 space-y-3 sm:space-y-1">
-            <h2 className={schoolsSectionH2}>Maintain Excellence with Robust Oversight</h2>
-            <p className={schoolsSectionLead}>
-              Ensure high-impact tutoring through data-driven insights and professional
-              certification.
-            </p>
-          </div>
-          <img
-            alt=""
-            src={forSchoolsAssets.oversightHeaderEqual}
-            className={schoolsSectionHeaderOversightDecorClass}
-            width={467}
-            height={371}
-            aria-hidden
-          />
+        <div className={cn(marketingSectionIntroColumnClass, "sm:space-y-1 md:pr-[12rem] lg:pr-[12rem]")}>
+          <h2 className={schoolsSectionH2}>Maintain Excellence with Robust Oversight</h2>
+          <p className={schoolsSectionLead}>
+            Ensure high-impact tutoring through data-driven insights and professional
+            certification.
+          </p>
         </div>
+        <img
+          alt=""
+          src={forSchoolsAssets.oversightHeaderEqual}
+          className={cn(schoolsSectionHeaderOversightDecorClass, marketingSectionHeaderDecorAbsoluteClass)}
+          width={467}
+          height={371}
+          aria-hidden
+        />
       </motion.div>
 
       {prefersReducedMotion ? (
@@ -1000,22 +984,21 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
       className={cn("scroll-mt-24", marketingSectionVerticalGapClass)}
     >
       <div className="relative w-full min-w-0 text-left">
-        <div className={schoolsSectionHeaderGridClass}>
-          <div className="min-w-0 space-y-3">
-            <h2 className={schoolsSectionH2}>School Success Stories</h2>
-            <p className={schoolsSectionLead}>Here&apos;s what schools are saying about PLUS.</p>
-          </div>
-          <img
-            alt=""
-            src={forTutorsAssets.toolkitDecor}
-            className={schoolsSectionHeaderSquareDecorClass}
-            aria-hidden
-          />
+        <div className={marketingSectionIntroColumnClass}>
+          <h2 className={schoolsSectionH2}>School Success Stories</h2>
+          <p className={schoolsSectionLead}>Here&apos;s what schools are saying about PLUS.</p>
         </div>
+        <img
+          alt=""
+          src={forTutorsAssets.toolkitDecor}
+          className={cn(marketingSectionHeaderDecorImgClass, marketingSectionHeaderDecorAbsoluteClass)}
+          aria-hidden
+        />
       </div>
 
       <div className={cn("flex flex-col", marketingCardStackGapClass)}>
-        {stories.map((story) => {
+        {stories.map((story, index) => {
+            const theme = SCHOOLS_STORY_THEMES[index % SCHOOLS_STORY_THEMES.length]!
             const readHref = successStoryPagePath(story)
             const readOnSite = readHref?.startsWith("/") ?? false
             const quoteParts = story.quote ? splitSuccessStoryQuote(story.quote) : null
@@ -1024,8 +1007,8 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
               <article
                 key={story.id}
                 className={cn(
-                  "flex h-full flex-col rounded-[30px] dark:bg-rose-950/30",
-                  SCHOOLS_PINK_BG,
+                  "flex h-full flex-col rounded-[30px]",
+                  theme.shell,
                   marketingCardPaddingClass,
                 )}
               >
@@ -1041,7 +1024,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                         marketingCardIconTitleRowOffsetClass,
                         marketingCardIconCircleClass,
                         "shrink-0 text-white",
-                        SCHOOLS_PINK_ICON_BG,
+                        theme.iconBg,
                       )}
                     >
                       <School className={marketingCardLucideGlyphClass} aria-hidden />
@@ -1049,7 +1032,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                     <h3
                       className={cn(
                         "min-w-0 flex-1 text-pretty text-base font-bold leading-snug tracking-tight sm:text-lg lg:text-2xl",
-                        SCHOOLS_PINK_ACCENT,
+                        theme.accent,
                       )}
                     >
                       {story.title}
@@ -1062,7 +1045,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                           <>
                             &ldquo;{quoteParts.before}{" "}
                             <strong
-                              className={cn("font-semibold italic", SCHOOLS_PINK_ACCENT)}
+                              className={cn("font-semibold italic", theme.accent)}
                             >
                               {quoteParts.highlight}
                             </strong>
@@ -1090,7 +1073,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                       href={readHref}
                       className={cn(
                         "group mt-4 ml-auto flex w-fit items-center gap-2 text-base font-medium no-underline transition-opacity hover:opacity-90 sm:text-lg",
-                        SCHOOLS_PINK_ACCENT,
+                        theme.accent,
                       )}
                     >
                       <span>Read story</span>
@@ -1106,7 +1089,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                       rel="noopener noreferrer"
                       className={cn(
                         "group mt-4 ml-auto flex w-fit items-center gap-2 text-base font-medium no-underline transition-opacity hover:opacity-90 sm:text-lg",
-                        SCHOOLS_PINK_ACCENT,
+                        theme.accent,
                       )}
                     >
                       <span>Read story</span>

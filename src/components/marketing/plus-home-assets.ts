@@ -70,6 +70,8 @@ export const plusHomeImpactRowTutors = "/figma/home/impact-row-tutors.png"
 export const plusHomeSmartTech = {
   /** Collaborative Goal Setting — flattened composite `1714:1988` (incl. form, pills, sparkles; shadows baked in export). */
   goalComposite: "/figma/home/smarttech-goal-composite.png",
+  /** Collaborative Goal Setting — goal-setting UI screenshot used as the live back layer (pills/sparkles overlaid in JSX). */
+  goalUi: "/figma/home/smarttech-goal-ui.png",
   /** Supervisor — `2193:2305`, `2193:2314` inside `1714:1965` (526×423). */
   supervisorLayerBack: "/figma/home/smarttech-supervisor-back.png",
   supervisorLayerFront: "/figma/home/smarttech-supervisor-front.png",
@@ -81,6 +83,11 @@ export const plusHomeSmartTech = {
   iconAiTutor: "/figma/home/smarttech-icon-aitutor.svg",
   iconGoal: "/figma/home/smarttech-icon-goal.svg",
   headerDoodle: "/figma/home/smarttech-header-doodle.png",
+  goalSparkleA: "/figma/home/smarttech-goal-sparkle-a.svg",
+  goalSparkleB: "/figma/home/smarttech-goal-sparkle-b.svg",
+  goalSparkleC: "/figma/home/smarttech-goal-sparkle-c.svg",
+  goalSparkleD: "/figma/home/smarttech-goal-sparkle-d.svg",
+  goalSparkleE: "/figma/home/smarttech-goal-sparkle-e.svg",
 } as const
 
 /**

@@ -17,7 +17,6 @@ import {
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "For Schools",
   description:
     "PLUS tutoring for schools — research-backed, AI-powered math support for every classroom.",
 }

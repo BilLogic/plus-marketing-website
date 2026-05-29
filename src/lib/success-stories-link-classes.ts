@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils"
 
 /** Pink story CTA — matches “Read story” on `/success-stories` (color + opacity hover + `group` for arrow). */
 export const successStoriesPinkCtaLinkClass =
-  "group inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-[#C6009C] no-underline transition-opacity hover:opacity-90 dark:text-[#C6009C]"
+  "group inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-fuchsia-900 no-underline transition-opacity hover:opacity-90 dark:text-fuchsia-900"
 
 /** Icon size + motion — shared by “Read story” (`ArrowRight`) and “Back…” (`ArrowLeft`). */
 export const successStoriesReadStoryArrowClass =

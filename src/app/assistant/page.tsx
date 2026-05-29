@@ -1,16 +1,20 @@
-"use client"
-
-import { useMemo } from "react"
+import { notFound } from "next/navigation"
 
 import { buildSystemPrompt, MARKETING_ASSISTANT_PROMPT } from "@/ai/system-prompts"
 
-/** Simple in-app surface that shows how the marketing assistant prompt and context compose. */
+/**
+ * Dev-only scaffold showing how the marketing assistant prompt + context compose.
+ * Returns 404 in production so the internal AI prompt/context is neither public nor
+ * shipped to the client bundle (this is a server component, and the guard runs first).
+ */
 const AssistantPage = () => {
-  const systemPrompt = useMemo(() => {
-    return buildSystemPrompt(MARKETING_ASSISTANT_PROMPT, {
-      route: "/assistant",
-    })
-  }, [])
+  if (process.env.NODE_ENV === "production") {
+    notFound()
+  }
+
+  const systemPrompt = buildSystemPrompt(MARKETING_ASSISTANT_PROMPT, {
+    route: "/assistant",
+  })
 
   return (
     <main className="flex min-h-0 flex-1 flex-col bg-background text-foreground">
@@ -45,4 +49,3 @@ const AssistantPage = () => {
 }
 
 export default AssistantPage
-

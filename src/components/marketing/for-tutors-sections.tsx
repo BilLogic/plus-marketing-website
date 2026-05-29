@@ -29,6 +29,7 @@ import {
   marketingFinalCtaShellClass,
   marketingFinalCtaTitleClass,
   marketingSectionContentShellClass,
+  marketingSectionVerticalGapClass,
   marketingSectionHeaderDecorAbsoluteClass,
   marketingSectionHeaderDecorImgClass,
   marketingSectionIntroColumnClass,
@@ -238,7 +239,7 @@ export const TutorsCompensationSection = () => {
         <div className="text-left">
           <div className="relative">
             <div className={marketingSectionIntroColumnClass}>
-              <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+              <h2 className="text-pretty text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 Get Paid for All Your Hours
               </h2>
               <p
@@ -268,18 +269,18 @@ export const TutorsCompensationSection = () => {
           {COMPENSATION_COLUMNS.map((col) => (
             <div
               key={col.stat}
-              className="overflow-hidden rounded-[30px] border-2 border-sky-200 bg-white dark:border-sky-800/50 dark:bg-card"
+              className="overflow-hidden rounded-[30px] border-2 border-blue-200 bg-white dark:border-sky-800/50 dark:bg-card"
             >
               <div
                 className={cn(
                   marketingCardPaddingClass,
-                  "border-b border-sky-200 bg-sky-100 text-left dark:border-sky-800/50 dark:bg-sky-950/35",
+                  "border-b border-blue-200 bg-blue-200 text-left dark:border-sky-800/50 dark:bg-sky-950/35",
                 )}
               >
-                <p className="text-2xl font-bold tracking-tight text-sky-900 dark:text-sky-100">
+                <p className="text-2xl font-bold tracking-tight text-blue-900 dark:text-sky-100">
                   {col.stat}
                 </p>
-                <p className="mt-1 text-xl font-bold leading-snug tracking-tight text-sky-800 dark:text-sky-300">
+                <p className="mt-1 text-xl font-bold leading-snug tracking-tight text-blue-900 dark:text-sky-300">
                   {col.sub}
                 </p>
               </div>
@@ -291,7 +292,7 @@ export const TutorsCompensationSection = () => {
                       className="flex gap-2 text-base leading-relaxed text-muted-foreground lg:text-lg"
                     >
                       <span
-                        className="mt-2 size-1.5 shrink-0 rounded-full bg-sky-400 dark:bg-sky-500"
+                        className="mt-2 size-1.5 shrink-0 rounded-full bg-blue-800 dark:bg-sky-500"
                         aria-hidden
                       />
                       <span>{b}</span>
@@ -304,17 +305,17 @@ export const TutorsCompensationSection = () => {
         </div>
 
         {/* lg+: single card, two-row three-column grid */}
-        <div className="hidden overflow-hidden rounded-[30px] border-2 border-sky-200 bg-white lg:block dark:border-sky-800/50 dark:bg-card">
-          <div className="grid border-b border-sky-200 bg-sky-100 dark:border-sky-800/50 dark:bg-sky-950/35 lg:grid-cols-3">
+        <div className="hidden overflow-hidden rounded-[30px] border-2 border-blue-200 bg-white lg:block dark:border-sky-800/50 dark:bg-card">
+          <div className="grid border-b border-blue-200 bg-blue-200 dark:border-sky-800/50 dark:bg-sky-950/35 lg:grid-cols-3">
             {COMPENSATION_COLUMNS.map((col) => (
               <div
                 key={col.stat}
                 className={cn(marketingCardPaddingClass, "text-left")}
               >
-                <p className="text-2xl font-bold tracking-tight text-sky-900 dark:text-sky-100 sm:text-3xl md:text-4xl">
+                <p className="text-2xl font-bold tracking-tight text-blue-900 dark:text-sky-100 sm:text-3xl md:text-4xl">
                   {col.stat}
                 </p>
-                <p className="mt-1 text-xl font-bold leading-snug tracking-tight text-sky-800 dark:text-sky-300 sm:text-2xl">
+                <p className="mt-1 text-xl font-bold leading-snug tracking-tight text-blue-900 dark:text-sky-300 sm:text-2xl">
                   {col.sub}
                 </p>
               </div>
@@ -330,7 +331,7 @@ export const TutorsCompensationSection = () => {
                       className="flex gap-2 text-base leading-relaxed text-muted-foreground lg:text-lg"
                     >
                       <span
-                        className="mt-2 size-1.5 shrink-0 rounded-full bg-sky-400 dark:bg-sky-500"
+                        className="mt-2 size-1.5 shrink-0 rounded-full bg-blue-800 dark:bg-sky-500"
                         aria-hidden
                       />
                       <span>{b}</span>
@@ -440,7 +441,7 @@ export const TutorsCompensationSection = () => {
  *                   "flex h-full min-h-0 w-full cursor-default flex-col gap-3 rounded-3xl p-5 text-left transition-colors sm:gap-5 sm:p-6",
  *                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
  *                   isSelected
- *                     ? "border-2 border-[#EBC077] bg-[#FFF1C7]"
+ *                     ? "border-2 border-[#EBC077] bg-yellow-200"
  *                     : "border-2 border-[#EBC077]/60 bg-white"
  *                 )}
  *               >
@@ -449,13 +450,13 @@ export const TutorsCompensationSection = () => {
  *                     marketingCardIconCircleClass,
  *                     marketingCardStepDigitClass,
  *                     "text-white",
- *                     isSelected ? "bg-[#A27707]" : "bg-[#A27707]/85"
+ *                     isSelected ? "bg-yellow-900" : "bg-yellow-900/85"
  *                   )}
  *                 >
  *                   {index + 1}
  *                 </div>
  *                 <div className="flex min-h-0 flex-1 flex-col gap-2">
- *                   <p className="shrink-0 text-pretty text-xl font-bold leading-snug tracking-tight text-[#9A6D00] sm:text-2xl dark:text-[#9A6D00]">
+ *                   <p className="shrink-0 text-pretty text-xl font-bold leading-snug tracking-tight text-yellow-900 sm:text-2xl dark:text-yellow-900">
  *                     {card.title}
  *                   </p>
  *                   <div className="flex min-h-0 flex-1 flex-col">
@@ -499,7 +500,7 @@ export const TutorsCompensationSection = () => {
 /** Numbered step badge — matches Day-to-Day Experience step circles (shared `marketingCardIcon*` tokens). */
 const tutoringLooksStepBadge = cn(
   marketingCardIconCircleClass,
-  "bg-[#A27707] text-white",
+  "bg-yellow-900 text-white",
   marketingCardStepDigitClass,
 )
 
@@ -508,18 +509,18 @@ const tutoringLooksDescription = "text-base leading-relaxed text-muted-foregroun
 
 /** Bottom row card titles — matches certification in-panel `h3` scale. */
 const tutoringLooksCardTitleMd =
-  "text-balance text-lg font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-[#9A6D00] sm:text-xl lg:text-2xl"
+  "text-balance text-lg font-bold leading-snug tracking-tight text-yellow-900 dark:text-yellow-900 sm:text-xl lg:text-2xl"
 
 /** Full-width top card title — one step larger for hierarchy (Figma reference). */
 const tutoringLooksCardTitleLg =
-  "text-balance text-lg font-bold leading-snug tracking-tight text-[#9A6D00] sm:text-xl lg:text-3xl dark:text-[#9A6D00]"
+  "text-balance text-lg font-bold leading-snug tracking-tight text-yellow-900 sm:text-xl lg:text-3xl dark:text-yellow-900"
 
 /**
  * Cream card shell — minimal bottom padding so the container hugs the image edge.
  * Header row keeps horizontal padding on the right for copy.
  */
 const tutoringLooksCardShell =
-  "flex w-full min-w-0 flex-col gap-4 overflow-hidden rounded-[30px] bg-[#FFF1C7] pt-5 pl-5 pb-0 pr-0 dark:bg-amber-950/20 sm:gap-4 sm:pt-6 sm:pl-6"
+  "flex w-full min-w-0 flex-col gap-4 overflow-hidden rounded-[30px] bg-yellow-200 pt-5 pl-5 pb-0 pr-0 dark:bg-amber-950/20 sm:gap-4 sm:pt-6 sm:pl-6"
 
 /** Step badge + `gap-3` — aligns image block with title column. */
 const tutoringLooksImageInset = marketingCardContentInsetFromStepRowClass
@@ -589,7 +590,7 @@ function TutoringLooksCard({
       >
         <div
           className={cn(
-            "relative isolate w-full max-w-full translate-z-0 overflow-hidden rounded-tl-2xl rounded-br-2xl bg-[#FFF1C7] ring-1 ring-inset ring-[#A27707]/15 dark:bg-amber-950/30",
+            "relative isolate w-full max-w-full translate-z-0 overflow-hidden rounded-tl-2xl rounded-br-2xl bg-yellow-200 ring-1 ring-inset ring-yellow-900/15 dark:bg-amber-950/30",
             imageAspect,
             /* Next/Image `fill` — pin wrapper + img so cover always fills frame height */
             "[&>span]:absolute [&>span]:inset-0 [&>span]:m-0 [&>span]:block [&>span]:size-full [&>span]:max-w-none",
@@ -623,8 +624,8 @@ export const TutorsExperienceSection = () => {
           {/*
             Same header grid as `TutorsCertificationSection`: copy fills to decor’s left edge; decor sizes match `marketingSectionHeaderDecorImgClass`.
           */}
-          <div className="relative grid w-full md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
-            <div className="min-w-0 space-y-3">
+          <div className="relative">
+            <div className={marketingSectionIntroColumnClass}>
               <h2 className="text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 What Tutoring at PLUS Looks Like
               </h2>
@@ -642,8 +643,8 @@ export const TutorsExperienceSection = () => {
               alt=""
               src={forTutorsAssets.certificationDecor}
               className={cn(
-                "pointer-events-none aspect-square shrink-0 object-contain opacity-90 select-none",
-                "hidden md:block md:w-[110px] lg:w-[124px]",
+                marketingSectionHeaderDecorImgClass,
+                marketingSectionHeaderDecorAbsoluteClass,
               )}
               aria-hidden
             />
@@ -684,10 +685,10 @@ export const TutorsCertificationSection = () => {
             Grid: copy uses all space up to the decor (no column gap — art abuts the text edge).
             Decor sizes match `marketingSectionHeaderDecorImgClass`.
           */}
-          <div className="relative grid w-full md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
-            <div className="min-w-0 space-y-3">
+          <div className="relative">
+            <div className={marketingSectionIntroColumnClass}>
               <h2 className="text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
-                Get Certified &amp; Receive Shareable Digital Credentials
+                Get Certified &amp; Receive Digital Credentials
               </h2>
               <p
                 className={cn(
@@ -703,8 +704,8 @@ export const TutorsCertificationSection = () => {
               alt=""
               src={forTutorsAssets.experienceDecor}
               className={cn(
-                "pointer-events-none aspect-square shrink-0 object-contain opacity-90 select-none",
-                "hidden md:block md:w-[110px] lg:w-[124px]",
+                marketingSectionHeaderDecorImgClass,
+                marketingSectionHeaderDecorAbsoluteClass,
               )}
               aria-hidden
             />
@@ -713,19 +714,19 @@ export const TutorsCertificationSection = () => {
 
         <div
           className={cn(
-            "flex flex-col gap-5 rounded-[30px] bg-[#E8F6EA] dark:bg-[#E8F6EA]/12 sm:gap-8 md:flex-row md:items-stretch md:gap-10",
+            "flex flex-col gap-5 rounded-[30px] bg-green-200 dark:bg-green-200/12 sm:gap-8 md:flex-row md:items-stretch md:gap-10",
             marketingCardPaddingClass,
           )}
         >
           <div className="flex flex-[3] flex-col gap-4">
             <div className="flex items-center gap-3">
               <span
-                className={cn(marketingCardIconCircleClass, "bg-[#297E43] text-white")}
+                className={cn(marketingCardIconCircleClass, "bg-green-900 text-white")}
                 aria-hidden
               >
                 <Star className={cn(marketingCardLucideGlyphClass)} strokeWidth={2.25} />
               </span>
-              <h3 className="min-w-0 text-balance text-lg font-bold leading-snug tracking-tight text-[#297E43] dark:text-green-200 sm:text-xl lg:text-2xl">
+              <h3 className="min-w-0 text-balance text-lg font-bold leading-snug tracking-tight text-green-900 dark:text-green-200 sm:text-xl lg:text-2xl">
                 Tutor Certification &amp; Shareable Badges
               </h3>
             </div>
@@ -748,7 +749,7 @@ export const TutorsCertificationSection = () => {
                 href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-9 w-fit cursor-pointer items-center justify-center rounded-full bg-[#4CAB65] px-8 text-sm font-medium text-white no-underline hover:bg-[#3d9655] sm:h-11 sm:text-base"
+                className="inline-flex h-9 w-fit cursor-pointer items-center justify-center rounded-full bg-green-800 px-8 text-sm font-medium text-white no-underline hover:bg-green-900 sm:h-11 sm:text-base"
               >
                 Register now
               </a>
@@ -837,7 +838,7 @@ export const TutorsToolkitSection = () => {
         <div className="text-left">
           <div className="relative">
             <div className={marketingSectionIntroColumnClass}>
-              <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+              <h2 className="text-pretty text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 Your Tutor Toolkit
               </h2>
               <p
@@ -863,7 +864,7 @@ export const TutorsToolkitSection = () => {
         </div>
 
         <div className={cn("grid md:grid-cols-2 md:grid-rows-2", marketingCardStackGapClass)}>
-          <div className="flex min-h-[280px] w-full min-w-0 flex-col overflow-hidden rounded-[30px] border border-fuchsia-200/60 bg-[#FFE8F6] sm:min-h-[340px] md:row-span-2 md:min-h-[400px] lg:min-h-[520px]">
+          <div className="flex min-h-[280px] w-full min-w-0 flex-col overflow-hidden rounded-[30px] bg-fuchsia-200 sm:min-h-[340px] md:row-span-2 md:min-h-[400px] lg:min-h-[520px]">
             <div className={marketingCardPaddingClass}>
               <ToolkitCardHeading icon={Sparkles}>
                 Dashboard Tracking Insights
@@ -877,7 +878,7 @@ export const TutorsToolkitSection = () => {
               />
             </div>
           </div>
-          <div className="flex min-h-[200px] min-w-0 flex-col overflow-hidden rounded-[30px] border border-fuchsia-200/60 bg-[#FFE8F6] sm:min-h-[220px] md:min-h-[260px]">
+          <div className="flex min-h-[280px] min-w-0 flex-col overflow-hidden rounded-[30px] bg-fuchsia-200 sm:min-h-[340px] md:min-h-[260px]">
             <div className={marketingCardPaddingClass}>
               <ToolkitCardHeading icon={LayoutDashboard}>
                 Student Progress At-A-Glance
@@ -891,7 +892,7 @@ export const TutorsToolkitSection = () => {
               />
             </div>
           </div>
-          <div className="flex min-h-[200px] min-w-0 flex-col overflow-hidden rounded-[30px] border border-fuchsia-200/60 bg-[#FFE8F6] sm:min-h-[220px] md:min-h-[260px]">
+          <div className="flex min-h-[280px] min-w-0 flex-col overflow-hidden rounded-[30px] bg-fuchsia-200 sm:min-h-[340px] md:min-h-[260px]">
             <div className={marketingCardPaddingClass}>
               <ToolkitCardHeading icon={Brain}>
                 Session Tracking
@@ -913,7 +914,7 @@ export const TutorsToolkitSection = () => {
 
 /** Read story row — same interaction pattern as About Success Stories (`cursor-pointer`, arrow nudge). */
 const tutorVoiceReadStoryClass =
-  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-[#A55D5D] no-underline transition-opacity hover:opacity-90 dark:text-[#c97a7a]"
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-red-900 no-underline transition-opacity hover:opacity-90 dark:text-[#c97a7a]"
 
 /** Avatar + name — same 64px disc + `gap-3` row as homepage `PlusVoicesSection` testimonials. */
 const tutorVoicesAvatarRowClass = "flex w-full shrink-0 items-center gap-3"
@@ -935,22 +936,22 @@ function TutorVoiceCard({
   return (
     <article
       className={cn(
-        "flex h-full flex-col rounded-[30px] bg-[#FDECEC] dark:bg-[#3d2528]/40",
+        "flex h-full flex-col rounded-[30px] bg-red-200 dark:bg-[#3d2528]/40",
         marketingCardPaddingClass,
       )}
     >
       <div className={tutorVoicesAvatarRowClass}>
         <Avatar
           className={cn(
-            "size-16 shrink-0 rounded-full border border-[#A55D5D]/25 bg-white",
+            "size-16 shrink-0 rounded-full bg-white",
           )}
         >
           <AvatarImage src={avatarUrl} alt="" aria-hidden />
-          <AvatarFallback className="bg-white text-xs font-semibold text-[#A55D5D]">
+          <AvatarFallback className="bg-white text-xs font-semibold text-red-900">
             {name.slice(0, 2).toUpperCase()}
           </AvatarFallback>
         </Avatar>
-        <p className="min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight text-[#A55D5D] dark:text-[#e8a0a0] sm:text-xl lg:text-2xl">
+        <p className="min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight text-red-900 dark:text-[#e8a0a0] sm:text-xl lg:text-2xl">
           {name}
         </p>
       </div>
@@ -962,7 +963,7 @@ function TutorVoiceCard({
       >
         <blockquote className="text-pretty text-left text-base italic leading-relaxed text-[#4A4A4A] dark:text-neutral-200">
           &ldquo;{quoteLead}
-          <strong className="font-bold italic text-[#A55D5D] dark:text-[#c97a7a]">
+          <strong className="font-bold italic text-red-900 dark:text-[#c97a7a]">
             {quoteHighlight}
           </strong>
           {quoteTail}&rdquo;
@@ -991,47 +992,38 @@ export const TutorsTestimonialsSection = ({ stories = [] }: { stories?: SuccessS
   if (stories.length === 0) return null
 
   return (
-    <section className="relative" id="tutor-testimonials">
-      <div className={marketingSectionContentShellClass}>
-        <div className="text-left">
-          <div className="relative">
-            <div className={marketingSectionIntroColumnClass}>
-              <h2 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
-                Voices from Our Tutors
-              </h2>
-              <p
-                className={cn(
-                  "mx-auto max-w-2xl text-base sm:mx-0 lg:text-lg",
-                  marketingSectionLeadColorClass,
-                )}
-              >
-                Learn from real tutor stories, experiences, and tips to improve your
-                practice.
-              </p>
-            </div>
-            <img
-              alt=""
-              src={forTutorsAssets.voicesDecor}
-              className={cn(
-                marketingSectionVoicesHeaderDecorImgClass,
-                marketingSectionHeaderDecorAbsoluteClass
-              )}
-              aria-hidden
+    <section className={cn("relative", marketingSectionVerticalGapClass)} id="tutor-testimonials">
+      <div className="relative w-full text-left">
+        <div className={marketingSectionIntroColumnClass}>
+          <h2 className="text-pretty text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+            Voices from Our Tutors
+          </h2>
+          <p className={cn("w-full max-w-none text-lg", marketingSectionLeadColorClass)}>
+            Learn from real tutor stories, experiences, and tips to improve your
+            practice.
+          </p>
+        </div>
+        <img
+          alt=""
+          src={forTutorsAssets.voicesDecor}
+          className={cn(
+            marketingSectionVoicesHeaderDecorImgClass,
+            marketingSectionHeaderDecorAbsoluteClass
+          )}
+          aria-hidden
+        />
+      </div>
+      <div className={cn("grid grid-cols-1 md:grid-cols-2 md:items-stretch md:gap-8 lg:grid-cols-3", marketingCardStackGapClass)}>
+        {stories.map((story, index) => (
+            <TutorVoiceCard
+              key={story.id}
+              name={story.quoteAttribution ?? story.title}
+              quoteLead={story.quote ?? ""}
+              quoteHighlight=""
+              quoteTail=""
+              avatarUrl={story.coverImage ?? forSchoolsAssets.avatars[index % forSchoolsAssets.avatars.length]!}
             />
-          </div>
-        </div>
-        <div className={cn("grid md:grid-cols-3 md:items-stretch", marketingCardStackGapClass)}>
-          {stories.map((story, index) => (
-              <TutorVoiceCard
-                key={story.id}
-                name={story.quoteAttribution ?? story.title}
-                quoteLead={story.quote ?? ""}
-                quoteHighlight=""
-                quoteTail=""
-                avatarUrl={story.coverImage ?? forSchoolsAssets.avatars[index % forSchoolsAssets.avatars.length]!}
-              />
-            ))}
-        </div>
+          ))}
       </div>
     </section>
   )

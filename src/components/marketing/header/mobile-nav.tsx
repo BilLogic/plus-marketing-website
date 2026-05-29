@@ -188,6 +188,9 @@ export const MobileNav = ({ className }: MobileNavProps) => {
                                   href={child.href}
                                   onClick={close}
                                   className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                                  {...(child.external
+                                    ? { target: "_blank", rel: "noopener noreferrer" }
+                                    : {})}
                                 >
                                   {child.icon && (
                                     <child.icon className="size-4 shrink-0" />

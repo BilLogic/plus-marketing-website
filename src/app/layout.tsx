@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { dmSans, geistMono } from "./fonts"
 
 export const metadata: Metadata = {
-  title: "Plus Marketing",
+  title: "PLUS | Personalized Learning & Scalable Tutoring Solutions",
   description: "Plus marketing website",
 }
 

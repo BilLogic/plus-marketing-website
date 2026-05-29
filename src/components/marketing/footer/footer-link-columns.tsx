@@ -1,7 +1,10 @@
 import Link from "next/link"
 import { FOOTER_LINKS } from "@/components/marketing/header/nav-config"
 
-const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] = [
+const COLUMNS: {
+  heading: string
+  links: { label: string; href: string; external?: boolean }[]
+}[] = [
   { heading: "About", links: FOOTER_LINKS.about },
   { heading: "Solutions", links: FOOTER_LINKS.solutions },
   { heading: "Resources", links: FOOTER_LINKS.resources },
@@ -22,6 +25,9 @@ export const FooterLinkColumns = () => {
                 <Link
                   href={link.href}
                   className="transition-colors hover:text-white"
+                  {...(link.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
                 >
                   {link.label}
                 </Link>

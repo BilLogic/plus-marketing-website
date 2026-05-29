@@ -19,7 +19,6 @@ import { fetchResearchTeamMembers } from "@/lib/notion/queries/team"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "For Researchers",
   description:
     "PLUS research partners, highlights, index, and team — lab research and learning science.",
 }

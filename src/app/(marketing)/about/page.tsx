@@ -16,7 +16,6 @@ import { fetchNews } from "@/lib/notion/queries/news"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "About PLUS",
   description:
     "Bridging opportunity gaps in math education with AI-powered tutoring. Meet our team, values, and latest updates.",
 }

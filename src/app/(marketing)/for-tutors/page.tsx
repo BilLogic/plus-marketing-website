@@ -13,7 +13,6 @@ import { fetchTutorTestimonials } from "@/lib/notion/queries/success-stories"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "For Tutors",
   description:
     "Join PLUS as a tutor — gain experience, earn compensation, and make a real impact on students' math confidence.",
 }

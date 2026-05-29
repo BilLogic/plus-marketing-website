@@ -41,7 +41,7 @@ import type { JobListing } from "@/lib/notion/types"
 // ─── Shared tokens (match about/for-tutors pages) ────────────────────────────
 
 const sectionH2 =
-  "text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+  "text-pretty text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
 
 const sectionLead = cn(
   "w-full max-w-none text-base lg:text-lg",
@@ -57,26 +57,26 @@ const sectionHeaderDecorImgClass = cn(
 const careersGreenContactCtaClass = cn(
   "inline-flex w-fit self-start items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-0 bg-[#4CAB65] px-5 sm:px-8 text-sm sm:text-base font-medium text-white shadow-none transition-opacity hover:opacity-90 dark:bg-[#4CAB65] dark:text-white",
+  "h-9 sm:h-11 rounded-full border-0 bg-green-800 px-5 sm:px-8 text-sm sm:text-base font-medium text-white shadow-none transition-opacity hover:opacity-90 dark:bg-green-800 dark:text-white",
 )
 
 /** Partnerships pink CTA — same footprint; not the global cyan primary pill. */
 const partnershipsPinkContactCtaClass = cn(
   "inline-flex w-fit self-start items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-0 bg-[#ECA8D3] px-5 sm:px-8 text-sm sm:text-base font-medium text-[#690051] shadow-none transition-opacity hover:opacity-90 dark:bg-[#ECA8D3]/90 dark:text-[#690051]",
+  "h-9 sm:h-11 rounded-full border-0 bg-fuchsia-600 px-5 sm:px-8 text-sm sm:text-base font-medium text-fuchsia-950 shadow-none transition-opacity hover:opacity-90 dark:bg-fuchsia-600/90 dark:text-fuchsia-950",
 )
 
 /** Amber tutoring featured-card CTA — not `marketingFinalCtaPrimaryLinkClass` (that token is the cyan impact pill). */
 const tutoringBecomeTutorCardCtaClass = cn(
   "inline-flex w-fit self-start items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-0 bg-[#FFC94B] px-5 sm:px-8 text-sm sm:text-base font-medium text-[#463923] shadow-none transition-opacity hover:opacity-95 dark:bg-[#FFC94B] dark:text-[#463923] dark:hover:opacity-95",
+  "h-9 sm:h-11 rounded-full border-0 bg-yellow-800 px-5 sm:px-8 text-sm sm:text-base font-medium text-[#463923] shadow-none transition-opacity hover:opacity-95 dark:bg-yellow-800 dark:text-[#463923] dark:hover:opacity-95",
 )
 
 /** Learn more row — matches About `AboutSuccessStoriesSection` Read story link (size, arrow, interaction). */
 const careersLearnMoreLinkClass =
-  "group ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-[#297E43] no-underline transition-opacity hover:opacity-90 dark:text-[#297E43]"
+  "group ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-green-900 no-underline transition-opacity hover:opacity-90 dark:text-green-900"
 
 /** Icon disc + title — flush to card top padding; `items-center` aligns title with the 48px circle (careers, tutoring, partnerships). */
 const getInvolvedDiscTitleRowClass = "flex w-full shrink-0 items-center gap-3"
@@ -230,7 +230,7 @@ export function GetInvolvedWhyWorkSection() {
               <span
                 className={cn(
                   marketingCardIconCircleClass,
-                  "shrink-0 bg-[#007EB8] text-white",
+                  "shrink-0 bg-blue-900 text-white",
                 )}
                 aria-hidden
               >
@@ -241,7 +241,7 @@ export function GetInvolvedWhyWorkSection() {
               </span>
               <p
                 className={cn(
-                  "text-pretty text-lg font-bold leading-snug tracking-tight text-[#007EB8] dark:text-sky-300 sm:text-xl lg:text-2xl",
+                  "text-pretty text-lg font-bold leading-snug tracking-tight text-blue-900 dark:text-sky-300 sm:text-xl lg:text-2xl",
                 )}
               >
                 {item.title}
@@ -318,7 +318,7 @@ export function GetInvolvedCareersSection({ jobs }: { jobs?: JobListing[] }) {
 
       <div className={cn("flex flex-col", marketingCardStackGapClass)}>
       {listings.length === 0 ? (
-        <div className={cn("rounded-[30px] bg-[#E8F6EA] dark:bg-emerald-950/20", marketingCardPaddingClass)}>
+        <div className={cn("rounded-[30px] bg-green-200 dark:bg-emerald-950/20", marketingCardPaddingClass)}>
           <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">No open jobs at this time. Check back soon!</p>
         </div>
       ) : (
@@ -327,13 +327,13 @@ export function GetInvolvedCareersSection({ jobs }: { jobs?: JobListing[] }) {
           <div
             key={job.id}
             className={cn(
-              "flex flex-col gap-3 rounded-[30px] bg-[#E8F6EA] dark:bg-emerald-950/20",
+              "flex flex-col gap-3 rounded-[30px] bg-green-200 dark:bg-emerald-950/20",
               marketingCardPaddingClass,
             )}
           >
             <div className={getInvolvedDiscTitleRowClass}>
               <span
-                className={cn(marketingCardIconCircleClass, "bg-[#297E43]")}
+                className={cn(marketingCardIconCircleClass, "bg-green-900")}
               >
                 <Microscope
                   className={cn(marketingCardLucideGlyphClass, "text-white")}
@@ -341,7 +341,7 @@ export function GetInvolvedCareersSection({ jobs }: { jobs?: JobListing[] }) {
                 />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-lg font-bold leading-tight tracking-tight text-[#297E43] sm:text-xl lg:text-2xl">
+                <p className="text-lg font-bold leading-tight tracking-tight text-green-900 sm:text-xl lg:text-2xl">
                   {job.title}
                 </p>
                 <p className="mt-1 text-base leading-relaxed text-muted-foreground lg:text-lg">
@@ -368,14 +368,14 @@ export function GetInvolvedCareersSection({ jobs }: { jobs?: JobListing[] }) {
       )}
 
       <div
-        className={cn("rounded-[30px] bg-[#E8F6EA] dark:bg-emerald-950/20", marketingCardPaddingClass)}
+        className={cn("rounded-[30px] bg-green-200 dark:bg-emerald-950/20", marketingCardPaddingClass)}
       >
         <div className="flex items-start gap-3">
-          <span className={cn(marketingCardIconCircleClass, "shrink-0 bg-[#297E43]")}>
+          <span className={cn(marketingCardIconCircleClass, "shrink-0 bg-green-900")}>
             <FileText className={cn(marketingCardLucideGlyphClass, "text-white")} aria-hidden />
           </span>
           <div className="flex min-w-0 flex-col gap-3">
-            <p className="pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-bold leading-tight tracking-tight text-[#297E43] sm:text-xl lg:text-2xl">
+            <p className="pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-bold leading-tight tracking-tight text-green-900 sm:text-xl lg:text-2xl">
               Don&apos;t See a Role That Fits?
             </p>
             <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
@@ -424,21 +424,21 @@ export function GetInvolvedTutoringSection() {
       {/* Featured card */}
       <div
         className={cn(
-          "overflow-hidden rounded-[30px] bg-[#FFF1C7] dark:bg-amber-950/20",
+          "overflow-hidden rounded-[30px] bg-yellow-200 dark:bg-amber-950/20",
           marketingCardPaddingClass,
         )}
       >
-        <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-stretch md:gap-8">
+        <div className="grid gap-6 md:grid-cols-2 md:items-stretch md:gap-8">
           <div className="flex min-h-0 w-full flex-col justify-between gap-4 md:gap-6">
             <div className="flex flex-col gap-1">
               <div className={getInvolvedDiscTitleRowClass}>
-                <span className={cn(marketingCardIconCircleClass, "bg-[#A27707]")}>
+                <span className={cn(marketingCardIconCircleClass, "bg-yellow-900")}>
                   <GraduationCap
                     className={cn(marketingCardLucideGlyphClass, "text-white")}
                     aria-hidden
                   />
                 </span>
-                <p className="min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-xl lg:text-2xl">
+                <p className="min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
                   Becoming a Tutor at PLUS
                 </p>
               </div>
@@ -468,7 +468,7 @@ export function GetInvolvedTutoringSection() {
               </a>
             </div>
           </div>
-          <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-2xl md:w-72 lg:w-80">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl md:aspect-[16/9]">
             <Image
               src="/figma/get-involved/tutoring-becoming-tutor.jpg"
               alt="Tutor working with a student during a PLUS session"
@@ -484,18 +484,18 @@ export function GetInvolvedTutoringSection() {
       <div className={cn("grid sm:grid-cols-2", marketingCardStackGapClass)}>
         <div
           className={cn(
-            "rounded-[30px] bg-[#FFF1C7] dark:bg-amber-950/20",
+            "rounded-[30px] bg-yellow-200 dark:bg-amber-950/20",
             marketingCardPaddingClass,
           )}
         >
           <div className={getInvolvedDiscTitleRowClass}>
-            <span className={cn(marketingCardIconCircleClass, "bg-[#A27707]")}>
+            <span className={cn(marketingCardIconCircleClass, "bg-yellow-900")}>
               <Heart
                 className={cn(marketingCardLucideGlyphClass, "text-white")}
                 aria-hidden
               />
             </span>
-            <p className="min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-xl lg:text-2xl">
+            <p className="min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
               No Prior Experience Needed
             </p>
           </div>
@@ -511,18 +511,18 @@ export function GetInvolvedTutoringSection() {
         </div>
         <div
           className={cn(
-            "rounded-[30px] bg-[#FFF1C7] dark:bg-amber-950/20",
+            "rounded-[30px] bg-yellow-200 dark:bg-amber-950/20",
             marketingCardPaddingClass,
           )}
         >
           <div className={getInvolvedDiscTitleRowClass}>
-            <span className={cn(marketingCardIconCircleClass, "bg-[#A27707]")}>
+            <span className={cn(marketingCardIconCircleClass, "bg-yellow-900")}>
               <BookOpen
                 className={cn(marketingCardLucideGlyphClass, "text-white")}
                 aria-hidden
               />
             </span>
-            <p className="min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-xl lg:text-2xl">
+            <p className="min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
               What You&apos;ll Do
             </p>
           </div>
@@ -566,16 +566,16 @@ export function GetInvolvedPartnershipsSection() {
 
       <div
         className={cn(
-          "rounded-[30px] bg-[#fdf0f6] dark:bg-[#fdf0f6]/[0.08]",
+          "rounded-[30px] bg-fuchsia-200 dark:bg-fuchsia-200/[0.08]",
           marketingCardPaddingClass,
         )}
       >
         <div className="flex items-start gap-3">
-          <span className={cn(marketingCardIconCircleClass, "shrink-0 bg-[#C6009C]")}>
+          <span className={cn(marketingCardIconCircleClass, "shrink-0 bg-fuchsia-900")}>
             <FileText className={cn(marketingCardLucideGlyphClass, "text-white")} aria-hidden />
           </span>
           <div className="flex min-w-0 flex-col gap-3">
-            <p className="pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-bold text-[#C6009C] sm:text-xl lg:text-2xl dark:text-[#e879a9]">
+            <p className="pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-bold text-fuchsia-900 sm:text-xl lg:text-2xl dark:text-[#e879a9]">
               Contact Us to Learn More
             </p>
             <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">

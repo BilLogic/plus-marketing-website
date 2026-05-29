@@ -31,7 +31,7 @@ const CATEGORY_ICON: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
 }
 
 const cardTitle =
-  "text-pretty text-lg font-bold leading-snug tracking-tight text-[#C6009C] dark:text-[#C6009C] sm:text-xl lg:text-2xl"
+  "text-pretty text-lg font-bold leading-snug tracking-tight text-fuchsia-900 dark:text-fuchsia-900 sm:text-xl lg:text-2xl"
 
 const cardBody =
   "text-base leading-relaxed text-teal-900/75 dark:text-white/80"
@@ -78,8 +78,8 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
                 className={cn(
                   "inline-flex h-9 items-center gap-1.5 rounded-full px-4 text-sm font-medium transition-colors",
                   active
-                    ? "bg-[#C6009C] text-white"
-                    : "border border-[#C6009C]/30 text-[#C6009C]/80 hover:border-[#C6009C]/60 hover:bg-[#FFE8F6] dark:border-[#C6009C]/40 dark:text-[#e879a9] dark:hover:bg-[#FFE8F6]/10"
+                    ? "bg-fuchsia-900 text-white"
+                    : "border border-fuchsia-600 text-fuchsia-900 hover:border-fuchsia-900 hover:bg-fuchsia-200 dark:border-fuchsia-600 dark:text-fuchsia-600 dark:hover:bg-fuchsia-200/10"
                 )}
               >
                 {cat}
@@ -87,7 +87,7 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
                   <span
                     className={cn(
                       "inline-flex size-5 items-center justify-center rounded-full text-xs",
-                      active ? "bg-white/25 text-white" : "bg-[#FFE8F6] text-[#C6009C] dark:bg-[#C6009C]/20"
+                      active ? "bg-white/25 text-white" : "bg-fuchsia-200 text-fuchsia-900 dark:bg-fuchsia-900/20"
                     )}
                   >
                     {count}
@@ -101,7 +101,7 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
         {filtered.length === 0 ? (
           <div
             className={cn(
-              "rounded-[30px] bg-[#FFE8F6] dark:bg-[#FFE8F6]/10",
+              "rounded-[30px] bg-fuchsia-200 dark:bg-fuchsia-200/10",
               marketingCardPaddingClass,
             )}
           >
@@ -119,7 +119,7 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
                 <article
                   key={story.id}
                   className={cn(
-                    "flex h-full flex-col rounded-[30px] bg-[#FFE8F6] dark:bg-[#FFE8F6]/10",
+                    "flex h-full flex-col rounded-[30px] bg-fuchsia-200 dark:bg-fuchsia-200/10",
                     marketingCardPaddingClass,
                   )}
                 >
@@ -134,7 +134,7 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
                         className={cn(
                           marketingCardIconTitleRowOffsetClass,
                           marketingCardIconCircleClass,
-                          "shrink-0 bg-[#C6009C] text-white",
+                          "shrink-0 bg-fuchsia-900 text-white",
                         )}
                       >
                         <Icon className={marketingCardLucideGlyphClass} aria-hidden />
@@ -145,7 +145,7 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
                       <p className={cn(cardBody, "mt-4 min-h-0 flex-1 text-pretty italic text-muted-foreground")}>
                         &ldquo;{story.quote}&rdquo;
                         {story.quoteAttribution && (
-                          <span className="mt-2 block not-italic font-medium text-[#C6009C]/80 dark:text-[#C6009C]/80">
+                          <span className="mt-2 block not-italic font-medium text-fuchsia-900/80 dark:text-fuchsia-900/80">
                             — {story.quoteAttribution}
                           </span>
                         )}

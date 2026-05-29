@@ -18,6 +18,7 @@ export type NavDropdownItem = {
   description?: string
   icon?: React.ComponentType<{ className?: string }>
   badge?: string
+  external?: boolean
 }
 
 export type NavDropdownSection = {
@@ -65,7 +66,12 @@ export const NAV_CONFIG: NavItem[] = [
         items: [
           { label: "Publications", href: "/publications", icon: FileText },
           { label: "News", href: "/about/news", icon: Newspaper },
-          { label: "Media Kit", href: "/media-kit", icon: Image },
+          {
+            label: "Media Kit",
+            href: "https://plus-tutors.notion.site/brand-guidelines",
+            icon: Image,
+            external: true,
+          },
         ],
       },
     ],
@@ -142,7 +148,11 @@ export const FOOTER_LINKS = {
   resources: [
     { label: "Publications", href: "/publications" },
     { label: "News", href: "/about/news" },
-    { label: "Media Kit", href: "/media-kit" },
+    {
+      label: "Media Kit",
+      href: "https://plus-tutors.notion.site/brand-guidelines",
+      external: true,
+    },
   ],
   getInvolved: [
     { label: "Careers", href: "#" },

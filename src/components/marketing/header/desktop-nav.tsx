@@ -65,7 +65,13 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
                             <NavigationMenuLink
                               closeOnClick
                               render={
-                                <Link href={child.href} className={navDropdownItemClass} />
+                                <Link
+                                  href={child.href}
+                                  className={navDropdownItemClass}
+                                  {...(child.external
+                                    ? { target: "_blank", rel: "noopener noreferrer" }
+                                    : {})}
+                                />
                               }
                             >
                               {child.icon && (

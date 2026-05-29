@@ -4,7 +4,6 @@ import { fetchResearchPapers } from "@/lib/notion/queries/research"
 import { ResearchPageClient } from "./research-page-client"
 
 export const metadata: Metadata = {
-  title: "Publications",
   description: "Explore the full archive of PLUS research publications.",
 }
 

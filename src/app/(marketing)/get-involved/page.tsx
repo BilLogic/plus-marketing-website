@@ -12,7 +12,6 @@ import { cn } from "@/lib/utils"
 // TODO: import { fetchJobListings } from "@/lib/notion/queries/jobs" when Notion DB is ready
 
 export const metadata: Metadata = {
-  title: "Get Involved — PLUS",
   description:
     "Join PLUS as a tutor, staff member, or partner. Explore careers, tutoring opportunities, and partnerships.",
 }

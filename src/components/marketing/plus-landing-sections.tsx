@@ -131,7 +131,7 @@ const CountUpStat = ({
 
 /** Section typography + rhythm — match `get-involved-sections.tsx` / `for-tutors-sections.tsx`. */
 const schoolsSectionTitle =
-  "text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+  "text-pretty text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
 const schoolsSectionLead = cn(
   "w-full max-w-none text-lg",
   marketingSectionLeadColorClass,
@@ -641,12 +641,12 @@ export const PlusHeroSection = () => {
   )
 }
 
-/** Figma IA — brown stat color (#a56d1e) */
-const IMPACT_STAT = "text-[#a56d1e]"
+/** Brand dark-yellow stat color (yellow-900 token). */
+const IMPACT_STAT = "text-yellow-900"
 
 /** Tinted shell — matches `TutorVoiceCard` rhythm (`for-tutors-sections` Voices from Our Tutors). */
 const VOICES_STORY_CARD = cn(
-  "flex h-full flex-col overflow-hidden rounded-[30px] bg-[#f4fbf6] dark:bg-emerald-950/20",
+  "flex h-full flex-col overflow-hidden rounded-[30px] bg-green-200 dark:bg-emerald-950/20",
   marketingCardPaddingClass,
 )
 
@@ -658,7 +658,7 @@ const VOICES_QUOTE_SHELL = cn(
 
 /** “Read story” row — same interaction as tutor voices; emerald accent for homepage testimonials. */
 const VOICES_READ_STORY_CLASS =
-  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-[#007d49] no-underline transition-opacity hover:opacity-90 dark:text-emerald-300"
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-green-900 no-underline transition-opacity hover:opacity-90 dark:text-emerald-300"
 
 /** Avatar + attribution — flush to card `p-*` top; `items-center` vertically centers copy with the disc. */
 const VOICES_ATTRIBUTION_ROW = "flex w-full shrink-0 items-center gap-3"
@@ -854,7 +854,7 @@ const SmartTechCardHeader = ({
   className?: string
   titleClassName?: string
 }) => (
-  <div className={cn("relative z-20 flex w-full shrink-0 items-center gap-[25px]", className)}>
+  <div className={cn("relative z-20 flex w-full shrink-0 items-center gap-3", className)}>
     <div className={cn("relative", marketingCardIconAssetFrameClass)}>
       <Image
         src={iconSrc}
@@ -865,7 +865,7 @@ const SmartTechCardHeader = ({
         unoptimized
       />
     </div>
-    <h3 className={cn(marketingTypography.bentoTitle, "max-w-[18rem] text-[#d31998] lg:max-w-[289px]", titleClassName)}>
+    <h3 className={cn(marketingTypography.bentoTitle, "max-w-[18rem] text-fuchsia-900 lg:max-w-[289px]", titleClassName)}>
       {title}
     </h3>
   </div>
@@ -873,7 +873,7 @@ const SmartTechCardHeader = ({
 
 /** Figma `1714:1965` / `1714:1976` — bento frame size (px). */
 const SMART_TECH_TOP_W = 526
-const SMART_TECH_TOP_H = 423
+const SMART_TECH_TOP_H = 385
 
 const pctX = (px: number) => `${(px / SMART_TECH_TOP_W) * 100}%`
 const pctY = (px: number) => `${(px / SMART_TECH_TOP_H) * 100}%`
@@ -884,7 +884,7 @@ const pctY = (px: number) => `${(px / SMART_TECH_TOP_H) * 100}%`
 const AI_COACH_STACK_SPECS = [
   {
     srcKey: "aiCoachLayerBack" as const,
-    bottomPx: -243.28,
+    bottomPx: -255.28,
     heightPx: 466.277,
     widthPx: 365,
     leftNudgePx: -0.5,
@@ -894,7 +894,7 @@ const AI_COACH_STACK_SPECS = [
   },
   {
     srcKey: "aiCoachLayerMid" as const,
-    bottomPx: -96.52,
+    bottomPx: -108.52,
     heightPx: 361.525,
     widthPx: 283,
     leftNudgePx: 0.5,
@@ -904,7 +904,7 @@ const AI_COACH_STACK_SPECS = [
   },
   {
     srcKey: "aiCoachLayerFront" as const,
-    bottomPx: 32.18,
+    bottomPx: 20.18,
     heightPx: 270.824,
     widthPx: 212,
     leftNudgePx: 0,
@@ -912,6 +912,29 @@ const AI_COACH_STACK_SPECS = [
       "drop-shadow(0 12px 24px rgba(132, 81, 93, 0.17)) drop-shadow(0 4px 10px rgba(200, 194, 200, 0.1))",
     z: 10,
   },
+] as const
+
+/**
+ * Collaborative Goal Setting pills — colors, rotation, and center positions (% of the
+ * `2087×732` Figma frame) sampled from the original baked composite so the live overlay
+ * matches the design while sitting over the new goal-setting screenshot.
+ */
+const GOAL_PILLS = [
+  { label: "Social-Emotional", x: 11.0, y: 31.0, rotate: -5, color: "#8c6601" },
+  { label: "Technology Tools", x: 50.0, y: 10.5, rotate: 5, color: "#015cbd" },
+  { label: "Mastering Content", x: 88.5, y: 47.0, rotate: 5, color: "#7f40b1" },
+  { label: "Advocacy", x: 11.5, y: 79.0, rotate: 5, color: "#1f6d28" },
+  { label: "Relationships", x: 85.0, y: 86.0, rotate: -5, color: "#c80b77" },
+] as const
+
+/** Sparkle positions/sizes (% of the `2087×732` frame) sampled from the original composite. */
+const GOAL_SPARKLES = [
+  { srcKey: "goalSparkleA" as const, x: 3.5, y: 51.1, size: 2.4 },
+  { srcKey: "goalSparkleB" as const, x: 87.6, y: 8.3, size: 2.4 },
+  { srcKey: "goalSparkleC" as const, x: 14.3, y: 7.0, size: 1.8 },
+  { srcKey: "goalSparkleD" as const, x: 99.1, y: 31.6, size: 1.7 },
+  { srcKey: "goalSparkleA" as const, x: 26.2, y: 32.9, size: 1.4 },
+  { srcKey: "goalSparkleB" as const, x: 27.4, y: 61.7, size: 1.4 },
 ] as const
 
 /**
@@ -948,26 +971,25 @@ export const PlusSmartTechSection = () => {
           marketingCardStackGapClass,
         )}
       >
-        <div className="flex w-full flex-col items-center gap-4 md:gap-8 lg:flex-row lg:justify-center lg:gap-[42px]">
+        <div className="flex w-full flex-col items-center gap-4 md:flex-row md:justify-center md:gap-8 lg:gap-[42px]">
           {/* Supervisor — `1714:1965` */}
-          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-[30px] bg-[#ffe8f5] min-[1800px]:max-w-[680px]">
-            <div className="relative w-full" style={{ aspectRatio: `${SMART_TECH_TOP_W} / ${SMART_TECH_TOP_H}` }}>
-              <div className="absolute inset-0 bg-[#ffe8f5]">
-                <div
-                  className="absolute z-20 flex"
-                  style={{ left: pctX(23), top: pctY(17) }}
-                >
-                  <SmartTechCardHeader
-                    iconSrc={plusHomeSmartTech.iconSupervisor}
-                    title="Supervisor Dashboard"
-                    className="max-w-[min(100%,372px)]"
-                  />
-                </div>
+          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-[30px] bg-fuchsia-200 min-[1800px]:max-w-[680px]">
+            {/* Title: normal flow on mobile (sits above the image), overlaid on md+ */}
+            <div className="relative z-30 flex px-5 pt-5 sm:px-6 sm:pt-6 md:absolute md:left-6 md:top-6 md:p-0">
+              <SmartTechCardHeader
+                iconSrc={plusHomeSmartTech.iconSupervisor}
+                title="Supervisor Dashboard"
+                className="max-w-[min(100%,372px)]"
+              />
+            </div>
+            <div className="relative w-full aspect-[526/385] max-md:-mt-[24%]">
+              <div className="absolute inset-0 bg-fuchsia-200">
+                <div className="absolute inset-0 origin-bottom md:scale-[0.8] lg:scale-100">
                 <div
                   className="pointer-events-none absolute overflow-hidden shadow-[0px_8px_22px_-6px_rgba(132,81,93,0.13),0px_2px_10px_-2px_rgba(198,191,198,0.11)]"
                   style={{
                     left: pctX(25),
-                    top: pctY(235.56),
+                    top: pctY(200),
                     width: pctX(230.257),
                     height: pctY(201.58),
                     borderRadius: "12.651px",
@@ -988,7 +1010,7 @@ export const PlusSmartTechSection = () => {
                   )}
                   style={{
                     left: pctX(211.36),
-                    top: pctY(192.55),
+                    top: pctY(150),
                     width: pctX(290.644),
                     height: pctY(254.447),
                     borderRadius: "15.969px",
@@ -1002,24 +1024,23 @@ export const PlusSmartTechSection = () => {
                     className="absolute inset-0 size-full max-w-none object-cover"
                   />
                 </div>
+                </div>
               </div>
             </div>
           </article>
 
           {/* AI coaching — `1714:1976`; bottom-anchored stack matches Figma (no scale transform). */}
-          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-[30px] bg-[#ffe8f5] min-[1800px]:max-w-[680px]">
-            <div className="relative w-full" style={{ aspectRatio: `${SMART_TECH_TOP_W} / ${SMART_TECH_TOP_H}` }}>
-              <div className="absolute inset-0 overflow-visible rounded-[inherit] bg-[#ffe8f5]">
-                <div
-                  className="absolute z-40 flex"
-                  style={{ left: pctX(21), top: pctY(21) }}
-                >
+          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-[30px] bg-fuchsia-200 min-[1800px]:max-w-[680px]">
+            <div className="relative w-full aspect-[526/385]">
+              <div className="absolute inset-0 overflow-visible rounded-[inherit] bg-fuchsia-200">
+                <div className="absolute left-5 top-5 z-40 flex sm:left-6 sm:top-6">
                   <SmartTechCardHeader
                     iconSrc={plusHomeSmartTech.iconAiTutor}
-                    title="AI coaching for tutors"
+                    title="AI Coaching for Tutors"
                     className="max-w-[min(100%,372px)]"
                   />
                 </div>
+                <div className="absolute inset-0 origin-bottom max-md:scale-[0.93] md:scale-[0.8] lg:scale-100">
                 {AI_COACH_STACK_SPECS.map((layer) => (
                   <div
                     key={layer.srcKey}
@@ -1043,27 +1064,62 @@ export const PlusSmartTechSection = () => {
                     />
                   </div>
                 ))}
+                </div>
               </div>
             </div>
           </article>
         </div>
 
         {/* Collaborative Goal Setting — raster flush to bottom of pink frame */}
-        <article className="mx-auto w-full max-w-[1097px] overflow-hidden rounded-[30px] bg-[#ffe8f5] px-5 pt-6 sm:px-7 sm:pt-8 md:px-8 min-[1800px]:max-w-[1400px]">
+        <article className="mx-auto w-full max-w-[1097px] overflow-hidden rounded-[30px] bg-fuchsia-200 px-5 pt-5 sm:px-6 sm:pt-6 min-[1800px]:max-w-[1400px]">
           <SmartTechCardHeader
             iconSrc={plusHomeSmartTech.iconGoal}
             title="Collaborative Goal Setting"
-            className="mb-6 max-w-full sm:mb-8"
+            className="mb-2 max-w-full sm:mb-3"
             titleClassName="max-w-none whitespace-nowrap"
           />
-          {/* eslint-disable-next-line @next/next/no-img-element -- large static raster from Figma */}
-          <img
-            alt=""
-            src={plusHomeSmartTech.goalComposite}
-            width={2087}
-            height={732}
-            className="mx-auto block w-full rounded-t-[12px] rounded-b-none object-contain object-bottom object-center"
-          />
+          {/* Back: goal-setting UI screenshot, centered & flush to bottom. Floating pills + sparkles overlaid (was a baked composite). */}
+          <div
+            className="relative mx-auto w-full [container-type:inline-size]"
+            style={{ aspectRatio: "2087 / 732" }}
+          >
+            {GOAL_SPARKLES.map((s, i) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={`${s.srcKey}-${i}`}
+                alt=""
+                aria-hidden
+                src={plusHomeSmartTech[s.srcKey]}
+                className="pointer-events-none absolute z-[1] -translate-x-1/2 -translate-y-1/2 select-none"
+                style={{ left: `${s.x}%`, top: `${s.y}%`, width: `${s.size}cqw`, aspectRatio: "1" }}
+              />
+            ))}
+            {/* eslint-disable-next-line @next/next/no-img-element -- static UI screenshot (transparent PNG; cards have own corners) */}
+            <img
+              alt="PLUS student goal-setting interface"
+              src={plusHomeSmartTech.goalUi}
+              width={1124}
+              height={436}
+              className="absolute left-1/2 z-[2] block h-[86%] w-auto -translate-x-1/2 object-contain"
+              style={{ bottom: "-0.7cqw", filter: "drop-shadow(0 8px 16px rgba(60, 30, 40, 0.10))" }}
+            />
+            {GOAL_PILLS.map((p) => (
+              <span
+                key={p.label}
+                className="absolute z-[3] inline-flex items-center whitespace-nowrap rounded-[0.7em] px-[0.8em] py-[0.5em] font-bold leading-none text-white"
+                style={{
+                  left: `${p.x}%`,
+                  top: `${p.y}%`,
+                  backgroundColor: p.color,
+                  fontSize: "clamp(8px, 1.95cqw, 22px)",
+                  transform: `translate(-50%, -50%) rotate(${p.rotate}deg)`,
+                  boxShadow: "0 0.4em 0.9em -0.2em rgba(60, 30, 40, 0.32)",
+                }}
+              >
+                {p.label}
+              </span>
+            ))}
+          </div>
         </article>
       </div>
     </section>
@@ -1099,7 +1155,7 @@ export const PlusScienceOfLearningSection = () => {
 
       <div className="mx-auto grid w-full max-w-[1122px] grid-cols-1 gap-10 lg:grid-cols-[minmax(0,473fr)_minmax(0,556fr)] lg:items-start lg:gap-[72px] min-[1800px]:max-w-[1400px] min-[1800px]:grid-cols-[minmax(0,560fr)_minmax(0,700fr)] min-[1800px]:gap-[96px]">
         {/* Left — Figma `1709:2079`: 395px-wide stack, gap 18px, vertically centered in 473px column */}
-        <div className="flex w-full justify-center lg:min-h-[397px] lg:items-center lg:justify-center">
+        <div className="flex w-full justify-start lg:min-h-[397px] lg:items-center">
           <div className="flex w-full max-w-[395px] flex-col gap-[18px] min-[1800px]:max-w-[500px]">
             <div className={cn("relative", marketingCardIconAssetFrameClass)}>
               <Image
@@ -1111,7 +1167,7 @@ export const PlusScienceOfLearningSection = () => {
                 unoptimized
               />
             </div>
-            <p className={cn(marketingTypography.bentoTitle, "text-[#0080b4]")}>
+            <p className={cn(marketingTypography.bentoTitle, "text-blue-900")}>
               <CountUpStat target={30} suffix="+" /> published papers
             </p>
             <p className={schoolsSectionLead}>
@@ -1219,7 +1275,7 @@ export const PlusVoicesSection = () => {
               <p
                 className={cn(
                   marketingTypography.bentoTitle,
-                  "min-w-0 flex-1 text-pretty text-[#007d49]",
+                  "min-w-0 flex-1 text-pretty text-green-900",
                 )}
               >
                 {attribution}
@@ -1228,7 +1284,7 @@ export const PlusVoicesSection = () => {
             <div className={VOICES_QUOTE_SHELL}>
               <blockquote className="text-pretty text-left text-base font-normal italic leading-relaxed text-[#4A4A4A] dark:text-neutral-200">
                 &ldquo;{quote}{" "}
-                <strong className="font-bold italic text-[#007d49] dark:text-emerald-300">
+                <strong className="font-bold italic text-green-900 dark:text-emerald-300">
                   {highlight}
                 </strong>
                 {end}&rdquo;

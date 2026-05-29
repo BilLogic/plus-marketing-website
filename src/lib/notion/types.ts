@@ -63,6 +63,14 @@ export type SuccessStory = {
   publicReadUrl?: string | null
 }
 
+export type SiteBanner = {
+  id: string
+  message: string
+  badge: string | null
+  linkText: string | null
+  linkHref: string | null
+}
+
 export type JobListing = {
   id: string
   title: string

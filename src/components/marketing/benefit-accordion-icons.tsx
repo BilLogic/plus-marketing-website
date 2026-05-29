@@ -158,7 +158,7 @@ export function BenefitsAccordionIcon({
   return (
     <Icon
       className={cn(
-        tone === "muted" ? "text-muted-foreground" : "text-[#a56d1e]",
+        tone === "muted" ? "text-muted-foreground" : "text-yellow-900",
         className
       )}
     />

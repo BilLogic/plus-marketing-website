@@ -2,16 +2,21 @@ import Link from "next/link"
 import { AnnouncementBar } from "./announcement-bar"
 import { DesktopNav } from "./desktop-nav"
 import { MobileNav } from "./mobile-nav"
+import { fetchBanner } from "@/lib/notion/queries/banner"
 
-export function PlusHeader() {
+export async function PlusHeader() {
+  const banner = await fetchBanner()
+
   return (
     <>
-      <AnnouncementBar
-        badge="New"
-        message="PLUS app v10 is now live — new features for onboarding, AI Feedback and tutoring workflows."
-        linkText="Explore updates"
-        linkHref="#"
-      />
+      {banner && (
+        <AnnouncementBar
+          badge={banner.badge ?? undefined}
+          message={banner.message}
+          linkText={banner.linkText ?? undefined}
+          linkHref={banner.linkHref ?? undefined}
+        />
+      )}
       <header className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-20 min-[1800px]:h-16 min-[1800px]:max-w-none min-[1800px]:px-10">
           {/* Logo */}

@@ -16,7 +16,6 @@ import { marketingListingShellClass } from "@/lib/marketing-layout"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "News — PLUS",
   description: "Latest updates, media coverage, and announcements from PLUS.",
 }
 
@@ -40,7 +39,7 @@ function NewsCard({ item }: { item: NewsItem }) {
   return (
     <article
       className={cn(
-        "flex w-full flex-col rounded-[30px] bg-[#FFF1C7] dark:bg-amber-950/20",
+        "flex w-full flex-col rounded-[30px] bg-yellow-200 dark:bg-amber-950/20",
         marketingCardPaddingClass,
       )}
     >
@@ -48,12 +47,12 @@ function NewsCard({ item }: { item: NewsItem }) {
         <span
           className={cn(
             marketingCardIconCircleClass,
-            "shrink-0 bg-[#A27707] text-white",
+            "shrink-0 bg-yellow-900 text-white",
           )}
         >
           <Icon className={marketingCardLucideGlyphClass} aria-hidden />
         </span>
-        <h2 className="min-w-0 flex-1 pt-[max(0px,calc((48px-1lh)/2))] text-pretty text-lg font-bold leading-snug tracking-tight text-[#9A6D00] dark:text-amber-200 sm:text-xl lg:text-2xl">
+        <h2 className="min-w-0 flex-1 pt-[max(0px,calc((48px-1lh)/2))] text-pretty text-lg font-bold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
           {item.title}
         </h2>
       </div>
@@ -74,11 +73,11 @@ function NewsCard({ item }: { item: NewsItem }) {
       ) : null}
       <Link
         href={href}
-        className="group ml-auto mt-4 inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-[#9A6D00] no-underline transition-opacity hover:opacity-90 dark:text-amber-200"
-        aria-label={`Read more about ${item.title}`}
+        className="group ml-auto mt-4 inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-yellow-900 no-underline transition-opacity hover:opacity-90 dark:text-amber-200"
+        aria-label={`View article about ${item.title}`}
         {...(item.externalLink ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
-        <span>Read more</span>
+        <span>View article</span>
         <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
       </Link>
     </article>
@@ -108,7 +107,7 @@ export default async function NewsPage() {
         {news.length === 0 ? (
           <div
             className={cn(
-              "rounded-3xl bg-[#FFF1C7] dark:bg-amber-950/20",
+              "rounded-3xl bg-yellow-200 dark:bg-amber-950/20",
               marketingCardPaddingClass,
             )}
           >

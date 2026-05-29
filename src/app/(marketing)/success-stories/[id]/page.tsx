@@ -27,7 +27,7 @@ const successStoryBodyFromMarkdownClass = cn(
   "[&_ol]:my-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:text-[#62636C] dark:[&_ol]:text-white/90",
   "[&_li]:mb-1 [&_li]:marker:text-[#e598c8] dark:[&_li]:marker:text-[#ebb4d4]",
   /* Pull quotes — no border (prose default adds a left rule). */
-  "[&_blockquote]:my-6 [&_blockquote]:rounded-2xl [&_blockquote]:border-0 [&_blockquote]:border-l-0 [&_blockquote]:bg-[#FFF5FB]/80 [&_blockquote]:px-5 [&_blockquote]:py-4 [&_blockquote]:not-italic [&_blockquote]:shadow-none dark:[&_blockquote]:bg-[#C6009C]/10",
+  "[&_blockquote]:my-6 [&_blockquote]:rounded-2xl [&_blockquote]:border-0 [&_blockquote]:border-l-0 [&_blockquote]:bg-fuchsia-200/80 [&_blockquote]:px-5 [&_blockquote]:py-4 [&_blockquote]:not-italic [&_blockquote]:shadow-none dark:[&_blockquote]:bg-fuchsia-900/10",
   "[&_blockquote]:text-[#4a4a4a] dark:[&_blockquote]:text-white/90",
   "[&_blockquote_p]:mb-2 [&_blockquote_p]:last:mb-0",
   "[&_hr]:my-10 [&_hr]:border-border/50",
@@ -98,11 +98,11 @@ export default async function SuccessStoryPage({
           {story.quote ? (
             <blockquote
               className={cn(
-                "flex gap-3 rounded-[30px] bg-[#FFF5FB] p-5 sm:p-6 dark:bg-[#C6009C]/10",
+                "flex gap-3 rounded-[30px] bg-fuchsia-200 p-5 sm:p-6 dark:bg-fuchsia-900/10",
               )}
             >
               <Quote
-                className="mt-0.5 size-5 shrink-0 text-[#C6009C] dark:text-[#e879a9]"
+                className="mt-0.5 size-5 shrink-0 -scale-x-100 text-fuchsia-900 dark:text-[#e879a9]"
                 aria-hidden
               />
               <div className="min-w-0">
