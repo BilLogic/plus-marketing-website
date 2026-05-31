@@ -73,12 +73,12 @@ function NewsCard({ item }: { item: NewsItem }) {
       ) : null}
       <Link
         href={href}
-        className="group ml-auto mt-4 inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-yellow-900 no-underline transition-opacity hover:opacity-90 dark:text-amber-200"
+        className="group ml-auto mt-4 inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-yellow-900 no-underline transition-opacity hover:opacity-90 dark:text-amber-200"
         aria-label={`View article about ${item.title}`}
         {...(item.externalLink ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
-        <span>View article</span>
-        <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
+        <span>View Article</span>
+        <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5" aria-hidden />
       </Link>
     </article>
   )

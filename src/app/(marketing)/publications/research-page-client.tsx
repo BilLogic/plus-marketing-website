@@ -82,9 +82,10 @@ function PublicationTableRow({ paper }: { paper: ResearchPaper }) {
               <span
                 key={t}
                 className={cn(
-                  "inline-flex items-center rounded-[26px] px-2 py-0.5 leading-snug",
+                  "inline-flex items-center rounded-[26px] px-2 py-0.5",
                   riIndexMetaCopy,
-                  riGenrePillClass(t)
+                  riGenrePillClass(t),
+                  "leading-none"
                 )}
               >
                 {t}

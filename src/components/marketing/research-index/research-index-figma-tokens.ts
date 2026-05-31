@@ -41,7 +41,8 @@ export const riPageTitleCn = cn(
 /** Genre / “All” filter chips in the index shell. */
 export const riFilterTagButtonCn = cn(
   "inline-flex min-h-7 items-center justify-center rounded-full px-2.5 py-1 font-medium transition-colors",
-  riIndexMetaCopy
+  riIndexMetaCopy,
+  "leading-none"
 )
 
 /** “Tags” row label (margin below). */
@@ -62,18 +63,18 @@ export const riSeeAllPublicationsLinkClass = cn(
 
 /** Embedded For Researchers preview — smaller link matching `riIndexMetaCopy`. */
 export const riSeeAllPublicationsLinkMetaClass = cn(
-  "group inline-flex items-center gap-2.5 font-sans font-normal text-[#027f89] transition-opacity hover:opacity-90",
+  "group inline-flex items-center gap-2.5 font-sans font-medium text-[#027f89] transition-opacity hover:opacity-90",
   riIndexMetaCopy
 )
 
 /** Card topic chips — `font-sans` maps to DM Sans via `next/font` + `@theme` (`src/app/fonts.ts`). */
 export function riGenrePillClass(genre: string): string {
   switch (genre) {
-    case "Student learning":
+    case "Student Learning":
       return cn("font-sans font-normal", riFg.tagStudentBg)
     case "Gen AI":
       return cn("font-sans font-normal", riFg.tagGenAiBg)
-    case "Tutor training":
+    case "Tutor Training":
       return cn("font-sans font-normal", riFg.tagTutorBg)
     default:
       return cn("font-sans font-normal", "bg-muted text-muted-foreground")
@@ -85,11 +86,11 @@ function riGenreFilterPillActiveClass(
   genre: (typeof RESEARCH_GENRE_TAGS)[number]
 ): string {
   switch (genre) {
-    case "Student learning":
+    case "Student Learning":
       return "bg-red-900 text-white shadow-none"
     case "Gen AI":
       return "bg-blue-900 text-white shadow-none"
-    case "Tutor training":
+    case "Tutor Training":
       return "bg-green-900 text-white shadow-none"
   }
 }
@@ -102,11 +103,11 @@ export function riGenreFilterPillClass(
     return riGenreFilterPillActiveClass(genre)
   }
   switch (genre) {
-    case "Student learning":
+    case "Student Learning":
       return cn(riFg.tagStudentBg, "hover:brightness-[0.98]")
     case "Gen AI":
       return cn(riFg.tagGenAiBg, "hover:brightness-[0.98]")
-    case "Tutor training":
+    case "Tutor Training":
       return cn(riFg.tagTutorBg, "hover:brightness-[0.98]")
     default:
       return "bg-muted text-muted-foreground"

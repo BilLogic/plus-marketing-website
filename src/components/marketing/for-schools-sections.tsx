@@ -70,21 +70,18 @@ const schoolsSectionHeaderOversightDecorClass = cn(
 
 export const SchoolsHeroSection = () => {
   /**
-   * Peak sizes match pre–overlap-fix art (`lg` 110px, `xl` 150px). When the section is
-   * narrow, `min(...)` shrinks so sprites stay inside the side margin past `max-w-3xl`.
+   * Four-corner hero sprites. Positioned with percentage anchors relative to the
+   * `max-w-7xl` section (not fixed rem offsets) and pushed outward at `min-[1800px]`
+   * so they clear the headline column when it widens to `max-w-5xl` — matches the
+   * flexible scheme in `GetInvolvedHeroSection` / `TutorsHeroSection`.
    */
   const heroDecorBase =
-    "pointer-events-none absolute z-0 block h-auto w-auto opacity-90 select-none " +
-    "hidden lg:block " +
-    "lg:max-w-[min(110px,max(4.5rem,calc((100%-48rem)/2-2rem)))] " +
-    "xl:max-w-[min(150px,max(4.5rem,calc((100%-48rem)/2-2rem)))]"
-  /** ~35rem reserves space for the wider `xl` cap (150px) without covering the headline. */
-  const heroDecorLeft = "left-[max(0.5rem,calc(50%-35rem))]"
-  const heroDecorRight = "right-[max(0.5rem,calc(50%-35rem))]"
+    "pointer-events-none absolute z-0 hidden h-auto w-auto opacity-90 select-none " +
+    "lg:block lg:max-w-[110px] xl:max-w-[150px]"
   return (
     <section
       className={cn(
-        "relative w-full min-w-0 overflow-x-clip lg:overflow-hidden",
+        "relative mx-auto w-full min-w-0 max-w-7xl overflow-hidden",
         "flex flex-col items-center justify-center",
         "min-h-[380px] sm:min-h-[440px] md:min-h-[500px] lg:min-h-[530px]",
         "pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14",
@@ -93,25 +90,25 @@ export const SchoolsHeroSection = () => {
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[0]}
-        className={cn(heroDecorBase, heroDecorLeft, "top-[18%]")}
+        className={cn(heroDecorBase, "left-[10%] top-[18%] min-[1800px]:left-[4%]")}
         aria-hidden
       />
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[1]}
-        className={cn(heroDecorBase, heroDecorLeft, "top-[54%]")}
+        className={cn(heroDecorBase, "left-[5%] top-[54%] min-[1800px]:left-[0%]")}
         aria-hidden
       />
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[2]}
-        className={cn(heroDecorBase, heroDecorRight, "top-[18%]")}
+        className={cn(heroDecorBase, "right-[10%] top-[18%] min-[1800px]:right-[4%]")}
         aria-hidden
       />
       <img
         alt=""
         src={forSchoolsAssets.heroDecor[3]}
-        className={cn(heroDecorBase, heroDecorRight, "top-[54%]")}
+        className={cn(heroDecorBase, "right-[5%] top-[54%] min-[1800px]:right-[0%]")}
         aria-hidden
       />
 
@@ -124,7 +121,7 @@ export const SchoolsHeroSection = () => {
         <div className="flex w-full max-w-3xl flex-col items-center gap-6 text-center sm:gap-8 min-[1800px]:max-w-5xl">
           <h1 className="flex flex-col items-center gap-3 sm:gap-4">
             <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
-              For schools
+              For Schools
             </span>
             <span className={cn(marketingTypography.heroH1, "max-w-prose")}>
               Research-backed, AI-powered Math Tutoring to Supplement Classroom Instruction
@@ -672,7 +669,7 @@ const OVERSIGHT_IMG =
 const oversightCardCtaClass = cn(
   "inline-flex w-fit items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-0 px-5 sm:px-8 text-sm sm:text-base font-normal shadow-none transition-opacity hover:opacity-95 min-[1800px]:h-12 min-[1800px]:px-9 min-[1800px]:text-lg",
+  "h-9 sm:h-11 rounded-full border-0 px-5 sm:px-8 text-sm sm:text-base font-medium shadow-none transition-opacity hover:opacity-95 min-[1800px]:h-12 min-[1800px]:px-9 min-[1800px]:text-lg",
 )
 
 const OVERSIGHT_CARDS = [
@@ -681,7 +678,7 @@ const OVERSIGHT_CARDS = [
     title: "Align with Your Curriculum",
     description:
       "We work with your faculty to tailor lesson strategies that complement your school’s specific learning objectives and standards.",
-    cta: "Get training",
+    cta: "Get Training",
     href: "https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform",
     bgColor: "bg-red-200",
     titleColor: "text-red-900",
@@ -694,7 +691,7 @@ const OVERSIGHT_CARDS = [
     title: "Data at Your Fingertips",
     description:
       "Track tutor performance, monitor student progress, and access high-level analytics to measure the ROI of your tutoring initiatives.",
-    cta: "Try our demo",
+    cta: "Try Our Demo",
     href: "https://app.tutors.plus/demo",
     bgColor: "bg-green-200",
     titleColor: "text-green-900",
@@ -709,7 +706,7 @@ const OVERSIGHT_CARDS = [
     title: "Professional Growth & Accountability",
     description:
       "Tutors earn industry-recognized credentials upon completion, ensuring they meet the standards of your institution.",
-    cta: "Register your tutors",
+    cta: "Register Your Tutors",
     href: "https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform",
     bgColor: "bg-yellow-200",
     titleColor: "text-yellow-900",
@@ -722,7 +719,7 @@ const OVERSIGHT_CARDS = [
     title: "Works with Any Math Software",
     description:
       "PLUS is designed to be software-agnostic, which means no new software licenses or changes required.",
-    cta: "See How it Works",
+    cta: "See How It Works",
     href: "https://app.tutors.plus/demo",
     bgColor: "bg-blue-200",
     titleColor: "text-blue-900",
@@ -1072,13 +1069,13 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                     <Link
                       href={readHref}
                       className={cn(
-                        "group mt-4 ml-auto flex w-fit items-center gap-2 text-base font-medium no-underline transition-opacity hover:opacity-90 sm:text-lg",
+                        "group mt-4 ml-auto flex w-fit items-center gap-2 text-sm font-medium no-underline transition-opacity hover:opacity-90 sm:text-base min-[1800px]:text-lg",
                         theme.accent,
                       )}
                     >
-                      <span>Read story</span>
+                      <span>Read Story</span>
                       <ArrowRight
-                        className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
+                        className="size-5 shrink-0 transition-transform group-hover:translate-x-0.5"
                         aria-hidden
                       />
                     </Link>
@@ -1088,13 +1085,13 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                       target="_blank"
                       rel="noopener noreferrer"
                       className={cn(
-                        "group mt-4 ml-auto flex w-fit items-center gap-2 text-base font-medium no-underline transition-opacity hover:opacity-90 sm:text-lg",
+                        "group mt-4 ml-auto flex w-fit items-center gap-2 text-sm font-medium no-underline transition-opacity hover:opacity-90 sm:text-base min-[1800px]:text-lg",
                         theme.accent,
                       )}
                     >
-                      <span>Read story</span>
+                      <span>Read Story</span>
                       <ArrowRight
-                        className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
+                        className="size-5 shrink-0 transition-transform group-hover:translate-x-0.5"
                         aria-hidden
                       />
                       <span className="sr-only">(opens in new tab)</span>
@@ -1128,7 +1125,7 @@ export const SchoolsRegisterCTA = () => {
             rel="noopener noreferrer"
             className={marketingFinalCtaPrimaryLinkClass}
           >
-            Sign up
+            Sign Up
           </a>
         </div>
       </div>

@@ -764,7 +764,7 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
 }
 
 const latestReadMoreLinkClass =
-  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-yellow-900 no-underline transition-opacity hover:opacity-90 dark:text-amber-200"
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-yellow-900 no-underline transition-opacity hover:opacity-90 dark:text-amber-200"
 
 /**
  * Icon top flush with card padding (`items-start`). Title gets `pt` so the **first line’s**
@@ -854,8 +854,8 @@ function LatestNewsCard({
         aria-label={`View article about ${item.title}`}
         {...(item.externalLink ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
-        <span>View article</span>
-        <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
+        <span>View Article</span>
+        <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5" aria-hidden />
       </Link>
     </article>
   )
@@ -916,8 +916,8 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
               />
             </div>
             <Link href="/about/news" className={latestReadMoreLinkClass} aria-label="View article about Celebrating Our Datasets Win">
-              <span>View article</span>
-              <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
+              <span>View Article</span>
+              <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5" aria-hidden />
             </Link>
           </article>
           <div className={cn("grid grid-cols-1 sm:grid-cols-2", marketingCardStackGapClass)}>
@@ -951,8 +951,8 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
                 />
               </div>
               <Link href="/about/news" className={latestReadMoreLinkClass} aria-label="View article about Teachers Inspire Our Tutoring">
-                <span>View article</span>
-                <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                <span>View Article</span>
+                <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5" aria-hidden />
               </Link>
             </article>
             <article
@@ -985,8 +985,8 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
                 />
               </div>
               <Link href="/about/news" className={latestReadMoreLinkClass} aria-label="View article about PLUS Expands To 6 New Schools">
-                <span>View article</span>
-                <ArrowRight className="size-6 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                <span>View Article</span>
+                <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5" aria-hidden />
               </Link>
             </article>
           </div>
@@ -997,10 +997,10 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
 }
 
 const successStoryReadLinkClass =
-  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-fuchsia-900 no-underline transition-opacity hover:opacity-90 dark:text-fuchsia-900"
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-fuchsia-900 no-underline transition-opacity hover:opacity-90 dark:text-fuchsia-900"
 
 const successStoryReadLinkBlueClass =
-  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-blue-900 no-underline transition-opacity hover:opacity-90 dark:text-sky-300"
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-blue-900 no-underline transition-opacity hover:opacity-90 dark:text-sky-300"
 
 /**
  * Cycles pink → blue → amber for each success-story card from Notion.
@@ -1131,9 +1131,9 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
                     className={theme.readLink}
                     aria-label={`Read story: ${story.title}`}
                   >
-                    <span>Read story</span>
+                    <span>Read Story</span>
                     <ArrowRight
-                      className="size-6 transition-transform group-hover:translate-x-0.5"
+                      className="size-5 transition-transform group-hover:translate-x-0.5"
                       aria-hidden
                     />
                   </Link>
@@ -1145,9 +1145,9 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
                     className={theme.readLink}
                     aria-label={`Read story: ${story.title}`}
                   >
-                    <span>Read story</span>
+                    <span>Read Story</span>
                     <ArrowRight
-                      className="size-6 transition-transform group-hover:translate-x-0.5"
+                      className="size-5 transition-transform group-hover:translate-x-0.5"
                       aria-hidden
                     />
                     <span className="sr-only">(opens in new tab)</span>

@@ -96,7 +96,7 @@ export const marketingHeroCtaButtonRowClass = cn(
 export const marketingHeroCtaPrimaryLinkClass = cn(
   "inline-flex items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-sm sm:text-base font-normal text-[#004247] shadow-none min-[1800px]:h-12 min-[1800px]:px-9 min-[1800px]:text-lg",
+  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-sm sm:text-base font-medium text-[#004247] shadow-none min-[1800px]:h-12 min-[1800px]:px-9 min-[1800px]:text-lg",
   "hover:bg-[#A6EDF4] hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4] dark:hover:text-[#004247]",
 )
 
@@ -104,7 +104,7 @@ export const marketingHeroCtaPrimaryLinkClass = cn(
 export const marketingFinalCtaPrimaryLinkClass = cn(
   "inline-flex items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-sm sm:text-base font-normal text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4] min-[1800px]:h-12 min-[1800px]:px-9 min-[1800px]:text-lg",
+  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-sm sm:text-base font-medium text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4] min-[1800px]:h-12 min-[1800px]:px-9 min-[1800px]:text-lg",
 )
 
 /** Outline pill — matches `TutorsImpactCTA` “Become a Tutor” button. */

@@ -112,7 +112,7 @@ export const TutorsHeroSection = () => {
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center sm:gap-8 sm:px-6 min-[1800px]:max-w-5xl">
         <h1 className="flex flex-col items-center gap-3 sm:gap-4">
           <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
-            For tutors
+            For Tutors
           </span>
           <span className={cn(marketingTypography.heroH1, "max-w-prose")}>
             Teach What Matters and Earn What You Deserve
@@ -751,7 +751,7 @@ export const TutorsCertificationSection = () => {
                 rel="noopener noreferrer"
                 className="inline-flex h-9 w-fit cursor-pointer items-center justify-center rounded-full bg-green-800 px-8 text-sm font-medium text-white no-underline hover:bg-green-900 sm:h-11 sm:text-base"
               >
-                Register now
+                Register Now
               </a>
             </div>
           </div>
@@ -914,7 +914,7 @@ export const TutorsToolkitSection = () => {
 
 /** Read story row — same interaction pattern as About Success Stories (`cursor-pointer`, arrow nudge). */
 const tutorVoiceReadStoryClass =
-  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-red-900 no-underline transition-opacity hover:opacity-90 dark:text-[#c97a7a]"
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-red-900 no-underline transition-opacity hover:opacity-90 dark:text-[#c97a7a]"
 
 /** Avatar + name — same 64px disc + `gap-3` row as homepage `PlusVoicesSection` testimonials. */
 const tutorVoicesAvatarRowClass = "flex w-full shrink-0 items-center gap-3"
@@ -974,9 +974,9 @@ function TutorVoiceCard({
         className={tutorVoiceReadStoryClass}
         aria-label={`Read story: ${name}`}
       >
-        <span>Read story</span>
+        <span>Read Story</span>
         <ArrowRight
-          className="size-6 transition-transform group-hover:translate-x-0.5"
+          className="size-5 transition-transform group-hover:translate-x-0.5"
           aria-hidden
         />
       </Link>

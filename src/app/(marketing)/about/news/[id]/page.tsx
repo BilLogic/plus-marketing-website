@@ -70,7 +70,7 @@ export default async function NewsDetailPage({
               <a href={item.externalLink} target="_blank" rel="noopener noreferrer" />
             }
           >
-            Read full article
+            Read Full Article
           </Button>
         )}
         </article>

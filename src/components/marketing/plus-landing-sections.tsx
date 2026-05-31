@@ -248,6 +248,18 @@ const ORNAMENT_RIGHT_COMPACT = {
 
 const ORNAMENT_SIZE_COMPACT = 58
 
+/**
+ * `min-[1800px]+`: the headline column widens to `max-w-5xl`, so the box grows to
+ * 96rem and the right anchors are pushed out by the same proportional amount —
+ * preserving the ~34px clearance the `xl` layout has from the copy edge.
+ * Derived as `(origX + 256) / 1.2` from {@link ORNAMENT_RIGHT}.
+ */
+const ORNAMENT_RIGHT_WIDE = {
+  greenGt:   { x: 1095, y: 5   },
+  equals:    { x: 1170, y: 72  },
+  character: { x: 1100, y: 164 },
+} as const
+
 /** CSS left value using the 1280px proportional scale. */
 const pct = (x: number) => `calc(${x} * 100% / ${LANDING_HERO_ARTBOARD})`
 
@@ -268,7 +280,7 @@ const LandingHeroOrnamentTrack = ({
   size: number
 }) => (
   <div
-    className="relative w-full max-w-[1280px] shrink-0"
+    className="relative w-full max-w-[1280px] shrink-0 min-[1800px]:max-w-[96rem]"
     style={{ height: right.character.y + size + 16 }}
   >
     <div
@@ -361,12 +373,15 @@ const LandingHeroOrnaments = () => (
     className="pointer-events-none absolute inset-x-0 top-0 z-0 hidden justify-center lg:flex"
     aria-hidden
   >
-    <div className="relative w-full max-w-[1280px]">
+    <div className="relative w-full max-w-[1280px] min-[1800px]:max-w-[96rem]">
       <div className="hidden lg:block xl:hidden">
         <LandingHeroOrnamentTrack right={ORNAMENT_RIGHT_COMPACT} size={ORNAMENT_SIZE_COMPACT} />
       </div>
-      <div className="hidden xl:block">
+      <div className="hidden xl:block min-[1800px]:hidden">
         <LandingHeroOrnamentTrack right={ORNAMENT_RIGHT} size={ORNAMENT_SIZE} />
+      </div>
+      <div className="hidden min-[1800px]:block">
+        <LandingHeroOrnamentTrack right={ORNAMENT_RIGHT_WIDE} size={ORNAMENT_SIZE} />
       </div>
     </div>
   </div>
@@ -471,9 +486,9 @@ const LandingHeroAwardsRow = () => {
 const HERO_VIDEO_ID = "UGoYioREH0E"
 
 const LEARN_MORE_AUDIENCE_ITEMS = [
-  { label: "For schools", href: "/for-schools", icon: School },
-  { label: "For tutors", href: "/for-tutors", icon: GraduationCap },
-  { label: "For researchers", href: "/for-researchers", icon: FileText },
+  { label: "For Schools", href: "/for-schools", icon: School },
+  { label: "For Tutors", href: "/for-tutors", icon: GraduationCap },
+  { label: "For Researchers", href: "/for-researchers", icon: FileText },
 ] as const
 
 const LearnMoreDropdown = () => {
@@ -489,7 +504,7 @@ const LearnMoreDropdown = () => {
           "group min-w-[140px] gap-2",
         )}
       >
-        Learn more
+        Learn More
         <ChevronDown
           className="size-4 shrink-0 transition-transform duration-300 group-data-popup-open:rotate-180"
           aria-hidden
@@ -581,8 +596,8 @@ export const PlusHeroSection = () => {
                 middle school math learners with AI technology and research-backed methods.
               </p>
             <div className={marketingHeroCtaButtonRowClass}>
-              <Link href="/about" className={cn(marketingHeroCtaPrimaryLinkClass, "min-w-[169px]")}>
-                Our mission
+              <Link href="/about" className={cn(marketingHeroCtaPrimaryLinkClass, "sm:min-w-[169px]")}>
+                Our Mission
               </Link>
               <LearnMoreDropdown />
             </div>
@@ -658,7 +673,7 @@ const VOICES_QUOTE_SHELL = cn(
 
 /** “Read story” row — same interaction as tutor voices; emerald accent for homepage testimonials. */
 const VOICES_READ_STORY_CLASS =
-  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-green-900 no-underline transition-opacity hover:opacity-90 dark:text-emerald-300"
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-green-900 no-underline transition-opacity hover:opacity-90 dark:text-emerald-300"
 
 /** Avatar + attribution — flush to card `p-*` top; `items-center` vertically centers copy with the disc. */
 const VOICES_ATTRIBUTION_ROW = "flex w-full shrink-0 items-center gap-3"
@@ -773,7 +788,7 @@ export const PlusImpactStatsSection = () => {
               href="/success-stories"
               className={cn(marketingHeroCtaPrimaryLinkClass, "w-fit self-start")}
             >
-              See impact
+              See Impact
             </Link>
           </div>
           <div className={impactZigzagPhotoColClass("md:order-2")}>
@@ -800,7 +815,7 @@ export const PlusImpactStatsSection = () => {
               rel="noopener noreferrer"
               className={cn(marketingHeroCtaOutlineLinkClass, "w-fit self-start")}
             >
-              Get PLUS tutoring
+              Get PLUS Tutoring
             </a>
           </div>
           <div className={impactZigzagPhotoColClass("md:order-1")}>
@@ -827,7 +842,7 @@ export const PlusImpactStatsSection = () => {
               rel="noopener noreferrer"
               className={cn(marketingHeroCtaOutlineLinkClass, "w-fit self-start")}
             >
-              Become a tutor
+              Become a Tutor
             </a>
           </div>
           <div className={impactZigzagPhotoColClass("md:order-2")}>
@@ -1176,9 +1191,9 @@ export const PlusScienceOfLearningSection = () => {
             </p>
             <Link
               href="/publications"
-              className={cn(marketingFinalCtaPrimaryLinkClass, "w-fit min-w-[215px]")}
+              className={cn(marketingFinalCtaPrimaryLinkClass, "w-fit sm:min-w-[215px]")}
             >
-              Read our research
+              Read Our Research
             </Link>
           </div>
         </div>
@@ -1295,9 +1310,9 @@ export const PlusVoicesSection = () => {
               className={VOICES_READ_STORY_CLASS}
               aria-label={`Read story: ${attribution}`}
             >
-              <span>Read story</span>
+              <span>Read Story</span>
               <ArrowRight
-                className="size-6 transition-transform group-hover:translate-x-0.5"
+                className="size-5 transition-transform group-hover:translate-x-0.5"
                 aria-hidden
               />
             </Link>

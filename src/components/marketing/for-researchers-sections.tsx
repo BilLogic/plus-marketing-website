@@ -81,7 +81,7 @@ const RESEARCH_HIGHLIGHT_TOPICS = [
   {
     id: "student-learning",
     title: "Student Learning",
-    genre: "Student learning" satisfies ResearchGenreTag,
+    genre: "Student Learning" satisfies ResearchGenreTag,
   },
   {
     id: "gen-ai",
@@ -91,7 +91,7 @@ const RESEARCH_HIGHLIGHT_TOPICS = [
   {
     id: "tutor-training",
     title: "Tutor Training",
-    genre: "Tutor training" satisfies ResearchGenreTag,
+    genre: "Tutor Training" satisfies ResearchGenreTag,
   },
 ] as const
 
@@ -320,7 +320,7 @@ export const ResearchersHeroSection = () => {
         <div className="mx-auto flex w-full min-w-0 shrink-0 flex-col gap-5 sm:gap-6 lg:mx-0 lg:max-w-[26rem] min-[1800px]:max-w-[32rem]">
           <h1 className="flex flex-col gap-2 sm:gap-3">
             <span className="text-center text-2xl font-semibold text-[#027f89] sm:text-3xl lg:text-left">
-              For researchers
+              For Researchers
             </span>
             <span className="text-balance text-center text-3xl font-bold leading-tight tracking-tight text-[#004247] sm:text-4xl md:text-5xl lg:text-left">
               Pioneering Research in Human-Centered AI for Personalized Math Learning
@@ -333,10 +333,10 @@ export const ResearchersHeroSection = () => {
               rel="noopener noreferrer"
               className={researchersHeroPrimaryCtaClassName}
             >
-              Research with us
+              Research with Us
             </a>
             <Link href="/publications" className={researchersHeroSecondaryCtaClassName}>
-              Our publications
+              Our Publications
             </Link>
           </div>
         </div>
@@ -619,7 +619,7 @@ function HighlightStudyCard({
   const summary = riPublicationDescription(paper)
   const shellClass = cn(
     HIGHLIGHT_STUDY_CARD_MIN_H,
-    "group flex w-full min-w-0 flex-col gap-2 rounded-[26px] text-left no-underline outline-none transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-offset-2",
+    "group flex w-full min-w-0 flex-col gap-4 rounded-[26px] text-left no-underline outline-none transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-offset-2",
     marketingCardPaddingClass,
     theme.studyShellBg,
     theme.studyFocusRing
@@ -697,14 +697,13 @@ function HighlightStudyCard({
       </div>
       <span
         className={cn(
-          "flex shrink-0 items-center justify-end gap-2.5",
-          marketingTypography.body,
+          "mt-auto flex shrink-0 items-center justify-end gap-2 text-sm font-medium leading-relaxed sm:text-base min-[1800px]:text-lg",
           theme.studyAccentText,
         )}
       >
-        Read study
+        Read Study
         <ArrowRight
-          className="size-[26px] shrink-0 transition-transform group-hover:translate-x-0.5"
+          className="size-5 shrink-0 transition-transform group-hover:translate-x-0.5"
           strokeWidth={2}
           aria-hidden
         />
@@ -781,7 +780,7 @@ function HighlightStudiesCarousel({
               theme.studyFocusRing,
             )}
           >
-            Next study
+            Next Study
             <ChevronRight className="size-4 shrink-0" strokeWidth={2} aria-hidden />
           </button>
         </div>
@@ -1339,7 +1338,7 @@ export const ResearchIndexSection = ({
             page.
           </p>
           <Link href="/publications" className={cn(forResearchersOutlineCtaClassName, "mt-6")}>
-            Open publications
+            Open Publications
           </Link>
         </div>
       ) : (
@@ -1496,9 +1495,9 @@ export const ResearchIndexSection = ({
 
           <div className="flex justify-end px-5 py-4 sm:px-5">
             <Link href="/publications" className={riSeeAllPublicationsLinkMetaClass}>
-              See all publications
+              See All Publications
               <ArrowRight
-                className="size-[26px] shrink-0 transition-transform group-hover:translate-x-0.5"
+                className="size-5 shrink-0 transition-transform group-hover:translate-x-0.5"
                 strokeWidth={2}
                 aria-hidden
               />
@@ -1645,13 +1644,13 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
                   <Link
                     href={readHref}
                     className={cn(
-                      "group mt-4 ml-auto flex w-fit items-center gap-2 text-lg font-medium no-underline transition-opacity hover:opacity-90",
+                      "group mt-4 ml-auto flex w-fit items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg no-underline transition-opacity hover:opacity-90",
                       theme.accent,
                     )}
                   >
-                    <span>Read story</span>
+                    <span>Read Story</span>
                     <ArrowRight
-                      className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
+                      className="size-5 shrink-0 transition-transform group-hover:translate-x-0.5"
                       aria-hidden
                     />
                   </Link>
@@ -1661,13 +1660,13 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
-                      "group mt-4 ml-auto flex w-fit items-center gap-2 text-lg font-medium no-underline transition-opacity hover:opacity-90",
+                      "group mt-4 ml-auto flex w-fit items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg no-underline transition-opacity hover:opacity-90",
                       theme.accent,
                     )}
                   >
-                    <span>Read story</span>
+                    <span>Read Story</span>
                     <ArrowRight
-                      className="size-6 shrink-0 transition-transform group-hover:translate-x-0.5"
+                      className="size-5 shrink-0 transition-transform group-hover:translate-x-0.5"
                       aria-hidden
                     />
                     <span className="sr-only">(opens in new tab)</span>
@@ -1698,7 +1697,7 @@ export const ResearchCollaborateCtaSection = () => {
             rel="noopener noreferrer"
             className={marketingFinalCtaPrimaryLinkClass}
           >
-            Reach out
+            Reach Out
           </a>
         </div>
       </div>

@@ -76,7 +76,7 @@ const tutoringBecomeTutorCardCtaClass = cn(
 
 /** Learn more row — matches About `AboutSuccessStoriesSection` Read story link (size, arrow, interaction). */
 const careersLearnMoreLinkClass =
-  "group ml-auto inline-flex cursor-pointer items-center gap-2 text-lg font-medium text-green-900 no-underline transition-opacity hover:opacity-90 dark:text-green-900"
+  "group ml-auto inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-green-900 no-underline transition-opacity hover:opacity-90 dark:text-green-900"
 
 /** Icon disc + title — flush to card top padding; `items-center` aligns title with the 48px circle (careers, tutoring, partnerships). */
 const getInvolvedDiscTitleRowClass = "flex w-full shrink-0 items-center gap-3"
@@ -139,7 +139,7 @@ const WHY_WORK_ITEMS = [
     title: "Your Benefits at PLUS",
     description:
       "We provide robust benefits to ensure your health, financial security, work-life balance, and growth.",
-    cta: "Learn more",
+    cta: "Learn More",
     icon: HandCoins,
     panelArt: "/figma/get-involved/why-work-benefits.jpg",
   },
@@ -355,9 +355,9 @@ export function GetInvolvedCareersSection({ jobs }: { jobs?: JobListing[] }) {
                 className={careersLearnMoreLinkClass}
                 aria-label={`Learn more: ${job.title}`}
               >
-                <span>Learn more</span>
+                <span>Learn More</span>
                 <ArrowRight
-                  className="size-6 transition-transform group-hover:translate-x-0.5"
+                  className="size-5 transition-transform group-hover:translate-x-0.5"
                   aria-hidden
                 />
               </Link>

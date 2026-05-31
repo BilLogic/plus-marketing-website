@@ -101,7 +101,7 @@ export function PaperCard({
                   "hover:underline"
                 )}
               >
-                {expanded ? "Show less" : "Read more"}
+                {expanded ? "Show Less" : "Read More"}
                 <ChevronDown
                   className={cn(
                     "h-3 w-3 transition-transform",

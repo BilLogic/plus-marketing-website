@@ -163,7 +163,7 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
                       aria-label={`Read story: ${story.title}`}
                       {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     >
-                      <span>Read story</span>
+                      <span>Read Story</span>
                       <ArrowRight className={successStoriesReadStoryArrowClass} aria-hidden />
                     </Link>
                   )}

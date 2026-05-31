@@ -2,9 +2,9 @@ import type { ResearchPaper } from "@/lib/notion/types"
 
 /** Canonical marketing tags — match Notion multi-select labels when present. */
 export const RESEARCH_GENRE_TAGS = [
-  "Student learning",
+  "Student Learning",
   "Gen AI",
-  "Tutor training",
+  "Tutor Training",
 ] as const
 
 export type ResearchGenreTag = (typeof RESEARCH_GENRE_TAGS)[number]
@@ -48,46 +48,46 @@ function normalizeNotionTopicsToGenres(topics: string[]): string[] {
  * Curated genres for CSV-seeded cache ids (`research.json`) and matching normalized titles.
  */
 const GENRES_BY_PAPER_ID: Record<string, string[]> = {
-  "csv-1": ["Student learning"],
-  "csv-2": ["Gen AI", "Tutor training"],
-  "csv-3": ["Student learning"],
-  "csv-4": ["Student learning"],
-  "csv-5": ["Gen AI", "Tutor training"],
-  "csv-6": ["Student learning"],
-  "csv-7": ["Gen AI", "Tutor training"],
-  "csv-8": ["Student learning"],
-  "csv-9": ["Gen AI", "Tutor training"],
-  "csv-10": ["Gen AI", "Tutor training"],
-  "csv-11": ["Gen AI", "Student learning"],
-  "csv-12": ["Gen AI", "Tutor training"],
-  "csv-13": ["Gen AI", "Tutor training"],
-  "csv-14": ["Gen AI", "Tutor training"],
-  "csv-15": ["Student learning"],
-  "csv-16": ["Gen AI", "Tutor training"],
-  "csv-17": ["Student learning"],
-  "csv-18": ["Gen AI", "Tutor training"],
-  "csv-19": ["Gen AI", "Tutor training"],
-  "csv-20": ["Student learning", "Gen AI", "Tutor training"],
-  "csv-21": ["Tutor training"],
-  "csv-22": ["Gen AI", "Tutor training"],
-  "csv-23": ["Gen AI", "Student learning"],
-  "csv-24": ["Gen AI", "Tutor training"],
-  "csv-25": ["Gen AI", "Tutor training"],
-  "csv-26": ["Tutor training"],
-  "csv-27": ["Tutor training"],
-  "csv-28": ["Student learning"],
-  "csv-29": ["Student learning", "Tutor training"],
-  "csv-30": ["Gen AI", "Student learning"],
-  "csv-31": ["Tutor training"],
-  "csv-32": ["Tutor training"],
-  "csv-33": ["Gen AI", "Tutor training"],
-  "csv-34": ["Tutor training"],
-  "csv-35": ["Student learning"],
-  "csv-36": ["Student learning"],
-  "csv-37": ["Student learning"],
-  "csv-38": ["Student learning"],
-  "csv-39": ["Student learning", "Tutor training"],
-  "csv-40": ["Student learning"],
+  "csv-1": ["Student Learning"],
+  "csv-2": ["Gen AI", "Tutor Training"],
+  "csv-3": ["Student Learning"],
+  "csv-4": ["Student Learning"],
+  "csv-5": ["Gen AI", "Tutor Training"],
+  "csv-6": ["Student Learning"],
+  "csv-7": ["Gen AI", "Tutor Training"],
+  "csv-8": ["Student Learning"],
+  "csv-9": ["Gen AI", "Tutor Training"],
+  "csv-10": ["Gen AI", "Tutor Training"],
+  "csv-11": ["Gen AI", "Student Learning"],
+  "csv-12": ["Gen AI", "Tutor Training"],
+  "csv-13": ["Gen AI", "Tutor Training"],
+  "csv-14": ["Gen AI", "Tutor Training"],
+  "csv-15": ["Student Learning"],
+  "csv-16": ["Gen AI", "Tutor Training"],
+  "csv-17": ["Student Learning"],
+  "csv-18": ["Gen AI", "Tutor Training"],
+  "csv-19": ["Gen AI", "Tutor Training"],
+  "csv-20": ["Student Learning", "Gen AI", "Tutor Training"],
+  "csv-21": ["Tutor Training"],
+  "csv-22": ["Gen AI", "Tutor Training"],
+  "csv-23": ["Gen AI", "Student Learning"],
+  "csv-24": ["Gen AI", "Tutor Training"],
+  "csv-25": ["Gen AI", "Tutor Training"],
+  "csv-26": ["Tutor Training"],
+  "csv-27": ["Tutor Training"],
+  "csv-28": ["Student Learning"],
+  "csv-29": ["Student Learning", "Tutor Training"],
+  "csv-30": ["Gen AI", "Student Learning"],
+  "csv-31": ["Tutor Training"],
+  "csv-32": ["Tutor Training"],
+  "csv-33": ["Gen AI", "Tutor Training"],
+  "csv-34": ["Tutor Training"],
+  "csv-35": ["Student Learning"],
+  "csv-36": ["Student Learning"],
+  "csv-37": ["Student Learning"],
+  "csv-38": ["Student Learning"],
+  "csv-39": ["Student Learning", "Tutor Training"],
+  "csv-40": ["Student Learning"],
 }
 
 const PAPER_TITLE_BY_CSV_ID: Record<string, string> = {
@@ -182,11 +182,11 @@ function inferGenresFromContent(paper: ResearchPaper): string[] {
   const studentSignals =
     /student learning|learning outcome|achievement|engagement|middle school|students with disabilities|marginalized students|math learning|literacy|k-12|seatwork|goal setting|learning gains|hybrid human-ai|human-ai tutoring|propensity|state test|edtech log|peer interaction|belonging|help-seeking|narrative inquiry|adaptive math/
 
-  if (tutorSignals.test(blob)) tags.add("Tutor training")
+  if (tutorSignals.test(blob)) tags.add("Tutor Training")
   if (genAiSignals.test(blob)) tags.add("Gen AI")
-  if (studentSignals.test(blob)) tags.add("Student learning")
+  if (studentSignals.test(blob)) tags.add("Student Learning")
 
-  if (tags.size === 0) tags.add("Student learning")
+  if (tags.size === 0) tags.add("Student Learning")
 
   return sortResearchGenresForDisplay([...tags])
 }

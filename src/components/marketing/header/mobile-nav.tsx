@@ -36,13 +36,13 @@ const mobileNavDropdownChevronTriggerClass = cn(
 )
 
 const mobileNavDemoCtaClass =
-  "inline-flex h-9 shrink-0 items-center justify-center rounded-full bg-[#a6edf4] px-3 text-sm font-normal text-[#004247] transition-opacity hover:opacity-90 whitespace-nowrap sm:px-4 sm:text-base"
+  "inline-flex h-9 shrink-0 items-center justify-center rounded-full bg-[#a6edf4] px-3 text-sm font-medium text-[#004247] transition-opacity hover:opacity-90 whitespace-nowrap sm:px-4 sm:text-base"
 const mobileNavLoginClass =
   "inline-flex h-7 shrink-0 items-center justify-center rounded-lg px-2 text-sm font-medium text-[#62636c] transition-opacity hover:opacity-60 whitespace-nowrap sm:px-2.5 sm:text-base"
 
 /** Slightly tighter in the drawer toolbar so logo + CTAs + X fit on narrow sheets. */
 const mobileNavSheetToolbarDemoClass =
-  "inline-flex h-8 shrink-0 items-center justify-center rounded-full bg-[#a6edf4] px-2.5 text-xs font-normal text-[#004247] transition-opacity hover:opacity-90 whitespace-nowrap sm:h-9 sm:px-3 sm:text-sm"
+  "inline-flex h-8 shrink-0 items-center justify-center rounded-full bg-[#a6edf4] px-2.5 text-xs font-medium text-[#004247] transition-opacity hover:opacity-90 whitespace-nowrap sm:h-9 sm:px-3 sm:text-sm"
 const mobileNavSheetToolbarLoginClass =
   "inline-flex h-7 shrink-0 items-center justify-center rounded-lg px-1.5 text-xs font-medium text-[#62636c] transition-opacity hover:opacity-60 whitespace-nowrap sm:px-2 sm:text-sm"
 

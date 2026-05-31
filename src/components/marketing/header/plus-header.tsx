@@ -42,7 +42,7 @@ export async function PlusHeader() {
               href="https://app.tutors.plus/demo"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden lg:inline-flex h-9 items-center justify-center rounded-full bg-[#a6edf4] px-5 text-base font-normal text-[#004247] transition-opacity hover:opacity-90 whitespace-nowrap min-[1800px]:h-10 min-[1800px]:px-6 min-[1800px]:text-lg"
+              className="hidden lg:inline-flex h-9 items-center justify-center rounded-full bg-[#a6edf4] px-5 text-base font-medium text-[#004247] transition-opacity hover:opacity-90 whitespace-nowrap min-[1800px]:h-10 min-[1800px]:px-6 min-[1800px]:text-lg"
             >
               Try PLUS Demo
             </a>
