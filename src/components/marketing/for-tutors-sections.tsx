@@ -742,7 +742,7 @@ export const TutorsCertificationSection = () => {
                   media.
                 </p>
                 <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
-                  Note: Available to institutions only. Contact us to activate.
+                  Note: Available to PLUS tutors and partner institutions only.
                 </p>
               </div>
               <a
