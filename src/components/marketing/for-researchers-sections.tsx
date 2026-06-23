@@ -2,7 +2,7 @@
 
 import { ArrowRight, BookOpen, ChevronRight, Search } from "lucide-react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useMemo, useRef, useState } from "react"
 
 import {
@@ -228,7 +228,7 @@ const heroCollageTileLayout =
 const ResearchHeroCollageVisual = () => {
   const c = forResearchersAssets.heroCollage
   return (
-    <div className="relative w-full max-w-[min(100%,44rem)] pb-6 pt-14 sm:pb-8 sm:pt-16 lg:pb-4 lg:pt-16 min-[1800px]:max-w-[min(100%,52rem)]">
+    <div className="relative w-full max-w-[min(100%,36rem)] pb-6 pt-14 sm:pb-8 sm:pt-16 lg:pb-4 lg:pt-16 min-[1800px]:max-w-[min(100%,40rem)]">
       {/* Pink character — Figma `1730:2467` 109×95, −15°, above grid top-left */}
       <div className="pointer-events-none absolute left-2 top-0 z-20">
         <div className="-rotate-[15deg]">
@@ -433,8 +433,8 @@ function highlightPublishTime(paper: ResearchPaper): number {
   return Number.isNaN(t) ? 0 : t
 }
 
-/** Papers per theme for highlight carousel (single visible + “Next study”). */
-const HIGHLIGHT_TOPIC_CAROUSEL_LIMIT = 8
+/** Papers per theme for highlight carousel (single visible + “Next study”). Max 4 per section. */
+const HIGHLIGHT_TOPIC_CAROUSEL_LIMIT = 4
 
 function pickHighlightStudies(
   papers: ResearchPaper[],
@@ -843,12 +843,16 @@ const HIGHLIGHTS_STICKY_PANEL_MIN_H =
 
 export const ResearchHighlightsSection = ({
   papers,
-  openAllAccordions = false,
 }: {
   papers: ResearchPaper[]
-  /** Set via `?highlights=all` — expands every theme for Figma/screenshots (not default UX). */
-  openAllAccordions?: boolean
 }) => {
+  // Read `?highlights=all` on the client so this page stays statically rendered
+  // (reading searchParams on the server forces dynamic SSR on every request).
+  // Expands every theme for Figma/screenshots — not default UX. Requires a
+  // <Suspense> boundary around this section (see for-researchers/page.tsx).
+  const searchParams = useSearchParams()
+  const openAllAccordions = searchParams.getAll("highlights").includes("all")
+
   const studiesByTopic = useMemo(() => {
     const map = new Map<string, ResearchPaper[]>()
     for (const topic of RESEARCH_HIGHLIGHT_TOPICS) {
@@ -1218,7 +1222,10 @@ function indexVenueOptionsFromPapers(papers: ResearchPaper[]): string[] {
 
 /** Cropped scroll region — keeps the section short (card list only; full `/publications` has table + cards). */
 const INDEX_PREVIEW_SCROLL =
-  "max-h-[min(26rem,50svh)] overflow-y-auto overscroll-y-contain min-h-0 scroll-smooth sm:max-h-[min(30rem,55svh)] [contain:layout]"
+  // `min-[1800px]:!max-h-...` uses `!important`: the arbitrary `min-[1800px]`
+  // variant sorts before the named `lg` variant in Tailwind v4, so without it
+  // `lg:max-h-[36rem]` would win at >=1800 and the taller window never applied.
+  "max-h-[min(26rem,50svh)] overflow-y-auto overscroll-y-contain min-h-0 scroll-smooth sm:max-h-[min(30rem,55svh)] lg:max-h-[min(36rem,58svh)] min-[1800px]:!max-h-[min(46rem,62svh)] [contain:layout]"
 
 /** Wider list than trigger — min = trigger width, grows for long labels (capped to viewport). */
 const INDEX_SELECT_CONTENT_CLASS =

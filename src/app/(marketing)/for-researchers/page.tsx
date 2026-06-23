@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import type { Metadata } from "next"
 
 import {
@@ -27,17 +28,7 @@ export const metadata: Metadata = {
 export const revalidate = 300
 
 /** Same page shell as `for-schools/page.tsx` — vertical rhythm + max width. */
-const ForResearchersPage = async ({
-  searchParams,
-}: {
-  searchParams?: Promise<{ highlights?: string | string[] }>
-}) => {
-  const sp = searchParams ? await searchParams : {}
-  const highlightsParam = sp.highlights
-  const openAllHighlightAccordions =
-    highlightsParam === "all" ||
-    (Array.isArray(highlightsParam) && highlightsParam.includes("all"))
-
+const ForResearchersPage = async () => {
   const allPapers = await fetchResearchPapers()
   const indexPreview = allPapers.slice(0, 20)
   const researchTeam = await fetchResearchTeamMembers()
@@ -54,10 +45,9 @@ const ForResearchersPage = async ({
           marketingSectionStackGap
         )}
       >
-        <ResearchHighlightsSection
-          papers={allPapers}
-          openAllAccordions={openAllHighlightAccordions}
-        />
+        <Suspense>
+          <ResearchHighlightsSection papers={allPapers} />
+        </Suspense>
         <ResearchPartnersSection />
         <ResearchIndexSection
           papers={indexPreview}
