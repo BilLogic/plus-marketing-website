@@ -89,19 +89,19 @@ export function GetInvolvedHeroSection() {
       {/** Same four-corner hero art + breakpoints as `AboutHeroSection`. */}
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[0]}
-        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[10%] top-[18%] min-[1800px]:left-[4%]"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] min-[1800px]:!max-w-[120px] left-[10%] top-[18%] min-[1800px]:left-[4%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[1]}
-        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] left-[5%] top-[54%] min-[1800px]:left-[0%]"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] min-[1800px]:!max-w-[120px] left-[5%] top-[54%] min-[1800px]:left-[0%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[2]}
-        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[10%] top-[18%] min-[1800px]:right-[4%]"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] min-[1800px]:!max-w-[120px] right-[10%] top-[18%] min-[1800px]:right-[4%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[3]}
-        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] right-[5%] top-[54%] min-[1800px]:right-[0%]"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] min-[1800px]:!max-w-[120px] right-[5%] top-[54%] min-[1800px]:right-[0%]"
       />
 
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center sm:gap-8 sm:px-6 min-[1800px]:max-w-5xl">

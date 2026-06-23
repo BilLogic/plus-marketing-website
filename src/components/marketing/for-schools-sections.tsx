@@ -77,7 +77,7 @@ export const SchoolsHeroSection = () => {
    */
   const heroDecorBase =
     "pointer-events-none absolute z-0 hidden h-auto w-auto opacity-90 select-none " +
-    "lg:block lg:max-w-[110px] xl:max-w-[150px]"
+    "lg:block lg:max-w-[110px] xl:max-w-[150px] min-[1800px]:!max-w-[120px]"
   return (
     <section
       className={cn(
