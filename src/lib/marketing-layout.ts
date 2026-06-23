@@ -43,6 +43,10 @@ export const marketingListingShellClass =
  */
 export const marketingWideTypeScale = "min-[1800px]:text-[1.0625rem]"
 
-/** Shared footer content track used by newsletter and lower footer sections. */
+/**
+ * Shared footer content track used by newsletter and lower footer sections.
+ * Lives inside `[data-marketing-scale]`, so its large-screen width scales
+ * uniformly with the rest of the page via the `zoom` step in globals.css.
+ */
 export const marketingFooterInnerShell =
   "mx-auto max-w-7xl px-6 sm:px-10 min-[1800px]:max-w-[1360px] min-[1800px]:px-0"

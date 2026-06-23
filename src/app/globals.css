@@ -301,6 +301,28 @@
     @apply bg-background font-sans;
     overscroll-behavior-y: none;
   }
+  /*
+   * Large-screen uniform scaling for the marketing shell (see CLAUDE.md).
+   *
+   * Goal: on very wide displays (e.g. Shiv's 2560px) the existing 1800px
+   * "large" layout should fill the screen instead of sitting small in
+   * whitespace. We use `zoom` rather than scaling the root rem because rem
+   * scaling *reflows* the layout — two-column / zigzag sections (homepage
+   * Impact, Science) widen their containers and spread content apart with a
+   * dead gap in the middle. `zoom` scales the finished, already-correct 1800px
+   * design uniformly: every proportion is preserved, just larger, no reflow.
+   *
+   * Scoped to `[data-marketing-scale]` (the marketing layout's <main>) so the
+   * /assistant app and any nested <main> are untouched and never double-zoom.
+   * Starts above 1800px and steps gently so the 1800px tier is unchanged and
+   * resizing stays smooth. Media queries evaluate against the true (un-zoomed)
+   * viewport, so all `min-[1800px]:` variants still apply before zoom scales.
+   */
+  @media (min-width: 1900px) { [data-marketing-scale] { zoom: 1.04; } }
+  @media (min-width: 2050px) { [data-marketing-scale] { zoom: 1.08; } }
+  @media (min-width: 2200px) { [data-marketing-scale] { zoom: 1.12; } }
+  @media (min-width: 2360px) { [data-marketing-scale] { zoom: 1.15; } }
+  @media (min-width: 2520px) { [data-marketing-scale] { zoom: 1.18; } }
   body {
     @apply bg-background text-foreground;
     overscroll-behavior-y: none;

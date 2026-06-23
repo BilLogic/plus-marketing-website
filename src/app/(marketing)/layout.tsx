@@ -8,7 +8,10 @@ export default function MarketingLayout({
   children: React.ReactNode
 }) {
   return (
-    <main className="flex min-h-dvh w-full min-w-0 flex-col bg-transparent text-foreground">
+    <main
+      data-marketing-scale
+      className="flex min-h-dvh w-full min-w-0 flex-col bg-transparent text-foreground"
+    >
       <div className="shrink-0">
         <PlusHeader />
       </div>

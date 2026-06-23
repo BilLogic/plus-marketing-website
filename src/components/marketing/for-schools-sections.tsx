@@ -118,7 +118,7 @@ export const SchoolsHeroSection = () => {
         (that narrowed the positioning box and mis-centered copy vs the negated shell).
       */}
       <div className="relative z-10 mx-auto flex w-full max-w-[min(80rem,100%)] flex-col items-center px-4 sm:px-6 min-[1800px]:max-w-[min(96rem,100%)]">
-        <div className="flex w-full max-w-3xl flex-col items-center gap-6 text-center sm:gap-8 min-[1800px]:max-w-5xl">
+        <div className="flex w-full max-w-3xl flex-col items-center gap-6 text-center sm:gap-8">
           <h1 className="flex flex-col items-center gap-3 sm:gap-4">
             <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
               For Schools
