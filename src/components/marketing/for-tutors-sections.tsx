@@ -102,11 +102,11 @@ export const TutorsHeroSection = () => {
       {/** Same decor size + `lg` visibility as `AboutHeroSection` (uses `heroDecor[0]` / `[2]` only). */}
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[0]}
-        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] min-[1800px]:!max-w-[120px] left-[10%] top-[18%] min-[1800px]:left-[4%]"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[130px] left-[10%] top-[18%] min-[1800px]:left-[4%]"
       />
       <TutorsHeroDecorImg
         src={forSchoolsAssets.heroDecor[2]}
-        className="hidden lg:block lg:max-w-[110px] xl:max-w-[150px] min-[1800px]:!max-w-[120px] right-[10%] top-[18%] min-[1800px]:right-[4%]"
+        className="hidden lg:block lg:max-w-[110px] xl:max-w-[130px] right-[10%] top-[18%] min-[1800px]:right-[4%]"
       />
 
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center sm:gap-8 sm:px-6 min-[1800px]:max-w-5xl">
