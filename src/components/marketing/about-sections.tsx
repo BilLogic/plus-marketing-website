@@ -6,6 +6,7 @@ import {
   type SVGProps,
 } from "react"
 import type { TeamMember, SuccessStory, NewsItem } from "@/lib/notion/types"
+import { formatNewsDate } from "@/lib/marketing/news-date"
 import {
   TeamMemberPhoto,
   teamMemberInitials,
@@ -19,6 +20,8 @@ import {
   Briefcase,
   Calendar,
   GraduationCap,
+  Instagram,
+  Linkedin,
   Newspaper,
   School,
   Sparkles,
@@ -799,6 +802,7 @@ function LatestNewsCard({
   const href = item.externalLink ?? "/about/news"
   const rawBlurb = item.marketingBlurb ?? item.summary
   const blurb = rawBlurb?.startsWith("(TBD") ? null : rawBlurb
+  const date = formatNewsDate(item.publicationDate)
 
   return (
     <article
@@ -812,15 +816,25 @@ function LatestNewsCard({
         <span className={latestCardHeaderIconClass}>
           <Icon className={marketingCardLucideGlyphClass} aria-hidden />
         </span>
-        <h3
-          className={cn(
-            aboutCardTitle,
-            latestCardTitleWithIconAlignClass,
-            "min-w-0 flex-1 text-yellow-900 dark:text-amber-200",
-          )}
-        >
-          {item.title}
-        </h3>
+        <div className="min-w-0 flex-1">
+          <h3
+            className={cn(
+              aboutCardTitle,
+              latestCardTitleWithIconAlignClass,
+              "text-yellow-900 dark:text-amber-200",
+            )}
+          >
+            {item.title}
+          </h3>
+          {date ? (
+            <time
+              dateTime={item.publicationDate}
+              className="mt-2 block text-sm font-medium text-yellow-900/70 dark:text-amber-200/70 sm:text-base"
+            >
+              {date}
+            </time>
+          ) : null}
+        </div>
       </div>
       {item.featuredImage ? (
         <div
@@ -1173,6 +1187,34 @@ export function AboutFinalCtaSection() {
           Want to contribute? Explore our full-time and part-time tutoring opportunities.
         </p>
         <AboutLandingCtaRow className="mt-8" />
+        <div className="mt-8 flex items-center justify-center gap-3 sm:gap-4">
+          <a
+            href="https://www.linkedin.com/company/plus-tutors"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="PLUS on LinkedIn"
+            className="text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Linkedin
+              className="size-5 sm:size-6 sm:[stroke-width:1.6] lg:size-7"
+              strokeWidth={1.75}
+              aria-hidden
+            />
+          </a>
+          <a
+            href="https://www.instagram.com/plus.tutors"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="PLUS on Instagram"
+            className="text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Instagram
+              className="size-5 sm:size-6 sm:[stroke-width:1.6] lg:size-7"
+              strokeWidth={1.75}
+              aria-hidden
+            />
+          </a>
+        </div>
       </div>
     </section>
   )

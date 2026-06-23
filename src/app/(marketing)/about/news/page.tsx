@@ -12,6 +12,7 @@ import {
 } from "@/lib/marketing-section-layout"
 import { fetchNews } from "@/lib/notion/queries/news"
 import type { NewsItem } from "@/lib/notion/types"
+import { formatNewsDate } from "@/lib/marketing/news-date"
 import { marketingListingShellClass } from "@/lib/marketing-layout"
 import { cn } from "@/lib/utils"
 
@@ -35,6 +36,7 @@ function NewsCard({ item }: { item: NewsItem }) {
   const href = item.externalLink ?? `/about/news/${item.id}`
   const rawBlurb = item.marketingBlurb ?? item.summary
   const blurb = rawBlurb?.startsWith("(TBD") ? null : rawBlurb
+  const date = formatNewsDate(item.publicationDate)
 
   return (
     <article
@@ -52,9 +54,19 @@ function NewsCard({ item }: { item: NewsItem }) {
         >
           <Icon className={marketingCardLucideGlyphClass} aria-hidden />
         </span>
-        <h2 className="min-w-0 flex-1 pt-[max(0px,calc((48px-1lh)/2))] text-pretty text-lg font-bold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
-          {item.title}
-        </h2>
+        <div className="min-w-0 flex-1">
+          <h2 className="pt-[max(0px,calc((48px-1lh)/2))] text-pretty text-lg font-bold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
+            {item.title}
+          </h2>
+          {date ? (
+            <time
+              dateTime={item.publicationDate}
+              className="mt-2 block text-sm font-medium text-yellow-900/70 dark:text-amber-200/70 sm:text-base"
+            >
+              {date}
+            </time>
+          ) : null}
+        </div>
       </div>
       {item.featuredImage ? (
         <div className="relative mt-4 min-h-[280px] flex-1 overflow-hidden rounded-2xl bg-muted sm:min-h-[360px] lg:min-h-[420px]">
