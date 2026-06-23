@@ -115,7 +115,7 @@ export const TutorsHeroSection = () => {
             For Tutors
           </span>
           <span className={cn(marketingTypography.heroH1, "max-w-prose")}>
-            Teach What Matters and Earn What You Deserve
+            Teach What Matters and Make Meaningful Impact
           </span>
         </h1>
         <p
@@ -197,8 +197,8 @@ export const TutorsHeroSection = () => {
 
 const COMPENSATION_COLUMNS = [
   {
-    stat: "$18+",
-    sub: "Starting pay",
+    stat: "Competitive Pay",
+    sub: "For Every Session",
     bullets: [
       "Competitive base rate for every session",
       "Paid for prep, tutoring, and reflection",
@@ -206,8 +206,8 @@ const COMPENSATION_COLUMNS = [
     ],
   },
   {
-    stat: "2–10 hrs",
-    sub: "Per week",
+    stat: "Flexible Hours",
+    sub: "On Your Schedule",
     bullets: [
       "Flexible scheduling that fits your life",
       "Evening and weekend slots available",
@@ -215,8 +215,8 @@ const COMPENSATION_COLUMNS = [
     ],
   },
   {
-    stat: "$0 cost",
-    sub: "For training",
+    stat: "Free Training",
+    sub: "Fully Included",
     bullets: [
       "Full curriculum and materials included",
       "No application or onboarding fees",
@@ -277,10 +277,10 @@ export const TutorsCompensationSection = () => {
                   "border-b border-blue-200 bg-blue-200 text-left dark:border-sky-800/50 dark:bg-sky-950/35",
                 )}
               >
-                <p className="text-2xl font-bold tracking-tight text-blue-900 dark:text-sky-100">
+                <p className="text-lg font-bold leading-snug tracking-tight text-blue-900 dark:text-sky-100 sm:text-xl lg:text-2xl">
                   {col.stat}
                 </p>
-                <p className="mt-1 text-xl font-bold leading-snug tracking-tight text-blue-900 dark:text-sky-300">
+                <p className="mt-1 text-lg font-bold leading-snug tracking-tight text-blue-900 dark:text-sky-100 sm:text-xl lg:text-2xl">
                   {col.sub}
                 </p>
               </div>
@@ -312,10 +312,10 @@ export const TutorsCompensationSection = () => {
                 key={col.stat}
                 className={cn(marketingCardPaddingClass, "text-left")}
               >
-                <p className="text-2xl font-bold tracking-tight text-blue-900 dark:text-sky-100 sm:text-3xl md:text-4xl">
+                <p className="text-lg font-bold leading-snug tracking-tight text-blue-900 dark:text-sky-100 sm:text-xl lg:text-2xl">
                   {col.stat}
                 </p>
-                <p className="mt-1 text-xl font-bold leading-snug tracking-tight text-blue-900 dark:text-sky-300 sm:text-2xl">
+                <p className="mt-1 text-lg font-bold leading-snug tracking-tight text-blue-900 dark:text-sky-100 sm:text-xl lg:text-2xl">
                   {col.sub}
                 </p>
               </div>
@@ -573,7 +573,7 @@ function TutoringLooksCard({
 }: (typeof TUTORING_LOOKS_CARDS)[number]) {
   return (
     <article className={tutoringLooksCardShell}>
-      <div className="flex flex-col gap-2 pr-5 sm:pr-6">
+      <div className="flex flex-1 flex-col gap-2 pr-5 sm:pr-6">
         <div className="flex items-center gap-3">
           <span className={tutoringLooksStepBadge} aria-hidden>
             {step}
@@ -655,7 +655,7 @@ export const TutorsExperienceSection = () => {
           <TutoringLooksCard {...primary} />
           <div
             className={cn(
-              "grid grid-cols-1 sm:grid-cols-2 sm:items-start",
+              "grid grid-cols-1 sm:grid-cols-2 sm:items-stretch",
               marketingCardStackGapClass,
             )}
           >
@@ -755,12 +755,12 @@ export const TutorsCertificationSection = () => {
               </a>
             </div>
           </div>
-          <div className="flex min-w-0 flex-[2] items-center justify-end max-sm:justify-center">
+          <div className="flex shrink-0 items-center justify-end max-sm:w-full max-sm:justify-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={forTutorsAssets.certificationBadgeCard}
               alt="Claimed badge: Certified Tutor with PLUS branding"
-              className="h-auto w-auto max-w-[min(99vw,clamp(13.5rem,calc(4rem+34vw),22rem))] object-contain object-right max-sm:mx-auto max-sm:object-center xl:max-w-none xl:w-full"
+              className="h-auto w-auto max-w-[min(99vw,clamp(13.5rem,calc(4rem+34vw),18rem))] object-contain object-right max-sm:mx-auto max-sm:object-center"
             />
           </div>
         </div>
