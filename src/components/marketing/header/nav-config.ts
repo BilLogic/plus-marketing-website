@@ -155,7 +155,7 @@ export const FOOTER_LINKS = {
     },
   ],
   getInvolved: [
-    { label: "Careers", href: "#" },
-    { label: "Partnerships", href: "#" },
+    { label: "Careers", href: "/get-involved#careers" },
+    { label: "Partnerships", href: "/get-involved#partnerships" },
   ],
 }
