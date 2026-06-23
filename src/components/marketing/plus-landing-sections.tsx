@@ -69,7 +69,10 @@ import { cn } from "@/lib/utils"
  * final value.
  */
 function useCountUp(target: number, duration = 1200) {
-  const [value, setValue] = useState(0)
+  // Default to the final number so SSR / no-JS / pre-hydration render the real
+  // value (never a "0+" flash). The count-up animation only kicks in on the
+  // client once the element first scrolls into view.
+  const [value, setValue] = useState(target)
   const ref = useRef<HTMLSpanElement>(null)
   const hasRun = useRef(false)
 
@@ -78,16 +81,24 @@ function useCountUp(target: number, duration = 1200) {
     if (!el) return
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (prefersReduced) return // leave at the final value
+
+    // If the stat is already on screen at mount, keep the final value as-is —
+    // resetting to 0 here would flash target -> 0 -> count. We only animate
+    // stats the user scrolls down to (which start off-screen, so the reset to 0
+    // is never visible).
+    const rect = el.getBoundingClientRect()
+    const inViewAtMount = rect.top < window.innerHeight && rect.bottom > 0
+    if (inViewAtMount) {
+      hasRun.current = true
+      return
+    }
+    setValue(0)
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting || hasRun.current) return
         hasRun.current = true
-
-        if (prefersReduced) {
-          setValue(target)
-          return
-        }
 
         const start = performance.now()
         const tick = (now: number) => {
@@ -377,7 +388,15 @@ const LandingHeroOrnaments = () => (
       <div className="hidden lg:block xl:hidden">
         <LandingHeroOrnamentTrack right={ORNAMENT_RIGHT_COMPACT} size={ORNAMENT_SIZE_COMPACT} />
       </div>
-      <div className="hidden xl:block min-[1800px]:hidden">
+      {/*
+        Force-hide at >=1800 with `!hidden`: in Tailwind v4 the arbitrary
+        `min-[1800px]` variant sorts *before* the named `xl` variant, so a plain
+        `min-[1800px]:hidden` failed to override `xl:block` and this track stayed
+        visible at >=1800 alongside the wide track (12 ornaments instead of 6).
+        The `!important` wins regardless of source order; the wide track below
+        takes over at >=1800.
+      */}
+      <div className="hidden xl:block min-[1800px]:!hidden">
         <LandingHeroOrnamentTrack right={ORNAMENT_RIGHT} size={ORNAMENT_SIZE} />
       </div>
       <div className="hidden min-[1800px]:block">
