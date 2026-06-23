@@ -277,8 +277,8 @@ export function AboutMissionSection() {
           icon={GraduationCap}
           title="Proven Impact"
           items={[
-            "Serving 10+ schools across PA, NY, OR, and WV",
-            "Nearly 5,000 students helped since 2018",
+            "Serving 13+ schools across PA, NY, OR, and WV",
+            "5,000+ students helped since 2018",
             "Technology developed with Carnegie Mellon & Stanford",
           ]}
         />
