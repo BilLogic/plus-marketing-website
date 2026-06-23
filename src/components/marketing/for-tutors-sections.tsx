@@ -792,7 +792,11 @@ function ToolkitCardMockup({
         src={src}
         alt={alt}
         fill
-        className="object-cover object-left"
+        className={cn(
+          "object-cover",
+          /* dashboard peeks in from the left; compact cards anchor to the top so headers stay visible */
+          variant === "dashboard" ? "object-left" : "object-left-top",
+        )}
         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 480px"
       />
     </div>

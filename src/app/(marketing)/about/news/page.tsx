@@ -58,13 +58,16 @@ function NewsCard({ item }: { item: NewsItem }) {
           <h2 className="pt-[max(0px,calc((48px-1lh)/2))] text-pretty text-lg font-bold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
             {item.title}
           </h2>
-          {date ? (
-            <time
-              dateTime={item.publicationDate}
-              className="mt-2 block text-sm font-medium text-yellow-900/70 dark:text-amber-200/70 sm:text-base"
-            >
-              {date}
-            </time>
+          {item.author || date ? (
+            <p className="mt-2 text-sm font-medium text-yellow-900/70 dark:text-amber-200/70 sm:text-base">
+              {item.author ? <span>{item.author}</span> : null}
+              {item.author && date ? (
+                <span aria-hidden> &middot; </span>
+              ) : null}
+              {date ? (
+                <time dateTime={item.publicationDate}>{date}</time>
+              ) : null}
+            </p>
           ) : null}
         </div>
       </div>
