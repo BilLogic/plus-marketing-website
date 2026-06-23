@@ -53,19 +53,38 @@ const sectionHeaderDecorImgClass = cn(
   marketingSectionHeaderDecorAbsoluteClass,
 )
 
-/** Green careers card CTA — same **size** as impact pills (`h-9` / `px-5 sm:px-8`), not the cyan `marketingFinalCta*` pill. */
+/** Green careers card CTA — same size as impact pills, not the cyan `marketingFinalCta*` pill. */
 const careersGreenContactCtaClass = cn(
   "inline-flex w-fit self-start items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
   "h-9 sm:h-11 rounded-full border-0 bg-green-800 px-5 sm:px-8 text-sm sm:text-base font-medium text-white shadow-none transition-opacity hover:opacity-90 dark:bg-green-800 dark:text-white",
 )
 
-/** Partnerships pink CTA — same footprint; not the global cyan primary pill. */
-const partnershipsPinkContactCtaClass = cn(
-  "inline-flex w-fit self-start items-center justify-center whitespace-nowrap no-underline outline-none",
-  "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-0 bg-fuchsia-600 px-5 sm:px-8 text-sm sm:text-base font-medium text-fuchsia-950 shadow-none transition-opacity hover:opacity-90 dark:bg-fuchsia-600/90 dark:text-fuchsia-950",
-)
+/**
+ * Form A (schools / research / contact) — embedded inline on the Get Involved
+ * Partnerships "Contact Us" spot instead of redirecting out.
+ */
+const CONTACT_FORM_EMBED_SRC =
+  "https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform?embedded=true"
+
+/**
+ * Inline Google Form embed. Google Form iframes don't auto-resize to content, so
+ * the height is fixed (the iframe scrolls internally if the form is longer).
+ */
+function GoogleFormEmbed({ title }: { title: string }) {
+  return (
+    <div className="mt-2 w-full overflow-hidden rounded-2xl bg-white ring-1 ring-black/5">
+      <iframe
+        src={CONTACT_FORM_EMBED_SRC}
+        title={title}
+        loading="lazy"
+        className="block h-[720px] w-full border-0"
+      >
+        Loading…
+      </iframe>
+    </div>
+  )
+}
 
 /** Amber tutoring featured-card CTA — not `marketingFinalCtaPrimaryLinkClass` (that token is the cyan impact pill). */
 const tutoringBecomeTutorCardCtaClass = cn(
@@ -201,8 +220,8 @@ export function GetInvolvedWhyWorkSection() {
           <div className={cn(marketingSectionIntroColumnClass, "sm:space-y-1")}>
             <h2 className={sectionH2}>Why Work at PLUS?</h2>
             <p className={sectionLead}>
-              Join our full-time staff team shaping the future of personalized learning. Become part
-              of PLUS!
+              Join our full-time staff team shaping the future of personalized learning. The
+              benefits below are for full-time staff roles, not tutoring positions.
             </p>
           </div>
           <img
@@ -379,7 +398,7 @@ export function GetInvolvedCareersSection({ jobs }: { jobs?: JobListing[] }) {
               Don&apos;t See a Role That Fits?
             </p>
             <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
-              Interested in joining us? Fill out the form below with any job-related questions.
+              Interested in joining us? Reach out with any job-related questions.
             </p>
             <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform?usp=header"
@@ -582,17 +601,10 @@ export function GetInvolvedPartnershipsSection() {
               Book a demo, explore joining a program, or reach out with general questions about
               partnerships — we&apos;d love to hear from you.
             </p>
-            <div id="partnerships-contact-form" className="mt-1 scroll-mt-24">
-              <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform?usp=header"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={partnershipsPinkContactCtaClass}
-              >
-                Contact Us
-              </a>
-            </div>
           </div>
+        </div>
+        <div id="partnerships-contact-form" className="mt-4 scroll-mt-24">
+          <GoogleFormEmbed title="Partnerships inquiry form" />
         </div>
       </div>
     </section>
