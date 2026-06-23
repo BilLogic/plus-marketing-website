@@ -133,7 +133,7 @@ export const SchoolsHeroSection = () => {
             rel="noopener noreferrer"
             className={marketingHeroCtaPrimaryLinkClass}
           >
-            Get Started for Free
+            Get Started
           </a>
         </div>
       </div>
@@ -561,7 +561,7 @@ export const SchoolsExperienceSection = () => {
     >
       <div className="relative w-full text-left">
         <div className={cn(marketingSectionIntroColumnClass, "sm:space-y-1")}>
-          <h2 className={schoolsSectionH2}>Your Day-to-Day Experience with PLUS</h2>
+          <h2 className={schoolsSectionH2}>How PLUS Works at Your School</h2>
           <p className={schoolsSectionLead}>
             A seamless integration designed to support your faculty and accelerate student
             growth.
@@ -690,7 +690,7 @@ const OVERSIGHT_CARDS = [
   {
     title: "Data at Your Fingertips",
     description:
-      "Track tutor performance, monitor student progress, and access high-level analytics to measure the ROI of your tutoring initiatives.",
+      "Track tutor performance, monitor student progress, and access high-level analytics to measure the impact of your tutoring initiatives.",
     cta: "Try Our Demo",
     href: "https://app.tutors.plus/demo",
     bgColor: "bg-green-200",

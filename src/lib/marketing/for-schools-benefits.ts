@@ -5,32 +5,32 @@
 export const FOR_SCHOOLS_BENEFITS_ITEMS = [
   {
     id: "free-for-all",
-    title: "Free for All",
+    title: "Affordable for Every District",
     description:
-      "High-quality education shouldn't be gated. Access our full suite of AI-driven training and feedback tools at no cost to your district.",
+      "High-impact tutoring shouldn't be out of reach. PLUS is built to fit district budgets, putting our full suite of AI-driven training and feedback tools within reach of every school.",
     cta: "See If Your School Qualifies",
     ctaHref:
       "https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform",
   },
   {
     id: "multilingual-support",
-    title: "Multilingual Support",
+    title: "Reach Every Learner",
     description:
-      "Support your diverse student body with lessons available in both English and Spanish.",
+      "Engage your diverse student body with lessons available in both English and Spanish.",
     cta: "",
   },
   {
     id: "goal-setting",
-    title: "Goal Setting with Students",
+    title: "More Practice, Faster Mastery",
     description:
-      "Tutors set weekly math goals with students and reward them for meeting their goals. By using this goal-setting method, there is a 25% increase in time spent practicing and a 40% increase in skill mastery.",
+      "Tutors set weekly math goals with students and reward them for hitting them — driving a 25% increase in time spent practicing and a 40% increase in skill mastery.",
     cta: "",
   },
   {
     id: "human-ai",
-    title: "Human + AI Tutoring Model",
+    title: "Human + AI Tutoring, on Your Terms",
     description:
-      "We allow teachers to select the scope and sequence of what is taught. We also determine which students would benefit most from tutoring based on prior performance in math software.",
+      "You set the scope and sequence; our AI targets the students who'll benefit most based on their math-software performance — so support lands where it counts.",
     cta: "",
   },
 ] as const
