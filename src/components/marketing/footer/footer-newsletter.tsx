@@ -13,7 +13,7 @@ export const FooterNewsletter = () => {
         </h2>
         <div className="flex max-w-md flex-1 flex-col gap-3">
           <form
-            className="flex items-center gap-0 border-b border-white/40"
+            className="flex items-center gap-0 rounded-full bg-white pl-5 pr-2 shadow-sm"
             action="/api/newsletter"
             method="POST"
             onSubmit={(e) => {
@@ -34,16 +34,16 @@ export const FooterNewsletter = () => {
               name="email"
               placeholder="Enter email"
               required
-              className="h-12 flex-1 rounded-none border-0 bg-transparent px-0 text-sm text-white placeholder:text-white/40 focus-visible:ring-0 sm:text-base min-[1800px]:text-lg"
+              className="h-12 flex-1 rounded-none border-0 bg-transparent px-0 text-sm text-teal-950 placeholder:text-teal-950/50 focus-visible:ring-0 sm:text-base min-[1800px]:text-lg"
             />
             <button
               type="submit"
               aria-label="Subscribe"
-              className="group flex shrink-0 cursor-pointer items-center border-0 bg-transparent p-2 text-white outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              className="group flex shrink-0 cursor-pointer items-center rounded-full border-0 bg-transparent p-2 text-teal-900 outline-none focus-visible:ring-2 focus-visible:ring-teal-900/40"
             >
               {/* Group opacity (not color alpha) so the arrow's two overlapping
                   vector paths don't double-composite into a visible seam. */}
-              <ArrowRight className="size-5 opacity-40 transition-[transform,opacity] group-hover:translate-x-0.5 group-hover:opacity-70" />
+              <ArrowRight className="size-5 opacity-70 transition-[transform,opacity] group-hover:translate-x-0.5 group-hover:opacity-100" />
             </button>
           </form>
           <p className="text-xs text-white/50">
