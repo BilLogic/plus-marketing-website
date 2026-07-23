@@ -188,7 +188,7 @@ const aboutMissionPillarTitle =
 const aboutMissionBulletList =
   "space-y-2.5 text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg"
 
-const MISSION_MAP_SRC = "/figma/about/mission-eastern-us-map.png"
+const MISSION_MAP_SRC = "/figma/about/mission-us-map-v3.png"
 
 const MissionBulletList = ({ items }: { items: readonly string[] }) => (
   <ul className={aboutMissionBulletList}>
@@ -258,11 +258,11 @@ export function AboutMissionSection() {
         <div className="flex w-full shrink-0 justify-center leading-none">
           <Image
             src={MISSION_MAP_SRC}
-            alt="Hand-drawn map of the Eastern United States with PLUS program location markers"
-            width={837}
-            height={966}
-            className="m-0 block h-auto w-full max-w-[min(100%,14rem)] object-contain object-top align-top sm:max-w-[min(100%,16rem)] md:max-w-[min(100%,18rem)] lg:max-w-[min(100%,18rem)]"
-            sizes="(max-width: 640px) 224px, (max-width: 1024px) 256px, 288px"
+            alt="Hand-drawn map of the United States with PLUS program location markers across CA, OR, IL, PA, and TN"
+            width={1024}
+            height={684}
+            className="m-0 block h-auto w-full max-w-[min(100%,22rem)] object-contain object-top align-top sm:max-w-[min(100%,28rem)] md:max-w-[min(100%,34rem)] lg:max-w-[min(100%,38rem)]"
+            sizes="(max-width: 640px) 352px, (max-width: 1024px) 448px, 608px"
           />
         </div>
 
@@ -280,8 +280,8 @@ export function AboutMissionSection() {
           icon={GraduationCap}
           title="Proven Impact"
           items={[
-            "Serving 13+ schools across PA, NY, OR, and WV",
-            "5,000+ students helped since 2018",
+            "Serving 25+ schools across PA, OR, IL, CA, and TN",
+            "8,900+ students tutored since 2018",
             "Technology developed with Carnegie Mellon & Stanford",
           ]}
         />

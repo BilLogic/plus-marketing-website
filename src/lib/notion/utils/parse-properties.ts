@@ -45,6 +45,24 @@ export const getFiles = (prop: any): string | null => {
     : file.file?.url ?? null
 }
 
+/**
+ * Resolves a page's cover image URL: the "Cover Image" files property first
+ * (used by success stories + news), then the Notion page's native cover.
+ * Returns a fresh (but signed/expiring) URL — serve it through a caching proxy.
+ */
+export function getNotionCoverUrl(page: {
+  properties?: Record<string, any>
+  cover?: any
+}): string | null {
+  const fromProp = getFiles(page.properties?.["Cover Image"])
+  if (fromProp) return fromProp
+
+  const cover = page.cover
+  if (cover?.type === "external") return cover.external?.url ?? null
+  if (cover?.type === "file") return cover.file?.url ?? null
+  return null
+}
+
 /** Notion databases often name the headshot column differently — try files, then URL fields. */
 const TEAM_HEADSHOT_FILES = [
   "Profile Photo",

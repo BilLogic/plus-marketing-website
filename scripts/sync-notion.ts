@@ -58,6 +58,28 @@ function getUrl(prop: any): string | null {
   return prop?.url ?? null
 }
 
+/** Ensure external URLs are absolute + https (repairs missing scheme / http). */
+function normalizeExternalUrl(raw: string | null | undefined): string | null {
+  if (!raw) return null
+  const trimmed = raw.trim()
+  if (!trimmed) return null
+  if (/^https?:\/\//i.test(trimmed)) return trimmed.replace(/^http:\/\//i, "https://")
+  if (trimmed.startsWith("//")) return `https:${trimmed}`
+  return `https://${trimmed.replace(/^\/+/, "")}`
+}
+
+/** Normalize a LinkedIn URL; null if empty or not a linkedin.com link. */
+function normalizeLinkedInUrl(raw: string | null | undefined): string | null {
+  const url = normalizeExternalUrl(raw)
+  if (!url) return null
+  try {
+    const host = new URL(url).hostname.toLowerCase()
+    return host === "linkedin.com" || host.endsWith(".linkedin.com") ? url : null
+  } catch {
+    return null
+  }
+}
+
 function getFiles(prop: any): string | null {
   const files = prop?.files
   if (!files?.length) return null
@@ -172,9 +194,9 @@ async function syncTeam() {
       picture: getFiles(props["Profile Photo"]),
       title1: getRichText(props["Primary Role"]),
       title2: getRichText(props["Secondary Title"]),
-      linkedIn: getUrl(props.LinkedIn),
-      googleScholar: getUrl(props["Google Scholar"]),
-      personalWebsite: getUrl(props["Personal Website"]),
+      linkedIn: normalizeLinkedInUrl(getUrl(props.LinkedIn)),
+      googleScholar: normalizeExternalUrl(getUrl(props["Google Scholar"])),
+      personalWebsite: normalizeExternalUrl(getUrl(props["Personal Website"])),
       bio: getRichText(props["Short Bio"]),
     }
   })
@@ -233,11 +255,7 @@ async function syncResearch() {
 }
 
 async function syncSuccessStories() {
-  const dbId = process.env.NOTION_SUCCESS_STORIES_DB_ID
-  if (!dbId) {
-    console.log("Skipping success stories (NOTION_SUCCESS_STORIES_DB_ID not set)")
-    return
-  }
+  const dbId = process.env.NOTION_SUCCESS_STORIES_DB_ID || "55c702c618dd4b5c8ceaeac797c02257"
   console.log("Syncing success stories...")
   const pages = await queryDatabase(dbId)
   const stories = []

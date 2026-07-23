@@ -143,16 +143,98 @@ export const SchoolsHeroSection = () => {
 
 export const SchoolsCommunitySection = () => {
   const reduceMotion = useReducedMotion()
-  const [marqueePaused, setMarqueePaused] = useState(false)
   const partnerLogos = forSchoolsAssets.partnerLogos
+
+  /**
+   * Auto-scroll + drag: a native horizontal scroll container advanced each frame
+   * via requestAnimationFrame, so users can also grab and drag (or swipe) to scroll.
+   * The logo list is duplicated to create a seamless loop.
+   */
+  const scrollRef = useRef<HTMLDivElement | null>(null)
+  const pausedRef = useRef(false)
+  const dragRef = useRef<{ active: boolean; startX: number; startScroll: number; moved: boolean }>({
+    active: false,
+    startX: 0,
+    startScroll: 0,
+    moved: false,
+  })
+
+  useEffect(() => {
+    if (reduceMotion) return
+    const el = scrollRef.current
+    if (!el) return
+
+    let raf = 0
+    const SPEED_PX_PER_FRAME = 0.5 // ~30px/s at 60fps — matches the old 80s loop feel
+    const step = () => {
+      if (!pausedRef.current && !dragRef.current.active) {
+        const half = el.scrollWidth / 2
+        let next = el.scrollLeft + SPEED_PX_PER_FRAME
+        if (half > 0 && next >= half) next -= half
+        el.scrollLeft = next
+      }
+      raf = requestAnimationFrame(step)
+    }
+    raf = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(raf)
+  }, [reduceMotion])
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollRef.current
+    if (!el) return
+    dragRef.current = {
+      active: true,
+      startX: e.clientX,
+      startScroll: el.scrollLeft,
+      moved: false,
+    }
+    el.setPointerCapture?.(e.pointerId)
+  }
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollRef.current
+    const drag = dragRef.current
+    if (!el || !drag.active) return
+    const dx = e.clientX - drag.startX
+    if (Math.abs(dx) > 3) drag.moved = true
+    let next = drag.startScroll - dx
+    // Keep the pointer within the seamless loop range so dragging never hits a hard edge.
+    const half = el.scrollWidth / 2
+    if (half > 0) {
+      if (next < 0) next += half
+      else if (next >= half) next -= half
+    }
+    el.scrollLeft = next
+  }
+
+  const endDrag = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollRef.current
+    if (el?.hasPointerCapture?.(e.pointerId)) el.releasePointerCapture(e.pointerId)
+    dragRef.current.active = false
+  }
+
+  // These logos read a touch large next to the others, so give them extra inner padding.
+  const smallerLogos = new Set([
+    "/figma/for-schools/school-4-jefferson-county-middle.png",
+    "/figma/for-schools/school-5-warm-springs.png",
+    "/figma/for-schools/school-8-laurel-highlands.png",
+  ])
 
   const logoCell = (src: string, index: number, keySuffix: string) => (
     <div
       key={`${src}-${keySuffix}`}
-      className="relative flex size-48 shrink-0 items-center justify-center sm:size-64 lg:size-72"
+      className="relative flex size-40 shrink-0 items-center justify-center sm:size-52 lg:size-60"
       aria-hidden={index >= partnerLogos.length ? true : undefined}
     >
-      <img alt="" src={src} className="h-full w-full object-contain p-6 sm:p-8" />
+      <img
+        alt=""
+        src={src}
+        draggable={false}
+        className={cn(
+          "h-full w-full select-none object-contain",
+          smallerLogos.has(src) ? "p-5 sm:p-6" : "p-1 sm:p-2",
+        )}
+      />
     </div>
   )
 
@@ -181,31 +263,42 @@ export const SchoolsCommunitySection = () => {
         role="region"
         aria-label="Partner school logos"
         className="relative w-full min-w-0"
-        onMouseEnter={() => setMarqueePaused(true)}
-        onMouseLeave={() => setMarqueePaused(false)}
-        onFocusCapture={() => setMarqueePaused(true)}
+        onMouseEnter={() => {
+          pausedRef.current = true
+        }}
+        onMouseLeave={() => {
+          pausedRef.current = false
+        }}
+        onFocusCapture={() => {
+          pausedRef.current = true
+        }}
         onBlurCapture={(e) => {
           if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
-            setMarqueePaused(false)
+            pausedRef.current = false
           }
         }}
       >
         {reduceMotion ? (
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-5">
             {partnerLogos.map((src, index) => logoCell(src, index, `static-${index}`))}
           </div>
         ) : (
-          <div className="overflow-hidden">
-            <div
-              className="partner-marquee-track flex w-max items-center gap-6 sm:gap-8"
-              style={{
-                animationPlayState: marqueePaused ? "paused" : "running",
-              }}
-            >
-              {[...partnerLogos, ...partnerLogos].map((src, index) =>
-                logoCell(src, index, `marquee-${index}`)
-              )}
-            </div>
+          <div
+            ref={scrollRef}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={endDrag}
+            onPointerCancel={endDrag}
+            className={cn(
+              "flex w-full cursor-grab items-center gap-3 overflow-x-auto sm:gap-5",
+              "touch-pan-y select-none active:cursor-grabbing",
+              "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+            )}
+            style={{ scrollBehavior: "auto" }}
+          >
+            {[...partnerLogos, ...partnerLogos].map((src, index) =>
+              logoCell(src, index, `marquee-${index}`),
+            )}
           </div>
         )}
       </div>
@@ -675,17 +768,17 @@ const oversightCardCtaClass = cn(
 const OVERSIGHT_CARDS = [
   /** CTA pill fills + label colors — Figma `1877:2183` (title hues may differ from buttons). */
   {
-    title: "Align with Your Curriculum",
+    title: "Works with Any Math Software",
     description:
-      "We work with your faculty to tailor lesson strategies that complement your school’s specific learning objectives and standards.",
-    cta: "Get Training",
-    href: "https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform",
+      "PLUS is designed to be software-agnostic, which means no new software licenses or changes required.",
+    cta: "See How It Works",
+    href: "https://app.tutors.plus/demo",
     bgColor: "bg-red-200",
     titleColor: "text-red-900",
     btnBg: "bg-red-700",
     btnText: "text-white",
-    icon: forSchoolsAssets.icons.oversight[0],
-    image: forSchoolsAssets.oversightCardImages[0],
+    icon: forSchoolsAssets.icons.oversight[3],
+    image: forSchoolsAssets.oversightCardImages[3],
   },
   {
     title: "Data at Your Fingertips",
@@ -714,19 +807,6 @@ const OVERSIGHT_CARDS = [
     btnText: "text-yellow-950",
     icon: forSchoolsAssets.icons.oversight[2],
     image: forSchoolsAssets.oversightCardImages[2],
-  },
-  {
-    title: "Works with Any Math Software",
-    description:
-      "PLUS is designed to be software-agnostic, which means no new software licenses or changes required.",
-    cta: "See How It Works",
-    href: "https://app.tutors.plus/demo",
-    bgColor: "bg-blue-200",
-    titleColor: "text-blue-900",
-    btnBg: "bg-blue-800",
-    btnText: "text-white",
-    icon: forSchoolsAssets.icons.oversight[3],
-    image: forSchoolsAssets.oversightCardImages[3],
   },
 ] as const
 

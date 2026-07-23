@@ -9,6 +9,7 @@ import {
   getTeamMemberPictureUrl,
 } from "@/lib/notion/utils/parse-properties"
 import { readCache, writeCache } from "@/lib/notion/utils/cache"
+import { normalizeExternalUrl, normalizeLinkedInUrl } from "@/lib/social-links"
 
 const DATABASE_ID = "134b7cca4982801da91dd678e79d6e27"
 const CACHE_KEY = "team"
@@ -32,17 +33,26 @@ const parseTeamMember = (page: any): TeamMember => {
     picture: getTeamMemberPictureUrl(props),
     title1: getRichText(props["Primary Role"]),
     title2: getRichText(props["Secondary Title"]),
-    linkedIn: getUrl(props.LinkedIn),
-    googleScholar: getUrl(props["Google Scholar"]),
-    personalWebsite: getUrl(props["Personal Website"]),
+    linkedIn: normalizeLinkedInUrl(getUrl(props.LinkedIn)),
+    googleScholar: normalizeExternalUrl(getUrl(props["Google Scholar"])),
+    personalWebsite: normalizeExternalUrl(getUrl(props["Personal Website"])),
     bio: getRichText(props["Short Bio"]),
   }
 }
 
+/** Repair externally-sourced profile links (missing scheme, http, mislabeled LinkedIn). */
+const normalizeMemberLinks = (members: TeamMember[]): TeamMember[] =>
+  members.map((m) => ({
+    ...m,
+    linkedIn: normalizeLinkedInUrl(m.linkedIn),
+    googleScholar: normalizeExternalUrl(m.googleScholar),
+    personalWebsite: normalizeExternalUrl(m.personalWebsite),
+  }))
+
 export const fetchTeamMembers = async (): Promise<TeamMember[]> => {
   if (!process.env.NOTION_API_KEY) {
     const cached = await readCache<TeamMember[]>(CACHE_KEY)
-    return cached ?? []
+    return normalizeMemberLinks(cached ?? [])
   }
 
   try {
@@ -76,7 +86,7 @@ export const fetchTeamMembers = async (): Promise<TeamMember[]> => {
   } catch (error) {
     console.error("Failed to fetch team members from Notion:", error)
     const cached = await readCache<TeamMember[]>(CACHE_KEY)
-    return cached ?? []
+    return normalizeMemberLinks(cached ?? [])
   }
 }
 

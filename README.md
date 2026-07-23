@@ -88,7 +88,7 @@ The landing page mirrors [https://www.tutors.plus/](https://www.tutors.plus/) in
 1. **Announcement bar** — PLUS app v10 launch banner
 2. **Navbar** — sticky, floating pill with About / Solutions / Impact / Get Involved + Demo / Login + light/dark toggle
 3. **Hero** — headline, platform description, CTAs, mission card + meteor background effect
-4. **Impact stats** — 13+ Schools, 500+ Tutors, 5000+ Students with animated counters
+4. **Impact stats** — 25+ Schools, 900+ Tutors, 5000+ Students with animated counters
 5. **Motivation** — "Math is for Everyone" / "Learn our stories"
 6. **Outcomes strip** — 1:1 tutoring + 80%+ low-income families
 7. **Testimonials** — 2×2 grid of real quotes from students, teachers, and districts

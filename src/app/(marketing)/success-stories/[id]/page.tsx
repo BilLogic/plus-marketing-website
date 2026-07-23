@@ -60,40 +60,47 @@ export default async function SuccessStoryPage({
         </Link>
 
         <article className="flex flex-col gap-8 sm:gap-10">
-          {story.coverImage && (
-            <div className="overflow-hidden rounded-[30px] ring-1 ring-teal-950/10 dark:ring-white/10">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={story.coverImage}
-                alt=""
-                className="aspect-video w-full object-cover"
-              />
-            </div>
-          )}
-
-          <header className="w-full min-w-0 max-w-none space-y-3">
-            <p
-              className={cn(
-                "w-full max-w-none text-sm sm:text-base",
-                marketingSectionLeadColorClass,
-              )}
-            >
-              {metaLine}
-            </p>
-            <h1 className="w-full max-w-none text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
-              {story.title}
-            </h1>
-            {story.summary ? (
+          <div
+            className={cn(
+              "flex flex-col gap-6 md:gap-10",
+              story.coverImage && "md:flex-row md:items-start",
+            )}
+          >
+            <header className="w-full min-w-0 max-w-none space-y-3 md:flex-1">
               <p
                 className={cn(
-                  "w-full max-w-none text-base leading-relaxed lg:text-lg",
+                  "w-full max-w-none text-sm sm:text-base",
                   marketingSectionLeadColorClass,
                 )}
               >
-                {story.summary}
+                {metaLine}
               </p>
-            ) : null}
-          </header>
+              <h1 className="w-full max-w-none text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+                {story.title}
+              </h1>
+              {story.summary ? (
+                <p
+                  className={cn(
+                    "w-full max-w-none text-base leading-relaxed lg:text-lg",
+                    marketingSectionLeadColorClass,
+                  )}
+                >
+                  {story.summary}
+                </p>
+              ) : null}
+            </header>
+
+            {story.coverImage && (
+              <div className="w-full shrink-0 overflow-hidden rounded-[30px] ring-1 ring-teal-950/10 md:w-[44%] md:max-w-[460px] dark:ring-white/10">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`/api/notion-cover/${story.id}`}
+                  alt=""
+                  className="aspect-video w-full object-cover"
+                />
+              </div>
+            )}
+          </div>
 
           {story.quote ? (
             <blockquote

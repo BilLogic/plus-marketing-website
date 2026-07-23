@@ -124,7 +124,7 @@ export const TutorsHeroSection = () => {
             marketingSectionLeadColorClass,
           )}
         >
-          Join 500+ tutors supporting 5,000+ students. Earn while you learn and
+          Join 900+ tutors supporting 8,900+ students. Earn while you learn and
           lead.
         </p>
         <div className={marketingHeroCtaButtonRowClass}>
@@ -673,6 +673,55 @@ export const TutorsExperienceSection = () => {
  * Certification — section header (title, intro, decor) + pale yellow panel (#FFF1C7),
  * star + in-panel title, copy, CTA, badge card image.
  */
+/** Universities PLUS recruits tutors from. CMU logo reused from the research-partners assets. */
+const TUTOR_PARTNER_UNIVERSITIES = [
+  { name: "Carnegie Mellon University", logo: "/figma/for-researchers/partner-1.png" },
+  { name: "University of Pittsburgh", logo: "/figma/for-tutors/partner-pitt.png" },
+  { name: "Duquesne University", logo: "/figma/for-tutors/partner-duquesne.png" },
+] as const
+
+/** Same sizing/position as the "Maintain Excellence with Robust Oversight" header avatar. */
+const tutorsPartnerHeaderDecorClass = cn(
+  "pointer-events-none hidden h-[104px] w-auto max-w-[150px] shrink-0 object-contain opacity-90 select-none md:block md:h-[118px] md:max-w-[170px]",
+)
+
+export const TutorsPartnerUniversitiesSection = () => {
+  return (
+    <section className={cn("relative w-full min-w-0", marketingSectionVerticalGapClass)}>
+      <div className="relative w-full text-left">
+        <div className={cn(marketingSectionIntroColumnClass, "sm:space-y-1 md:pr-[12rem] lg:pr-[12rem]")}>
+          <h2 className="text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+            Our Tutor Partner Universities
+          </h2>
+          <p className={cn("text-base lg:text-lg", marketingSectionLeadColorClass)}>
+            PLUS recruits and trains talented tutors from leading Pittsburgh-area universities.
+          </p>
+        </div>
+        <img
+          alt=""
+          src={forSchoolsAssets.oversightHeaderEqual}
+          className={cn(tutorsPartnerHeaderDecorClass, marketingSectionHeaderDecorAbsoluteClass)}
+          aria-hidden
+        />
+      </div>
+      <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-4 sm:gap-x-12 sm:pt-8">
+        {TUTOR_PARTNER_UNIVERSITIES.map((university) => (
+          <div
+            key={university.name}
+            className="relative size-[120px] shrink-0 sm:size-[160px] md:size-[200px]"
+          >
+            <img
+              src={university.logo}
+              alt={university.name}
+              className="absolute inset-0 size-full max-w-none object-contain"
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 export const TutorsCertificationSection = () => {
   return (
     <section
@@ -1025,7 +1074,7 @@ export const TutorsTestimonialsSection = ({ stories = [] }: { stories?: SuccessS
               quoteLead={story.quote ?? ""}
               quoteHighlight=""
               quoteTail=""
-              avatarUrl={story.coverImage ?? forSchoolsAssets.avatars[index % forSchoolsAssets.avatars.length]!}
+              avatarUrl={story.coverImage ? `/api/notion-cover/${story.id}` : forSchoolsAssets.avatars[index % forSchoolsAssets.avatars.length]!}
             />
           ))}
       </div>

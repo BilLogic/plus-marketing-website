@@ -399,16 +399,12 @@ export const ResearchPartnersSection = () => {
         description="A strategic alliance of world-class universities and industry leaders committed to rigorous learning engineering at scale."
         decor={forResearchersAssets.partners.decor}
       />
-      <div className="flex items-center justify-between">
-        {forResearchersAssets.partners.logos.map((logo, i) => (
+      {/* Add more logos by appending paths to `forResearchersAssets.partners.logos`. */}
+      <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 sm:gap-x-12">
+        {forResearchersAssets.partners.logos.map((logo) => (
           <div
             key={logo}
-            className={cn(
-              "relative shrink-0",
-              i === 2
-                ? "size-[160px] sm:size-[210px] md:size-[260px]"
-                : "size-[120px] sm:size-[160px] md:size-[200px]",
-            )}
+            className="relative size-[120px] shrink-0 sm:size-[160px] md:size-[200px]"
           >
             <img
               alt=""

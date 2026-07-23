@@ -15,6 +15,9 @@ import {
   successStorySlug,
 } from "@/lib/success-stories/success-story-path"
 
+// Hardcoded like the news DB so covers/content fetch with just NOTION_API_KEY
+// (no separate NOTION_SUCCESS_STORIES_DB_ID env var required).
+const DATABASE_ID = "55c702c6-18dd-4b5c-8cea-eac797c02257"
 const CACHE_KEY = "success-stories"
 
 const parseSuccessStory = (page: any): Omit<SuccessStory, "content"> => {
@@ -65,12 +68,6 @@ export function selectSuccessStoriesForResearchersPage(
 }
 
 export const fetchSuccessStories = async (): Promise<SuccessStory[]> => {
-  const databaseId = process.env.NOTION_SUCCESS_STORIES_DB_ID
-  if (!databaseId) {
-    const cached = await readCache<SuccessStory[]>(CACHE_KEY)
-    return cached ?? []
-  }
-
   if (!process.env.NOTION_API_KEY) {
     const cached = await readCache<SuccessStory[]>(CACHE_KEY)
     return cached ?? []
@@ -79,7 +76,7 @@ export const fetchSuccessStories = async (): Promise<SuccessStory[]> => {
   try {
     const notion = getNotionClient()
     const response = await notion.databases.query({
-      database_id: databaseId,
+      database_id: DATABASE_ID,
       sorts: [
         { property: "Date Published", direction: "descending" as const },
       ],

@@ -427,7 +427,8 @@ const landingHeroAwards = [
 ] as const
 
 /**
- * Same marquee pattern as `SchoolsCommunitySection` — `partner-marquee-track` in `globals.css`.
+ * CSS-animation marquee via `partner-marquee-track` in `globals.css`.
+ * (Note: `SchoolsCommunitySection` now uses a drag-enabled JS scroll instead.)
  */
 const LandingHeroAwardsRow = () => {
   const reduceMotion = useReducedMotion()
@@ -798,10 +799,10 @@ export const PlusImpactStatsSection = () => {
           <div className={cn(impactZigzagTextColClass, "shrink-0", "md:order-1")}>
             <ImpactStatIcon src={plusHomeImpactDecor.iconStudents} />
             <p className={impactStatTitleClass}>
-              <CountUpStat target={5000} suffix="+" /> students
+              <CountUpStat target={8900} suffix="+" /> students
             </p>
             <p className={impactZigzagBodyClass}>
-              Students across the country receiving personalized math support through PLUS.
+              Middle-school students we&apos;ve tutored with personalized math support through PLUS.
             </p>
             <Link
               href="/success-stories"
@@ -823,7 +824,7 @@ export const PlusImpactStatsSection = () => {
           <div className={cn(impactZigzagTextColClass, "shrink-0", "md:order-2")}>
             <ImpactStatIcon src={plusHomeImpactDecor.iconSchools} />
             <p className={impactStatTitleClass}>
-              <CountUpStat target={13} suffix="+" /> schools
+              <CountUpStat target={25} suffix="+" /> schools
             </p>
             <p className={impactZigzagBodyClass}>
               PLUS tutors provide instructional support to middle-school math learners during the school day.
@@ -850,7 +851,7 @@ export const PlusImpactStatsSection = () => {
           <div className={cn(impactZigzagTextColClass, "shrink-0", "md:order-1")}>
             <ImpactStatIcon src={plusHomeImpactDecor.iconTutors} />
             <p className={impactStatTitleClass}>
-              <CountUpStat target={500} suffix="+" /> tutors
+              <CountUpStat target={900} suffix="+" /> tutors
             </p>
             <p className={impactZigzagBodyClass}>
               University and community tutors trained to support middle school math learners.
@@ -983,9 +984,8 @@ export const PlusSmartTechSection = () => {
         <div className={marketingSectionIntroColumnClass}>
           <h2 className={schoolsSectionTitle}>Smart Tech, Smarter Learning</h2>
           <p className={schoolsSectionLead}>
-            Smart systems for superior outcomes. Our platform integrates AI coaching for tutors, centralized
-            supervisor tracking, and interactive goal setting to turn complex data into clear academic
-            breakthroughs.
+            Students get consistent, high-quality tutoring, while tutors get real-time progress visibility
+            and collaborative goal setting that keeps students motivated and invested in their learning.
           </p>
         </div>
         <img
@@ -1006,14 +1006,56 @@ export const PlusSmartTechSection = () => {
         )}
       >
         <div className="flex w-full flex-col items-center gap-4 md:flex-row md:justify-center md:gap-8 lg:gap-[42px]">
+          {/* AI coaching — `1714:1976`; bottom-anchored stack matches Figma (no scale transform). */}
+          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-[30px] bg-fuchsia-200 min-[1800px]:max-w-[680px]">
+            <div className="relative w-full aspect-[526/385]">
+              <div className="absolute inset-0 overflow-visible rounded-[inherit] bg-fuchsia-200">
+                <div className="absolute left-5 top-5 z-40 flex sm:left-6 sm:top-6">
+                  <SmartTechCardHeader
+                    iconSrc={plusHomeSmartTech.iconAiTutor}
+                    title="Consistently Great Tutoring"
+                    className="max-w-[min(100%,460px)]"
+                    titleClassName="max-w-none lg:max-w-none"
+                  />
+                </div>
+                <div className="absolute inset-0 origin-bottom max-md:scale-[0.93] md:scale-[0.8] lg:scale-100">
+                {AI_COACH_STACK_SPECS.map((layer) => (
+                  <div
+                    key={layer.srcKey}
+                    aria-hidden
+                    className="pointer-events-none absolute isolate"
+                    style={{
+                      zIndex: layer.z,
+                      left: `calc(50% + ${layer.leftNudgePx}px)`,
+                      bottom: `${(layer.bottomPx / SMART_TECH_TOP_H) * 100}%`,
+                      width: `${(layer.widthPx / SMART_TECH_TOP_W) * 100}%`,
+                      height: `${(layer.heightPx / SMART_TECH_TOP_H) * 100}%`,
+                      transform: "translateX(-50%)",
+                    }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      alt=""
+                      src={plusHomeSmartTech[layer.srcKey]}
+                      className="absolute inset-0 size-full max-w-none object-cover"
+                      style={{ filter: layer.imgFilter }}
+                    />
+                  </div>
+                ))}
+                </div>
+              </div>
+            </div>
+          </article>
+
           {/* Supervisor — `1714:1965` */}
           <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-[30px] bg-fuchsia-200 min-[1800px]:max-w-[680px]">
             {/* Title: normal flow on mobile (sits above the image), overlaid on md+ */}
             <div className="relative z-30 flex px-5 pt-5 sm:px-6 sm:pt-6 md:absolute md:left-6 md:top-6 md:p-0">
               <SmartTechCardHeader
                 iconSrc={plusHomeSmartTech.iconSupervisor}
-                title="Supervisor Dashboard"
-                className="max-w-[min(100%,372px)]"
+                title="Progress Insights for Tutors"
+                className="max-w-[min(100%,460px)]"
+                titleClassName="max-w-none lg:max-w-none"
               />
             </div>
             <div className="relative w-full aspect-[526/385] max-md:-mt-[24%]">
@@ -1058,46 +1100,6 @@ export const PlusSmartTechSection = () => {
                     className="absolute inset-0 size-full max-w-none object-cover"
                   />
                 </div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          {/* AI coaching — `1714:1976`; bottom-anchored stack matches Figma (no scale transform). */}
-          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-[30px] bg-fuchsia-200 min-[1800px]:max-w-[680px]">
-            <div className="relative w-full aspect-[526/385]">
-              <div className="absolute inset-0 overflow-visible rounded-[inherit] bg-fuchsia-200">
-                <div className="absolute left-5 top-5 z-40 flex sm:left-6 sm:top-6">
-                  <SmartTechCardHeader
-                    iconSrc={plusHomeSmartTech.iconAiTutor}
-                    title="AI Coaching for Tutors"
-                    className="max-w-[min(100%,372px)]"
-                  />
-                </div>
-                <div className="absolute inset-0 origin-bottom max-md:scale-[0.93] md:scale-[0.8] lg:scale-100">
-                {AI_COACH_STACK_SPECS.map((layer) => (
-                  <div
-                    key={layer.srcKey}
-                    aria-hidden
-                    className="pointer-events-none absolute isolate"
-                    style={{
-                      zIndex: layer.z,
-                      left: `calc(50% + ${layer.leftNudgePx}px)`,
-                      bottom: `${(layer.bottomPx / SMART_TECH_TOP_H) * 100}%`,
-                      width: `${(layer.widthPx / SMART_TECH_TOP_W) * 100}%`,
-                      height: `${(layer.heightPx / SMART_TECH_TOP_H) * 100}%`,
-                      transform: "translateX(-50%)",
-                    }}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      alt=""
-                      src={plusHomeSmartTech[layer.srcKey]}
-                      className="absolute inset-0 size-full max-w-none object-cover"
-                      style={{ filter: layer.imgFilter }}
-                    />
-                  </div>
-                ))}
                 </div>
               </div>
             </div>
@@ -1187,7 +1189,7 @@ export const PlusScienceOfLearningSection = () => {
         />
       </div>
 
-      <div className="mx-auto grid w-full max-w-[1122px] grid-cols-1 gap-10 lg:grid-cols-[minmax(0,473fr)_minmax(0,556fr)] lg:items-start lg:gap-[72px] min-[1800px]:max-w-[1400px] min-[1800px]:grid-cols-[minmax(0,560fr)_minmax(0,700fr)] min-[1800px]:gap-[96px]">
+      <div className="mx-auto grid w-full max-w-[1122px] grid-cols-1 gap-10 lg:grid-cols-[minmax(0,473fr)_minmax(0,556fr)] lg:items-center lg:gap-[72px] min-[1800px]:max-w-[1400px] min-[1800px]:grid-cols-[minmax(0,560fr)_minmax(0,600fr)] min-[1800px]:gap-[96px]">
         {/* Left — Figma `1709:2079`: 395px-wide stack, gap 18px, vertically centered in 473px column */}
         <div className="flex w-full justify-start lg:min-h-[397px] lg:items-center">
           <div className="flex w-full max-w-[395px] flex-col gap-[18px] min-[1800px]:max-w-[500px]">

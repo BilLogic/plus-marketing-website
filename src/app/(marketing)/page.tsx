@@ -5,6 +5,7 @@ import {
   PlusSmartTechSection,
   PlusVoicesSection,
 } from "@/components/marketing/plus-landing-sections"
+import { PlusLinkedInFeedSection } from "@/components/marketing/plus-linkedin-feed"
 import {
   marketingSectionStackGap,
   marketingShellNegatePadX,
@@ -24,7 +25,8 @@ const homePageShellClassName = cn(
 )
 
 /**
- * Homepage — Figma `1714:1883` (Landing includes Our Awards) → Impact → Smart Tech → Science → Testimonials.
+ * Homepage — Figma `1714:1883` (Landing includes Our Awards) → Impact → Science → Smart Tech → Testimonials.
+ * "Built on the Science of Learning" leads the feature stack so credibility comes before product detail.
  * Header and footer come from `(marketing)/layout.tsx`.
  */
 const Home = () => {
@@ -37,9 +39,10 @@ const Home = () => {
       <div className={homePageShellClassName}>
         <PlusImpactStatsSection />
         <div className={cn("mt-16 flex flex-col md:mt-32", marketingSectionStackGap)}>
-          <PlusSmartTechSection />
           <PlusScienceOfLearningSection />
+          <PlusSmartTechSection />
           <PlusVoicesSection />
+          <PlusLinkedInFeedSection />
         </div>
       </div>
     </>

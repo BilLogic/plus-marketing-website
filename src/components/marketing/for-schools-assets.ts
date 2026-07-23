@@ -1,8 +1,17 @@
 export const forSchoolsAssets = {
+  // Partner-school logos for the "Join the PLUS School Community" scroll, in display order.
+  // `partner-1.png` = Urban Pathways Charter School (UP) and `partner-4.png` = Jefferson
+  // County School District are kept from the original set; the rest are new school logos.
   partnerLogos: [
+    "/figma/for-schools/school-1-life-male-steam.png",
+    "/figma/for-schools/school-2-mohawk.png",
+    "/figma/for-schools/school-3-manchester.png",
     "/figma/for-schools/partner-1.png",
-    "/figma/for-schools/partner-2.png",
-    "/figma/for-schools/partner-3.png",
+    "/figma/for-schools/school-4-jefferson-county-middle.png",
+    "/figma/for-schools/school-5-warm-springs.png",
+    "/figma/for-schools/school-6-obsidian-middle.png",
+    "/figma/for-schools/school-7-elton-gregory.png",
+    "/figma/for-schools/school-8-laurel-highlands.png",
     "/figma/for-schools/partner-4.png",
   ] as const,
   decor: {
@@ -63,7 +72,8 @@ export const forSchoolsAssets = {
       "/figma/for-schools/oversight-icon-1.svg",
       "/figma/for-schools/oversight-icon-2.svg",
       "/figma/for-schools/oversight-icon-3.svg",
-      "/figma/for-schools/oversight-icon-4.svg",
+      // Red variant of the math-tools icon to match the "Works with Any Math Software" card.
+      "/figma/for-schools/oversight-icon-4-red.svg",
     ] as const,
   },
   /** Figma `1877:2254` / `2273:2568` — pink “=” character beside oversight intro. */
