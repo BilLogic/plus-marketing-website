@@ -23,6 +23,7 @@ export const forResearchersAssets = {
       "/figma/for-researchers/partner-1.png",
       "/figma/for-researchers/partner-2.png",
       "/figma/for-researchers/partner-3.png",
+      "/figma/for-researchers/partner-4.png",
     ] as const,
   },
   highlights: {

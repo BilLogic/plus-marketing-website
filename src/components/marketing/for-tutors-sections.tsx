@@ -704,7 +704,7 @@ export const TutorsPartnerUniversitiesSection = () => {
           aria-hidden
         />
       </div>
-      <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-4 sm:gap-x-12 sm:pt-8">
+      <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 sm:gap-x-12">
         {TUTOR_PARTNER_UNIVERSITIES.map((university) => (
           <div
             key={university.name}

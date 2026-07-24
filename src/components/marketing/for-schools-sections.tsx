@@ -223,7 +223,7 @@ export const SchoolsCommunitySection = () => {
   const logoCell = (src: string, index: number, keySuffix: string) => (
     <div
       key={`${src}-${keySuffix}`}
-      className="relative flex size-40 shrink-0 items-center justify-center sm:size-52 lg:size-60"
+      className="relative flex size-[120px] shrink-0 items-center justify-center sm:size-[160px] md:size-[200px]"
       aria-hidden={index >= partnerLogos.length ? true : undefined}
     >
       <img
@@ -279,7 +279,7 @@ export const SchoolsCommunitySection = () => {
         }}
       >
         {reduceMotion ? (
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-5">
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 sm:gap-x-12">
             {partnerLogos.map((src, index) => logoCell(src, index, `static-${index}`))}
           </div>
         ) : (
@@ -290,7 +290,7 @@ export const SchoolsCommunitySection = () => {
             onPointerUp={endDrag}
             onPointerCancel={endDrag}
             className={cn(
-              "flex w-full cursor-grab items-center gap-3 overflow-x-auto sm:gap-5",
+              "flex w-full cursor-grab items-center gap-8 overflow-x-auto sm:gap-12",
               "touch-pan-y select-none active:cursor-grabbing",
               "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
             )}
