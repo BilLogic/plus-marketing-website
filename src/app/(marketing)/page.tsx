@@ -3,7 +3,7 @@ import {
   PlusImpactStatsSection,
   PlusScienceOfLearningSection,
   PlusSmartTechSection,
-  PlusVoicesSection,
+  // PlusVoicesSection, // Testimonials section temporarily hidden
 } from "@/components/marketing/plus-landing-sections"
 import { PlusLinkedInFeedSection } from "@/components/marketing/plus-linkedin-feed"
 import {
@@ -41,7 +41,8 @@ const Home = () => {
         <div className={cn("mt-16 flex flex-col md:mt-32", marketingSectionStackGap)}>
           <PlusScienceOfLearningSection />
           <PlusSmartTechSection />
-          <PlusVoicesSection />
+          {/* Testimonials section temporarily hidden — restore <PlusVoicesSection /> to re-enable */}
+          {/* <PlusVoicesSection /> */}
           <PlusLinkedInFeedSection />
         </div>
       </div>
