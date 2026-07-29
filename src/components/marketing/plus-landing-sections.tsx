@@ -1248,21 +1248,21 @@ export const PlusVoicesSection = () => {
       quote: "Tutoring has affected me and it made me realize if I didn't get the help I needed I would still be struggling. But it made me see",
       highlight: "math differently in a good way",
       end: ".",
-      attribution: "Student with PLUS Tutoring",
+      attribution: "Middle school student, PLUS Tutoring",
     },
     {
       avatar: plusHomeTestimonialAvatars.district,
-      quote: "The students' reactions speak for themselves. They look forward to the tutoring sessions. It's not just about math. It's about relationships. It's about",
-      highlight: "building confidence",
-      end: ".",
-      attribution: "School District of Lancaster",
+      quote: "I love that tutoring provides an opportunity for kids to have more help in the classroom. It's not just me trying to get to every student but it's",
+      highlight: "more specific to their needs",
+      end: ". I feel like they get a little bit more out of every day.",
+      attribution: "Math teacher, Warm Springs K-8 Academy",
     },
     {
       avatar: plusHomeTestimonialAvatars.teacher,
       quote: "My students were able to understand concepts more easily than before due to the",
       highlight: "one-to-one help",
       end: ". My students' math confidence has also increased!",
-      attribution: "Teacher working with PLUS Tutors",
+      attribution: "Classroom teacher, PLUS Tutoring",
     },
   ] as const
 
