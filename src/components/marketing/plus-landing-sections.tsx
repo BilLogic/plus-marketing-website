@@ -1259,10 +1259,10 @@ export const PlusVoicesSection = () => {
     },
     {
       avatar: plusHomeTestimonialAvatars.teacher,
-      quote: "My students were able to understand concepts more easily than before due to the",
-      highlight: "one-to-one help",
-      end: ". My students' math confidence has also increased!",
-      attribution: "Classroom teacher, PLUS Tutoring",
+      quote: "This gave our students a different way of looking at themselves as mathematicians, even after only a few weeks. They look forward to the tutoring sessions. It’s not just about math. ",
+      highlight: "It’s about relationships. It’s about building confidence.",
+      end: "",
+      attribution: "School District Leader & PLUS Partner",
     },
   ] as const
 
