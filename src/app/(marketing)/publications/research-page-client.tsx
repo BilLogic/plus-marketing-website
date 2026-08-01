@@ -15,6 +15,12 @@ import { cn } from "@/lib/utils"
 import type { ResearchPaper } from "@/lib/notion/types"
 import { RESEARCH_GENRE_TAGS } from "@/lib/research/research-genres"
 import {
+  PUBLICATION_TYPES,
+  isPublicationType,
+  publicationTypeBadgeClass,
+  publicationTypeLabel,
+} from "@/lib/research/publication-types"
+import {
   riFg,
   riFilterFieldLabelCn,
   riFilterLabelCn,
@@ -74,6 +80,23 @@ function PublicationTableRow({ paper }: { paper: ResearchPaper }) {
       {/* Title — always visible */}
       <td className={cn("py-3 pr-4 align-top", riIndexMetaCopy)}>{titleEl}</td>
 
+      {/* Type — sm+ */}
+      <td className="hidden py-3 pr-4 align-top sm:table-cell">
+        {paper.type ? (
+          <span
+            className={cn(
+              "inline-flex items-center whitespace-nowrap rounded-[26px] px-2 py-0.5 leading-none",
+              riIndexMetaCopy,
+              publicationTypeBadgeClass()
+            )}
+          >
+            {publicationTypeLabel(paper.type)}
+          </span>
+        ) : (
+          <span className={cn(riIndexMetaCopy, riFg.bodyMuted)}>—</span>
+        )}
+      </td>
+
       {/* Tags — sm+ */}
       <td className="hidden py-3 pr-4 align-top sm:table-cell">
         {paper.topics.length > 0 && (
@@ -106,7 +129,7 @@ function PublicationTableRow({ paper }: { paper: ResearchPaper }) {
         {year}
       </td>
 
-      {/* Conference — md+ */}
+      {/* Venue — md+ */}
       <td
         className={cn(
           "hidden py-3 pr-4 align-top md:table-cell",
@@ -152,6 +175,16 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
 
   const venuesParam = searchParams.get("venue")?.split(",").filter(Boolean) ?? []
   const venueFilter = venuesParam[0] ?? ""
+
+  const typeParam = searchParams.get("type") ?? ""
+  const typeFilter = isPublicationType(typeParam) ? typeParam : ""
+
+  /** Only offer types actually present, so the dropdown never lists an empty bucket. */
+  const allTypes = useMemo(
+    () =>
+      PUBLICATION_TYPES.filter((t) => papers.some((p) => p.type === t)),
+    [papers]
+  )
 
   const allYears = useMemo(
     () =>
@@ -226,6 +259,10 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
       result = result.filter((p) => p.venue === venueFilter)
     }
 
+    if (typeFilter) {
+      result = result.filter((p) => p.type === typeFilter)
+    }
+
     if (authorsParam.length) {
       result = result.filter((p) =>
         authorsParam.some((a) => p.authors.includes(a))
@@ -239,7 +276,15 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
     )
 
     return result
-  }, [papers, searchParams, searchQ, selectedGenre, yearFilter, venueFilter])
+  }, [
+    papers,
+    searchParams,
+    searchQ,
+    selectedGenre,
+    yearFilter,
+    venueFilter,
+    typeFilter,
+  ])
 
   const setGenre = (g: string) => {
     updateParams({ genre: g ? g : null })
@@ -258,7 +303,7 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
       <div className="mx-auto flex max-w-5xl flex-col pb-12 pt-14 sm:pb-14 sm:pt-16 lg:pb-16 lg:pt-20 min-[1800px]:max-w-7xl min-[1800px]:pb-20 min-[1800px]:pt-24">
         <header className="mb-8 sm:mb-10">
           <h1 className="text-balance text-2xl font-bold tracking-tight text-teal-950 sm:text-3xl md:text-4xl">
-            Publications
+            Publications &amp; Resources
           </h1>
         </header>
 
@@ -360,13 +405,42 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
             </div>
           </div>
 
-          {/* Year + Conference filters */}
+          {/* Type + Year + Venue filters */}
           <div
             className={cn(
               "flex flex-col gap-4 px-4 py-3 sm:flex-row sm:items-end sm:gap-2 sm:px-6 md:px-8",
               riFg.shellRow
             )}
           >
+            {allTypes.length > 0 && (
+              <div className="flex w-full min-w-0 flex-col gap-2 sm:w-[173px] sm:shrink-0">
+                <span className={riFilterFieldLabelCn}>Type</span>
+                <Select
+                  value={typeFilter || ALL_VALUE}
+                  onValueChange={(v) =>
+                    updateParams({ type: v === ALL_VALUE ? null : v })
+                  }
+                >
+                  <SelectTrigger size="sm" className={riSelectTriggerCn}>
+                    {/* Items only mount when the menu opens, so Radix would otherwise fall
+                        back to the raw lowercase Notion value here. */}
+                    <SelectValue placeholder="all">
+                      {typeFilter ? publicationTypeLabel(typeFilter) : "all"}
+                    </SelectValue>
+                  </SelectTrigger>
+                  <SelectContent align="start" alignItemWithTrigger={false}>
+                    <SelectItem value={ALL_VALUE} className={riSelectItemCn}>
+                      all
+                    </SelectItem>
+                    {allTypes.map((t) => (
+                      <SelectItem key={t} value={t} className={riSelectItemCn}>
+                        {publicationTypeLabel(t)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
             <div className="flex w-full min-w-0 flex-col gap-2 sm:w-[173px] sm:shrink-0">
               <span className={riFilterFieldLabelCn}>Year</span>
               <Select
@@ -391,7 +465,7 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
               </Select>
             </div>
             <div className="flex min-w-0 flex-1 flex-col gap-2">
-              <span className={riFilterFieldLabelCn}>Conference</span>
+              <span className={riFilterFieldLabelCn}>Venue</span>
               <Select
                 value={venueFilter || ALL_VALUE}
                 onValueChange={(v) =>
@@ -442,9 +516,10 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
                 <thead>
                   <tr className={cn("border-b", riFg.borderHairline)}>
                     <th className={tableHeaderCn}>Title</th>
+                    <th className={cn(tableHeaderCn, "hidden sm:table-cell")}>Type</th>
                     <th className={cn(tableHeaderCn, "hidden sm:table-cell")}>Tags</th>
                     <th className={tableHeaderCn}>Year</th>
-                    <th className={cn(tableHeaderCn, "hidden md:table-cell")}>Conference</th>
+                    <th className={cn(tableHeaderCn, "hidden md:table-cell")}>Venue</th>
                     <th className={cn(tableHeaderCn, "hidden pr-0 lg:table-cell")}>Authors</th>
                   </tr>
                 </thead>

@@ -12,6 +12,10 @@ import {
   riParseYear,
   riPublicationDescription,
 } from "./research-index-utils"
+import {
+  publicationTypeBadgeClass,
+  publicationTypeLabel,
+} from "@/lib/research/publication-types"
 
 export const ResearchIndexPublicationCard = ({
   paper,
@@ -20,6 +24,8 @@ export const ResearchIndexPublicationCard = ({
 }) => {
   const desc = riPublicationDescription(paper)
   const year = paper.publishDate ? riParseYear(paper.publishDate) : ""
+  // Shown for every type so the card view matches the table's Type column.
+  const showTypeBadge = !!paper.type
   const metaBits = [
     year,
     paper.venue?.trim() || null,
@@ -66,8 +72,19 @@ export const ResearchIndexPublicationCard = ({
           )}
         </div>
 
-        {paper.topics.length > 0 && (
+        {(paper.topics.length > 0 || showTypeBadge) && (
           <div className="flex flex-wrap gap-1.5">
+            {showTypeBadge && (
+              <span
+                className={cn(
+                  "inline-flex items-center rounded-[26px] px-2 py-1 leading-none",
+                  riIndexMetaCopy,
+                  publicationTypeBadgeClass()
+                )}
+              >
+                {publicationTypeLabel(paper.type!)}
+              </span>
+            )}
             {paper.topics.map((t) => (
               <span
                 key={t}

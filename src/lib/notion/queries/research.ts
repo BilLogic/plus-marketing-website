@@ -4,9 +4,14 @@ import {
   getTitle,
   getRichText,
   getMultiSelect,
+  getSelect,
   getDate,
   getUrl,
 } from "@/lib/notion/utils/parse-properties"
+import {
+  isPublicationType,
+  type PublicationType,
+} from "@/lib/research/publication-types"
 import { applyResearchGenres } from "@/lib/research/research-genres"
 import { readCache, writeCache } from "@/lib/notion/utils/cache"
 
@@ -23,9 +28,17 @@ function getResearchTopicsFromProperties(
   return []
 }
 
+/** Notion **Type** select; unrecognized values fall back to null rather than leaking to the UI. */
+function getPublicationType(prop: unknown): PublicationType | null {
+  const v = getSelect(prop)
+  return v && isPublicationType(v) ? v : null
+}
+
 const normalizeResearchPaper = (p: ResearchPaper): ResearchPaper => ({
   ...p,
   topics: Array.isArray(p.topics) ? p.topics : [],
+  // Cache files written before `Type` existed have no such key.
+  type: p.type && isPublicationType(p.type) ? p.type : null,
 })
 
 const parseResearchPaper = (page: any): ResearchPaper => {
@@ -39,6 +52,7 @@ const parseResearchPaper = (page: any): ResearchPaper => {
     abstract: getRichText(props.Abstract),
     shortDescription: getRichText(props["Website Summary"]),
     topics: getResearchTopicsFromProperties(props),
+    type: getPublicationType(props.Type),
     paperLink: getUrl(props["Link to Paper"]),
     presentationLink: getUrl(props["Link to Slides or Poster"]),
     videoLink: getUrl(props["Link to Video"]),

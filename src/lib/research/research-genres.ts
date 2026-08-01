@@ -212,5 +212,12 @@ export function applyResearchGenres(paper: ResearchPaper): ResearchPaper {
     return { ...paper, topics: sortResearchGenresForDisplay([...fromTitle]) }
   }
 
+  // Keyword inference is tuned for paper abstracts and defaults to "Student learning" when
+  // nothing matches. On a dataset or workshop entry that default is an unfounded claim, so
+  // non-papers get no genre rather than a guessed one.
+  if (paper.type && paper.type !== "research paper") {
+    return { ...paper, topics: [] }
+  }
+
   return { ...paper, topics: inferGenresFromContent(paper) }
 }

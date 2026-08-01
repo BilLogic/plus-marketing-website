@@ -1,5 +1,53 @@
 [
   {
+    "id": "3aeb7cca-4982-81d1-87df-e27ba9c7517a",
+    "title": "Learning With and About AI seminar series: \"Four Ways PLUS Uses AI to Enhance Learning\"",
+    "marketingBlurb": null,
+    "summary": "Learning With and About AI — CMU Seminar Series.",
+    "category": "Events",
+    "publicationDate": "2026-03-30",
+    "author": "Danielle Thomas and PLUS team",
+    "featuredImage": null,
+    "externalLink": "https://docs.google.com/presentation/d/1c7Jn-iwl8qGxEZj5jGnge00HS-MfTUjz/edit?usp=drive_link&ouid=104340475034501365800&rtpof=true&sd=true",
+    "featured": false
+  },
+  {
+    "id": "3aeb7cca-4982-81e0-8569-f3a5d87e22d0",
+    "title": "Data Science in Education seminar series: \"An AI-driven and Closed-loop Human Tutor Training and Real-life Assessment System\"",
+    "marketingBlurb": null,
+    "summary": "Data Science in Education seminar series hosted by Simon Woodhead.",
+    "category": "Events",
+    "publicationDate": "2026-03-23",
+    "author": "Danielle Thomas and PLUS team",
+    "featuredImage": null,
+    "externalLink": "https://docs.google.com/presentation/d/1lVI9jm0-6JUrPnz5GMVb3gxLRS14SAIZ/edit?usp=drive_link&ouid=104340475034501365800&rtpof=true&sd=true",
+    "featured": false
+  },
+  {
+    "id": "2f7b7cca-4982-8060-841e-fdf1b550e213",
+    "title": "The “5% Problem”: Why Students Don’t Engage in Tutoring Enough (and How to Fix It)",
+    "marketingBlurb": null,
+    "summary": null,
+    "category": "Media Coverage",
+    "publicationDate": "2025-12-24",
+    "author": "Danielle R. Thomas",
+    "featuredImage": null,
+    "externalLink": "https://learning-engineering-virtual-institute.org/the-5-problem-why-students-dont-engage-in-tutoring-enough-and-how-to-fix-it/",
+    "featured": false
+  },
+  {
+    "id": "3aeb7cca-4982-8183-ad65-e4df2a522173",
+    "title": "AI + Human = Equation for Math Success",
+    "marketingBlurb": null,
+    "summary": "NBC Digital Series \"The Learning Shift\".",
+    "category": "Media Coverage",
+    "publicationDate": "2025-09-01",
+    "author": "NBC Universal",
+    "featuredImage": null,
+    "externalLink": "https://www.hcii.cmu.edu/news/plus-program-nbc",
+    "featured": false
+  },
+  {
     "id": "19ab7cca-4982-8016-9def-f206a1bda4cd",
     "title": "CMU Researchers Help Launch Project To Improve Education",
     "marketingBlurb": null,
@@ -12,6 +60,18 @@
     "featured": true
   },
   {
+    "id": "18cb7cca-4982-8069-9a0b-f14feb94282f",
+    "title": "Technology is Transforming Society, But Not Learning. The Nation Needs A Plan To Fix That.",
+    "marketingBlurb": null,
+    "summary": "(TBD: actually summary of the article)",
+    "category": "Media Coverage",
+    "publicationDate": "2025-01-16",
+    "author": null,
+    "featuredImage": null,
+    "externalLink": "https://www.edupexperience.com/blog/technology-is-transforming-society-not-learning-the-nation-needs-a-plan-to-fix-that/",
+    "featured": false
+  },
+  {
     "id": "1a7b7cca-4982-8043-85d4-f552822e5906",
     "title": "Innovative Program Expands Reach with Grant from Richard King Mellon Foundation",
     "marketingBlurb": null,
@@ -21,30 +81,6 @@
     "author": "CMU HCII",
     "featuredImage": null,
     "externalLink": "https://www.hcii.cmu.edu/news/plus-expands-reach-with-rkmellon",
-    "featured": false
-  },
-  {
-    "id": "2f7b7cca-4982-8060-841e-fdf1b550e213",
-    "title": "The “5% Problem”: Why Students Don’t Engage in Tutoring Enough (and How to Fix It)",
-    "marketingBlurb": null,
-    "summary": null,
-    "category": null,
-    "publicationDate": "",
-    "author": null,
-    "featuredImage": null,
-    "externalLink": "https://learning-engineering-virtual-institute.org/the-5-problem-why-students-dont-engage-in-tutoring-enough-and-how-to-fix-it/",
-    "featured": false
-  },
-  {
-    "id": "18cb7cca-4982-8069-9a0b-f14feb94282f",
-    "title": "Technology is Transforming Society, But Not Learning. The Nation Needs A Plan To Fix That.",
-    "marketingBlurb": null,
-    "summary": "(TBD: actually summary of the article)",
-    "category": "Media Coverage",
-    "publicationDate": "",
-    "author": null,
-    "featuredImage": null,
-    "externalLink": "https://www.edupexperience.com/blog/technology-is-transforming-society-not-learning-the-nation-needs-a-plan-to-fix-that/",
     "featured": false
   }
 ]

@@ -1,3 +1,5 @@
+import type { PublicationType } from "@/lib/research/publication-types"
+
 export type TeamAffiliation =
   | "Leadership"
   | "PLUS Staff"
@@ -89,6 +91,8 @@ export type ResearchPaper = {
   shortDescription: string | null
   /** Scannable tags from Notion multi-select (Topics / Tags / Theme / Category)—use instead of long blurbs on marketing lists. */
   topics: string[]
+  /** Notion **Type** select — mirrors the LEVI report vocabulary (research paper / workshop / book / dataset). */
+  type: PublicationType | null
   paperLink: string | null
   presentationLink: string | null
   videoLink: string | null
