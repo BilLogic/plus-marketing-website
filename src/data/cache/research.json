@@ -84,7 +84,7 @@
   },
   {
     "id": "3aeb7cca-4982-8177-8857-e613a9fb143b",
-    "title": "Cross-Subject Predictive Validity for Learning Outcomes of Delayed Start Behavior",
+    "title": "Delayed Start Behavior as a Cross-Subject Predictor of Learning Outcomes",
     "authors": [
       "Jordan Gutterman",
       "Ashish Gurung",
@@ -110,13 +110,16 @@
     "authors": [
       "Ashish Gurung",
       "Ge Gao",
-      "Jordan Gutterman",
+      "Boyuan Guo",
+      "Alex Houk",
+      "Erin Gatz",
       "Danielle R. Thomas",
       "Shivang Gupta",
       "Lee Branstetter",
       "Emma Brunskill",
       "Vincent Aleven",
-      "Kenneth R. Koedinger"
+      "Kenneth R. Koedinger",
+      "Jordan Gutterman"
     ],
     "publishDate": "2026-07-01",
     "venue": "EDM 2026",
@@ -132,7 +135,7 @@
   },
   {
     "id": "3aeb7cca-4982-817f-acee-dc4cabebbf41",
-    "title": "From Heuristics to Analytics: Forecasting Effort and Progress in Online Learning for Goal Setting",
+    "title": "From Heuristics to Analytics: Forecasting Effort and Progress in Online Learning",
     "authors": [
       "Eric S. Qiu",
       "Danielle R. Thomas",
@@ -154,7 +157,7 @@
   },
   {
     "id": "3aeb7cca-4982-81f0-9599-e6179287f55e",
-    "title": "A Causal Framework for Estimating Heterogeneuos Effects of On-Demand Tutoring",
+    "title": "A Causal Framework for Estimating Heterogeneous Effects of On-Demand Tutoring",
     "authors": [
       "Kirk Vanacore",
       "Danielle R. Thomas",
@@ -1528,7 +1531,7 @@
   },
   {
     "id": "3aeb7cca-4982-81ab-9ee2-cc5f4592c184",
-    "title": "Dosage and Dialogue: What Drives Student Math Progress in One-on-One Human-AI Hybrid Tutoring?",
+    "title": "Dosage and Dialogue: Understanding Human Support in Hybrid Human-AI Math Tutoring",
     "authors": [
       "Ge Gao",
       "Ashish Gurung",
