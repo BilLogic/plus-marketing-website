@@ -176,6 +176,29 @@
     "videoLink": null
   },
   {
+    "id": "3aeb7cca-4982-81fe-b094-d98255d69af4",
+    "title": "Coasting Through Class: Learning Opportunity Loss from Practice Avoidance During Individual Seatwork",
+    "authors": [
+      "Ashish Gurung",
+      "Jordan Gutterman",
+      "Danielle R. Thomas",
+      "Mingyu Feng",
+      "Vincent Aleven",
+      "Kenneth R. Koedinger"
+    ],
+    "publishDate": "2026-06-28",
+    "venue": "L@S 2026",
+    "abstract": "Measures of disengagement provide insights into unproductive use of learning opportunities. Although measures of active disengagement, such as gaming the system and mind-wandering, are well studied, loss of practice time due to outright task avoidance remains relatively understudied. The current study addresses this gap by extending existing within-task measures (idle time) with two new session-level measures (delayed start and early stop) to capture loss of practice time due to task avoidance. We characterize the combined lost time as coasted time and the associated behavior as coasting behavior. Using ASSISTments logs (N = 1,425), we find that students dedicate only 40% of available classwork time to math practice and coast through the remaining 60%. Of the coasted time, 36% resulted from delayed starts, 2% from mid-practice idling, and 62% from stopping early. Delayed start and early stop showed moderate temporal stability (G = 0.73 and 0.71, respectively), suggesting that coasting is a consistent behavioral pattern. Even after excluding early stops attributable to assignment completion (i.e., early stop = 0), coasted time remained substantial at 32%. While we observe significant differences in coasting by gender and IEP status, we do not observe them by other demographic factors or school locale. Critically, students who continued working beyond the first assignment completion (\"extra effort\") performed significantly better on standardized tests. For research, coasting offers a new lens on opportunity loss by combining session-level disengagement with within-task disengagement. For practitioners, our results highlight the need for platform affordances that support sustained engagement and more productive use of available practice time.",
+    "shortDescription": null,
+    "topics": [
+      "Student Learning"
+    ],
+    "type": "research paper",
+    "paperLink": "https://doi.org/10.1145/3774398.3811601",
+    "presentationLink": null,
+    "videoLink": null
+  },
+  {
     "id": "3aeb7cca-4982-8110-8ab1-eb6735273771",
     "title": "Personalized Goal Support to Enhance Technology-Supported Learning",
     "authors": [
@@ -290,29 +313,6 @@
     ],
     "type": "research paper",
     "paperLink": "https://dl.acm.org/doi/full/10.1145/3785022.3785041",
-    "presentationLink": null,
-    "videoLink": null
-  },
-  {
-    "id": "3aeb7cca-4982-81fe-b094-d98255d69af4",
-    "title": "Coasting Through Class: Learning Opportunity Loss from Time Leakage During Individual Seatwork",
-    "authors": [
-      "Ashish Gurung",
-      "Jordan Gutterman",
-      "Danielle R. Thomas",
-      "Mingyu Feng",
-      "Vincent Aleven",
-      "Kenneth R. Koedinger"
-    ],
-    "publishDate": "2026-02-01",
-    "venue": "EDM 2026",
-    "abstract": "Measures of disengagement provide insights into unproductive use of learning opportunities. Although measures of active disengagement, such as gaming the system and mind-wandering, are well studied, loss of practice time due to outright task avoidance remains relatively understudied. The current study addresses this gap by extending existing within-task measures (idle time) with two new session-level measures (delayed start and early stop) to capture loss of practice time due to task avoidance. We characterize the combined lost time as coasted time and the associated behavior as coasting behavior. Using ASSISTments logs (N = 1,425), we find that students dedicate only 40% of available classwork time to math practice and coast through the remaining 60%. Of the coasted time, 36% resulted from delayed starts, 2% from mid-practice idling, and 62% from stopping early. Delayed start and early stop showed moderate temporal stability (G = 0.73 and 0.71, respectively), suggesting that coasting is a consistent behavioral pattern. Even after excluding early stops attributable to assignment completion (i.e., early stop = 0), coasted time remained substantial at 32%. While we observe significant differences in coasting by gender and IEP status, we do not observe them by other demographic factors or school locale. Critically, students who continued working beyond the first assignment completion (\"extra effort\") performed significantly better on standardized tests. For research, coasting offers a new lens on opportunity loss by combining session-level disengagement with within-task disengagement. For practitioners, our results highlight the need for platform affordances that support sustained engagement and more productive use of available practice time.",
-    "shortDescription": null,
-    "topics": [
-      "Student Learning"
-    ],
-    "type": "research paper",
-    "paperLink": "https://arxiv.org/abs/2604.25014",
     "presentationLink": null,
     "videoLink": null
   },
@@ -936,7 +936,7 @@
   },
   {
     "id": "334b7cca-4982-8120-8158-f6865cc8a8d3",
-    "title": "Using Generative AI to Provide Feedback to Adult Tutors in Training",
+    "title": "Using Generative AI to Provide Feedback to Adult Tutors in Training and Assess Real-Life Performance",
     "authors": [
       "Danielle R. Thomas",
       "Erin Gatz",
@@ -950,12 +950,11 @@
     "abstract": "Tutoring remains among the most impactful academic interventions known to improve student achievement. Despite its success, there are few available opportunities for training and professional development for adult tutors. Furthermore, the task of assessing tutor performance during actual tutoring sessions is challenging and time-consuming for human evaluators. In this work, we harness generative AI, specifically large language models (LLMs) like GPT-4, to introduce an innovative approach for delivering tutors real-time, explanatory feedback while tutors engage in online scenario-based lessons. Hosted within the Personalized Learning Squared (PLUS) tutoring platform, these lessons cover topics such as giving effective praise, reacting to student errors, and responding to students experiencing negative self-talk. We evaluate tutor performance using GPT-4 for automated grading and find that GPT-4 demonstrates proficiency in assessing tutors' ability to predict and explain the best approach across multiple lesson scenarios.",
     "shortDescription": "Leveraging GPT-4 within the PLUS tutoring platform to provide real-time, explanatory feedback to adult tutors during scenario-based lessons.",
     "topics": [
-      "Student Learning",
       "Gen AI",
       "Tutor Training"
     ],
     "type": "research paper",
-    "paperLink": "https://cmu.app.box.com/s/u814ez60mrptjdsgx8ou7oyx7lltcg1m",
+    "paperLink": "https://doi.org/10.1007/978-3-031-73427-4_21",
     "presentationLink": null,
     "videoLink": null
   },
