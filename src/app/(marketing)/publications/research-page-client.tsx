@@ -33,8 +33,8 @@ import {
 } from "@/components/marketing/research-index/research-index-figma-tokens"
 import { ResearchIndexPublicationCard } from "@/components/marketing/research-index/research-index-publication-card"
 import {
+  riDateSortKey,
   riFormatAuthorsLine,
-  riParseDate,
   riParseYear,
 } from "@/components/marketing/research-index/research-index-utils"
 
@@ -270,9 +270,7 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
     }
 
     result = [...result].sort(
-      (a, b) =>
-        riParseDate(b.publishDate).getTime() -
-        riParseDate(a.publishDate).getTime()
+      (a, b) => riDateSortKey(b.publishDate) - riDateSortKey(a.publishDate)
     )
 
     return result

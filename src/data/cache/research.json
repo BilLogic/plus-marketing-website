@@ -1,25 +1,5 @@
 [
   {
-    "id": "3aeb7cca-4982-81a3-881f-e60856d4fb01",
-    "title": "Representation Learning to Study Temporal Dynamics in Tutorial Scaffolding",
-    "authors": [
-      "Conrad Borchers",
-      "Jiayi Zhang",
-      "Ashish Gurung"
-    ],
-    "publishDate": "2026-07-01",
-    "venue": "AIED 2026",
-    "abstract": "Adaptive scaffolding enhances learning, yet the field lacks robust methods for measuring it within authentic tutoring dialogue. This gap has become more pressing with the rise of remote human tutoring and large language model-based systems. We introduce an embedding-based approach that analyzes scaffolding dynamics by aligning the semantics of dialogue turns, problem statements, and correct solutions. Specifically, we operationalize alignment by computing cosine similarity between tutor and student contributions and task-relevant content. We apply this framework to 1,576 real-world mathematics tutoring dialogues from the Eedi Question Anchored Tutoring Dialogues dataset. The analysis reveals systematic differences in task alignment and distinct temporal patterns in how participants ground their contributions in problem and solution content. Further, mixed-effects models show that role-specific semantic alignment predicts tutorial progression beyond baseline features such as message order and length. Tutor contributions exhibited stronger grounding in problem content early in interactions. In contrast, student solution alignment was modestly positively associated with progression. These findings support scaffolding as a continuous, role-sensitive process grounded in task semantics. By capturing role-specific alignment over time, this approach provides a principled method for analyzing instructional dialogue and evaluating conversational tutoring systems.",
-    "shortDescription": null,
-    "topics": [
-      "Gen AI"
-    ],
-    "type": "research paper",
-    "paperLink": "https://arxiv.org/abs/2603.24535",
-    "presentationLink": null,
-    "videoLink": null
-  },
-  {
     "id": "3aeb7cca-4982-8116-824d-f3645e5b88fb",
     "title": "Advancing the Science of Human and AI Tutoring Through Shared Research Infrastructure and Collaborations",
     "authors": [
@@ -32,75 +12,6 @@
     "topics": [],
     "type": "workshop",
     "paperLink": "https://drive.google.com/file/d/188JKrmfrvgOiSK3uGkobNvuSRvbXR4M5/view",
-    "presentationLink": null,
-    "videoLink": null
-  },
-  {
-    "id": "3aeb7cca-4982-81d3-accf-ff1dd9457b2c",
-    "title": "Does the TalkMoves Codebook Generalize to One-on-One Tutoring and Multimodal Interaction?",
-    "authors": [
-      "Corina Luca Focsan",
-      "Marie Cynthia Abijuru Kamikazi",
-      "Tamisha Thompson",
-      "Jennifer St. John",
-      "Kirk Vanacore",
-      "Danielle R. Thomas",
-      "Kenneth R. Koedinger",
-      "René F. Kizilcec"
-    ],
-    "publishDate": "2026-07-01",
-    "venue": "AIED 2026",
-    "abstract": "Accountable Talk theory has been widely adopted to analyze classroom discourse and is increasingly used to annotate tutoring interactions. In particular, the TalkMoves codebook, grounded in Accountable Talk Theory, is commonly used to label tutoring data and train models of effective instructional support. However, Accountable Talk was originally developed to characterize collaborative, whole-classroom oral discourse, not identify talk moves in one-on-one tutoring environments using multimodal data (e.g., video, audio, chat). As tutoring platforms expand in scale and modality, questions remain about whether Accountable Talk-based codebooks generalize reliably beyond their original classroom context and data representation. This study examines whether the human-developed TalkMoves codebook generalizes in reliability, utility, and interpretability when applied to one-on-one tutoring across audio, chat, and multimodal data. We compare TalkMoves with a hybrid AI-human developed codebook using a workflow established in prior research. Two expert annotators with over 20 years of teaching experience applied both codebooks to six tutoring sessions spanning three modalities: chat-based, audio-only, and multimodal interactions. Results show that while TalkMoves achieved higher overall inter-rater reliability than the AI-human codebook (0.74 vs. 0.64), the AI-human codebook demonstrated broader empirical coverage and higher perceived usability across modalities. Both codebooks undercaptured tutoring-relevant moves and introduced ambiguity when identifying actions expressed through non-verbal and multimodal artifacts. Together, these findings highlight the uneven generalizability of TalkMoves to tutoring contexts and motivate the development of modality-aware, tutoring-grounded codebooks.",
-    "shortDescription": null,
-    "topics": [
-      "Student Learning"
-    ],
-    "type": "research paper",
-    "paperLink": "https://drive.google.com/file/d/1cy2AVlZwQzVw-2YNo14hN5cCCyoTRN83/view",
-    "presentationLink": null,
-    "videoLink": null
-  },
-  {
-    "id": "3aeb7cca-4982-81c3-be74-c7f579257571",
-    "title": "Modernizing Ground Truth: Four Shifts Toward Improving Reliability and Validity in AI in Education",
-    "authors": [
-      "Danielle R. Thomas",
-      "Conrad Borchers",
-      "Kirk Vanacore",
-      "Kenneth R. Koedinger",
-      "René F. Kizilcec"
-    ],
-    "publishDate": "2026-07-01",
-    "venue": "AIED 2026",
-    "abstract": "Generative Artificial Intelligence (GenAI) is now widespread in education, yet the efficacy of GenAI systems remains constrained by the quality and interpretation of the labeled data used to train and evaluate them. Studies commonly report inter-rater reliability (IRR), often summarized by a single coefficient such as Cohen's kappa, as a gatekeeper to \"ground truth.\" We argue that many educational assessment and practice support settings include challenges, such as high-inference constructs, skewed label distributions, and temporally segmented multimodal data, which yield potential misapplication or misinterpretation of threshold-based heuristics for IRR. The growing use of large language models as annotators and judges introduces risks such as automation bias and circular validation. We propose four practical shifts for establishing ground truth: (1) treat IRR as a diagnostic signal to localize disagreement and refine constructs rather than a mechanical acceptance threshold; (2) require transparent reporting of rater expertise, codebook development, reconciliation procedures, and segmentation rules; (3) mitigate risks in LLM annotation through bias audits and verification workflows; and (4) complement agreement statistics with validity and effectiveness evidence for the intended use, including uncertainty-aware labeling, criterion-related checks, and close-the-loop evaluations of whether systems trained on these labels improve learning beyond a reasonable control. We illustrate these shifts through case studies of multimodal tutoring data and provide actionable recommendations toward strengthening the evidence base of labeled AIED datasets.",
-    "shortDescription": null,
-    "topics": [
-      "Gen AI"
-    ],
-    "type": "research paper",
-    "paperLink": "https://doi.org/10.1007/978-3-032-29773-0_9",
-    "presentationLink": null,
-    "videoLink": null
-  },
-  {
-    "id": "3aeb7cca-4982-8177-8857-e613a9fb143b",
-    "title": "Delayed Start Behavior as a Cross-Subject Predictor of Learning Outcomes",
-    "authors": [
-      "Jordan Gutterman",
-      "Ashish Gurung",
-      "Lee Branstetter",
-      "Kenneth R. Koedinger",
-      "Vincent Aleven"
-    ],
-    "publishDate": "2026-07-01",
-    "venue": "AIED 2026",
-    "abstract": "Behavioral detectors provide valuable insights into learner motivation and self-regulation. Among these, delayed start, a new session-level detector, has shown great promise as a valid behavioral measure that generalizes well across systems. In this paper, we examine cross-subject predictive validity of delayed start behavior. Using iReady data from 711 grade 7 students, we find delayed starts during Math practice are predictive of standardized test performance in both Math (beta=.07 SD, p=.02) and English (beta=.10 SD, p=<.001). Additionally, using mixture modeling and sensitivity analyses, we use a data-driven strategy to operationalize the identification of delayed starters in practice. We identify two underlying sub-groups of interest: \"early starters\" (<5 minute average delay, 20% of students) and \"chronic delayers\" (>13 minutes average delay, 20% of students). Relative to students in neither sub-group, early starters experienced greater growth (Math beta=.11 SD, p=.07; ELA beta=.15 SD, p=.02), while chronic delayers had the opposite trends (Math beta=-.13 SD, p=0.05; ELA beta=-.11 SD, p=0.11). Session-level measures provide a new opportunity for content-independent detectors, adding a behavioral component to the traditional usage and progress based on student engagement with content. This work aims to bridge education research with classroom practice by developing interpretable measures that align with behavioral cues teachers already use during classwork sessions to monitor and support students.",
-    "shortDescription": null,
-    "topics": [
-      "Student Learning"
-    ],
-    "type": "research paper",
-    "paperLink": "https://arxiv.org/abs/2606.25308",
     "presentationLink": null,
     "videoLink": null
   },
@@ -198,6 +109,95 @@
     ],
     "type": "research paper",
     "paperLink": "https://doi.org/10.1145/3774398.3811601",
+    "presentationLink": null,
+    "videoLink": null
+  },
+  {
+    "id": "3aeb7cca-4982-81a3-881f-e60856d4fb01",
+    "title": "Representation Learning to Study Temporal Dynamics in Tutorial Scaffolding",
+    "authors": [
+      "Conrad Borchers",
+      "Jiayi Zhang",
+      "Ashish Gurung"
+    ],
+    "publishDate": "2026-06-27",
+    "venue": "AIED 2026",
+    "abstract": "Adaptive scaffolding enhances learning, yet the field lacks robust methods for measuring it within authentic tutoring dialogue. This gap has become more pressing with the rise of remote human tutoring and large language model-based systems. We introduce an embedding-based approach that analyzes scaffolding dynamics by aligning the semantics of dialogue turns, problem statements, and correct solutions. Specifically, we operationalize alignment by computing cosine similarity between tutor and student contributions and task-relevant content. We apply this framework to 1,576 real-world mathematics tutoring dialogues from the Eedi Question Anchored Tutoring Dialogues dataset. The analysis reveals systematic differences in task alignment and distinct temporal patterns in how participants ground their contributions in problem and solution content. Further, mixed-effects models show that role-specific semantic alignment predicts tutorial progression beyond baseline features such as message order and length. Tutor contributions exhibited stronger grounding in problem content early in interactions. In contrast, student solution alignment was modestly positively associated with progression. These findings support scaffolding as a continuous, role-sensitive process grounded in task semantics. By capturing role-specific alignment over time, this approach provides a principled method for analyzing instructional dialogue and evaluating conversational tutoring systems.",
+    "shortDescription": null,
+    "topics": [
+      "Gen AI"
+    ],
+    "type": "research paper",
+    "paperLink": "https://arxiv.org/abs/2603.24535",
+    "presentationLink": null,
+    "videoLink": null
+  },
+  {
+    "id": "3aeb7cca-4982-81d3-accf-ff1dd9457b2c",
+    "title": "Does the TalkMoves Codebook Generalize to One-on-One Tutoring and Multimodal Interaction?",
+    "authors": [
+      "Corina Luca Focsan",
+      "Marie Cynthia Abijuru Kamikazi",
+      "Tamisha Thompson",
+      "Jennifer St. John",
+      "Kirk Vanacore",
+      "Danielle R. Thomas",
+      "Kenneth R. Koedinger",
+      "René F. Kizilcec"
+    ],
+    "publishDate": "2026-06-27",
+    "venue": "AIED 2026",
+    "abstract": "Accountable Talk theory has been widely adopted to analyze classroom discourse and is increasingly used to annotate tutoring interactions. In particular, the TalkMoves codebook, grounded in Accountable Talk Theory, is commonly used to label tutoring data and train models of effective instructional support. However, Accountable Talk was originally developed to characterize collaborative, whole-classroom oral discourse, not identify talk moves in one-on-one tutoring environments using multimodal data (e.g., video, audio, chat). As tutoring platforms expand in scale and modality, questions remain about whether Accountable Talk-based codebooks generalize reliably beyond their original classroom context and data representation. This study examines whether the human-developed TalkMoves codebook generalizes in reliability, utility, and interpretability when applied to one-on-one tutoring across audio, chat, and multimodal data. We compare TalkMoves with a hybrid AI-human developed codebook using a workflow established in prior research. Two expert annotators with over 20 years of teaching experience applied both codebooks to six tutoring sessions spanning three modalities: chat-based, audio-only, and multimodal interactions. Results show that while TalkMoves achieved higher overall inter-rater reliability than the AI-human codebook (0.74 vs. 0.64), the AI-human codebook demonstrated broader empirical coverage and higher perceived usability across modalities. Both codebooks undercaptured tutoring-relevant moves and introduced ambiguity when identifying actions expressed through non-verbal and multimodal artifacts. Together, these findings highlight the uneven generalizability of TalkMoves to tutoring contexts and motivate the development of modality-aware, tutoring-grounded codebooks.",
+    "shortDescription": null,
+    "topics": [
+      "Student Learning"
+    ],
+    "type": "research paper",
+    "paperLink": "https://drive.google.com/file/d/1cy2AVlZwQzVw-2YNo14hN5cCCyoTRN83/view",
+    "presentationLink": null,
+    "videoLink": null
+  },
+  {
+    "id": "3aeb7cca-4982-81c3-be74-c7f579257571",
+    "title": "Modernizing Ground Truth: Four Shifts Toward Improving Reliability and Validity in AI in Education",
+    "authors": [
+      "Danielle R. Thomas",
+      "Conrad Borchers",
+      "Kirk Vanacore",
+      "Kenneth R. Koedinger",
+      "René F. Kizilcec"
+    ],
+    "publishDate": "2026-06-27",
+    "venue": "AIED 2026",
+    "abstract": "Generative Artificial Intelligence (GenAI) is now widespread in education, yet the efficacy of GenAI systems remains constrained by the quality and interpretation of the labeled data used to train and evaluate them. Studies commonly report inter-rater reliability (IRR), often summarized by a single coefficient such as Cohen's kappa, as a gatekeeper to \"ground truth.\" We argue that many educational assessment and practice support settings include challenges, such as high-inference constructs, skewed label distributions, and temporally segmented multimodal data, which yield potential misapplication or misinterpretation of threshold-based heuristics for IRR. The growing use of large language models as annotators and judges introduces risks such as automation bias and circular validation. We propose four practical shifts for establishing ground truth: (1) treat IRR as a diagnostic signal to localize disagreement and refine constructs rather than a mechanical acceptance threshold; (2) require transparent reporting of rater expertise, codebook development, reconciliation procedures, and segmentation rules; (3) mitigate risks in LLM annotation through bias audits and verification workflows; and (4) complement agreement statistics with validity and effectiveness evidence for the intended use, including uncertainty-aware labeling, criterion-related checks, and close-the-loop evaluations of whether systems trained on these labels improve learning beyond a reasonable control. We illustrate these shifts through case studies of multimodal tutoring data and provide actionable recommendations toward strengthening the evidence base of labeled AIED datasets.",
+    "shortDescription": null,
+    "topics": [
+      "Gen AI"
+    ],
+    "type": "research paper",
+    "paperLink": "https://doi.org/10.1007/978-3-032-29773-0_9",
+    "presentationLink": null,
+    "videoLink": null
+  },
+  {
+    "id": "3aeb7cca-4982-8177-8857-e613a9fb143b",
+    "title": "Delayed Start Behavior as a Cross-Subject Predictor of Learning Outcomes",
+    "authors": [
+      "Jordan Gutterman",
+      "Ashish Gurung",
+      "Lee Branstetter",
+      "Kenneth R. Koedinger",
+      "Vincent Aleven"
+    ],
+    "publishDate": "2026-06-27",
+    "venue": "AIED 2026",
+    "abstract": "Behavioral detectors provide valuable insights into learner motivation and self-regulation. Among these, delayed start, a new session-level detector, has shown great promise as a valid behavioral measure that generalizes well across systems. In this paper, we examine cross-subject predictive validity of delayed start behavior. Using iReady data from 711 grade 7 students, we find delayed starts during Math practice are predictive of standardized test performance in both Math (beta=.07 SD, p=.02) and English (beta=.10 SD, p=<.001). Additionally, using mixture modeling and sensitivity analyses, we use a data-driven strategy to operationalize the identification of delayed starters in practice. We identify two underlying sub-groups of interest: \"early starters\" (<5 minute average delay, 20% of students) and \"chronic delayers\" (>13 minutes average delay, 20% of students). Relative to students in neither sub-group, early starters experienced greater growth (Math beta=.11 SD, p=.07; ELA beta=.15 SD, p=.02), while chronic delayers had the opposite trends (Math beta=-.13 SD, p=0.05; ELA beta=-.11 SD, p=0.11). Session-level measures provide a new opportunity for content-independent detectors, adding a behavioral component to the traditional usage and progress based on student engagement with content. This work aims to bridge education research with classroom practice by developing interpretable measures that align with behavioral cues teachers already use during classwork sessions to monitor and support students.",
+    "shortDescription": null,
+    "topics": [
+      "Student Learning"
+    ],
+    "type": "research paper",
+    "paperLink": "https://arxiv.org/abs/2606.25308",
     "presentationLink": null,
     "videoLink": null
   },
@@ -587,7 +587,7 @@
       "Ralph Abboud",
       "Shivang Gupta",
       "Erin Gatz",
-      "Kenneth Holstein"
+      "Kenneth R. Koedinger"
     ],
     "publishDate": "2025-07-21",
     "venue": "AIED 2025",
@@ -1250,7 +1250,7 @@
       "Carmen Thomas-Browne",
       "J. Elizabeth Richey",
       "Abdulmenaf Gul",
-      "Paulo F. Carvalhoa",
+      "Paulo F. Carvalho",
       "Lee Branstetter",
       "Kenneth R. Koedinger"
     ],
@@ -1514,7 +1514,7 @@
     "authors": [
       "J. Elizabeth Richey",
       "Nikki G. Lobczowski",
-      "Paulo F. Carvalhoa",
+      "Paulo F. Carvalho",
       "Kenneth R. Koedinger"
     ],
     "publishDate": "2020-06-30",
