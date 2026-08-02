@@ -434,7 +434,7 @@
   },
   {
     "id": "3aeb7cca-4982-810a-a212-c5291da8976a",
-    "title": "Optimizing Mastery Learning by Fast-Forwarding Over-Practice Steps.",
+    "title": "Optimizing Mastery Learning by Fast-Forwarding Over-Practice Steps",
     "authors": [
       "Meng Xia",
       "Robin Schmucker",
@@ -455,7 +455,7 @@
   },
   {
     "id": "3aeb7cca-4982-81a3-aa79-ef8843502088",
-    "title": "Is More Gamification Better? Evaluating Playful Interactions and Narratives for Algebra Learning.",
+    "title": "Is More Gamification Better? Evaluating Playful Interactions and Narratives for Algebra Learning",
     "authors": [
       "Conrad Borchers",
       "Tomohiro Nagashima",
@@ -672,7 +672,7 @@
   },
   {
     "id": "334b7cca-4982-8156-927b-e6878a3718ba",
-    "title": "VTutor for high-impact tutoring at scale: Managing engagement and real-time multi-screen monitoring with P2P connections.",
+    "title": "VTutor for High-Impact Tutoring at Scale: Managing Engagement and Real-Time Multi-Screen Monitoring with P2P Connections",
     "authors": [
       "Eason Chen",
       "Xinyi Tang",
@@ -1140,7 +1140,7 @@
       "Student Learning",
       "Gen AI"
     ],
-    "type": "research paper",
+    "type": "workshop",
     "paperLink": "https://cmu.app.box.com/s/lxm3vvj6r9j5se7s0dderrtaf5y3nklc",
     "presentationLink": null,
     "videoLink": null
@@ -1232,8 +1232,6 @@
     "abstract": "Personalized Learning2 (PL2) is a mentor professional development platform designed to improve efficiency and workplace training through scenario-based instruction and personalized support. Combining research-driven mentor training with artificial intelligence (AI)-powered software, PL2 connects mentors to personalized resources. These curated resources cover a range of topics from social-emotional learning and math content to culturally responsive teaching practices. PL2 is addressing the opportunity gap among marginalized students by recommending specific instructional supports and social-emotional resources based on student's individual math performance and effort.",
     "shortDescription": "Scenario-based lessons plus in-the-moment AI support let mentors get more out of the time they have.",
     "topics": [
-      "Student Learning",
-      "Gen AI",
       "Tutor Training"
     ],
     "type": "research paper",
@@ -1290,7 +1288,7 @@
   },
   {
     "id": "334b7cca-4982-81d6-b658-d7a681767df6",
-    "title": "Designing for Human-AI Complementarity in K-12 Education.",
+    "title": "Designing for Human-AI Complementarity in K-12 Education",
     "authors": [
       "Kenneth Holstein",
       "Vincent Aleven"
@@ -1321,7 +1319,7 @@
     "publishDate": "2022-06-01",
     "venue": "L@S 2022",
     "abstract": "In this demonstration, we showcase the recent advancement of scenario-based tutor training with a focus to scale by applying the learn-by-doing approach to teaching strategies to provide socio-motivational support. These short (~15 min.) self-paced lessons use the predict-observe-explain inquiry method to develop mentor capacity in bolstering student motivation. These custom training modules are being created to provide supplemental mentor support within the Personalized Learning2 system. Enhancing mentor training will aid in better quality mentoring at low cost. Mentor training is most effective when scenario-based practice provides trainees with response-specific feedback.",
-    "shortDescription": "How the PL2 mentor lessons were built: 15-minute self-paced scenarios where mentors predict, observe, then explain — refined over repeated design cycles.",
+    "shortDescription": "How the PLUS mentor lessons were built: 15-minute self-paced scenarios where mentors predict, observe, then explain — refined over repeated design cycles.",
     "topics": [
       "Tutor Training"
     ],
@@ -1345,7 +1343,7 @@
     "abstract": "The use of technology-based learning systems to provide individualized instruction through tutoring for K-12 students is gaining increased attention. We discuss the development of pedagogical components of Personalized Learning2 (PL2), a human mentoring online system that supports both mentors and students while improving student's math achievement. PL2 uses AI-driven software to recommend custom resources and supports based on mentor input and student math learning data. This research focuses on developing a more efficient and research-based method of resource organization by creating a schema of mentoring competencies. The survey results ranked mentor skills according to the perceptions of partner members, demonstrating Engage and Motivate Students as the most important skill. These results guided the creation of a preliminary super-competency scheme through SMART supports (Social-emotional, Math Content, Advocacy, Relationships, Technology).",
     "shortDescription": "Asked to rank what a mentor most needs to be able to do, partners put \"engage and motivate students\" first — ahead of math content.",
     "topics": [
-      "Student Learning"
+      "Tutor Training"
     ],
     "type": "research paper",
     "paperLink": "https://cmu.app.box.com/s/snqodxt81wykhz8526vcee0pn85kwi2a",
@@ -1364,7 +1362,8 @@
     "abstract": null,
     "shortDescription": null,
     "topics": [
-      "Student Learning"
+      "Gen AI",
+      "Tutor Training"
     ],
     "type": null,
     "paperLink": null,
@@ -1452,9 +1451,10 @@
     "publishDate": "2021-06-12",
     "venue": "AIED 2021",
     "abstract": "Computer tutor data indicate that more learning opportunities yield greater achievement, but also confirm there are gaps in the number and quality of opportunities marginalized students receive that technology alone does not address. Personalized learning with mentors can close this gap in opportunities but is expensive to implement. We introduce a free, web-based application, Personalized Learning2 (PL2), designed to improve mentoring efficiency by connecting mentors to intervention and instructional resources. Preliminary findings indicated that PL2's categorization of students based on math learning software data enabled mentors to focus their efforts, and that mentors found PL2 resources to positively expand how they taught and mentored.",
-    "shortDescription": "PL2 is a free web app that helps one mentor support more students well, aimed at closing opportunity gaps.",
+    "shortDescription": "PLUS is a free web app that helps one mentor support more students well, aimed at closing opportunity gaps.",
     "topics": [
-      "Student Learning"
+      "Student Learning",
+      "Tutor Training"
     ],
     "type": "research paper",
     "paperLink": "https://cmu.app.box.com/s/fmw5hnrmvr7qq18ysywl31afpl4xhve9",
@@ -1500,7 +1500,7 @@
     "abstract": null,
     "shortDescription": null,
     "topics": [
-      "Student Learning"
+      "Tutor Training"
     ],
     "type": "research paper",
     "paperLink": "https://cmu.app.box.com/s/8xnnd8edy7rffdhgyuk1lce22zxr8jjj",

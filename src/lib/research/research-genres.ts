@@ -29,6 +29,9 @@ function normalizeTitleKey(title: string): string {
     .toLowerCase()
     .replace(/\s+/g, " ")
     .replace(/[–—-]/g, "-")
+    // Notion titles are edited by hand; a stray trailing period must not silently
+    // drop a paper out of the curated genre map below.
+    .replace(/[.\s]+$/, "")
 }
 
 const CANON_GENRE_BY_LOWER = new Map(
