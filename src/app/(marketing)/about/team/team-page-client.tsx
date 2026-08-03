@@ -3,6 +3,7 @@
 import { useMemo, useState, useCallback, useEffect } from "react"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
 import type { TeamAffiliation, TeamMember } from "@/lib/notion/types"
+import { trackEvent } from "@/lib/analytics"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -72,6 +73,12 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
       if (grps.size) params.set("group", [...grps].join(","))
       const qs = params.toString()
       router.replace(`${pathname}${qs ? `?${qs}` : ""}`, { scroll: false })
+      // Key names only — affiliation/group values are Notion-driven and
+      // would grow dimension cardinality without bound.
+      const active = [q && "q", affs.size && "affiliation", grps.size && "group"]
+        .filter(Boolean)
+        .join(",")
+      if (active) trackEvent("team_filter_used", { filter_type: active })
     },
     [router, pathname]
   )

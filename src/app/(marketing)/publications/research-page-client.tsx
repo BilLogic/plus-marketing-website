@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { ExternalLink, LayoutGrid, List, Search } from "lucide-react"
+import { trackEvent } from "@/lib/analytics"
 import { Input } from "@/components/ui/input"
 import {
   Select,
@@ -209,6 +210,13 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
         else params.set(k, v)
       })
       router.replace(`?${params.toString()}`, { scroll: false })
+      // Filtering is the core interaction on this page — without it we can't
+      // tell "browsed the archive" from "bounced off a wall of papers".
+      // `filter_type` is the key name only, never the value (unbounded search
+      // strings would blow up dimension cardinality).
+      trackEvent("research_filter_used", {
+        filter_type: Object.keys(updates).join(","),
+      })
     },
     [searchParams, router]
   )
