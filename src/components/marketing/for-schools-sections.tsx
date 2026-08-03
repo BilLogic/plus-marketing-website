@@ -129,6 +129,7 @@ export const SchoolsHeroSection = () => {
           </h1>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform"
+            data-cta-location="hero"
             target="_blank"
             rel="noopener noreferrer"
             className={marketingHeroCtaPrimaryLinkClass}
@@ -413,6 +414,7 @@ export const SchoolsTrainingSection = () => {
                   "ctaHref" in item && item.ctaHref ? (
                     <a
                       href={item.ctaHref}
+                      data-cta-location="card"
                       target="_blank"
                       rel="noopener noreferrer"
                       className={cn(marketingFinalCtaPrimaryLinkClass, "mt-1 w-fit")}
@@ -492,6 +494,7 @@ export const SchoolsTrainingSection = () => {
                         "ctaHref" in item && item.ctaHref ? (
                           <a
                             href={item.ctaHref}
+                            data-cta-location="card"
                             target="_blank"
                             rel="noopener noreferrer"
                             className={cn(marketingFinalCtaPrimaryLinkClass, "w-fit")}
@@ -844,6 +847,7 @@ function OversightCardInner({
             </div>
             <a
               href={card.href}
+              data-cta-location="card"
               {...(card.href.startsWith("http")
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
@@ -1201,6 +1205,7 @@ export const SchoolsRegisterCTA = () => {
         <div className={marketingFinalCtaButtonRowClass}>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform"
+            data-cta-location="final_cta"
             target="_blank"
             rel="noopener noreferrer"
             className={marketingFinalCtaPrimaryLinkClass}

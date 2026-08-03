@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft, Quote } from "lucide-react"
@@ -13,6 +14,31 @@ import { cn } from "@/lib/utils"
 import { MarkdownRenderer } from "./markdown-renderer"
 
 export const revalidate = 3600
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}): Promise<Metadata> {
+  const { id } = await params
+  const story = await fetchSuccessStoryBySlugOrId(id)
+  if (!story) return { title: "Success Stories" }
+
+  const description =
+    story.summary || `How ${story.clientPartner ?? "our partners"} use PLUS.`
+  return {
+    title: story.title,
+    description,
+    openGraph: {
+      title: story.title,
+      description,
+      type: "article",
+      publishedTime: story.publishedDate || undefined,
+      url: `/success-stories/${id}`,
+      images: story.coverImage ? [story.coverImage] : undefined,
+    },
+  }
+}
 
 /** Long-form body from Notion — mirrors About / listing section H2, card H3, and lead grey (`#62636C`). */
 const successStoryBodyFromMarkdownClass = cn(

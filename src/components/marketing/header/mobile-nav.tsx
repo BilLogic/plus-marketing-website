@@ -56,6 +56,7 @@ export const MobileNav = ({ className }: MobileNavProps) => {
           <>
             <a
               href="https://app.tutors.plus/demo"
+              data-cta-location="nav"
               target="_blank"
               rel="noopener noreferrer"
               className={mobileNavDemoCtaClass}
@@ -64,6 +65,7 @@ export const MobileNav = ({ className }: MobileNavProps) => {
             </a>
             <a
               href="https://app.tutors.plus/login"
+              data-cta-location="nav"
               target="_blank"
               rel="noopener noreferrer"
               className={mobileNavLoginClass}
@@ -105,6 +107,7 @@ export const MobileNav = ({ className }: MobileNavProps) => {
           <div className="ml-auto flex min-w-0 shrink-0 items-center gap-1.5 sm:gap-2">
             <a
               href="https://app.tutors.plus/demo"
+              data-cta-location="nav"
               target="_blank"
               rel="noopener noreferrer"
               className={mobileNavSheetToolbarDemoClass}
@@ -113,6 +116,7 @@ export const MobileNav = ({ className }: MobileNavProps) => {
             </a>
             <a
               href="https://app.tutors.plus/login"
+              data-cta-location="nav"
               target="_blank"
               rel="noopener noreferrer"
               className={mobileNavSheetToolbarLoginClass}

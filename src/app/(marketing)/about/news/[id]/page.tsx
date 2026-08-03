@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { marketingListingShellClass } from "@/lib/marketing-layout"
@@ -7,6 +8,31 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
 
 export const revalidate = 60
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}): Promise<Metadata> {
+  const { id } = await params
+  const item = await fetchNewsById(id)
+  if (!item) return { title: "News" }
+
+  const description =
+    item.marketingBlurb || item.summary || "News and media coverage from PLUS."
+  return {
+    title: item.title,
+    description,
+    openGraph: {
+      title: item.title,
+      description,
+      type: "article",
+      publishedTime: item.publicationDate || undefined,
+      url: `/about/news/${id}`,
+      images: item.featuredImage ? [item.featuredImage] : undefined,
+    },
+  }
+}
 
 export default async function NewsDetailPage({
   params,

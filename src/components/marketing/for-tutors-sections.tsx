@@ -138,6 +138,7 @@ export const TutorsHeroSection = () => {
           </a>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
+            data-cta-location="hero"
             target="_blank"
             rel="noopener noreferrer"
             className={marketingHeroCtaOutlineLinkClass}
@@ -796,6 +797,7 @@ export const TutorsCertificationSection = () => {
               </div>
               <a
                 href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
+                data-cta-location="card"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex h-9 w-fit cursor-pointer items-center justify-center rounded-full bg-green-800 px-8 text-sm font-medium text-white no-underline hover:bg-green-900 sm:h-11 sm:text-base"
@@ -1105,6 +1107,7 @@ export const TutorsImpactCTA = () => {
           </a>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
+            data-cta-location="final_cta"
             target="_blank"
             rel="noopener noreferrer"
             className={marketingFinalCtaOutlineLinkClass}

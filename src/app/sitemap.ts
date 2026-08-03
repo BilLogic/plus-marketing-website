@@ -5,6 +5,12 @@ import { successStoryPagePath } from "@/lib/success-stories/success-story-path"
 
 const BASE = "https://tutors.plus"
 
+/**
+ * Regenerate hourly so Notion-backed entries (news, success stories) appear
+ * without waiting for the next deploy. Matches the detail pages' own ISR window.
+ */
+export const revalidate = 3600
+
 const STATIC_ROUTES = [
   "",
   "/about",
