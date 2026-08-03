@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react"
 import { Input } from "@/components/ui/input"
+import { clarityCall, trackEvent } from "@/lib/analytics"
 import { marketingFooterInnerShell } from "@/lib/marketing-layout"
 
 export const FooterNewsletter = () => {
@@ -21,6 +22,11 @@ export const FooterNewsletter = () => {
               const form = e.currentTarget
               const email = new FormData(form).get("email") as string
               if (!email) return
+              // The only on-site conversion — every other CTA is an outbound
+              // link. Fired on submit rather than on response so an API hiccup
+              // doesn't silently lose the signal.
+              trackEvent("newsletter_signup", { cta_location: "footer" })
+              clarityCall("event", "cta_newsletter")
               fetch("/api/newsletter", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
