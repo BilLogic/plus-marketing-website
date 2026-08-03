@@ -329,6 +329,7 @@ export const ResearchersHeroSection = () => {
           <div className={cn("w-full", marketingHeroCtaButtonRowClass)}>
             <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform"
+              data-cta-location="inline"
               target="_blank"
               rel="noopener noreferrer"
               className={researchersHeroPrimaryCtaClassName}
@@ -1696,6 +1697,7 @@ export const ResearchCollaborateCtaSection = () => {
         <div className={marketingFinalCtaButtonRowClass}>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform"
+            data-cta-location="final_cta"
             target="_blank"
             rel="noopener noreferrer"
             className={marketingFinalCtaPrimaryLinkClass}

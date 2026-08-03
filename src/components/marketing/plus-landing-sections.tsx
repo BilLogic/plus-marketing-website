@@ -831,6 +831,7 @@ export const PlusImpactStatsSection = () => {
             </p>
             <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform"
+              data-cta-location="final_cta"
               target="_blank"
               rel="noopener noreferrer"
               className={cn(marketingHeroCtaOutlineLinkClass, "w-fit self-start")}
@@ -858,6 +859,7 @@ export const PlusImpactStatsSection = () => {
             </p>
             <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
+              data-cta-location="final_cta"
               target="_blank"
               rel="noopener noreferrer"
               className={cn(marketingHeroCtaOutlineLinkClass, "w-fit self-start")}

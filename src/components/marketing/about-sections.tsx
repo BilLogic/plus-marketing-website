@@ -136,6 +136,7 @@ function AboutLandingCtaRow({
       </Link>
       <a
         href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
+        data-cta-location="hero"
         target="_blank"
         rel="noopener noreferrer"
         className={outlineClass}

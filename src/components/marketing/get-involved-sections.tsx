@@ -138,6 +138,7 @@ export function GetInvolvedHeroSection() {
           </Link>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
+            data-cta-location="hero"
             target="_blank"
             rel="noopener noreferrer"
             className={marketingHeroCtaOutlineLinkClass}
@@ -402,6 +403,7 @@ export function GetInvolvedCareersSection({ jobs }: { jobs?: JobListing[] }) {
             </p>
             <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform?usp=header"
+              data-cta-location="card"
               target="_blank"
               rel="noopener noreferrer"
               className={cn(careersGreenContactCtaClass, "mt-1")}
@@ -479,6 +481,7 @@ export function GetInvolvedTutoringSection() {
             >
               <a
                 href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
+                data-cta-location="card"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={tutoringBecomeTutorCardCtaClass}
@@ -634,6 +637,7 @@ export function GetInvolvedFinalCTA() {
           </Link>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSfnLoEbL_irrlGeoW6toMctQ8rstewQ1-PB4h7XwUKZAeXmVg/viewform"
+            data-cta-location="final_cta"
             target="_blank"
             rel="noopener noreferrer"
             className={marketingFinalCtaOutlineLinkClass}

@@ -40,6 +40,7 @@ export async function PlusHeader() {
           <div className="flex items-center gap-3 lg:justify-self-end">
             <a
               href="https://app.tutors.plus/demo"
+              data-cta-location="nav"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden lg:inline-flex h-9 items-center justify-center rounded-full bg-[#a6edf4] px-5 text-base font-medium text-[#004247] transition-opacity hover:opacity-90 whitespace-nowrap min-[1800px]:h-10 min-[1800px]:px-6 min-[1800px]:text-lg"
@@ -48,6 +49,7 @@ export async function PlusHeader() {
             </a>
             <a
               href="https://app.tutors.plus/login"
+              data-cta-location="nav"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden lg:inline-flex h-7 items-center justify-center rounded-lg px-2.5 text-base font-medium text-[#62636c] transition-opacity hover:opacity-60 whitespace-nowrap min-[1800px]:h-8 min-[1800px]:text-lg"
