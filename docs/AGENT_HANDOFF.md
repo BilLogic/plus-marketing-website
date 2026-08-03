@@ -77,6 +77,18 @@ When a task involves **creating, updating, or removing** components, stories, pa
 
 For more detail, see `docs/deletion-playbook.md`.
 
+## Analytics architecture (added 2026-08-03)
+
+Full spec: `docs/plans/2026-08-03-001-feat-tutors-plus-launch-hardening-plan.md` (Tagging Taxonomy section).
+
+- **Gate**: GA4 + Clarity scripts load only when Netlify `CONTEXT === "production"` (`src/app/layout.tsx`). IDs come from `NEXT_PUBLIC_GA_MEASUREMENT_ID` / `NEXT_PUBLIC_CLARITY_PROJECT_ID` (set in Netlify env; empty locally). `NEXT_PUBLIC_*` is inlined at build time — a missing var silently disables that tag.
+- **Choke point**: every GA4 event goes through `trackEvent()` in `src/lib/analytics.ts` — fixed snake_case names only, never dynamic names. `click`/`error`/`scroll` are GA4-reserved; don't use them.
+- **CTA tracking**: `src/components/analytics/outbound-click-tracker.tsx` — one document-level capture-phase listener (mobile nav portals outside layout subtrees). Matches Google Forms by full form ID and `app.tutors.plus`. Events: `tutor_apply_click`, `contact_form_click`, `demo_click`, `login_click` with `link_domain` + `cta_location` params. New CTAs need no wiring; override placement with `data-cta-location="nav|hero|inline|footer|card"` on the link or an ancestor.
+- **Clarity**: `clarity-tagger.tsx` sets `page_type` per route change; click handler also fires `cta_*` Clarity events + `upgrade`.
+- **Monitoring**: `web-vitals.tsx` (CWV → GA4), `src/instrumentation-client.ts` (`js_error`, deduped, capped 5/pageload), `not-found-tracker.tsx` (`page_not_found`), plus `error.tsx`/`global-error.tsx` boundary pings.
+- **Redirects**: legacy Framer URLs 301 in `next.config.ts` `redirects()` — keep single-hop, never chain.
+- **SEO**: `src/app/robots.ts`, `src/app/sitemap.ts` (Notion query layer w/ git-cache fallback), `metadataBase = https://tutors.plus` (apex canonical).
+
 ## Notes for different tools
 
 - **Cursor / Windsurf / other editors**  

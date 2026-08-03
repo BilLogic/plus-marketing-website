@@ -18,6 +18,44 @@ const nextConfig: NextConfig = {
         destination: "/publications",
         permanent: true,
       },
+      // Legacy Framer-site URLs (tutors.plus cutover). All single-hop 301s —
+      // never chain through another redirect. `/hidden/*` intentionally 404s.
+      { source: "/about/story", destination: "/about", permanent: true },
+      {
+        source: "/get-involved/become-a-tutor",
+        destination: "/for-tutors",
+        permanent: true,
+      },
+      {
+        source: "/get-involved/contact-us",
+        destination: "/get-involved",
+        permanent: true,
+      },
+      {
+        source: "/get-involved/careers",
+        destination: "/get-involved",
+        permanent: true,
+      },
+      {
+        source: "/impact/research",
+        destination: "/publications",
+        permanent: true,
+      },
+      {
+        source: "/solution/tutoring",
+        destination: "/for-schools",
+        permanent: true,
+      },
+      {
+        source: "/solution/toolkit",
+        destination: "/for-schools",
+        permanent: true,
+      },
+      {
+        source: "/solution/training",
+        destination: "/for-tutors",
+        permanent: true,
+      },
     ]
   },
   /**
