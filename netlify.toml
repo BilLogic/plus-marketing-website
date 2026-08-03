@@ -3,6 +3,15 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+# Canonical host — the default subdomain would otherwise serve the full site
+# as duplicate content (Netlify's automatic primary-domain redirect does not
+# apply to Next.js runtime sites).
+[[redirects]]
+  from = "https://plus-marketing-website.netlify.app/*"
+  to = "https://tutors.plus/:splat"
+  status = 301
+  force = true
+
 [build]
   command = "npm run build"
   publish = ".next"
