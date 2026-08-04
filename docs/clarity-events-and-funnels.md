@@ -61,15 +61,34 @@ a saved funnel, so rebuilding was the only path.
 |---|---|
 | **NEW For Tutors to Apply Click** | page `contains /for-tutors` → Outbound click |
 | **Schools: intent to contact** | School intent → Contact us |
+| **Schools: intent to demo click** | School intent → `cta_demo` |
 | **Researchers: intent to outbound** | Researcher intent → Outbound click |
 
 Funnels are **not retroactive** — they populate from creation forward.
 
-**Next iteration:** once the four `cta_*` API events have each fired at least once
-(they only began flowing into this project on 2026-08-03), swap the generic
-"Outbound click" end-step for the precise event — `cta_tutor_apply` for the tutor
-funnel, `cta_contact`/`cta_demo` for schools. That turns "clicked something
-external" into "converted".
+### Precise-event upgrade (2026-08-04)
+
+Only API events Clarity has actually received are selectable as funnel steps, so
+the swap is gated on real traffic. One week after the events started flowing:
+
+| API event | Sessions | Funnel impact |
+|---|---|---|
+| `cta_demo` | 3 | **Schools: intent to demo click** added |
+| `cta_login` | 1 | no funnel — login is retention, not acquisition |
+| `cta_tutor_apply` | 0 | tutor funnel left on Outbound click |
+| `cta_contact` | 0 | researcher funnel left on Outbound click |
+| `cta_newsletter` | 0 | no funnel planned |
+
+The schools funnel was **added alongside** the existing one rather than replacing
+it: `cta_demo` measures the demo CTA (two on `/for-schools`, both pointing at
+`app.tutors.plus/demo`), while "Contact us" measures the contact form. They are
+different conversions, and deleting a funnel destroys its accumulated data.
+
+**Still pending:** when `cta_tutor_apply` and `cta_contact` register their first
+sessions, rebuild the tutor and researcher funnels to end on them instead of
+"Outbound click". Because Clarity's UI cannot edit the steps of a saved funnel,
+that means creating the replacement, confirming it saved, then deleting the old
+one — accepting the loss of its history.
 
 ## Bug and UX monitoring
 
