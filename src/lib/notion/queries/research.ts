@@ -70,14 +70,24 @@ export const fetchResearchPapers = async (): Promise<ResearchPaper[]> => {
 
   try {
     const notion = getNotionClient()
-    const response = await notion.databases.query({
-      database_id: databaseId,
-      sorts: [
-        { property: "Date Published", direction: "descending" as const },
-      ],
-    })
+    // Notion caps a query at 100 rows — page through `next_cursor` or the list
+    // (and the count derived from it) silently truncates once the CMS passes 100.
+    const results: unknown[] = []
+    let cursor: string | undefined = undefined
+    do {
+      const response = await notion.databases.query({
+        database_id: databaseId,
+        sorts: [
+          { property: "Date Published", direction: "descending" as const },
+        ],
+        start_cursor: cursor,
+        page_size: 100,
+      })
+      results.push(...response.results)
+      cursor = response.has_more ? (response.next_cursor ?? undefined) : undefined
+    } while (cursor)
 
-    const papers = response.results
+    const papers = results
       .map(parseResearchPaper)
       .map(applyResearchGenres)
     await writeCache(CACHE_KEY, papers)
@@ -89,4 +99,23 @@ export const fetchResearchPapers = async (): Promise<ResearchPaper[]> => {
       .map(normalizeResearchPaper)
       .map(applyResearchGenres)
   }
+}
+
+/**
+ * Floor to `step` so a marketing "N+" claim is always backed by at least N CMS
+ * entries — 67 publications renders "60+", and the copy only moves at 70.
+ */
+export const roundedPublicationStat = (count: number, step = 10): number =>
+  Math.floor(count / step) * step
+
+/**
+ * Every row of the Publications & Resources CMS — papers, workshops, books and
+ * datasets alike — matching what `/publications` lists.
+ *
+ * `floor` guards the homepage stat against a Notion outage landing on an empty
+ * disk cache: the claim degrades to the last hand-verified number, never "0+".
+ */
+export const fetchPublicationCount = async (floor = 30): Promise<number> => {
+  const papers = await fetchResearchPapers()
+  return Math.max(papers.length, floor)
 }
