@@ -7,6 +7,10 @@ import {
 } from "@/components/marketing/plus-landing-sections"
 import { PlusLinkedInFeedSection } from "@/components/marketing/plus-linkedin-feed"
 import {
+  fetchPublicationCount,
+  roundedPublicationStat,
+} from "@/lib/notion/queries/research"
+import {
   marketingSectionStackGap,
   marketingShellNegatePadX,
 } from "@/lib/marketing-layout"
@@ -24,12 +28,17 @@ const homePageShellClassName = cn(
   homeHeroToImpactSpacing
 )
 
+/** Matches `/publications` — the "N+ published papers" stat is read from the same CMS. */
+export const revalidate = 3600
+
 /**
  * Homepage — Figma `1714:1883` (Landing includes Our Awards) → Impact → Science → Smart Tech → Testimonials.
  * "Built on the Science of Learning" leads the feature stack so credibility comes before product detail.
  * Header and footer come from `(marketing)/layout.tsx`.
  */
-const Home = () => {
+const Home = async () => {
+  const publicationCount = roundedPublicationStat(await fetchPublicationCount())
+
   return (
     <>
       {/* Break hero out of the layout's horizontal padding so bg-white spans full viewport width */}
@@ -39,7 +48,7 @@ const Home = () => {
       <div className={homePageShellClassName}>
         <PlusImpactStatsSection />
         <div className={cn("mt-16 flex flex-col md:mt-32", marketingSectionStackGap)}>
-          <PlusScienceOfLearningSection />
+          <PlusScienceOfLearningSection publicationCount={publicationCount} />
           <PlusSmartTechSection />
           <PlusVoicesSection />
           <PlusLinkedInFeedSection />

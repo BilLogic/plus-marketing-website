@@ -1165,10 +1165,21 @@ export const PlusSmartTechSection = () => {
 }
 
 /**
+ * Fallback when no CMS count is supplied (Storybook, or a caller that renders the
+ * section without a server fetch). Kept conservative — real count is well above it.
+ */
+const DEFAULT_PUBLICATION_COUNT = 30
+
+/**
  * Figma `1714:1998` — two columns (473 + 72 gap + 556), 397px-tall row; right panel single image (`1714:2017`).
  * Typography: shared `schoolsSection*` + `marketingTypography.bentoTitle` for the stat line (brand blue).
  */
-export const PlusScienceOfLearningSection = () => {
+export const PlusScienceOfLearningSection = ({
+  publicationCount = DEFAULT_PUBLICATION_COUNT,
+}: {
+  /** Floored count of Publications & Resources CMS rows — see `fetchPublicationCount`. */
+  publicationCount?: number
+}) => {
   return (
     <section id="science-of-learning" className={cn("relative", marketingSectionVerticalGapClass)}>
       <div className="relative w-full text-left">
@@ -1206,7 +1217,7 @@ export const PlusScienceOfLearningSection = () => {
               />
             </div>
             <p className={cn(marketingTypography.bentoTitle, "text-blue-900")}>
-              <CountUpStat target={30} suffix="+" /> published papers
+              <CountUpStat target={publicationCount} suffix="+" /> published papers
             </p>
             <p className={schoolsSectionLead}>
               PLUS is founded on decades of learning science research from leaders at Carnegie Mellon University
