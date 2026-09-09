@@ -8,6 +8,9 @@ import { OutboundClickTracker } from "./outbound-click-tracker"
  * dispatch a genuine DOM click, assert the resulting calls. Nothing here
  * reaches into the module's own helpers — a test that still passed after the
  * tag stopped firing in a browser would be testing the wrong thing.
+ *
+ * `audience` is stamped on every event by `trackEvent`; jsdom starts at "/", so
+ * it reads "general" unless a test navigates first.
  */
 
 const TUTOR_FORM_URL =
@@ -58,6 +61,7 @@ function trackedEvent() {
 }
 
 beforeEach(() => {
+  window.history.pushState({}, "", "/")
   document.addEventListener("click", swallowNavigation)
   window.gtag = vi.fn()
   window.clarity = vi.fn()
@@ -76,7 +80,11 @@ describe("CTA matching", () => {
 
     expect(trackedEvent()).toEqual({
       name: "tutor_apply_click",
-      params: { link_domain: "tutor_application_form", cta_location: "inline" },
+      params: {
+        link_domain: "tutor_application_form",
+        cta_location: "inline",
+        audience: "general",
+      },
     })
   })
 
@@ -86,7 +94,11 @@ describe("CTA matching", () => {
 
     expect(trackedEvent()).toEqual({
       name: "contact_form_click",
-      params: { link_domain: "contact_form", cta_location: "inline" },
+      params: {
+        link_domain: "contact_form",
+        cta_location: "inline",
+        audience: "general",
+      },
     })
   })
 
@@ -96,7 +108,11 @@ describe("CTA matching", () => {
 
     expect(trackedEvent()).toEqual({
       name: "demo_click",
-      params: { link_domain: "app.tutors.plus", cta_location: "inline" },
+      params: {
+        link_domain: "app.tutors.plus",
+        cta_location: "inline",
+        audience: "general",
+      },
     })
   })
 
@@ -106,7 +122,11 @@ describe("CTA matching", () => {
 
     expect(trackedEvent()).toEqual({
       name: "login_click",
-      params: { link_domain: "app.tutors.plus", cta_location: "inline" },
+      params: {
+        link_domain: "app.tutors.plus",
+        cta_location: "inline",
+        audience: "general",
+      },
     })
   })
 
@@ -231,6 +251,33 @@ describe("portaled markup", () => {
     )
 
     expect(trackedEvent()?.name).toBe("tutor_apply_click")
+  })
+})
+
+describe("audience", () => {
+  /**
+   * End-to-end proof that the choke-point stamp reaches a real CTA click: the
+   * same button on two different pages reports two different audiences.
+   */
+  it("reports the audience of the page the CTA was clicked on", () => {
+    render(<OutboundClickTracker />)
+
+    window.history.pushState({}, "", "/for-schools")
+    clickLink("https://app.tutors.plus/demo")
+
+    expect(trackedEvent()?.params).toMatchObject({
+      audience: "schools",
+      link_domain: "app.tutors.plus",
+    })
+  })
+
+  it("reports funders for a CTA clicked on a publications page", () => {
+    render(<OutboundClickTracker />)
+
+    window.history.pushState({}, "", "/publications/a-paper")
+    clickLink(CONTACT_FORM_URL)
+
+    expect(trackedEvent()?.params).toMatchObject({ audience: "funders" })
   })
 })
 

@@ -54,10 +54,57 @@ export function syncInternalTrafficFlag(): boolean {
   return isInternalTraffic()
 }
 
+/**
+ * The three audiences the site exists to serve, plus a fallback.
+ *
+ * PLUS treats funders, schools and tutors as equal priorities, but nothing in
+ * GA4 recorded which one an event belonged to — so "does the site serve all
+ * three equally?" could only be answered by reading paths by hand. Stamping
+ * this on every event turns that into an ordinary report breakdown.
+ *
+ * Deliberately coarser than, and separate from, Clarity's `page_type` (the raw
+ * first path segment, set in `clarity-tagger.tsx`). `page_type` is left alone
+ * for continuity with the funnels rebuilt in August; this groups those pages by
+ * who they are written for.
+ */
+export const AUDIENCES = ["schools", "funders", "tutors", "general"] as const
+
+export type Audience = (typeof AUDIENCES)[number]
+
+/**
+ * Longest-prefix-free by construction: no entry here is a prefix of another, so
+ * ordering does not affect the result.
+ */
+const AUDIENCE_BY_PATH_PREFIX: ReadonlyArray<readonly [string, Audience]> = [
+  ["/for-schools", "schools"],
+  ["/for-researchers", "funders"],
+  ["/publications", "funders"],
+  ["/for-tutors", "tutors"],
+  ["/get-involved", "tutors"],
+]
+
+/** Maps a pathname to its audience. Nested routes inherit their parent's. */
+export function audienceForPath(pathname: string): Audience {
+  const path = pathname.toLowerCase().replace(/\/+$/, "") || "/"
+  for (const [prefix, audience] of AUDIENCE_BY_PATH_PREFIX) {
+    if (path === prefix || path.startsWith(`${prefix}/`)) return audience
+  }
+  return "general"
+}
+
+/** The audience of the page the visitor is on right now. */
+export function currentAudience(): Audience {
+  if (typeof window === "undefined") return "general"
+  return audienceForPath(window.location.pathname)
+}
+
 export function trackEvent(name: string, params?: GtagParams) {
   if (typeof window === "undefined") return
   window.gtag?.("event", name, {
     ...params,
+    // Stamped after `params` so a caller cannot accidentally drop them. Every
+    // event, current and future, inherits these by passing through here.
+    audience: currentAudience(),
     ...(isInternalTraffic() ? { traffic_type: "internal" } : {}),
   })
 }
