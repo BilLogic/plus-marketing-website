@@ -71,6 +71,83 @@ traffic filter and the funnel explorations in #19 are console-only.
 Authentication is a service account with the `analytics.edit` scope; the same
 credential the Analytics MCP uses for reads.
 
+## Manual console steps — the three things no API reaches
+
+Everything above was applied through the Admin API. Three items cannot be, and
+they are still outstanding. Each blocker below was verified, not assumed, so
+nobody has to re-derive it.
+
+**None of these can be done by an agent.** Each needs a person signed into the
+GA4 UI as an editor, or with edit rights on the Google Forms.
+
+### 1. Set the internal-traffic data filter to Active
+
+Admin → Data collection and modification → Data filters → *Internal Traffic* →
+**Filter state: Active**.
+
+It is almost certainly still on **Testing**, the default, which tags traffic but
+excludes nothing. Verify rather than assume — the state cannot be read
+programmatically either.
+
+*Why it cannot be scripted:* there is no `dataFilters` resource in the Admin API
+in either version. The 21 property sub-resources in `v1alpha` are
+`accessBindings, adSenseLinks, audiences, bigQueryLinks, calculatedMetrics,
+channelGroups, conversionEvents, customDimensions, customMetrics, dataStreams,
+displayVideo360AdvertiserLinkProposals, displayVideo360AdvertiserLinks,
+expandedDataSets, firebaseLinks, googleAdsLinks, keyEvents,
+reportingDataAnnotations, rollupPropertySourceLinks, searchAds360Links,
+subpropertyEventFilters, subpropertySyncConfigs`. `v1beta` has 7, and none of
+them either.
+
+**Activating it alone changes nothing.** The filter excludes on
+`traffic_type = internal`, which `trackEvent()` stamps from a localStorage flag.
+Teammates must opt in per browser at `https://tutors.plus/?internal=1`
+(`?internal=0` undoes it). Without that, there is nothing to exclude.
+
+### 2. Build the three audience funnel Explorations — optional
+
+Explore → Blank → Funnel exploration, three times. Step definitions are in
+`scripts/audience-funnels.md`.
+
+*Why it cannot be scripted:* there is no Explorations resource in the Admin API
+at all.
+
+**Only worth doing if someone wants the clickable version in the UI.** The
+measurement itself is already delivered as `scripts/audience_funnels.py`, which
+produces the same three funnels on demand and is version-controlled. Nothing is
+blocked on this.
+
+### 3. Link `/thanks` from each form's confirmation message
+
+Add `https://tutors.plus/thanks?form=contact|tutor|demo|school` to each outbound
+Google Form's confirmation message.
+
+**Read this before trusting the resulting numbers.** Google Forms cannot redirect
+anywhere after submission — the confirmation option is a *message*, not a URL,
+and the Forms API exposes no confirmation field at all (`FormSettings` carries
+only `emailCollectionType` and `quizSettings`). The most a form can do is show a
+clickable link the respondent has to notice and click.
+
+So `form_submit` counts **"submitted and then clicked through"**, not
+"submitted", and undercounts by an unknown margin. Do not compare it against the
+`*_click` events and call the gap form drop-off.
+
+Counting iframe `load` events on the embedded form does not rescue this: Google
+Forms fires a load on every section change, and Form A ("Contact Form") has four
+page breaks — checked against its published `FB_PUBLIC_LOAD_DATA_`, not assumed.
+It would overcount badly.
+
+**If completion counts matter**, the ground truth is each form's linked response
+sheet. Nothing reads it yet; that is real new work rather than a checklist item.
+
+### On access
+
+The browser route was tried for items 1 and 2, since it needs no password. The
+Chrome session is signed into a Workspace account where Google Analytics is
+disabled at the org level — *"you do not have access to Google Analytics. Your
+account is managed by an organization that has this service turned off for its
+users."* Signing in as the property's own account needs that account's password.
+
 ## Related
 
 - `docs/AGENT_HANDOFF.md` — analytics architecture
