@@ -32,6 +32,25 @@ export default defineConfig({
           setupFiles: ['.storybook/vitest.setup.ts'],
         },
       },
+      {
+        // Unit tests for logic that has no visual surface — the analytics
+        // trackers all render `null`, so Storybook is the wrong home for them.
+        // The `@/` alias is scoped to this project: the Storybook project
+        // resolves it through @storybook/nextjs-vite and must stay untouched.
+        resolve: {
+          alias: { '@': path.join(dirname, 'src') },
+        },
+        test: {
+          name: 'unit',
+          environment: 'jsdom',
+          include: ['src/**/*.test.{ts,tsx}'],
+          setupFiles: ['./vitest.setup.unit.ts'],
+          // Resets vi.fn/vi.spyOn between tests. Note this does NOT unset
+          // properties assigned onto `window` (gtag, clarity) — tests that
+          // stub those must delete them in their own afterEach.
+          restoreMocks: true,
+        },
+      },
     ],
   },
 });
