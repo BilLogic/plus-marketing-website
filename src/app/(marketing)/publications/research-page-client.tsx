@@ -1,7 +1,10 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import {
+  useParamSyncedState,
+  useUrlSearchParams,
+} from "@/lib/use-url-search-params"
 import { ExternalLink, LayoutGrid, List, Search } from "lucide-react"
 import { trackEvent } from "@/lib/analytics"
 import { Input } from "@/components/ui/input"
@@ -156,11 +159,16 @@ function PublicationTableRow({ paper }: { paper: ResearchPaper }) {
 }
 
 export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
-  const router = useRouter()
-  const searchParams = useSearchParams()
+  // Not `useSearchParams()`: on a statically rendered route that opts the whole
+  // page out of server rendering, which is why this archive shipped no papers
+  // in its HTML. See `use-url-search-params.ts`.
+  const { params: searchParams, replace: replaceParams } = useUrlSearchParams()
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(null)
 
-  const [query, setQuery] = useState(searchParams.get("q") ?? "")
+  const [query, setQuery] = useState("")
+  // Keeps the search box in step with the URL on mount and on back/forward,
+  // without interrupting typing.
+  useParamSyncedState(searchParams, "q", setQuery)
   const [viewMode, setViewMode] = useState<"card" | "table">("card")
 
   const searchQ = searchParams.get("q")?.toLowerCase() ?? ""
@@ -209,7 +217,7 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
         if (v === null || v === "") params.delete(k)
         else params.set(k, v)
       })
-      router.replace(`?${params.toString()}`, { scroll: false })
+      replaceParams(params)
       // Filtering is the core interaction on this page — without it we can't
       // tell "browsed the archive" from "bounced off a wall of papers".
       // `filter_type` is the key name only, never the value (unbounded search
@@ -218,7 +226,7 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
         filter_type: Object.keys(updates).join(","),
       })
     },
-    [searchParams, router]
+    [searchParams, replaceParams]
   )
 
   const debouncedSearch = useCallback(
