@@ -18,3 +18,10 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+# Analytics gate. Netlify's own CONTEXT is build-only and not inlined into the
+# bundle, so an ISR re-render inside the runtime function sees it undefined and
+# silently drops the GA4 + Clarity tags. A NEXT_PUBLIC_* var is inlined at build
+# time and therefore survives request-time rendering.
+[context.production.environment]
+  NEXT_PUBLIC_DEPLOY_CONTEXT = "production"

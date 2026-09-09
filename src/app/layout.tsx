@@ -34,8 +34,14 @@ export const viewport: Viewport = {
  * Analytics fire only on Netlify production deploys — never on localhost,
  * deploy previews, or branch deploys. IDs come from env (`NEXT_PUBLIC_*` is
  * inlined at build time; a missing var silently disables that tag).
+ *
+ * The gate must be a `NEXT_PUBLIC_*` var, set per-context in `netlify.toml`.
+ * Netlify's own `CONTEXT` is build-only and never inlined, so this layout —
+ * a Server Component — saw it undefined whenever a page re-rendered at request
+ * time via ISR, silently dropping both tags on every `revalidate` route.
  */
-const isProductionDeploy = process.env.CONTEXT === "production"
+const isProductionDeploy =
+  process.env.NEXT_PUBLIC_DEPLOY_CONTEXT === "production"
 const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 const clarityId = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID
 

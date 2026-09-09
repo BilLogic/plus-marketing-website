@@ -6,7 +6,7 @@
  * `scroll` are GA4-reserved names; do not use them.
  *
  * Both wrappers no-op when the underlying tag is absent (dev, deploy previews —
- * scripts are gated to Netlify `CONTEXT === "production"` in the root layout).
+ * scripts are gated to `NEXT_PUBLIC_DEPLOY_CONTEXT === "production"` in the root layout).
  */
 
 type GtagParams = Record<string, string | number | boolean>
