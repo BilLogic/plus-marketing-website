@@ -98,6 +98,65 @@ export function currentAudience(): Audience {
   return audienceForPath(window.location.pathname)
 }
 
+/**
+ * Pushes a gtag `set` command. Goes through `dataLayer` rather than `gtag()`
+ * so it works identically before and after gtag.js loads — the queue is
+ * replayed in order, which is what lets `instrumentation-client.ts` seed
+ * values ahead of the GA config command.
+ */
+export function gtagSet(params: Record<string, string | boolean>) {
+  if (typeof window === "undefined") return
+  const w = window as typeof window & { dataLayer?: unknown[] }
+  w.dataLayer = w.dataLayer || []
+  w.dataLayer.push(["set", params])
+}
+
+/**
+ * The door a visitor came in through, as opposed to the page they happen to be
+ * on. A funder who lands on `/for-researchers`, reads `/about`, then converts
+ * would otherwise be recorded against `general` — attribution needs the door.
+ *
+ * Session-scoped and write-once: only the first audience-mapped page counts, so
+ * a later navigation to a different audience does not overwrite it. Landing on
+ * a `general` page does not claim the slot; the next audience page still can.
+ */
+const FIRST_AUDIENCE_KEY = "plus:first-audience"
+
+function readFirstAudience(): Audience | null {
+  try {
+    const stored = window.sessionStorage.getItem(FIRST_AUDIENCE_KEY)
+    return (AUDIENCES as readonly string[]).includes(stored ?? "")
+      ? (stored as Audience)
+      : null
+  } catch {
+    // Safari private mode and blocked-storage contexts throw on access.
+    return null
+  }
+}
+
+/**
+ * Claims the slot for the current page when it is audience-mapped and unclaimed.
+ * Returns the visitor's first audience, defaulting to `general` for a session
+ * that never touches one.
+ */
+export function syncFirstAudience(): Audience {
+  if (typeof window === "undefined") return "general"
+
+  const existing = readFirstAudience()
+  if (existing) return existing
+
+  const current = currentAudience()
+  if (current === "general") return "general"
+
+  try {
+    window.sessionStorage.setItem(FIRST_AUDIENCE_KEY, current)
+  } catch {
+    // Unwritable storage: report the audience for this page view and accept
+    // that the next one re-derives it rather than failing the page.
+  }
+  return current
+}
+
 export function trackEvent(name: string, params?: GtagParams) {
   if (typeof window === "undefined") return
   window.gtag?.("event", name, {
