@@ -4,6 +4,7 @@ import { FooterNewsletter } from "./footer-newsletter"
 import { FooterLinkColumns } from "./footer-link-columns"
 import { FooterBottomBar } from "./footer-bottom-bar"
 import { marketingFooterInnerShell } from "@/lib/marketing-layout"
+import { isLeadDestinationConfigured } from "@/lib/notion/leads"
 
 const SOCIAL_LINKS = [
   {
@@ -23,9 +24,17 @@ const SOCIAL_LINKS = [
 ]
 
 export function PlusFooter() {
+  /**
+   * A signup form with nowhere to send its data is worse than no form: it
+   * collects addresses under false pretenses and reports conversions that did
+   * not happen. Server-side check, so an unconfigured environment renders no
+   * form at all rather than one that fails on submit.
+   */
+  const newsletterAvailable = isLeadDestinationConfigured("newsletter")
+
   return (
     <footer className="bg-teal-950 pb-[env(safe-area-inset-bottom,0px)] text-white">
-      <FooterNewsletter />
+      {newsletterAvailable ? <FooterNewsletter /> : null}
 
       <div className={`${marketingFooterInnerShell} py-12 sm:py-16`}>
         <div className="flex flex-col gap-10 md:flex-row md:gap-16">
