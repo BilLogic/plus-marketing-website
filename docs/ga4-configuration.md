@@ -80,42 +80,56 @@ nobody has to re-derive it.
 **None of these can be done by an agent.** Each needs a person signed into the
 GA4 UI as an editor, or with edit rights on the Google Forms.
 
-### 1. Set the internal-traffic data filter to Active
+### 1. Internal-traffic data filter — DONE (was already Active)
 
-Admin → Data collection and modification → Data filters → *Internal Traffic* →
-**Filter state: Active**.
+Verified in the console on 2026-09-09: the *Internal Traffic* filter is
+**Active** (not Testing), operation **Exclude**, matching on parameter
+`traffic_type` exactly matching `internal`. That is exactly what `trackEvent()`
+stamps, so the filter is both on and correct.
 
-It is almost certainly still on **Testing**, the default, which tags traffic but
-excludes nothing. Verify rather than assume — the state cannot be read
-programmatically either.
+This corrects an earlier assumption recorded here that it was "almost certainly
+still on Testing". It was not. Nothing needed changing, and nothing was changed.
+
+The filter still only excludes browsers that have opted in. Teammates opt in per
+browser at `https://tutors.plus/?internal=1` (`?internal=0` undoes it); until
+they do, the filter has nothing to exclude.
 
 *Why it cannot be scripted:* there is no `dataFilters` resource in the Admin API
-in either version. The 21 property sub-resources in `v1alpha` are
-`accessBindings, adSenseLinks, audiences, bigQueryLinks, calculatedMetrics,
-channelGroups, conversionEvents, customDimensions, customMetrics, dataStreams,
-displayVideo360AdvertiserLinkProposals, displayVideo360AdvertiserLinks,
-expandedDataSets, firebaseLinks, googleAdsLinks, keyEvents,
-reportingDataAnnotations, rollupPropertySourceLinks, searchAds360Links,
-subpropertyEventFilters, subpropertySyncConfigs`. `v1beta` has 7, and none of
-them either.
+in either version, so its state can be neither read nor changed programmatically
+— it had to be confirmed by eye.
 
-**Activating it alone changes nothing.** The filter excludes on
-`traffic_type = internal`, which `trackEvent()` stamps from a localStorage flag.
-Teammates must opt in per browser at `https://tutors.plus/?internal=1`
-(`?internal=0` undoes it). Without that, there is nothing to exclude.
+### 2. Audience funnel Explorations — DONE
 
-### 2. Build the three audience funnel Explorations — optional
+Built in the console on 2026-09-09 as one exploration, **"Audience funnels
+(schools / funders / tutors)"**, with three tabs: `Schools`, `Funders`,
+`Tutors`. One exploration with three tabs rather than three separate
+explorations — the same three funnels, in one place, sharing a date range.
 
-Explore → Blank → Funnel exploration, three times. Step definitions are in
-`scripts/audience-funnels.md`.
+Each is `session_start` → a `page_view` on that audience's pages → that
+audience's conversion event, broken down by the user-scoped **First audience**
+so a visitor is attributed to the door they entered through.
 
-*Why it cannot be scripted:* there is no Explorations resource in the Admin API
-at all.
+| Tab | Page step | Conversion step |
+| --- | --- | --- |
+| Schools | `page_location` contains `/for-schools` | `demo_click` |
+| Funders | `page_location` matches `.*/(for-researchers\|publications).*` | `contact_form_click` |
+| Tutors | `page_location` matches `.*/(for-tutors\|get-involved).*` | `tutor_apply_click` |
 
-**Only worth doing if someone wants the clickable version in the UI.** The
-measurement itself is already delivered as `scripts/audience_funnels.py`, which
-produces the same three funnels on demand and is version-controlled. Nothing is
-blocked on this.
+**Gotcha worth keeping: a funnel step's "matches regex" is a FULL-STRING match.**
+`/(for-tutors|get-involved)` silently matched nothing and the funnel reported a
+clean, plausible-looking **zero** — no error, no warning. Wrapping it as
+`.*/(for-tutors|get-involved).*` took the same step from 0 to 48 users. If a
+funnel step reports zero, suspect the regex anchoring before you conclude the
+traffic is not there.
+
+`form_submit` was left out of the funders funnel: the event does not exist in
+GA4 yet, because nothing links to `/thanks` (see item 3). GA4 offered to create
+it as a new definition; a placeholder event that has never fired would only make
+the funnel look configured while measuring nothing.
+
+The 28-day figures at build time agreed with `scripts/audience_funnels.py`,
+which is the cross-check that the console funnels are measuring what the script
+measures: tutors 27.75% reaching their pages, funders 1.16%, schools 0.58%.
 
 ### 3. Link `/thanks` from each form's confirmation message
 
@@ -142,11 +156,10 @@ sheet. Nothing reads it yet; that is real new work rather than a checklist item.
 
 ### On access
 
-The browser route was tried for items 1 and 2, since it needs no password. The
-Chrome session is signed into a Workspace account where Google Analytics is
-disabled at the org level — *"you do not have access to Google Analytics. Your
-account is managed by an organization that has this service turned off for its
-users."* Signing in as the property's own account needs that account's password.
+GA4 admin work needs the property's own Google account. The CMU Workspace
+account cannot reach Analytics at all — *"you do not have access to Google
+Analytics. Your account is managed by an organization that has this service
+turned off for its users"* — so signing in as that account is not a workaround.
 
 ## Related
 
