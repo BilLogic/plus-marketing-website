@@ -101,7 +101,7 @@ export const FooterNewsletter = () => {
               ? "Thanks — you're on the list."
               : status === "error"
                 ? "Something went wrong and you were not subscribed. Please try again, or email us at tutors@tutors.plus."
-                : "By subscribing, you agree to our privacy policy."}
+                : "We'll only email you about PLUS, and you can unsubscribe at any time."}
           </p>
         </div>
       </div>
