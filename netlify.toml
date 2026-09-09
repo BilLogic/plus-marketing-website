@@ -18,3 +18,17 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+# Analytics gate. Netlify's own CONTEXT is build-only and not inlined into the
+# bundle, so an ISR re-render inside the runtime function sees it undefined and
+# silently drops the GA4 + Clarity tags. A NEXT_PUBLIC_* var is inlined at build
+# time and therefore survives request-time rendering.
+#
+# Keep this var HERE ONLY. netlify.toml env is build-scoped and never reaches
+# the function runtime, which is what keeps previews clean: outside production
+# the var is undefined at build, so the gate is not folded away and survives as
+# a runtime `process.env` read. Setting this name as an unscoped Netlify env var
+# (`netlify env:set`, no --context) would therefore switch real GA4 + Clarity on
+# for deploy previews and branch deploys.
+[context.production.environment]
+  NEXT_PUBLIC_DEPLOY_CONTEXT = "production"
