@@ -59,10 +59,10 @@ a saved funnel, so rebuilding was the only path.
 
 | Funnel | Steps |
 |---|---|
-| **NEW For Tutors to Apply Click** | page `contains /for-tutors` → Outbound click |
+| **Tutors: intent to apply click** | page `contains /for-tutors` → `cta_tutor_apply` |
 | **Schools: intent to contact** | School intent → Contact us |
 | **Schools: intent to demo click** | School intent → `cta_demo` |
-| **Researchers: intent to outbound** | Researcher intent → Outbound click |
+| **Researchers: intent to contact** | Researcher intent → `cta_contact` |
 
 Funnels are **not retroactive** — they populate from creation forward.
 
@@ -84,11 +84,38 @@ it: `cta_demo` measures the demo CTA (two on `/for-schools`, both pointing at
 `app.tutors.plus/demo`), while "Contact us" measures the contact form. They are
 different conversions, and deleting a funnel destroys its accumulated data.
 
-**Still pending:** when `cta_tutor_apply` and `cta_contact` register their first
-sessions, rebuild the tutor and researcher funnels to end on them instead of
-"Outbound click". Because Clarity's UI cannot edit the steps of a saved funnel,
-that means creating the replacement, confirming it saved, then deleting the old
-one — accepting the loss of its history.
+### Precise-event upgrade completed (2026-08-10)
+
+All four `cta_*` events that have a funnel role had registered sessions by this
+date, so the two remaining "Outbound click" endings were replaced:
+
+| API event | Sessions (lifetime, at 2026-08-10) |
+|---|---|
+| `cta_demo` | 9 |
+| `cta_tutor_apply` | 3 |
+| `cta_login` | 2 |
+| `cta_contact` | 1 |
+| `cta_newsletter` | 0 — not yet selectable, no funnel planned |
+
+Changes, done as create-then-delete because Clarity's UI still cannot edit the
+steps of a saved funnel:
+
+- **"NEW For Tutors to Apply Click"** (`/for-tutors` → Outbound click) replaced by
+  **"Tutors: intent to apply click"** (`/for-tutors` → `cta_tutor_apply`), then deleted.
+- **"Researchers: intent to outbound"** (Researcher intent → Outbound click) replaced by
+  **"Researchers: intent to contact"** (Researcher intent → `cta_contact`), then deleted.
+
+Both replacements were confirmed saved in the funnel list before either deletion.
+The accumulated data of the two old funnels is gone — that is the unavoidable cost
+of the no-edit limitation. Counting restarts from 2026-08-10.
+
+**Left alone:** "Schools: intent to contact" (School intent → Contact us) and
+"Schools: intent to demo click" (School intent → `cta_demo`). Neither ends on the
+generic "Outbound click", and together they already measure the two distinct
+schools conversions. Swapping "Contact us" for `cta_contact` there would destroy
+history to gain nothing.
+
+No funnel exists for `cta_login` (retention, not acquisition) or `cta_newsletter`.
 
 ## Bug and UX monitoring
 
