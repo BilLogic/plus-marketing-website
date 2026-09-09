@@ -1,6 +1,7 @@
 "use client"
 
 import { ArrowRight, Check, Loader2 } from "lucide-react"
+import Link from "next/link"
 import { useRef, useState } from "react"
 
 import { Input } from "@/components/ui/input"
@@ -101,7 +102,16 @@ export const FooterNewsletter = () => {
               ? "Thanks — you're on the list."
               : status === "error"
                 ? "Something went wrong and you were not subscribed. Please try again, or email us at tutors@tutors.plus."
-                : "We'll only email you about PLUS, and you can unsubscribe at any time."}
+                : (
+                  <>
+                    We&rsquo;ll only email you about PLUS, and you can
+                    unsubscribe at any time. See our{" "}
+                    <Link href="/privacy" className="underline underline-offset-2">
+                      privacy page
+                    </Link>
+                    .
+                  </>
+                )}
           </p>
         </div>
       </div>

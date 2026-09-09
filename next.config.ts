@@ -54,6 +54,10 @@ const nextConfig: NextConfig = {
 
         ["/solution/tutoring", "/for-schools"],
         ["/solution/toolkit", "/for-schools"],
+
+        // Terms lived under the locale prefix on the Framer site. `/terms` and
+        // `/privacy` are real pages now, so these resolve rather than 404.
+        ["/terms-of-use", "/terms"],
       ]
 
     return [

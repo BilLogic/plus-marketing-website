@@ -73,6 +73,8 @@ describe("legacy redirect map", () => {
     ["/en/about/story", "/about"],
     ["/tutor", "/for-tutors"],
     ["/pubs/7-Using_Large_Language_Models_to_Provide_Explanatory.pdf", "/publications"],
+    ["/en/terms-of-use", "/terms"],
+    ["/terms-of-use", "/terms"],
   ])("sends %s to %s in one hop", async (from, to) => {
     const rules = await redirects()
     expect(resolveOnce(from, rules)).toBe(to)
@@ -82,8 +84,14 @@ describe("legacy redirect map", () => {
    * Deliberately unmapped: no destination exists, and #20 is where that
    * product decision lives. A clean 404 beats an arbitrary redirect.
    */
+  /**
+   * `/terms` and `/privacy` are now real pages, so they must NOT be redirect
+   * sources — a redirect would shadow the page. Release notes have no
+   * destination (app.tutors.plus returns 403 to anonymous requests) and FAQ is
+   * deliberately deferred.
+   */
   it.each(["/terms", "/privacy", "/faq.html", "/release-notes/4-2", "/hidden/page"])(
-    "leaves %s unmapped pending a decision",
+    "leaves %s unmapped",
     async (path) => {
       const rules = await redirects()
       expect(resolveOnce(path, rules)).toBeNull()
