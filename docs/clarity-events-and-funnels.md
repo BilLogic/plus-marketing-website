@@ -107,6 +107,43 @@ Clarity has **no native threshold alerting**. Practical setup:
 Masking **Relaxed** · IP block on the team IP · GA4 integration connected to the
 `PLUS Framer Site` property (legacy name, correct property — `G-6LB6RSKSCC`).
 
+## GA4 counterparts (added 2026-09-09)
+
+GA4 now carries an `audience` dimension of its own, so the two tools can finally
+be pointed at the same question. Clarity's `page_type` (raw first path segment)
+is unchanged — `audience` is a coarser grouping layered alongside it, not a
+replacement, so nothing here had to be rebuilt a second time.
+
+| Clarity | GA4 |
+|---|---|
+| `page_type` custom tag | `audience` event parameter |
+| — | `first_audience` user property (the door entered through) |
+| `cta_tutor_apply` | `tutor_apply_click` |
+| `cta_contact` | `contact_form_click` |
+| `cta_demo` | `demo_click` |
+| `cta_login` | `login_click` |
+| `cta_newsletter` | `newsletter_signup` |
+| `form_submit_*` | `form_submit` |
+| Excessive scrolling (auto) | `scroll_depth` at 25/50/75/90 |
+
+### Funnel definitions to mirror
+
+Three GA4 funnel explorations, segmented by `first_audience`, deliberately
+mirroring the Clarity funnels above so the two stay comparable:
+
+| Audience | Steps |
+|---|---|
+| Schools | `session_start` → `page_view` contains `/for-schools` → `demo_click` |
+| Funders | `session_start` → `page_view` contains `/for-researchers`, `/publications` → `contact_form_click` or `form_submit` (`form=contact`) |
+| Tutors | `session_start` → `page_view` contains `/for-tutors`, `/get-involved` → `tutor_apply_click` |
+
+Baseline measured 2026-09-09 over the prior 90 days: **1.65% of sessions that
+view a page click any conversion CTA** (23 of 1,394). That is the number these
+funnels exist to move.
+
+Like Clarity's, GA4 funnels are **not retroactive** — they populate from
+creation forward.
+
 ## Related
 
 - GA4 taxonomy: `docs/plans/2026-08-03-001-feat-tutors-plus-launch-hardening-plan.md`
