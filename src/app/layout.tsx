@@ -3,6 +3,7 @@ import { GoogleAnalytics } from "@next/third-parties/google"
 import Script from "next/script"
 import "./globals.css"
 import { ClarityTagger } from "@/components/analytics/clarity-tagger"
+import { FirstAudienceTracker } from "@/components/analytics/first-audience-tracker"
 import { OutboundClickTracker } from "@/components/analytics/outbound-click-tracker"
 import { WebVitals } from "@/components/analytics/web-vitals"
 import { ScrollToTopButton } from "@/components/scroll-to-top-button"
@@ -87,6 +88,7 @@ export default function RootLayout({
         </ThemeProvider>
         <OutboundClickTracker />
         <ClarityTagger />
+        <FirstAudienceTracker />
         <WebVitals />
         {isProductionDeploy && gaId ? <GoogleAnalytics gaId={gaId} /> : null}
       </body>

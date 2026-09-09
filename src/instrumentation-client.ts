@@ -9,24 +9,24 @@
  *     async code, unhandled promise rejections.
  */
 
-import { syncInternalTrafficFlag } from "@/lib/analytics"
+import { gtagSet, syncFirstAudience, syncInternalTrafficFlag } from "@/lib/analytics"
 
 // --- gtag defaults ---------------------------------------------------------
 
-/**
- * `dataLayer` accumulates commands before gtag.js loads and replays them in
- * order, so pushing here guarantees these land ahead of the `config` command
- * that @next/third-parties emits.
- */
-function gtagSet(params: Record<string, string | boolean>) {
-  const w = window as typeof window & { dataLayer?: unknown[] }
-  w.dataLayer = w.dataLayer || []
-  w.dataLayer.push(["set", params])
-}
+// `dataLayer` accumulates commands before gtag.js loads and replays them in
+// order, so `gtagSet` here lands ahead of the `config` command that
+// @next/third-parties emits.
 
 if (syncInternalTrafficFlag()) {
   gtagSet({ traffic_type: "internal" })
 }
+
+/**
+ * Seeds the landing page's audience. A session that lands on a `general` page
+ * and only later reaches an audience page is picked up by
+ * `FirstAudienceTracker` on the soft navigation.
+ */
+gtagSet({ first_audience: syncFirstAudience() })
 
 /**
  * Our conversion CTAs are outbound links to Google Forms. When someone submits
