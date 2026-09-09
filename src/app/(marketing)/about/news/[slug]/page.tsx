@@ -1,34 +1,62 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { notFound } from "next/navigation"
+import { notFound, permanentRedirect } from "next/navigation"
 import { marketingListingShellClass } from "@/lib/marketing-layout"
-import { fetchNewsById } from "@/lib/notion/queries/news"
+import { fetchNews } from "@/lib/notion/queries/news"
+import type { NewsItem } from "@/lib/notion/types"
+import {
+  isNotionId,
+  newsItemForSlug,
+  newsSlugFor,
+} from "@/lib/notion/utils/news-slug"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
 
 export const revalidate = 60
 
+/**
+ * Resolves the route param against the full set.
+ *
+ * Slugs are assigned across all articles at once — a UUID prefix is not unique
+ * in practice — so a single-page fetch cannot answer this. `fetchNews` is the
+ * same cached, revalidated call the listing already makes.
+ */
+async function resolve(
+  slug: string,
+): Promise<{ item: NewsItem; canonical: string } | null> {
+  const items = await fetchNews()
+  const item = newsItemForSlug(items, slug)
+  if (!item) return null
+
+  const canonical = newsSlugFor(items, item.id) ?? slug
+  return { item, canonical }
+}
+
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
-  const { id } = await params
-  const item = await fetchNewsById(id)
-  if (!item) return { title: "News" }
+  const { slug } = await params
+  const resolved = await resolve(slug)
+  if (!resolved) return { title: "News" }
 
+  const { item, canonical } = resolved
   const description =
     item.marketingBlurb || item.summary || "News and media coverage from PLUS."
+
   return {
     title: item.title,
     description,
+    // Always the slug form, so a lingering id URL never competes with it.
+    alternates: { canonical: `/about/news/${canonical}` },
     openGraph: {
       title: item.title,
       description,
       type: "article",
       publishedTime: item.publicationDate || undefined,
-      url: `/about/news/${id}`,
+      url: `/about/news/${canonical}`,
       images: item.featuredImage ? [item.featuredImage] : undefined,
     },
   }
@@ -37,13 +65,21 @@ export async function generateMetadata({
 export default async function NewsDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ slug: string }>
 }) {
-  const { id } = await params
-  const item = await fetchNewsById(id)
+  const { slug } = await params
+  const resolved = await resolve(slug)
 
-  if (!item) {
+  if (!resolved) {
     notFound()
+  }
+
+  const { item, canonical } = resolved
+
+  // Old UUID URLs are already in Google's index and in whatever was shared
+  // before this change. Send them to the slug rather than serving both.
+  if (isNotionId(slug) && canonical !== slug) {
+    permanentRedirect(`/about/news/${canonical}`)
   }
 
   return (

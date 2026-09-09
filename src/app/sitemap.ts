@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next"
 import { fetchNews } from "@/lib/notion/queries/news"
+import { assignNewsSlugs } from "@/lib/notion/utils/news-slug"
 import { fetchSuccessStories } from "@/lib/notion/queries/success-stories"
 import { successStoryPagePath } from "@/lib/success-stories/success-story-path"
 
@@ -36,10 +37,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     fetchSuccessStories(),
   ])
 
-  const newsEntries: MetadataRoute.Sitemap = news.map((item) => ({
-    url: `${BASE}/about/news/${item.id}`,
-    lastModified: item.publicationDate || undefined,
-  }))
+  // Slugs are assigned across the whole set at once, so this must not be a
+  // per-item derivation.
+  const newsSlugs = assignNewsSlugs(news)
+  const newsEntries: MetadataRoute.Sitemap = news.flatMap((item) => {
+    const slug = newsSlugs.get(item.id)
+    if (!slug) return []
+    return [
+      {
+        url: `${BASE}/about/news/${slug}`,
+        lastModified: item.publicationDate || undefined,
+      },
+    ]
+  })
 
   // Only stories with on-site pages; external-only stories return a non-local path.
   const storyEntries: MetadataRoute.Sitemap = stories.flatMap((story) => {

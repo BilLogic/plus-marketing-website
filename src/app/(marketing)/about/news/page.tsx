@@ -12,6 +12,7 @@ import {
 } from "@/lib/marketing-section-layout"
 import { fetchNews } from "@/lib/notion/queries/news"
 import type { NewsItem } from "@/lib/notion/types"
+import { assignNewsSlugs } from "@/lib/notion/utils/news-slug"
 import { formatNewsDate } from "@/lib/marketing/news-date"
 import { marketingListingShellClass } from "@/lib/marketing-layout"
 import { cn } from "@/lib/utils"
@@ -31,9 +32,9 @@ const NEWS_CATEGORY_ICON: Record<string, ComponentType<{ className?: string }>> 
   "Others": BookOpen,
 }
 
-function NewsCard({ item }: { item: NewsItem }) {
+function NewsCard({ item, slug }: { item: NewsItem; slug: string }) {
   const Icon = NEWS_CATEGORY_ICON[item.category] ?? Newspaper
-  const href = item.externalLink ?? `/about/news/${item.id}`
+  const href = item.externalLink ?? `/about/news/${slug}`
   const rawBlurb = item.marketingBlurb ?? item.summary
   const blurb = rawBlurb?.startsWith("(TBD") ? null : rawBlurb
   const date = formatNewsDate(item.publicationDate)
@@ -101,6 +102,7 @@ function NewsCard({ item }: { item: NewsItem }) {
 
 export default async function NewsPage() {
   const news = await fetchNews()
+  const newsSlugs = assignNewsSlugs(news)
 
   return (
     <main className="bg-background text-foreground">
@@ -133,7 +135,11 @@ export default async function NewsPage() {
         ) : (
           <div className={cn("flex flex-col", marketingCardStackGapClass)}>
             {news.map((item) => (
-              <NewsCard key={item.id} item={item} />
+              <NewsCard
+                key={item.id}
+                item={item}
+                slug={newsSlugs.get(item.id) ?? item.id}
+              />
             ))}
           </div>
         )}
