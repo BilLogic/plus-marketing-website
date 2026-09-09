@@ -17,8 +17,13 @@ import {
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
+  // Without an explicit title this page inherited the root `default` and shipped
+  // the homepage's title verbatim — as did /for-researchers. Three URLs, one
+  // title, which is both unhelpful to a searcher scanning results and part of
+  // why Search Console reports duplicate-canonical warnings.
+  title: "Math Tutoring for Schools",
   description:
-    "PLUS tutoring for schools — research-backed, AI-powered math support for every classroom.",
+    "Research-backed, AI-powered math tutoring that supplements classroom instruction. PLUS partners with schools to give every student individual support at scale.",
 }
 
 export const revalidate = 300

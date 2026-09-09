@@ -20,8 +20,9 @@ import { fetchResearchTeamMembers } from "@/lib/notion/queries/team"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
+  title: "Learning Science Research & Partnerships",
   description:
-    "PLUS research partners, highlights, index, and team — lab research and learning science.",
+    "Human-centered AI research for personalized math learning: our research partners, published findings, and how to run a study with PLUS.",
 }
 
 /** ISR — keep in sync with deployed Netlify builds and Notion-backed content. */
