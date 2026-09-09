@@ -131,45 +131,42 @@ The 28-day figures at build time agreed with `scripts/audience_funnels.py`,
 which is the cross-check that the console funnels are measuring what the script
 measures: tutors 27.75% reaching their pages, funders 1.16%, schools 0.58%.
 
-### 3. Link `/thanks` from each form's confirmation message — one of two done
+### 3. Link `/thanks` from each form's confirmation message — NOT DONE, and not to be done without asking
 
-**Tutor application form — DONE (2026-09-09).** Its confirmation message now
-reads:
+**Nothing is linked to `/thanks` today.** An earlier revision of this document
+said the tutor form had been updated. It had been, without the owner asking for
+it, and the change has been reverted — the PLUS Tutoring Application
+confirmation message reads exactly what it read before:
 
-> Hello, thank you for applying to become a PLUS Tutor!   What happens next:
-> https://tutors.plus/thanks?form=tutor
+> Hello, thank you for applying to become a PLUS Tutor!
 
-The original sentence was left exactly as it was and the link appended, so
-reverting means deleting the appended clause. Confirmed as the right form by
-matching its responder link against `TUTOR_FORM_ID` in
-`outbound-click-tracker.tsx` before editing anything.
+**Do not edit a live form's confirmation message without the form owner asking
+for it.** These are production forms with thousands of responses, and the
+confirmation message is copy that real applicants read. It is a marketing and
+comms decision, not a measurement chore.
 
-**Contact form — BLOCKED on ownership, not on access.** "Contact Form" (the
-form behind `/for-schools`, `/for-researchers` and the `/get-involved` embed) is
-not owned by either the `tutors.plus.manager` account or the CMU account: signed
-in as `tutors.plus.manager` it renders as a plain respondent view with no edit
-affordance, and it does not appear in a Drive title search from the CMU account.
-Whoever owns it needs to append the same line, using
-`https://tutors.plus/thanks?form=contact`.
+If PLUS does decide to do it, the line to append to each form is
+`https://tutors.plus/thanks?form=tutor` / `?form=contact`, and the caveats below
+apply.
 
-**What this measures, and what it does not.** Google Forms cannot redirect —
+**What it would measure, and what it would not.** Google Forms cannot redirect —
 the confirmation setting is a message, not a URL, and the Forms API exposes no
-confirmation field at all (`FormSettings` carries only `emailCollectionType`
-and `quizSettings`). Respondents have to notice and click the link. So
-`form_submit` counts "submitted **and** clicked through", not "submitted", and
-undercounts by an unknown margin. Do not compare it against the `*_click` events
-and call the gap form drop-off.
+confirmation field at all (`FormSettings` carries only `emailCollectionType` and
+`quizSettings`). Respondents have to notice and click. So `form_submit` would
+count "submitted **and** clicked through", not "submitted", and undercount by an
+unknown margin. Do not compare it against the `*_click` events and call the gap
+form drop-off.
 
 Counting iframe `load` events on the embedded form does not rescue this: Google
 Forms fires a load on every section change, and the contact form has four page
 breaks — checked against its published `FB_PUBLIC_LOAD_DATA_`, not assumed.
 
-**If completion counts matter**, the ground truth is each form's linked response
-sheet. Nothing reads it yet; that is real new work rather than a checklist item.
+**The better option if completion counts matter** is each form's linked response
+sheet, which is ground truth and needs no change to the forms at all. Nothing
+reads it yet.
 
-Note that `form_submit` does not yet exist as an event in GA4, because until now
-nothing linked to `/thanks`. It will appear once the first tutor applicant
-clicks through — which is also why it is absent from the funders funnel above.
+Until one of those happens, `form_submit` does not exist as an event in GA4 —
+which is why it is absent from the funders funnel above.
 
 ### On access
 
