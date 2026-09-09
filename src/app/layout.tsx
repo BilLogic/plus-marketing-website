@@ -5,6 +5,7 @@ import "./globals.css"
 import { ClarityTagger } from "@/components/analytics/clarity-tagger"
 import { FirstAudienceTracker } from "@/components/analytics/first-audience-tracker"
 import { OutboundClickTracker } from "@/components/analytics/outbound-click-tracker"
+import { ScrollDepthTracker } from "@/components/analytics/scroll-depth-tracker"
 import { WebVitals } from "@/components/analytics/web-vitals"
 import { ScrollToTopButton } from "@/components/scroll-to-top-button"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -89,6 +90,7 @@ export default function RootLayout({
         <OutboundClickTracker />
         <ClarityTagger />
         <FirstAudienceTracker />
+        <ScrollDepthTracker />
         <WebVitals />
         {isProductionDeploy && gaId ? <GoogleAnalytics gaId={gaId} /> : null}
       </body>
