@@ -47,7 +47,9 @@ export function useUrlSearchParams(): {
       const qs = next.toString()
       // Set state before navigating so the UI does not wait on the router.
       setSearch(qs)
-      router.replace(qs ? `?${qs}` : "?", { scroll: false })
+      // A bare "?" when every filter is cleared, which is what strips the old
+      // query string from the URL.
+      router.replace(`?${qs}`, { scroll: false })
     },
     [router]
   )
