@@ -24,7 +24,7 @@ export function isNotionId(value: string): boolean {
 }
 
 export function slugify(title: string): string {
-  return (
+  const slug = (
     title
       .toLowerCase()
       .normalize("NFKD")
@@ -33,9 +33,26 @@ export function slugify(title: string): string {
       .replace(/['’]/g, "")
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "")
-      .slice(0, 80)
-      .replace(/-+$/g, "")
   )
+
+  return truncateAtWord(slug)
+}
+
+/**
+ * Caps slug length without cutting mid-word.
+ *
+ * A blind `slice` produces tails like `...how-plus-uses-ai-to-enhance-lear`,
+ * which reads as broken rather than shortened — and the URL is the whole point
+ * of having a slug. Cuts back to the last word boundary instead, falling back
+ * to a hard cut for a single word longer than the cap.
+ */
+function truncateAtWord(slug: string, max = 80): string {
+  if (slug.length <= max) return slug
+
+  const cut = slug.slice(0, max + 1)
+  const lastDash = cut.lastIndexOf("-")
+  const truncated = lastDash > 0 ? cut.slice(0, lastDash) : cut.slice(0, max)
+  return truncated.replace(/-+$/g, "")
 }
 
 /** The id fragment appended to a colliding slug. Long enough to be unique. */

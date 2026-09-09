@@ -52,7 +52,7 @@ describe("slugify", () => {
   it("truncates without leaving a trailing dash", () => {
     // 79 letters then a word break puts the dash at index 79, so the 80-char
     // cut lands exactly on it. This is the case that needs cleaning up after
-    // the slice, not before it.
+    // the cut, not before it.
     const slug = slugify("a".repeat(79) + " b")
     expect(slug).toBe("a".repeat(79))
     expect(slug.endsWith("-")).toBe(false)
@@ -62,6 +62,23 @@ describe("slugify", () => {
     const slug = slugify("word ".repeat(40))
     expect(slug.length).toBeLessThanOrEqual(80)
     expect(slug.endsWith("-")).toBe(false)
+  })
+
+  it("cuts at a word boundary rather than mid-word", () => {
+    // The real headline that exposed this: a blind slice ended "...enhance-lear".
+    const slug = slugify(
+      "Learning With and About AI Seminar Series: Four Ways PLUS Uses AI to Enhance Learning",
+    )
+    expect(slug.length).toBeLessThanOrEqual(80)
+    expect(slug).toBe(
+      "learning-with-and-about-ai-seminar-series-four-ways-plus-uses-ai-to-enhance",
+    )
+    expect(slug.endsWith("-lear")).toBe(false)
+  })
+
+  it("hard-cuts a single word longer than the cap", () => {
+    const slug = slugify("x".repeat(120))
+    expect(slug).toBe("x".repeat(80))
   })
 
   it("returns empty for a title with nothing sluggable", () => {
