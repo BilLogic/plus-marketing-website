@@ -116,3 +116,49 @@ medium** as the dimension. A correctly tagged campaign shows as
 the five above.
 
 Give it 24-48 hours — standard reports are not realtime.
+
+## Ready-made links
+
+Copy these as-is. They are the placements that matter for the two audiences that
+currently do not find the site, plus the one placement already known to be
+mis-tagged.
+
+### Fix first — Handshake
+
+The live Handshake posting uses `utm_medium=Handshake`, which is not a value GA4
+recognises, so **161 sessions over 90 days landed in Unassigned** and were
+invisible in every standard report. Replace it with:
+
+```
+https://tutors.plus/for-tutors?utm_source=handshake&utm_medium=job-board&utm_campaign=tutor-recruitment
+```
+
+### Schools outreach
+
+| Placement | Link |
+| --- | --- |
+| Email to a district or principal | `https://tutors.plus/for-schools?utm_source=school-outreach&utm_medium=email&utm_campaign=school-partnerships` |
+| Conference deck or printed handout | `https://tutors.plus/for-schools?utm_source=conference&utm_medium=deck&utm_campaign=school-partnerships` |
+| Partner or district website | `https://tutors.plus/for-schools?utm_source=<their-domain>&utm_medium=referral&utm_campaign=school-partnerships` |
+
+### Funder and researcher outreach
+
+| Placement | Link |
+| --- | --- |
+| Funder update email | `https://tutors.plus/publications?utm_source=funder-update&utm_medium=email&utm_campaign=funder-relations` |
+| Grant application PDF | `https://tutors.plus/publications?utm_source=<funder-name>&utm_medium=deck&utm_campaign=funder-relations` |
+| Paper landing page or author profile | `https://tutors.plus/publications?utm_source=<site-domain>&utm_medium=referral&utm_campaign=research-referral` |
+| Lab or university directory | `https://tutors.plus/for-researchers?utm_source=<site-domain>&utm_medium=referral&utm_campaign=research-referral` |
+
+Replace each `<placeholder>` with the actual host or funder, lowercase, no
+`www.`. Keep the `utm_campaign` value stable across a push so its sessions group
+into one row.
+
+### Why these destinations
+
+`/for-schools`, `/for-researchers` and `/publications` drew **zero organic search
+sessions in the 90 days to 2026-09-09**. Google has not indexed them — organic
+traffic still lands on legacy Framer paths like `/get-involved/become-a-tutor`
+and `/impact/research`, which survive only because of the redirect map. Until
+that changes, a hand-placed link is the only way those pages get reached at all,
+which makes tagging them the only way their audiences become measurable.
