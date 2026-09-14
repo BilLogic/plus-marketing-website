@@ -17,14 +17,21 @@ function goTo(pathname: string) {
   window.history.pushState({}, "", pathname)
 }
 
+/**
+ * Reads `first_audience` only from commands gtag.js would actually execute:
+ * `Arguments` objects of the form `set, "user_properties", {...}`. The previous
+ * version of this helper accepted plain arrays and plain `set` parameters —
+ * exactly the shape gtag.js ignores and a user-scoped dimension cannot read —
+ * which is how a dead implementation passed every test.
+ */
 function firstAudienceSets(): string[] {
   const queue = (window as { dataLayer?: unknown[] }).dataLayer ?? []
   return queue.flatMap((entry) => {
-    if (!Array.isArray(entry) || entry[0] !== "set") return []
-    const params = entry[1] as Record<string, unknown>
-    return typeof params?.first_audience === "string"
-      ? [params.first_audience]
-      : []
+    if (Object.prototype.toString.call(entry) !== "[object Arguments]") return []
+    const [command, target, properties] = Array.from(entry as ArrayLike<unknown>)
+    if (command !== "set" || target !== "user_properties") return []
+    const value = (properties as Record<string, unknown>)?.first_audience
+    return typeof value === "string" ? [value] : []
   })
 }
 
