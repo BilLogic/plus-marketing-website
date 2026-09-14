@@ -99,16 +99,38 @@ export function currentAudience(): Audience {
 }
 
 /**
- * Pushes a gtag `set` command. Goes through `dataLayer` rather than `gtag()`
- * so it works identically before and after gtag.js loads — the queue is
- * replayed in order, which is what lets `instrumentation-client.ts` seed
- * values ahead of the GA config command.
+ * Queues a gtag command exactly as `gtag()` itself would.
+ *
+ * gtag.js replays only `Arguments` objects from `dataLayer` — its own stub is
+ * `function gtag(){dataLayer.push(arguments)}`. A plain array such as
+ * `["set", {...}]` is silently skipped. That mistake shipped once: every `set`
+ * this module made was dropped, so `first_audience`, the internal-traffic flag
+ * on page views, and `ignore_referrer` never reached a single hit.
+ *
+ * Going through `dataLayer` rather than `gtag()` keeps this working before
+ * gtag.js loads, which is what lets `instrumentation-client.ts` seed values
+ * ahead of the GA config command.
  */
-export function gtagSet(params: Record<string, string | boolean>) {
+function queueGtagCommand(..._command: unknown[]): void {
   if (typeof window === "undefined") return
   const w = window as typeof window & { dataLayer?: unknown[] }
   w.dataLayer = w.dataLayer || []
-  w.dataLayer.push(["set", params])
+  // `arguments`, deliberately — see above.
+  // eslint-disable-next-line prefer-rest-params
+  w.dataLayer.push(arguments)
+}
+
+/** Sets parameters sent with every subsequent hit (event-scoped). */
+export function gtagSet(params: Record<string, string | boolean>) {
+  queueGtagCommand("set", params)
+}
+
+/**
+ * Sets GA4 user properties. User-scoped custom dimensions read these and
+ * nothing else — a plain `set` parameter of the same name reports "(not set)".
+ */
+export function gtagSetUserProperties(properties: Record<string, string>) {
+  queueGtagCommand("set", "user_properties", properties)
 }
 
 /**

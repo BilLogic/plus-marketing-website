@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation"
 import { useEffect } from "react"
-import { gtagSet, syncFirstAudience } from "@/lib/analytics"
+import { gtagSetUserProperties, syncFirstAudience } from "@/lib/analytics"
 
 /**
  * Claims `first_audience` on the first audience-mapped page of the session.
@@ -15,7 +15,7 @@ import { gtagSet, syncFirstAudience } from "@/lib/analytics"
 export function FirstAudienceTracker() {
   const pathname = usePathname()
   useEffect(() => {
-    gtagSet({ first_audience: syncFirstAudience() })
+    gtagSetUserProperties({ first_audience: syncFirstAudience() })
   }, [pathname])
   return null
 }

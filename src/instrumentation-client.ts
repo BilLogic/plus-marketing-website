@@ -9,7 +9,12 @@
  *     async code, unhandled promise rejections.
  */
 
-import { gtagSet, syncFirstAudience, syncInternalTrafficFlag } from "@/lib/analytics"
+import {
+  gtagSet,
+  gtagSetUserProperties,
+  syncFirstAudience,
+  syncInternalTrafficFlag,
+} from "@/lib/analytics"
 
 // --- gtag defaults ---------------------------------------------------------
 
@@ -26,7 +31,7 @@ if (syncInternalTrafficFlag()) {
  * and only later reaches an audience page is picked up by
  * `FirstAudienceTracker` on the soft navigation.
  */
-gtagSet({ first_audience: syncFirstAudience() })
+gtagSetUserProperties({ first_audience: syncFirstAudience() })
 
 /**
  * Our conversion CTAs are outbound links to Google Forms. When someone submits
