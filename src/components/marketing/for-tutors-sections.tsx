@@ -124,7 +124,7 @@ export const TutorsHeroSection = () => {
             marketingSectionLeadColorClass,
           )}
         >
-          Join 900+ tutors supporting 8,900+ students. Earn while you learn and
+          Join 900+ tutors supporting 9,500+ students. Earn while you learn and
           lead.
         </p>
         <div className={marketingHeroCtaButtonRowClass}>

@@ -799,7 +799,7 @@ export const PlusImpactStatsSection = () => {
           <div className={cn(impactZigzagTextColClass, "shrink-0", "md:order-1")}>
             <ImpactStatIcon src={plusHomeImpactDecor.iconStudents} />
             <p className={impactStatTitleClass}>
-              <CountUpStat target={8900} suffix="+" /> students
+              <CountUpStat target={9500} suffix="+" /> students
             </p>
             <p className={impactZigzagBodyClass}>
               Middle-school students we&apos;ve tutored with personalized math support through PLUS.
