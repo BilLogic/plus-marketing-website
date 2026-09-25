@@ -282,7 +282,7 @@ export function AboutMissionSection() {
           title="Proven Impact"
           items={[
             "Serving 25+ schools across PA, OR, IL, CA, and TN",
-            "8,900+ students tutored since 2018",
+            "9,500+ students tutored since 2018",
             "Technology developed with Carnegie Mellon & Stanford",
           ]}
         />
