@@ -49,6 +49,39 @@ const normalizeMemberLinks = (members: TeamMember[]): TeamMember[] =>
     personalWebsite: normalizeExternalUrl(m.personalWebsite),
   }))
 
+/**
+ * Every team row straight from Notion, leadership first. Throws on failure —
+ * the site's fetcher falls back to the cache, the scheduled sync must not.
+ */
+export const loadTeamMembersFromNotion = async (): Promise<TeamMember[]> => {
+  const notion = getNotionClient()
+  const pages: Awaited<
+    ReturnType<typeof notion.databases.query>
+  >["results"] = []
+  let cursor: string | undefined
+
+  do {
+    const response = await notion.databases.query({
+      database_id: DATABASE_ID,
+      start_cursor: cursor,
+    })
+    pages.push(...response.results)
+    cursor = response.has_more ? response.next_cursor! : undefined
+  } while (cursor)
+
+  const members = pages.map(parseTeamMember)
+
+  members.sort((a, b) => {
+    const affA = a.affiliation ? (AFFILIATION_ORDER[a.affiliation] ?? 99) : 98
+    const affB = b.affiliation ? (AFFILIATION_ORDER[b.affiliation] ?? 99) : 98
+    if (affA !== affB) return affA - affB
+
+    return a.name.localeCompare(b.name)
+  })
+
+  return members
+}
+
 export const fetchTeamMembers = async (): Promise<TeamMember[]> => {
   if (!process.env.NOTION_API_KEY) {
     const cached = await readCache<TeamMember[]>(CACHE_KEY)
@@ -56,31 +89,7 @@ export const fetchTeamMembers = async (): Promise<TeamMember[]> => {
   }
 
   try {
-    const notion = getNotionClient()
-    const pages: Awaited<
-      ReturnType<typeof notion.databases.query>
-    >["results"] = []
-    let cursor: string | undefined
-
-    do {
-      const response = await notion.databases.query({
-        database_id: DATABASE_ID,
-        start_cursor: cursor,
-      })
-      pages.push(...response.results)
-      cursor = response.has_more ? response.next_cursor! : undefined
-    } while (cursor)
-
-    const members = pages.map(parseTeamMember)
-
-    members.sort((a, b) => {
-      const affA = a.affiliation ? (AFFILIATION_ORDER[a.affiliation] ?? 99) : 98
-      const affB = b.affiliation ? (AFFILIATION_ORDER[b.affiliation] ?? 99) : 98
-      if (affA !== affB) return affA - affB
-
-      return a.name.localeCompare(b.name)
-    })
-
+    const members = await loadTeamMembersFromNotion()
     await writeCache(CACHE_KEY, members)
     return members
   } catch (error) {

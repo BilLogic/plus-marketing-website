@@ -59,6 +59,34 @@ const parseResearchPaper = (page: any): ResearchPaper => {
   }
 }
 
+/**
+ * Every research row straight from Notion, newest first. Throws on failure —
+ * the site's fetcher falls back to the cache, the scheduled sync must not.
+ */
+export const loadResearchPapersFromNotion = async (
+  databaseId: string
+): Promise<ResearchPaper[]> => {
+  const notion = getNotionClient()
+  // Notion caps a query at 100 rows — page through `next_cursor` or the list
+  // (and the count derived from it) silently truncates once the CMS passes 100.
+  const results: unknown[] = []
+  let cursor: string | undefined = undefined
+  do {
+    const response = await notion.databases.query({
+      database_id: databaseId,
+      sorts: [
+        { property: "Date Published", direction: "descending" as const },
+      ],
+      start_cursor: cursor,
+      page_size: 100,
+    })
+    results.push(...response.results)
+    cursor = response.has_more ? (response.next_cursor ?? undefined) : undefined
+  } while (cursor)
+
+  return results.map(parseResearchPaper).map(applyResearchGenres)
+}
+
 export const fetchResearchPapers = async (): Promise<ResearchPaper[]> => {
   const databaseId = process.env.NOTION_RESEARCH_DB_ID
   if (!databaseId) {
@@ -69,27 +97,7 @@ export const fetchResearchPapers = async (): Promise<ResearchPaper[]> => {
   }
 
   try {
-    const notion = getNotionClient()
-    // Notion caps a query at 100 rows — page through `next_cursor` or the list
-    // (and the count derived from it) silently truncates once the CMS passes 100.
-    const results: unknown[] = []
-    let cursor: string | undefined = undefined
-    do {
-      const response = await notion.databases.query({
-        database_id: databaseId,
-        sorts: [
-          { property: "Date Published", direction: "descending" as const },
-        ],
-        start_cursor: cursor,
-        page_size: 100,
-      })
-      results.push(...response.results)
-      cursor = response.has_more ? (response.next_cursor ?? undefined) : undefined
-    } while (cursor)
-
-    const papers = results
-      .map(parseResearchPaper)
-      .map(applyResearchGenres)
+    const papers = await loadResearchPapersFromNotion(databaseId)
     await writeCache(CACHE_KEY, papers)
     return papers
   } catch (error) {

@@ -7,12 +7,11 @@ on:
   workflow_dispatch:
     # Allow manual trigger from GitHub Actions UI
 
+# Team, news and success-story database IDs live in `src/lib/notion/queries/`;
+# only research reads its ID from the environment.
 env:
   NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
-  NOTION_TEAM_DB_ID: ${{ vars.NOTION_TEAM_DB_ID }}
-  NOTION_NEWS_DB_ID: ${{ vars.NOTION_NEWS_DB_ID }}
   NOTION_RESEARCH_DB_ID: ${{ vars.NOTION_RESEARCH_DB_ID }}
-  NOTION_SUCCESS_STORIES_DB_ID: ${{ vars.NOTION_SUCCESS_STORIES_DB_ID }}
 
 jobs:
   sync:
