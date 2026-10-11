@@ -160,26 +160,27 @@ export const fetchSuccessStoryById = async (
   }
 }
 
+/**
+ * A story's page body as markdown, or null when the page has none. Throws on
+ * a Notion error: a story without its body would lose its on-site page, so
+ * callers fall back to the cached copy (or fail the sync) instead.
+ */
 async function fetchPageContent(
   notion: ReturnType<typeof getNotionClient>,
   pageId: string
 ): Promise<string | null> {
-  try {
-    const blocks: any[] = []
-    let cursor: string | undefined
+  const blocks: any[] = []
+  let cursor: string | undefined
 
-    do {
-      const response = await notion.blocks.children.list({
-        block_id: pageId,
-        start_cursor: cursor,
-      })
-      blocks.push(...response.results)
-      cursor = response.has_more ? response.next_cursor! : undefined
-    } while (cursor)
+  do {
+    const response = await notion.blocks.children.list({
+      block_id: pageId,
+      start_cursor: cursor,
+    })
+    blocks.push(...response.results)
+    cursor = response.has_more ? response.next_cursor! : undefined
+  } while (cursor)
 
-    if (blocks.length === 0) return null
-    return blocksToMarkdown(blocks)
-  } catch {
-    return null
-  }
+  if (blocks.length === 0) return null
+  return blocksToMarkdown(blocks)
 }
