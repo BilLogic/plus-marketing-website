@@ -31,21 +31,11 @@ const parseNewsItem = (page: any): NewsItem => {
 }
 
 /**
- * News rows straight from Notion, newest first. Throws on failure — the
+ * Every news row straight from Notion, newest first. Throws on failure — the
  * site's fetcher falls back to the cache, the scheduled sync must not.
  */
-export const loadNewsFromNotion = async (
-  options?: { featured?: boolean }
-): Promise<NewsItem[]> => {
+export const loadNewsFromNotion = async (): Promise<NewsItem[]> => {
   const notion = getNotionClient()
-
-  const filter = options?.featured !== undefined
-    ? {
-        property: "Priority / Featured?",
-        checkbox: { equals: options.featured },
-      }
-    : undefined
-
   const pages: Awaited<
     ReturnType<typeof notion.databases.query>
   >["results"] = []
@@ -54,7 +44,6 @@ export const loadNewsFromNotion = async (
   do {
     const response = await notion.databases.query({
       database_id: DATABASE_ID,
-      filter,
       sorts: [
         { property: "Date Published", direction: "descending" as const },
       ],
@@ -67,16 +56,14 @@ export const loadNewsFromNotion = async (
   return pages.map(parseNewsItem)
 }
 
-export const fetchNews = async (
-  options?: { featured?: boolean }
-): Promise<NewsItem[]> => {
+const fetchAllNews = async (): Promise<NewsItem[]> => {
   if (!process.env.NOTION_API_KEY) {
     const cached = await readCache<NewsItem[]>(CACHE_KEY)
     return cached ?? []
   }
 
   try {
-    const items = await loadNewsFromNotion(options)
+    const items = await loadNewsFromNotion()
     await writeCache(CACHE_KEY, items)
     return items
   } catch (error) {
@@ -84,6 +71,18 @@ export const fetchNews = async (
     const cached = await readCache<NewsItem[]>(CACHE_KEY)
     return cached ?? []
   }
+}
+
+/**
+ * News, newest first. `featured` filters after loading so the cache always
+ * holds the full list, and the filter applies to cached news too.
+ */
+export const fetchNews = async (
+  options?: { featured?: boolean }
+): Promise<NewsItem[]> => {
+  const items = await fetchAllNews()
+  if (options?.featured === undefined) return items
+  return items.filter((item) => item.featured === options.featured)
 }
 
 export const fetchNewsById = async (id: string): Promise<NewsItem | null> => {
