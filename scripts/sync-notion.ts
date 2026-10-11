@@ -81,8 +81,8 @@ const SYNCS: Record<string, () => Promise<void>> = {
 }
 
 async function main() {
-  const requested = process.argv.slice(2)
-  const unknown = requested.filter((name) => !(name in SYNCS))
+  const requested = [...new Set(process.argv.slice(2))]
+  const unknown = requested.filter((name) => !Object.hasOwn(SYNCS, name))
   if (unknown.length > 0) {
     console.error(`Unknown collection: ${unknown.join(", ")} (expected ${Object.keys(SYNCS).join(", ")})`)
     process.exit(1)

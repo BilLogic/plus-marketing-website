@@ -28,11 +28,13 @@ const memberPage = (
     group = "Researcher",
     joined = "2024-01-01",
     linkedIn = null,
+    website = null,
   }: {
     affiliation?: string
     group?: string
     joined?: string
     linkedIn?: string | null
+    website?: string | null
   } = {}
 ) => ({
   id: name.toLowerCase(),
@@ -42,6 +44,7 @@ const memberPage = (
     Group: { type: "select", select: { name: group } },
     "Date Joined PLUS": { type: "date", date: { start: joined } },
     LinkedIn: { type: "url", url: linkedIn },
+    "Personal Website": { type: "url", url: website },
   },
 })
 
@@ -77,13 +80,14 @@ describe("loadTeamMembersFromNotion", () => {
 
   it("repairs profile links and drops a LinkedIn field that is not LinkedIn", async () => {
     notionReturns(
-      memberPage("Ada", { linkedIn: "linkedin.com/in/ada" }),
+      memberPage("Ada", { linkedIn: "linkedin.com/in/ada", website: "http://ada.dev" }),
       memberPage("Ben", { linkedIn: "https://example.com/ben" })
     )
 
     const [ada, ben] = await loadTeamMembersFromNotion()
 
     expect(ada.linkedIn).toBe("https://linkedin.com/in/ada")
+    expect(ada.personalWebsite).toBe("https://ada.dev")
     expect(ben.linkedIn).toBeNull()
   })
 

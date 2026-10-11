@@ -31,11 +31,12 @@ describe("queryAllPages", () => {
       .mockResolvedValueOnce({ results: [], has_more: true, next_cursor: "c1" })
       .mockResolvedValueOnce({ results: [], has_more: false, next_cursor: null })
     const sorts = [{ property: "Date Published", direction: "descending" as const }]
+    const filter = { property: "Published", checkbox: { equals: true } }
 
-    await queryAllPages(clientWith(query), { database_id: "db", sorts })
+    await queryAllPages(clientWith(query), { database_id: "db", sorts, filter })
 
     for (const [params] of query.mock.calls) {
-      expect(params).toMatchObject({ database_id: "db", sorts, page_size: 100 })
+      expect(params).toMatchObject({ database_id: "db", sorts, filter, page_size: 100 })
     }
   })
 
