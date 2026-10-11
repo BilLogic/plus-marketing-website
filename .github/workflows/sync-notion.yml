@@ -7,12 +7,16 @@ on:
   workflow_dispatch:
     # Allow manual trigger from GitHub Actions UI
 
+# Team, news and success-story database IDs live in `src/lib/notion/queries/`;
+# only research reads its ID from the environment.
 env:
   NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
-  NOTION_TEAM_DB_ID: ${{ vars.NOTION_TEAM_DB_ID }}
-  NOTION_NEWS_DB_ID: ${{ vars.NOTION_NEWS_DB_ID }}
   NOTION_RESEARCH_DB_ID: ${{ vars.NOTION_RESEARCH_DB_ID }}
-  NOTION_SUCCESS_STORIES_DB_ID: ${{ vars.NOTION_SUCCESS_STORIES_DB_ID }}
+
+# A manual run overlapping the schedule would race the push below.
+concurrency:
+  group: sync-notion
+  cancel-in-progress: false
 
 jobs:
   sync:
@@ -45,6 +49,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add src/data/cache/
           git commit -m "chore: sync Notion CMS data [automated]"
+          # main may have moved during the run; the cache files are ours alone.
+          git pull --rebase origin main
           git push
 
       - name: Trigger Netlify rebuild

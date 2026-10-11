@@ -67,6 +67,39 @@ export function selectSuccessStoriesForResearchersPage(
     .slice(0, 2)
 }
 
+/**
+ * Every success story straight from Notion, newest first, with its page body.
+ * Throws on failure — the site's fetcher falls back to the cache, the
+ * scheduled sync must not.
+ */
+export const loadSuccessStoriesFromNotion = async (): Promise<SuccessStory[]> => {
+  const notion = getNotionClient()
+  const pages: Awaited<
+    ReturnType<typeof notion.databases.query>
+  >["results"] = []
+  let cursor: string | undefined
+
+  do {
+    const response = await notion.databases.query({
+      database_id: DATABASE_ID,
+      sorts: [
+        { property: "Date Published", direction: "descending" as const },
+      ],
+      start_cursor: cursor,
+    })
+    pages.push(...response.results)
+    cursor = response.has_more ? response.next_cursor! : undefined
+  } while (cursor)
+
+  const stories: SuccessStory[] = []
+  for (const page of pages) {
+    const base = parseSuccessStory(page)
+    const content = await fetchPageContent(notion, page.id)
+    stories.push({ ...base, content })
+  }
+  return stories
+}
+
 export const fetchSuccessStories = async (): Promise<SuccessStory[]> => {
   if (!process.env.NOTION_API_KEY) {
     const cached = await readCache<SuccessStory[]>(CACHE_KEY)
@@ -74,21 +107,7 @@ export const fetchSuccessStories = async (): Promise<SuccessStory[]> => {
   }
 
   try {
-    const notion = getNotionClient()
-    const response = await notion.databases.query({
-      database_id: DATABASE_ID,
-      sorts: [
-        { property: "Date Published", direction: "descending" as const },
-      ],
-    })
-
-    const stories: SuccessStory[] = []
-    for (const page of response.results) {
-      const base = parseSuccessStory(page)
-      const content = await fetchPageContent(notion, page.id)
-      stories.push({ ...base, content })
-    }
-
+    const stories = await loadSuccessStoriesFromNotion()
     await writeCache(CACHE_KEY, stories)
     return stories
   } catch (error) {

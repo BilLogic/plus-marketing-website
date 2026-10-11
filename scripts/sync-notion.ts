@@ -2,282 +2,60 @@
  * Sync script: Fetches all CMS data from Notion and writes to local cache.
  * Run manually: npx tsx scripts/sync-notion.ts
  * Also used by GitHub Actions for scheduled sync.
+ *
+ * Mapping lives in `src/lib/notion/queries/` — this script only writes what the
+ * site's own loaders return, so the cache can never drift from the live shape.
  */
 
-import { Client } from "@notionhq/client"
 import * as fs from "fs"
 import * as path from "path"
 
+import { loadNewsFromNotion } from "@/lib/notion/queries/news"
+import { loadResearchPapersFromNotion } from "@/lib/notion/queries/research"
+import { loadSuccessStoriesFromNotion } from "@/lib/notion/queries/success-stories"
+import { loadTeamMembersFromNotion } from "@/lib/notion/queries/team"
+
 const CACHE_DIR = path.resolve(__dirname, "../src/data/cache")
 
-const notion = new Client({ auth: process.env.NOTION_API_KEY })
-
-async function queryDatabase(databaseId: string) {
-  const pages: any[] = []
-  let cursor: string | undefined
-
-  do {
-    const response = await notion.databases.query({
-      database_id: databaseId,
-      start_cursor: cursor,
-    })
-    pages.push(...response.results)
-    cursor = response.has_more ? response.next_cursor! : undefined
-  } while (cursor)
-
-  return pages
-}
-
-function getRichText(prop: any): string | null {
-  if (!prop?.rich_text?.length) return null
-  return prop.rich_text.map((t: any) => t.plain_text).join("")
-}
-
-function getTitle(prop: any): string {
-  if (!prop?.title?.length) return ""
-  return prop.title.map((t: any) => t.plain_text).join("")
-}
-
-function getSelect(prop: any): string | null {
-  return prop?.select?.name ?? null
-}
-
-function getMultiSelect(prop: any): string[] {
-  return prop?.multi_select?.map((s: any) => s.name) ?? []
-}
-
-function getDate(prop: any): string | null {
-  return prop?.date?.start ?? null
-}
-
-function getCheckbox(prop: any): boolean {
-  return prop?.checkbox ?? false
-}
-
-function getUrl(prop: any): string | null {
-  return prop?.url ?? null
-}
-
-/** Ensure external URLs are absolute + https (repairs missing scheme / http). */
-function normalizeExternalUrl(raw: string | null | undefined): string | null {
-  if (!raw) return null
-  const trimmed = raw.trim()
-  if (!trimmed) return null
-  if (/^https?:\/\//i.test(trimmed)) return trimmed.replace(/^http:\/\//i, "https://")
-  if (trimmed.startsWith("//")) return `https:${trimmed}`
-  return `https://${trimmed.replace(/^\/+/, "")}`
-}
-
-/** Normalize a LinkedIn URL; null if empty or not a linkedin.com link. */
-function normalizeLinkedInUrl(raw: string | null | undefined): string | null {
-  const url = normalizeExternalUrl(raw)
-  if (!url) return null
-  try {
-    const host = new URL(url).hostname.toLowerCase()
-    return host === "linkedin.com" || host.endsWith(".linkedin.com") ? url : null
-  } catch {
-    return null
-  }
-}
-
-function getFiles(prop: any): string | null {
-  const files = prop?.files
-  if (!files?.length) return null
-  const file = files[0]
-  return file.file?.url ?? file.external?.url ?? null
-}
-
-// Blocks-to-markdown converter (mirrors src/lib/notion/utils/blocks-to-markdown.ts)
-function richTextToMarkdown(richText: any[]): string {
-  if (!richText?.length) return ""
-  return richText
-    .map((t: any) => {
-      let text = t.plain_text ?? ""
-      const ann = t.annotations ?? {}
-      if (ann.bold) text = `**${text}**`
-      if (ann.italic) text = `*${text}*`
-      if (ann.code) text = `\`${text}\``
-      if (ann.strikethrough) text = `~~${text}~~`
-      if (t.href) text = `[${text}](${t.href})`
-      return text
-    })
-    .join("")
-}
-
-function blockToMarkdown(block: any): string {
-  const type = block.type
-  const data = block[type]
-  switch (type) {
-    case "paragraph":
-      return richTextToMarkdown(data?.rich_text) + "\n"
-    case "heading_1":
-      return `# ${richTextToMarkdown(data?.rich_text)}\n`
-    case "heading_2":
-      return `## ${richTextToMarkdown(data?.rich_text)}\n`
-    case "heading_3":
-      return `### ${richTextToMarkdown(data?.rich_text)}\n`
-    case "bulleted_list_item":
-      return `- ${richTextToMarkdown(data?.rich_text)}\n`
-    case "numbered_list_item":
-      return `1. ${richTextToMarkdown(data?.rich_text)}\n`
-    case "to_do": {
-      const checked = data?.checked ? "x" : " "
-      return `- [${checked}] ${richTextToMarkdown(data?.rich_text)}\n`
-    }
-    case "toggle":
-      return `<details><summary>${richTextToMarkdown(data?.rich_text)}</summary></details>\n`
-    case "quote":
-      return `> ${richTextToMarkdown(data?.rich_text)}\n`
-    case "callout": {
-      const icon = data?.icon?.emoji ?? ""
-      return `> ${icon} ${richTextToMarkdown(data?.rich_text)}\n`
-    }
-    case "divider":
-      return "---\n"
-    case "code": {
-      const lang = data?.language ?? ""
-      return `\`\`\`${lang}\n${richTextToMarkdown(data?.rich_text)}\n\`\`\`\n`
-    }
-    case "image": {
-      const url = data?.file?.url ?? data?.external?.url ?? ""
-      const caption = richTextToMarkdown(data?.caption)
-      return `![${caption}](${url})\n`
-    }
-    case "video": {
-      const videoUrl = data?.file?.url ?? data?.external?.url ?? ""
-      return `[Video](${videoUrl})\n`
-    }
-    case "bookmark":
-      return `[${data?.url ?? "Link"}](${data?.url ?? ""})\n`
-    case "embed":
-      return `[Embed](${data?.url ?? ""})\n`
-    default:
-      return ""
-  }
-}
-
-function blocksToMarkdown(blocks: any[]): string {
-  return blocks.map(blockToMarkdown).join("\n").trim()
-}
-
-async function fetchPageContent(pageId: string): Promise<string | null> {
-  try {
-    const blocks: any[] = []
-    let cursor: string | undefined
-    do {
-      const response = await notion.blocks.children.list({
-        block_id: pageId,
-        start_cursor: cursor,
-      })
-      blocks.push(...response.results)
-      cursor = response.has_more ? response.next_cursor! : undefined
-    } while (cursor)
-    if (blocks.length === 0) return null
-    return blocksToMarkdown(blocks)
-  } catch {
-    return null
-  }
+// Not `writeCache`: that one swallows errors and skips writes in development,
+// and a sync that cannot write its output has failed.
+function writeCacheFile(key: string, data: unknown[]) {
+  fs.mkdirSync(CACHE_DIR, { recursive: true })
+  fs.writeFileSync(path.join(CACHE_DIR, `${key}.json`), JSON.stringify(data, null, 2))
 }
 
 async function syncTeam() {
-  const dbId = process.env.NOTION_TEAM_DB_ID || "134b7cca4982801da91dd678e79d6e27"
   console.log("Syncing team members...")
-  const pages = await queryDatabase(dbId)
-  const members = pages.map((page: any) => {
-    const props = page.properties
-    return {
-      id: page.id,
-      name: getTitle(props.Name),
-      affiliation: getSelect(props.Affiliation),
-      group: getSelect(props.Group),
-      joinedDate: getDate(props["Date Joined PLUS"]),
-      picture: getFiles(props["Profile Photo"]),
-      title1: getRichText(props["Primary Role"]),
-      title2: getRichText(props["Secondary Title"]),
-      linkedIn: normalizeLinkedInUrl(getUrl(props.LinkedIn)),
-      googleScholar: normalizeExternalUrl(getUrl(props["Google Scholar"])),
-      personalWebsite: normalizeExternalUrl(getUrl(props["Personal Website"])),
-      bio: getRichText(props["Short Bio"]),
-    }
-  })
-  fs.writeFileSync(path.join(CACHE_DIR, "team.json"), JSON.stringify(members, null, 2))
+  const members = await loadTeamMembersFromNotion()
+  writeCacheFile("team", members)
   console.log(`  Synced ${members.length} team members`)
 }
 
 async function syncNews() {
-  const dbId = process.env.NOTION_NEWS_DB_ID || "18ab7cca498280b79168db5c5ab201e9"
   console.log("Syncing news...")
-  const pages = await queryDatabase(dbId)
-  const items = pages.map((page: any) => {
-    const props = page.properties
-    return {
-      id: page.id,
-      title: getTitle(props.Title),
-      marketingBlurb: getRichText(props["One-Line Teaser"]),
-      summary: getRichText(props.Summary),
-      category: getSelect(props.Category),
-      publicationDate: getDate(props["Date Published"]),
-      author: getRichText(props.Author),
-      featuredImage: getFiles(props["Cover Image"]),
-      externalLink: getUrl(props["Link to Article or Source"]),
-      featured: getCheckbox(props["Priority / Featured?"]),
-    }
-  })
-  fs.writeFileSync(path.join(CACHE_DIR, "news.json"), JSON.stringify(items, null, 2))
+  const items = await loadNewsFromNotion()
+  writeCacheFile("news", items)
   console.log(`  Synced ${items.length} news items`)
 }
 
 async function syncResearch() {
   const dbId = process.env.NOTION_RESEARCH_DB_ID
   if (!dbId) {
+    // A missing repo variable would otherwise freeze the research cache unnoticed.
+    if (process.env.CI) throw new Error("NOTION_RESEARCH_DB_ID not set")
     console.log("Skipping research (NOTION_RESEARCH_DB_ID not set)")
     return
   }
   console.log("Syncing research papers...")
-  const pages = await queryDatabase(dbId)
-  const papers = pages.map((page: any) => {
-    const props = page.properties
-    return {
-      id: page.id,
-      title: getTitle(props.Title),
-      authors: getMultiSelect(props.Authors),
-      publishDate: getDate(props["Date Published"]),
-      venue: getRichText(props["Conference or Journal"]),
-      abstract: getRichText(props.Abstract),
-      shortDescription: getRichText(props["Website Summary"]),
-      paperLink: getUrl(props["Link to Paper"]),
-      presentationLink: getUrl(props["Link to Slides or Poster"]),
-      videoLink: getUrl(props["Link to Video"]),
-    }
-  })
-  fs.writeFileSync(path.join(CACHE_DIR, "research.json"), JSON.stringify(papers, null, 2))
+  const papers = await loadResearchPapersFromNotion(dbId)
+  writeCacheFile("research", papers)
   console.log(`  Synced ${papers.length} research papers`)
 }
 
 async function syncSuccessStories() {
-  const dbId = process.env.NOTION_SUCCESS_STORIES_DB_ID || "55c702c618dd4b5c8ceaeac797c02257"
   console.log("Syncing success stories...")
-  const pages = await queryDatabase(dbId)
-  const stories = []
-  for (const page of pages) {
-    const props = (page as any).properties
-    const content = await fetchPageContent(page.id)
-    stories.push({
-      id: page.id,
-      title: getTitle(props.Title),
-      category: getSelect(props.Category),
-      summary: getRichText(props.Summary),
-      content,
-      coverImage: getFiles(props["Cover Image"]),
-      author: getRichText(props["Written By"]),
-      clientPartner: getRichText(props["Organization Name"]),
-      quote: getRichText(props.Quote),
-      quoteAttribution: getRichText(props["Who Said It?"]),
-      publishedDate: getDate(props["Date Published"]),
-      publicReadUrl: getUrl(props["Public URL"]) ?? getUrl(props["Public page URL"]) ?? null,
-    })
-  }
-  fs.writeFileSync(path.join(CACHE_DIR, "success-stories.json"), JSON.stringify(stories, null, 2))
+  const stories = await loadSuccessStoriesFromNotion()
+  writeCacheFile("success-stories", stories)
   console.log(`  Synced ${stories.length} success stories`)
 }
 

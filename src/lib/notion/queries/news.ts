@@ -30,6 +30,43 @@ const parseNewsItem = (page: any): NewsItem => {
   }
 }
 
+/**
+ * News rows straight from Notion, newest first. Throws on failure — the
+ * site's fetcher falls back to the cache, the scheduled sync must not.
+ */
+export const loadNewsFromNotion = async (
+  options?: { featured?: boolean }
+): Promise<NewsItem[]> => {
+  const notion = getNotionClient()
+
+  const filter = options?.featured !== undefined
+    ? {
+        property: "Priority / Featured?",
+        checkbox: { equals: options.featured },
+      }
+    : undefined
+
+  const pages: Awaited<
+    ReturnType<typeof notion.databases.query>
+  >["results"] = []
+  let cursor: string | undefined
+
+  do {
+    const response = await notion.databases.query({
+      database_id: DATABASE_ID,
+      filter,
+      sorts: [
+        { property: "Date Published", direction: "descending" as const },
+      ],
+      start_cursor: cursor,
+    })
+    pages.push(...response.results)
+    cursor = response.has_more ? response.next_cursor! : undefined
+  } while (cursor)
+
+  return pages.map(parseNewsItem)
+}
+
 export const fetchNews = async (
   options?: { featured?: boolean }
 ): Promise<NewsItem[]> => {
@@ -39,24 +76,7 @@ export const fetchNews = async (
   }
 
   try {
-    const notion = getNotionClient()
-
-    const filter = options?.featured !== undefined
-      ? {
-          property: "Priority / Featured?",
-          checkbox: { equals: options.featured },
-        }
-      : undefined
-
-    const response = await notion.databases.query({
-      database_id: DATABASE_ID,
-      filter,
-      sorts: [
-        { property: "Date Published", direction: "descending" as const },
-      ],
-    })
-
-    const items = response.results.map(parseNewsItem)
+    const items = await loadNewsFromNotion(options)
     await writeCache(CACHE_KEY, items)
     return items
   } catch (error) {
