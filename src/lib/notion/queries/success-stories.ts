@@ -9,6 +9,7 @@ import {
   getUrl,
 } from "@/lib/notion/utils/parse-properties"
 import { readCache, writeCache } from "@/lib/notion/utils/cache"
+import { queryAllPages } from "@/lib/notion/utils/query-all-pages"
 import { blocksToMarkdown } from "@/lib/notion/utils/blocks-to-markdown"
 import {
   isNotionPageId,
@@ -74,22 +75,10 @@ export function selectSuccessStoriesForResearchersPage(
  */
 export const loadSuccessStoriesFromNotion = async (): Promise<SuccessStory[]> => {
   const notion = getNotionClient()
-  const pages: Awaited<
-    ReturnType<typeof notion.databases.query>
-  >["results"] = []
-  let cursor: string | undefined
-
-  do {
-    const response = await notion.databases.query({
-      database_id: DATABASE_ID,
-      sorts: [
-        { property: "Date Published", direction: "descending" as const },
-      ],
-      start_cursor: cursor,
-    })
-    pages.push(...response.results)
-    cursor = response.has_more ? response.next_cursor! : undefined
-  } while (cursor)
+  const pages = await queryAllPages(notion, {
+    database_id: DATABASE_ID,
+    sorts: [{ property: "Date Published", direction: "descending" }],
+  })
 
   const stories: SuccessStory[] = []
   for (const page of pages) {

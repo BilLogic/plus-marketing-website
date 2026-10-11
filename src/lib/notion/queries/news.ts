@@ -10,6 +10,7 @@ import {
   getFiles,
 } from "@/lib/notion/utils/parse-properties"
 import { readCache, writeCache } from "@/lib/notion/utils/cache"
+import { queryAllPages } from "@/lib/notion/utils/query-all-pages"
 
 const DATABASE_ID = "18ab7cca498280b79168db5c5ab201e9"
 const CACHE_KEY = "news"
@@ -35,23 +36,10 @@ const parseNewsItem = (page: any): NewsItem => {
  * site's fetcher falls back to the cache, the scheduled sync must not.
  */
 export const loadNewsFromNotion = async (): Promise<NewsItem[]> => {
-  const notion = getNotionClient()
-  const pages: Awaited<
-    ReturnType<typeof notion.databases.query>
-  >["results"] = []
-  let cursor: string | undefined
-
-  do {
-    const response = await notion.databases.query({
-      database_id: DATABASE_ID,
-      sorts: [
-        { property: "Date Published", direction: "descending" as const },
-      ],
-      start_cursor: cursor,
-    })
-    pages.push(...response.results)
-    cursor = response.has_more ? response.next_cursor! : undefined
-  } while (cursor)
+  const pages = await queryAllPages(getNotionClient(), {
+    database_id: DATABASE_ID,
+    sorts: [{ property: "Date Published", direction: "descending" }],
+  })
 
   return pages.map(parseNewsItem)
 }

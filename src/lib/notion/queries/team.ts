@@ -9,6 +9,7 @@ import {
   getTeamMemberPictureUrl,
 } from "@/lib/notion/utils/parse-properties"
 import { readCache, writeCache } from "@/lib/notion/utils/cache"
+import { queryAllPages } from "@/lib/notion/utils/query-all-pages"
 import { normalizeExternalUrl, normalizeLinkedInUrl } from "@/lib/social-links"
 
 const DATABASE_ID = "134b7cca4982801da91dd678e79d6e27"
@@ -54,20 +55,9 @@ const normalizeMemberLinks = (members: TeamMember[]): TeamMember[] =>
  * the site's fetcher falls back to the cache, the scheduled sync must not.
  */
 export const loadTeamMembersFromNotion = async (): Promise<TeamMember[]> => {
-  const notion = getNotionClient()
-  const pages: Awaited<
-    ReturnType<typeof notion.databases.query>
-  >["results"] = []
-  let cursor: string | undefined
-
-  do {
-    const response = await notion.databases.query({
-      database_id: DATABASE_ID,
-      start_cursor: cursor,
-    })
-    pages.push(...response.results)
-    cursor = response.has_more ? response.next_cursor! : undefined
-  } while (cursor)
+  const pages = await queryAllPages(getNotionClient(), {
+    database_id: DATABASE_ID,
+  })
 
   const members = pages.map(parseTeamMember)
 

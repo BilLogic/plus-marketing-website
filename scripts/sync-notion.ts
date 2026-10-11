@@ -1,7 +1,7 @@
 /**
  * Sync script: Fetches all CMS data from Notion and writes to local cache.
- * Run manually: npx tsx scripts/sync-notion.ts
- * Also used by GitHub Actions for scheduled sync.
+ * Run manually: npx tsx scripts/sync-notion.ts [team|news|research|stories ...]
+ * (no names syncs everything). Also used by GitHub Actions for scheduled sync.
  *
  * Mapping lives in `src/lib/notion/queries/` — this script only writes what the
  * site's own loaders return, so the cache can never drift from the live shape.
@@ -73,35 +73,37 @@ async function syncSuccessStories() {
   console.log(`  Synced ${stories.length} success stories`)
 }
 
+const SYNCS: Record<string, () => Promise<void>> = {
+  team: syncTeam,
+  news: syncNews,
+  research: syncResearch,
+  stories: syncSuccessStories,
+}
+
 async function main() {
+  const requested = [...new Set(process.argv.slice(2))]
+  const unknown = requested.filter((name) => !Object.hasOwn(SYNCS, name))
+  if (unknown.length > 0) {
+    console.error(`Unknown collection: ${unknown.join(", ")} (expected ${Object.keys(SYNCS).join(", ")})`)
+    process.exit(1)
+  }
+  const names = requested.length > 0 ? requested : Object.keys(SYNCS)
+
   console.log("Starting Notion sync...")
   console.log("")
 
-  const results: Record<string, boolean> = {}
-
-  try { await syncTeam(); results.team = true } catch (e) {
-    console.error("Team sync failed:", e)
-    results.team = false
-  }
-
-  try { await syncNews(); results.news = true } catch (e) {
-    console.error("News sync failed:", e)
-    results.news = false
-  }
-
-  try { await syncResearch(); results.research = true } catch (e) {
-    console.error("Research sync failed:", e)
-    results.research = false
-  }
-
-  try { await syncSuccessStories(); results.stories = true } catch (e) {
-    console.error("Success stories sync failed:", e)
-    results.stories = false
+  const failed: string[] = []
+  for (const name of names) {
+    try {
+      await SYNCS[name]()
+    } catch (e) {
+      console.error(`Sync of ${name} failed:`, e)
+      failed.push(name)
+    }
   }
 
   console.log("")
 
-  const failed = Object.entries(results).filter(([, ok]) => !ok).map(([name]) => name)
   if (failed.length > 0) {
     console.error(`Partial sync failure: ${failed.join(", ")}`)
     process.exit(1)
