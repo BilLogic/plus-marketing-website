@@ -14,14 +14,28 @@ import { loadNewsFromNotion } from "@/lib/notion/queries/news"
 import { loadResearchPapersFromNotion } from "@/lib/notion/queries/research"
 import { loadSuccessStoriesFromNotion } from "@/lib/notion/queries/success-stories"
 import { loadTeamMembersFromNotion } from "@/lib/notion/queries/team"
+import { sameIgnoringSignedUrls } from "@/lib/notion/utils/signed-urls"
 
 const CACHE_DIR = path.resolve(__dirname, "../src/data/cache")
+
+/** Last committed cache, or null when missing or unreadable so it gets rewritten. */
+function readPreviousCache(file: string): unknown {
+  try {
+    return JSON.parse(fs.readFileSync(file, "utf-8"))
+  } catch {
+    return null
+  }
+}
 
 // Not `writeCache`: that one swallows errors and skips writes in development,
 // and a sync that cannot write its output has failed.
 function writeCacheFile(key: string, data: unknown[]) {
+  const file = path.join(CACHE_DIR, `${key}.json`)
+  // Leave the file alone when only re-signed image links differ, so an
+  // unchanged CMS produces no commit.
+  if (sameIgnoringSignedUrls(readPreviousCache(file), data)) return
   fs.mkdirSync(CACHE_DIR, { recursive: true })
-  fs.writeFileSync(path.join(CACHE_DIR, `${key}.json`), JSON.stringify(data, null, 2))
+  fs.writeFileSync(file, JSON.stringify(data, null, 2))
 }
 
 async function syncTeam() {
