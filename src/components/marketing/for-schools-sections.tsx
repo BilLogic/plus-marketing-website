@@ -47,7 +47,7 @@ import { forSchoolsSectionIds } from "@/lib/plus-footer-ia"
 
 /** Match `get-involved-sections` / `for-tutors-sections` section headers (`sectionH2` / `sectionLead`). */
 const schoolsSectionH2 =
-  "text-pretty text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+  "text-pretty text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
 /** Same breakpoint rhythm as `marketingTypography.sectionLead` + For Tutors intro copy (not hero). */
 const schoolsSectionLead = cn(
   "w-full max-w-none text-base lg:text-lg",
@@ -59,7 +59,7 @@ const schoolsSectionLead = cn(
  * stacked cards + sticky column), for sections that should read consistently with Benefits.
  */
 const schoolsBenefitsCardTitleClass =
-  "text-pretty text-lg font-bold leading-tight tracking-tight sm:text-xl lg:text-2xl"
+  "text-pretty text-lg font-semibold leading-tight tracking-tight sm:text-xl lg:text-2xl"
 const schoolsBenefitsCardBodyClass =
   "text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg"
 
@@ -404,7 +404,7 @@ export const SchoolsTrainingSection = () => {
             <div className="flex items-start gap-3">
               <BenefitsAccordionIcon index={i} tone="accent" />
               <div className="flex min-w-0 flex-col gap-3">
-                <h3 className="pt-[calc((3rem-1lh)/2)] text-pretty text-base font-bold leading-tight tracking-tight text-yellow-900 sm:text-lg md:text-xl">
+                <h3 className="pt-[calc((3rem-1lh)/2)] text-pretty text-base font-semibold leading-tight tracking-tight text-yellow-900 sm:text-lg md:text-xl">
                   {item.title}
                 </h3>
                 <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -475,7 +475,7 @@ export const SchoolsTrainingSection = () => {
                   <div className="flex flex-col gap-3">
                     <h3
                       className={cn(
-                        "line-clamp-3 text-pretty text-base font-bold leading-tight tracking-tight transition-colors duration-300 sm:text-lg md:text-xl lg:text-2xl",
+                        "line-clamp-3 text-pretty text-base font-semibold leading-tight tracking-tight transition-colors duration-300 sm:text-lg md:text-xl lg:text-2xl",
                         BENEFITS_STICKY_TITLE_H,
                         isActive ? "text-yellow-900" : "text-muted-foreground",
                       )}
@@ -684,7 +684,7 @@ export const SchoolsExperienceSection = () => {
           >
             {/* Ghost number — decorative, top-right */}
             <span
-              className="pointer-events-none absolute right-0 top-0 select-none font-bold leading-none text-[max(8rem,36vw)] sm:text-[clamp(7rem,18vw,12.5rem)]"
+              className="pointer-events-none absolute right-0 top-0 select-none font-semibold leading-none text-[max(8rem,36vw)] sm:text-[clamp(7rem,18vw,12.5rem)]"
               style={schoolsExperienceGhostNumberStyle}
               aria-hidden
             >
@@ -1112,7 +1112,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                     </span>
                     <h3
                       className={cn(
-                        "min-w-0 flex-1 text-pretty text-base font-bold leading-snug tracking-tight sm:text-lg lg:text-2xl",
+                        "min-w-0 flex-1 text-pretty text-base font-semibold leading-snug tracking-tight sm:text-lg lg:text-2xl",
                         theme.accent,
                       )}
                     >

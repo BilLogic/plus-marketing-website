@@ -79,7 +79,7 @@ export const Overview: Story = {
           <p className="text-xs font-semibold uppercase tracking-eyebrow text-primary">
             Effects / Backgrounds
           </p>
-          <h1 className="text-balance text-3xl font-bold tracking-tight">
+          <h1 className="text-balance text-3xl font-semibold tracking-tight">
             Backgrounds
           </h1>
           <p className="text-sm leading-relaxed text-muted-foreground">
@@ -210,7 +210,7 @@ export const MeteorShower: Story = {
   render: () => (
     <div className="relative flex min-h-[300px] items-center justify-center bg-zinc-950 p-8">
       <MeteorBackground density={20} />
-      <p className="relative z-10 text-2xl font-bold text-white">Meteors</p>
+      <p className="relative z-10 text-2xl font-semibold text-white">Meteors</p>
     </div>
   ),
 }
@@ -220,7 +220,7 @@ export const Snow: Story = {
   render: () => (
     <div className="relative flex min-h-[300px] items-center justify-center bg-zinc-950 p-8">
       <Snowfall count={50} />
-      <p className="relative z-10 text-2xl font-bold text-white">Snowfall</p>
+      <p className="relative z-10 text-2xl font-semibold text-white">Snowfall</p>
     </div>
   ),
 }
@@ -230,7 +230,7 @@ export const Stars: Story = {
   render: () => (
     <div className="relative flex min-h-[300px] items-center justify-center bg-zinc-950 p-8">
       <StarsBackground count={100} />
-      <p className="relative z-10 text-2xl font-bold text-white">Stars</p>
+      <p className="relative z-10 text-2xl font-semibold text-white">Stars</p>
     </div>
   ),
 }

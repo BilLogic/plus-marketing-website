@@ -9,7 +9,7 @@ export const marketingTypography = {
    * Marketing landing hero title — matches for-tutors / get-involved hero H1.
    * Used by for-schools `SchoolsHeroSection`.
    */
-  heroH1: "text-balance text-3xl font-bold leading-tight tracking-tight text-teal-950 sm:text-4xl md:text-5xl",
+  heroH1: "text-balance text-3xl font-semibold leading-tight tracking-tight text-teal-950 sm:text-4xl md:text-5xl",
   /** H2 — Section headline (Storybook: text-3xl font-semibold tracking-tight) */
   h2: "text-balance text-3xl font-semibold tracking-tight text-foreground",
   /** H3 — Card / accordion titles (Storybook: text-xl font-semibold tracking-tight) */
@@ -19,7 +19,7 @@ export const marketingTypography = {
    * Set brand color at the call site.
    */
   bentoTitle:
-    "text-pretty text-xl font-bold leading-snug tracking-tight sm:text-2xl",
+    "text-pretty text-xl font-semibold leading-snug tracking-tight sm:text-2xl",
   /** Lead paragraph — section intros (Storybook: text-lg text-muted-foreground) */
   lead: "max-w-prose text-lg text-muted-foreground",
   /**

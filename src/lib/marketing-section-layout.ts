@@ -54,7 +54,7 @@ export const marketingCardLhHeaderRowLeadPaddingClass = "pt-2 sm:pt-3"
  * scale). Pair the icon with `marketingCardIconTitleRowOffsetClass` + `marketingCardIconCircleClass`.
  */
 export const marketingCardLhAlignedHeaderRowClass = cn(
-  "flex items-start gap-3 text-lg font-bold leading-snug tracking-tight sm:text-xl lg:text-2xl",
+  "flex items-start gap-3 text-lg font-semibold leading-snug tracking-tight sm:text-xl lg:text-2xl",
   marketingCardLhHeaderRowLeadPaddingClass,
 )
 
@@ -68,7 +68,7 @@ export const marketingFinalCtaShellClass = cn(
 )
 
 export const marketingFinalCtaTitleClass =
-  "text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl lg:text-4xl min-[1800px]:text-5xl"
+  "text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl lg:text-4xl min-[1800px]:text-5xl"
 
 export const marketingFinalCtaLeadClass = cn(
   "w-full max-w-none text-base lg:text-lg min-[1800px]:text-xl",
@@ -134,7 +134,7 @@ export const marketingCardIconCircleClass =
 
 /** Step number (1, 2, 3…) inside `marketingCardIconCircleClass` */
 export const marketingCardStepDigitClass =
-  "text-[26px] font-bold leading-none tabular-nums min-[1800px]:text-[30px]"
+  "text-[26px] font-semibold leading-none tabular-nums min-[1800px]:text-[30px]"
 
 /** Lucide icon inside `marketingCardIconCircleClass` */
 export const marketingCardLucideGlyphClass = "size-6 min-[1800px]:size-7"

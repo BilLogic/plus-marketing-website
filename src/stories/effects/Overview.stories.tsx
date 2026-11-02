@@ -83,7 +83,7 @@ export const EffectsGuide: Story = {
           <p className="text-xs font-semibold uppercase tracking-eyebrow text-primary">
             Effects
           </p>
-          <h1 className="text-balance text-4xl font-bold tracking-tight">
+          <h1 className="text-balance text-4xl font-semibold tracking-tight">
             Effects Guide
           </h1>
           <p className="text-base leading-relaxed text-muted-foreground">
@@ -141,7 +141,7 @@ export const EffectsGuide: Story = {
 import { MeteorBackground } from "@/components/effects/meteor-background"
 
 // Text effects wrap text content
-<AnimatedGradientText className="text-4xl font-bold">
+<AnimatedGradientText className="text-4xl font-semibold">
   Ship faster with Plus
 </AnimatedGradientText>
 

@@ -240,7 +240,7 @@ export const TutorsCompensationSection = () => {
         <div className="text-left">
           <div className="relative">
             <div className={marketingSectionIntroColumnClass}>
-              <h2 className="text-pretty text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+              <h2 className="text-pretty text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 Get Paid for All Your Hours
               </h2>
               <p
@@ -278,10 +278,10 @@ export const TutorsCompensationSection = () => {
                   "border-b border-blue-200 bg-blue-200 text-left dark:border-sky-800/50 dark:bg-sky-950/35",
                 )}
               >
-                <p className="text-lg font-bold leading-snug tracking-tight text-blue-900 dark:text-sky-100 sm:text-xl lg:text-2xl">
+                <p className="text-lg font-semibold leading-snug tracking-tight text-blue-900 dark:text-sky-100 sm:text-xl lg:text-2xl">
                   {col.stat}
                 </p>
-                <p className="mt-1 text-lg font-bold leading-snug tracking-tight text-blue-900 dark:text-sky-100 sm:text-xl lg:text-2xl">
+                <p className="mt-1 text-lg font-semibold leading-snug tracking-tight text-blue-900 dark:text-sky-100 sm:text-xl lg:text-2xl">
                   {col.sub}
                 </p>
               </div>
@@ -313,10 +313,10 @@ export const TutorsCompensationSection = () => {
                 key={col.stat}
                 className={cn(marketingCardPaddingClass, "text-left")}
               >
-                <p className="text-lg font-bold leading-snug tracking-tight text-blue-900 dark:text-sky-100 sm:text-xl lg:text-2xl">
+                <p className="text-lg font-semibold leading-snug tracking-tight text-blue-900 dark:text-sky-100 sm:text-xl lg:text-2xl">
                   {col.stat}
                 </p>
-                <p className="mt-1 text-lg font-bold leading-snug tracking-tight text-blue-900 dark:text-sky-100 sm:text-xl lg:text-2xl">
+                <p className="mt-1 text-lg font-semibold leading-snug tracking-tight text-blue-900 dark:text-sky-100 sm:text-xl lg:text-2xl">
                   {col.sub}
                 </p>
               </div>
@@ -407,7 +407,7 @@ export const TutorsCompensationSection = () => {
  *       <div className="mx-auto max-w-5xl text-left">
  *         <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between md:gap-6 lg:gap-8">
  *           <div className="w-full space-y-3 md:min-w-0 md:flex-1">
- *             <h2 className="text-balance text-xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-2xl md:text-4xl">
+ *             <h2 className="text-balance text-xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-2xl md:text-4xl">
  *               What Tutoring at PLUS Looks Like
  *             </h2>
  *             <p className="mx-auto max-w-2xl text-sm text-teal-900/75 sm:mx-0 sm:text-base lg:text-lg dark:text-white/90">
@@ -457,7 +457,7 @@ export const TutorsCompensationSection = () => {
  *                   {index + 1}
  *                 </div>
  *                 <div className="flex min-h-0 flex-1 flex-col gap-2">
- *                   <p className="shrink-0 text-pretty text-xl font-bold leading-snug tracking-tight text-yellow-900 sm:text-2xl dark:text-yellow-900">
+ *                   <p className="shrink-0 text-pretty text-xl font-semibold leading-snug tracking-tight text-yellow-900 sm:text-2xl dark:text-yellow-900">
  *                     {card.title}
  *                   </p>
  *                   <div className="flex min-h-0 flex-1 flex-col">
@@ -510,11 +510,11 @@ const tutoringLooksDescription = "text-base leading-relaxed text-muted-foregroun
 
 /** Bottom row card titles — matches certification in-panel `h3` scale. */
 const tutoringLooksCardTitleMd =
-  "text-balance text-lg font-bold leading-snug tracking-tight text-yellow-900 dark:text-yellow-900 sm:text-xl lg:text-2xl"
+  "text-balance text-lg font-semibold leading-snug tracking-tight text-yellow-900 dark:text-yellow-900 sm:text-xl lg:text-2xl"
 
 /** Full-width top card title — one step larger for hierarchy (Figma reference). */
 const tutoringLooksCardTitleLg =
-  "text-balance text-lg font-bold leading-snug tracking-tight text-yellow-900 sm:text-xl lg:text-3xl dark:text-yellow-900"
+  "text-balance text-lg font-semibold leading-snug tracking-tight text-yellow-900 sm:text-xl lg:text-3xl dark:text-yellow-900"
 
 /**
  * Cream card shell — minimal bottom padding so the container hugs the image edge.
@@ -627,7 +627,7 @@ export const TutorsExperienceSection = () => {
           */}
           <div className="relative">
             <div className={marketingSectionIntroColumnClass}>
-              <h2 className="text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+              <h2 className="text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 What Tutoring at PLUS Looks Like
               </h2>
               <p
@@ -691,7 +691,7 @@ export const TutorsPartnerUniversitiesSection = () => {
     <section className={cn("relative w-full min-w-0", marketingSectionVerticalGapClass)}>
       <div className="relative w-full text-left">
         <div className={cn(marketingSectionIntroColumnClass, "sm:space-y-1 md:pr-[12rem] lg:pr-[12rem]")}>
-          <h2 className="text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+          <h2 className="text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Our Tutor Partner Universities
           </h2>
           <p className={cn("text-base lg:text-lg", marketingSectionLeadColorClass)}>
@@ -737,7 +737,7 @@ export const TutorsCertificationSection = () => {
           */}
           <div className="relative">
             <div className={marketingSectionIntroColumnClass}>
-              <h2 className="text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+              <h2 className="text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 Get Certified &amp; Receive Digital Credentials
               </h2>
               <p
@@ -776,7 +776,7 @@ export const TutorsCertificationSection = () => {
               >
                 <Star className={cn(marketingCardLucideGlyphClass)} strokeWidth={2.25} />
               </span>
-              <h3 className="min-w-0 text-balance text-lg font-bold leading-snug tracking-tight text-green-900 dark:text-green-200 sm:text-xl lg:text-2xl">
+              <h3 className="min-w-0 text-balance text-lg font-semibold leading-snug tracking-tight text-green-900 dark:text-green-200 sm:text-xl lg:text-2xl">
                 Tutor Certification &amp; Shareable Badges
               </h3>
             </div>
@@ -873,7 +873,7 @@ function ToolkitCardHeading({
       >
         <Icon className={cn(marketingCardLucideGlyphClass)} strokeWidth={2.25} />
       </span>
-      <p className="min-w-0 text-pretty text-lg font-bold leading-snug tracking-tight text-fuchsia-900 dark:text-fuchsia-200 sm:text-xl lg:text-2xl">
+      <p className="min-w-0 text-pretty text-lg font-semibold leading-snug tracking-tight text-fuchsia-900 dark:text-fuchsia-200 sm:text-xl lg:text-2xl">
         {children}
       </p>
     </div>
@@ -893,7 +893,7 @@ export const TutorsToolkitSection = () => {
         <div className="text-left">
           <div className="relative">
             <div className={marketingSectionIntroColumnClass}>
-              <h2 className="text-pretty text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+              <h2 className="text-pretty text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
                 Your Tutor Toolkit
               </h2>
               <p
@@ -1006,7 +1006,7 @@ function TutorVoiceCard({
             {name.slice(0, 2).toUpperCase()}
           </AvatarFallback>
         </Avatar>
-        <p className="min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight text-red-900 dark:text-[#e8a0a0] sm:text-xl lg:text-2xl">
+        <p className="min-w-0 flex-1 text-pretty text-lg font-semibold leading-snug tracking-tight text-red-900 dark:text-[#e8a0a0] sm:text-xl lg:text-2xl">
           {name}
         </p>
       </div>
@@ -1050,7 +1050,7 @@ export const TutorsTestimonialsSection = ({ stories = [] }: { stories?: SuccessS
     <section className={cn("relative", marketingSectionVerticalGapClass)} id="tutor-testimonials">
       <div className="relative w-full text-left">
         <div className={marketingSectionIntroColumnClass}>
-          <h2 className="text-pretty text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+          <h2 className="text-pretty text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Voices from Our Tutors
           </h2>
           <p className={cn("w-full max-w-none text-lg", marketingSectionLeadColorClass)}>

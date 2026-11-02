@@ -63,7 +63,7 @@ export const Overview: Story = {
           <p className="text-xs font-semibold uppercase tracking-eyebrow text-primary">
             Effects / Animations
           </p>
-          <h1 className="text-balance text-3xl font-bold tracking-tight">
+          <h1 className="text-balance text-3xl font-semibold tracking-tight">
             Animations
           </h1>
           <p className="text-sm leading-relaxed text-muted-foreground">

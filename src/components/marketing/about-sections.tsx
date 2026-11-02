@@ -69,7 +69,7 @@ import { aboutSectionIds } from "@/lib/plus-footer-ia"
 
 /** Section titles / intros — match `for-tutors-sections.tsx` (Compensation, Experience, etc.). */
 const aboutSectionH2 =
-  "text-pretty text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+  "text-pretty text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
 
 /** Section intros — same lead color / scale as other marketing pages */
 const aboutSectionLead = cn(
@@ -82,7 +82,7 @@ const aboutFinalCtaLead = cn("text-base lg:text-lg", marketingSectionLeadColorCl
 
 /** Card titles / body — match Tutors Experience bento cards. */
 const aboutCardTitle =
-  "text-pretty text-lg font-bold leading-snug tracking-tight text-teal-950 sm:text-xl lg:text-2xl"
+  "text-pretty text-lg font-semibold leading-snug tracking-tight text-teal-950 sm:text-xl lg:text-2xl"
 
 const aboutCardBody = cn("text-base leading-relaxed", marketingSectionLeadColorClass)
 
@@ -184,7 +184,7 @@ export function AboutHeroSection() {
 
 /** Our Mission pillar headings — same scale as foundation pillars; color matches icon circles. */
 const aboutMissionPillarTitle =
-  "text-pretty text-lg font-bold leading-snug tracking-tight text-red-900 sm:text-xl lg:text-2xl dark:text-[#c97d73]"
+  "text-pretty text-lg font-semibold leading-snug tracking-tight text-red-900 sm:text-xl lg:text-2xl dark:text-[#c97d73]"
 
 const aboutMissionBulletList =
   "space-y-2.5 text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg"
@@ -333,7 +333,7 @@ export function AboutFoundationsSection() {
             <div className="flex min-w-0 flex-1 flex-col gap-2">
               <p
                 className={cn(
-                  "text-lg font-bold leading-snug tracking-tight text-blue-900 sm:text-xl lg:text-2xl dark:text-sky-300",
+                  "text-lg font-semibold leading-snug tracking-tight text-blue-900 sm:text-xl lg:text-2xl dark:text-sky-300",
                   latestCardTitleWithIconAlignClass,
                 )}
               >
@@ -382,7 +382,7 @@ export function AboutFoundationsSection() {
               <div className="flex min-w-0 flex-1 flex-col gap-2">
                 <p
                   className={cn(
-                    "text-lg font-bold leading-snug tracking-tight text-blue-900 sm:text-xl lg:text-2xl dark:text-sky-300",
+                    "text-lg font-semibold leading-snug tracking-tight text-blue-900 sm:text-xl lg:text-2xl dark:text-sky-300",
                     latestCardTitleWithIconAlignClass,
                   )}
                 >
@@ -427,7 +427,7 @@ export function AboutFoundationsSection() {
               <div className="flex min-w-0 flex-1 flex-col gap-2">
                 <p
                   className={cn(
-                    "text-lg font-bold leading-snug tracking-tight text-blue-900 sm:text-xl lg:text-2xl dark:text-sky-300",
+                    "text-lg font-semibold leading-snug tracking-tight text-blue-900 sm:text-xl lg:text-2xl dark:text-sky-300",
                     latestCardTitleWithIconAlignClass,
                   )}
                 >
@@ -584,7 +584,7 @@ function TeamMemberCard({
 }
 
 const triggerCls =
-  "cursor-pointer items-center text-lg font-bold leading-snug tracking-tight text-green-900 shadow-none hover:no-underline focus-visible:ring-0 focus-visible:border-transparent dark:text-emerald-300 sm:text-xl lg:text-2xl **:data-[slot=accordion-trigger-icon]:size-6 **:data-[slot=accordion-trigger-icon]:text-green-900 dark:**:data-[slot=accordion-trigger-icon]:text-emerald-300"
+  "cursor-pointer items-center text-lg font-semibold leading-snug tracking-tight text-green-900 shadow-none hover:no-underline focus-visible:ring-0 focus-visible:border-transparent dark:text-emerald-300 sm:text-xl lg:text-2xl **:data-[slot=accordion-trigger-icon]:size-6 **:data-[slot=accordion-trigger-icon]:text-green-900 dark:**:data-[slot=accordion-trigger-icon]:text-emerald-300"
 
 const memberGrid = "grid gap-2 grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 sm:gap-3 lg:gap-4 [&>*]:min-w-0"
 
@@ -1181,7 +1181,7 @@ export function AboutFinalCtaSection() {
   return (
     <section id={aboutSectionIds.learnMore} className="scroll-mt-24">
       <div className="mx-auto max-w-4xl space-y-6 rounded-3xl bg-white p-8 text-center dark:bg-transparent sm:p-12">
-        <h2 className="text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl lg:text-4xl">
+        <h2 className="text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl lg:text-4xl">
           Learn More About PLUS
         </h2>
         <p className={aboutFinalCtaLead}>

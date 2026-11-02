@@ -88,7 +88,7 @@ export const Overview: Story = {
           <p className="text-xs font-semibold uppercase tracking-eyebrow text-primary">
             Plus Design System
           </p>
-          <h1 className="text-balance text-4xl font-bold tracking-tight">
+          <h1 className="text-balance text-4xl font-semibold tracking-tight">
             Marketing Website Storybook
           </h1>
           <p className="text-base leading-relaxed text-muted-foreground">

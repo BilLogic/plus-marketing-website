@@ -63,7 +63,7 @@ export function DayToDayExperienceSection({
     <div className={cn("relative w-full", marketingSectionVerticalGapClass, className)}>
       <div className="relative w-full text-left">
         <div className={marketingSectionIntroColumnClass}>
-          <h2 className="text-pretty text-lg font-bold tracking-tight text-teal-950 sm:text-2xl md:text-3xl">
+          <h2 className="text-pretty text-lg font-semibold tracking-tight text-teal-950 sm:text-2xl md:text-3xl">
             {sectionTitle}
           </h2>
           <p
