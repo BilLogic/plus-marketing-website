@@ -9,7 +9,7 @@ import { ScrollDepthTracker } from "@/components/analytics/scroll-depth-tracker"
 import { WebVitals } from "@/components/analytics/web-vitals"
 import { ScrollToTopButton } from "@/components/scroll-to-top-button"
 import { ThemeProvider } from "@/components/theme-provider"
-import { notoSans, notoSansMono, notoSerif } from "./fonts"
+import { notoSans, notoSansMono } from "./fonts"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://tutors.plus"),
@@ -74,7 +74,7 @@ export default function RootLayout({
         ) : null}
       </head>
       <body
-        className={`${notoSans.variable} ${notoSerif.variable} ${notoSansMono.variable} min-h-0 bg-background antialiased`}
+        className={`${notoSans.variable} ${notoSansMono.variable} min-h-0 bg-background antialiased`}
         suppressHydrationWarning
       >
         <ThemeProvider

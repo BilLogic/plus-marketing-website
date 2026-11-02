@@ -108,7 +108,7 @@ export default async function NewsDetailPage({
             {item.author && <span>by {item.author}</span>}
           </div>
 
-          <h1 className="text-3xl font-serif font-semibold tracking-title sm:text-4xl">
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
             {item.title}
           </h1>
 

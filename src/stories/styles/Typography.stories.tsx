@@ -27,10 +27,9 @@ export const Story: Story = {
             Typography
           </h1>
           <p className="text-sm text-muted-foreground">
-            The site shares the PLUS product pairing: <strong>Noto Sans</strong> for
-            UI, headings and body; <strong>Noto Serif</strong> for page titles only
-            (<code className="text-xs">font-serif font-semibold tracking-title</code>);{" "}
-            <strong>Noto Sans Mono</strong> for code. Small uppercase labels use{" "}
+            The site uses the PLUS product fonts: <strong>Noto Sans</strong> for
+            titles, headings, UI and body, and <strong>Noto Sans Mono</strong> for
+            code. Small uppercase labels use{" "}
             <code className="text-xs">tracking-eyebrow</code>.
           </p>
         </div>

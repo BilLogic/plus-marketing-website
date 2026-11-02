@@ -52,7 +52,7 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
     <main className="bg-background text-foreground">
       <div className={marketingListingShellClass}>
         <div className="space-y-3">
-          <h1 className="text-balance text-2xl font-serif font-semibold tracking-title text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+          <h1 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Success Stories
           </h1>
           <p

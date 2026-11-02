@@ -23,7 +23,7 @@ const sections = [
     icon: PaletteIcon,
     title: "Styles",
     description:
-      "Color tokens (OKLCH), typography (Noto Sans / Noto Serif / Noto Sans Mono), elevation, motion principles, icons, and shape conventions. Start here to understand the visual language.",
+      "Color tokens (OKLCH), typography (Noto Sans / Noto Sans Mono), elevation, motion principles, icons, and shape conventions. Start here to understand the visual language.",
     path: "Styles/Overview",
     items: ["Color", "Typography", "Elevation", "Motion", "Icons", "Shape"],
   },
@@ -117,7 +117,7 @@ export const Overview: Story = {
             "shadcn/ui (base-nova)",
             "Framer Motion",
             "Storybook 10",
-            "Noto Sans + Noto Serif",
+            "Noto Sans + Noto Sans Mono",
           ].map((tech) => (
             <span
               key={tech}

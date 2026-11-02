@@ -143,7 +143,7 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
     <div className="mx-auto flex max-w-6xl flex-col gap-10 pb-16 pt-2 sm:pb-20 md:pb-24 min-[1800px]:max-w-7xl min-[1800px]:gap-12 min-[1800px]:pb-32 min-[1800px]:pt-8">
       {/* Header */}
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-serif font-semibold tracking-title text-foreground sm:text-3xl lg:text-4xl">
+        <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
           Our Team
         </h1>
         <p className="max-w-2xl text-sm text-muted-foreground sm:text-base">

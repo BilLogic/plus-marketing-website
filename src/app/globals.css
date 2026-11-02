@@ -5,12 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  /*
-    Tracking tuned for the Noto pairing:
-    - title: Noto Serif page titles, near-normal (tight tracking crowds serifs).
-    - eyebrow: small uppercase labels; Noto capitals already set wide.
-  */
-  --tracking-title: -0.01em;
+  /* Small uppercase labels; Noto Sans capitals already set wide. */
   --tracking-eyebrow: 0.12em;
 
   /* Plus brand palette – Accent teal (primary) */
@@ -114,9 +109,8 @@
   --color-foreground: var(--foreground);
   /*
     Font tokens:
-    - In the Next app, next/font sets CSS variables (--font-sans, --font-serif, --font-mono).
+    - In the Next app, next/font sets CSS variables (--font-sans, --font-mono).
     - In Storybook (no next/font), the stacks fall back to locally installed Noto, then system fonts.
-    - Noto Serif is for page titles only; everything else is Noto Sans.
   */
   --font-sans: var(
     --font-sans,
@@ -127,7 +121,6 @@
     "Segoe UI",
     sans-serif
   );
-  --font-serif: var(--font-serif, "Noto Serif", Georgia, "Times New Roman", serif);
   --font-mono: var(
     --font-mono,
     "Noto Sans Mono",
