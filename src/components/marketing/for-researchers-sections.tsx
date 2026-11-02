@@ -322,7 +322,7 @@ export const ResearchersHeroSection = () => {
             <span className="text-center text-2xl font-semibold text-[#027f89] sm:text-3xl lg:text-left">
               For Researchers
             </span>
-            <span className="text-balance text-center text-3xl font-serif font-semibold leading-tight tracking-title text-[#004247] sm:text-4xl md:text-5xl lg:text-left">
+            <span className="text-balance text-center text-3xl font-bold leading-tight tracking-tight text-[#004247] sm:text-4xl md:text-5xl lg:text-left">
               Pioneering Research in Human-Centered AI for Personalized Math Learning
             </span>
           </h1>
