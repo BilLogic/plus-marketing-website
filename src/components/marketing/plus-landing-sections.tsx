@@ -1114,7 +1114,7 @@ export const PlusSmartTechSection = () => {
             iconSrc={plusHomeSmartTech.iconGoal}
             title="Collaborative Goal Setting"
             className="mb-2 max-w-full sm:mb-3"
-            titleClassName="max-w-none whitespace-nowrap"
+            titleClassName="max-w-none sm:whitespace-nowrap"
           />
           {/* Back: goal-setting UI screenshot, centered & flush to bottom. Floating pills + sparkles overlaid (was a baked composite). */}
           <div
