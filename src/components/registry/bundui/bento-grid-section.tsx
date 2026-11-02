@@ -43,7 +43,7 @@ const BunduiBentoGridSection = ({
       )}
     >
       <header className="space-y-2">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
           Layout
         </p>
         <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">

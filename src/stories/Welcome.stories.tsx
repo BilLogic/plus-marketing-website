@@ -23,7 +23,7 @@ const sections = [
     icon: PaletteIcon,
     title: "Styles",
     description:
-      "Color tokens (OKLCH), typography (DM Sans / Geist Mono), elevation, motion principles, icons, and shape conventions. Start here to understand the visual language.",
+      "Color tokens (OKLCH), typography (Noto Sans / Noto Serif / Noto Sans Mono), elevation, motion principles, icons, and shape conventions. Start here to understand the visual language.",
     path: "Styles/Overview",
     items: ["Color", "Typography", "Elevation", "Motion", "Icons", "Shape"],
   },
@@ -85,7 +85,7 @@ export const Overview: Story = {
       <div className="mx-auto max-w-5xl px-6 py-12">
         {/* Hero */}
         <header className="mb-16 max-w-2xl space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-primary">
             Plus Design System
           </p>
           <h1 className="text-balance text-4xl font-bold tracking-tight">
@@ -117,7 +117,7 @@ export const Overview: Story = {
             "shadcn/ui (base-nova)",
             "Framer Motion",
             "Storybook 10",
-            "DM Sans + Geist Mono",
+            "Noto Sans + Noto Serif",
           ].map((tech) => (
             <span
               key={tech}
@@ -160,7 +160,7 @@ export const Overview: Story = {
 
         {/* Registry sources */}
         <section className="mt-16">
-          <h2 className="mb-6 text-sm font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="mb-6 text-sm font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Registry Sources
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

@@ -20,7 +20,7 @@ const BunduiLogoCloudSection = ({
       )}
     >
       <div className="space-y-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
           Logo cloud
         </p>
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">

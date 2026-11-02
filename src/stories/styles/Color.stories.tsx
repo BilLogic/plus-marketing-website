@@ -308,7 +308,7 @@ export const Semantics: Story = {
         <div className="mx-auto max-w-7xl px-6 py-10">
           {/* Header */}
           <div className="max-w-3xl space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Styles / Color
             </p>
             <h1 className="text-balance text-3xl font-semibold tracking-tight">

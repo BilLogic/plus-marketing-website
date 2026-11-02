@@ -24,7 +24,7 @@ const sections = [
   },
   {
     title: "Typography",
-    description: "DM Sans type scale, heading hierarchy, body text, and font conventions.",
+    description: "Noto type scale, heading hierarchy, body text, and font conventions.",
     path: "Styles/Typography",
   },
   {
@@ -67,7 +67,7 @@ export const Guide: Story = {
       <div className="mx-auto max-w-5xl px-6 py-10">
         <div className="max-w-3xl space-y-2">
           <div className="flex items-center gap-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+            <p className="text-xs font-semibold uppercase tracking-eyebrow text-primary">
               Styles
             </p>
             <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary">

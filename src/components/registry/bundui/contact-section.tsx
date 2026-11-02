@@ -62,7 +62,7 @@ const BunduiContactSection = ({ className }: BunduiContactSectionProps) => {
     >
       <div className="grid gap-8 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1.4fr)] md:items-start">
         <header className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Contact
           </p>
           <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">

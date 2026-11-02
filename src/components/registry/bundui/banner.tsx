@@ -16,7 +16,7 @@ const BunduiBanner = ({
   return (
     <section className={cn("px-4 sm:px-6", className)}>
       <div className="mx-auto flex max-w-3xl items-center gap-3 rounded-full border border-border/70 bg-card/80 px-3 py-2 text-xs shadow-sm sm:text-sm">
-        <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
+        <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-medium uppercase tracking-eyebrow text-primary">
           <span className="h-1 w-1 rounded-full bg-primary" />
           {label}
         </span>

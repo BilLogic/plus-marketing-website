@@ -48,7 +48,7 @@ export const Shape: Story = {
     <div className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto max-w-6xl px-6 py-10">
         <div className="max-w-3xl space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Styles
           </p>
           <h1 className="text-balance text-3xl font-semibold tracking-tight">Shape</h1>
@@ -61,7 +61,7 @@ export const Shape: Story = {
 
         {/* Radius scale */}
         <section className="mt-10">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Radius scale
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -81,7 +81,7 @@ export const Shape: Story = {
 
         {/* Side-specific radius */}
         <section className="mt-12">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Side-specific radius
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -109,7 +109,7 @@ export const Shape: Story = {
 
         {/* Usage patterns */}
         <section className="mt-12">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Usage patterns
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">

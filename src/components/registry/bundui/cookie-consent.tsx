@@ -49,7 +49,7 @@ const BunduiCookieConsent = ({ className }: BunduiCookieConsentProps) => {
       <div className="mx-auto max-w-3xl rounded-2xl border border-border/70 bg-background/95 px-4 py-3 shadow-lg shadow-background/40 backdrop-blur-sm sm:px-5 sm:py-4">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-1">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Cookies
             </p>
             <p className="text-sm font-medium text-foreground">

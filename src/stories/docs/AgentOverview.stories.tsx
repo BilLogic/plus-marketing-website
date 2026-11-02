@@ -17,7 +17,7 @@ export const Overview: Story = {
     <div className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto max-w-4xl px-6 py-12 space-y-10">
         <header className="space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-primary">
             For agents &amp; engineers
           </p>
           <h1 className="text-3xl font-semibold tracking-tight">

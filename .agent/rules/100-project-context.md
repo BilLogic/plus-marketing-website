@@ -11,7 +11,7 @@ We are building the **Plus Marketing Website**. This is a highly polished, aesth
 - **Content**: MDX
 
 ### Theme & tokens
-- **Fonts**: `DM Sans` (primary sans) via `--font-sans`, `Geist Mono` for code.
+- **Fonts**: the PLUS product pairing. `Noto Sans` (everything) via `--font-sans`; `Noto Serif` via `--font-serif` for page titles only (`font-serif font-semibold tracking-title`); `Noto Sans Mono` for code. Small uppercase labels use `tracking-eyebrow`.
 - **Colors**: OKLCH semantic tokens (background, primary, muted, etc.) defined in `src/app/globals.css`.
 - **Customization strategy**:
   1. Prefer theme-level changes first (fonts, color tokens, radii) instead of per-component overrides.

@@ -67,7 +67,7 @@ export const riSeeAllPublicationsLinkMetaClass = cn(
   riIndexMetaCopy
 )
 
-/** Card topic chips — `font-sans` maps to DM Sans via `next/font` + `@theme` (`src/app/fonts.ts`). */
+/** Card topic chips — `font-sans` maps to Noto Sans via `next/font` + `@theme` (`src/app/fonts.ts`). */
 export function riGenrePillClass(genre: string): string {
   switch (genre) {
     case "Student Learning":

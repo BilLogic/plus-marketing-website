@@ -41,7 +41,7 @@ export const Elevation: Story = {
     <div className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto max-w-6xl px-6 py-10">
         <div className="max-w-3xl space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Styles
           </p>
           <h1 className="text-balance text-3xl font-semibold tracking-tight">
@@ -55,7 +55,7 @@ export const Elevation: Story = {
 
         {/* Shadow scale */}
         <section className="mt-10">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Shadow scale
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -77,7 +77,7 @@ export const Elevation: Story = {
 
         {/* Colored shadows */}
         <section className="mt-12">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Colored shadows
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -101,7 +101,7 @@ export const Elevation: Story = {
 
         {/* Ring patterns */}
         <section className="mt-12">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Ring patterns
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -123,7 +123,7 @@ export const Elevation: Story = {
 
         {/* Backdrop blur */}
         <section className="mt-12">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Backdrop blur (glass)
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -148,7 +148,7 @@ export const Elevation: Story = {
 
         {/* Composition patterns */}
         <section className="mt-12">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Composition patterns
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">

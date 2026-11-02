@@ -65,7 +65,7 @@ const BunduiNewsletterSection = ({
     >
       <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,2fr)] md:items-center">
         <div className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Newsletter
           </p>
           <h2 className="text-balance text-xl font-semibold tracking-tight sm:text-2xl">

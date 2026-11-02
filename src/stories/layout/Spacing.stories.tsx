@@ -48,7 +48,7 @@ export const Story: Story = {
     <div className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto max-w-6xl px-6 py-10 space-y-10">
         <header className="max-w-2xl space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Layout
           </p>
           <h1 className="text-balance text-3xl font-semibold tracking-tight">
@@ -62,7 +62,7 @@ export const Story: Story = {
 
         {/* Primitive ladder */}
         <section className="space-y-3">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Primitives
           </h2>
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
@@ -82,7 +82,7 @@ export const Story: Story = {
 
         {/* Section padding semantics */}
         <section className="space-y-4">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Section padding presets
           </h2>
           <div className="space-y-6">
@@ -92,7 +92,7 @@ export const Story: Story = {
                 className={`border border-dashed border-border bg-background/60 ${variant.classes}`}
               >
                 <div className="mx-auto max-w-4xl px-4 sm:px-6 md:px-8">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
                     {variant.label}
                   </p>
                   <p className="mt-1 text-sm text-muted-foreground">
@@ -107,7 +107,7 @@ export const Story: Story = {
 
         {/* Stack gaps */}
         <section className="space-y-4">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Stack gaps
           </h2>
           <div className="grid gap-4 md:grid-cols-3">

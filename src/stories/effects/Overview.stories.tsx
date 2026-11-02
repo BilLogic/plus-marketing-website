@@ -80,7 +80,7 @@ export const EffectsGuide: Story = {
       <div className="mx-auto max-w-5xl px-6 py-12">
         {/* Header */}
         <header className="mb-12 max-w-2xl space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-primary">
             Effects
           </p>
           <h1 className="text-balance text-4xl font-bold tracking-tight">

@@ -89,7 +89,7 @@ export const Overview: Story = {
 
       <TabsContent value="bundui">
         <div className="rounded-3xl border border-border/70 bg-background/80 px-4 py-4">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Bundui-style filter sheet
           </p>
           <Sheet>

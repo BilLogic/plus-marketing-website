@@ -27,7 +27,7 @@ const CultCardSurface = ({
           {title}
         </CardTitle>
         {badge ? (
-          <span className="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-primary">
+          <span className="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-eyebrow text-primary">
             {badge}
           </span>
         ) : null}

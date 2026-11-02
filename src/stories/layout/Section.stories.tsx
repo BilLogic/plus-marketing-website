@@ -33,7 +33,7 @@ export const StorySection: Story = {
     <section className={`border-border/60 bg-background/60 ${paddingClass(800)}`}>
       <div className="mx-auto flex max-w-5xl flex-col gap-8 px-4 sm:px-6 md:px-8">
         <header className="max-w-2xl space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Section label
           </p>
           <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">

@@ -72,7 +72,7 @@ export const Spacing: Story = {
     <div className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto max-w-6xl px-6 py-10">
         <div className="max-w-3xl space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Styles
           </p>
           <h1 className="text-balance text-3xl font-semibold tracking-tight">
@@ -87,7 +87,7 @@ export const Spacing: Story = {
 
         {/* Spacing scale */}
         <section className="mt-10">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Spacing scale
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -119,7 +119,7 @@ export const Spacing: Story = {
 
         {/* Gap utilities */}
         <section className="mt-12">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Gap utilities
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -151,7 +151,7 @@ export const Spacing: Story = {
 
         {/* Padding & margin conventions */}
         <section className="mt-12">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Padding conventions
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -199,7 +199,7 @@ export const Spacing: Story = {
 
         {/* Container widths */}
         <section className="mt-12">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Container widths
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -234,7 +234,7 @@ export const Spacing: Story = {
 
         {/* Responsive spacing */}
         <section className="mt-12">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Responsive patterns
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">
