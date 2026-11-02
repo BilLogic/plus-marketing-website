@@ -42,7 +42,7 @@ const BunduiBlogSection = ({
     >
       <header className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Resources
           </p>
           <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
@@ -64,7 +64,7 @@ const BunduiBlogSection = ({
             className="flex h-full flex-col justify-between rounded-2xl border border-border/70 bg-card/80 p-5 text-sm shadow-sm"
           >
             <div className="space-y-2">
-              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+              <p className="text-[11px] font-medium uppercase tracking-eyebrow text-muted-foreground">
                 {post.category}
               </p>
               <h3 className="text-sm font-semibold tracking-tight">{post.title}</h3>

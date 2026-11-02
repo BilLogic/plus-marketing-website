@@ -149,7 +149,7 @@ export const Palette: Story = {
       <div className="min-h-dvh bg-background text-foreground">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 md:px-8">
           <div className="max-w-2xl space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Styles / Color
             </p>
             <h1 className="text-balance text-3xl font-semibold tracking-tight">
@@ -179,7 +179,7 @@ export const Palette: Story = {
             <div className="mt-4 rounded-2xl bg-background p-5 text-foreground ring-1 ring-border transition-colors">
               {/* Plus brand hues */}
               <div className="space-y-1">
-                <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
                   Plus brand hues (Figma)
                 </h2>
                 <p className="text-[11px] text-muted-foreground/70">
@@ -235,7 +235,7 @@ export const Palette: Story = {
 
               {/* Standard Tailwind hues */}
               <div className="mt-10 space-y-1">
-                <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
                   Standard Tailwind hues
                 </h2>
                 <p className="text-[11px] text-muted-foreground/70">

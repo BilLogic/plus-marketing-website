@@ -42,7 +42,7 @@ const TailarkTestimonialsSection = ({
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
         <header className="max-w-2xl space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Testimonials
           </p>
           <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">

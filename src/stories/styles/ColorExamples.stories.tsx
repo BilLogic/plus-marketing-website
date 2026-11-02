@@ -85,7 +85,7 @@ export const Examples: Story = {
       <div className="min-h-dvh bg-background text-foreground">
         <div className="mx-auto max-w-5xl space-y-10 px-6 py-10">
           <header className="max-w-2xl space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Styles / Color
             </p>
             <h1 className="text-balance text-3xl font-semibold tracking-tight">
@@ -102,7 +102,7 @@ export const Examples: Story = {
 
           {/* 1. Hero CTA strip */}
           <section>
-            <h2 className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="mb-1 text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Hero call-to-action
             </h2>
             <p className="mb-4 text-[11px] text-muted-foreground/70">
@@ -138,7 +138,7 @@ export const Examples: Story = {
 
           {/* 2. Pricing cards */}
           <section>
-            <h2 className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="mb-1 text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Pricing cards
             </h2>
             <p className="mb-4 text-[11px] text-muted-foreground/70">
@@ -188,7 +188,7 @@ export const Examples: Story = {
 
           {/* 3. Form with validation states */}
           <section>
-            <h2 className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="mb-1 text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Form with validation
             </h2>
             <p className="mb-4 text-[11px] text-muted-foreground/70">
@@ -237,7 +237,7 @@ export const Examples: Story = {
 
           {/* 4. Notification banner */}
           <section>
-            <h2 className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="mb-1 text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Notification banners
             </h2>
             <p className="mb-4 text-[11px] text-muted-foreground/70">
@@ -282,7 +282,7 @@ export const Examples: Story = {
 
           {/* 5. Dashboard metrics with charts */}
           <section>
-            <h2 className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="mb-1 text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Dashboard metrics
             </h2>
             <p className="mb-4 text-[11px] text-muted-foreground/70">
@@ -349,7 +349,7 @@ export const Examples: Story = {
 
           {/* 6. Sidebar navigation */}
           <section>
-            <h2 className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="mb-1 text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               App shell with sidebar
             </h2>
             <p className="mb-4 text-[11px] text-muted-foreground/70">
@@ -409,7 +409,7 @@ export const Examples: Story = {
 
           {/* 7. Button spectrum */}
           <section>
-            <h2 className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="mb-1 text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Button variants
             </h2>
             <p className="mb-4 text-[11px] text-muted-foreground/70">
@@ -461,7 +461,7 @@ export const Examples: Story = {
 
           {/* 8. Colored shadows and rings */}
           <section>
-            <h2 className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="mb-1 text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Shadows, rings &amp; outlines
             </h2>
             <p className="mb-4 text-[11px] text-muted-foreground/70">

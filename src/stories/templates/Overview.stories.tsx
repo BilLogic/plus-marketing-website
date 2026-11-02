@@ -17,7 +17,7 @@ export const Story: Story = {
     <div className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto max-w-5xl px-6 py-10">
         <div className="max-w-2xl space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Templates
           </p>
           <h1 className="text-balance text-3xl font-semibold tracking-tight">

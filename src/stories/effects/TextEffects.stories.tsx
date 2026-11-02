@@ -55,7 +55,7 @@ export const Overview: Story = {
     <div className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto max-w-4xl px-6 py-12 space-y-10">
         <header className="max-w-2xl space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-primary">
             Effects / Text Effects
           </p>
           <h1 className="text-balance text-3xl font-bold tracking-tight">

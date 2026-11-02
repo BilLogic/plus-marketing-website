@@ -16,7 +16,7 @@ Production marketing site for [PLUS (tutors.plus)](https://www.tutors.plus/) —
 | Styling | Tailwind CSS v4 (OKLCH token system) |
 | Components | shadcn/ui + Radix UI + Base UI |
 | Motion | Framer Motion |
-| Fonts | DM Sans (primary), Geist Mono |
+| Fonts | Noto Sans (primary), Noto Serif (page titles), Noto Sans Mono |
 | Deploy | Netlify (`@netlify/plugin-nextjs`) |
 | Docs | Storybook (served at `/storybook` on Netlify) |
 

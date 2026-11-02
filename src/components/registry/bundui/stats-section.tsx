@@ -28,7 +28,7 @@ const BunduiStatsSection = ({
       )}
     >
       <header className="space-y-2">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
           Stats
         </p>
         <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
@@ -45,7 +45,7 @@ const BunduiStatsSection = ({
             key={stat.label}
             className="rounded-2xl border border-border/70 bg-card/80 px-4 py-5 text-sm shadow-sm"
           >
-            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+            <p className="text-[11px] font-medium uppercase tracking-eyebrow text-muted-foreground">
               {stat.label}
             </p>
             <p className="mt-2 text-xl font-semibold tracking-tight text-foreground">

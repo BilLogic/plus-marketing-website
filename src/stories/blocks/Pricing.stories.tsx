@@ -20,7 +20,7 @@ const BasePricingGridSection = () => (
   <section className="border-border/60 bg-background/60 py-16 sm:py-20 md:py-24">
     <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
       <header className="mx-auto max-w-2xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
           Pricing
         </p>
         <h2 className="mt-2 text-balance text-3xl font-semibold tracking-tight">

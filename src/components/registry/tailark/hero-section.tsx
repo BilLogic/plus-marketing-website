@@ -47,7 +47,7 @@ const TailarkHeroSection = ({ className }: TailarkHeroSectionProps) => {
           <div className="relative aspect-[4/3] rounded-3xl border border-border bg-card/80 shadow-lg shadow-primary/15">
             <div className="absolute inset-x-6 bottom-6 flex items-center justify-between rounded-2xl border border-border/70 bg-background/90 px-4 py-3 text-xs text-muted-foreground">
               <div>
-                <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                <p className="text-[11px] font-medium uppercase tracking-eyebrow text-muted-foreground">
                   Variants
                 </p>
                 <p className="text-xs text-foreground">Hero, pricing, testimonials</p>

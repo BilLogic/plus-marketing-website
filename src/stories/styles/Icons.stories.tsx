@@ -60,7 +60,7 @@ export const Icons: Story = {
     <div className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto max-w-6xl px-6 py-10">
         <div className="max-w-3xl space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Styles
           </p>
           <h1 className="text-balance text-3xl font-semibold tracking-tight">Icons</h1>
@@ -74,7 +74,7 @@ export const Icons: Story = {
 
         {/* Size scale */}
         <section className="mt-10">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Size scale
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -97,7 +97,7 @@ export const Icons: Story = {
 
         {/* Color patterns */}
         <section className="mt-12">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Color patterns
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -128,7 +128,7 @@ export const Icons: Story = {
 
         {/* Feedback icons */}
         <section className="mt-12">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Feedback icons
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -152,7 +152,7 @@ export const Icons: Story = {
 
         {/* Common icons grid */}
         <section className="mt-12">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Common icons
           </h2>
           <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -175,7 +175,7 @@ export const Icons: Story = {
 
         {/* Usage patterns */}
         <section className="mt-12">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Usage patterns
           </h2>
 

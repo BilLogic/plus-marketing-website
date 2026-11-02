@@ -120,7 +120,7 @@ export const Themes: Story = {
       <div className="min-h-dvh bg-background text-foreground">
         <div className="mx-auto max-w-6xl px-6 py-10">
           <div className="max-w-3xl space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Styles
             </p>
             <h1 className="text-balance text-3xl font-semibold tracking-tight">
@@ -139,7 +139,7 @@ export const Themes: Story = {
 
           {/* Token comparison table */}
           <section className="mt-10">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Token comparison
             </h2>
             <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -213,7 +213,7 @@ export const Themes: Story = {
 
           {/* Live comparison */}
           <section className="mt-12">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Live comparison
             </h2>
             <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -283,7 +283,7 @@ export const Themes: Story = {
 
           {/* Implementation guide */}
           <section className="mt-12">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Implementation
             </h2>
             <p className="mt-1 text-[11px] text-muted-foreground/70">

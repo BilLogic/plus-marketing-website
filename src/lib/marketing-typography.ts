@@ -3,13 +3,13 @@
  * Use semantic HTML (h1, h2, h3, p) with these classes for marketing pages.
  */
 export const marketingTypography = {
-  /** H1 — Hero headline (Storybook: text-5xl font-semibold tracking-tight) */
-  h1: "text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl",
+  /** H1 — Page title, Noto Serif (Storybook: text-5xl font-serif font-semibold tracking-title) */
+  h1: "text-balance font-serif text-4xl font-semibold tracking-title text-foreground sm:text-5xl",
   /**
    * Marketing landing hero title — matches for-tutors / get-involved hero H1.
    * Used by for-schools `SchoolsHeroSection`.
    */
-  heroH1: "text-balance text-3xl font-bold leading-tight tracking-tight text-teal-950 sm:text-4xl md:text-5xl",
+  heroH1: "text-balance font-serif text-3xl font-semibold leading-tight tracking-title text-teal-950 sm:text-4xl md:text-5xl",
   /** H2 — Section headline (Storybook: text-3xl font-semibold tracking-tight) */
   h2: "text-balance text-3xl font-semibold tracking-tight text-foreground",
   /** H3 — Card / accordion titles (Storybook: text-xl font-semibold tracking-tight) */

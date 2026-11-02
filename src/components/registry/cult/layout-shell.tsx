@@ -19,7 +19,7 @@ const CultLayoutShell = ({ sidebar, children, className }: CultLayoutShellProps)
         <aside className="hidden w-56 flex-none rounded-3xl border border-border/80 bg-card/90 p-4 text-xs text-muted-foreground shadow-[0_24px_60px_rgba(15,23,42,0.7)] lg:block">
           {sidebar ?? (
             <div className="space-y-3">
-              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+              <p className="text-[11px] font-medium uppercase tracking-eyebrow text-muted-foreground">
                 Navigation
               </p>
               <ul className="space-y-1.5">

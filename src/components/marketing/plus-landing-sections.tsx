@@ -602,7 +602,7 @@ export const PlusHeroSection = () => {
             )}
           >
               <h1
-                className="mx-auto max-w-prose text-balance text-center text-3xl font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-4xl md:text-5xl"
+                className="mx-auto max-w-prose text-balance text-center text-3xl font-serif font-semibold leading-tight tracking-title text-teal-950 dark:text-white sm:text-4xl md:text-5xl"
               >
                 Scaling Up High-Impact Math Tutoring with Technology and Training
               </h1>
@@ -1114,7 +1114,7 @@ export const PlusSmartTechSection = () => {
             iconSrc={plusHomeSmartTech.iconGoal}
             title="Collaborative Goal Setting"
             className="mb-2 max-w-full sm:mb-3"
-            titleClassName="max-w-none whitespace-nowrap"
+            titleClassName="max-w-none sm:whitespace-nowrap"
           />
           {/* Back: goal-setting UI screenshot, centered & flush to bottom. Floating pills + sparkles overlaid (was a baked composite). */}
           <div

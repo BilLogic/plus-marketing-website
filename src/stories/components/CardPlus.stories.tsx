@@ -26,7 +26,7 @@ export const Overview: Story = {
   render: () => (
     <div className="grid gap-6 md:grid-cols-3">
       <div className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
           Base (shadcn)
         </p>
         <Card className="max-w-sm">
@@ -42,7 +42,7 @@ export const Overview: Story = {
         </Card>
       </div>
       <div className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
           Plus (customized)
         </p>
         <PlusCard className="max-w-sm">
@@ -59,7 +59,7 @@ export const Overview: Story = {
         </PlusCard>
       </div>
       <div className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
           Cult UI (registry)
         </p>
         <CultCardSurface
@@ -77,7 +77,7 @@ export const Comparison: Story = {
   render: () => (
     <div className="grid gap-8 md:grid-cols-2">
       <div className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
           Base (shadcn)
         </p>
         <Card className="max-w-sm">
@@ -98,7 +98,7 @@ export const Comparison: Story = {
         </Card>
       </div>
       <div className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
           Plus (customized)
         </p>
         <PlusCard className="max-w-sm">

@@ -54,7 +54,7 @@ const ParallaxCards = ({ items, className }: ParallaxCardsProps) => {
             rotateY,
           }}
         >
-          <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="text-[11px] font-medium uppercase tracking-eyebrow text-muted-foreground">
             {String(item.index).padStart(2, "0")}
           </p>
           <h3 className="mt-2 text-sm font-semibold tracking-tight">{item.title}</h3>
@@ -80,7 +80,7 @@ const ParallaxCardsSection = ({
   return (
     <section className="space-y-4">
       <header className="space-y-1">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
           Bundui-inspired
         </p>
         <h2 className="text-balance text-xl font-semibold tracking-tight">{title}</h2>

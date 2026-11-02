@@ -82,7 +82,7 @@ export const Comparison: Story = {
       </TabsList>
 
       <TabsContent value="shadcn" className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
           Base (shadcn/ui)
         </p>
         <Tabs defaultValue="overview">
@@ -100,7 +100,7 @@ export const Comparison: Story = {
       </TabsContent>
 
       <TabsContent value="tailark" className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
           Tailark (registry)
         </p>
         <Tabs defaultValue="monthly">
@@ -128,7 +128,7 @@ export const Comparison: Story = {
       </TabsContent>
 
       <TabsContent value="cult-ui" className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
           Cult UI (registry)
         </p>
         <Tabs defaultValue="design">

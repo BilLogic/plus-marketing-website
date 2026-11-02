@@ -46,7 +46,7 @@ const BunduiCtaSection = ({
     >
       <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div className="max-w-xl space-y-3">
-          <p className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/70 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/70 px-3 py-1 text-[11px] font-medium uppercase tracking-eyebrow text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             {eyebrow}
           </p>

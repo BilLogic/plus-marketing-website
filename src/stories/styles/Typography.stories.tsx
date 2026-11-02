@@ -20,21 +20,24 @@ export const Story: Story = {
     <div className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto max-w-5xl px-6 py-10">
         <div className="max-w-2xl space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
             Styles
           </p>
           <h1 className="text-balance text-3xl font-semibold tracking-tight">
             Typography
           </h1>
           <p className="text-sm text-muted-foreground">
-            Default font is <strong>DM Sans</strong> for UI and body text, with{" "}
-            <strong>Geist Mono</strong> for code.
+            The site shares the PLUS product pairing: <strong>Noto Sans</strong> for
+            UI, headings and body; <strong>Noto Serif</strong> for page titles only
+            (<code className="text-xs">font-serif font-semibold tracking-title</code>);{" "}
+            <strong>Noto Sans Mono</strong> for code. Small uppercase labels use{" "}
+            <code className="text-xs">tracking-eyebrow</code>.
           </p>
         </div>
 
         <div className="mt-10 space-y-10">
           <section className="space-y-3">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Heading hierarchy
             </h2>
             <div className="space-y-3">
@@ -61,7 +64,7 @@ export const Story: Story = {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Body text
             </h2>
             <div className="max-w-prose space-y-3">
@@ -89,12 +92,12 @@ export const Story: Story = {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Type scales
             </h2>
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               <div className="rounded-lg border border-dashed border-border bg-card/40 p-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
                   Body
                 </p>
                 <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
@@ -110,7 +113,7 @@ export const Story: Story = {
                 </ul>
               </div>
               <div className="rounded-lg border border-dashed border-border bg-card/40 p-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
                   Headings & display
                 </p>
                 <ul className="mt-2 space-y-1 text-xs text-muted-foreground">

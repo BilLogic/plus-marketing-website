@@ -58,7 +58,7 @@ export const Transitions: Story = {
       <div className="min-h-dvh bg-background text-foreground">
         <div className="mx-auto max-w-6xl px-6 py-10">
           <div className="max-w-3xl space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Styles
             </p>
             <h1 className="text-balance text-3xl font-semibold tracking-tight">
@@ -73,7 +73,7 @@ export const Transitions: Story = {
 
           {/* Duration scale */}
           <section className="mt-10">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Duration scale
             </h2>
             <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -110,7 +110,7 @@ export const Transitions: Story = {
 
           {/* Easing curves */}
           <section className="mt-12">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Easing curves
             </h2>
             <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -133,7 +133,7 @@ export const Transitions: Story = {
 
           {/* Transition properties */}
           <section className="mt-12">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Transition properties
             </h2>
             <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -166,7 +166,7 @@ export const Transitions: Story = {
 
           {/* Keyframe animations */}
           <section className="mt-12">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Keyframe animations
             </h2>
             <p className="mt-1 text-[11px] text-muted-foreground/70">
@@ -188,7 +188,7 @@ export const Transitions: Story = {
 
           {/* Composition recipe */}
           <section className="mt-12">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Composition recipe
             </h2>
             <p className="mt-1 text-[11px] text-muted-foreground/70">

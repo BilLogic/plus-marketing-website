@@ -6,7 +6,7 @@ Use this as a quick reference plus a set of copy‑pastable prompts.
 ## Core capabilities
 
 - **Design & theming**
-  - Frontend design skill for premium UI using OKLCH tokens, DM Sans, and Geist Mono.
+  - Frontend design skill for premium UI using OKLCH tokens and the Noto pairing (Noto Sans, Noto Serif titles, Noto Sans Mono).
   - shadcn/ui skill with strict composition and styling rules.
 - **Registry & Storybook**
   - Registry Advisor and shadcn MCP for searching Bundui, Tailark, Cult UI, and shadcn blocks.

@@ -43,7 +43,7 @@ const TailarkFeatureSection = ({
       <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
         <header className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <p className="text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground">
               Features
             </p>
             <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
@@ -65,7 +65,7 @@ const TailarkFeatureSection = ({
               key={feature.title}
               className="rounded-2xl border border-border/70 bg-card/80 p-5 text-sm shadow-sm"
             >
-              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+              <p className="text-[11px] font-medium uppercase tracking-eyebrow text-muted-foreground">
                 {feature.label}
               </p>
               <h3 className="mt-2 text-sm font-semibold tracking-tight text-foreground">
