@@ -142,7 +142,7 @@ const CountUpStat = ({
 
 /** Section typography + rhythm — match `get-involved-sections.tsx` / `for-tutors-sections.tsx`. */
 const schoolsSectionTitle =
-  "text-pretty text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+  "text-pretty text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
 const schoolsSectionLead = cn(
   "w-full max-w-none text-lg",
   marketingSectionLeadColorClass,
@@ -602,7 +602,7 @@ export const PlusHeroSection = () => {
             )}
           >
               <h1
-                className="mx-auto max-w-prose text-balance text-center text-3xl font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-4xl md:text-5xl"
+                className="mx-auto max-w-prose text-balance text-center text-3xl font-semibold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-4xl md:text-5xl"
               >
                 Scaling Up High-Impact Math Tutoring with Technology and Training
               </h1>
@@ -713,7 +713,7 @@ const impactZigzagTextColClass = cn(
 )
 
 /** Stat line — original impact scale (unchanged color). */
-const impactStatTitleClass = cn("text-2xl font-bold leading-tight sm:text-3xl", IMPACT_STAT)
+const impactStatTitleClass = cn("text-2xl font-semibold leading-tight sm:text-3xl", IMPACT_STAT)
 
 /** Body — matches get-involved section lead (`text-base lg:text-lg`). */
 const impactZigzagBodyClass = cn(

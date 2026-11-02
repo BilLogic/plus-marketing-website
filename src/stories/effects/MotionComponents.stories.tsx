@@ -61,7 +61,7 @@ const SlidingNumberDemo = () => {
   const [val, setVal] = React.useState(42)
   return (
     <div className="flex items-center gap-4">
-      <SlidingNumber value={val} className="text-4xl font-bold" />
+      <SlidingNumber value={val} className="text-4xl font-semibold" />
       <button
         onClick={() => setVal((v) => v + Math.floor(Math.random() * 10 + 1))}
         className="rounded-md border px-3 py-1.5 text-sm hover:bg-muted"
@@ -82,7 +82,7 @@ export const Overview: Story = {
           <p className="text-xs font-semibold uppercase tracking-eyebrow text-primary">
             Effects / Motion Components
           </p>
-          <h1 className="text-balance text-3xl font-bold tracking-tight">
+          <h1 className="text-balance text-3xl font-semibold tracking-tight">
             Motion Components
           </h1>
           <p className="text-sm leading-relaxed text-muted-foreground">
@@ -129,7 +129,7 @@ export const Overview: Story = {
           <div className="flex items-center justify-center py-4">
             <AnimatedGradientBorder className="w-64">
               <p className="text-sm font-semibold">Pro Plan</p>
-              <p className="mt-1 text-2xl font-bold">$49<span className="text-sm font-normal text-muted-foreground">/mo</span></p>
+              <p className="mt-1 text-2xl font-semibold">$49<span className="text-sm font-normal text-muted-foreground">/mo</span></p>
               <p className="mt-1 text-xs text-muted-foreground">Everything you need to ship.</p>
             </AnimatedGradientBorder>
           </div>
@@ -140,7 +140,7 @@ export const Overview: Story = {
           when="Stats sections, social proof numbers, and KPI displays. Triggers on scroll-into-view for maximum impact."
           code={`import { CounterAnimation } from "@/components/effects/counter-animation"
 
-<CounterAnimation target={1250} suffix="+" className="text-4xl font-bold" />
+<CounterAnimation target={1250} suffix="+" className="text-4xl font-semibold" />
 <CounterAnimation target={99} suffix="%" duration={1500} />
 <CounterAnimation target={48} prefix="$" suffix="M" />
 
@@ -151,15 +151,15 @@ export const Overview: Story = {
         >
           <div className="flex items-center justify-center gap-12 py-6">
             <div className="text-center">
-              <CounterAnimation target={1250} suffix="+" className="text-4xl font-bold" />
+              <CounterAnimation target={1250} suffix="+" className="text-4xl font-semibold" />
               <p className="mt-1 text-xs text-muted-foreground">Users</p>
             </div>
             <div className="text-center">
-              <CounterAnimation target={99} suffix="%" className="text-4xl font-bold" />
+              <CounterAnimation target={99} suffix="%" className="text-4xl font-semibold" />
               <p className="mt-1 text-xs text-muted-foreground">Uptime</p>
             </div>
             <div className="text-center">
-              <CounterAnimation target={48} prefix="$" suffix="M" className="text-4xl font-bold" />
+              <CounterAnimation target={48} prefix="$" suffix="M" className="text-4xl font-semibold" />
               <p className="mt-1 text-xs text-muted-foreground">Revenue</p>
             </div>
           </div>
@@ -252,7 +252,7 @@ export const Overview: Story = {
 
 const [price, setPrice] = useState(42)
 
-<SlidingNumber value={price} className="text-4xl font-bold" />`}
+<SlidingNumber value={price} className="text-4xl font-semibold" />`}
         >
           <div className="flex items-center justify-center py-4">
             <SlidingNumberDemo />
@@ -264,7 +264,7 @@ const [price, setPrice] = useState(42)
           when="Product launches, flash sales, event timers. Displays MM:SS format counting down to zero."
           code={`import { Countdown } from "@/components/effects/countdown"
 
-<Countdown seconds={120} className="text-4xl font-bold" />
+<Countdown seconds={120} className="text-4xl font-semibold" />
 <Countdown seconds={3600} onComplete={() => alert("Done!")} />
 
 // Props:
@@ -272,7 +272,7 @@ const [price, setPrice] = useState(42)
 //   onComplete: () => void    — callback when timer hits 00:00`}
         >
           <div className="flex items-center justify-center py-4">
-            <Countdown seconds={90} className="text-4xl font-bold" />
+            <Countdown seconds={90} className="text-4xl font-semibold" />
           </div>
         </EffectCard>
 

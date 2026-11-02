@@ -187,7 +187,7 @@ const HIGHLIGHT_STUDY_IDS_BY_TOPIC: Partial<
 
 /** Match `get-involved-sections` / `for-tutors-sections` typography. */
 const sectionHeaderH2 =
-  "text-pretty text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+  "text-pretty text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
 const sectionHeaderLead = cn(
   "w-full max-w-none text-lg",
   marketingSectionLeadColorClass,
@@ -322,7 +322,7 @@ export const ResearchersHeroSection = () => {
             <span className="text-center text-2xl font-semibold text-[#027f89] sm:text-3xl lg:text-left">
               For Researchers
             </span>
-            <span className="text-balance text-center text-3xl font-bold leading-tight tracking-tight text-[#004247] sm:text-4xl md:text-5xl lg:text-left">
+            <span className="text-balance text-center text-3xl font-semibold leading-tight tracking-tight text-[#004247] sm:text-4xl md:text-5xl lg:text-left">
               Pioneering Research in Human-Centered AI for Personalized Math Learning
             </span>
           </h1>
@@ -1057,7 +1057,7 @@ export const ResearchHighlightsSection = ({
                     </span>
                     <h3
                       className={cn(
-                        "pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-bold leading-tight tracking-tight sm:text-xl",
+                        "pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-semibold leading-tight tracking-tight sm:text-xl",
                         theme.titleWhenOpen,
                       )}
                     >
@@ -1125,7 +1125,7 @@ export const ResearchHighlightsSection = ({
                       <div className="flex flex-col gap-3">
                         <h3
                           className={cn(
-                            "line-clamp-3 text-pretty text-lg font-bold leading-tight tracking-tight transition-colors duration-300 sm:text-xl lg:text-2xl",
+                            "line-clamp-3 text-pretty text-lg font-semibold leading-tight tracking-tight transition-colors duration-300 sm:text-xl lg:text-2xl",
                             HIGHLIGHTS_STICKY_TITLE_H,
                             isActive ? theme.titleWhenOpen : "text-muted-foreground",
                           )}
@@ -1609,7 +1609,7 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
                   </span>
                   <h3
                     className={cn(
-                      "min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight sm:text-xl lg:text-2xl",
+                      "min-w-0 flex-1 text-pretty text-lg font-semibold leading-snug tracking-tight sm:text-xl lg:text-2xl",
                       theme.accent,
                     )}
                   >

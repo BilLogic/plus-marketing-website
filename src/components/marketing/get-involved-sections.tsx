@@ -41,7 +41,7 @@ import type { JobListing } from "@/lib/notion/types"
 // ─── Shared tokens (match about/for-tutors pages) ────────────────────────────
 
 const sectionH2 =
-  "text-pretty text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+  "text-pretty text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
 
 const sectionLead = cn(
   "w-full max-w-none text-base lg:text-lg",
@@ -261,7 +261,7 @@ export function GetInvolvedWhyWorkSection() {
               </span>
               <p
                 className={cn(
-                  "text-pretty text-lg font-bold leading-snug tracking-tight text-blue-900 dark:text-sky-300 sm:text-xl lg:text-2xl",
+                  "text-pretty text-lg font-semibold leading-snug tracking-tight text-blue-900 dark:text-sky-300 sm:text-xl lg:text-2xl",
                 )}
               >
                 {item.title}
@@ -361,7 +361,7 @@ export function GetInvolvedCareersSection({ jobs }: { jobs?: JobListing[] }) {
                 />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-lg font-bold leading-tight tracking-tight text-green-900 sm:text-xl lg:text-2xl">
+                <p className="text-lg font-semibold leading-tight tracking-tight text-green-900 sm:text-xl lg:text-2xl">
                   {job.title}
                 </p>
                 <p className="mt-1 text-base leading-relaxed text-muted-foreground lg:text-lg">
@@ -395,7 +395,7 @@ export function GetInvolvedCareersSection({ jobs }: { jobs?: JobListing[] }) {
             <FileText className={cn(marketingCardLucideGlyphClass, "text-white")} aria-hidden />
           </span>
           <div className="flex min-w-0 flex-col gap-3">
-            <p className="pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-bold leading-tight tracking-tight text-green-900 sm:text-xl lg:text-2xl">
+            <p className="pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-semibold leading-tight tracking-tight text-green-900 sm:text-xl lg:text-2xl">
               Don&apos;t See a Role That Fits?
             </p>
             <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
@@ -459,7 +459,7 @@ export function GetInvolvedTutoringSection() {
                     aria-hidden
                   />
                 </span>
-                <p className="min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
+                <p className="min-w-0 flex-1 text-pretty text-lg font-semibold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
                   Becoming a Tutor at PLUS
                 </p>
               </div>
@@ -517,7 +517,7 @@ export function GetInvolvedTutoringSection() {
                 aria-hidden
               />
             </span>
-            <p className="min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
+            <p className="min-w-0 flex-1 text-pretty text-lg font-semibold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
               No Prior Experience Needed
             </p>
           </div>
@@ -544,7 +544,7 @@ export function GetInvolvedTutoringSection() {
                 aria-hidden
               />
             </span>
-            <p className="min-w-0 flex-1 text-pretty text-lg font-bold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
+            <p className="min-w-0 flex-1 text-pretty text-lg font-semibold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
               What You&apos;ll Do
             </p>
           </div>
@@ -597,7 +597,7 @@ export function GetInvolvedPartnershipsSection() {
             <FileText className={cn(marketingCardLucideGlyphClass, "text-white")} aria-hidden />
           </span>
           <div className="flex min-w-0 flex-col gap-3">
-            <p className="pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-bold text-fuchsia-900 sm:text-xl lg:text-2xl dark:text-[#e879a9]">
+            <p className="pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-semibold text-fuchsia-900 sm:text-xl lg:text-2xl dark:text-[#e879a9]">
               Contact Us to Learn More
             </p>
             <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
@@ -625,7 +625,7 @@ export function GetInvolvedFinalCTA() {
           marketingCardPaddingClass,
         )}
       >
-        <h2 className="text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl lg:text-4xl">
+        <h2 className="text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl lg:text-4xl">
           Get Involved at PLUS
         </h2>
         <p className={cn("text-pretty text-base lg:text-lg", marketingSectionLeadColorClass)}>

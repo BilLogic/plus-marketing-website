@@ -56,7 +56,7 @@ function NewsCard({ item, slug }: { item: NewsItem; slug: string }) {
           <Icon className={marketingCardLucideGlyphClass} aria-hidden />
         </span>
         <div className="min-w-0 flex-1">
-          <h2 className="pt-[max(0px,calc((48px-1lh)/2))] text-pretty text-lg font-bold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
+          <h2 className="pt-[max(0px,calc((48px-1lh)/2))] text-pretty text-lg font-semibold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
             {item.title}
           </h2>
           {item.author || date ? (
@@ -108,7 +108,7 @@ export default async function NewsPage() {
     <main className="bg-background text-foreground">
       <div className={marketingListingShellClass}>
         <div className="space-y-3">
-          <h1 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+          <h1 className="text-balance text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             News
           </h1>
           <p

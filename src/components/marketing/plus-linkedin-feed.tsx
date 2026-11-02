@@ -16,7 +16,7 @@ export const PlusLinkedInFeedSection = () => {
     <section id="linkedin" className="relative">
       <div className="relative w-full text-left">
         <div className={marketingSectionIntroColumnClass}>
-          <h2 className="text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+          <h2 className="text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Latest from LinkedIn
           </h2>
           <p className="max-w-2xl text-base text-muted-foreground lg:text-lg">

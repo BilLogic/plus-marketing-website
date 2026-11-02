@@ -34,7 +34,7 @@ export const riIndexMetaCopy =
  * (`text-lg` → `sm:text-2xl` → `md:text-3xl`; color from `riFg.title`.)
  */
 export const riPageTitleCn = cn(
-  "font-sans text-pretty text-lg font-bold tracking-tight sm:text-2xl md:text-3xl",
+  "font-sans text-pretty text-lg font-semibold tracking-tight sm:text-2xl md:text-3xl",
   riFg.title
 )
 

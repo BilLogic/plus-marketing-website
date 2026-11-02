@@ -31,7 +31,7 @@ const CATEGORY_ICON: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
 }
 
 const cardTitle =
-  "text-pretty text-lg font-bold leading-snug tracking-tight text-fuchsia-900 dark:text-fuchsia-900 sm:text-xl lg:text-2xl"
+  "text-pretty text-lg font-semibold leading-snug tracking-tight text-fuchsia-900 dark:text-fuchsia-900 sm:text-xl lg:text-2xl"
 
 const cardBody =
   "text-base leading-relaxed text-teal-900/75 dark:text-white/80"
@@ -52,7 +52,7 @@ export const SuccessStoriesClient = ({ stories }: Props) => {
     <main className="bg-background text-foreground">
       <div className={marketingListingShellClass}>
         <div className="space-y-3">
-          <h1 className="text-balance text-2xl font-bold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+          <h1 className="text-balance text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
             Success Stories
           </h1>
           <p

@@ -58,7 +58,7 @@ export const Overview: Story = {
           <p className="text-xs font-semibold uppercase tracking-eyebrow text-primary">
             Effects / Text Effects
           </p>
-          <h1 className="text-balance text-3xl font-bold tracking-tight">
+          <h1 className="text-balance text-3xl font-semibold tracking-tight">
             Text Effects
           </h1>
           <p className="text-sm leading-relaxed text-muted-foreground">
@@ -81,12 +81,12 @@ export const Overview: Story = {
           when="Hero headlines that need visual energy. The gradient continuously sweeps across the text, drawing the eye without overwhelming."
           code={`import { AnimatedGradientText } from "@/components/effects/animated-gradient-text"
 
-<AnimatedGradientText className="text-5xl font-bold tracking-tight">
+<AnimatedGradientText className="text-5xl font-semibold tracking-tight">
   Ship faster with Plus
 </AnimatedGradientText>`}
         >
           <div className="flex items-center justify-center py-6">
-            <AnimatedGradientText className="text-4xl font-bold tracking-tight">
+            <AnimatedGradientText className="text-4xl font-semibold tracking-tight">
               Ship faster with Plus
             </AnimatedGradientText>
           </div>
@@ -97,7 +97,7 @@ export const Overview: Story = {
           when="Rotating taglines, value propositions, or feature names on landing pages. Shows breadth in a compact space."
           code={`import { TextMorph } from "@/components/effects/text-morph"
 
-<h1 className="text-4xl font-bold">
+<h1 className="text-4xl font-semibold">
   We help you{" "}
   <TextMorph
     words={["Design", "Build", "Ship", "Scale"]}
@@ -112,7 +112,7 @@ export const Overview: Story = {
 //   className: string   — applied to the outer span`}
         >
           <div className="flex items-center justify-center py-6">
-            <span className="text-4xl font-bold tracking-tight">
+            <span className="text-4xl font-semibold tracking-tight">
               We help you{" "}
               <TextMorph
                 words={["Design", "Build", "Ship", "Scale"]}
@@ -127,7 +127,7 @@ export const Overview: Story = {
           when="Section headings on long-scroll pages. The gradient fill reveals as the user scrolls, rewarding exploration and guiding reading flow."
           code={`import { TextGradientScroll } from "@/components/effects/text-gradient-scroll"
 
-<TextGradientScroll className="text-4xl font-bold tracking-tight">
+<TextGradientScroll className="text-4xl font-semibold tracking-tight">
   Scroll to reveal this headline
 </TextGradientScroll>
 
@@ -136,7 +136,7 @@ export const Overview: Story = {
 // as the element moves through the viewport.`}
         >
           <div className="flex items-center justify-center py-6">
-            <TextGradientScroll className="text-3xl font-bold tracking-tight">
+            <TextGradientScroll className="text-3xl font-semibold tracking-tight">
               Scroll to reveal this headline gradually
             </TextGradientScroll>
           </div>
@@ -150,7 +150,7 @@ export const Overview: Story = {
 export const GradientText: Story = {
   render: () => (
     <div className="flex min-h-[200px] items-center justify-center bg-background p-8">
-      <AnimatedGradientText className="text-4xl font-bold tracking-tight">
+      <AnimatedGradientText className="text-4xl font-semibold tracking-tight">
         Animated gradient headline
       </AnimatedGradientText>
     </div>
@@ -161,7 +161,7 @@ export const GradientText: Story = {
 export const Morph: Story = {
   render: () => (
     <div className="flex min-h-[200px] items-center justify-center bg-background p-8">
-      <span className="text-3xl font-bold tracking-tight">
+      <span className="text-3xl font-semibold tracking-tight">
         We{" "}
         <TextMorph words={["design", "build", "ship", "scale"]} className="text-primary" />
       </span>
@@ -174,7 +174,7 @@ export const ScrollGradient: Story = {
   render: () => (
     <div className="min-h-[150vh] bg-background p-8">
       <div className="h-[50vh]" />
-      <TextGradientScroll className="text-4xl font-bold tracking-tight">
+      <TextGradientScroll className="text-4xl font-semibold tracking-tight">
         Scroll down to see this gradient reveal
       </TextGradientScroll>
       <div className="h-[50vh]" />

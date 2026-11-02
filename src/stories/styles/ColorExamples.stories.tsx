@@ -165,7 +165,7 @@ export const Examples: Story = {
                       </span>
                     )}
                     <p className="text-sm font-semibold text-card-foreground">{plan.tier}</p>
-                    <p className="mt-1 text-2xl font-bold tracking-tight">{plan.price}</p>
+                    <p className="mt-1 text-2xl font-semibold tracking-tight">{plan.price}</p>
                     <p className="mt-1 text-xs text-muted-foreground">per month</p>
                     <button
                       className={`mt-4 w-full rounded-lg py-2 text-xs font-medium ${
