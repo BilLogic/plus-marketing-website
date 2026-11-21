@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "./plus-tokens.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -174,36 +175,36 @@
 :root {
   /* Surfaces – Neutral grey */
   --background: #FFFFFF;
-  --foreground: #62636C;
+  --foreground: var(--ds-text);
   --card: #FCFCFD;
-  --card-foreground: #62636C;
+  --card-foreground: var(--ds-text);
   --popover: #FFFFFF;
-  --popover-foreground: #62636C;
+  --popover-foreground: var(--ds-text);
 
   /* Primary – Accent teal */
-  --primary: #00BFCC;
-  --primary-foreground: #FFFFFF;
+  --primary: var(--ds-background-brand-bold);
+  --primary-foreground: var(--ds-text-inverse);
 
   /* Secondary – Neutral grey soft */
   --secondary: #EFF0F3;
-  --secondary-foreground: #62636C;
+  --secondary-foreground: var(--ds-text);
 
   /* Muted – Neutral grey */
   --muted: #F9F9FB;
-  --muted-foreground: #62636C;
+  --muted-foreground: var(--ds-text-subtle);
 
   /* Accent – Bento magenta */
   --accent: #DD2AB0;
   --accent-foreground: #FFFFFF;
 
   /* Destructive – Bento red */
-  --destructive: #FF9292;
-  --destructive-foreground: #6A0B19;
+  --destructive: var(--ds-background-danger-bold);
+  --destructive-foreground: var(--ds-text-inverse);
 
   /* Borders – Neutral grey */
-  --border: #E7E8EC;
-  --input: #E0E1E6;
-  --ring: #00BFCC;
+  --border: var(--ds-border);
+  --input: var(--ds-border-input);
+  --ring: var(--ds-border-focused);
 
   /* Charts – one per hue family */
   --chart-1: #4DC1FF;
@@ -217,12 +218,12 @@
   /* Sidebar */
   --sidebar: #F9F9FB;
   --sidebar-foreground: #1E1F24;
-  --sidebar-primary: #00BFCC;
-  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-primary: var(--ds-background-brand-bold);
+  --sidebar-primary-foreground: var(--ds-text-inverse);
   --sidebar-accent: #EFFBFC;
   --sidebar-accent-foreground: #004248;
-  --sidebar-border: #E7E8EC;
-  --sidebar-ring: #00BFCC;
+  --sidebar-border: var(--ds-border);
+  --sidebar-ring: var(--ds-border-focused);
 }
 
 .dark {
