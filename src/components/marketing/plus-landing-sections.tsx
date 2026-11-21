@@ -93,7 +93,9 @@ function useCountUp(target: number, duration = 1200) {
       hasRun.current = true
       return
     }
-    setValue(0)
+    requestAnimationFrame(() => {
+      setValue(0)
+    })
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -121,6 +123,9 @@ function useCountUp(target: number, duration = 1200) {
   return { ref, value }
 }
 
+/** Card titles on the home page, on the PLUS heading roles. */
+const homeCardTitle = "text-pretty text-heading-md sm:text-heading-lg"
+
 /** Animated number with optional suffix (e.g. "+" or " papers"). */
 const CountUpStat = ({
   target,
@@ -142,9 +147,9 @@ const CountUpStat = ({
 
 /** Section typography + rhythm — match `get-involved-sections.tsx` / `for-tutors-sections.tsx`. */
 const schoolsSectionTitle =
-  "text-pretty text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+  "text-pretty text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl md:text-heading-xxl"
 const schoolsSectionLead = cn(
-  "w-full max-w-none text-lg",
+  "w-full max-w-none text-body-lg",
   marketingSectionLeadColorClass,
 )
 
@@ -153,15 +158,15 @@ const schoolsSectionLead = cn(
  */
 export const PlusAnnouncementBar = () => {
   return (
-    <div className="w-full border-b border-border/60 bg-primary/5 px-4 py-2.5 text-xs text-muted-foreground sm:px-6">
+    <div className="w-full border-b border-border/60 bg-primary/5 px-4 py-2.5 text-body-sm text-muted-foreground sm:px-6">
       <div className="mx-auto flex max-w-5xl flex-col gap-1 sm:flex-row sm:items-center sm:justify-between min-[1800px]:max-w-7xl">
-        <p className="text-xs">
-          <span className="mr-1.5 inline-flex items-center rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-primary uppercase">
+        <p className="text-body-sm">
+          <span className="mr-1.5 inline-flex items-center rounded-full bg-primary/15 px-2 py-0.5 text-body-sm font-medium tracking-wide text-primary uppercase">
             New
           </span>
           PLUS app v10 is now live — new features for onboarding, AI Feedback and tutoring workflows.
         </p>
-        <Button variant="link" size="sm" className="h-auto px-0 py-0 text-xs font-medium text-primary">
+        <Button variant="link" size="sm" className="h-auto px-0 py-0 text-body-sm font-medium text-primary">
           Explore updates →
         </Button>
       </div>
@@ -193,17 +198,17 @@ export const PlusNavbar = ({
   return (
     <header className="sticky top-0 z-40 bg-background/80 pb-3 backdrop-blur-md">
       <div className="flex justify-center px-4 pt-3 sm:px-6 lg:px-8">
-        <div className="flex w-full max-w-5xl items-center justify-between gap-3 rounded-full border border-border/70 bg-background/90 px-4 py-2.5 shadow-sm shadow-black/[0.04] min-[1800px]:max-w-7xl">
+        <div className="flex w-full max-w-5xl items-center justify-between gap-3 rounded-full border border-border/70 bg-background/90 px-4 py-2.5 shadow-(--ds-shadow-raised) min-[1800px]:max-w-7xl">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <span className="relative flex size-7 items-center justify-center rounded-full bg-primary/10">
               <span className="absolute inset-1.5 rounded-full bg-primary" />
             </span>
-            <span className="text-sm font-semibold tracking-tight">PLUS</span>
+            <span className="text-body-default font-medium">PLUS</span>
           </Link>
 
           {/* Nav links */}
-          <nav className="hidden items-center gap-5 text-sm text-muted-foreground md:flex">
+          <nav className="hidden items-center gap-5 text-body-default text-muted-foreground md:flex">
             {NAV_LINKS.map(({ label, href }) => (
               <Link
                 key={label}
@@ -454,7 +459,7 @@ const LandingHeroAwardsRow = () => {
           unoptimized
         />
       </div>
-      <p className="text-pretty text-xl font-semibold text-muted-foreground">{label}</p>
+      <p className="text-pretty text-heading-md text-muted-foreground">{label}</p>
     </article>
   )
 
@@ -466,7 +471,7 @@ const LandingHeroAwardsRow = () => {
         marketingShellPadX,
       )}
     >
-      <p className="text-center text-xl font-normal text-muted-foreground">Our Awards</p>
+      <p className="text-center text-heading-md font-normal text-muted-foreground">Our Awards</p>
       <div
         role="region"
         aria-label="Award recognition"
@@ -565,7 +570,7 @@ export const PlusHeroSection = () => {
   return (
     <section
       id="about"
-      className="relative w-full overflow-x-clip overflow-y-visible bg-white pb-10 pt-10 sm:pb-14 sm:pt-12 md:pt-16"
+      className="relative w-full overflow-x-clip overflow-y-visible bg-(--ds-surface) pb-10 pt-10 sm:pb-14 sm:pt-12 md:pt-16"
     >
       {/* Figma `1714:2153` — blob order L→R: pink → coral → yellow → green → blue; then white veil (heavy white) */}
       <div
@@ -602,7 +607,7 @@ export const PlusHeroSection = () => {
             )}
           >
               <h1
-                className="mx-auto max-w-prose text-balance text-center text-3xl font-semibold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-4xl md:text-5xl"
+                className="mx-auto max-w-prose text-balance text-center text-heading-xxl text-(--ds-text-accent-teal-bolder) sm:text-display-sm md:text-display-md"
               >
                 Scaling Up High-Impact Math Tutoring with Technology and Training
               </h1>
@@ -612,7 +617,7 @@ export const PlusHeroSection = () => {
                   "mx-auto max-w-prose text-center text-pretty"
                 )}
               >
-                <span className="font-bold text-[#027f89]">PLUS</span> is a virtual tutoring platform that empowers
+                <span className="font-medium text-(--ds-text-brand)">PLUS</span> is a virtual tutoring platform that empowers
                 middle school math learners with AI technology and research-backed methods.
               </p>
             <div className={marketingHeroCtaButtonRowClass}>
@@ -626,7 +631,7 @@ export const PlusHeroSection = () => {
 
         {/* Figma `1791:3805` — video: same horizontal track as `TutorsHeroSection` (shell pad on outer wrapper). */}
         <div className="relative z-10 mx-auto mt-10 w-full max-w-[1000px] sm:mt-12 min-[1800px]:max-w-[1280px]">
-          <div className="relative aspect-video overflow-hidden rounded-[22px]">
+          <div className="relative aspect-video overflow-hidden rounded-(--ds-radius-xxl)">
             {isVideoPlaying ? (
               <iframe
                 className="absolute inset-0 size-full"
@@ -677,23 +682,23 @@ export const PlusHeroSection = () => {
 }
 
 /** Brand dark-yellow stat color (yellow-900 token). */
-const IMPACT_STAT = "text-yellow-900"
+const IMPACT_STAT = "text-(--ds-text-accent-yellow)"
 
 /** Tinted shell — matches `TutorVoiceCard` rhythm (`for-tutors-sections` Voices from Our Tutors). */
 const VOICES_STORY_CARD = cn(
-  "flex h-full flex-col overflow-hidden rounded-[30px] bg-green-200 dark:bg-emerald-950/20",
+  "flex h-full flex-col overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-background-accent-green-subtler)",
   marketingCardPaddingClass,
 )
 
 /** Inner white quote panel — same `mt-4` + `rounded-3xl` + padding as `TutorVoiceCard`. */
 const VOICES_QUOTE_SHELL = cn(
-  "mt-4 flex min-h-0 flex-1 flex-col rounded-3xl bg-white dark:bg-card dark:ring-1 dark:ring-white/10",
+  "mt-4 flex min-h-0 flex-1 flex-col rounded-(--ds-radius-xl) bg-(--ds-surface)",
   marketingCardPaddingClass,
 )
 
 /** “Read story” row — same interaction as tutor voices; emerald accent for homepage testimonials. */
 const VOICES_READ_STORY_CLASS =
-  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-green-900 no-underline transition-opacity hover:opacity-90 dark:text-emerald-300"
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-body-default font-medium sm:text-body-lg text-(--ds-text-accent-green) no-underline transition-opacity hover:opacity-90"
 
 /** Avatar + attribution — flush to card `p-*` top; `items-center` vertically centers copy with the disc. */
 const VOICES_ATTRIBUTION_ROW = "flex w-full shrink-0 items-center gap-3"
@@ -713,11 +718,11 @@ const impactZigzagTextColClass = cn(
 )
 
 /** Stat line — original impact scale (unchanged color). */
-const impactStatTitleClass = cn("text-2xl font-semibold leading-tight sm:text-3xl", IMPACT_STAT)
+const impactStatTitleClass = cn("text-heading-lg sm:text-heading-xl", IMPACT_STAT)
 
-/** Body — matches get-involved section lead (`text-base lg:text-lg`). */
+/** Body — matches get-involved section lead (`text-body-lg`). */
 const impactZigzagBodyClass = cn(
-  "w-full max-w-none text-pretty text-base leading-relaxed lg:text-lg",
+  "w-full max-w-none text-pretty text-body-lg",
   marketingSectionLeadColorClass,
 )
 
@@ -739,7 +744,7 @@ function ImpactStatIcon({ src }: { src: string }) {
 
 const ImpactRowPhoto = ({ src, alt = "" }: { src: string; alt?: string }) => (
   <div className="relative w-full min-w-0">
-    <div className="relative w-full overflow-hidden rounded-[30px] bg-muted/30">
+    <div className="relative w-full overflow-hidden rounded-(--ds-radius-xxl) bg-muted/30">
       <div className="relative aspect-[556/472] w-full">
         {/* eslint-disable-next-line @next/next/no-img-element -- public static asset; object-cover in ratio frame */}
         <img
@@ -902,7 +907,7 @@ const SmartTechCardHeader = ({
         unoptimized
       />
     </div>
-    <h3 className={cn(marketingTypography.bentoTitle, "max-w-[18rem] text-fuchsia-900 lg:max-w-[289px]", titleClassName)}>
+    <h3 className={cn(homeCardTitle, "max-w-[18rem] text-(--ds-text-accent-magenta) lg:max-w-[289px]", titleClassName)}>
       {title}
     </h3>
   </div>
@@ -1009,9 +1014,9 @@ export const PlusSmartTechSection = () => {
       >
         <div className="flex w-full flex-col items-center gap-4 md:flex-row md:justify-center md:gap-8 lg:gap-[42px]">
           {/* AI coaching — `1714:1976`; bottom-anchored stack matches Figma (no scale transform). */}
-          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-[30px] bg-fuchsia-200 min-[1800px]:max-w-[680px]">
+          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-background-accent-magenta-subtler) min-[1800px]:max-w-[680px]">
             <div className="relative w-full aspect-[526/385]">
-              <div className="absolute inset-0 overflow-visible rounded-[inherit] bg-fuchsia-200">
+              <div className="absolute inset-0 overflow-visible rounded-[inherit] bg-(--ds-background-accent-magenta-subtler)">
                 <div className="absolute left-5 top-5 z-40 flex sm:left-6 sm:top-6">
                   <SmartTechCardHeader
                     iconSrc={plusHomeSmartTech.iconAiTutor}
@@ -1050,7 +1055,7 @@ export const PlusSmartTechSection = () => {
           </article>
 
           {/* Supervisor — `1714:1965` */}
-          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-[30px] bg-fuchsia-200 min-[1800px]:max-w-[680px]">
+          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-background-accent-magenta-subtler) min-[1800px]:max-w-[680px]">
             {/* Title: normal flow on mobile (sits above the image), overlaid on md+ */}
             <div className="relative z-30 flex px-5 pt-5 sm:px-6 sm:pt-6 md:absolute md:left-6 md:top-6 md:p-0">
               <SmartTechCardHeader
@@ -1061,10 +1066,10 @@ export const PlusSmartTechSection = () => {
               />
             </div>
             <div className="relative w-full aspect-[526/385] max-md:-mt-[24%]">
-              <div className="absolute inset-0 bg-fuchsia-200">
+              <div className="absolute inset-0 bg-(--ds-background-accent-magenta-subtler)">
                 <div className="absolute inset-0 origin-bottom md:scale-[0.8] lg:scale-100">
                 <div
-                  className="pointer-events-none absolute overflow-hidden shadow-[0px_8px_22px_-6px_rgba(132,81,93,0.13),0px_2px_10px_-2px_rgba(198,191,198,0.11)]"
+                  className="pointer-events-none absolute overflow-hidden shadow-(--ds-shadow-raised)"
                   style={{
                     left: pctX(25),
                     top: pctY(200),
@@ -1084,7 +1089,7 @@ export const PlusSmartTechSection = () => {
                 <div
                   className={cn(
                     "pointer-events-none absolute z-[1] overflow-hidden",
-                    "shadow-[0px_12px_32px_-8px_rgba(132,81,93,0.21),0px_4px_18px_-4px_rgba(198,191,198,0.16)]",
+                    "shadow-(--ds-shadow-overlay)",
                   )}
                   style={{
                     left: pctX(211.36),
@@ -1109,7 +1114,7 @@ export const PlusSmartTechSection = () => {
         </div>
 
         {/* Collaborative Goal Setting — raster flush to bottom of pink frame */}
-        <article className="mx-auto w-full max-w-[1097px] overflow-hidden rounded-[30px] bg-fuchsia-200 px-5 pt-5 sm:px-6 sm:pt-6 min-[1800px]:max-w-[1400px]">
+        <article className="mx-auto w-full max-w-[1097px] overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-background-accent-magenta-subtler) px-5 pt-5 sm:px-6 sm:pt-6 min-[1800px]:max-w-[1400px]">
           <SmartTechCardHeader
             iconSrc={plusHomeSmartTech.iconGoal}
             title="Collaborative Goal Setting"
@@ -1144,7 +1149,7 @@ export const PlusSmartTechSection = () => {
             {GOAL_PILLS.map((p) => (
               <span
                 key={p.label}
-                className="absolute z-[3] inline-flex items-center whitespace-nowrap rounded-[0.7em] px-[0.8em] py-[0.5em] font-bold leading-none text-white"
+                className="absolute z-[3] inline-flex items-center whitespace-nowrap rounded-[0.7em] px-[0.8em] py-[0.5em] font-medium leading-none text-white"
                 style={{
                   left: `${p.x}%`,
                   top: `${p.y}%`,
@@ -1172,7 +1177,7 @@ const DEFAULT_PUBLICATION_COUNT = 30
 
 /**
  * Figma `1714:1998` — two columns (473 + 72 gap + 556), 397px-tall row; right panel single image (`1714:2017`).
- * Typography: shared `schoolsSection*` + `marketingTypography.bentoTitle` for the stat line (brand blue).
+ * Typography: shared `schoolsSection*` + `homeCardTitle` for the stat line (brand blue).
  */
 export const PlusScienceOfLearningSection = ({
   publicationCount = DEFAULT_PUBLICATION_COUNT,
@@ -1216,7 +1221,7 @@ export const PlusScienceOfLearningSection = ({
                 unoptimized
               />
             </div>
-            <p className={cn(marketingTypography.bentoTitle, "text-blue-900")}>
+            <p className={cn(homeCardTitle, "text-(--ds-text-accent-blue)")}>
               <CountUpStat target={publicationCount} suffix="+" /> published papers
             </p>
             <p className={schoolsSectionLead}>
@@ -1233,7 +1238,7 @@ export const PlusScienceOfLearningSection = ({
         </div>
 
         {/* Right — Figma `1714:2017`: 556×397 mask; raster crop matches design export (`h/w/top/left %`). */}
-        <div className="relative mx-auto w-full max-w-[556px] overflow-hidden rounded-[30px] bg-[#e0f6fe] lg:mx-0 min-[1800px]:max-w-[700px]">
+        <div className="relative mx-auto w-full max-w-[556px] overflow-hidden rounded-(--ds-radius-xxl) bg-[#e0f6fe] lg:mx-0 min-[1800px]:max-w-[700px]">
           <div className="relative aspect-[556/397] w-full overflow-hidden leading-none">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -1323,17 +1328,17 @@ export const PlusVoicesSection = () => {
               </div>
               <p
                 className={cn(
-                  marketingTypography.bentoTitle,
-                  "min-w-0 flex-1 text-pretty text-green-900",
+                  homeCardTitle,
+                  "min-w-0 flex-1 text-pretty text-(--ds-text-accent-green)",
                 )}
               >
                 {attribution}
               </p>
             </div>
             <div className={VOICES_QUOTE_SHELL}>
-              <blockquote className="text-pretty text-left text-base font-normal italic leading-relaxed text-[#4A4A4A] dark:text-neutral-200">
+              <blockquote className="text-pretty text-left text-body-lg italic text-(--ds-text-subtle)">
                 &ldquo;{quote}{" "}
-                <strong className="font-bold italic text-green-900 dark:text-emerald-300">
+                <strong className="font-medium italic text-(--ds-text-accent-green)">
                   {highlight}
                 </strong>
                 {end}&rdquo;
