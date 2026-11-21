@@ -50,7 +50,7 @@ export function PaperCard({
     >
       <div className="flex flex-col gap-3">
         <div className="flex flex-wrap items-start justify-between gap-2">
-          <h3 className="text-lg font-semibold leading-tight text-foreground">
+          <h3 className="text-heading-sm text-foreground">
             {paper.paperLink ? (
               <a
                 href={paper.paperLink}
@@ -73,14 +73,14 @@ export function PaperCard({
               onClick={() => onAuthorClick(author)}
               className="cursor-pointer"
             >
-              <Badge variant="secondary" className="text-xs">
+              <Badge variant="secondary" className="text-body-sm">
                 {author}
               </Badge>
             </button>
           ))}
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-2 text-body-default text-muted-foreground">
           {paper.publishDate && <span>{formatDate(paper.publishDate)}</span>}
           {paper.venue && (
             <>
@@ -91,13 +91,13 @@ export function PaperCard({
         </div>
 
         {description && (
-          <div className="text-sm leading-relaxed text-muted-foreground">
+          <div className="text-body-default text-muted-foreground">
             <p>{expanded ? description : truncated}</p>
             {description.length > 200 && (
               <button
                 onClick={() => setExpanded(!expanded)}
                 className={cn(
-                  "mt-1 inline-flex items-center gap-1 text-xs font-medium text-primary",
+                  "mt-1 inline-flex items-center gap-1 text-body-sm font-medium text-primary",
                   "hover:underline"
                 )}
               >

@@ -46,7 +46,7 @@ export function PaperTableRow({
               onClick={() => onAuthorClick(author)}
               className="cursor-pointer"
             >
-              <Badge variant="secondary" className="text-xs">
+              <Badge variant="secondary" className="text-body-sm">
                 {author}
               </Badge>
             </button>

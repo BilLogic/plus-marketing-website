@@ -6,7 +6,7 @@ import {
   riGenrePillClass,
   riIndexCopy,
   riIndexMetaCopy,
-} from "./research-index-figma-tokens"
+} from "./research-index-styles"
 import {
   riFormatAuthorsLine,
   riParseYear,
@@ -35,7 +35,7 @@ export const ResearchIndexPublicationCard = ({
   return (
     <article
       className={cn(
-        "w-full min-w-0 rounded-[24px] border border-solid",
+        "w-full min-w-0 rounded-(--ds-radius-xxl) border border-solid",
         riFg.borderCard,
         riFg.cardSurface
       )}
@@ -49,13 +49,13 @@ export const ResearchIndexPublicationCard = ({
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
-                "group inline-flex max-w-full items-start gap-1.5 font-sans font-semibold leading-snug text-[#62636c] underline-offset-[3px] hover:text-[#004247] hover:underline",
+                "group inline-flex max-w-full items-start gap-1.5 font-sans text-(--ds-text-subtle) underline-offset-[3px] hover:text-(--ds-text-accent-teal-bolder) hover:underline",
                 riIndexCopy
               )}
             >
               <span className="min-w-0">{paper.title}</span>
               <ExternalLink
-                className="mt-0.5 size-4 shrink-0 text-[#62636c] opacity-80 group-hover:text-[#004247]"
+                className="mt-0.5 size-4 shrink-0 text-(--ds-text-subtle) opacity-80 group-hover:text-(--ds-text-accent-teal-bolder)"
                 aria-hidden
               />
               <span className="sr-only">(opens in new tab)</span>
@@ -63,7 +63,7 @@ export const ResearchIndexPublicationCard = ({
           ) : (
             <h3
               className={cn(
-                "font-sans font-semibold leading-snug text-[#62636c]",
+                "font-sans text-(--ds-text-subtle)",
                 riIndexCopy
               )}
             >
@@ -77,7 +77,7 @@ export const ResearchIndexPublicationCard = ({
             {showTypeBadge && (
               <span
                 className={cn(
-                  "inline-flex items-center rounded-[26px] px-2 py-1 leading-none",
+                  "inline-flex items-center rounded-(--ds-radius-xxl) px-2 py-1 leading-none",
                   riIndexMetaCopy,
                   publicationTypeBadgeClass()
                 )}
@@ -89,7 +89,7 @@ export const ResearchIndexPublicationCard = ({
               <span
                 key={t}
                 className={cn(
-                  "inline-flex items-center rounded-[26px] px-2 py-1",
+                  "inline-flex items-center rounded-(--ds-radius-xxl) px-2 py-1",
                   riIndexMetaCopy,
                   riGenrePillClass(t),
                   "leading-none"
@@ -103,14 +103,14 @@ export const ResearchIndexPublicationCard = ({
 
         {desc ? (
           <p
-            className={cn("line-clamp-2 text-pretty text-[#62636c]", riIndexMetaCopy)}
+            className={cn("line-clamp-2 text-pretty text-(--ds-text-subtle)", riIndexMetaCopy)}
           >
             {desc}
           </p>
         ) : null}
 
         {metaBits.length > 0 && (
-          <p className={cn("text-[#62636c]", riIndexMetaCopy)}>
+          <p className={cn("text-(--ds-text-subtle)", riIndexMetaCopy)}>
             {metaBits.join(" · ")}
           </p>
         )}

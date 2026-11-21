@@ -2,21 +2,21 @@ import { marketingTypography } from "@/lib/marketing-typography"
 import { cn } from "@/lib/utils"
 import { RESEARCH_GENRE_TAGS } from "@/lib/research/research-genres"
 
-/** Figma PLUS-website-IA `1730:2012` — shared by `/publications` and For Researchers → Research Index. */
+/** Shared color roles for /publications and the For Researchers Research Index. */
 export const riFg = {
-  title: "text-[#004247]",
-  bodyMuted: "text-[#62636c]",
-  borderHairline: "border-[#ecedf0]",
-  borderCard: "border-[#e7e8ec]/80",
-  shellBg: "bg-white",
+  title: "text-(--ds-text-accent-teal-bolder)",
+  bodyMuted: "text-(--ds-text-subtle)",
+  borderHairline: "border-(--ds-border)",
+  borderCard: "border-(--ds-border)",
+  shellBg: "bg-(--ds-surface)",
   /** Toolbar rows inside shell — white; grey reserved for search + selects only. */
-  shellRow: "bg-white",
-  allActive: "bg-yellow-800 text-white shadow-none",
-  tagStudentBg: "bg-red-200 text-red-900",
-  tagGenAiBg: "bg-blue-200 text-blue-900",
-  tagTutorBg: "bg-green-200 text-green-900",
-  cardSurface: "bg-white",
-  linkTeal: "text-[#004247]",
+  shellRow: "bg-(--ds-surface)",
+  allActive: "bg-(--ds-background-accent-yellow-bolder) text-(--ds-text-inverse) shadow-none",
+  tagStudentBg: "bg-(--ds-background-accent-red-subtler) text-(--ds-text-accent-red)",
+  tagGenAiBg: "bg-(--ds-background-accent-blue-subtler) text-(--ds-text-accent-blue)",
+  tagTutorBg: "bg-(--ds-background-accent-green-subtler) text-(--ds-text-accent-green)",
+  cardSurface: "bg-(--ds-surface)",
+  linkTeal: "text-(--ds-link)",
 } as const
 
 /** Same responsive scale as marketing section descriptions — all Research Index copy + controls. */
@@ -26,15 +26,14 @@ export const riIndexCopy = marketingTypography.sectionLead
  * Smaller caption scale — genre filter tags, Year/Conference labels + menus, card topic chips,
  * and publication meta (dates, venue, authors).
  */
-export const riIndexMetaCopy =
-  "font-sans text-xs leading-snug tracking-normal sm:text-sm"
+export const riIndexMetaCopy = "font-sans text-body-sm sm:text-body-default"
 
 /**
  * Research Index page `<h1>` — same scale as For Researchers `sectionHeaderH2` / Schools section titles.
- * (`text-lg` → `sm:text-2xl` → `md:text-3xl`; color from `riFg.title`.)
+ * (`text-heading-sm` → `sm:text-heading-lg` → `md:text-heading-xl`; color from `riFg.title`.)
  */
 export const riPageTitleCn = cn(
-  "font-sans text-pretty text-lg font-semibold tracking-tight sm:text-2xl md:text-3xl",
+  "font-sans text-pretty text-heading-sm sm:text-heading-lg md:text-heading-xl",
   riFg.title
 )
 
@@ -57,13 +56,13 @@ export const riFilterFieldLabelCn = cn("font-medium", riIndexMetaCopy, riFg.body
 
 /** “See all publications” — same type scale as index body; teal link color. */
 export const riSeeAllPublicationsLinkClass = cn(
-  "group inline-flex items-center gap-2.5 font-sans font-normal text-[#027f89] transition-opacity hover:opacity-90",
+  "group inline-flex items-center gap-2.5 font-sans font-normal text-(--ds-link) transition-opacity hover:opacity-90",
   riIndexCopy
 )
 
 /** Embedded For Researchers preview — smaller link matching `riIndexMetaCopy`. */
 export const riSeeAllPublicationsLinkMetaClass = cn(
-  "group inline-flex items-center gap-2.5 font-sans font-medium text-[#027f89] transition-opacity hover:opacity-90",
+  "group inline-flex items-center gap-2.5 font-sans font-medium text-(--ds-link) transition-opacity hover:opacity-90",
   riIndexMetaCopy
 )
 
@@ -87,11 +86,11 @@ function riGenreFilterPillActiveClass(
 ): string {
   switch (genre) {
     case "Student Learning":
-      return "bg-red-900 text-white shadow-none"
+      return "bg-(--ds-background-accent-red-bolder) text-(--ds-text-inverse) shadow-none"
     case "Gen AI":
-      return "bg-blue-900 text-white shadow-none"
+      return "bg-(--ds-background-accent-blue-bolder) text-(--ds-text-inverse) shadow-none"
     case "Tutor Training":
-      return "bg-green-900 text-white shadow-none"
+      return "bg-(--ds-background-accent-green-bolder) text-(--ds-text-inverse) shadow-none"
   }
 }
 
@@ -116,15 +115,15 @@ export function riGenreFilterPillClass(
 
 /** Dropdown triggers — compact type for Year / Conference. */
 export const riSelectTriggerCn = cn(
-  "h-auto min-h-8 w-full rounded-full border-0 bg-[#f9f9fb]/80 px-2.5 py-1.5 font-medium data-[size=sm]:h-auto data-[size=sm]:min-h-8 sm:min-h-9",
+  "h-auto min-h-11 w-full rounded-full border-0 bg-(--ds-background-neutral) px-2.5 py-1.5 font-medium data-[size=sm]:h-auto data-[size=sm]:min-h-11 sm:min-h-9 sm:data-[size=sm]:min-h-9",
   riIndexMetaCopy,
   riFg.bodyMuted,
-  "shadow-none focus:ring-0 focus-visible:ring-1 focus-visible:ring-[#004247]/20"
+  "shadow-none focus:ring-0 focus-visible:ring-2 focus-visible:ring-ring"
 )
 
 /** Options inside the index Year / Conference menus. */
 export const riSelectItemCn = cn(
-  "py-1.5 focus:text-[#62636c] data-highlighted:text-[#62636c]",
+  "py-1.5 focus:text-(--ds-text-subtle) data-highlighted:text-(--ds-text-subtle)",
   riIndexMetaCopy,
   riFg.bodyMuted
 )

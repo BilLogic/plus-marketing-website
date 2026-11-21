@@ -63,7 +63,7 @@ import {
   riSeeAllPublicationsLinkMetaClass,
   riSelectItemCn,
   riSelectTriggerCn,
-} from "@/components/marketing/research-index/research-index-figma-tokens"
+} from "@/components/marketing/research-index/research-index-styles"
 import { ResearchIndexPublicationCard } from "@/components/marketing/research-index/research-index-publication-card"
 import { ResearcherCard } from "@/components/marketing/researcher-card"
 import {
@@ -127,40 +127,40 @@ const HIGHLIGHT_TOPIC_THEME: Record<
   }
 > = {
   "student-learning": {
-    contentLinkHover: "hover:[&_a]:text-red-900",
-    openTitle: "group-aria-expanded/accordion-trigger:text-red-900",
-    openChevron: "group-aria-expanded/accordion-trigger:text-red-900",
-    titleWhenOpen: "text-red-900",
-    chevronWhenOpen: "text-red-900",
+    contentLinkHover: "hover:[&_a]:text-(--ds-text-accent-red)",
+    openTitle: "group-aria-expanded/accordion-trigger:text-(--ds-text-accent-red)",
+    openChevron: "group-aria-expanded/accordion-trigger:text-(--ds-text-accent-red)",
+    titleWhenOpen: "text-(--ds-text-accent-red)",
+    chevronWhenOpen: "text-(--ds-text-accent-red)",
     openIconDisc: "#B44F52",
     openIconGlyph: "#ffffff",
-    studyShellBg: "bg-red-200",
-    studyAccentText: "text-red-900",
-    studyFocusRing: "focus-visible:ring-red-900/40",
+    studyShellBg: "bg-(--ds-background-accent-red-subtler)",
+    studyAccentText: "text-(--ds-text-accent-red)",
+    studyFocusRing: "focus-visible:ring-ring",
   },
   "gen-ai": {
-    contentLinkHover: "hover:[&_a]:text-blue-900",
-    openTitle: "group-aria-expanded/accordion-trigger:text-blue-900",
-    openChevron: "group-aria-expanded/accordion-trigger:text-blue-900",
-    titleWhenOpen: "text-blue-900",
-    chevronWhenOpen: "text-blue-900",
+    contentLinkHover: "hover:[&_a]:text-(--ds-text-accent-blue)",
+    openTitle: "group-aria-expanded/accordion-trigger:text-(--ds-text-accent-blue)",
+    openChevron: "group-aria-expanded/accordion-trigger:text-(--ds-text-accent-blue)",
+    titleWhenOpen: "text-(--ds-text-accent-blue)",
+    chevronWhenOpen: "text-(--ds-text-accent-blue)",
     openIconDisc: "#007EB8",
     openIconGlyph: "#ffffff",
-    studyShellBg: "bg-blue-200",
-    studyAccentText: "text-blue-900",
-    studyFocusRing: "focus-visible:ring-blue-900/40",
+    studyShellBg: "bg-(--ds-background-accent-blue-subtler)",
+    studyAccentText: "text-(--ds-text-accent-blue)",
+    studyFocusRing: "focus-visible:ring-ring",
   },
   "tutor-training": {
-    contentLinkHover: "hover:[&_a]:text-green-900",
-    openTitle: "group-aria-expanded/accordion-trigger:text-green-900",
-    openChevron: "group-aria-expanded/accordion-trigger:text-green-900",
-    titleWhenOpen: "text-green-900",
-    chevronWhenOpen: "text-green-900",
+    contentLinkHover: "hover:[&_a]:text-(--ds-text-accent-green)",
+    openTitle: "group-aria-expanded/accordion-trigger:text-(--ds-text-accent-green)",
+    openChevron: "group-aria-expanded/accordion-trigger:text-(--ds-text-accent-green)",
+    titleWhenOpen: "text-(--ds-text-accent-green)",
+    chevronWhenOpen: "text-(--ds-text-accent-green)",
     openIconDisc: "#297E43",
     openIconGlyph: "#ffffff",
-    studyShellBg: "bg-green-200",
-    studyAccentText: "text-green-900",
-    studyFocusRing: "focus-visible:ring-green-900/40",
+    studyShellBg: "bg-(--ds-background-accent-green-subtler)",
+    studyAccentText: "text-(--ds-text-accent-green)",
+    studyFocusRing: "focus-visible:ring-ring",
   },
 }
 
@@ -187,9 +187,9 @@ const HIGHLIGHT_STUDY_IDS_BY_TOPIC: Partial<
 
 /** Match `get-involved-sections` / `for-tutors-sections` typography. */
 const sectionHeaderH2 =
-  "text-pretty text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+  "text-pretty text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl md:text-heading-xxl"
 const sectionHeaderLead = cn(
-  "w-full max-w-none text-lg",
+  "w-full max-w-none text-body-lg",
   marketingSectionLeadColorClass,
 )
 /** Every `<h2>` on `/for-researchers` — same scale as reference pages. */
@@ -201,9 +201,9 @@ const sectionHeaderDecorImgClass = cn(
 
 /** Research Success Stories — cycles pink → blue → amber (matches About / For Schools). */
 const RESEARCH_STORY_THEMES = [
-  { shell: "bg-fuchsia-200 dark:bg-fuchsia-200/15", iconBg: "bg-fuchsia-900", accent: "text-fuchsia-900" },
-  { shell: "bg-blue-200 dark:bg-sky-950/40", iconBg: "bg-blue-900", accent: "text-blue-900" },
-  { shell: "bg-yellow-200 dark:bg-amber-950/20", iconBg: "bg-yellow-900", accent: "text-yellow-900" },
+  { shell: "bg-(--ds-background-accent-magenta-subtler)", iconBg: "bg-(--ds-background-accent-magenta-bolder)", accent: "text-(--ds-text-accent-magenta)" },
+  { shell: "bg-(--ds-background-accent-blue-subtler)", iconBg: "bg-(--ds-background-accent-blue-bolder)", accent: "text-(--ds-text-accent-blue)" },
+  { shell: "bg-(--ds-background-accent-yellow-subtler)", iconBg: "bg-(--ds-background-accent-yellow-bolder)", accent: "text-(--ds-text-accent-yellow)" },
 ] as const
 
 /** Teal outline pill — Research Index “View all” / empty-state link. */
@@ -244,7 +244,7 @@ const ResearchHeroCollageVisual = () => {
         className="relative z-0 mx-auto grid w-full grid-cols-1 gap-3.5 min-[480px]:grid-cols-2 min-[480px]:gap-5 min-[1800px]:gap-6"
       >
         {/* Learning Ideas — pink, Figma `1730:2455` */}
-        <div className={cn(heroCollageTileLayout, "rounded-[24px] bg-fuchsia-200 min-[480px]:rounded-[30px]")}>
+        <div className={cn(heroCollageTileLayout, "rounded-(--ds-radius-xxl) bg-(--ds-background-accent-magenta-subtler)")}>
           <img
             alt=""
             src={c.learningIdeasConference}
@@ -253,7 +253,7 @@ const ResearchHeroCollageVisual = () => {
           />
         </div>
         {/* SIGCHI — yellow */}
-        <div className={cn(heroCollageTileLayout, "rounded-[24px] bg-yellow-200 min-[480px]:rounded-[30px]")}>
+        <div className={cn(heroCollageTileLayout, "rounded-(--ds-radius-xxl) bg-(--ds-background-accent-yellow-subtler)")}>
           <img
             alt=""
             src={c.sigchi}
@@ -265,7 +265,7 @@ const ResearchHeroCollageVisual = () => {
         <div
           className={cn(
             heroCollageTileLayout,
-            "rounded-[24px] bg-green-200 min-[480px]:rounded-[31.932px]"
+            "rounded-(--ds-radius-xxl) bg-(--ds-background-accent-green-subtler)"
           )}
         >
           <img
@@ -280,7 +280,7 @@ const ResearchHeroCollageVisual = () => {
           <div
             className={cn(
               heroCollageTileLayout,
-              "rounded-[18px] bg-blue-200 min-[480px]:rounded-[21.254px]"
+              "rounded-(--ds-radius-xl) bg-(--ds-background-accent-blue-subtler)"
             )}
           >
             <div className="pointer-events-none relative z-0 h-[min(74px,32%)] w-[min(166px,61%)] min-h-[36px] min-w-[100px] overflow-hidden">
@@ -319,10 +319,10 @@ export const ResearchersHeroSection = () => {
         {/* Text column — narrower to give the collage more room */}
         <div className="mx-auto flex w-full min-w-0 shrink-0 flex-col gap-5 sm:gap-6 lg:mx-0 lg:max-w-[26rem] min-[1800px]:max-w-[32rem]">
           <h1 className="flex flex-col gap-2 sm:gap-3">
-            <span className="text-center text-2xl font-semibold text-[#027f89] sm:text-3xl lg:text-left">
+            <span className="text-center text-heading-lg text-(--ds-text-brand) sm:text-heading-xl lg:text-left">
               For Researchers
             </span>
-            <span className="text-balance text-center text-3xl font-semibold leading-tight tracking-tight text-[#004247] sm:text-4xl md:text-5xl lg:text-left">
+            <span className="text-balance text-center text-heading-xl text-(--ds-text-accent-teal-bolder) sm:text-heading-xxl md:text-display-md lg:text-left">
               Pioneering Research in Human-Centered AI for Personalized Math Learning
             </span>
           </h1>
@@ -616,7 +616,7 @@ function HighlightStudyCard({
   const summary = riPublicationDescription(paper)
   const shellClass = cn(
     HIGHLIGHT_STUDY_CARD_MIN_H,
-    "group flex w-full min-w-0 flex-col gap-4 rounded-[26px] text-left no-underline outline-none transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-offset-2",
+    "group flex w-full min-w-0 flex-col gap-4 rounded-(--ds-radius-xxl) text-left no-underline outline-none transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-offset-2",
     marketingCardPaddingClass,
     theme.studyShellBg,
     theme.studyFocusRing
@@ -643,7 +643,7 @@ function HighlightStudyCard({
     <>
       <div
         className={cn(
-          "flex min-h-0 flex-1 flex-col justify-center overflow-hidden rounded-[26px] bg-white",
+          "flex min-h-0 flex-1 flex-col justify-center overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-surface)",
           marketingCardPaddingClass,
         )}
       >
@@ -694,7 +694,7 @@ function HighlightStudyCard({
       </div>
       <span
         className={cn(
-          "mt-auto flex shrink-0 items-center justify-end gap-2 text-sm font-medium leading-relaxed sm:text-base min-[1800px]:text-lg",
+          "mt-auto flex shrink-0 items-center justify-end gap-2 text-body-default font-medium sm:text-body-lg",
           theme.studyAccentText,
         )}
       >
@@ -744,10 +744,10 @@ function HighlightStudiesCarousel({
   const theme = HIGHLIGHT_TOPIC_THEME[topicId]
   if (studies.length === 0) {
     return (
-      <p className={cn("text-pretty text-base text-muted-foreground", className)}>
+      <p className={cn("text-pretty text-body-lg text-muted-foreground", className)}>
         <Link
           href="/publications"
-          className="font-medium text-[#027f89] underline-offset-4 hover:underline"
+          className="font-medium text-(--ds-link) underline-offset-4 hover:underline"
         >
           Browse all research
         </Link>{" "}
@@ -763,14 +763,14 @@ function HighlightStudiesCarousel({
       <HighlightStudyCard paper={paper} topicId={topicId} />
       {n > 1 ? (
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-sm text-muted-foreground" aria-live="polite">
+          <p className="text-body-default text-muted-foreground" aria-live="polite">
             Study {idx + 1} of {n}
           </p>
           <button
             type="button"
             onClick={onNextStudy}
             className={cn(
-              "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-colors",
+              "inline-flex items-center gap-2 rounded-full px-4 py-2 text-body-default font-medium transition-colors",
               "bg-muted/70 text-foreground hover:bg-muted",
               theme.studyAccentText,
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
@@ -798,10 +798,10 @@ function HighlightStudiesBlock({
 }) {
   if (studies.length === 0) {
     return (
-      <p className="text-pretty text-base text-muted-foreground">
+      <p className="text-pretty text-body-lg text-muted-foreground">
         <Link
           href="/publications"
-          className="font-medium text-[#027f89] underline-offset-4 hover:underline"
+          className="font-medium text-(--ds-link) underline-offset-4 hover:underline"
         >
           Browse all research
         </Link>{" "}
@@ -966,11 +966,11 @@ export const ResearchHighlightsSection = ({
               <AccordionItem
                 key={topic.id}
                 value={topic.id}
-                className="w-full min-w-0 overflow-hidden rounded-[30px] border-0 bg-white not-last:border-b-0 shadow-none outline-none ring-0"
+                className="w-full min-w-0 overflow-hidden rounded-(--ds-radius-xxl) border-0 bg-(--ds-surface) not-last:border-b-0 shadow-none outline-none ring-0"
               >
                 <AccordionTrigger
                   hideChevron
-                  className="w-full items-center border-0 py-8 pl-0 pr-0 text-base font-normal shadow-none outline-none ring-0 hover:no-underline focus-visible:border-transparent focus-visible:shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:after:border-transparent"
+                  className="w-full items-center border-0 py-8 pl-0 pr-0 text-body-lg font-normal shadow-none outline-none ring-0 hover:no-underline focus-visible:border-transparent focus-visible:shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:after:border-transparent"
                 >
                   <span className={HIGHLIGHT_TRIGGER_ROW}>
                     <span className="flex min-w-0 items-center gap-3">
@@ -993,7 +993,7 @@ export const ResearchHighlightsSection = ({
                       <span
                         className={cn(
                           marketingTypography.bentoTitle,
-                          "min-w-0 text-left capitalize text-[#62636c]",
+                          "min-w-0 text-left capitalize text-(--ds-text-subtle)",
                           theme.openTitle,
                         )}
                       >
@@ -1011,7 +1011,7 @@ export const ResearchHighlightsSection = ({
                         strokeWidth={1.75}
                         className={cn(
                           marketingCardLucideGlyphClass,
-                          "shrink-0 text-[#62636c] transition-transform duration-200 ease-out group-aria-expanded/accordion-trigger:rotate-90",
+                          "shrink-0 text-(--ds-text-subtle) transition-transform duration-200 ease-out group-aria-expanded/accordion-trigger:rotate-90",
                           theme.openChevron,
                         )}
                       />
@@ -1043,7 +1043,7 @@ export const ResearchHighlightsSection = ({
                 <article
                   key={topic.id}
                   className={cn(
-                    "flex w-full min-w-0 flex-col gap-5 overflow-hidden rounded-[30px] bg-white",
+                    "flex w-full min-w-0 flex-col gap-5 overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-surface)",
                     marketingCardPaddingClass,
                   )}
                 >
@@ -1057,7 +1057,7 @@ export const ResearchHighlightsSection = ({
                     </span>
                     <h3
                       className={cn(
-                        "pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-semibold leading-tight tracking-tight sm:text-xl",
+                        "pt-[calc((3rem-1lh)/2)] text-pretty text-heading-sm sm:text-heading-md",
                         theme.titleWhenOpen,
                       )}
                     >
@@ -1125,7 +1125,7 @@ export const ResearchHighlightsSection = ({
                       <div className="flex flex-col gap-3">
                         <h3
                           className={cn(
-                            "line-clamp-3 text-pretty text-lg font-semibold leading-tight tracking-tight transition-colors duration-300 sm:text-xl lg:text-2xl",
+                            "line-clamp-3 text-pretty text-heading-sm transition-colors duration-300 sm:text-heading-md lg:text-heading-lg",
                             HIGHLIGHTS_STICKY_TITLE_H,
                             isActive ? theme.titleWhenOpen : "text-muted-foreground",
                           )}
@@ -1134,7 +1134,7 @@ export const ResearchHighlightsSection = ({
                         </h3>
                         <div className={HIGHLIGHTS_STICKY_BODY_H}>
                           {isActive ? (
-                            <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
+                            <p className="text-pretty text-body-lg text-muted-foreground">
                               {sectionLead}
                             </p>
                           ) : null}
@@ -1264,11 +1264,11 @@ function ResearchIndexSearchForm() {
             placeholder="Search studies"
             autoComplete="off"
             className={cn(
-              "h-[56px] w-full rounded-full border-0 bg-[#f9f9fb]/70 pl-14 pr-5 font-sans shadow-none sm:h-[63px]",
+              "h-[56px] w-full rounded-full border-0 bg-(--ds-background-neutral) pl-14 pr-5 font-sans shadow-none sm:h-[63px]",
               riFg.bodyMuted,
               riIndexMetaCopy,
-              "leading-normal placeholder:text-[#62636c]/80",
-              "focus:outline-none focus:ring-2 focus:ring-[#004247]/15"
+              "placeholder:text-(--ds-text-subtlest)",
+              "focus:outline-none focus:ring-2 focus:ring-ring"
             )}
           />
         </div>
@@ -1324,7 +1324,7 @@ export const ResearchIndexSection = ({
     <section
       id={forResearchersSectionIds.index}
       className={cn(
-        "w-full min-w-0 font-sans text-[#62636c]",
+        "w-full min-w-0 font-sans text-(--ds-text-subtle)",
         marketingSectionVerticalGapClass,
       )}
     >
@@ -1336,7 +1336,7 @@ export const ResearchIndexSection = ({
       <ResearchIndexSearchForm />
 
       {papers.length === 0 ? (
-        <div className="rounded-[30px] bg-white px-6 py-10 text-center">
+        <div className="rounded-(--ds-radius-xxl) bg-(--ds-surface) px-6 py-10 text-center">
           <p className={cn("text-pretty", riIndexMetaCopy, riFg.bodyMuted)}>
             Publications could not be loaded right now. Browse the archive on the Research Index
             page.
@@ -1347,7 +1347,7 @@ export const ResearchIndexSection = ({
         </div>
       ) : (
         <div
-          className={cn("overflow-hidden rounded-[30px] shadow-none", riFg.shellBg)}
+          className={cn("overflow-hidden rounded-(--ds-radius-xxl) shadow-none", riFg.shellBg)}
         >
           <div
             className={cn(
@@ -1385,7 +1385,7 @@ export const ResearchIndexSection = ({
                   riFilterTagButtonCn,
                   tagFilter === "all"
                     ? riFg.allActive
-                    : "bg-[#f0f0f2] text-[#62636c] hover:bg-[#e8e8eb]"
+                    : "bg-(--ds-background-neutral) text-(--ds-text-subtle) hover:bg-(--ds-background-neutral-hovered)"
                 )}
               >
                 All
@@ -1537,7 +1537,7 @@ export const ResearchersGridSection = ({ members }: { members: TeamMember[] }) =
       </div>
 
       {members.length === 0 ? (
-        <p className="text-pretty text-sm text-muted-foreground">
+        <p className="text-pretty text-body-default text-muted-foreground">
           Researcher profiles will appear here once loaded from our team directory.
         </p>
       ) : (
@@ -1585,14 +1585,14 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
             <article
               key={story.id}
               className={cn(
-                "flex h-full flex-col rounded-[30px]",
+                "flex h-full flex-col rounded-(--ds-radius-xxl)",
                 theme.shell,
                 marketingCardPaddingClass,
               )}
             >
               <div
                 className={cn(
-                  "flex min-h-0 flex-1 flex-col rounded-3xl bg-white dark:bg-card dark:ring-1 dark:ring-white/10",
+                  "flex min-h-0 flex-1 flex-col rounded-3xl bg-(--ds-surface)",
                   marketingCardPaddingClass,
                 )}
               >
@@ -1601,7 +1601,7 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
                     className={cn(
                       marketingCardIconTitleRowOffsetClass,
                       marketingCardIconCircleClass,
-                      "shrink-0 text-white",
+                      "shrink-0 text-(--ds-text-inverse)",
                       theme.iconBg,
                     )}
                   >
@@ -1609,7 +1609,7 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
                   </span>
                   <h3
                     className={cn(
-                      "min-w-0 flex-1 text-pretty text-lg font-semibold leading-snug tracking-tight sm:text-xl lg:text-2xl",
+                      "min-w-0 flex-1 text-pretty text-heading-sm sm:text-heading-md lg:text-heading-lg",
                       theme.accent,
                     )}
                   >
@@ -1618,11 +1618,11 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
                 </div>
                 {story.quote ? (
                   <>
-                    <blockquote className="mt-4 min-h-0 flex-1 text-pretty text-base italic leading-relaxed text-muted-foreground">
+                    <blockquote className="mt-4 min-h-0 flex-1 text-pretty text-body-lg italic text-muted-foreground">
                       {quoteParts ? (
                         <>
                           &ldquo;{quoteParts.before}{" "}
-                          <strong className={cn("font-semibold italic", theme.accent)}>
+                          <strong className={cn("font-medium italic", theme.accent)}>
                             {quoteParts.highlight}
                           </strong>
                           {quoteParts.after}&rdquo;
@@ -1632,13 +1632,13 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
                       )}
                     </blockquote>
                     {story.quoteAttribution ? (
-                      <p className="mt-2 text-sm not-italic text-muted-foreground">
+                      <p className="mt-2 text-body-default not-italic text-muted-foreground">
                         — {story.quoteAttribution}
                       </p>
                     ) : null}
                   </>
                 ) : (
-                  <p className="mt-4 min-h-0 flex-1 text-pretty text-base leading-relaxed text-muted-foreground">
+                  <p className="mt-4 min-h-0 flex-1 text-pretty text-body-lg text-muted-foreground">
                     {story.summary}
                   </p>
                 )}
@@ -1648,7 +1648,7 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
                   <Link
                     href={readHref}
                     className={cn(
-                      "group mt-4 ml-auto flex w-fit items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg no-underline transition-opacity hover:opacity-90",
+                      "group mt-4 ml-auto flex w-fit items-center gap-2 text-body-default font-medium sm:text-body-lg no-underline transition-opacity hover:opacity-90",
                       theme.accent,
                     )}
                   >
@@ -1664,7 +1664,7 @@ export const ResearchSuccessStoriesSection = ({ stories }: { stories: SuccessSto
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
-                      "group mt-4 ml-auto flex w-fit items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg no-underline transition-opacity hover:opacity-90",
+                      "group mt-4 ml-auto flex w-fit items-center gap-2 text-body-default font-medium sm:text-body-lg no-underline transition-opacity hover:opacity-90",
                       theme.accent,
                     )}
                   >
