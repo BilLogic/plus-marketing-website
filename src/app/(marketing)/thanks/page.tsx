@@ -58,7 +58,7 @@ export default async function ThanksPage({
       </p>
       <Link
         href="/"
-        className="mt-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+        className="mt-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-(--ds-background-brand-bold-hovered)"
       >
         Back to home
       </Link>
