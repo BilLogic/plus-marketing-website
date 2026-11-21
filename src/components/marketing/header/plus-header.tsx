@@ -18,18 +18,22 @@ export async function PlusHeader() {
         />
       )}
       <header className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
-        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-20 min-[1800px]:h-16 min-[1800px]:max-w-none min-[1800px]:px-10">
+        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:h-16 lg:px-20 min-[1800px]:max-w-none min-[1800px]:px-10">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 lg:justify-self-start">
+          <Link href="/" className="flex items-center lg:justify-self-start">
             <img
-              src="/brand/plus-icon-gradient.svg"
-              alt=""
-              className="size-8 min-[1800px]:size-9"
+              src="/brand/plus-lockup-colored-24.svg"
+              alt="PLUS home"
+              width={67}
+              height={24}
+              className="h-6 w-auto lg:hidden"
             />
             <img
-              src="/brand/plus-logo-dark.svg"
-              alt="PLUS"
-              className="h-5 min-[1800px]:h-6"
+              src="/brand/plus-lockup-colored-32.svg"
+              alt="PLUS home"
+              width={89}
+              height={32}
+              className="hidden h-8 w-auto lg:block"
             />
           </Link>
 

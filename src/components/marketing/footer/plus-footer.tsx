@@ -40,16 +40,13 @@ export function PlusFooter() {
         <div className="flex flex-col gap-10 md:flex-row md:gap-16">
           {/* Logo + tagline + social */}
           <div className="flex shrink-0 flex-col gap-4 md:max-w-xs">
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center">
               <img
-                src="/brand/plus-icon-gradient.svg"
-                alt=""
-                className="size-8"
-              />
-              <img
-                src="/brand/plus-logo-white.svg"
-                alt="PLUS"
-                className="h-5"
+                src="/brand/plus-lockup-colored-dark-32.svg"
+                alt="PLUS home"
+                width={89}
+                height={32}
+                className="h-8 w-auto"
               />
             </Link>
             <p className="text-sm text-white/60">
