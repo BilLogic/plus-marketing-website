@@ -124,6 +124,9 @@ function useCountUp(target: number, duration = 1200) {
 }
 
 /** Animated number with optional suffix (e.g. "+" or " papers"). */
+/** Card titles on the home page, on the PLUS heading roles. */
+const homeCardTitle = "text-pretty text-heading-md sm:text-heading-lg"
+
 const CountUpStat = ({
   target,
   suffix = "",
@@ -144,7 +147,7 @@ const CountUpStat = ({
 
 /** Section typography + rhythm — match `get-involved-sections.tsx` / `for-tutors-sections.tsx`. */
 const schoolsSectionTitle =
-  "text-pretty text-heading-lg text-teal-950 sm:text-heading-xl md:text-heading-xxl"
+  "text-pretty text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl md:text-heading-xxl"
 const schoolsSectionLead = cn(
   "w-full max-w-none text-lg",
   marketingSectionLeadColorClass,
@@ -604,7 +607,7 @@ export const PlusHeroSection = () => {
             )}
           >
               <h1
-                className="mx-auto max-w-prose text-balance text-center text-heading-xxl text-teal-950 sm:text-display-sm md:text-display-md"
+                className="mx-auto max-w-prose text-balance text-center text-heading-xxl text-(--ds-text-accent-teal-bolder) sm:text-display-sm md:text-display-md"
               >
                 Scaling Up High-Impact Math Tutoring with Technology and Training
               </h1>
@@ -683,7 +686,7 @@ const IMPACT_STAT = "text-yellow-900"
 
 /** Tinted shell — matches `TutorVoiceCard` rhythm (`for-tutors-sections` Voices from Our Tutors). */
 const VOICES_STORY_CARD = cn(
-  "flex h-full flex-col overflow-hidden rounded-(--ds-radius-xxl) bg-green-200",
+  "flex h-full flex-col overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-background-accent-green-subtler)",
   marketingCardPaddingClass,
 )
 
@@ -695,7 +698,7 @@ const VOICES_QUOTE_SHELL = cn(
 
 /** “Read story” row — same interaction as tutor voices; emerald accent for homepage testimonials. */
 const VOICES_READ_STORY_CLASS =
-  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-green-900 no-underline transition-opacity hover:opacity-90"
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-(--ds-text-accent-green) no-underline transition-opacity hover:opacity-90"
 
 /** Avatar + attribution — flush to card `p-*` top; `items-center` vertically centers copy with the disc. */
 const VOICES_ATTRIBUTION_ROW = "flex w-full shrink-0 items-center gap-3"
@@ -904,7 +907,7 @@ const SmartTechCardHeader = ({
         unoptimized
       />
     </div>
-    <h3 className={cn(marketingTypography.bentoTitle, "max-w-[18rem] text-fuchsia-900 lg:max-w-[289px]", titleClassName)}>
+    <h3 className={cn(homeCardTitle, "max-w-[18rem] text-(--ds-text-accent-magenta) lg:max-w-[289px]", titleClassName)}>
       {title}
     </h3>
   </div>
@@ -1011,9 +1014,9 @@ export const PlusSmartTechSection = () => {
       >
         <div className="flex w-full flex-col items-center gap-4 md:flex-row md:justify-center md:gap-8 lg:gap-[42px]">
           {/* AI coaching — `1714:1976`; bottom-anchored stack matches Figma (no scale transform). */}
-          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-(--ds-radius-xxl) bg-fuchsia-200 min-[1800px]:max-w-[680px]">
+          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-background-accent-magenta-subtler) min-[1800px]:max-w-[680px]">
             <div className="relative w-full aspect-[526/385]">
-              <div className="absolute inset-0 overflow-visible rounded-[inherit] bg-fuchsia-200">
+              <div className="absolute inset-0 overflow-visible rounded-[inherit] bg-(--ds-background-accent-magenta-subtler)">
                 <div className="absolute left-5 top-5 z-40 flex sm:left-6 sm:top-6">
                   <SmartTechCardHeader
                     iconSrc={plusHomeSmartTech.iconAiTutor}
@@ -1052,7 +1055,7 @@ export const PlusSmartTechSection = () => {
           </article>
 
           {/* Supervisor — `1714:1965` */}
-          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-(--ds-radius-xxl) bg-fuchsia-200 min-[1800px]:max-w-[680px]">
+          <article className="relative mx-auto w-full max-w-[526px] overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-background-accent-magenta-subtler) min-[1800px]:max-w-[680px]">
             {/* Title: normal flow on mobile (sits above the image), overlaid on md+ */}
             <div className="relative z-30 flex px-5 pt-5 sm:px-6 sm:pt-6 md:absolute md:left-6 md:top-6 md:p-0">
               <SmartTechCardHeader
@@ -1063,10 +1066,10 @@ export const PlusSmartTechSection = () => {
               />
             </div>
             <div className="relative w-full aspect-[526/385] max-md:-mt-[24%]">
-              <div className="absolute inset-0 bg-fuchsia-200">
+              <div className="absolute inset-0 bg-(--ds-background-accent-magenta-subtler)">
                 <div className="absolute inset-0 origin-bottom md:scale-[0.8] lg:scale-100">
                 <div
-                  className="pointer-events-none absolute overflow-hidden shadow-[0px_8px_22px_-6px_rgba(132,81,93,0.13),0px_2px_10px_-2px_rgba(198,191,198,0.11)]"
+                  className="pointer-events-none absolute overflow-hidden shadow-(--ds-shadow-raised)"
                   style={{
                     left: pctX(25),
                     top: pctY(200),
@@ -1086,7 +1089,7 @@ export const PlusSmartTechSection = () => {
                 <div
                   className={cn(
                     "pointer-events-none absolute z-[1] overflow-hidden",
-                    "shadow-[0px_12px_32px_-8px_rgba(132,81,93,0.21),0px_4px_18px_-4px_rgba(198,191,198,0.16)]",
+                    "shadow-(--ds-shadow-overlay)",
                   )}
                   style={{
                     left: pctX(211.36),
@@ -1111,7 +1114,7 @@ export const PlusSmartTechSection = () => {
         </div>
 
         {/* Collaborative Goal Setting — raster flush to bottom of pink frame */}
-        <article className="mx-auto w-full max-w-[1097px] overflow-hidden rounded-(--ds-radius-xxl) bg-fuchsia-200 px-5 pt-5 sm:px-6 sm:pt-6 min-[1800px]:max-w-[1400px]">
+        <article className="mx-auto w-full max-w-[1097px] overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-background-accent-magenta-subtler) px-5 pt-5 sm:px-6 sm:pt-6 min-[1800px]:max-w-[1400px]">
           <SmartTechCardHeader
             iconSrc={plusHomeSmartTech.iconGoal}
             title="Collaborative Goal Setting"
@@ -1174,7 +1177,7 @@ const DEFAULT_PUBLICATION_COUNT = 30
 
 /**
  * Figma `1714:1998` — two columns (473 + 72 gap + 556), 397px-tall row; right panel single image (`1714:2017`).
- * Typography: shared `schoolsSection*` + `marketingTypography.bentoTitle` for the stat line (brand blue).
+ * Typography: shared `schoolsSection*` + `homeCardTitle` for the stat line (brand blue).
  */
 export const PlusScienceOfLearningSection = ({
   publicationCount = DEFAULT_PUBLICATION_COUNT,
@@ -1218,7 +1221,7 @@ export const PlusScienceOfLearningSection = ({
                 unoptimized
               />
             </div>
-            <p className={cn(marketingTypography.bentoTitle, "text-blue-900")}>
+            <p className={cn(homeCardTitle, "text-(--ds-text-accent-blue)")}>
               <CountUpStat target={publicationCount} suffix="+" /> published papers
             </p>
             <p className={schoolsSectionLead}>
@@ -1325,8 +1328,8 @@ export const PlusVoicesSection = () => {
               </div>
               <p
                 className={cn(
-                  marketingTypography.bentoTitle,
-                  "min-w-0 flex-1 text-pretty text-green-900",
+                  homeCardTitle,
+                  "min-w-0 flex-1 text-pretty text-(--ds-text-accent-green)",
                 )}
               >
                 {attribution}
@@ -1335,7 +1338,7 @@ export const PlusVoicesSection = () => {
             <div className={VOICES_QUOTE_SHELL}>
               <blockquote className="text-pretty text-left text-base font-normal italic leading-relaxed text-(--ds-text-subtle)">
                 &ldquo;{quote}{" "}
-                <strong className="font-medium italic text-green-900">
+                <strong className="font-medium italic text-(--ds-text-accent-green)">
                   {highlight}
                 </strong>
                 {end}&rdquo;
