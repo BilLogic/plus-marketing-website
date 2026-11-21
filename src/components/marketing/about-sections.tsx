@@ -69,22 +69,22 @@ import { aboutSectionIds } from "@/lib/plus-footer-ia"
 
 /** Section titles / intros — match `for-tutors-sections.tsx` (Compensation, Experience, etc.). */
 const aboutSectionH2 =
-  "text-pretty text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+  "text-pretty text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl md:text-heading-xxl"
 
 /** Section intros — same lead color / scale as other marketing pages */
 const aboutSectionLead = cn(
-  "w-full max-w-none text-base lg:text-lg",
+  "w-full max-w-none text-body-lg",
   marketingSectionLeadColorClass,
 )
 
 /** Final CTA blurb — wider shell (`max-w-4xl`) so copy can stay one line on large viewports. */
-const aboutFinalCtaLead = cn("text-base lg:text-lg", marketingSectionLeadColorClass)
+const aboutFinalCtaLead = cn("text-body-lg", marketingSectionLeadColorClass)
 
 /** Card titles / body — match Tutors Experience bento cards. */
 const aboutCardTitle =
-  "text-pretty text-lg font-semibold leading-snug tracking-tight text-teal-950 sm:text-xl lg:text-2xl"
+  "text-pretty text-heading-sm text-(--ds-text-accent-teal-bolder) sm:text-heading-md lg:text-heading-lg"
 
-const aboutCardBody = cn("text-base leading-relaxed", marketingSectionLeadColorClass)
+const aboutCardBody = cn("text-body-lg", marketingSectionLeadColorClass)
 
 function AboutSectionTitleWithDecor({
   decorSrc,
@@ -169,7 +169,7 @@ export function AboutHeroSection() {
 
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center sm:gap-8 sm:px-6 min-[1800px]:max-w-5xl">
         <h1 className="flex flex-col items-center gap-3 sm:gap-4">
-          <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
+          <span className="text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl">
             About PLUS
           </span>
           <span className={cn(marketingTypography.heroH1, "max-w-prose")}>
@@ -184,10 +184,10 @@ export function AboutHeroSection() {
 
 /** Our Mission pillar headings — same scale as foundation pillars; color matches icon circles. */
 const aboutMissionPillarTitle =
-  "text-pretty text-lg font-semibold leading-snug tracking-tight text-red-900 sm:text-xl lg:text-2xl dark:text-[#c97d73]"
+  "text-pretty text-heading-sm text-(--ds-text-accent-red) sm:text-heading-md lg:text-heading-lg"
 
 const aboutMissionBulletList =
-  "space-y-2.5 text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg"
+  "space-y-2.5 text-pretty text-body-lg text-muted-foreground"
 
 const MISSION_MAP_SRC = "/figma/about/mission-us-map-v3.png"
 
@@ -196,7 +196,7 @@ const MissionBulletList = ({ items }: { items: readonly string[] }) => (
     {items.map((text) => (
       <li key={text} className="flex gap-3">
         <span
-          className="mt-2 size-1.5 shrink-0 rounded-full bg-red-700"
+          className="mt-2 size-1.5 shrink-0 rounded-full bg-(--ds-background-accent-red-bolder)"
           aria-hidden
         />
         <span>{text}</span>
@@ -218,7 +218,7 @@ const MissionPillarBlock = ({
     <span
       className={cn(
         marketingCardIconCircleClass,
-        "bg-red-900 text-white dark:bg-[#c97d73]",
+        "bg-(--ds-background-accent-red-bolder) text-(--ds-text-inverse)",
       )}
     >
       <Icon className={marketingCardLucideGlyphClass} aria-hidden />
@@ -313,7 +313,7 @@ export function AboutFoundationsSection() {
       >
 
         {/* Community — left large card: fills full height of the right column */}
-        <div className="flex flex-col overflow-hidden rounded-[30px] bg-blue-200 dark:bg-sky-950/40">
+        <div className="flex flex-col overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-background-accent-blue-subtler)">
           {/* Content row: circle | title + description */}
           <div
             className={cn(
@@ -324,7 +324,7 @@ export function AboutFoundationsSection() {
             <div
               className={cn(
                 marketingCardIconCircleClass,
-                "shrink-0 bg-blue-900 text-white",
+                "shrink-0 bg-(--ds-background-accent-blue-bolder) text-(--ds-text-inverse)",
                 marketingCardStepDigitClass,
               )}
             >
@@ -333,13 +333,13 @@ export function AboutFoundationsSection() {
             <div className="flex min-w-0 flex-1 flex-col gap-2">
               <p
                 className={cn(
-                  "text-lg font-semibold leading-snug tracking-tight text-blue-900 sm:text-xl lg:text-2xl dark:text-sky-300",
+                  "text-heading-sm text-(--ds-text-accent-blue) sm:text-heading-md lg:text-heading-lg",
                   latestCardTitleWithIconAlignClass,
                 )}
               >
                 Community
               </p>
-              <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
+              <p className="text-body-lg text-muted-foreground">
                 PLUS connects communities and researchers to improve student outcomes.
               </p>
             </div>
@@ -363,7 +363,7 @@ export function AboutFoundationsSection() {
         <div className={cn("flex flex-col", marketingCardStackGapClass)}>
 
           {/* Research */}
-          <div className="flex flex-col overflow-hidden rounded-[30px] bg-blue-200 dark:bg-sky-950/40">
+          <div className="flex flex-col overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-background-accent-blue-subtler)">
             <div
               className={cn(
                 latestCardTitleRowClass,
@@ -373,7 +373,7 @@ export function AboutFoundationsSection() {
               <div
                 className={cn(
                   marketingCardIconCircleClass,
-                  "shrink-0 bg-blue-900 text-white",
+                  "shrink-0 bg-(--ds-background-accent-blue-bolder) text-(--ds-text-inverse)",
                   marketingCardStepDigitClass,
                 )}
               >
@@ -382,13 +382,13 @@ export function AboutFoundationsSection() {
               <div className="flex min-w-0 flex-1 flex-col gap-2">
                 <p
                   className={cn(
-                    "text-lg font-semibold leading-snug tracking-tight text-blue-900 sm:text-xl lg:text-2xl dark:text-sky-300",
+                    "text-heading-sm text-(--ds-text-accent-blue) sm:text-heading-md lg:text-heading-lg",
                     latestCardTitleWithIconAlignClass,
                   )}
                 >
                   Research
                 </p>
-                <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
+                <p className="text-body-lg text-muted-foreground">
                   Built on decades of learning science research from CMU and Stanford.
                 </p>
               </div>
@@ -408,7 +408,7 @@ export function AboutFoundationsSection() {
           </div>
 
           {/* Innovation */}
-          <div className="flex flex-col overflow-hidden rounded-[30px] bg-blue-200 dark:bg-sky-950/40">
+          <div className="flex flex-col overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-background-accent-blue-subtler)">
             <div
               className={cn(
                 latestCardTitleRowClass,
@@ -418,7 +418,7 @@ export function AboutFoundationsSection() {
               <div
                 className={cn(
                   marketingCardIconCircleClass,
-                  "shrink-0 bg-blue-900 text-white",
+                  "shrink-0 bg-(--ds-background-accent-blue-bolder) text-(--ds-text-inverse)",
                   marketingCardStepDigitClass,
                 )}
               >
@@ -427,13 +427,13 @@ export function AboutFoundationsSection() {
               <div className="flex min-w-0 flex-1 flex-col gap-2">
                 <p
                   className={cn(
-                    "text-lg font-semibold leading-snug tracking-tight text-blue-900 sm:text-xl lg:text-2xl dark:text-sky-300",
+                    "text-heading-sm text-(--ds-text-accent-blue) sm:text-heading-md lg:text-heading-lg",
                     latestCardTitleWithIconAlignClass,
                   )}
                 >
                   Innovation
                 </p>
-                <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
+                <p className="text-body-lg text-muted-foreground">
                   Shaping educational technology to deliver innovative, engaging learning experiences.
                 </p>
               </div>
@@ -521,9 +521,9 @@ function TeamMemberCard({
   const initials = teamMemberInitials(name)
 
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-[30px] bg-green-200 dark:bg-emerald-950/20">
+    <article className="flex h-full flex-col overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-background-accent-green-subtler)">
       <div className="relative aspect-square w-full overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center text-base font-bold text-green-900 sm:text-lg">
+        <div className="absolute inset-0 flex items-center justify-center text-heading-sm text-(--ds-text-accent-green)">
           {initials}
         </div>
         {memberId ? (
@@ -544,11 +544,11 @@ function TeamMemberCard({
         ) : null}
       </div>
       <div className="flex flex-col gap-3 px-2 pt-3 pb-4 sm:px-3 sm:pt-4 sm:pb-5 sm:gap-3.5">
-        <div className="text-xs font-bold leading-tight tracking-tight text-teal-950 dark:text-white sm:text-sm lg:text-base">
+        <div className="text-body-sm font-medium text-(--ds-text-accent-teal-bolder) sm:text-body-default lg:text-heading-sm">
           {name}
         </div>
         {(googleScholar || linkedIn) ? (
-          <div className="flex flex-col gap-0.5 text-[10px] font-medium leading-tight text-green-900 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-1.5 sm:gap-y-0 sm:text-xs">
+          <div className="flex flex-col gap-0.5 text-body-sm font-medium text-(--ds-text-accent-green) sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-1.5 sm:gap-y-0">
             {googleScholar ? (
               <Link
                 href={googleScholar}
@@ -560,7 +560,7 @@ function TeamMemberCard({
               </Link>
             ) : null}
             {googleScholar && linkedIn ? (
-              <span className="hidden sm:inline text-green-900/50 select-none" aria-hidden>|</span>
+              <span className="hidden sm:inline text-(--ds-text-subtle) select-none" aria-hidden>|</span>
             ) : null}
             {linkedIn ? (
               <Link
@@ -574,9 +574,9 @@ function TeamMemberCard({
             ) : null}
           </div>
         ) : null}
-        <div className="text-[10px] leading-tight text-foreground/80 dark:text-white/85 sm:text-xs">{role}</div>
+        <div className="text-body-sm text-foreground/80">{role}</div>
         {institution ? (
-          <div className="text-[10px] leading-tight text-foreground/80 dark:text-white/85 sm:text-xs">{institution}</div>
+          <div className="text-body-sm text-foreground/80">{institution}</div>
         ) : null}
       </div>
     </article>
@@ -584,7 +584,7 @@ function TeamMemberCard({
 }
 
 const triggerCls =
-  "cursor-pointer items-center text-lg font-semibold leading-snug tracking-tight text-green-900 shadow-none hover:no-underline focus-visible:ring-0 focus-visible:border-transparent dark:text-emerald-300 sm:text-xl lg:text-2xl **:data-[slot=accordion-trigger-icon]:size-6 **:data-[slot=accordion-trigger-icon]:text-green-900 dark:**:data-[slot=accordion-trigger-icon]:text-emerald-300"
+  "cursor-pointer items-center text-heading-sm text-(--ds-text-accent-green) shadow-none hover:no-underline focus-visible:ring-0 focus-visible:border-transparent sm:text-heading-md lg:text-heading-lg **:data-[slot=accordion-trigger-icon]:size-6 **:data-[slot=accordion-trigger-icon]:text-(--ds-text-accent-green)"
 
 const memberGrid = "grid gap-2 grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 sm:gap-3 lg:gap-4 [&>*]:min-w-0"
 
@@ -638,13 +638,13 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
           <AccordionTrigger
             className={cn(
               triggerCls,
-              "rounded-[30px] bg-green-200 dark:bg-emerald-950/25",
+              "rounded-(--ds-radius-xxl) bg-(--ds-background-accent-green-subtler)",
               marketingCardPaddingClass,
             )}
           >
             <span className="flex items-center gap-3">
               <span
-                className={cn(marketingCardIconCircleClass, "bg-green-900 text-white")}
+                className={cn(marketingCardIconCircleClass, "bg-(--ds-background-accent-green-bolder) text-(--ds-text-inverse)")}
               >
                 <Users className={marketingCardLucideGlyphClass} />
               </span>
@@ -668,7 +668,7 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
                 ))}
               </div>
             ) : (
-              <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
+              <p className="text-body-lg text-muted-foreground">
                 Leadership bios and profiles will appear here as we publish them on the marketing site.
               </p>
             )}
@@ -679,13 +679,13 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
           <AccordionTrigger
             className={cn(
               triggerCls,
-              "rounded-[30px] bg-green-200 dark:bg-emerald-950/25",
+              "rounded-(--ds-radius-xxl) bg-(--ds-background-accent-green-subtler)",
               marketingCardPaddingClass,
             )}
           >
             <span className="flex items-center gap-3">
               <span
-                className={cn(marketingCardIconCircleClass, "bg-green-900 text-white")}
+                className={cn(marketingCardIconCircleClass, "bg-(--ds-background-accent-green-bolder) text-(--ds-text-inverse)")}
               >
                 <Briefcase className={marketingCardLucideGlyphClass} />
               </span>
@@ -709,7 +709,7 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
                 ))}
               </div>
             ) : (
-              <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
+              <p className="text-body-lg text-muted-foreground">
                 Staff spotlights and roles will be listed here.
               </p>
             )}
@@ -720,13 +720,13 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
           <AccordionTrigger
             className={cn(
               triggerCls,
-              "rounded-[30px] bg-green-200 dark:bg-emerald-950/25",
+              "rounded-(--ds-radius-xxl) bg-(--ds-background-accent-green-subtler)",
               marketingCardPaddingClass,
             )}
           >
             <span className="flex items-center gap-3">
               <span
-                className={cn(marketingCardIconCircleClass, "bg-green-900 text-white")}
+                className={cn(marketingCardIconCircleClass, "bg-(--ds-background-accent-green-bolder) text-(--ds-text-inverse)")}
               >
                 <GraduationCap className={marketingCardLucideGlyphClass} />
               </span>
@@ -768,7 +768,7 @@ export function AboutTeamSection({ members = [] }: { members?: TeamMember[] }) {
 }
 
 const latestReadMoreLinkClass =
-  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-yellow-900 no-underline transition-opacity hover:opacity-90 dark:text-amber-200"
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-body-default font-medium sm:text-body-lg text-(--ds-text-accent-yellow) no-underline transition-opacity hover:opacity-90"
 
 /**
  * Icon top flush with card padding (`items-start`). Title gets `pt` so the **first line’s**
@@ -780,7 +780,7 @@ const latestCardTitleRowClass = "flex w-full shrink-0 items-start gap-3"
 const latestCardTitleWithIconAlignClass =
   "pt-[max(0px,calc((48px-1lh)/2))]"
 
-const latestCardHeaderIconClass = cn(marketingCardIconCircleClass, "bg-yellow-900 text-white")
+const latestCardHeaderIconClass = cn(marketingCardIconCircleClass, "bg-(--ds-background-accent-yellow-bolder) text-(--ds-text-inverse)")
 
 const NEWS_CATEGORY_ICON: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
   "Media Coverage": Newspaper,
@@ -808,7 +808,7 @@ function LatestNewsCard({
   return (
     <article
       className={cn(
-        "flex flex-col rounded-[30px] bg-yellow-200 dark:bg-amber-950/20",
+        "flex flex-col rounded-(--ds-radius-xxl) bg-(--ds-background-accent-yellow-subtler)",
         marketingCardPaddingClass,
         large && "w-full",
       )}
@@ -822,7 +822,7 @@ function LatestNewsCard({
             className={cn(
               aboutCardTitle,
               latestCardTitleWithIconAlignClass,
-              "text-yellow-900 dark:text-amber-200",
+              "text-(--ds-text-accent-yellow)",
             )}
           >
             {item.title}
@@ -830,7 +830,7 @@ function LatestNewsCard({
           {date ? (
             <time
               dateTime={item.publicationDate}
-              className="mt-2 block text-sm font-medium text-yellow-900/70 dark:text-amber-200/70 sm:text-base"
+              className="mt-2 block text-body-default font-medium text-(--ds-text-subtle) sm:text-body-lg"
             >
               {date}
             </time>
@@ -856,7 +856,7 @@ function LatestNewsCard({
         <p
           className={cn(
             aboutCardBody,
-            "mt-4 text-pretty dark:text-amber-100/90",
+            "mt-4 text-pretty",
             large && "flex-1",
           )}
         >
@@ -903,7 +903,7 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
         <div className={cn("flex flex-col", marketingCardStackGapClass)}>
           <article
             className={cn(
-              "flex w-full flex-col rounded-[30px] bg-yellow-200 dark:bg-amber-950/20",
+              "flex w-full flex-col rounded-(--ds-radius-xxl) bg-(--ds-background-accent-yellow-subtler)",
               marketingCardPaddingClass,
             )}
           >
@@ -915,7 +915,7 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
                 className={cn(
                   aboutCardTitle,
                   latestCardTitleWithIconAlignClass,
-                  "min-w-0 flex-1 text-yellow-900 dark:text-amber-200",
+                  "min-w-0 flex-1 text-(--ds-text-accent-yellow)",
                 )}
               >
                 Celebrating Our Datasets Win
@@ -938,7 +938,7 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
           <div className={cn("grid grid-cols-1 sm:grid-cols-2", marketingCardStackGapClass)}>
             <article
               className={cn(
-                "flex flex-col rounded-[30px] bg-yellow-200 dark:bg-amber-950/20",
+                "flex flex-col rounded-(--ds-radius-xxl) bg-(--ds-background-accent-yellow-subtler)",
                 marketingCardPaddingClass,
               )}
             >
@@ -950,7 +950,7 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
                   className={cn(
                     aboutCardTitle,
                     latestCardTitleWithIconAlignClass,
-                    "min-w-0 flex-1 text-yellow-900 dark:text-amber-200",
+                    "min-w-0 flex-1 text-(--ds-text-accent-yellow)",
                   )}
                 >
                   Teachers Inspire Our Tutoring
@@ -972,7 +972,7 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
             </article>
             <article
               className={cn(
-                "flex flex-col rounded-[30px] bg-yellow-200 dark:bg-amber-950/20",
+                "flex flex-col rounded-(--ds-radius-xxl) bg-(--ds-background-accent-yellow-subtler)",
                 marketingCardPaddingClass,
               )}
             >
@@ -984,7 +984,7 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
                   className={cn(
                     aboutCardTitle,
                     latestCardTitleWithIconAlignClass,
-                    "min-w-0 flex-1 text-yellow-900 dark:text-amber-200",
+                    "min-w-0 flex-1 text-(--ds-text-accent-yellow)",
                   )}
                 >
                   PLUS Expands To 6 New Schools
@@ -1012,10 +1012,10 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
 }
 
 const successStoryReadLinkClass =
-  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-fuchsia-900 no-underline transition-opacity hover:opacity-90 dark:text-fuchsia-900"
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-body-default font-medium sm:text-body-lg text-(--ds-text-accent-magenta) no-underline transition-opacity hover:opacity-90"
 
 const successStoryReadLinkBlueClass =
-  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-blue-900 no-underline transition-opacity hover:opacity-90 dark:text-sky-300"
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-body-default font-medium sm:text-body-lg text-(--ds-text-accent-blue) no-underline transition-opacity hover:opacity-90"
 
 /**
  * Cycles pink → blue → amber for each success-story card from Notion.
@@ -1023,24 +1023,24 @@ const successStoryReadLinkBlueClass =
  */
 const SUCCESS_STORY_CARD_THEMES = [
   {
-    shell: "bg-fuchsia-200 dark:bg-fuchsia-200/15",
-    iconCircle: "bg-fuchsia-900 text-white",
-    title: "text-fuchsia-900",
-    quoteStrong: "text-fuchsia-900",
+    shell: "bg-(--ds-background-accent-magenta-subtler)",
+    iconCircle: "bg-(--ds-background-accent-magenta-bolder) text-(--ds-text-inverse)",
+    title: "text-(--ds-text-accent-magenta)",
+    quoteStrong: "text-(--ds-text-accent-magenta)",
     readLink: successStoryReadLinkClass,
   },
   {
-    shell: "bg-blue-200 dark:bg-sky-950/40",
-    iconCircle: "bg-blue-900 text-white",
-    title: "text-blue-900 dark:text-sky-300",
-    quoteStrong: "text-blue-900 dark:text-sky-300",
+    shell: "bg-(--ds-background-accent-blue-subtler)",
+    iconCircle: "bg-(--ds-background-accent-blue-bolder) text-(--ds-text-inverse)",
+    title: "text-(--ds-text-accent-blue)",
+    quoteStrong: "text-(--ds-text-accent-blue)",
     readLink: successStoryReadLinkBlueClass,
   },
   {
-    shell: "bg-yellow-200 dark:bg-amber-950/20",
-    iconCircle: "bg-yellow-900 text-white",
-    title: "text-yellow-900 dark:text-amber-200",
-    quoteStrong: "text-yellow-900 dark:text-amber-200",
+    shell: "bg-(--ds-background-accent-yellow-subtler)",
+    iconCircle: "bg-(--ds-background-accent-yellow-bolder) text-(--ds-text-inverse)",
+    title: "text-(--ds-text-accent-yellow)",
+    quoteStrong: "text-(--ds-text-accent-yellow)",
     readLink: latestReadMoreLinkClass,
   },
 ] as const
@@ -1081,14 +1081,14 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
             <article
               key={story.id}
               className={cn(
-                "flex h-full flex-col rounded-[30px]",
+                "flex h-full flex-col rounded-(--ds-radius-xxl)",
                 theme.shell,
                 marketingCardPaddingClass,
               )}
             >
               <div
                 className={cn(
-                  "flex min-h-0 flex-1 flex-col rounded-3xl bg-white dark:bg-card",
+                  "flex min-h-0 flex-1 flex-col rounded-(--ds-radius-xl) bg-(--ds-surface)",
                   marketingCardPaddingClass,
                 )}
               >
@@ -1118,7 +1118,7 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
                       {quoteParts ? (
                         <>
                           &ldquo;{quoteParts.before}{" "}
-                          <strong className={cn("font-semibold italic", theme.quoteStrong)}>
+                          <strong className={cn("font-medium italic", theme.quoteStrong)}>
                             {quoteParts.highlight}
                           </strong>
                           {quoteParts.after}&rdquo;
@@ -1128,7 +1128,7 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
                       )}
                     </blockquote>
                     {story.quoteAttribution ? (
-                      <p className="mt-2 text-sm not-italic text-muted-foreground">
+                      <p className="mt-2 text-body-default not-italic text-muted-foreground">
                         — {story.quoteAttribution}
                       </p>
                     ) : null}
@@ -1180,8 +1180,8 @@ export function AboutSuccessStoriesSection({ stories = [] }: { stories?: Success
 export function AboutFinalCtaSection() {
   return (
     <section id={aboutSectionIds.learnMore} className="scroll-mt-24">
-      <div className="mx-auto max-w-4xl space-y-6 rounded-3xl bg-white p-8 text-center dark:bg-transparent sm:p-12">
-        <h2 className="text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl lg:text-4xl">
+      <div className="mx-auto max-w-4xl space-y-6 rounded-(--ds-radius-xl) bg-(--ds-surface) p-8 text-center sm:p-12">
+        <h2 className="text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl lg:text-heading-xxl">
           Learn More About PLUS
         </h2>
         <p className={aboutFinalCtaLead}>

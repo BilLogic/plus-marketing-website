@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"
 import type { TeamMember } from "@/lib/notion/types"
 
 const LINK_CN =
-  "text-blue-900 underline decoration-blue-900 underline-offset-2 hover:text-blue-950 transition-colors"
+  "text-(--ds-text-accent-blue) underline decoration-(--ds-text-accent-blue) underline-offset-2 hover:text-(--ds-text-accent-blue-bolder) transition-colors"
 
 function researcherLinks(
   member: TeamMember
@@ -73,18 +73,18 @@ function ResearcherPhoto({
 export function ResearcherCard({ member }: { member: TeamMember }) {
   const links = researcherLinks(member)
   return (
-    <article className="flex flex-col overflow-hidden rounded-[30px] bg-blue-200">
+    <article className="flex flex-col overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-background-accent-blue-subtler)">
       <ResearcherPhoto id={member.id} cachedSrc={member.picture} name={member.name} />
       <div className="flex flex-col gap-2 px-2 pt-3 pb-4 sm:px-3 sm:pt-4 sm:pb-5">
-        <p className="text-xs font-bold leading-tight tracking-tight text-[#004247] sm:text-sm lg:text-base">
+        <p className="text-body-sm font-medium text-(--ds-text-accent-teal-bolder) sm:text-body-default lg:text-heading-sm">
           {member.name}
         </p>
         {links.length > 0 && (
-          <div className="flex flex-col gap-0.5 text-[10px] font-medium leading-tight text-blue-900 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-1.5 sm:gap-y-0 sm:text-xs">
+          <div className="flex flex-col gap-0.5 text-body-sm font-medium text-(--ds-text-accent-blue) sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-1.5 sm:gap-y-0">
             {links.map((link, i) => (
               <span key={link.href} className="inline-flex items-center gap-1">
                 {i > 0 && (
-                  <span className="hidden sm:inline text-[#004247]/50 select-none" aria-hidden>|</span>
+                  <span className="hidden sm:inline text-(--ds-text-subtle) select-none" aria-hidden>|</span>
                 )}
                 {link.external ? (
                   <a
@@ -105,10 +105,10 @@ export function ResearcherCard({ member }: { member: TeamMember }) {
           </div>
         )}
         {member.title1 && (
-          <p className="text-[10px] leading-snug text-[#004247] sm:text-xs">{member.title1}</p>
+          <p className="text-body-sm text-(--ds-text-accent-teal-bolder)">{member.title1}</p>
         )}
         {member.title2 && (
-          <p className="text-[10px] leading-snug text-[#004247]/75 sm:text-xs">{member.title2}</p>
+          <p className="text-body-sm text-(--ds-text-subtle)">{member.title2}</p>
         )}
       </div>
     </article>

@@ -34,10 +34,10 @@ export default async function ThanksPage({
   return (
     <div className="mx-auto flex max-w-2xl flex-col items-start gap-6 px-6 py-24 md:py-32">
       <FormSubmissionTracker form={form} />
-      <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+      <h1 className="text-heading-xl text-foreground md:text-heading-xxl">
         Thanks — we&rsquo;ve got it.
       </h1>
-      <p className="text-lg text-muted-foreground">
+      <p className="text-body-lg text-muted-foreground">
         Your message is with the PLUS team. We usually reply within a few
         working days.
       </p>
@@ -58,7 +58,7 @@ export default async function ThanksPage({
       </p>
       <Link
         href="/"
-        className="mt-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-(--ds-background-brand-bold-hovered)"
+        className="mt-2 rounded-full bg-primary px-6 py-3 text-body-default font-medium text-primary-foreground transition-colors hover:bg-(--ds-background-brand-bold-hovered)"
       >
         Back to home
       </Link>

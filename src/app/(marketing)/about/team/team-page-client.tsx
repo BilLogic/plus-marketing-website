@@ -143,10 +143,10 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
     <div className="mx-auto flex max-w-6xl flex-col gap-10 pb-16 pt-2 sm:pb-20 md:pb-24 min-[1800px]:max-w-7xl min-[1800px]:gap-12 min-[1800px]:pb-32 min-[1800px]:pt-8">
       {/* Header */}
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
+        <h1 className="text-heading-lg text-foreground sm:text-heading-xl lg:text-heading-xxl">
           Our Team
         </h1>
-        <p className="max-w-2xl text-sm text-muted-foreground sm:text-base">
+        <p className="max-w-2xl text-body-default text-muted-foreground sm:text-body-lg">
           Meet the researchers, engineers, designers, and educators behind PLUS
           -- working together to advance learning through technology.
         </p>
@@ -164,7 +164,7 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
 
         {/* Affiliation chips */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-medium text-muted-foreground">
+          <span className="text-body-sm font-medium text-muted-foreground">
             Affiliation:
           </span>
           {AFFILIATIONS.map((aff) => (
@@ -172,7 +172,7 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
               key={aff}
               variant={selectedAffiliations.has(aff) ? "default" : "outline"}
               size="sm"
-              className="h-7 text-xs"
+              className="h-7 text-body-sm"
               onClick={() => toggleAffiliation(aff)}
             >
               {aff}
@@ -182,7 +182,7 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
 
         {/* Group chips */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-medium text-muted-foreground">
+          <span className="text-body-sm font-medium text-muted-foreground">
             Role:
           </span>
           {GROUPS.map((grp) => (
@@ -190,7 +190,7 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
               key={grp}
               variant={selectedGroups.has(grp) ? "default" : "outline"}
               size="sm"
-              className="h-7 text-xs"
+              className="h-7 text-body-sm"
               onClick={() => toggleGroup(grp)}
             >
               {grp}
@@ -202,7 +202,7 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
       {/* Team grid grouped by affiliation */}
       {grouped.size === 0 ? (
         <div className="flex flex-col items-center gap-2 py-20 text-center">
-          <p className="text-sm font-medium text-muted-foreground sm:text-base lg:text-lg">
+          <p className="text-body-default font-medium text-muted-foreground sm:text-body-lg">
             {members.length === 0
               ? "Team directory coming soon."
               : "No team members match your filters."}
@@ -225,9 +225,9 @@ export function TeamPageClient({ members }: { members: TeamMember[] }) {
         <div className="flex flex-col gap-12">
           {[...grouped.entries()].map(([affiliation, groupMembers]) => (
             <section key={affiliation} className="flex flex-col gap-5">
-              <h2 className="text-base font-semibold text-foreground sm:text-lg">
+              <h2 className="text-heading-sm text-foreground">
                 {affiliation}
-                <span className="ml-2 text-sm font-normal text-muted-foreground">
+                <span className="ml-2 text-body-default font-normal text-muted-foreground">
                   ({groupMembers.length})
                 </span>
               </h2>

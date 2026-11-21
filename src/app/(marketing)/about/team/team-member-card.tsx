@@ -41,7 +41,7 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
     >
       <div className="relative size-20 shrink-0 overflow-hidden rounded-full">
         <div
-          className="absolute inset-0 flex items-center justify-center text-lg font-semibold"
+          className="absolute inset-0 flex items-center justify-center text-heading-sm"
           style={{
             backgroundColor: `oklch(0.85 0.08 ${hue})`,
             color: `oklch(0.3 0.08 ${hue})`,
@@ -59,14 +59,14 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
       </div>
 
       <div className="flex flex-col items-center gap-1 text-center">
-        <h3 className="text-sm font-semibold text-foreground">
+        <h3 className="text-body-default font-medium text-foreground">
           {member.name}
         </h3>
         {member.title1 && (
-          <p className="text-xs text-muted-foreground">{member.title1}</p>
+          <p className="text-body-sm text-muted-foreground">{member.title1}</p>
         )}
         {member.title2 && (
-          <p className="text-xs text-muted-foreground">{member.title2}</p>
+          <p className="text-body-sm text-muted-foreground">{member.title2}</p>
         )}
       </div>
 
@@ -122,7 +122,7 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
       )}
 
       {member.bio && expanded && (
-        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+        <p className="mt-1 text-body-sm text-muted-foreground">
           {member.bio}
         </p>
       )}
