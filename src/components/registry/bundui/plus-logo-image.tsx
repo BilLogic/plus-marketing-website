@@ -4,13 +4,13 @@ type PlusLogoImageProps = {
   className?: string
 }
 
-const ALT = "PLUS Personalized Learning²"
+const ALT = "PLUS"
 
-const LOGO_SRC = "/plus-logo.png"
-const LOGO_W = 400
-const LOGO_H = 160
+const LOGO_SRC = "/brand/plus-lockup-colored-32.svg"
+const LOGO_W = 89
+const LOGO_H = 32
 
-/** Committed asset: `public/plus-logo.png` (400×160). Plain `<img>` so Storybook + Netlify static don’t rely on `next/image`. */
+/** Committed asset: `public/brand/plus-lockup-colored-32.svg` (89×32). Plain `<img>` so Storybook + Netlify static don’t rely on `next/image`. */
 export function PlusLogoImage({ className }: PlusLogoImageProps) {
   return (
     <img
@@ -21,16 +21,16 @@ export function PlusLogoImage({ className }: PlusLogoImageProps) {
       decoding="async"
       fetchPriority="high"
       className={cn(
-        "h-10 w-auto max-w-[min(100%,280px)] object-contain object-left",
+        "h-8 w-auto",
         className
       )}
     />
   )
 }
 
-const FOOTER_LOGO_SRC = "/plus-logo-white.png"
+const FOOTER_LOGO_SRC = "/brand/plus-lockup-colored-dark-32.svg"
 
-/** Full white wordmark for dark footer — `public/plus-logo-white.png` (400×160). */
+/** Committed asset: `public/brand/plus-lockup-colored-dark-32.svg` (89×32). */
 export function PlusFooterLogoImage({ className }: { className?: string }) {
   return (
     <img
@@ -40,7 +40,7 @@ export function PlusFooterLogoImage({ className }: { className?: string }) {
       height={LOGO_H}
       decoding="async"
       className={cn(
-        "h-9 w-auto max-w-[min(100%,280px)] object-contain object-left sm:h-10",
+        "h-8 w-auto",
         className
       )}
     />

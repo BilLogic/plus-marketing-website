@@ -91,17 +91,14 @@ export const MobileNav = ({ className }: MobileNavProps) => {
           <Link
             href="/"
             onClick={close}
-            className="flex min-w-0 shrink-0 items-center gap-2"
+            className="flex min-w-0 shrink-0 items-center"
           >
             <img
-              src="/brand/plus-icon-gradient.svg"
-              alt=""
-              className="size-8 shrink-0"
-            />
-            <img
-              src="/brand/plus-logo-dark.svg"
-              alt="PLUS"
-              className="h-5 shrink-0"
+              src="/brand/plus-lockup-colored-24.svg"
+              alt="PLUS home"
+              width={67}
+              height={24}
+              className="h-6 w-auto shrink-0"
             />
           </Link>
           <div className="ml-auto flex min-w-0 shrink-0 items-center gap-1.5 sm:gap-2">
