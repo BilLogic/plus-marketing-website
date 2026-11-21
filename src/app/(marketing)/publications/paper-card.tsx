@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { FileText, Presentation, Video, ChevronDown } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -32,6 +32,7 @@ export function PaperCard({
   paper: ResearchPaper
   onAuthorClick: (author: string) => void
 }) {
+  const reduceMotion = useReducedMotion()
   const [expanded, setExpanded] = useState(false)
   const description = paper.shortDescription || paper.abstract
   const truncated =
@@ -41,10 +42,10 @@ export function PaperCard({
 
   return (
     <motion.article
-      layout
-      initial={{ opacity: 0, y: 12 }}
+      layout={!reduceMotion}
+      initial={{ opacity: 0, y: reduceMotion ? 0 : 12 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -12 }}
+      exit={{ opacity: 0, y: reduceMotion ? 0 : -12 }}
       transition={{ duration: 0.2 }}
       className="rounded-xl border border-border bg-card p-5 shadow-sm transition-shadow hover:shadow-md"
     >
