@@ -53,7 +53,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="min-h-0">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${googleSansFlex.variable} min-h-0`}
+    >
       <head>
         {process.env.NEXT_PUBLIC_FIGMA_HTML_CAPTURE === "1" ? (
           <Script
@@ -74,7 +78,7 @@ export default function RootLayout({
         ) : null}
       </head>
       <body
-        className={`${googleSansFlex.variable} min-h-0 bg-background antialiased`}
+        className="min-h-0 bg-background antialiased"
         suppressHydrationWarning
       >
         <ThemeProvider
