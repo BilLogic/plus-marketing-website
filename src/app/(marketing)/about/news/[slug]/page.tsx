@@ -92,7 +92,7 @@ export default async function NewsDetailPage({
 
         <article className="space-y-6">
         {item.featuredImage && (
-          <div className="overflow-hidden rounded-lg">
+          <div className="overflow-hidden rounded-(--ds-radius-lg)">
             <img
               src={item.featuredImage}
               alt=""

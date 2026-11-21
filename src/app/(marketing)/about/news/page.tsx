@@ -73,7 +73,7 @@ function NewsCard({ item, slug }: { item: NewsItem; slug: string }) {
         </div>
       </div>
       {item.featuredImage ? (
-        <div className="relative mt-4 min-h-[280px] flex-1 overflow-hidden rounded-2xl bg-muted sm:min-h-[360px] lg:min-h-[420px]">
+        <div className="relative mt-4 min-h-[280px] flex-1 overflow-hidden rounded-(--ds-radius-xl) bg-muted sm:min-h-[360px] lg:min-h-[420px]">
           <Image
             src={item.featuredImage}
             alt={item.title}

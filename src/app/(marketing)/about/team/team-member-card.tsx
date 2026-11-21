@@ -33,8 +33,8 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
       type="button"
       onClick={() => member.bio && setExpanded((prev) => !prev)}
       className={cn(
-        "group flex w-full flex-col items-center gap-3 rounded-xl border border-border bg-card p-5 text-left",
-        "transition-all duration-200 hover:scale-[1.02] hover:shadow-lg hover:shadow-foreground/5",
+        "group flex w-full flex-col items-center gap-3 rounded-(--ds-radius-xl) border border-border bg-card p-5 text-left",
+        "transition-all duration-200 hover:scale-[1.02] hover:shadow-(--ds-shadow-raised)",
         "focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
         member.bio && "cursor-pointer"
       )}

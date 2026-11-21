@@ -840,7 +840,7 @@ function LatestNewsCard({
       {item.featuredImage ? (
         <div
           className={cn(
-            "relative mt-4 overflow-hidden rounded-2xl bg-muted",
+            "relative mt-4 overflow-hidden rounded-(--ds-radius-xl) bg-muted",
             large ? "min-h-[280px] flex-1 sm:min-h-[360px] lg:min-h-[420px]" : "aspect-[16/8.5]",
           )}
         >
@@ -921,7 +921,7 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
                 Celebrating Our Datasets Win
               </h3>
             </div>
-            <div className="relative mt-4 min-h-[280px] flex-1 overflow-hidden rounded-2xl bg-muted sm:min-h-[360px] lg:min-h-[420px]">
+            <div className="relative mt-4 min-h-[280px] flex-1 overflow-hidden rounded-(--ds-radius-xl) bg-muted sm:min-h-[360px] lg:min-h-[420px]">
               <Image
                 src="/figma/about/latest-datasets-win.png"
                 alt="Schools Competition Winners graphic"
@@ -956,7 +956,7 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
                   Teachers Inspire Our Tutoring
                 </h3>
               </div>
-              <div className="relative mt-4 aspect-[16/8.5] overflow-hidden rounded-2xl bg-muted">
+              <div className="relative mt-4 aspect-[16/8.5] overflow-hidden rounded-(--ds-radius-xl) bg-muted">
                 <Image
                   src="/figma/about/latest-teachers-inspire.png"
                   alt="Teachers and students in a school setting"
@@ -990,7 +990,7 @@ export function AboutLatestSection({ news = [] }: { news?: NewsItem[] }) {
                   PLUS Expands To 6 New Schools
                 </h3>
               </div>
-              <div className="relative mt-4 aspect-[16/8.5] overflow-hidden rounded-2xl bg-muted">
+              <div className="relative mt-4 aspect-[16/8.5] overflow-hidden rounded-(--ds-radius-xl) bg-muted">
                 <Image
                   src="/figma/about/latest-expands-schools.png"
                   alt="Student using a learning tablet in a classroom"

@@ -73,7 +73,7 @@ const CONTACT_FORM_EMBED_SRC =
  */
 function GoogleFormEmbed({ title }: { title: string }) {
   return (
-    <div className="mt-2 w-full overflow-hidden rounded-2xl bg-(--ds-surface) ring-1 ring-black/5">
+    <div className="mt-2 w-full overflow-hidden rounded-(--ds-radius-xl) bg-(--ds-surface) ring-1 ring-black/5">
       <iframe
         src={CONTACT_FORM_EMBED_SRC}
         title={title}
@@ -490,7 +490,7 @@ export function GetInvolvedTutoringSection() {
               </a>
             </div>
           </div>
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl md:aspect-[16/9]">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-(--ds-radius-xl) md:aspect-[16/9]">
             <Image
               src="/figma/get-involved/tutoring-becoming-tutor.jpg"
               alt="Tutor working with a student during a PLUS session"
