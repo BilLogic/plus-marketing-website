@@ -123,10 +123,10 @@ function useCountUp(target: number, duration = 1200) {
   return { ref, value }
 }
 
-/** Animated number with optional suffix (e.g. "+" or " papers"). */
 /** Card titles on the home page, on the PLUS heading roles. */
 const homeCardTitle = "text-pretty text-heading-md sm:text-heading-lg"
 
+/** Animated number with optional suffix (e.g. "+" or " papers"). */
 const CountUpStat = ({
   target,
   suffix = "",
@@ -198,7 +198,7 @@ export const PlusNavbar = ({
   return (
     <header className="sticky top-0 z-40 bg-background/80 pb-3 backdrop-blur-md">
       <div className="flex justify-center px-4 pt-3 sm:px-6 lg:px-8">
-        <div className="flex w-full max-w-5xl items-center justify-between gap-3 rounded-full border border-border/70 bg-background/90 px-4 py-2.5 shadow-sm shadow-black/[0.04] min-[1800px]:max-w-7xl">
+        <div className="flex w-full max-w-5xl items-center justify-between gap-3 rounded-full border border-border/70 bg-background/90 px-4 py-2.5 shadow-(--ds-shadow-raised) min-[1800px]:max-w-7xl">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <span className="relative flex size-7 items-center justify-center rounded-full bg-primary/10">
@@ -570,7 +570,7 @@ export const PlusHeroSection = () => {
   return (
     <section
       id="about"
-      className="relative w-full overflow-x-clip overflow-y-visible bg-white pb-10 pt-10 sm:pb-14 sm:pt-12 md:pt-16"
+      className="relative w-full overflow-x-clip overflow-y-visible bg-(--ds-surface) pb-10 pt-10 sm:pb-14 sm:pt-12 md:pt-16"
     >
       {/* Figma `1714:2153` — blob order L→R: pink → coral → yellow → green → blue; then white veil (heavy white) */}
       <div
@@ -692,7 +692,7 @@ const VOICES_STORY_CARD = cn(
 
 /** Inner white quote panel — same `mt-4` + `rounded-3xl` + padding as `TutorVoiceCard`. */
 const VOICES_QUOTE_SHELL = cn(
-  "mt-4 flex min-h-0 flex-1 flex-col rounded-(--ds-radius-xl) bg-white",
+  "mt-4 flex min-h-0 flex-1 flex-col rounded-(--ds-radius-xl) bg-(--ds-surface)",
   marketingCardPaddingClass,
 )
 
