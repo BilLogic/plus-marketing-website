@@ -34,7 +34,7 @@ export const marketingSectionVoicesHeaderDecorImgClass =
 
 /** Section / hero lead body — matches For Schools “School Community” intro */
 export const marketingSectionLeadColorClass =
-  "text-pretty text-[#62636C] dark:text-white/90"
+  "text-pretty text-(--ds-text-subtle)"
 
 /**
  * Standard marketing card inset — **equal** on all sides (`p-5 sm:p-6`). Use on outer shells,
@@ -54,7 +54,7 @@ export const marketingCardLhHeaderRowLeadPaddingClass = "pt-2 sm:pt-3"
  * scale). Pair the icon with `marketingCardIconTitleRowOffsetClass` + `marketingCardIconCircleClass`.
  */
 export const marketingCardLhAlignedHeaderRowClass = cn(
-  "flex items-start gap-3 text-lg font-semibold leading-snug tracking-tight sm:text-xl lg:text-2xl",
+  "flex items-start gap-3 text-heading-sm sm:text-heading-md lg:text-heading-lg",
   marketingCardLhHeaderRowLeadPaddingClass,
 )
 
@@ -63,15 +63,15 @@ export const marketingCardLhAlignedHeaderRowClass = cn(
  * `TutorsImpactCTA` (For Tutors). Use on For Schools / For Researchers final blocks too.
  */
 export const marketingFinalCtaShellClass = cn(
-  "mx-auto max-w-5xl space-y-6 rounded-3xl bg-white text-center dark:bg-transparent min-[1800px]:max-w-7xl min-[1800px]:space-y-8",
+  "mx-auto max-w-5xl space-y-6 rounded-(--ds-radius-xl) bg-(--ds-surface) text-center min-[1800px]:max-w-7xl min-[1800px]:space-y-8",
   marketingCardPaddingClass,
 )
 
 export const marketingFinalCtaTitleClass =
-  "text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl lg:text-4xl min-[1800px]:text-5xl"
+  "text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl lg:text-heading-xxl"
 
 export const marketingFinalCtaLeadClass = cn(
-  "w-full max-w-none text-base lg:text-lg min-[1800px]:text-xl",
+  "w-full max-w-none text-body-lg",
   marketingSectionLeadColorClass,
 )
 
@@ -96,22 +96,22 @@ export const marketingHeroCtaButtonRowClass = cn(
 export const marketingHeroCtaPrimaryLinkClass = cn(
   "inline-flex items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-sm sm:text-base font-medium text-[#004247] shadow-none min-[1800px]:h-12 min-[1800px]:px-9 min-[1800px]:text-lg",
-  "hover:bg-[#A6EDF4] hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4] dark:hover:text-[#004247]",
+  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-body-default sm:text-body-lg font-medium text-[#004247] shadow-none min-[1800px]:h-12 min-[1800px]:px-9",
+  "hover:bg-[#A6EDF4] hover:text-[#004247]",
 )
 
 /** Primary pill — matches `TutorsImpactCTA` “Try the Demo” button (use on `<a>` or `<Link>`). */
 export const marketingFinalCtaPrimaryLinkClass = cn(
   "inline-flex items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-sm sm:text-base font-medium text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] dark:bg-[#A6EDF4] dark:text-[#004247] dark:hover:bg-[#A6EDF4] min-[1800px]:h-12 min-[1800px]:px-9 min-[1800px]:text-lg",
+  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-body-default sm:text-body-lg font-medium text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] min-[1800px]:h-12 min-[1800px]:px-9",
 )
 
 /** Outline pill — matches `TutorsImpactCTA` “Become a Tutor” button. */
 export const marketingFinalCtaOutlineLinkClass = cn(
   "inline-flex items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-5 sm:px-8 text-sm sm:text-base font-medium text-teal-950 hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20 min-[1800px]:h-12 min-[1800px]:px-9 min-[1800px]:text-lg",
+  "h-9 sm:h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-5 sm:px-8 text-body-default sm:text-body-lg font-medium text-(--ds-text-accent-teal-bolder) hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 min-[1800px]:h-12 min-[1800px]:px-9",
 )
 
 /**
@@ -134,7 +134,7 @@ export const marketingCardIconCircleClass =
 
 /** Step number (1, 2, 3…) inside `marketingCardIconCircleClass` */
 export const marketingCardStepDigitClass =
-  "text-[26px] font-semibold leading-none tabular-nums min-[1800px]:text-[30px]"
+  "text-[26px] font-medium leading-none tabular-nums min-[1800px]:text-[30px]"
 
 /** Lucide icon inside `marketingCardIconCircleClass` */
 export const marketingCardLucideGlyphClass = "size-6 min-[1800px]:size-7"
