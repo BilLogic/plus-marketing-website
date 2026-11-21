@@ -47,10 +47,10 @@ import { forSchoolsSectionIds } from "@/lib/plus-footer-ia"
 
 /** Match `get-involved-sections` / `for-tutors-sections` section headers (`sectionH2` / `sectionLead`). */
 const schoolsSectionH2 =
-  "text-pretty text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+  "text-pretty text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl md:text-heading-xxl"
 /** Same breakpoint rhythm as `marketingTypography.sectionLead` + For Tutors intro copy (not hero). */
 const schoolsSectionLead = cn(
-  "w-full max-w-none text-base lg:text-lg",
+  "w-full max-w-none text-body-lg",
   marketingSectionLeadColorClass,
 )
 
@@ -59,9 +59,9 @@ const schoolsSectionLead = cn(
  * stacked cards + sticky column), for sections that should read consistently with Benefits.
  */
 const schoolsBenefitsCardTitleClass =
-  "text-pretty text-lg font-semibold leading-tight tracking-tight sm:text-xl lg:text-2xl"
+  "text-pretty text-heading-sm sm:text-heading-md lg:text-heading-lg"
 const schoolsBenefitsCardBodyClass =
-  "text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg"
+  "text-pretty text-body-lg text-muted-foreground"
 
 /** Oversight hero decor — wide asset; absolutely positioned beside the intro copy. */
 const schoolsSectionHeaderOversightDecorClass = cn(
@@ -120,7 +120,7 @@ export const SchoolsHeroSection = () => {
       <div className="relative z-10 mx-auto flex w-full max-w-[min(80rem,100%)] flex-col items-center px-4 sm:px-6 min-[1800px]:max-w-[min(96rem,100%)]">
         <div className="flex w-full max-w-3xl flex-col items-center gap-6 text-center sm:gap-8">
           <h1 className="flex flex-col items-center gap-3 sm:gap-4">
-            <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
+            <span className="text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl">
               For Schools
             </span>
             <span className={cn(marketingTypography.heroH1, "max-w-prose")}>
@@ -317,7 +317,7 @@ export const SchoolsCommunitySection = () => {
  */
 const BENEFITS_STICKY_ITEM_CLASS =
   "box-border flex h-[26rem] flex-col justify-center sm:h-[27rem] md:h-[28rem] lg:h-[30rem] py-5 sm:py-6 md:py-7 lg:py-8"
-/** Room for 2 title lines at `lg:text-2xl` — fixed so row height is identical. */
+/** Room for 2 title lines at `lg:text-heading-lg` — fixed so row height is identical. */
 const BENEFITS_STICKY_TITLE_H =
   "h-[2.5rem] sm:h-[2.75rem] md:h-[3rem] lg:h-[3.5rem] lg:leading-snug"
 /** Fills longest copy (`goal-setting`); fixed `h-` + scroll if a viewport wraps more. */
@@ -397,17 +397,17 @@ export const SchoolsTrainingSection = () => {
           <article
             key={item.id}
             className={cn(
-              "flex flex-col gap-4 rounded-[30px] bg-yellow-200 dark:bg-amber-950/20",
+              "flex flex-col gap-4 rounded-(--ds-radius-xxl) bg-(--ds-background-accent-yellow-subtler)",
               marketingCardPaddingClass,
             )}
           >
             <div className="flex items-start gap-3">
               <BenefitsAccordionIcon index={i} tone="accent" />
               <div className="flex min-w-0 flex-col gap-3">
-                <h3 className="pt-[calc((3rem-1lh)/2)] text-pretty text-base font-semibold leading-tight tracking-tight text-yellow-900 sm:text-lg md:text-xl">
+                <h3 className="pt-[calc((3rem-1lh)/2)] text-pretty text-heading-sm text-(--ds-text-accent-yellow) md:text-heading-md">
                   {item.title}
                 </h3>
-                <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
+                <p className="text-pretty text-body-default text-muted-foreground sm:text-body-lg">
                   {item.description}
                 </p>
                 {item.cta ? (
@@ -432,7 +432,7 @@ export const SchoolsTrainingSection = () => {
                 ) : null}
               </div>
             </div>
-            <div className="relative aspect-square w-full overflow-hidden rounded-[30px]">
+            <div className="relative aspect-square w-full overflow-hidden rounded-(--ds-radius-xxl)">
               <img
                 alt=""
                 src={
@@ -475,16 +475,16 @@ export const SchoolsTrainingSection = () => {
                   <div className="flex flex-col gap-3">
                     <h3
                       className={cn(
-                        "line-clamp-3 text-pretty text-base font-semibold leading-tight tracking-tight transition-colors duration-300 sm:text-lg md:text-xl lg:text-2xl",
+                        "line-clamp-3 text-pretty text-heading-sm transition-colors duration-300 md:text-heading-md lg:text-heading-lg",
                         BENEFITS_STICKY_TITLE_H,
-                        isActive ? "text-yellow-900" : "text-muted-foreground",
+                        isActive ? "text-(--ds-text-accent-yellow)" : "text-muted-foreground",
                       )}
                     >
                       {item.title}
                     </h3>
                     <div className={BENEFITS_STICKY_BODY_H}>
                       {isActive ? (
-                        <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
+                        <p className="text-pretty text-body-default text-muted-foreground sm:text-body-lg">
                           {item.description}
                         </p>
                       ) : null}
@@ -532,7 +532,7 @@ export const SchoolsTrainingSection = () => {
           >
             <div
               className={cn(
-                "relative aspect-square w-full overflow-hidden rounded-[38px] transition-colors duration-500",
+                "relative aspect-square w-full overflow-hidden rounded-(--ds-radius-xxl) transition-colors duration-500",
                 activeIndex === 2 ? "bg-[#fff3dd]" : "bg-muted"
               )}
             >
@@ -558,21 +558,21 @@ export const SchoolsTrainingSection = () => {
                       <img
                         alt=""
                         src={forSchoolsAssets.benefitsPanelGoalScreenshots[0]}
-                        className="pointer-events-none absolute left-1/2 -translate-x-1/2 max-w-none w-[79.5%] h-[39.3%] rounded-[5px] object-cover select-none"
+                        className="pointer-events-none absolute left-1/2 -translate-x-1/2 max-w-none w-[79.5%] h-[39.3%] rounded-(--ds-radius-md) object-cover select-none"
                         style={{ bottom: "36.1%" }}
                         decoding="async"
                       />
                       <img
                         alt=""
                         src={forSchoolsAssets.benefitsPanelGoalScreenshots[1]}
-                        className="pointer-events-none absolute left-1/2 -translate-x-1/2 max-w-none w-[87.5%] h-[43.2%] rounded-[5px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] object-cover select-none"
+                        className="pointer-events-none absolute left-1/2 -translate-x-1/2 max-w-none w-[87.5%] h-[43.2%] rounded-(--ds-radius-md) shadow-(--ds-shadow-overlay) object-cover select-none"
                         style={{ bottom: "21.4%" }}
                         decoding="async"
                       />
                       <img
                         alt=""
                         src={forSchoolsAssets.benefitsPanelGoalScreenshots[2]}
-                        className="pointer-events-none absolute left-1/2 -translate-x-1/2 max-w-none w-[96.6%] h-[47.7%] rounded-[5px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] object-cover select-none"
+                        className="pointer-events-none absolute left-1/2 -translate-x-1/2 max-w-none w-[96.6%] h-[47.7%] rounded-(--ds-radius-md) shadow-(--ds-shadow-overlay) object-cover select-none"
                         style={{ bottom: "-2.5%" }}
                         decoding="async"
                       />
@@ -601,14 +601,14 @@ export const SchoolsTrainingSection = () => {
 
 /** School Success Stories — cycles pink → blue → amber (matches the About page). */
 const SCHOOLS_STORY_THEMES = [
-  { shell: "bg-fuchsia-200 dark:bg-fuchsia-200/15", iconBg: "bg-fuchsia-900", accent: "text-fuchsia-900" },
-  { shell: "bg-blue-200 dark:bg-sky-950/40", iconBg: "bg-blue-900", accent: "text-blue-900" },
-  { shell: "bg-yellow-200 dark:bg-amber-950/20", iconBg: "bg-yellow-900", accent: "text-yellow-900" },
+  { shell: "bg-(--ds-background-accent-magenta-subtler)", iconBg: "bg-(--ds-background-accent-magenta-bolder)", accent: "text-(--ds-text-accent-magenta)" },
+  { shell: "bg-(--ds-background-accent-blue-subtler)", iconBg: "bg-(--ds-background-accent-blue-bolder)", accent: "text-(--ds-text-accent-blue)" },
+  { shell: "bg-(--ds-background-accent-yellow-subtler)", iconBg: "bg-(--ds-background-accent-yellow-bolder)", accent: "text-(--ds-text-accent-yellow)" },
 ] as const
 
-/** Green palette (Day-to-Day Experience). Phase icon SVG circles are baked at ~#007d49 (asset, not recolorable here). */
-const SCHOOLS_GREEN_BG = "bg-green-200"
-const SCHOOLS_GREEN_ACCENT = "text-green-900"
+/** Green palette (Day-to-Day Experience). Phase icon circles are baked into the asset. */
+const SCHOOLS_GREEN_BG = "bg-(--ds-background-accent-green-subtler)"
+const SCHOOLS_GREEN_ACCENT = "text-(--ds-text-accent-green)"
 /** Ghost numbers: brand dark green at low opacity — a touch darker than the light-green card. */
 const schoolsExperienceGhostNumberStyle = {
   color: "rgba(41, 126, 67, 0.18)",
@@ -677,14 +677,14 @@ export const SchoolsExperienceSection = () => {
           <article
             key={phase.phase}
             className={cn(
-              "relative overflow-hidden rounded-[30px]",
+              "relative overflow-hidden rounded-(--ds-radius-xxl)",
               SCHOOLS_GREEN_BG,
               marketingCardPaddingClass,
             )}
           >
             {/* Ghost number — decorative, top-right */}
             <span
-              className="pointer-events-none absolute right-0 top-0 select-none font-semibold leading-none text-[max(8rem,36vw)] sm:text-[clamp(7rem,18vw,12.5rem)]"
+              className="pointer-events-none absolute right-0 top-0 select-none font-medium leading-none text-[max(8rem,36vw)] sm:text-[clamp(7rem,18vw,12.5rem)]"
               style={schoolsExperienceGhostNumberStyle}
               aria-hidden
             >
@@ -708,7 +708,7 @@ export const SchoolsExperienceSection = () => {
                 <div>
                   <p
                     className={cn(
-                      "text-sm font-normal uppercase tracking-wider sm:text-base",
+                      "text-body-default font-normal uppercase tracking-wider sm:text-body-lg",
                       SCHOOLS_GREEN_ACCENT,
                     )}
                   >
@@ -738,7 +738,7 @@ export const SchoolsExperienceSection = () => {
  */
 /** No outer `overflow-clip` — it was clipping copy/CTAs on narrow viewports; images use their own `overflow-hidden`. */
 const OVERSIGHT_CARD_FRAME =
-  "flex w-full min-w-0 max-w-5xl flex-col rounded-[30px] min-[1800px]:max-w-7xl"
+  "flex w-full min-w-0 max-w-5xl flex-col rounded-(--ds-radius-xxl) min-[1800px]:max-w-7xl"
 /** Stack until `lg` (avoids `1fr` + fixed 360px overflow on tablets); two columns from `lg` up. */
 const OVERSIGHT_CARD_ROW = cn(
   "grid w-full min-w-0 grid-cols-1 items-stretch gap-6",
@@ -757,9 +757,9 @@ const OVERSIGHT_TITLE_BODY = "flex w-full flex-col gap-4"
 const OVERSIGHT_TITLE_WRAP = "flex min-h-[48px] w-full min-w-0 items-center"
 /** Slightly smaller than Figma 411×350 so inset matches text; aspect preserved. */
 const OVERSIGHT_IMAGE =
-  "relative aspect-[411/350] w-full max-w-[360px] shrink-0 overflow-hidden rounded-[30px] bg-background/20 md:w-full md:max-w-none"
+  "relative aspect-[411/350] w-full max-w-[360px] shrink-0 overflow-hidden rounded-(--ds-radius-xxl) bg-background/20 md:w-full md:max-w-none"
 const OVERSIGHT_IMG =
-  "pointer-events-none absolute inset-0 size-full max-w-none rounded-[30px] object-cover"
+  "pointer-events-none absolute inset-0 size-full max-w-none rounded-(--ds-radius-xxl) object-cover"
 
 /** Pill sizing + type scale — same as `marketingFinalCtaPrimaryLinkClass` / Benefits CTAs; colors come from each card’s `btnBg` / `btnText`. */
 const oversightCardCtaClass = cn(
@@ -776,10 +776,10 @@ const OVERSIGHT_CARDS = [
       "PLUS is designed to be software-agnostic, which means no new software licenses or changes required.",
     cta: "See How It Works",
     href: "https://app.tutors.plus/demo",
-    bgColor: "bg-red-200",
-    titleColor: "text-red-900",
-    btnBg: "bg-red-700",
-    btnText: "text-white",
+    bgColor: "bg-(--ds-background-accent-red-subtler)",
+    titleColor: "text-(--ds-text-accent-red)",
+    btnBg: "bg-(--ds-background-accent-red-bolder)",
+    btnText: "text-(--ds-text-inverse)",
     icon: forSchoolsAssets.icons.oversight[3],
     image: forSchoolsAssets.oversightCardImages[3],
   },
@@ -789,11 +789,11 @@ const OVERSIGHT_CARDS = [
       "Track tutor performance, monitor student progress, and access high-level analytics to measure the impact of your tutoring initiatives.",
     cta: "Try Our Demo",
     href: "https://app.tutors.plus/demo",
-    bgColor: "bg-green-200",
-    titleColor: "text-green-900",
-    btnBg: "bg-green-800",
-    btnText: "text-white",
-    panelBg: "bg-green-300",
+    bgColor: "bg-(--ds-background-accent-green-subtler)",
+    titleColor: "text-(--ds-text-accent-green)",
+    btnBg: "bg-(--ds-background-accent-green-bolder)",
+    btnText: "text-(--ds-text-inverse)",
+    panelBg: "bg-(--ds-background-accent-green-subtle)",
     imageLayout: "dashboard" as const,
     icon: forSchoolsAssets.icons.oversight[1],
     image: forSchoolsAssets.oversightCardImages[1],
@@ -804,10 +804,10 @@ const OVERSIGHT_CARDS = [
       "Tutors earn industry-recognized credentials upon completion, ensuring they meet the standards of your institution.",
     cta: "Register Your Tutors",
     href: "https://docs.google.com/forms/d/e/1FAIpQLSc0TFyKzbPu5WGHWc13SDQ5aOrUQZgAAC_MMp0hK467OAzjeQ/viewform",
-    bgColor: "bg-yellow-200",
-    titleColor: "text-yellow-900",
-    btnBg: "bg-yellow-800",
-    btnText: "text-yellow-950",
+    bgColor: "bg-(--ds-background-accent-yellow-subtler)",
+    titleColor: "text-(--ds-text-accent-yellow)",
+    btnBg: "bg-(--ds-background-accent-yellow-bolder)",
+    btnText: "text-(--ds-text-inverse)",
     icon: forSchoolsAssets.icons.oversight[2],
     image: forSchoolsAssets.oversightCardImages[2],
   },
@@ -869,7 +869,7 @@ function OversightCardInner({
             <img
               alt=""
               src={card.image}
-              className="pointer-events-none absolute left-[8.5%] top-[13%] w-[153%] max-w-none rounded-[5px] object-cover"
+              className="pointer-events-none absolute left-[8.5%] top-[13%] w-[153%] max-w-none rounded-(--ds-radius-md) object-cover"
               decoding="async"
               aria-hidden
             />
@@ -1088,14 +1088,14 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
               <article
                 key={story.id}
                 className={cn(
-                  "flex h-full flex-col rounded-[30px]",
+                  "flex h-full flex-col rounded-(--ds-radius-xxl)",
                   theme.shell,
                   marketingCardPaddingClass,
                 )}
               >
                 <div
                   className={cn(
-                    "flex min-h-0 flex-1 flex-col rounded-3xl bg-white dark:bg-card dark:ring-1 dark:ring-white/10",
+                    "flex min-h-0 flex-1 flex-col rounded-(--ds-radius-xl) bg-(--ds-surface)",
                     marketingCardPaddingClass,
                   )}
                 >
@@ -1104,7 +1104,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                       className={cn(
                         marketingCardIconTitleRowOffsetClass,
                         marketingCardIconCircleClass,
-                        "shrink-0 text-white",
+                        "shrink-0 text-(--ds-text-inverse)",
                         theme.iconBg,
                       )}
                     >
@@ -1112,7 +1112,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                     </span>
                     <h3
                       className={cn(
-                        "min-w-0 flex-1 text-pretty text-base font-semibold leading-snug tracking-tight sm:text-lg lg:text-2xl",
+                        "min-w-0 flex-1 text-pretty text-heading-sm lg:text-heading-lg",
                         theme.accent,
                       )}
                     >
@@ -1121,12 +1121,12 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                   </div>
                   {story.quote ? (
                     <>
-                      <blockquote className="mt-4 min-h-0 flex-1 text-pretty text-sm italic leading-relaxed text-muted-foreground sm:text-base">
+                      <blockquote className="mt-4 min-h-0 flex-1 text-pretty text-body-default italic text-muted-foreground sm:text-body-lg">
                         {quoteParts ? (
                           <>
                             &ldquo;{quoteParts.before}{" "}
                             <strong
-                              className={cn("font-semibold italic", theme.accent)}
+                              className={cn("font-medium italic", theme.accent)}
                             >
                               {quoteParts.highlight}
                             </strong>
@@ -1137,13 +1137,13 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                         )}
                       </blockquote>
                       {story.quoteAttribution ? (
-                        <p className="mt-2 text-sm not-italic text-muted-foreground">
+                        <p className="mt-2 text-body-default not-italic text-muted-foreground">
                           — {story.quoteAttribution}
                         </p>
                       ) : null}
                     </>
                   ) : (
-                    <p className="mt-4 min-h-0 flex-1 text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
+                    <p className="mt-4 min-h-0 flex-1 text-pretty text-body-default text-muted-foreground sm:text-body-lg">
                       {story.summary}
                     </p>
                   )}
@@ -1153,7 +1153,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                     <Link
                       href={readHref}
                       className={cn(
-                        "group mt-4 ml-auto flex w-fit items-center gap-2 text-sm font-medium no-underline transition-opacity hover:opacity-90 sm:text-base min-[1800px]:text-lg",
+                        "group mt-4 ml-auto flex w-fit items-center gap-2 text-body-default font-medium no-underline transition-opacity hover:opacity-90 sm:text-body-lg",
                         theme.accent,
                       )}
                     >
@@ -1169,7 +1169,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                       target="_blank"
                       rel="noopener noreferrer"
                       className={cn(
-                        "group mt-4 ml-auto flex w-fit items-center gap-2 text-sm font-medium no-underline transition-opacity hover:opacity-90 sm:text-base min-[1800px]:text-lg",
+                        "group mt-4 ml-auto flex w-fit items-center gap-2 text-body-default font-medium no-underline transition-opacity hover:opacity-90 sm:text-body-lg",
                         theme.accent,
                       )}
                     >
