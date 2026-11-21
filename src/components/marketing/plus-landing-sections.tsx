@@ -149,7 +149,7 @@ const CountUpStat = ({
 const schoolsSectionTitle =
   "text-pretty text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl md:text-heading-xxl"
 const schoolsSectionLead = cn(
-  "w-full max-w-none text-lg",
+  "w-full max-w-none text-body-lg",
   marketingSectionLeadColorClass,
 )
 
@@ -158,15 +158,15 @@ const schoolsSectionLead = cn(
  */
 export const PlusAnnouncementBar = () => {
   return (
-    <div className="w-full border-b border-border/60 bg-primary/5 px-4 py-2.5 text-xs text-muted-foreground sm:px-6">
+    <div className="w-full border-b border-border/60 bg-primary/5 px-4 py-2.5 text-body-sm text-muted-foreground sm:px-6">
       <div className="mx-auto flex max-w-5xl flex-col gap-1 sm:flex-row sm:items-center sm:justify-between min-[1800px]:max-w-7xl">
-        <p className="text-xs">
-          <span className="mr-1.5 inline-flex items-center rounded-full bg-primary/15 px-2 py-0.5 text-xs/4 font-medium tracking-wide text-primary uppercase">
+        <p className="text-body-sm">
+          <span className="mr-1.5 inline-flex items-center rounded-full bg-primary/15 px-2 py-0.5 text-body-sm font-medium tracking-wide text-primary uppercase">
             New
           </span>
           PLUS app v10 is now live — new features for onboarding, AI Feedback and tutoring workflows.
         </p>
-        <Button variant="link" size="sm" className="h-auto px-0 py-0 text-xs font-medium text-primary">
+        <Button variant="link" size="sm" className="h-auto px-0 py-0 text-body-sm font-medium text-primary">
           Explore updates →
         </Button>
       </div>
@@ -204,11 +204,11 @@ export const PlusNavbar = ({
             <span className="relative flex size-7 items-center justify-center rounded-full bg-primary/10">
               <span className="absolute inset-1.5 rounded-full bg-primary" />
             </span>
-            <span className="text-sm font-medium tracking-tight">PLUS</span>
+            <span className="text-body-default font-medium">PLUS</span>
           </Link>
 
           {/* Nav links */}
-          <nav className="hidden items-center gap-5 text-sm text-muted-foreground md:flex">
+          <nav className="hidden items-center gap-5 text-body-default text-muted-foreground md:flex">
             {NAV_LINKS.map(({ label, href }) => (
               <Link
                 key={label}
@@ -459,7 +459,7 @@ const LandingHeroAwardsRow = () => {
           unoptimized
         />
       </div>
-      <p className="text-pretty text-xl font-medium text-muted-foreground">{label}</p>
+      <p className="text-pretty text-heading-md text-muted-foreground">{label}</p>
     </article>
   )
 
@@ -471,7 +471,7 @@ const LandingHeroAwardsRow = () => {
         marketingShellPadX,
       )}
     >
-      <p className="text-center text-xl font-normal text-muted-foreground">Our Awards</p>
+      <p className="text-center text-heading-md font-normal text-muted-foreground">Our Awards</p>
       <div
         role="region"
         aria-label="Award recognition"
@@ -682,7 +682,7 @@ export const PlusHeroSection = () => {
 }
 
 /** Brand dark-yellow stat color (yellow-900 token). */
-const IMPACT_STAT = "text-yellow-900"
+const IMPACT_STAT = "text-(--ds-text-accent-yellow)"
 
 /** Tinted shell — matches `TutorVoiceCard` rhythm (`for-tutors-sections` Voices from Our Tutors). */
 const VOICES_STORY_CARD = cn(
@@ -698,7 +698,7 @@ const VOICES_QUOTE_SHELL = cn(
 
 /** “Read story” row — same interaction as tutor voices; emerald accent for homepage testimonials. */
 const VOICES_READ_STORY_CLASS =
-  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-(--ds-text-accent-green) no-underline transition-opacity hover:opacity-90"
+  "group mt-4 ml-auto inline-flex cursor-pointer items-center gap-2 text-body-default font-medium sm:text-body-lg text-(--ds-text-accent-green) no-underline transition-opacity hover:opacity-90"
 
 /** Avatar + attribution — flush to card `p-*` top; `items-center` vertically centers copy with the disc. */
 const VOICES_ATTRIBUTION_ROW = "flex w-full shrink-0 items-center gap-3"
@@ -718,11 +718,11 @@ const impactZigzagTextColClass = cn(
 )
 
 /** Stat line — original impact scale (unchanged color). */
-const impactStatTitleClass = cn("text-2xl font-medium leading-tight sm:text-3xl", IMPACT_STAT)
+const impactStatTitleClass = cn("text-heading-lg sm:text-heading-xl", IMPACT_STAT)
 
-/** Body — matches get-involved section lead (`text-base lg:text-lg`). */
+/** Body — matches get-involved section lead (`text-body-lg`). */
 const impactZigzagBodyClass = cn(
-  "w-full max-w-none text-pretty text-base leading-relaxed lg:text-lg",
+  "w-full max-w-none text-pretty text-body-lg",
   marketingSectionLeadColorClass,
 )
 
@@ -1336,7 +1336,7 @@ export const PlusVoicesSection = () => {
               </p>
             </div>
             <div className={VOICES_QUOTE_SHELL}>
-              <blockquote className="text-pretty text-left text-base font-normal italic leading-relaxed text-(--ds-text-subtle)">
+              <blockquote className="text-pretty text-left text-body-lg italic text-(--ds-text-subtle)">
                 &ldquo;{quote}{" "}
                 <strong className="font-medium italic text-(--ds-text-accent-green)">
                   {highlight}
