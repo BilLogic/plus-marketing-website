@@ -3,31 +3,31 @@
  * Use semantic HTML (h1, h2, h3, p) with these classes for marketing pages.
  */
 export const marketingTypography = {
-  /** H1 — Hero headline (Storybook: text-5xl font-semibold tracking-tight) */
-  h1: "text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl",
+  /** H1 — Hero headline (Storybook: text-heading-xxl sm:text-display-md) */
+  h1: "text-balance text-heading-xxl text-foreground sm:text-display-md",
   /**
    * Marketing landing hero title — matches for-tutors / get-involved hero H1.
    * Used by for-schools `SchoolsHeroSection`.
    */
-  heroH1: "text-balance text-3xl font-semibold leading-tight tracking-tight text-teal-950 sm:text-4xl md:text-5xl",
-  /** H2 — Section headline (Storybook: text-3xl font-semibold tracking-tight) */
-  h2: "text-balance text-3xl font-semibold tracking-tight text-foreground",
-  /** H3 — Card / accordion titles (Storybook: text-xl font-semibold tracking-tight) */
-  h3: "text-xl font-semibold tracking-tight",
+  heroH1:
+    "text-balance text-heading-xxl text-(--ds-text-accent-teal-bolder) sm:text-display-sm md:text-display-md",
+  /** H2 — Section headline (Storybook: text-heading-xl) */
+  h2: "text-balance text-heading-xl text-foreground",
+  /** H3 — Card / accordion titles (Storybook: text-heading-md) */
+  h3: "text-heading-md",
   /**
-   * Dense bento / tile title (Storybook: Styles/Typography — `text-xl` → `sm:text-2xl`, bold).
+   * Dense bento / tile title (Storybook: Styles/Typography — `text-heading-md` → `sm:text-heading-lg`).
    * Set brand color at the call site.
    */
-  bentoTitle:
-    "text-pretty text-xl font-semibold leading-snug tracking-tight sm:text-2xl",
-  /** Lead paragraph — section intros (Storybook: text-lg text-muted-foreground) */
-  lead: "max-w-prose text-lg text-muted-foreground",
+  bentoTitle: "text-pretty text-heading-md sm:text-heading-lg",
+  /** Lead paragraph — section intros (Storybook: text-body-lg text-muted-foreground) */
+  lead: "max-w-prose text-body-lg text-muted-foreground",
   /**
    * Section description under H2 — For Researchers / Schools (`sectionHeaderLead` scale).
-   * Use with `text-[#62636c]` or `riFg.bodyMuted` where the index uses fixed grey instead of `muted-foreground`.
+   * Use with the muted text role or `riFg.bodyMuted` where the index uses fixed grey instead of `muted-foreground`.
    */
   sectionLead:
-    "text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg",
-  /** Standard body (Storybook: text-base leading-relaxed) */
-  body: "text-base leading-relaxed text-foreground",
+    "text-pretty text-body-default text-muted-foreground sm:text-body-lg",
+  /** Standard body (Storybook: text-body-lg) */
+  body: "text-body-lg text-foreground",
 } as const
