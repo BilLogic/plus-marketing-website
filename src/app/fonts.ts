@@ -1,24 +1,14 @@
-import { Noto_Sans, Noto_Sans_Mono } from "next/font/google"
+import localFont from "next/font/local"
 
 /**
- * The marketing site uses the PLUS product fonts: Noto Sans for everything,
- * Noto Sans Mono for code. Each font is loaded via next/font (self-hosted,
- * subset) and exposed as a CSS variable that `globals.css` maps into the
- * Tailwind theme.
+ * Google Sans Flex – rounded ends are built into the file (ROND 100).
  */
-
-/** Noto Sans – titles, headings, body, nav, buttons, labels. */
-export const notoSans = Noto_Sans({
-  subsets: ["latin"],
+export const googleSansFlex = localFont({
+  src: "./fonts/GoogleSansFlex-Latin-ROND100.woff2",
+  weight: "400 600",
+  style: "normal",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
-})
-
-/** Noto Sans Mono – code and tabular numeric data. */
-export const notoSansMono = Noto_Sans_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500"],
-  variable: "--font-mono",
+  adjustFontFallback: false,
+  fallback: ["Google Sans Flex Fallback", "sans-serif"],
 })
