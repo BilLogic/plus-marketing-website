@@ -92,7 +92,7 @@ export default async function NewsDetailPage({
 
         <article className="space-y-6">
         {item.featuredImage && (
-          <div className="overflow-hidden rounded-lg">
+          <div className="overflow-hidden rounded-(--ds-radius-lg)">
             <img
               src={item.featuredImage}
               alt=""
@@ -102,25 +102,25 @@ export default async function NewsDetailPage({
         )}
 
         <div className="space-y-3">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 text-body-default text-muted-foreground">
             <Badge variant="secondary">{item.category}</Badge>
             {item.publicationDate && <time>{item.publicationDate}</time>}
             {item.author && <span>by {item.author}</span>}
           </div>
 
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h1 className="text-heading-xl sm:text-heading-xxl">
             {item.title}
           </h1>
 
           {item.marketingBlurb && (
-            <p className="text-lg font-medium text-muted-foreground">
+            <p className="text-body-lg font-medium text-muted-foreground">
               {item.marketingBlurb}
             </p>
           )}
         </div>
 
         {item.summary && (
-          <div className="prose prose-neutral max-w-none dark:prose-invert">
+          <div className="prose prose-neutral max-w-none">
             <p>{item.summary}</p>
           </div>
         )}

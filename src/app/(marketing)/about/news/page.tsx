@@ -42,7 +42,7 @@ function NewsCard({ item, slug }: { item: NewsItem; slug: string }) {
   return (
     <article
       className={cn(
-        "flex w-full flex-col rounded-[30px] bg-yellow-200 dark:bg-amber-950/20",
+        "flex w-full flex-col rounded-(--ds-radius-xxl) bg-(--ds-background-accent-yellow-subtler)",
         marketingCardPaddingClass,
       )}
     >
@@ -50,17 +50,17 @@ function NewsCard({ item, slug }: { item: NewsItem; slug: string }) {
         <span
           className={cn(
             marketingCardIconCircleClass,
-            "shrink-0 bg-yellow-900 text-white",
+            "shrink-0 bg-(--ds-background-accent-yellow-bolder) text-(--ds-text-inverse)",
           )}
         >
           <Icon className={marketingCardLucideGlyphClass} aria-hidden />
         </span>
         <div className="min-w-0 flex-1">
-          <h2 className="pt-[max(0px,calc((48px-1lh)/2))] text-pretty text-lg font-semibold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
+          <h2 className="pt-[max(0px,calc((48px-1lh)/2))] text-pretty text-heading-sm text-(--ds-text-accent-yellow) sm:text-heading-md lg:text-heading-lg">
             {item.title}
           </h2>
           {item.author || date ? (
-            <p className="mt-2 text-sm font-medium text-yellow-900/70 dark:text-amber-200/70 sm:text-base">
+            <p className="mt-2 text-body-default font-medium text-(--ds-text-subtle) sm:text-body-lg">
               {item.author ? <span>{item.author}</span> : null}
               {item.author && date ? (
                 <span aria-hidden> &middot; </span>
@@ -73,7 +73,7 @@ function NewsCard({ item, slug }: { item: NewsItem; slug: string }) {
         </div>
       </div>
       {item.featuredImage ? (
-        <div className="relative mt-4 min-h-[280px] flex-1 overflow-hidden rounded-2xl bg-muted sm:min-h-[360px] lg:min-h-[420px]">
+        <div className="relative mt-4 min-h-[280px] flex-1 overflow-hidden rounded-(--ds-radius-xl) bg-muted sm:min-h-[360px] lg:min-h-[420px]">
           <Image
             src={item.featuredImage}
             alt={item.title}
@@ -83,13 +83,13 @@ function NewsCard({ item, slug }: { item: NewsItem; slug: string }) {
           />
         </div>
       ) : blurb ? (
-        <p className="mt-4 flex-1 text-pretty text-base leading-relaxed text-teal-900/80 dark:text-amber-100/80">
+        <p className="mt-4 flex-1 text-pretty text-body-lg text-(--ds-text-subtle)">
           {blurb}
         </p>
       ) : null}
       <Link
         href={href}
-        className="group ml-auto mt-4 inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-yellow-900 no-underline transition-opacity hover:opacity-90 dark:text-amber-200"
+        className="group ml-auto mt-4 inline-flex cursor-pointer items-center gap-2 text-body-default font-medium sm:text-body-lg text-(--ds-text-accent-yellow) no-underline transition-opacity hover:opacity-90"
         aria-label={`View article about ${item.title}`}
         {...(item.externalLink ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
@@ -108,12 +108,12 @@ export default async function NewsPage() {
     <main className="bg-background text-foreground">
       <div className={marketingListingShellClass}>
         <div className="space-y-3">
-          <h1 className="text-balance text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+          <h1 className="text-balance text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl md:text-heading-xxl">
             News
           </h1>
           <p
             className={cn(
-              "w-full max-w-none text-base lg:text-lg",
+              "w-full max-w-none text-body-lg",
               marketingSectionLeadColorClass,
             )}
           >
@@ -124,11 +124,11 @@ export default async function NewsPage() {
         {news.length === 0 ? (
           <div
             className={cn(
-              "rounded-3xl bg-yellow-200 dark:bg-amber-950/20",
+              "rounded-(--ds-radius-xl) bg-(--ds-background-accent-yellow-subtler)",
               marketingCardPaddingClass,
             )}
           >
-            <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">
+            <p className="text-body-lg text-muted-foreground">
               No news articles yet. Check back soon!
             </p>
           </div>

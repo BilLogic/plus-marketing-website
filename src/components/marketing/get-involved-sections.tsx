@@ -41,10 +41,10 @@ import type { JobListing } from "@/lib/notion/types"
 // ─── Shared tokens (match about/for-tutors pages) ────────────────────────────
 
 const sectionH2 =
-  "text-pretty text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl"
+  "text-pretty text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl md:text-heading-xxl"
 
 const sectionLead = cn(
-  "w-full max-w-none text-base lg:text-lg",
+  "w-full max-w-none text-body-lg",
   marketingSectionLeadColorClass,
 )
 
@@ -57,7 +57,7 @@ const sectionHeaderDecorImgClass = cn(
 const careersGreenContactCtaClass = cn(
   "inline-flex w-fit self-start items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-0 bg-green-800 px-5 sm:px-8 text-sm sm:text-base font-medium text-white shadow-none transition-opacity hover:opacity-90 dark:bg-green-800 dark:text-white",
+  "h-9 sm:h-11 rounded-full border-0 bg-(--ds-background-accent-green-bolder) px-5 sm:px-8 text-body-default sm:text-body-lg font-medium text-(--ds-text-inverse) shadow-none transition-opacity hover:opacity-90",
 )
 
 /**
@@ -73,7 +73,7 @@ const CONTACT_FORM_EMBED_SRC =
  */
 function GoogleFormEmbed({ title }: { title: string }) {
   return (
-    <div className="mt-2 w-full overflow-hidden rounded-2xl bg-white ring-1 ring-black/5">
+    <div className="mt-2 w-full overflow-hidden rounded-(--ds-radius-xl) bg-(--ds-surface) ring-1 ring-black/5">
       <iframe
         src={CONTACT_FORM_EMBED_SRC}
         title={title}
@@ -90,12 +90,12 @@ function GoogleFormEmbed({ title }: { title: string }) {
 const tutoringBecomeTutorCardCtaClass = cn(
   "inline-flex w-fit self-start items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-0 bg-yellow-800 px-5 sm:px-8 text-sm sm:text-base font-medium text-[#463923] shadow-none transition-opacity hover:opacity-95 dark:bg-yellow-800 dark:text-[#463923] dark:hover:opacity-95",
+  "h-9 sm:h-11 rounded-full border-0 bg-(--ds-background-accent-yellow-bolder) px-5 sm:px-8 text-body-default sm:text-body-lg font-medium text-(--ds-text-inverse) shadow-none transition-opacity hover:opacity-95",
 )
 
 /** Learn more row — matches About `AboutSuccessStoriesSection` Read story link (size, arrow, interaction). */
 const careersLearnMoreLinkClass =
-  "group ml-auto inline-flex cursor-pointer items-center gap-2 text-sm font-medium sm:text-base min-[1800px]:text-lg text-green-900 no-underline transition-opacity hover:opacity-90 dark:text-green-900"
+  "group ml-auto inline-flex cursor-pointer items-center gap-2 text-body-default font-medium sm:text-body-lg text-(--ds-text-accent-green) no-underline transition-opacity hover:opacity-90"
 
 /** Icon disc + title — flush to card top padding; `items-center` aligns title with the 48px circle (careers, tutoring, partnerships). */
 const getInvolvedDiscTitleRowClass = "flex w-full shrink-0 items-center gap-3"
@@ -125,7 +125,7 @@ export function GetInvolvedHeroSection() {
 
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center sm:gap-8 sm:px-6 min-[1800px]:max-w-5xl">
         <h1 className="flex flex-col items-center gap-3 sm:gap-4">
-          <span className="text-2xl font-semibold text-teal-900 sm:text-3xl">
+          <span className="text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl">
             Get Involved
           </span>
           <span className={cn(marketingTypography.heroH1, "max-w-prose")}>
@@ -203,7 +203,7 @@ const whyWorkZigzagTextColClass = cn(
 function WhyWorkZigzagPhoto({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="relative w-full min-w-0">
-      <div className="relative w-full overflow-hidden rounded-[30px] bg-muted/30">
+      <div className="relative w-full overflow-hidden rounded-(--ds-radius-xxl) bg-muted/30">
         <div className="relative aspect-[556/472] w-full">
           {/* eslint-disable-next-line @next/next/no-img-element -- public static asset; parity with ImpactRowPhoto */}
           <img alt={alt} src={src} className="absolute inset-0 size-full object-cover" />
@@ -250,18 +250,18 @@ export function GetInvolvedWhyWorkSection() {
               <span
                 className={cn(
                   marketingCardIconCircleClass,
-                  "shrink-0 bg-blue-900 text-white",
+                  "shrink-0 bg-(--ds-background-accent-blue-bolder) text-(--ds-text-inverse)",
                 )}
                 aria-hidden
               >
                 <Icon
-                  className={cn(marketingCardLucideGlyphClass, "text-white")}
+                  className={cn(marketingCardLucideGlyphClass, "text-(--ds-text-inverse)")}
                   strokeWidth={2}
                 />
               </span>
               <p
                 className={cn(
-                  "text-pretty text-lg font-semibold leading-snug tracking-tight text-blue-900 dark:text-sky-300 sm:text-xl lg:text-2xl",
+                  "text-pretty text-heading-sm text-(--ds-text-accent-blue) sm:text-heading-md lg:text-heading-lg",
                 )}
               >
                 {item.title}
@@ -338,8 +338,8 @@ export function GetInvolvedCareersSection({ jobs }: { jobs?: JobListing[] }) {
 
       <div className={cn("flex flex-col", marketingCardStackGapClass)}>
       {listings.length === 0 ? (
-        <div className={cn("rounded-[30px] bg-green-200 dark:bg-emerald-950/20", marketingCardPaddingClass)}>
-          <p className="text-base leading-relaxed text-muted-foreground lg:text-lg">No open jobs at this time. Check back soon!</p>
+        <div className={cn("rounded-(--ds-radius-xxl) bg-(--ds-background-accent-green-subtler)", marketingCardPaddingClass)}>
+          <p className="text-body-lg text-muted-foreground">No open jobs at this time. Check back soon!</p>
         </div>
       ) : (
       <div className={cn("flex flex-col", marketingCardStackGapClass)}>
@@ -347,24 +347,24 @@ export function GetInvolvedCareersSection({ jobs }: { jobs?: JobListing[] }) {
           <div
             key={job.id}
             className={cn(
-              "flex flex-col gap-3 rounded-[30px] bg-green-200 dark:bg-emerald-950/20",
+              "flex flex-col gap-3 rounded-(--ds-radius-xxl) bg-(--ds-background-accent-green-subtler)",
               marketingCardPaddingClass,
             )}
           >
             <div className={getInvolvedDiscTitleRowClass}>
               <span
-                className={cn(marketingCardIconCircleClass, "bg-green-900")}
+                className={cn(marketingCardIconCircleClass, "bg-(--ds-background-accent-green-bolder)")}
               >
                 <Microscope
-                  className={cn(marketingCardLucideGlyphClass, "text-white")}
+                  className={cn(marketingCardLucideGlyphClass, "text-(--ds-text-inverse)")}
                   aria-hidden
                 />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-lg font-semibold leading-tight tracking-tight text-green-900 sm:text-xl lg:text-2xl">
+                <p className="text-heading-sm text-(--ds-text-accent-green) sm:text-heading-md lg:text-heading-lg">
                   {job.title}
                 </p>
-                <p className="mt-1 text-base leading-relaxed text-muted-foreground lg:text-lg">
+                <p className="mt-1 text-body-lg text-muted-foreground">
                   {job.location}
                 </p>
               </div>
@@ -388,17 +388,17 @@ export function GetInvolvedCareersSection({ jobs }: { jobs?: JobListing[] }) {
       )}
 
       <div
-        className={cn("rounded-[30px] bg-green-200 dark:bg-emerald-950/20", marketingCardPaddingClass)}
+        className={cn("rounded-(--ds-radius-xxl) bg-(--ds-background-accent-green-subtler)", marketingCardPaddingClass)}
       >
         <div className="flex items-start gap-3">
-          <span className={cn(marketingCardIconCircleClass, "shrink-0 bg-green-900")}>
-            <FileText className={cn(marketingCardLucideGlyphClass, "text-white")} aria-hidden />
+          <span className={cn(marketingCardIconCircleClass, "shrink-0 bg-(--ds-background-accent-green-bolder)")}>
+            <FileText className={cn(marketingCardLucideGlyphClass, "text-(--ds-text-inverse)")} aria-hidden />
           </span>
           <div className="flex min-w-0 flex-col gap-3">
-            <p className="pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-semibold leading-tight tracking-tight text-green-900 sm:text-xl lg:text-2xl">
+            <p className="pt-[calc((3rem-1lh)/2)] text-pretty text-heading-sm text-(--ds-text-accent-green) sm:text-heading-md lg:text-heading-lg">
               Don&apos;t See a Role That Fits?
             </p>
-            <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
+            <p className="text-pretty text-body-lg text-muted-foreground">
               Interested in joining us? Reach out with any job-related questions.
             </p>
             <a
@@ -445,7 +445,7 @@ export function GetInvolvedTutoringSection() {
       {/* Featured card */}
       <div
         className={cn(
-          "overflow-hidden rounded-[30px] bg-yellow-200 dark:bg-amber-950/20",
+          "overflow-hidden rounded-(--ds-radius-xxl) bg-(--ds-background-accent-yellow-subtler)",
           marketingCardPaddingClass,
         )}
       >
@@ -453,19 +453,19 @@ export function GetInvolvedTutoringSection() {
           <div className="flex min-h-0 w-full flex-col justify-between gap-4 md:gap-6">
             <div className="flex flex-col gap-1">
               <div className={getInvolvedDiscTitleRowClass}>
-                <span className={cn(marketingCardIconCircleClass, "bg-yellow-900")}>
+                <span className={cn(marketingCardIconCircleClass, "bg-(--ds-background-accent-yellow-bolder)")}>
                   <GraduationCap
-                    className={cn(marketingCardLucideGlyphClass, "text-white")}
+                    className={cn(marketingCardLucideGlyphClass, "text-(--ds-text-inverse)")}
                     aria-hidden
                   />
                 </span>
-                <p className="min-w-0 flex-1 text-pretty text-lg font-semibold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
+                <p className="min-w-0 flex-1 text-pretty text-heading-sm text-(--ds-text-accent-yellow) sm:text-heading-md lg:text-heading-lg">
                   Becoming a Tutor at PLUS
                 </p>
               </div>
               <p
                 className={cn(
-                  "text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg",
+                  "text-pretty text-body-lg text-muted-foreground",
                   marketingCardContentInsetFromStepRowClass,
                 )}
               >
@@ -490,7 +490,7 @@ export function GetInvolvedTutoringSection() {
               </a>
             </div>
           </div>
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl md:aspect-[16/9]">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-(--ds-radius-xl) md:aspect-[16/9]">
             <Image
               src="/figma/get-involved/tutoring-becoming-tutor.jpg"
               alt="Tutor working with a student during a PLUS session"
@@ -506,24 +506,24 @@ export function GetInvolvedTutoringSection() {
       <div className={cn("grid sm:grid-cols-2", marketingCardStackGapClass)}>
         <div
           className={cn(
-            "rounded-[30px] bg-yellow-200 dark:bg-amber-950/20",
+            "rounded-(--ds-radius-xxl) bg-(--ds-background-accent-yellow-subtler)",
             marketingCardPaddingClass,
           )}
         >
           <div className={getInvolvedDiscTitleRowClass}>
-            <span className={cn(marketingCardIconCircleClass, "bg-yellow-900")}>
+            <span className={cn(marketingCardIconCircleClass, "bg-(--ds-background-accent-yellow-bolder)")}>
               <Heart
-                className={cn(marketingCardLucideGlyphClass, "text-white")}
+                className={cn(marketingCardLucideGlyphClass, "text-(--ds-text-inverse)")}
                 aria-hidden
               />
             </span>
-            <p className="min-w-0 flex-1 text-pretty text-lg font-semibold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
+            <p className="min-w-0 flex-1 text-pretty text-heading-sm text-(--ds-text-accent-yellow) sm:text-heading-md lg:text-heading-lg">
               No Prior Experience Needed
             </p>
           </div>
           <p
             className={cn(
-              "mt-1 text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg",
+              "mt-1 text-pretty text-body-lg text-muted-foreground",
               marketingCardContentInsetFromStepRowClass,
             )}
           >
@@ -533,24 +533,24 @@ export function GetInvolvedTutoringSection() {
         </div>
         <div
           className={cn(
-            "rounded-[30px] bg-yellow-200 dark:bg-amber-950/20",
+            "rounded-(--ds-radius-xxl) bg-(--ds-background-accent-yellow-subtler)",
             marketingCardPaddingClass,
           )}
         >
           <div className={getInvolvedDiscTitleRowClass}>
-            <span className={cn(marketingCardIconCircleClass, "bg-yellow-900")}>
+            <span className={cn(marketingCardIconCircleClass, "bg-(--ds-background-accent-yellow-bolder)")}>
               <BookOpen
-                className={cn(marketingCardLucideGlyphClass, "text-white")}
+                className={cn(marketingCardLucideGlyphClass, "text-(--ds-text-inverse)")}
                 aria-hidden
               />
             </span>
-            <p className="min-w-0 flex-1 text-pretty text-lg font-semibold leading-snug tracking-tight text-yellow-900 dark:text-amber-200 sm:text-xl lg:text-2xl">
+            <p className="min-w-0 flex-1 text-pretty text-heading-sm text-(--ds-text-accent-yellow) sm:text-heading-md lg:text-heading-lg">
               What You&apos;ll Do
             </p>
           </div>
           <p
             className={cn(
-              "mt-1 text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg",
+              "mt-1 text-pretty text-body-lg text-muted-foreground",
               marketingCardContentInsetFromStepRowClass,
             )}
           >
@@ -588,19 +588,19 @@ export function GetInvolvedPartnershipsSection() {
 
       <div
         className={cn(
-          "rounded-[30px] bg-fuchsia-200 dark:bg-fuchsia-200/[0.08]",
+          "rounded-(--ds-radius-xxl) bg-(--ds-background-accent-magenta-subtler)",
           marketingCardPaddingClass,
         )}
       >
         <div className="flex items-start gap-3">
-          <span className={cn(marketingCardIconCircleClass, "shrink-0 bg-fuchsia-900")}>
-            <FileText className={cn(marketingCardLucideGlyphClass, "text-white")} aria-hidden />
+          <span className={cn(marketingCardIconCircleClass, "shrink-0 bg-(--ds-background-accent-magenta-bolder)")}>
+            <FileText className={cn(marketingCardLucideGlyphClass, "text-(--ds-text-inverse)")} aria-hidden />
           </span>
           <div className="flex min-w-0 flex-col gap-3">
-            <p className="pt-[calc((3rem-1lh)/2)] text-pretty text-lg font-semibold text-fuchsia-900 sm:text-xl lg:text-2xl dark:text-[#e879a9]">
+            <p className="pt-[calc((3rem-1lh)/2)] text-pretty text-heading-sm text-(--ds-text-accent-magenta) sm:text-heading-md lg:text-heading-lg">
               Contact Us to Learn More
             </p>
-            <p className="text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg">
+            <p className="text-pretty text-body-lg text-muted-foreground">
               Book a demo, explore joining a program, or reach out with general questions about
               partnerships — we&apos;d love to hear from you.
             </p>
@@ -621,14 +621,14 @@ export function GetInvolvedFinalCTA() {
     <section className="scroll-mt-24">
       <div
         className={cn(
-          "mx-auto max-w-4xl space-y-6 rounded-3xl bg-white text-center dark:bg-transparent",
+          "mx-auto max-w-4xl space-y-6 rounded-(--ds-radius-xl) bg-(--ds-surface) text-center",
           marketingCardPaddingClass,
         )}
       >
-        <h2 className="text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl lg:text-4xl">
+        <h2 className="text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl lg:text-heading-xxl">
           Get Involved at PLUS
         </h2>
-        <p className={cn("text-pretty text-base lg:text-lg", marketingSectionLeadColorClass)}>
+        <p className={cn("text-pretty text-body-lg", marketingSectionLeadColorClass)}>
           Be part of our mission to make learning more accessible and impactful.
         </p>
         <div className={marketingFinalCtaButtonRowClass}>

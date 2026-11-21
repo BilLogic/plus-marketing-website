@@ -16,10 +16,10 @@ export const PlusLinkedInFeedSection = () => {
     <section id="linkedin" className="relative">
       <div className="relative w-full text-left">
         <div className={marketingSectionIntroColumnClass}>
-          <h2 className="text-2xl font-semibold tracking-tight text-teal-950 dark:text-white sm:text-3xl md:text-4xl">
+          <h2 className="text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl md:text-heading-xxl">
             Latest from LinkedIn
           </h2>
-          <p className="max-w-2xl text-base text-muted-foreground lg:text-lg">
+          <p className="max-w-2xl text-body-lg text-muted-foreground">
             Follow along with the latest updates from the PLUS team.
           </p>
         </div>
@@ -38,7 +38,7 @@ export const PlusLinkedInFeedSection = () => {
             loading="lazy"
             frameBorder={0}
             allowFullScreen
-            className="h-[560px] w-full rounded-[20px] border border-border bg-white"
+            className="h-[560px] w-full rounded-(--ds-radius-xl) border border-border bg-(--ds-surface)"
           />
         ))}
       </div>
@@ -47,7 +47,7 @@ export const PlusLinkedInFeedSection = () => {
           href="https://www.linkedin.com/company/plus-tutors"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-11 items-center justify-center rounded-full bg-blue-800 px-8 text-sm font-medium text-white no-underline hover:bg-blue-900 sm:text-base"
+          className="inline-flex h-11 items-center justify-center rounded-full bg-(--ds-background-accent-blue-bolder) px-8 text-body-default font-medium text-(--ds-text-inverse) no-underline hover:bg-(--ds-background-accent-blue-bolder-hovered) sm:text-body-lg"
         >
           Follow PLUS on LinkedIn
         </a>
