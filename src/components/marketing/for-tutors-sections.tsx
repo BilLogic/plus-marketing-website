@@ -800,7 +800,7 @@ export const TutorsCertificationSection = () => {
                 data-cta-location="card"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-9 w-fit cursor-pointer items-center justify-center rounded-full bg-(--ds-background-accent-green-bolder) px-8 text-body-default font-medium text-(--ds-text-inverse) no-underline hover:bg-(--ds-background-accent-green-bolder) sm:h-11 sm:text-body-lg"
+                className="inline-flex h-9 w-fit cursor-pointer items-center justify-center rounded-full bg-(--ds-background-accent-green-bolder) px-8 text-body-default font-medium text-(--ds-text-inverse) no-underline hover:bg-(--ds-background-accent-green-bolder-hovered) sm:h-11 sm:text-body-lg"
               >
                 Register Now
               </a>
