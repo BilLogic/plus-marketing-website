@@ -105,7 +105,7 @@ export function PaperCard({
                 {expanded ? "Show Less" : "Read More"}
                 <ChevronDown
                   className={cn(
-                    "h-3 w-3 transition-transform",
+                    "h-3 w-3 transition-transform motion-reduce:transition-none",
                     expanded && "rotate-180"
                   )}
                 />
