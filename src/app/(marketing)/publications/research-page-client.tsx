@@ -34,7 +34,7 @@ import {
   riIndexMetaCopy,
   riSelectItemCn,
   riSelectTriggerCn,
-} from "@/components/marketing/research-index/research-index-figma-tokens"
+} from "@/components/marketing/research-index/research-index-styles"
 import { ResearchIndexPublicationCard } from "@/components/marketing/research-index/research-index-publication-card"
 import {
   riDateSortKey,
@@ -45,7 +45,7 @@ import {
 const ALL_VALUE = "all"
 
 const tableHeaderCn = cn(
-  "pb-2.5 pr-4 pt-4 text-left font-semibold",
+  "pb-2.5 pr-4 pt-4 text-left font-medium",
   riIndexMetaCopy,
   riFg.bodyMuted
 )
@@ -59,17 +59,17 @@ function PublicationTableRow({ paper }: { paper: ResearchPaper }) {
       href={paper.paperLink}
       target="_blank"
       rel="noopener noreferrer"
-      className="group inline-flex items-start gap-1 font-sans font-medium leading-snug text-[#62636c] underline-offset-[3px] hover:text-[#004247] hover:underline"
+      className="group inline-flex items-start gap-1 font-sans font-medium text-(--ds-text-subtle) underline-offset-[3px] hover:text-(--ds-text-accent-teal-bolder) hover:underline"
     >
       <span className="min-w-0">{paper.title}</span>
       <ExternalLink
-        className="mt-0.5 size-3.5 shrink-0 opacity-60 group-hover:text-[#004247]"
+        className="mt-0.5 size-3.5 shrink-0 opacity-60 group-hover:text-(--ds-text-accent-teal-bolder)"
         aria-hidden
       />
       <span className="sr-only">(opens in new tab)</span>
     </a>
   ) : (
-    <span className="font-sans font-medium leading-snug text-[#62636c]">
+    <span className="font-sans font-medium text-(--ds-text-subtle)">
       {paper.title}
     </span>
   )
@@ -77,7 +77,7 @@ function PublicationTableRow({ paper }: { paper: ResearchPaper }) {
   return (
     <tr
       className={cn(
-        "border-b transition-colors hover:bg-[#f9f9fb]/60",
+        "border-b transition-colors hover:bg-(--ds-background-neutral-subtle-hovered)",
         riFg.borderHairline
       )}
     >
@@ -89,7 +89,7 @@ function PublicationTableRow({ paper }: { paper: ResearchPaper }) {
         {paper.type ? (
           <span
             className={cn(
-              "inline-flex items-center whitespace-nowrap rounded-[26px] px-2 py-0.5 leading-none",
+              "inline-flex items-center whitespace-nowrap rounded-(--ds-radius-xxl) px-2 py-0.5 leading-none",
               riIndexMetaCopy,
               publicationTypeBadgeClass()
             )}
@@ -109,7 +109,7 @@ function PublicationTableRow({ paper }: { paper: ResearchPaper }) {
               <span
                 key={t}
                 className={cn(
-                  "inline-flex items-center rounded-[26px] px-2 py-0.5",
+                  "inline-flex items-center rounded-(--ds-radius-xxl) px-2 py-0.5",
                   riIndexMetaCopy,
                   riGenrePillClass(t),
                   "leading-none"
@@ -308,15 +308,15 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
     cn(
       "flex items-center justify-center rounded-lg p-1.5 transition-colors",
       active
-        ? "bg-[#f0f0f2] text-[#004247]"
-        : "text-[#62636c]/40 hover:text-[#62636c]"
+        ? "bg-(--ds-background-neutral) text-(--ds-text-accent-teal-bolder)"
+        : "text-(--ds-text-subtlest) hover:text-(--ds-text-subtle)"
     )
 
   return (
-    <div className="bg-white text-[#62636c]">
+    <div className="bg-(--ds-surface) text-(--ds-text-subtle)">
       <div className="mx-auto flex max-w-5xl flex-col pb-12 pt-14 sm:pb-14 sm:pt-16 lg:pb-16 lg:pt-20 min-[1800px]:max-w-7xl min-[1800px]:pb-20 min-[1800px]:pt-24">
         <header className="mb-8 sm:mb-10">
-          <h1 className="text-balance text-2xl font-semibold tracking-tight text-teal-950 sm:text-3xl md:text-4xl">
+          <h1 className="text-balance text-heading-lg text-(--ds-text-accent-teal-bolder) sm:text-heading-xl md:text-heading-xxl">
             Publications &amp; Resources
           </h1>
         </header>
@@ -339,11 +339,11 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
               debouncedSearch(e.target.value)
             }}
             className={cn(
-              "h-[56px] rounded-full border-0 bg-[#f9f9fb]/70 pl-14 pr-5 font-sans shadow-none sm:h-[63px]",
+              "h-[56px] rounded-full border-0 bg-(--ds-background-neutral) pl-14 pr-5 font-sans shadow-none sm:h-[63px]",
               riFg.bodyMuted,
               riIndexMetaCopy,
-              "leading-normal placeholder:text-[#62636c]/80",
-              "focus-visible:ring-2 focus-visible:ring-[#004247]/15"
+              "placeholder:text-(--ds-text-subtlest)",
+              "focus-visible:ring-2 focus-visible:ring-ring"
             )}
             aria-label="Search studies"
           />
@@ -351,7 +351,7 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
 
         <div
           className={cn(
-            "overflow-hidden rounded-[30px] shadow-none",
+            "overflow-hidden rounded-(--ds-radius-xxl) shadow-none",
             riFg.shellBg
           )}
         >
@@ -398,7 +398,7 @@ export const ResearchPageClient = ({ papers }: { papers: ResearchPaper[] }) => {
                   riFilterTagButtonCn,
                   !selectedGenre
                     ? riFg.allActive
-                    : "bg-[#f0f0f2] text-[#62636c] hover:bg-[#e8e8eb]"
+                    : "bg-(--ds-background-neutral) text-(--ds-text-subtle) hover:bg-(--ds-background-neutral-hovered)"
                 )}
               >
                 All
