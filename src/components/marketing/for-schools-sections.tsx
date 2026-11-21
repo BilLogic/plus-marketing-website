@@ -776,10 +776,10 @@ const OVERSIGHT_CARDS = [
       "PLUS is designed to be software-agnostic, which means no new software licenses or changes required.",
     cta: "See How It Works",
     href: "https://app.tutors.plus/demo",
-    bgColor: "bg-red-200",
-    titleColor: "text-red-900",
-    btnBg: "bg-red-700",
-    btnText: "text-white",
+    bgColor: "bg-(--ds-background-accent-red-subtler)",
+    titleColor: "text-(--ds-text-accent-red)",
+    btnBg: "bg-(--ds-background-accent-red-bolder)",
+    btnText: "text-(--ds-text-inverse)",
     icon: forSchoolsAssets.icons.oversight[3],
     image: forSchoolsAssets.oversightCardImages[3],
   },
@@ -1104,7 +1104,7 @@ export const SchoolsSuccessStoriesSection = ({ stories }: { stories: SuccessStor
                       className={cn(
                         marketingCardIconTitleRowOffsetClass,
                         marketingCardIconCircleClass,
-                        "shrink-0 text-white",
+                        "shrink-0 text-(--ds-text-inverse)",
                         theme.iconBg,
                       )}
                     >
