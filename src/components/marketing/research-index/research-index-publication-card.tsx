@@ -49,7 +49,7 @@ export const ResearchIndexPublicationCard = ({
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
-                "group inline-flex max-w-full items-start gap-1.5 font-sans text-(--ds-text-subtle) underline-offset-[3px] hover:text-(--ds-text-accent-teal-bolder) hover:underline",
+                "group inline-flex max-w-full items-start gap-1.5 font-sans font-medium text-(--ds-text-subtle) underline-offset-[3px] hover:text-(--ds-text-accent-teal-bolder) hover:underline",
                 riIndexCopy
               )}
             >
@@ -63,7 +63,7 @@ export const ResearchIndexPublicationCard = ({
           ) : (
             <h3
               className={cn(
-                "font-sans text-(--ds-text-subtle)",
+                "font-sans font-medium text-(--ds-text-subtle)",
                 riIndexCopy
               )}
             >

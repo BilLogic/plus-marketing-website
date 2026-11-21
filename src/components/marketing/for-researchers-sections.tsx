@@ -208,7 +208,7 @@ const RESEARCH_STORY_THEMES = [
 
 /** Teal outline pill — Research Index “View all” / empty-state link. */
 const forResearchersOutlineCtaClassName =
-  "inline-flex items-center justify-center rounded-full border-2 border-[#A6EDF4] bg-transparent px-5 text-sm font-medium text-teal-950 transition-colors hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 dark:text-white dark:hover:bg-[#A6EDF4]/20 sm:px-6 sm:text-base"
+  "inline-flex items-center justify-center rounded-full border-2 border-[#A6EDF4] bg-transparent px-5 text-body-default font-medium text-(--ds-text-accent-teal-bolder) transition-colors hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 sm:px-6 sm:text-body-lg"
 
 /** Primary / outline hero CTAs — static pills (no shared final-CTA hover). */
 const researchersHeroPrimaryCtaClassName = cn("w-fit", marketingHeroCtaPrimaryLinkClass)
