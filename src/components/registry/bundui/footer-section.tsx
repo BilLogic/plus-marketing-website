@@ -59,7 +59,7 @@ const BunduiFooterSection = ({
               name="email"
               placeholder="Your email"
               aria-label="Email for newsletter"
-              className="h-10 flex-1 rounded-full border-white/30 bg-transparent text-white placeholder:text-white/50"
+              className="h-10 flex-1 rounded-full border-white/30 bg-transparent text-white hover:bg-transparent placeholder:text-white/50"
             />
             <Button
               type="submit"
