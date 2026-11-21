@@ -19,7 +19,8 @@ import { marketingTypography } from "@/lib/marketing-typography"
  * Bento cards — titles use `marketingTypography.bentoTitle`; body matches benefits scroll accordion
  * (`marketingTypography.lead` + `max-w-none`). Section header matches other For Schools blocks.
  */
-const activeFillClass = "border-[#ffe8f5] bg-[#ffe8f5]"
+const activeFillClass =
+  "border-(--ds-background-accent-magenta-subtler) bg-(--ds-background-accent-magenta-subtler)"
 
 export type DayToDayExperienceStep = {
   title: string
@@ -63,12 +64,12 @@ export function DayToDayExperienceSection({
     <div className={cn("relative w-full", marketingSectionVerticalGapClass, className)}>
       <div className="relative w-full text-left">
         <div className={marketingSectionIntroColumnClass}>
-          <h2 className="text-pretty text-lg font-semibold tracking-tight text-teal-950 sm:text-2xl md:text-3xl">
+          <h2 className="text-pretty text-heading-sm text-(--ds-text-accent-teal-bolder) sm:text-heading-lg md:text-heading-xl">
             {sectionTitle}
           </h2>
           <p
             className={cn(
-              "text-pretty text-sm leading-relaxed sm:text-base md:text-lg",
+              "text-pretty text-body-default sm:text-body-lg",
               marketingSectionLeadColorClass,
             )}
           >
@@ -114,22 +115,24 @@ export function DayToDayExperienceSection({
                 transition: "flex-grow 320ms ease-out",
               }}
               className={cn(
-                "flex cursor-pointer flex-col items-start gap-4 rounded-[30px] border-2 px-5 py-7 text-left sm:py-8",
+                "flex cursor-pointer flex-col items-start gap-4 rounded-(--ds-radius-xxl) border-2 px-5 py-7 text-left sm:py-8",
                 "h-[min(400px,78svh)] min-h-0 overflow-hidden",
                 "min-w-0",
                 isActive
                   ? "xl:min-w-[min(21rem,48%)]"
                   : "xl:min-w-[13.25rem]",
                 "transition-colors duration-200",
-                "focus-visible:ring-2 focus-visible:ring-[#d31998] focus-visible:ring-offset-2 focus-visible:outline-none",
-                isActive ? activeFillClass : "border-[#d31998] bg-white"
+                "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none",
+                isActive
+                  ? activeFillClass
+                  : "border-(--ds-background-accent-magenta-bolder) bg-(--ds-surface)"
               )}
             >
               <span
                 className={cn(
                   marketingCardIconCircleClass,
                   marketingCardStepDigitClass,
-                  "bg-[#d31998] text-white",
+                  "bg-(--ds-background-accent-magenta-bolder) text-(--ds-text-inverse)",
                 )}
                 aria-hidden
               >
@@ -138,7 +141,7 @@ export function DayToDayExperienceSection({
               <span
                 className={cn(
                   marketingTypography.bentoTitle,
-                  "w-full min-w-0 shrink-0 text-balance text-[#d31998]"
+                  "w-full min-w-0 shrink-0 text-balance text-(--ds-text-accent-magenta)"
                 )}
               >
                 {step.title}
@@ -160,7 +163,7 @@ export function DayToDayExperienceSection({
 
       {/* Hero — Figma 1206:1401; image swaps with active step (1206:1373). */}
       <div
-        className="relative isolate min-h-[min(280px,55vw)] overflow-hidden rounded-[30px] bg-muted sm:min-h-[min(380px,50vw)] lg:min-h-[494px]"
+        className="relative isolate min-h-[min(280px,55vw)] overflow-hidden rounded-(--ds-radius-xxl) bg-muted sm:min-h-[min(380px,50vw)] lg:min-h-[494px]"
         aria-live="polite"
         aria-label={`${displayStep.title} preview`}
       >
@@ -183,7 +186,7 @@ export function DayToDayExperienceSection({
               className={cn(
                 marketingCardIconCircleClass,
                 marketingCardStepDigitClass,
-                "bg-[#d31998]/90 text-white drop-shadow-md",
+                "bg-(--ds-background-accent-magenta-bolder) text-(--ds-text-inverse) drop-shadow-md",
               )}
             >
               {displayStep.heroOverlayNumber}
