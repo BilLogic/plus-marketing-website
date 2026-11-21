@@ -74,7 +74,7 @@ export const FooterNewsletter = () => {
               required
               disabled={status === "submitting"}
               aria-describedby="newsletter-status"
-              className="h-12 flex-1 rounded-none border-0 bg-transparent px-0 text-sm text-teal-950 placeholder:text-teal-950/50 focus-visible:ring-0 disabled:opacity-60 sm:text-base min-[1800px]:text-lg"
+              className="h-12 flex-1 rounded-none border-0 bg-transparent px-0 text-sm text-teal-950 hover:bg-transparent placeholder:text-teal-950/50 focus-visible:ring-0 focus-visible:ring-offset-0 disabled:opacity-60 sm:text-base min-[1800px]:text-lg"
             />
             <button
               type="submit"
