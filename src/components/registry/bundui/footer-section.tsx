@@ -65,7 +65,7 @@ const BunduiFooterSection = ({
               type="submit"
               variant="plusNavCta"
               size="navCta"
-              className="shrink-0"
+              className="border-(--ds-border-focused-inverse) focus-visible:ring-(--ds-border-focused-inverse) focus-visible:ring-offset-teal-950 shrink-0"
             >
               Sign up
             </Button>
