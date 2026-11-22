@@ -56,7 +56,7 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
                     {item.children.map((section, sIdx) => (
                       <Fragment key={sIdx}>
                         {section.heading && (
-                          <li className="col-span-full px-3 pt-2 pb-1 text-xs font-semibold tracking-wider text-muted-foreground uppercase list-none">
+                          <li className="col-span-full px-3 pt-2 pb-1 text-body-sm font-medium tracking-wider text-muted-foreground uppercase list-none">
                             {section.heading}
                           </li>
                         )}
@@ -88,7 +88,7 @@ export const DesktopNav = ({ className }: DesktopNavProps) => {
                                 >
                                   {child.label}
                                   {child.badge && (
-                                    <span className="rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-semibold text-primary">
+                                    <span className="rounded-full bg-primary/10 px-1.5 py-0.5 text-body-sm font-medium text-primary">
                                       {child.badge}
                                     </span>
                                   )}

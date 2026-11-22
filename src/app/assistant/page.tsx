@@ -20,10 +20,10 @@ const AssistantPage = () => {
     <main className="flex min-h-0 flex-1 flex-col bg-background text-foreground">
       <div className="mx-auto flex min-h-screen max-w-4xl flex-col gap-8 px-4 pb-16 pt-10 sm:px-6 md:px-8 md:pt-14">
         <header className="space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-eyebrow text-primary">
+          <p className="text-body-sm font-medium uppercase tracking-eyebrow text-primary">
             Plus Assistant
           </p>
-          <h1 className="text-3xl font-semibold tracking-tight">
+          <h1 className="text-heading-xl">
             Agent-native marketing assistant scaffold
           </h1>
           <p className="text-sm text-muted-foreground">
@@ -34,7 +34,7 @@ const AssistantPage = () => {
         </header>
 
         <section className="space-y-2">
-          <h2 className="text-sm font-semibold tracking-tight">Current system prompt</h2>
+          <h2 className="text-body-default font-medium">Current system prompt</h2>
           <p className="text-xs text-muted-foreground">
             Built from core project rules, skills, and dynamic context for the{" "}
             <code>/assistant</code> route.

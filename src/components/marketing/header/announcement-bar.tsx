@@ -24,7 +24,7 @@ export function AnnouncementBar({
     <div className="relative border-b border-[rgba(231,232,236,0.3)] bg-[rgba(166,237,244,0.5)] px-4 py-3 pr-12 sm:px-6 sm:pr-12">
       <div className="flex flex-col items-start gap-1.5 lg:flex-row lg:items-center lg:justify-center lg:gap-2">
         {badge && (
-          <span className="shrink-0 rounded-full bg-[#a6edf4] px-2 py-0.5 text-xs font-semibold text-[#004247]">
+          <span className="shrink-0 rounded-full bg-[#a6edf4] px-2 py-0.5 text-body-sm font-medium text-[#004247]">
             {badge}
           </span>
         )}

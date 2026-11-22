@@ -21,7 +21,7 @@ export const FooterNewsletter = () => {
   return (
     <div className="border-b border-white/10 py-16">
       <div className={`${marketingFooterInnerShell} flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between`}>
-        <h2 className="max-w-sm text-2xl font-semibold leading-tight sm:text-3xl">
+        <h2 className="max-w-sm text-heading-lg sm:text-heading-xl">
           Subscribe to Our Newsletter
         </h2>
         <div className="flex max-w-md flex-1 flex-col gap-3">

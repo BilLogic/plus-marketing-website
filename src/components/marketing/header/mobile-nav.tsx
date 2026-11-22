@@ -179,7 +179,7 @@ export const MobileNav = ({ className }: MobileNavProps) => {
                         {item.children.map((section, sIdx) => (
                           <Fragment key={sIdx}>
                             {section.heading && (
-                              <li className="px-3 pt-2 pb-1 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+                              <li className="px-3 pt-2 pb-1 text-body-sm font-medium tracking-wider text-muted-foreground uppercase">
                                 {section.heading}
                               </li>
                             )}
