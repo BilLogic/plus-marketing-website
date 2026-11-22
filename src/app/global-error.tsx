@@ -23,7 +23,7 @@ export default function GlobalError({
   return (
     <html lang="en">
       <body className="flex min-h-dvh flex-col items-center justify-center gap-4 bg-background px-6 text-center text-foreground antialiased">
-        <h1 className="text-2xl font-semibold">Something went wrong</h1>
+        <h1 className="text-2xl font-medium">Something went wrong</h1>
         <p className="text-muted-foreground">
           An unexpected error occurred. Please reload the page.
         </p>

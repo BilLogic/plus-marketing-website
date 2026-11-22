@@ -16,7 +16,7 @@ export const FooterLinkColumns = () => {
     <div className="grid grid-cols-2 gap-8 text-sm sm:grid-cols-4">
       {COLUMNS.map((col) => (
         <div key={col.heading}>
-          <p className="text-xs font-bold uppercase tracking-wider">
+          <p className="text-body-sm font-medium uppercase tracking-wider">
             {col.heading}
           </p>
           <ul className="mt-3 space-y-2 text-white/80">
