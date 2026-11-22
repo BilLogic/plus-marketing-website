@@ -47,7 +47,7 @@ export async function PlusHeader() {
               data-cta-location="nav"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden lg:inline-flex h-9 items-center justify-center rounded-full bg-[#a6edf4] px-5 text-base font-medium text-[#004247] transition-opacity hover:opacity-90 whitespace-nowrap min-[1800px]:h-10 min-[1800px]:px-6 min-[1800px]:text-lg"
+              className="hidden lg:inline-flex h-9 items-center justify-center rounded-full px-5 text-base font-medium bg-(--ds-background-brand-bold) text-(--ds-text-inverse) transition-colors duration-150 hover:bg-(--ds-background-brand-bold-hovered) hover:text-(--ds-text-inverse) active:bg-(--ds-background-brand-bold-pressed) outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 whitespace-nowrap min-[1800px]:h-10 min-[1800px]:px-6 min-[1800px]:text-lg"
             >
               Try PLUS Demo
             </a>

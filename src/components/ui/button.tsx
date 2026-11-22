@@ -21,9 +21,9 @@ const buttonVariants = cva(
         destructive:
           "bg-(--ds-background-danger-bold) text-(--ds-text-inverse) hover:bg-(--ds-background-danger-bold-hovered) active:bg-(--ds-background-danger-bold-pressed) focus-visible:ring-destructive",
         link: "text-(--ds-link) underline-offset-4 hover:underline active:text-(--ds-link-pressed)",
-        /** PLUS nav “Tutor Login” pill — bg #A6EDF4, text #004247 */
+        /** PLUS nav call to action on the Lagoon brand fill. */
         plusNavCta:
-          "border-transparent bg-[#A6EDF4] text-[#004247] shadow-none hover:bg-[#A6EDF4] hover:text-[#004247] hover:opacity-95 [&_svg]:text-[#004247]",
+          "border-transparent shadow-none [&_svg]:text-(--ds-icon-inverse) bg-(--ds-background-brand-bold) text-(--ds-text-inverse) transition-colors duration-150 hover:bg-(--ds-background-brand-bold-hovered) hover:text-(--ds-text-inverse) active:bg-(--ds-background-brand-bold-pressed)",
       },
       size: {
         default:
