@@ -96,27 +96,29 @@ export const marketingHeroCtaButtonRowClass = cn(
 export const marketingHeroCtaPrimaryLinkClass = cn(
   "inline-flex items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-body-default sm:text-body-lg font-medium text-[#004247] shadow-none min-[1800px]:h-12 min-[1800px]:px-9",
-  "hover:bg-[#A6EDF4] hover:text-[#004247]",
+  "h-9 sm:h-11 rounded-full border-0 px-5 sm:px-8 text-body-default sm:text-body-lg font-medium shadow-none min-[1800px]:h-12 min-[1800px]:px-9",
+  "bg-(--ds-background-brand-bold) text-(--ds-text-inverse) transition-colors duration-150 hover:bg-(--ds-background-brand-bold-hovered) hover:text-(--ds-text-inverse) active:bg-(--ds-background-brand-bold-pressed)",
 )
 
 /** Primary pill — matches `TutorsImpactCTA` “Try the Demo” button (use on `<a>` or `<Link>`). */
 export const marketingFinalCtaPrimaryLinkClass = cn(
   "inline-flex items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-0 bg-[#A6EDF4] px-5 sm:px-8 text-body-default sm:text-body-lg font-medium text-[#004247] shadow-none transition-opacity hover:bg-[#A6EDF4] hover:opacity-95 hover:text-[#004247] min-[1800px]:h-12 min-[1800px]:px-9",
+  "h-9 sm:h-11 rounded-full border-0 px-5 sm:px-8 text-body-default sm:text-body-lg font-medium shadow-none min-[1800px]:h-12 min-[1800px]:px-9",
+  "bg-(--ds-background-brand-bold) text-(--ds-text-inverse) transition-colors duration-150 hover:bg-(--ds-background-brand-bold-hovered) hover:text-(--ds-text-inverse) active:bg-(--ds-background-brand-bold-pressed)",
 )
 
 /** Outline pill — matches `TutorsImpactCTA` “Become a Tutor” button. */
 export const marketingFinalCtaOutlineLinkClass = cn(
   "inline-flex items-center justify-center whitespace-nowrap no-underline outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  "h-9 sm:h-11 rounded-full border-2 border-[#A6EDF4] bg-transparent px-5 sm:px-8 text-body-default sm:text-body-lg font-medium text-(--ds-text-accent-teal-bolder) hover:border-[#A6EDF4] hover:bg-[#A6EDF4]/15 min-[1800px]:h-12 min-[1800px]:px-9",
+  "h-9 sm:h-11 rounded-full border-2 px-5 sm:px-8 text-body-default sm:text-body-lg font-medium min-[1800px]:h-12 min-[1800px]:px-9",
+  "border-(--ds-border-brand) bg-transparent text-(--ds-text-brand) transition-colors duration-150 hover:bg-(--ds-background-brand-subtlest) active:bg-(--ds-background-brand-subtlest-hovered)",
 )
 
 /**
  * Outline pill in **page heroes** — same token as `marketingFinalCtaOutlineLinkClass` so hover
- * (teal wash) matches bottom-of-page CTAs like “Get Involved at PLUS”.
+ * (brand tint) matches bottom-of-page CTAs like “Get Involved at PLUS”.
  */
 export const marketingHeroCtaOutlineLinkClass = marketingFinalCtaOutlineLinkClass
 
